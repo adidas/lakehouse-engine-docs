@@ -148,14 +148,14 @@
 </span><span id="L-54"><a href="#L-54"><span class="linenos"> 54</span></a><span class="sd">    Finally, it aggregates the differences, using the supplied aggregation function</span>
 </span><span id="L-55"><a href="#L-55"><span class="linenos"> 55</span></a><span class="sd">    (e.g., sum, avg, min, max, etc).</span>
 </span><span id="L-56"><a href="#L-56"><span class="linenos"> 56</span></a>
-</span><span id="L-57"><a href="#L-57"><span class="linenos"> 57</span></a><span class="sd">    All of this configurations are passed via the ACON to instantiate a</span>
+</span><span id="L-57"><a href="#L-57"><span class="linenos"> 57</span></a><span class="sd">    All of these configurations are passed via the ACON to instantiate a</span>
 </span><span id="L-58"><a href="#L-58"><span class="linenos"> 58</span></a><span class="sd">    ReconciliatorSpec object.</span>
 </span><span id="L-59"><a href="#L-59"><span class="linenos"> 59</span></a>
 </span><span id="L-60"><a href="#L-60"><span class="linenos"> 60</span></a><span class="sd">    Notes:</span>
 </span><span id="L-61"><a href="#L-61"><span class="linenos"> 61</span></a><span class="sd">        - It is crucial that both the current and truth datasets have exactly the same</span>
 </span><span id="L-62"><a href="#L-62"><span class="linenos"> 62</span></a><span class="sd">            structure.</span>
 </span><span id="L-63"><a href="#L-63"><span class="linenos"> 63</span></a><span class="sd">        - You should not use 0 as yellow or red threshold, as the algorithm will verify</span>
-</span><span id="L-64"><a href="#L-64"><span class="linenos"> 64</span></a><span class="sd">            if the difference between the truth and current values is bigger or bigger</span>
+</span><span id="L-64"><a href="#L-64"><span class="linenos"> 64</span></a><span class="sd">            if the difference between the truth and current values is bigger</span>
 </span><span id="L-65"><a href="#L-65"><span class="linenos"> 65</span></a><span class="sd">            or equal than those thresholds.</span>
 </span><span id="L-66"><a href="#L-66"><span class="linenos"> 66</span></a><span class="sd">        - The reconciliation does not produce any negative values or percentages, as we</span>
 </span><span id="L-67"><a href="#L-67"><span class="linenos"> 67</span></a><span class="sd">            use the absolute value of the differences. This means that the recon result</span>
@@ -229,7 +229,7 @@
 </span><span id="L-135"><a href="#L-135"><span class="linenos">135</span></a>        <span class="n">status</span> <span class="o">=</span> <span class="s2">&quot;green&quot;</span>
 </span><span id="L-136"><a href="#L-136"><span class="linenos">136</span></a>
 </span><span id="L-137"><a href="#L-137"><span class="linenos">137</span></a>        <span class="c1"># if ignore_empty_df is true, run empty check on truth_df and current_results_df</span>
-</span><span id="L-138"><a href="#L-138"><span class="linenos">138</span></a>        <span class="c1"># if both the dataframe is empty then exit with green</span>
+</span><span id="L-138"><a href="#L-138"><span class="linenos">138</span></a>        <span class="c1"># if both the dataframes are empty then exit with green</span>
 </span><span id="L-139"><a href="#L-139"><span class="linenos">139</span></a>        <span class="k">if</span> <span class="p">(</span>
 </span><span id="L-140"><a href="#L-140"><span class="linenos">140</span></a>            <span class="bp">self</span><span class="o">.</span><span class="n">spec</span><span class="o">.</span><span class="n">ignore_empty_df</span>
 </span><span id="L-141"><a href="#L-141"><span class="linenos">141</span></a>            <span class="ow">and</span> <span class="n">truth_df</span><span class="o">.</span><span class="n">isEmpty</span><span class="p">()</span>
@@ -528,14 +528,14 @@
 </span><span id="Reconciliator-55"><a href="#Reconciliator-55"><span class="linenos"> 55</span></a><span class="sd">    Finally, it aggregates the differences, using the supplied aggregation function</span>
 </span><span id="Reconciliator-56"><a href="#Reconciliator-56"><span class="linenos"> 56</span></a><span class="sd">    (e.g., sum, avg, min, max, etc).</span>
 </span><span id="Reconciliator-57"><a href="#Reconciliator-57"><span class="linenos"> 57</span></a>
-</span><span id="Reconciliator-58"><a href="#Reconciliator-58"><span class="linenos"> 58</span></a><span class="sd">    All of this configurations are passed via the ACON to instantiate a</span>
+</span><span id="Reconciliator-58"><a href="#Reconciliator-58"><span class="linenos"> 58</span></a><span class="sd">    All of these configurations are passed via the ACON to instantiate a</span>
 </span><span id="Reconciliator-59"><a href="#Reconciliator-59"><span class="linenos"> 59</span></a><span class="sd">    ReconciliatorSpec object.</span>
 </span><span id="Reconciliator-60"><a href="#Reconciliator-60"><span class="linenos"> 60</span></a>
 </span><span id="Reconciliator-61"><a href="#Reconciliator-61"><span class="linenos"> 61</span></a><span class="sd">    Notes:</span>
 </span><span id="Reconciliator-62"><a href="#Reconciliator-62"><span class="linenos"> 62</span></a><span class="sd">        - It is crucial that both the current and truth datasets have exactly the same</span>
 </span><span id="Reconciliator-63"><a href="#Reconciliator-63"><span class="linenos"> 63</span></a><span class="sd">            structure.</span>
 </span><span id="Reconciliator-64"><a href="#Reconciliator-64"><span class="linenos"> 64</span></a><span class="sd">        - You should not use 0 as yellow or red threshold, as the algorithm will verify</span>
-</span><span id="Reconciliator-65"><a href="#Reconciliator-65"><span class="linenos"> 65</span></a><span class="sd">            if the difference between the truth and current values is bigger or bigger</span>
+</span><span id="Reconciliator-65"><a href="#Reconciliator-65"><span class="linenos"> 65</span></a><span class="sd">            if the difference between the truth and current values is bigger</span>
 </span><span id="Reconciliator-66"><a href="#Reconciliator-66"><span class="linenos"> 66</span></a><span class="sd">            or equal than those thresholds.</span>
 </span><span id="Reconciliator-67"><a href="#Reconciliator-67"><span class="linenos"> 67</span></a><span class="sd">        - The reconciliation does not produce any negative values or percentages, as we</span>
 </span><span id="Reconciliator-68"><a href="#Reconciliator-68"><span class="linenos"> 68</span></a><span class="sd">            use the absolute value of the differences. This means that the recon result</span>
@@ -609,7 +609,7 @@
 </span><span id="Reconciliator-136"><a href="#Reconciliator-136"><span class="linenos">136</span></a>        <span class="n">status</span> <span class="o">=</span> <span class="s2">&quot;green&quot;</span>
 </span><span id="Reconciliator-137"><a href="#Reconciliator-137"><span class="linenos">137</span></a>
 </span><span id="Reconciliator-138"><a href="#Reconciliator-138"><span class="linenos">138</span></a>        <span class="c1"># if ignore_empty_df is true, run empty check on truth_df and current_results_df</span>
-</span><span id="Reconciliator-139"><a href="#Reconciliator-139"><span class="linenos">139</span></a>        <span class="c1"># if both the dataframe is empty then exit with green</span>
+</span><span id="Reconciliator-139"><a href="#Reconciliator-139"><span class="linenos">139</span></a>        <span class="c1"># if both the dataframes are empty then exit with green</span>
 </span><span id="Reconciliator-140"><a href="#Reconciliator-140"><span class="linenos">140</span></a>        <span class="k">if</span> <span class="p">(</span>
 </span><span id="Reconciliator-141"><a href="#Reconciliator-141"><span class="linenos">141</span></a>            <span class="bp">self</span><span class="o">.</span><span class="n">spec</span><span class="o">.</span><span class="n">ignore_empty_df</span>
 </span><span id="Reconciliator-142"><a href="#Reconciliator-142"><span class="linenos">142</span></a>            <span class="ow">and</span> <span class="n">truth_df</span><span class="o">.</span><span class="n">isEmpty</span><span class="p">()</span>
@@ -788,14 +788,14 @@ differences in the metrics attributes (either percentage or absolute difference)
 Finally, it aggregates the differences, using the supplied aggregation function
 (e.g., sum, avg, min, max, etc).</p>
 
-<p>All of this configurations are passed via the ACON to instantiate a
+<p>All of these configurations are passed via the ACON to instantiate a
 ReconciliatorSpec object.</p>
 
 <p>Notes:
     - It is crucial that both the current and truth datasets have exactly the same
         structure.
     - You should not use 0 as yellow or red threshold, as the algorithm will verify
-        if the difference between the truth and current values is bigger or bigger
+        if the difference between the truth and current values is bigger
         or equal than those thresholds.
     - The reconciliation does not produce any negative values or percentages, as we
         use the absolute value of the differences. This means that the recon result
@@ -941,7 +941,7 @@ ReconciliatorSpec object.</p>
 </span><span id="Reconciliator.execute-136"><a href="#Reconciliator.execute-136"><span class="linenos">136</span></a>        <span class="n">status</span> <span class="o">=</span> <span class="s2">&quot;green&quot;</span>
 </span><span id="Reconciliator.execute-137"><a href="#Reconciliator.execute-137"><span class="linenos">137</span></a>
 </span><span id="Reconciliator.execute-138"><a href="#Reconciliator.execute-138"><span class="linenos">138</span></a>        <span class="c1"># if ignore_empty_df is true, run empty check on truth_df and current_results_df</span>
-</span><span id="Reconciliator.execute-139"><a href="#Reconciliator.execute-139"><span class="linenos">139</span></a>        <span class="c1"># if both the dataframe is empty then exit with green</span>
+</span><span id="Reconciliator.execute-139"><a href="#Reconciliator.execute-139"><span class="linenos">139</span></a>        <span class="c1"># if both the dataframes are empty then exit with green</span>
 </span><span id="Reconciliator.execute-140"><a href="#Reconciliator.execute-140"><span class="linenos">140</span></a>        <span class="k">if</span> <span class="p">(</span>
 </span><span id="Reconciliator.execute-141"><a href="#Reconciliator.execute-141"><span class="linenos">141</span></a>            <span class="bp">self</span><span class="o">.</span><span class="n">spec</span><span class="o">.</span><span class="n">ignore_empty_df</span>
 </span><span id="Reconciliator.execute-142"><a href="#Reconciliator.execute-142"><span class="linenos">142</span></a>            <span class="ow">and</span> <span class="n">truth_df</span><span class="o">.</span><span class="n">isEmpty</span><span class="p">()</span>

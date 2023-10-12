@@ -116,7 +116,7 @@
 </span><span id="L-34"><a href="#L-34"><span class="linenos"> 34</span></a><span class="sd">    steps and configurations through a dict based configuration, which we name ACON</span>
 </span><span id="L-35"><a href="#L-35"><span class="linenos"> 35</span></a><span class="sd">    in our framework.</span>
 </span><span id="L-36"><a href="#L-36"><span class="linenos"> 36</span></a>
-</span><span id="L-37"><a href="#L-37"><span class="linenos"> 37</span></a><span class="sd">    Since an ACON is a dict you can pass a custom transformer trough a python function</span>
+</span><span id="L-37"><a href="#L-37"><span class="linenos"> 37</span></a><span class="sd">    Since an ACON is a dict you can pass a custom transformer through a python function</span>
 </span><span id="L-38"><a href="#L-38"><span class="linenos"> 38</span></a><span class="sd">    and, therefore, the DataLoader can also be used to load data with custom</span>
 </span><span id="L-39"><a href="#L-39"><span class="linenos"> 39</span></a><span class="sd">    transformations not provided in our transformers package.</span>
 </span><span id="L-40"><a href="#L-40"><span class="linenos"> 40</span></a>
@@ -330,7 +330,7 @@
 </span><span id="L-248"><a href="#L-248"><span class="linenos">248</span></a><span class="sd">        in the same order that they appear in the list of transformations. This means</span>
 </span><span id="L-249"><a href="#L-249"><span class="linenos">249</span></a><span class="sd">        that other supported transformations that appear after an</span>
 </span><span id="L-250"><a href="#L-250"><span class="linenos">250</span></a><span class="sd">        unsupported one continue to stay one the normal execution plan,</span>
-</span><span id="L-251"><a href="#L-251"><span class="linenos">251</span></a><span class="sd">        i.e., outside the foreachBatch function. Therefore this may</span>
+</span><span id="L-251"><a href="#L-251"><span class="linenos">251</span></a><span class="sd">        i.e., outside the foreachBatch function. Therefore, this may</span>
 </span><span id="L-252"><a href="#L-252"><span class="linenos">252</span></a><span class="sd">        make your algorithm to execute a different logic than the one you</span>
 </span><span id="L-253"><a href="#L-253"><span class="linenos">253</span></a><span class="sd">        originally intended. For this reason:</span>
 </span><span id="L-254"><a href="#L-254"><span class="linenos">254</span></a><span class="sd">            1) ALWAYS PLACE UNSUPPORTED STREAMING TRANSFORMATIONS AT LAST;</span>
@@ -637,7 +637,7 @@
 </span><span id="DataLoader-35"><a href="#DataLoader-35"><span class="linenos"> 35</span></a><span class="sd">    steps and configurations through a dict based configuration, which we name ACON</span>
 </span><span id="DataLoader-36"><a href="#DataLoader-36"><span class="linenos"> 36</span></a><span class="sd">    in our framework.</span>
 </span><span id="DataLoader-37"><a href="#DataLoader-37"><span class="linenos"> 37</span></a>
-</span><span id="DataLoader-38"><a href="#DataLoader-38"><span class="linenos"> 38</span></a><span class="sd">    Since an ACON is a dict you can pass a custom transformer trough a python function</span>
+</span><span id="DataLoader-38"><a href="#DataLoader-38"><span class="linenos"> 38</span></a><span class="sd">    Since an ACON is a dict you can pass a custom transformer through a python function</span>
 </span><span id="DataLoader-39"><a href="#DataLoader-39"><span class="linenos"> 39</span></a><span class="sd">    and, therefore, the DataLoader can also be used to load data with custom</span>
 </span><span id="DataLoader-40"><a href="#DataLoader-40"><span class="linenos"> 40</span></a><span class="sd">    transformations not provided in our transformers package.</span>
 </span><span id="DataLoader-41"><a href="#DataLoader-41"><span class="linenos"> 41</span></a>
@@ -851,7 +851,7 @@
 </span><span id="DataLoader-249"><a href="#DataLoader-249"><span class="linenos">249</span></a><span class="sd">        in the same order that they appear in the list of transformations. This means</span>
 </span><span id="DataLoader-250"><a href="#DataLoader-250"><span class="linenos">250</span></a><span class="sd">        that other supported transformations that appear after an</span>
 </span><span id="DataLoader-251"><a href="#DataLoader-251"><span class="linenos">251</span></a><span class="sd">        unsupported one continue to stay one the normal execution plan,</span>
-</span><span id="DataLoader-252"><a href="#DataLoader-252"><span class="linenos">252</span></a><span class="sd">        i.e., outside the foreachBatch function. Therefore this may</span>
+</span><span id="DataLoader-252"><a href="#DataLoader-252"><span class="linenos">252</span></a><span class="sd">        i.e., outside the foreachBatch function. Therefore, this may</span>
 </span><span id="DataLoader-253"><a href="#DataLoader-253"><span class="linenos">253</span></a><span class="sd">        make your algorithm to execute a different logic than the one you</span>
 </span><span id="DataLoader-254"><a href="#DataLoader-254"><span class="linenos">254</span></a><span class="sd">        originally intended. For this reason:</span>
 </span><span id="DataLoader-255"><a href="#DataLoader-255"><span class="linenos">255</span></a><span class="sd">            1) ALWAYS PLACE UNSUPPORTED STREAMING TRANSFORMATIONS AT LAST;</span>
@@ -1145,7 +1145,7 @@
 steps and configurations through a dict based configuration, which we name ACON
 in our framework.</p>
 
-<p>Since an ACON is a dict you can pass a custom transformer trough a python function
+<p>Since an ACON is a dict you can pass a custom transformer through a python function
 and, therefore, the DataLoader can also be used to load data with custom
 transformations not provided in our transformers package.</p>
 

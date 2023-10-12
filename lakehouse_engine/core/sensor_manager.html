@@ -124,7 +124,7 @@
 </span><span id="L-33"><a href="#L-33"><span class="linenos"> 33</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Check if sensor has acquired new data.</span>
 </span><span id="L-34"><a href="#L-34"><span class="linenos"> 34</span></a>
 </span><span id="L-35"><a href="#L-35"><span class="linenos"> 35</span></a><span class="sd">        Args:</span>
-</span><span id="L-36"><a href="#L-36"><span class="linenos"> 36</span></a><span class="sd">            sensor_id: sendor id.</span>
+</span><span id="L-36"><a href="#L-36"><span class="linenos"> 36</span></a><span class="sd">            sensor_id: sensor id.</span>
 </span><span id="L-37"><a href="#L-37"><span class="linenos"> 37</span></a><span class="sd">            control_db_table_name: db.table to control sensor runs.</span>
 </span><span id="L-38"><a href="#L-38"><span class="linenos"> 38</span></a>
 </span><span id="L-39"><a href="#L-39"><span class="linenos"> 39</span></a><span class="sd">        Returns:</span>
@@ -249,8 +249,8 @@
 </span><span id="L-158"><a href="#L-158"><span class="linenos">158</span></a>                <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="n">status</span><span class="p">,</span>
 </span><span id="L-159"><a href="#L-159"><span class="linenos">159</span></a>                <span class="s2">&quot;status_change_timestamp&quot;</span><span class="p">:</span> <span class="n">status_change_timestamp</span><span class="p">,</span>
 </span><span id="L-160"><a href="#L-160"><span class="linenos">160</span></a>                <span class="s2">&quot;checkpoint_location&quot;</span><span class="p">:</span> <span class="n">spec</span><span class="o">.</span><span class="n">checkpoint_location</span><span class="p">,</span>
-</span><span id="L-161"><a href="#L-161"><span class="linenos">161</span></a>                <span class="s2">&quot;upstream_key&quot;</span><span class="p">:</span> <span class="n">upstream_key</span><span class="p">,</span>
-</span><span id="L-162"><a href="#L-162"><span class="linenos">162</span></a>                <span class="s2">&quot;upstream_value&quot;</span><span class="p">:</span> <span class="n">upstream_value</span><span class="p">,</span>
+</span><span id="L-161"><a href="#L-161"><span class="linenos">161</span></a>                <span class="s2">&quot;upstream_key&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">upstream_key</span><span class="p">),</span>
+</span><span id="L-162"><a href="#L-162"><span class="linenos">162</span></a>                <span class="s2">&quot;upstream_value&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">upstream_value</span><span class="p">),</span>
 </span><span id="L-163"><a href="#L-163"><span class="linenos">163</span></a>            <span class="p">}</span>
 </span><span id="L-164"><a href="#L-164"><span class="linenos">164</span></a>        <span class="p">]</span>
 </span><span id="L-165"><a href="#L-165"><span class="linenos">165</span></a>
@@ -286,7 +286,7 @@
 </span><span id="L-195"><a href="#L-195"><span class="linenos">195</span></a>
 </span><span id="L-196"><a href="#L-196"><span class="linenos">196</span></a><span class="sd">        Args:</span>
 </span><span id="L-197"><a href="#L-197"><span class="linenos">197</span></a><span class="sd">            sensor_id: sensor id. If this parameter is defined search occurs</span>
-</span><span id="L-198"><a href="#L-198"><span class="linenos">198</span></a><span class="sd">                only considering this parameter. Otherwise it considers sensor</span>
+</span><span id="L-198"><a href="#L-198"><span class="linenos">198</span></a><span class="sd">                only considering this parameter. Otherwise, it considers sensor</span>
 </span><span id="L-199"><a href="#L-199"><span class="linenos">199</span></a><span class="sd">                assets and checkpoint location.</span>
 </span><span id="L-200"><a href="#L-200"><span class="linenos">200</span></a><span class="sd">            control_db_table_name: db.table to control sensor runs.</span>
 </span><span id="L-201"><a href="#L-201"><span class="linenos">201</span></a><span class="sd">            assets: list of assets that are fueled by the pipeline</span>
@@ -424,7 +424,7 @@
 </span><span id="L-333"><a href="#L-333"><span class="linenos">333</span></a><span class="sd">            sensor_spec: sensor spec containing all sensor information.</span>
 </span><span id="L-334"><a href="#L-334"><span class="linenos">334</span></a>
 </span><span id="L-335"><a href="#L-335"><span class="linenos">335</span></a><span class="sd">        Return:</span>
-</span><span id="L-336"><a href="#L-336"><span class="linenos">336</span></a><span class="sd">            An empty dataframe if doesn&#39;t have new data otherwise the new data</span>
+</span><span id="L-336"><a href="#L-336"><span class="linenos">336</span></a><span class="sd">            An empty dataframe if it doesn&#39;t have new data otherwise the new data</span>
 </span><span id="L-337"><a href="#L-337"><span class="linenos">337</span></a><span class="sd">        &quot;&quot;&quot;</span>
 </span><span id="L-338"><a href="#L-338"><span class="linenos">338</span></a>        <span class="n">new_data_df</span> <span class="o">=</span> <span class="n">ReaderFactory</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span><span class="n">sensor_spec</span><span class="o">.</span><span class="n">input_spec</span><span class="p">)</span>
 </span><span id="L-339"><a href="#L-339"><span class="linenos">339</span></a>
@@ -523,7 +523,7 @@
 </span><span id="SensorControlTableManager-34"><a href="#SensorControlTableManager-34"><span class="linenos"> 34</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Check if sensor has acquired new data.</span>
 </span><span id="SensorControlTableManager-35"><a href="#SensorControlTableManager-35"><span class="linenos"> 35</span></a>
 </span><span id="SensorControlTableManager-36"><a href="#SensorControlTableManager-36"><span class="linenos"> 36</span></a><span class="sd">        Args:</span>
-</span><span id="SensorControlTableManager-37"><a href="#SensorControlTableManager-37"><span class="linenos"> 37</span></a><span class="sd">            sensor_id: sendor id.</span>
+</span><span id="SensorControlTableManager-37"><a href="#SensorControlTableManager-37"><span class="linenos"> 37</span></a><span class="sd">            sensor_id: sensor id.</span>
 </span><span id="SensorControlTableManager-38"><a href="#SensorControlTableManager-38"><span class="linenos"> 38</span></a><span class="sd">            control_db_table_name: db.table to control sensor runs.</span>
 </span><span id="SensorControlTableManager-39"><a href="#SensorControlTableManager-39"><span class="linenos"> 39</span></a>
 </span><span id="SensorControlTableManager-40"><a href="#SensorControlTableManager-40"><span class="linenos"> 40</span></a><span class="sd">        Returns:</span>
@@ -648,8 +648,8 @@
 </span><span id="SensorControlTableManager-159"><a href="#SensorControlTableManager-159"><span class="linenos">159</span></a>                <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="n">status</span><span class="p">,</span>
 </span><span id="SensorControlTableManager-160"><a href="#SensorControlTableManager-160"><span class="linenos">160</span></a>                <span class="s2">&quot;status_change_timestamp&quot;</span><span class="p">:</span> <span class="n">status_change_timestamp</span><span class="p">,</span>
 </span><span id="SensorControlTableManager-161"><a href="#SensorControlTableManager-161"><span class="linenos">161</span></a>                <span class="s2">&quot;checkpoint_location&quot;</span><span class="p">:</span> <span class="n">spec</span><span class="o">.</span><span class="n">checkpoint_location</span><span class="p">,</span>
-</span><span id="SensorControlTableManager-162"><a href="#SensorControlTableManager-162"><span class="linenos">162</span></a>                <span class="s2">&quot;upstream_key&quot;</span><span class="p">:</span> <span class="n">upstream_key</span><span class="p">,</span>
-</span><span id="SensorControlTableManager-163"><a href="#SensorControlTableManager-163"><span class="linenos">163</span></a>                <span class="s2">&quot;upstream_value&quot;</span><span class="p">:</span> <span class="n">upstream_value</span><span class="p">,</span>
+</span><span id="SensorControlTableManager-162"><a href="#SensorControlTableManager-162"><span class="linenos">162</span></a>                <span class="s2">&quot;upstream_key&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">upstream_key</span><span class="p">),</span>
+</span><span id="SensorControlTableManager-163"><a href="#SensorControlTableManager-163"><span class="linenos">163</span></a>                <span class="s2">&quot;upstream_value&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">upstream_value</span><span class="p">),</span>
 </span><span id="SensorControlTableManager-164"><a href="#SensorControlTableManager-164"><span class="linenos">164</span></a>            <span class="p">}</span>
 </span><span id="SensorControlTableManager-165"><a href="#SensorControlTableManager-165"><span class="linenos">165</span></a>        <span class="p">]</span>
 </span><span id="SensorControlTableManager-166"><a href="#SensorControlTableManager-166"><span class="linenos">166</span></a>
@@ -685,7 +685,7 @@
 </span><span id="SensorControlTableManager-196"><a href="#SensorControlTableManager-196"><span class="linenos">196</span></a>
 </span><span id="SensorControlTableManager-197"><a href="#SensorControlTableManager-197"><span class="linenos">197</span></a><span class="sd">        Args:</span>
 </span><span id="SensorControlTableManager-198"><a href="#SensorControlTableManager-198"><span class="linenos">198</span></a><span class="sd">            sensor_id: sensor id. If this parameter is defined search occurs</span>
-</span><span id="SensorControlTableManager-199"><a href="#SensorControlTableManager-199"><span class="linenos">199</span></a><span class="sd">                only considering this parameter. Otherwise it considers sensor</span>
+</span><span id="SensorControlTableManager-199"><a href="#SensorControlTableManager-199"><span class="linenos">199</span></a><span class="sd">                only considering this parameter. Otherwise, it considers sensor</span>
 </span><span id="SensorControlTableManager-200"><a href="#SensorControlTableManager-200"><span class="linenos">200</span></a><span class="sd">                assets and checkpoint location.</span>
 </span><span id="SensorControlTableManager-201"><a href="#SensorControlTableManager-201"><span class="linenos">201</span></a><span class="sd">            control_db_table_name: db.table to control sensor runs.</span>
 </span><span id="SensorControlTableManager-202"><a href="#SensorControlTableManager-202"><span class="linenos">202</span></a><span class="sd">            assets: list of assets that are fueled by the pipeline</span>
@@ -737,7 +737,7 @@
 </span><span id="SensorControlTableManager.check_if_sensor_has_acquired_data-34"><a href="#SensorControlTableManager.check_if_sensor_has_acquired_data-34"><span class="linenos">34</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Check if sensor has acquired new data.</span>
 </span><span id="SensorControlTableManager.check_if_sensor_has_acquired_data-35"><a href="#SensorControlTableManager.check_if_sensor_has_acquired_data-35"><span class="linenos">35</span></a>
 </span><span id="SensorControlTableManager.check_if_sensor_has_acquired_data-36"><a href="#SensorControlTableManager.check_if_sensor_has_acquired_data-36"><span class="linenos">36</span></a><span class="sd">        Args:</span>
-</span><span id="SensorControlTableManager.check_if_sensor_has_acquired_data-37"><a href="#SensorControlTableManager.check_if_sensor_has_acquired_data-37"><span class="linenos">37</span></a><span class="sd">            sensor_id: sendor id.</span>
+</span><span id="SensorControlTableManager.check_if_sensor_has_acquired_data-37"><a href="#SensorControlTableManager.check_if_sensor_has_acquired_data-37"><span class="linenos">37</span></a><span class="sd">            sensor_id: sensor id.</span>
 </span><span id="SensorControlTableManager.check_if_sensor_has_acquired_data-38"><a href="#SensorControlTableManager.check_if_sensor_has_acquired_data-38"><span class="linenos">38</span></a><span class="sd">            control_db_table_name: db.table to control sensor runs.</span>
 </span><span id="SensorControlTableManager.check_if_sensor_has_acquired_data-39"><a href="#SensorControlTableManager.check_if_sensor_has_acquired_data-39"><span class="linenos">39</span></a>
 </span><span id="SensorControlTableManager.check_if_sensor_has_acquired_data-40"><a href="#SensorControlTableManager.check_if_sensor_has_acquired_data-40"><span class="linenos">40</span></a><span class="sd">        Returns:</span>
@@ -758,7 +758,7 @@
             <div class="docstring"><p>Check if sensor has acquired new data.</p>
 
 <p>Args:
-    sensor_id: sendor id.
+    sensor_id: sensor id.
     control_db_table_name: db.table to control sensor runs.</p>
 
 <p>Returns:
@@ -866,7 +866,7 @@
 </span><span id="SensorControlTableManager.read_sensor_table_data-196"><a href="#SensorControlTableManager.read_sensor_table_data-196"><span class="linenos">196</span></a>
 </span><span id="SensorControlTableManager.read_sensor_table_data-197"><a href="#SensorControlTableManager.read_sensor_table_data-197"><span class="linenos">197</span></a><span class="sd">        Args:</span>
 </span><span id="SensorControlTableManager.read_sensor_table_data-198"><a href="#SensorControlTableManager.read_sensor_table_data-198"><span class="linenos">198</span></a><span class="sd">            sensor_id: sensor id. If this parameter is defined search occurs</span>
-</span><span id="SensorControlTableManager.read_sensor_table_data-199"><a href="#SensorControlTableManager.read_sensor_table_data-199"><span class="linenos">199</span></a><span class="sd">                only considering this parameter. Otherwise it considers sensor</span>
+</span><span id="SensorControlTableManager.read_sensor_table_data-199"><a href="#SensorControlTableManager.read_sensor_table_data-199"><span class="linenos">199</span></a><span class="sd">                only considering this parameter. Otherwise, it considers sensor</span>
 </span><span id="SensorControlTableManager.read_sensor_table_data-200"><a href="#SensorControlTableManager.read_sensor_table_data-200"><span class="linenos">200</span></a><span class="sd">                assets and checkpoint location.</span>
 </span><span id="SensorControlTableManager.read_sensor_table_data-201"><a href="#SensorControlTableManager.read_sensor_table_data-201"><span class="linenos">201</span></a><span class="sd">            control_db_table_name: db.table to control sensor runs.</span>
 </span><span id="SensorControlTableManager.read_sensor_table_data-202"><a href="#SensorControlTableManager.read_sensor_table_data-202"><span class="linenos">202</span></a><span class="sd">            assets: list of assets that are fueled by the pipeline</span>
@@ -897,7 +897,7 @@
 
 <p>Args:
     sensor_id: sensor id. If this parameter is defined search occurs
-        only considering this parameter. Otherwise it considers sensor
+        only considering this parameter. Otherwise, it considers sensor
         assets and checkpoint location.
     control_db_table_name: db.table to control sensor runs.
     assets: list of assets that are fueled by the pipeline
@@ -1033,7 +1033,7 @@
 </span><span id="SensorUpstreamManager-334"><a href="#SensorUpstreamManager-334"><span class="linenos">334</span></a><span class="sd">            sensor_spec: sensor spec containing all sensor information.</span>
 </span><span id="SensorUpstreamManager-335"><a href="#SensorUpstreamManager-335"><span class="linenos">335</span></a>
 </span><span id="SensorUpstreamManager-336"><a href="#SensorUpstreamManager-336"><span class="linenos">336</span></a><span class="sd">        Return:</span>
-</span><span id="SensorUpstreamManager-337"><a href="#SensorUpstreamManager-337"><span class="linenos">337</span></a><span class="sd">            An empty dataframe if doesn&#39;t have new data otherwise the new data</span>
+</span><span id="SensorUpstreamManager-337"><a href="#SensorUpstreamManager-337"><span class="linenos">337</span></a><span class="sd">            An empty dataframe if it doesn&#39;t have new data otherwise the new data</span>
 </span><span id="SensorUpstreamManager-338"><a href="#SensorUpstreamManager-338"><span class="linenos">338</span></a><span class="sd">        &quot;&quot;&quot;</span>
 </span><span id="SensorUpstreamManager-339"><a href="#SensorUpstreamManager-339"><span class="linenos">339</span></a>        <span class="n">new_data_df</span> <span class="o">=</span> <span class="n">ReaderFactory</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span><span class="n">sensor_spec</span><span class="o">.</span><span class="n">input_spec</span><span class="p">)</span>
 </span><span id="SensorUpstreamManager-340"><a href="#SensorUpstreamManager-340"><span class="linenos">340</span></a>
@@ -1298,7 +1298,7 @@
 </span><span id="SensorUpstreamManager.read_new_data-334"><a href="#SensorUpstreamManager.read_new_data-334"><span class="linenos">334</span></a><span class="sd">            sensor_spec: sensor spec containing all sensor information.</span>
 </span><span id="SensorUpstreamManager.read_new_data-335"><a href="#SensorUpstreamManager.read_new_data-335"><span class="linenos">335</span></a>
 </span><span id="SensorUpstreamManager.read_new_data-336"><a href="#SensorUpstreamManager.read_new_data-336"><span class="linenos">336</span></a><span class="sd">        Return:</span>
-</span><span id="SensorUpstreamManager.read_new_data-337"><a href="#SensorUpstreamManager.read_new_data-337"><span class="linenos">337</span></a><span class="sd">            An empty dataframe if doesn&#39;t have new data otherwise the new data</span>
+</span><span id="SensorUpstreamManager.read_new_data-337"><a href="#SensorUpstreamManager.read_new_data-337"><span class="linenos">337</span></a><span class="sd">            An empty dataframe if it doesn&#39;t have new data otherwise the new data</span>
 </span><span id="SensorUpstreamManager.read_new_data-338"><a href="#SensorUpstreamManager.read_new_data-338"><span class="linenos">338</span></a><span class="sd">        &quot;&quot;&quot;</span>
 </span><span id="SensorUpstreamManager.read_new_data-339"><a href="#SensorUpstreamManager.read_new_data-339"><span class="linenos">339</span></a>        <span class="n">new_data_df</span> <span class="o">=</span> <span class="n">ReaderFactory</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span><span class="n">sensor_spec</span><span class="o">.</span><span class="n">input_spec</span><span class="p">)</span>
 </span><span id="SensorUpstreamManager.read_new_data-340"><a href="#SensorUpstreamManager.read_new_data-340"><span class="linenos">340</span></a>
@@ -1316,7 +1316,7 @@
     sensor_spec: sensor spec containing all sensor information.</p>
 
 <p>Return:
-    An empty dataframe if doesn't have new data otherwise the new data</p>
+    An empty dataframe if it doesn't have new data otherwise the new data</p>
 </div>
 
 
