@@ -69,7 +69,7 @@
     </ul>
 
 
-            <footer>Lakehouse Engine v1.20.1</footer>
+            <footer>Lakehouse Engine v1.21.0version</footer>
 
 </div>
     </nav>
@@ -87,157 +87,158 @@
                     <label class="view-source-button" for="mod-filters-view-source"><span>View Source</span></label>
 
                     <div class="pdoc-code codehilite"><pre><span></span><span id="L-1"><a href="#L-1"><span class="linenos">  1</span></a><span class="sd">&quot;&quot;&quot;Module containing the filters transformers.&quot;&quot;&quot;</span>
-</span><span id="L-2"><a href="#L-2"><span class="linenos">  2</span></a><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span>
-</span><span id="L-3"><a href="#L-3"><span class="linenos">  3</span></a>
-</span><span id="L-4"><a href="#L-4"><span class="linenos">  4</span></a><span class="kn">from</span> <span class="nn">pyspark.sql</span> <span class="kn">import</span> <span class="n">DataFrame</span>
-</span><span id="L-5"><a href="#L-5"><span class="linenos">  5</span></a><span class="kn">from</span> <span class="nn">pyspark.sql.functions</span> <span class="kn">import</span> <span class="n">col</span>
-</span><span id="L-6"><a href="#L-6"><span class="linenos">  6</span></a>
-</span><span id="L-7"><a href="#L-7"><span class="linenos">  7</span></a><span class="kn">from</span> <span class="nn">lakehouse_engine.transformers.watermarker</span> <span class="kn">import</span> <span class="n">Watermarker</span>
-</span><span id="L-8"><a href="#L-8"><span class="linenos">  8</span></a><span class="kn">from</span> <span class="nn">lakehouse_engine.utils.logging_handler</span> <span class="kn">import</span> <span class="n">LoggingHandler</span>
-</span><span id="L-9"><a href="#L-9"><span class="linenos">  9</span></a>
+</span><span id="L-2"><a href="#L-2"><span class="linenos">  2</span></a>
+</span><span id="L-3"><a href="#L-3"><span class="linenos">  3</span></a><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span>
+</span><span id="L-4"><a href="#L-4"><span class="linenos">  4</span></a>
+</span><span id="L-5"><a href="#L-5"><span class="linenos">  5</span></a><span class="kn">from</span> <span class="nn">pyspark.sql</span> <span class="kn">import</span> <span class="n">DataFrame</span>
+</span><span id="L-6"><a href="#L-6"><span class="linenos">  6</span></a><span class="kn">from</span> <span class="nn">pyspark.sql.functions</span> <span class="kn">import</span> <span class="n">col</span>
+</span><span id="L-7"><a href="#L-7"><span class="linenos">  7</span></a>
+</span><span id="L-8"><a href="#L-8"><span class="linenos">  8</span></a><span class="kn">from</span> <span class="nn">lakehouse_engine.transformers.watermarker</span> <span class="kn">import</span> <span class="n">Watermarker</span>
+</span><span id="L-9"><a href="#L-9"><span class="linenos">  9</span></a><span class="kn">from</span> <span class="nn">lakehouse_engine.utils.logging_handler</span> <span class="kn">import</span> <span class="n">LoggingHandler</span>
 </span><span id="L-10"><a href="#L-10"><span class="linenos"> 10</span></a>
-</span><span id="L-11"><a href="#L-11"><span class="linenos"> 11</span></a><span class="k">class</span> <span class="nc">Filters</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-</span><span id="L-12"><a href="#L-12"><span class="linenos"> 12</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Class containing the filters transformers.&quot;&quot;&quot;</span>
-</span><span id="L-13"><a href="#L-13"><span class="linenos"> 13</span></a>
-</span><span id="L-14"><a href="#L-14"><span class="linenos"> 14</span></a>    <span class="n">_logger</span> <span class="o">=</span> <span class="n">LoggingHandler</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span><span class="o">.</span><span class="n">get_logger</span><span class="p">()</span>
-</span><span id="L-15"><a href="#L-15"><span class="linenos"> 15</span></a>
-</span><span id="L-16"><a href="#L-16"><span class="linenos"> 16</span></a>    <span class="nd">@classmethod</span>
-</span><span id="L-17"><a href="#L-17"><span class="linenos"> 17</span></a>    <span class="k">def</span> <span class="nf">incremental_filter</span><span class="p">(</span>
-</span><span id="L-18"><a href="#L-18"><span class="linenos"> 18</span></a>        <span class="bp">cls</span><span class="p">,</span>
-</span><span id="L-19"><a href="#L-19"><span class="linenos"> 19</span></a>        <span class="n">input_col</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-</span><span id="L-20"><a href="#L-20"><span class="linenos"> 20</span></a>        <span class="n">increment_value</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-</span><span id="L-21"><a href="#L-21"><span class="linenos"> 21</span></a>        <span class="n">increment_df</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">DataFrame</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-</span><span id="L-22"><a href="#L-22"><span class="linenos"> 22</span></a>        <span class="n">increment_col</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;latest&quot;</span><span class="p">,</span>
-</span><span id="L-23"><a href="#L-23"><span class="linenos"> 23</span></a>        <span class="n">greater_or_equal</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
-</span><span id="L-24"><a href="#L-24"><span class="linenos"> 24</span></a>    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">:</span>
-</span><span id="L-25"><a href="#L-25"><span class="linenos"> 25</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Incrementally Filter a certain dataframe given an increment logic.</span>
-</span><span id="L-26"><a href="#L-26"><span class="linenos"> 26</span></a>
-</span><span id="L-27"><a href="#L-27"><span class="linenos"> 27</span></a><span class="sd">        This logic can either be an increment value or an increment dataframe from</span>
-</span><span id="L-28"><a href="#L-28"><span class="linenos"> 28</span></a><span class="sd">        which the get the latest value from. By default, the operator for the</span>
-</span><span id="L-29"><a href="#L-29"><span class="linenos"> 29</span></a><span class="sd">        filtering process is greater or equal to cover cases where we receive late</span>
-</span><span id="L-30"><a href="#L-30"><span class="linenos"> 30</span></a><span class="sd">        arriving data not cover in a previous load. You can change greater_or_equal</span>
-</span><span id="L-31"><a href="#L-31"><span class="linenos"> 31</span></a><span class="sd">        to false to use greater, when you trust the source will never output more data</span>
-</span><span id="L-32"><a href="#L-32"><span class="linenos"> 32</span></a><span class="sd">        with the increment after you have load the data (e.g., you will never load</span>
-</span><span id="L-33"><a href="#L-33"><span class="linenos"> 33</span></a><span class="sd">        data until the source is still dumping data, which may cause you to get an</span>
-</span><span id="L-34"><a href="#L-34"><span class="linenos"> 34</span></a><span class="sd">        incomplete picture of the last arrived data).</span>
-</span><span id="L-35"><a href="#L-35"><span class="linenos"> 35</span></a>
-</span><span id="L-36"><a href="#L-36"><span class="linenos"> 36</span></a><span class="sd">        Args:</span>
-</span><span id="L-37"><a href="#L-37"><span class="linenos"> 37</span></a><span class="sd">            input_col: input column name</span>
-</span><span id="L-38"><a href="#L-38"><span class="linenos"> 38</span></a><span class="sd">            increment_value: value to which to filter the data, considering the</span>
-</span><span id="L-39"><a href="#L-39"><span class="linenos"> 39</span></a><span class="sd">                provided input_Col.</span>
-</span><span id="L-40"><a href="#L-40"><span class="linenos"> 40</span></a><span class="sd">            increment_df: a dataframe to get the increment value from.</span>
-</span><span id="L-41"><a href="#L-41"><span class="linenos"> 41</span></a><span class="sd">                you either specify this or the increment_value (this takes precedence).</span>
-</span><span id="L-42"><a href="#L-42"><span class="linenos"> 42</span></a><span class="sd">                This is a good approach to get the latest value from a given dataframe</span>
-</span><span id="L-43"><a href="#L-43"><span class="linenos"> 43</span></a><span class="sd">                that was read and apply that value as filter here. In this way you can</span>
-</span><span id="L-44"><a href="#L-44"><span class="linenos"> 44</span></a><span class="sd">                perform incremental loads based on the last value of a given dataframe</span>
-</span><span id="L-45"><a href="#L-45"><span class="linenos"> 45</span></a><span class="sd">                (e.g., table or file based). Can be used together with the</span>
-</span><span id="L-46"><a href="#L-46"><span class="linenos"> 46</span></a><span class="sd">                get_max_value transformer to accomplish these incremental based loads.</span>
-</span><span id="L-47"><a href="#L-47"><span class="linenos"> 47</span></a><span class="sd">                See our append load feature tests  to see how to provide an acon for</span>
-</span><span id="L-48"><a href="#L-48"><span class="linenos"> 48</span></a><span class="sd">                incremental loads, taking advantage of the scenario explained here.</span>
-</span><span id="L-49"><a href="#L-49"><span class="linenos"> 49</span></a><span class="sd">            increment_col: name of the column from which to get the increment</span>
-</span><span id="L-50"><a href="#L-50"><span class="linenos"> 50</span></a><span class="sd">                value from (when using increment_df approach). This assumes there&#39;s</span>
-</span><span id="L-51"><a href="#L-51"><span class="linenos"> 51</span></a><span class="sd">                only one row in the increment_df, reason why is a good idea to use</span>
-</span><span id="L-52"><a href="#L-52"><span class="linenos"> 52</span></a><span class="sd">                together with the get_max_value transformer. Defaults to &quot;latest&quot;</span>
-</span><span id="L-53"><a href="#L-53"><span class="linenos"> 53</span></a><span class="sd">                because that&#39;s the default output column name provided by the</span>
-</span><span id="L-54"><a href="#L-54"><span class="linenos"> 54</span></a><span class="sd">                get_max_value transformer.</span>
-</span><span id="L-55"><a href="#L-55"><span class="linenos"> 55</span></a><span class="sd">            greater_or_equal: if filtering should be done by also including the</span>
-</span><span id="L-56"><a href="#L-56"><span class="linenos"> 56</span></a><span class="sd">                increment value or not (useful for scenarios where you are performing</span>
-</span><span id="L-57"><a href="#L-57"><span class="linenos"> 57</span></a><span class="sd">                increment loads but still want to include data considering the increment</span>
-</span><span id="L-58"><a href="#L-58"><span class="linenos"> 58</span></a><span class="sd">                value, and not only values greater than that increment... examples may</span>
-</span><span id="L-59"><a href="#L-59"><span class="linenos"> 59</span></a><span class="sd">                include scenarios where you already loaded data including those values,</span>
-</span><span id="L-60"><a href="#L-60"><span class="linenos"> 60</span></a><span class="sd">                but the source produced more data containing those values).</span>
-</span><span id="L-61"><a href="#L-61"><span class="linenos"> 61</span></a><span class="sd">                Defaults to false.</span>
-</span><span id="L-62"><a href="#L-62"><span class="linenos"> 62</span></a>
-</span><span id="L-63"><a href="#L-63"><span class="linenos"> 63</span></a><span class="sd">        Returns:</span>
-</span><span id="L-64"><a href="#L-64"><span class="linenos"> 64</span></a><span class="sd">            A function to be called in .transform() spark function.</span>
-</span><span id="L-65"><a href="#L-65"><span class="linenos"> 65</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="L-66"><a href="#L-66"><span class="linenos"> 66</span></a>
-</span><span id="L-67"><a href="#L-67"><span class="linenos"> 67</span></a>        <span class="k">def</span> <span class="nf">inner</span><span class="p">(</span><span class="n">df</span><span class="p">:</span> <span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataFrame</span><span class="p">:</span>
-</span><span id="L-68"><a href="#L-68"><span class="linenos"> 68</span></a>            <span class="k">if</span> <span class="n">increment_df</span><span class="p">:</span>
-</span><span id="L-69"><a href="#L-69"><span class="linenos"> 69</span></a>                <span class="k">if</span> <span class="n">greater_or_equal</span><span class="p">:</span>
-</span><span id="L-70"><a href="#L-70"><span class="linenos"> 70</span></a>                    <span class="k">return</span> <span class="n">df</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span>  <span class="c1"># type: ignore</span>
-</span><span id="L-71"><a href="#L-71"><span class="linenos"> 71</span></a>                        <span class="n">col</span><span class="p">(</span><span class="n">input_col</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="n">increment_df</span><span class="o">.</span><span class="n">collect</span><span class="p">()[</span><span class="mi">0</span><span class="p">][</span><span class="n">increment_col</span><span class="p">]</span>
-</span><span id="L-72"><a href="#L-72"><span class="linenos"> 72</span></a>                    <span class="p">)</span>
-</span><span id="L-73"><a href="#L-73"><span class="linenos"> 73</span></a>                <span class="k">else</span><span class="p">:</span>
-</span><span id="L-74"><a href="#L-74"><span class="linenos"> 74</span></a>                    <span class="k">return</span> <span class="n">df</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span>  <span class="c1"># type: ignore</span>
-</span><span id="L-75"><a href="#L-75"><span class="linenos"> 75</span></a>                        <span class="n">col</span><span class="p">(</span><span class="n">input_col</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">increment_df</span><span class="o">.</span><span class="n">collect</span><span class="p">()[</span><span class="mi">0</span><span class="p">][</span><span class="n">increment_col</span><span class="p">]</span>
-</span><span id="L-76"><a href="#L-76"><span class="linenos"> 76</span></a>                    <span class="p">)</span>
-</span><span id="L-77"><a href="#L-77"><span class="linenos"> 77</span></a>            <span class="k">else</span><span class="p">:</span>
-</span><span id="L-78"><a href="#L-78"><span class="linenos"> 78</span></a>                <span class="k">if</span> <span class="n">greater_or_equal</span><span class="p">:</span>
-</span><span id="L-79"><a href="#L-79"><span class="linenos"> 79</span></a>                    <span class="k">return</span> <span class="n">df</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="n">input_col</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="n">increment_value</span><span class="p">)</span>  <span class="c1"># type: ignore</span>
-</span><span id="L-80"><a href="#L-80"><span class="linenos"> 80</span></a>                <span class="k">else</span><span class="p">:</span>
-</span><span id="L-81"><a href="#L-81"><span class="linenos"> 81</span></a>                    <span class="k">return</span> <span class="n">df</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="n">input_col</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">increment_value</span><span class="p">)</span>  <span class="c1"># type: ignore</span>
-</span><span id="L-82"><a href="#L-82"><span class="linenos"> 82</span></a>
-</span><span id="L-83"><a href="#L-83"><span class="linenos"> 83</span></a>        <span class="k">return</span> <span class="n">inner</span>
-</span><span id="L-84"><a href="#L-84"><span class="linenos"> 84</span></a>
-</span><span id="L-85"><a href="#L-85"><span class="linenos"> 85</span></a>    <span class="nd">@staticmethod</span>
-</span><span id="L-86"><a href="#L-86"><span class="linenos"> 86</span></a>    <span class="k">def</span> <span class="nf">expression_filter</span><span class="p">(</span><span class="n">exp</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">:</span>
-</span><span id="L-87"><a href="#L-87"><span class="linenos"> 87</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Filter a dataframe based on an expression.</span>
-</span><span id="L-88"><a href="#L-88"><span class="linenos"> 88</span></a>
-</span><span id="L-89"><a href="#L-89"><span class="linenos"> 89</span></a><span class="sd">        Args:</span>
-</span><span id="L-90"><a href="#L-90"><span class="linenos"> 90</span></a><span class="sd">            exp: filter expression.</span>
-</span><span id="L-91"><a href="#L-91"><span class="linenos"> 91</span></a>
-</span><span id="L-92"><a href="#L-92"><span class="linenos"> 92</span></a><span class="sd">        Returns:</span>
-</span><span id="L-93"><a href="#L-93"><span class="linenos"> 93</span></a><span class="sd">            A function to be called in .transform() spark function.</span>
-</span><span id="L-94"><a href="#L-94"><span class="linenos"> 94</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="L-95"><a href="#L-95"><span class="linenos"> 95</span></a>
-</span><span id="L-96"><a href="#L-96"><span class="linenos"> 96</span></a>        <span class="k">def</span> <span class="nf">inner</span><span class="p">(</span><span class="n">df</span><span class="p">:</span> <span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataFrame</span><span class="p">:</span>
-</span><span id="L-97"><a href="#L-97"><span class="linenos"> 97</span></a>            <span class="k">return</span> <span class="n">df</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">exp</span><span class="p">)</span>  <span class="c1"># type: ignore</span>
-</span><span id="L-98"><a href="#L-98"><span class="linenos"> 98</span></a>
-</span><span id="L-99"><a href="#L-99"><span class="linenos"> 99</span></a>        <span class="k">return</span> <span class="n">inner</span>
-</span><span id="L-100"><a href="#L-100"><span class="linenos">100</span></a>
-</span><span id="L-101"><a href="#L-101"><span class="linenos">101</span></a>    <span class="nd">@staticmethod</span>
-</span><span id="L-102"><a href="#L-102"><span class="linenos">102</span></a>    <span class="k">def</span> <span class="nf">column_filter_exp</span><span class="p">(</span><span class="n">exp</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">:</span>
-</span><span id="L-103"><a href="#L-103"><span class="linenos">103</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Filter a dataframe&#39;s columns based on a list of SQL expressions.</span>
-</span><span id="L-104"><a href="#L-104"><span class="linenos">104</span></a>
-</span><span id="L-105"><a href="#L-105"><span class="linenos">105</span></a><span class="sd">        Args:</span>
-</span><span id="L-106"><a href="#L-106"><span class="linenos">106</span></a><span class="sd">            exp: column filter expressions.</span>
-</span><span id="L-107"><a href="#L-107"><span class="linenos">107</span></a>
-</span><span id="L-108"><a href="#L-108"><span class="linenos">108</span></a><span class="sd">        Returns:</span>
-</span><span id="L-109"><a href="#L-109"><span class="linenos">109</span></a><span class="sd">            A function to be called in .transform() spark function.</span>
-</span><span id="L-110"><a href="#L-110"><span class="linenos">110</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="L-111"><a href="#L-111"><span class="linenos">111</span></a>
-</span><span id="L-112"><a href="#L-112"><span class="linenos">112</span></a>        <span class="k">def</span> <span class="nf">inner</span><span class="p">(</span><span class="n">df</span><span class="p">:</span> <span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataFrame</span><span class="p">:</span>
-</span><span id="L-113"><a href="#L-113"><span class="linenos">113</span></a>            <span class="k">return</span> <span class="n">df</span><span class="o">.</span><span class="n">selectExpr</span><span class="p">(</span><span class="o">*</span><span class="n">exp</span><span class="p">)</span>  <span class="c1"># type: ignore</span>
-</span><span id="L-114"><a href="#L-114"><span class="linenos">114</span></a>
-</span><span id="L-115"><a href="#L-115"><span class="linenos">115</span></a>        <span class="k">return</span> <span class="n">inner</span>
-</span><span id="L-116"><a href="#L-116"><span class="linenos">116</span></a>
-</span><span id="L-117"><a href="#L-117"><span class="linenos">117</span></a>    <span class="nd">@staticmethod</span>
-</span><span id="L-118"><a href="#L-118"><span class="linenos">118</span></a>    <span class="k">def</span> <span class="nf">drop_duplicate_rows</span><span class="p">(</span>
-</span><span id="L-119"><a href="#L-119"><span class="linenos">119</span></a>        <span class="n">cols</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">watermarker</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span>
-</span><span id="L-120"><a href="#L-120"><span class="linenos">120</span></a>    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">:</span>
-</span><span id="L-121"><a href="#L-121"><span class="linenos">121</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Drop duplicate rows using spark function dropDuplicates().</span>
-</span><span id="L-122"><a href="#L-122"><span class="linenos">122</span></a>
-</span><span id="L-123"><a href="#L-123"><span class="linenos">123</span></a><span class="sd">        This transformer can be used with or without arguments.</span>
-</span><span id="L-124"><a href="#L-124"><span class="linenos">124</span></a><span class="sd">        The provided argument needs to be a list of columns.</span>
-</span><span id="L-125"><a href="#L-125"><span class="linenos">125</span></a><span class="sd">        For example: [“Name”,”VAT”] will drop duplicate records within</span>
-</span><span id="L-126"><a href="#L-126"><span class="linenos">126</span></a><span class="sd">        &quot;Name&quot; and &quot;VAT&quot; columns.</span>
-</span><span id="L-127"><a href="#L-127"><span class="linenos">127</span></a><span class="sd">        If the transformer is used without providing any columns list or providing</span>
-</span><span id="L-128"><a href="#L-128"><span class="linenos">128</span></a><span class="sd">        an empty list, such as [] the result will be the same as using</span>
-</span><span id="L-129"><a href="#L-129"><span class="linenos">129</span></a><span class="sd">        the distinct() pyspark function. If the watermark dict is present it will</span>
-</span><span id="L-130"><a href="#L-130"><span class="linenos">130</span></a><span class="sd">        ensure that the drop operation will apply to rows within the watermark timeline</span>
-</span><span id="L-131"><a href="#L-131"><span class="linenos">131</span></a><span class="sd">        window.</span>
-</span><span id="L-132"><a href="#L-132"><span class="linenos">132</span></a>
+</span><span id="L-11"><a href="#L-11"><span class="linenos"> 11</span></a>
+</span><span id="L-12"><a href="#L-12"><span class="linenos"> 12</span></a><span class="k">class</span> <span class="nc">Filters</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+</span><span id="L-13"><a href="#L-13"><span class="linenos"> 13</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Class containing the filters transformers.&quot;&quot;&quot;</span>
+</span><span id="L-14"><a href="#L-14"><span class="linenos"> 14</span></a>
+</span><span id="L-15"><a href="#L-15"><span class="linenos"> 15</span></a>    <span class="n">_logger</span> <span class="o">=</span> <span class="n">LoggingHandler</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span><span class="o">.</span><span class="n">get_logger</span><span class="p">()</span>
+</span><span id="L-16"><a href="#L-16"><span class="linenos"> 16</span></a>
+</span><span id="L-17"><a href="#L-17"><span class="linenos"> 17</span></a>    <span class="nd">@classmethod</span>
+</span><span id="L-18"><a href="#L-18"><span class="linenos"> 18</span></a>    <span class="k">def</span> <span class="nf">incremental_filter</span><span class="p">(</span>
+</span><span id="L-19"><a href="#L-19"><span class="linenos"> 19</span></a>        <span class="bp">cls</span><span class="p">,</span>
+</span><span id="L-20"><a href="#L-20"><span class="linenos"> 20</span></a>        <span class="n">input_col</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+</span><span id="L-21"><a href="#L-21"><span class="linenos"> 21</span></a>        <span class="n">increment_value</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+</span><span id="L-22"><a href="#L-22"><span class="linenos"> 22</span></a>        <span class="n">increment_df</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">DataFrame</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+</span><span id="L-23"><a href="#L-23"><span class="linenos"> 23</span></a>        <span class="n">increment_col</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;latest&quot;</span><span class="p">,</span>
+</span><span id="L-24"><a href="#L-24"><span class="linenos"> 24</span></a>        <span class="n">greater_or_equal</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+</span><span id="L-25"><a href="#L-25"><span class="linenos"> 25</span></a>    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">:</span>
+</span><span id="L-26"><a href="#L-26"><span class="linenos"> 26</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Incrementally Filter a certain dataframe given an increment logic.</span>
+</span><span id="L-27"><a href="#L-27"><span class="linenos"> 27</span></a>
+</span><span id="L-28"><a href="#L-28"><span class="linenos"> 28</span></a><span class="sd">        This logic can either be an increment value or an increment dataframe from</span>
+</span><span id="L-29"><a href="#L-29"><span class="linenos"> 29</span></a><span class="sd">        which the get the latest value from. By default, the operator for the</span>
+</span><span id="L-30"><a href="#L-30"><span class="linenos"> 30</span></a><span class="sd">        filtering process is greater or equal to cover cases where we receive late</span>
+</span><span id="L-31"><a href="#L-31"><span class="linenos"> 31</span></a><span class="sd">        arriving data not cover in a previous load. You can change greater_or_equal</span>
+</span><span id="L-32"><a href="#L-32"><span class="linenos"> 32</span></a><span class="sd">        to false to use greater, when you trust the source will never output more data</span>
+</span><span id="L-33"><a href="#L-33"><span class="linenos"> 33</span></a><span class="sd">        with the increment after you have load the data (e.g., you will never load</span>
+</span><span id="L-34"><a href="#L-34"><span class="linenos"> 34</span></a><span class="sd">        data until the source is still dumping data, which may cause you to get an</span>
+</span><span id="L-35"><a href="#L-35"><span class="linenos"> 35</span></a><span class="sd">        incomplete picture of the last arrived data).</span>
+</span><span id="L-36"><a href="#L-36"><span class="linenos"> 36</span></a>
+</span><span id="L-37"><a href="#L-37"><span class="linenos"> 37</span></a><span class="sd">        Args:</span>
+</span><span id="L-38"><a href="#L-38"><span class="linenos"> 38</span></a><span class="sd">            input_col: input column name</span>
+</span><span id="L-39"><a href="#L-39"><span class="linenos"> 39</span></a><span class="sd">            increment_value: value to which to filter the data, considering the</span>
+</span><span id="L-40"><a href="#L-40"><span class="linenos"> 40</span></a><span class="sd">                provided input_Col.</span>
+</span><span id="L-41"><a href="#L-41"><span class="linenos"> 41</span></a><span class="sd">            increment_df: a dataframe to get the increment value from.</span>
+</span><span id="L-42"><a href="#L-42"><span class="linenos"> 42</span></a><span class="sd">                you either specify this or the increment_value (this takes precedence).</span>
+</span><span id="L-43"><a href="#L-43"><span class="linenos"> 43</span></a><span class="sd">                This is a good approach to get the latest value from a given dataframe</span>
+</span><span id="L-44"><a href="#L-44"><span class="linenos"> 44</span></a><span class="sd">                that was read and apply that value as filter here. In this way you can</span>
+</span><span id="L-45"><a href="#L-45"><span class="linenos"> 45</span></a><span class="sd">                perform incremental loads based on the last value of a given dataframe</span>
+</span><span id="L-46"><a href="#L-46"><span class="linenos"> 46</span></a><span class="sd">                (e.g., table or file based). Can be used together with the</span>
+</span><span id="L-47"><a href="#L-47"><span class="linenos"> 47</span></a><span class="sd">                get_max_value transformer to accomplish these incremental based loads.</span>
+</span><span id="L-48"><a href="#L-48"><span class="linenos"> 48</span></a><span class="sd">                See our append load feature tests  to see how to provide an acon for</span>
+</span><span id="L-49"><a href="#L-49"><span class="linenos"> 49</span></a><span class="sd">                incremental loads, taking advantage of the scenario explained here.</span>
+</span><span id="L-50"><a href="#L-50"><span class="linenos"> 50</span></a><span class="sd">            increment_col: name of the column from which to get the increment</span>
+</span><span id="L-51"><a href="#L-51"><span class="linenos"> 51</span></a><span class="sd">                value from (when using increment_df approach). This assumes there&#39;s</span>
+</span><span id="L-52"><a href="#L-52"><span class="linenos"> 52</span></a><span class="sd">                only one row in the increment_df, reason why is a good idea to use</span>
+</span><span id="L-53"><a href="#L-53"><span class="linenos"> 53</span></a><span class="sd">                together with the get_max_value transformer. Defaults to &quot;latest&quot;</span>
+</span><span id="L-54"><a href="#L-54"><span class="linenos"> 54</span></a><span class="sd">                because that&#39;s the default output column name provided by the</span>
+</span><span id="L-55"><a href="#L-55"><span class="linenos"> 55</span></a><span class="sd">                get_max_value transformer.</span>
+</span><span id="L-56"><a href="#L-56"><span class="linenos"> 56</span></a><span class="sd">            greater_or_equal: if filtering should be done by also including the</span>
+</span><span id="L-57"><a href="#L-57"><span class="linenos"> 57</span></a><span class="sd">                increment value or not (useful for scenarios where you are performing</span>
+</span><span id="L-58"><a href="#L-58"><span class="linenos"> 58</span></a><span class="sd">                increment loads but still want to include data considering the increment</span>
+</span><span id="L-59"><a href="#L-59"><span class="linenos"> 59</span></a><span class="sd">                value, and not only values greater than that increment... examples may</span>
+</span><span id="L-60"><a href="#L-60"><span class="linenos"> 60</span></a><span class="sd">                include scenarios where you already loaded data including those values,</span>
+</span><span id="L-61"><a href="#L-61"><span class="linenos"> 61</span></a><span class="sd">                but the source produced more data containing those values).</span>
+</span><span id="L-62"><a href="#L-62"><span class="linenos"> 62</span></a><span class="sd">                Defaults to false.</span>
+</span><span id="L-63"><a href="#L-63"><span class="linenos"> 63</span></a>
+</span><span id="L-64"><a href="#L-64"><span class="linenos"> 64</span></a><span class="sd">        Returns:</span>
+</span><span id="L-65"><a href="#L-65"><span class="linenos"> 65</span></a><span class="sd">            A function to be called in .transform() spark function.</span>
+</span><span id="L-66"><a href="#L-66"><span class="linenos"> 66</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="L-67"><a href="#L-67"><span class="linenos"> 67</span></a>
+</span><span id="L-68"><a href="#L-68"><span class="linenos"> 68</span></a>        <span class="k">def</span> <span class="nf">inner</span><span class="p">(</span><span class="n">df</span><span class="p">:</span> <span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataFrame</span><span class="p">:</span>
+</span><span id="L-69"><a href="#L-69"><span class="linenos"> 69</span></a>            <span class="k">if</span> <span class="n">increment_df</span><span class="p">:</span>
+</span><span id="L-70"><a href="#L-70"><span class="linenos"> 70</span></a>                <span class="k">if</span> <span class="n">greater_or_equal</span><span class="p">:</span>
+</span><span id="L-71"><a href="#L-71"><span class="linenos"> 71</span></a>                    <span class="k">return</span> <span class="n">df</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span>  <span class="c1"># type: ignore</span>
+</span><span id="L-72"><a href="#L-72"><span class="linenos"> 72</span></a>                        <span class="n">col</span><span class="p">(</span><span class="n">input_col</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="n">increment_df</span><span class="o">.</span><span class="n">collect</span><span class="p">()[</span><span class="mi">0</span><span class="p">][</span><span class="n">increment_col</span><span class="p">]</span>
+</span><span id="L-73"><a href="#L-73"><span class="linenos"> 73</span></a>                    <span class="p">)</span>
+</span><span id="L-74"><a href="#L-74"><span class="linenos"> 74</span></a>                <span class="k">else</span><span class="p">:</span>
+</span><span id="L-75"><a href="#L-75"><span class="linenos"> 75</span></a>                    <span class="k">return</span> <span class="n">df</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span>  <span class="c1"># type: ignore</span>
+</span><span id="L-76"><a href="#L-76"><span class="linenos"> 76</span></a>                        <span class="n">col</span><span class="p">(</span><span class="n">input_col</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">increment_df</span><span class="o">.</span><span class="n">collect</span><span class="p">()[</span><span class="mi">0</span><span class="p">][</span><span class="n">increment_col</span><span class="p">]</span>
+</span><span id="L-77"><a href="#L-77"><span class="linenos"> 77</span></a>                    <span class="p">)</span>
+</span><span id="L-78"><a href="#L-78"><span class="linenos"> 78</span></a>            <span class="k">else</span><span class="p">:</span>
+</span><span id="L-79"><a href="#L-79"><span class="linenos"> 79</span></a>                <span class="k">if</span> <span class="n">greater_or_equal</span><span class="p">:</span>
+</span><span id="L-80"><a href="#L-80"><span class="linenos"> 80</span></a>                    <span class="k">return</span> <span class="n">df</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="n">input_col</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="n">increment_value</span><span class="p">)</span>  <span class="c1"># type: ignore</span>
+</span><span id="L-81"><a href="#L-81"><span class="linenos"> 81</span></a>                <span class="k">else</span><span class="p">:</span>
+</span><span id="L-82"><a href="#L-82"><span class="linenos"> 82</span></a>                    <span class="k">return</span> <span class="n">df</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="n">input_col</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">increment_value</span><span class="p">)</span>  <span class="c1"># type: ignore</span>
+</span><span id="L-83"><a href="#L-83"><span class="linenos"> 83</span></a>
+</span><span id="L-84"><a href="#L-84"><span class="linenos"> 84</span></a>        <span class="k">return</span> <span class="n">inner</span>
+</span><span id="L-85"><a href="#L-85"><span class="linenos"> 85</span></a>
+</span><span id="L-86"><a href="#L-86"><span class="linenos"> 86</span></a>    <span class="nd">@staticmethod</span>
+</span><span id="L-87"><a href="#L-87"><span class="linenos"> 87</span></a>    <span class="k">def</span> <span class="nf">expression_filter</span><span class="p">(</span><span class="n">exp</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">:</span>
+</span><span id="L-88"><a href="#L-88"><span class="linenos"> 88</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Filter a dataframe based on an expression.</span>
+</span><span id="L-89"><a href="#L-89"><span class="linenos"> 89</span></a>
+</span><span id="L-90"><a href="#L-90"><span class="linenos"> 90</span></a><span class="sd">        Args:</span>
+</span><span id="L-91"><a href="#L-91"><span class="linenos"> 91</span></a><span class="sd">            exp: filter expression.</span>
+</span><span id="L-92"><a href="#L-92"><span class="linenos"> 92</span></a>
+</span><span id="L-93"><a href="#L-93"><span class="linenos"> 93</span></a><span class="sd">        Returns:</span>
+</span><span id="L-94"><a href="#L-94"><span class="linenos"> 94</span></a><span class="sd">            A function to be called in .transform() spark function.</span>
+</span><span id="L-95"><a href="#L-95"><span class="linenos"> 95</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="L-96"><a href="#L-96"><span class="linenos"> 96</span></a>
+</span><span id="L-97"><a href="#L-97"><span class="linenos"> 97</span></a>        <span class="k">def</span> <span class="nf">inner</span><span class="p">(</span><span class="n">df</span><span class="p">:</span> <span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataFrame</span><span class="p">:</span>
+</span><span id="L-98"><a href="#L-98"><span class="linenos"> 98</span></a>            <span class="k">return</span> <span class="n">df</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">exp</span><span class="p">)</span>  <span class="c1"># type: ignore</span>
+</span><span id="L-99"><a href="#L-99"><span class="linenos"> 99</span></a>
+</span><span id="L-100"><a href="#L-100"><span class="linenos">100</span></a>        <span class="k">return</span> <span class="n">inner</span>
+</span><span id="L-101"><a href="#L-101"><span class="linenos">101</span></a>
+</span><span id="L-102"><a href="#L-102"><span class="linenos">102</span></a>    <span class="nd">@staticmethod</span>
+</span><span id="L-103"><a href="#L-103"><span class="linenos">103</span></a>    <span class="k">def</span> <span class="nf">column_filter_exp</span><span class="p">(</span><span class="n">exp</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">:</span>
+</span><span id="L-104"><a href="#L-104"><span class="linenos">104</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Filter a dataframe&#39;s columns based on a list of SQL expressions.</span>
+</span><span id="L-105"><a href="#L-105"><span class="linenos">105</span></a>
+</span><span id="L-106"><a href="#L-106"><span class="linenos">106</span></a><span class="sd">        Args:</span>
+</span><span id="L-107"><a href="#L-107"><span class="linenos">107</span></a><span class="sd">            exp: column filter expressions.</span>
+</span><span id="L-108"><a href="#L-108"><span class="linenos">108</span></a>
+</span><span id="L-109"><a href="#L-109"><span class="linenos">109</span></a><span class="sd">        Returns:</span>
+</span><span id="L-110"><a href="#L-110"><span class="linenos">110</span></a><span class="sd">            A function to be called in .transform() spark function.</span>
+</span><span id="L-111"><a href="#L-111"><span class="linenos">111</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="L-112"><a href="#L-112"><span class="linenos">112</span></a>
+</span><span id="L-113"><a href="#L-113"><span class="linenos">113</span></a>        <span class="k">def</span> <span class="nf">inner</span><span class="p">(</span><span class="n">df</span><span class="p">:</span> <span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataFrame</span><span class="p">:</span>
+</span><span id="L-114"><a href="#L-114"><span class="linenos">114</span></a>            <span class="k">return</span> <span class="n">df</span><span class="o">.</span><span class="n">selectExpr</span><span class="p">(</span><span class="o">*</span><span class="n">exp</span><span class="p">)</span>  <span class="c1"># type: ignore</span>
+</span><span id="L-115"><a href="#L-115"><span class="linenos">115</span></a>
+</span><span id="L-116"><a href="#L-116"><span class="linenos">116</span></a>        <span class="k">return</span> <span class="n">inner</span>
+</span><span id="L-117"><a href="#L-117"><span class="linenos">117</span></a>
+</span><span id="L-118"><a href="#L-118"><span class="linenos">118</span></a>    <span class="nd">@staticmethod</span>
+</span><span id="L-119"><a href="#L-119"><span class="linenos">119</span></a>    <span class="k">def</span> <span class="nf">drop_duplicate_rows</span><span class="p">(</span>
+</span><span id="L-120"><a href="#L-120"><span class="linenos">120</span></a>        <span class="n">cols</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">watermarker</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span>
+</span><span id="L-121"><a href="#L-121"><span class="linenos">121</span></a>    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">:</span>
+</span><span id="L-122"><a href="#L-122"><span class="linenos">122</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Drop duplicate rows using spark function dropDuplicates().</span>
+</span><span id="L-123"><a href="#L-123"><span class="linenos">123</span></a>
+</span><span id="L-124"><a href="#L-124"><span class="linenos">124</span></a><span class="sd">        This transformer can be used with or without arguments.</span>
+</span><span id="L-125"><a href="#L-125"><span class="linenos">125</span></a><span class="sd">        The provided argument needs to be a list of columns.</span>
+</span><span id="L-126"><a href="#L-126"><span class="linenos">126</span></a><span class="sd">        For example: [“Name”,”VAT”] will drop duplicate records within</span>
+</span><span id="L-127"><a href="#L-127"><span class="linenos">127</span></a><span class="sd">        &quot;Name&quot; and &quot;VAT&quot; columns.</span>
+</span><span id="L-128"><a href="#L-128"><span class="linenos">128</span></a><span class="sd">        If the transformer is used without providing any columns list or providing</span>
+</span><span id="L-129"><a href="#L-129"><span class="linenos">129</span></a><span class="sd">        an empty list, such as [] the result will be the same as using</span>
+</span><span id="L-130"><a href="#L-130"><span class="linenos">130</span></a><span class="sd">        the distinct() pyspark function. If the watermark dict is present it will</span>
+</span><span id="L-131"><a href="#L-131"><span class="linenos">131</span></a><span class="sd">        ensure that the drop operation will apply to rows within the watermark timeline</span>
+</span><span id="L-132"><a href="#L-132"><span class="linenos">132</span></a><span class="sd">        window.</span>
 </span><span id="L-133"><a href="#L-133"><span class="linenos">133</span></a>
-</span><span id="L-134"><a href="#L-134"><span class="linenos">134</span></a><span class="sd">        Args:</span>
-</span><span id="L-135"><a href="#L-135"><span class="linenos">135</span></a><span class="sd">            cols: column names.</span>
-</span><span id="L-136"><a href="#L-136"><span class="linenos">136</span></a><span class="sd">            watermarker: properties to apply watermarker to the transformer.</span>
-</span><span id="L-137"><a href="#L-137"><span class="linenos">137</span></a>
-</span><span id="L-138"><a href="#L-138"><span class="linenos">138</span></a><span class="sd">        Returns:</span>
-</span><span id="L-139"><a href="#L-139"><span class="linenos">139</span></a><span class="sd">            A function to be called in .transform() spark function.</span>
-</span><span id="L-140"><a href="#L-140"><span class="linenos">140</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="L-141"><a href="#L-141"><span class="linenos">141</span></a>
-</span><span id="L-142"><a href="#L-142"><span class="linenos">142</span></a>        <span class="k">def</span> <span class="nf">inner</span><span class="p">(</span><span class="n">df</span><span class="p">:</span> <span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataFrame</span><span class="p">:</span>
-</span><span id="L-143"><a href="#L-143"><span class="linenos">143</span></a>            <span class="k">if</span> <span class="n">watermarker</span><span class="p">:</span>
-</span><span id="L-144"><a href="#L-144"><span class="linenos">144</span></a>                <span class="n">df</span> <span class="o">=</span> <span class="n">Watermarker</span><span class="o">.</span><span class="n">with_watermark</span><span class="p">(</span>
-</span><span id="L-145"><a href="#L-145"><span class="linenos">145</span></a>                    <span class="n">watermarker</span><span class="p">[</span><span class="s2">&quot;col&quot;</span><span class="p">],</span> <span class="n">watermarker</span><span class="p">[</span><span class="s2">&quot;watermarking_time&quot;</span><span class="p">]</span>
-</span><span id="L-146"><a href="#L-146"><span class="linenos">146</span></a>                <span class="p">)(</span><span class="n">df</span><span class="p">)</span>
-</span><span id="L-147"><a href="#L-147"><span class="linenos">147</span></a>            <span class="k">if</span> <span class="ow">not</span> <span class="n">cols</span><span class="p">:</span>
-</span><span id="L-148"><a href="#L-148"><span class="linenos">148</span></a>                <span class="k">return</span> <span class="n">df</span><span class="o">.</span><span class="n">dropDuplicates</span><span class="p">()</span>
-</span><span id="L-149"><a href="#L-149"><span class="linenos">149</span></a>            <span class="k">else</span><span class="p">:</span>
-</span><span id="L-150"><a href="#L-150"><span class="linenos">150</span></a>                <span class="k">return</span> <span class="n">df</span><span class="o">.</span><span class="n">dropDuplicates</span><span class="p">(</span><span class="n">cols</span><span class="p">)</span>
-</span><span id="L-151"><a href="#L-151"><span class="linenos">151</span></a>
-</span><span id="L-152"><a href="#L-152"><span class="linenos">152</span></a>        <span class="k">return</span> <span class="n">inner</span>
+</span><span id="L-134"><a href="#L-134"><span class="linenos">134</span></a>
+</span><span id="L-135"><a href="#L-135"><span class="linenos">135</span></a><span class="sd">        Args:</span>
+</span><span id="L-136"><a href="#L-136"><span class="linenos">136</span></a><span class="sd">            cols: column names.</span>
+</span><span id="L-137"><a href="#L-137"><span class="linenos">137</span></a><span class="sd">            watermarker: properties to apply watermarker to the transformer.</span>
+</span><span id="L-138"><a href="#L-138"><span class="linenos">138</span></a>
+</span><span id="L-139"><a href="#L-139"><span class="linenos">139</span></a><span class="sd">        Returns:</span>
+</span><span id="L-140"><a href="#L-140"><span class="linenos">140</span></a><span class="sd">            A function to be called in .transform() spark function.</span>
+</span><span id="L-141"><a href="#L-141"><span class="linenos">141</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="L-142"><a href="#L-142"><span class="linenos">142</span></a>
+</span><span id="L-143"><a href="#L-143"><span class="linenos">143</span></a>        <span class="k">def</span> <span class="nf">inner</span><span class="p">(</span><span class="n">df</span><span class="p">:</span> <span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataFrame</span><span class="p">:</span>
+</span><span id="L-144"><a href="#L-144"><span class="linenos">144</span></a>            <span class="k">if</span> <span class="n">watermarker</span><span class="p">:</span>
+</span><span id="L-145"><a href="#L-145"><span class="linenos">145</span></a>                <span class="n">df</span> <span class="o">=</span> <span class="n">Watermarker</span><span class="o">.</span><span class="n">with_watermark</span><span class="p">(</span>
+</span><span id="L-146"><a href="#L-146"><span class="linenos">146</span></a>                    <span class="n">watermarker</span><span class="p">[</span><span class="s2">&quot;col&quot;</span><span class="p">],</span> <span class="n">watermarker</span><span class="p">[</span><span class="s2">&quot;watermarking_time&quot;</span><span class="p">]</span>
+</span><span id="L-147"><a href="#L-147"><span class="linenos">147</span></a>                <span class="p">)(</span><span class="n">df</span><span class="p">)</span>
+</span><span id="L-148"><a href="#L-148"><span class="linenos">148</span></a>            <span class="k">if</span> <span class="ow">not</span> <span class="n">cols</span><span class="p">:</span>
+</span><span id="L-149"><a href="#L-149"><span class="linenos">149</span></a>                <span class="k">return</span> <span class="n">df</span><span class="o">.</span><span class="n">dropDuplicates</span><span class="p">()</span>
+</span><span id="L-150"><a href="#L-150"><span class="linenos">150</span></a>            <span class="k">else</span><span class="p">:</span>
+</span><span id="L-151"><a href="#L-151"><span class="linenos">151</span></a>                <span class="k">return</span> <span class="n">df</span><span class="o">.</span><span class="n">dropDuplicates</span><span class="p">(</span><span class="n">cols</span><span class="p">)</span>
+</span><span id="L-152"><a href="#L-152"><span class="linenos">152</span></a>
+</span><span id="L-153"><a href="#L-153"><span class="linenos">153</span></a>        <span class="k">return</span> <span class="n">inner</span>
 </span></pre></div>
 
 
@@ -253,148 +254,148 @@
 
     </div>
     <a class="headerlink" href="#Filters"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="Filters-12"><a href="#Filters-12"><span class="linenos"> 12</span></a><span class="k">class</span> <span class="nc">Filters</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-</span><span id="Filters-13"><a href="#Filters-13"><span class="linenos"> 13</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Class containing the filters transformers.&quot;&quot;&quot;</span>
-</span><span id="Filters-14"><a href="#Filters-14"><span class="linenos"> 14</span></a>
-</span><span id="Filters-15"><a href="#Filters-15"><span class="linenos"> 15</span></a>    <span class="n">_logger</span> <span class="o">=</span> <span class="n">LoggingHandler</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span><span class="o">.</span><span class="n">get_logger</span><span class="p">()</span>
-</span><span id="Filters-16"><a href="#Filters-16"><span class="linenos"> 16</span></a>
-</span><span id="Filters-17"><a href="#Filters-17"><span class="linenos"> 17</span></a>    <span class="nd">@classmethod</span>
-</span><span id="Filters-18"><a href="#Filters-18"><span class="linenos"> 18</span></a>    <span class="k">def</span> <span class="nf">incremental_filter</span><span class="p">(</span>
-</span><span id="Filters-19"><a href="#Filters-19"><span class="linenos"> 19</span></a>        <span class="bp">cls</span><span class="p">,</span>
-</span><span id="Filters-20"><a href="#Filters-20"><span class="linenos"> 20</span></a>        <span class="n">input_col</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-</span><span id="Filters-21"><a href="#Filters-21"><span class="linenos"> 21</span></a>        <span class="n">increment_value</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-</span><span id="Filters-22"><a href="#Filters-22"><span class="linenos"> 22</span></a>        <span class="n">increment_df</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">DataFrame</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-</span><span id="Filters-23"><a href="#Filters-23"><span class="linenos"> 23</span></a>        <span class="n">increment_col</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;latest&quot;</span><span class="p">,</span>
-</span><span id="Filters-24"><a href="#Filters-24"><span class="linenos"> 24</span></a>        <span class="n">greater_or_equal</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
-</span><span id="Filters-25"><a href="#Filters-25"><span class="linenos"> 25</span></a>    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">:</span>
-</span><span id="Filters-26"><a href="#Filters-26"><span class="linenos"> 26</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Incrementally Filter a certain dataframe given an increment logic.</span>
-</span><span id="Filters-27"><a href="#Filters-27"><span class="linenos"> 27</span></a>
-</span><span id="Filters-28"><a href="#Filters-28"><span class="linenos"> 28</span></a><span class="sd">        This logic can either be an increment value or an increment dataframe from</span>
-</span><span id="Filters-29"><a href="#Filters-29"><span class="linenos"> 29</span></a><span class="sd">        which the get the latest value from. By default, the operator for the</span>
-</span><span id="Filters-30"><a href="#Filters-30"><span class="linenos"> 30</span></a><span class="sd">        filtering process is greater or equal to cover cases where we receive late</span>
-</span><span id="Filters-31"><a href="#Filters-31"><span class="linenos"> 31</span></a><span class="sd">        arriving data not cover in a previous load. You can change greater_or_equal</span>
-</span><span id="Filters-32"><a href="#Filters-32"><span class="linenos"> 32</span></a><span class="sd">        to false to use greater, when you trust the source will never output more data</span>
-</span><span id="Filters-33"><a href="#Filters-33"><span class="linenos"> 33</span></a><span class="sd">        with the increment after you have load the data (e.g., you will never load</span>
-</span><span id="Filters-34"><a href="#Filters-34"><span class="linenos"> 34</span></a><span class="sd">        data until the source is still dumping data, which may cause you to get an</span>
-</span><span id="Filters-35"><a href="#Filters-35"><span class="linenos"> 35</span></a><span class="sd">        incomplete picture of the last arrived data).</span>
-</span><span id="Filters-36"><a href="#Filters-36"><span class="linenos"> 36</span></a>
-</span><span id="Filters-37"><a href="#Filters-37"><span class="linenos"> 37</span></a><span class="sd">        Args:</span>
-</span><span id="Filters-38"><a href="#Filters-38"><span class="linenos"> 38</span></a><span class="sd">            input_col: input column name</span>
-</span><span id="Filters-39"><a href="#Filters-39"><span class="linenos"> 39</span></a><span class="sd">            increment_value: value to which to filter the data, considering the</span>
-</span><span id="Filters-40"><a href="#Filters-40"><span class="linenos"> 40</span></a><span class="sd">                provided input_Col.</span>
-</span><span id="Filters-41"><a href="#Filters-41"><span class="linenos"> 41</span></a><span class="sd">            increment_df: a dataframe to get the increment value from.</span>
-</span><span id="Filters-42"><a href="#Filters-42"><span class="linenos"> 42</span></a><span class="sd">                you either specify this or the increment_value (this takes precedence).</span>
-</span><span id="Filters-43"><a href="#Filters-43"><span class="linenos"> 43</span></a><span class="sd">                This is a good approach to get the latest value from a given dataframe</span>
-</span><span id="Filters-44"><a href="#Filters-44"><span class="linenos"> 44</span></a><span class="sd">                that was read and apply that value as filter here. In this way you can</span>
-</span><span id="Filters-45"><a href="#Filters-45"><span class="linenos"> 45</span></a><span class="sd">                perform incremental loads based on the last value of a given dataframe</span>
-</span><span id="Filters-46"><a href="#Filters-46"><span class="linenos"> 46</span></a><span class="sd">                (e.g., table or file based). Can be used together with the</span>
-</span><span id="Filters-47"><a href="#Filters-47"><span class="linenos"> 47</span></a><span class="sd">                get_max_value transformer to accomplish these incremental based loads.</span>
-</span><span id="Filters-48"><a href="#Filters-48"><span class="linenos"> 48</span></a><span class="sd">                See our append load feature tests  to see how to provide an acon for</span>
-</span><span id="Filters-49"><a href="#Filters-49"><span class="linenos"> 49</span></a><span class="sd">                incremental loads, taking advantage of the scenario explained here.</span>
-</span><span id="Filters-50"><a href="#Filters-50"><span class="linenos"> 50</span></a><span class="sd">            increment_col: name of the column from which to get the increment</span>
-</span><span id="Filters-51"><a href="#Filters-51"><span class="linenos"> 51</span></a><span class="sd">                value from (when using increment_df approach). This assumes there&#39;s</span>
-</span><span id="Filters-52"><a href="#Filters-52"><span class="linenos"> 52</span></a><span class="sd">                only one row in the increment_df, reason why is a good idea to use</span>
-</span><span id="Filters-53"><a href="#Filters-53"><span class="linenos"> 53</span></a><span class="sd">                together with the get_max_value transformer. Defaults to &quot;latest&quot;</span>
-</span><span id="Filters-54"><a href="#Filters-54"><span class="linenos"> 54</span></a><span class="sd">                because that&#39;s the default output column name provided by the</span>
-</span><span id="Filters-55"><a href="#Filters-55"><span class="linenos"> 55</span></a><span class="sd">                get_max_value transformer.</span>
-</span><span id="Filters-56"><a href="#Filters-56"><span class="linenos"> 56</span></a><span class="sd">            greater_or_equal: if filtering should be done by also including the</span>
-</span><span id="Filters-57"><a href="#Filters-57"><span class="linenos"> 57</span></a><span class="sd">                increment value or not (useful for scenarios where you are performing</span>
-</span><span id="Filters-58"><a href="#Filters-58"><span class="linenos"> 58</span></a><span class="sd">                increment loads but still want to include data considering the increment</span>
-</span><span id="Filters-59"><a href="#Filters-59"><span class="linenos"> 59</span></a><span class="sd">                value, and not only values greater than that increment... examples may</span>
-</span><span id="Filters-60"><a href="#Filters-60"><span class="linenos"> 60</span></a><span class="sd">                include scenarios where you already loaded data including those values,</span>
-</span><span id="Filters-61"><a href="#Filters-61"><span class="linenos"> 61</span></a><span class="sd">                but the source produced more data containing those values).</span>
-</span><span id="Filters-62"><a href="#Filters-62"><span class="linenos"> 62</span></a><span class="sd">                Defaults to false.</span>
-</span><span id="Filters-63"><a href="#Filters-63"><span class="linenos"> 63</span></a>
-</span><span id="Filters-64"><a href="#Filters-64"><span class="linenos"> 64</span></a><span class="sd">        Returns:</span>
-</span><span id="Filters-65"><a href="#Filters-65"><span class="linenos"> 65</span></a><span class="sd">            A function to be called in .transform() spark function.</span>
-</span><span id="Filters-66"><a href="#Filters-66"><span class="linenos"> 66</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="Filters-67"><a href="#Filters-67"><span class="linenos"> 67</span></a>
-</span><span id="Filters-68"><a href="#Filters-68"><span class="linenos"> 68</span></a>        <span class="k">def</span> <span class="nf">inner</span><span class="p">(</span><span class="n">df</span><span class="p">:</span> <span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataFrame</span><span class="p">:</span>
-</span><span id="Filters-69"><a href="#Filters-69"><span class="linenos"> 69</span></a>            <span class="k">if</span> <span class="n">increment_df</span><span class="p">:</span>
-</span><span id="Filters-70"><a href="#Filters-70"><span class="linenos"> 70</span></a>                <span class="k">if</span> <span class="n">greater_or_equal</span><span class="p">:</span>
-</span><span id="Filters-71"><a href="#Filters-71"><span class="linenos"> 71</span></a>                    <span class="k">return</span> <span class="n">df</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span>  <span class="c1"># type: ignore</span>
-</span><span id="Filters-72"><a href="#Filters-72"><span class="linenos"> 72</span></a>                        <span class="n">col</span><span class="p">(</span><span class="n">input_col</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="n">increment_df</span><span class="o">.</span><span class="n">collect</span><span class="p">()[</span><span class="mi">0</span><span class="p">][</span><span class="n">increment_col</span><span class="p">]</span>
-</span><span id="Filters-73"><a href="#Filters-73"><span class="linenos"> 73</span></a>                    <span class="p">)</span>
-</span><span id="Filters-74"><a href="#Filters-74"><span class="linenos"> 74</span></a>                <span class="k">else</span><span class="p">:</span>
-</span><span id="Filters-75"><a href="#Filters-75"><span class="linenos"> 75</span></a>                    <span class="k">return</span> <span class="n">df</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span>  <span class="c1"># type: ignore</span>
-</span><span id="Filters-76"><a href="#Filters-76"><span class="linenos"> 76</span></a>                        <span class="n">col</span><span class="p">(</span><span class="n">input_col</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">increment_df</span><span class="o">.</span><span class="n">collect</span><span class="p">()[</span><span class="mi">0</span><span class="p">][</span><span class="n">increment_col</span><span class="p">]</span>
-</span><span id="Filters-77"><a href="#Filters-77"><span class="linenos"> 77</span></a>                    <span class="p">)</span>
-</span><span id="Filters-78"><a href="#Filters-78"><span class="linenos"> 78</span></a>            <span class="k">else</span><span class="p">:</span>
-</span><span id="Filters-79"><a href="#Filters-79"><span class="linenos"> 79</span></a>                <span class="k">if</span> <span class="n">greater_or_equal</span><span class="p">:</span>
-</span><span id="Filters-80"><a href="#Filters-80"><span class="linenos"> 80</span></a>                    <span class="k">return</span> <span class="n">df</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="n">input_col</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="n">increment_value</span><span class="p">)</span>  <span class="c1"># type: ignore</span>
-</span><span id="Filters-81"><a href="#Filters-81"><span class="linenos"> 81</span></a>                <span class="k">else</span><span class="p">:</span>
-</span><span id="Filters-82"><a href="#Filters-82"><span class="linenos"> 82</span></a>                    <span class="k">return</span> <span class="n">df</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="n">input_col</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">increment_value</span><span class="p">)</span>  <span class="c1"># type: ignore</span>
-</span><span id="Filters-83"><a href="#Filters-83"><span class="linenos"> 83</span></a>
-</span><span id="Filters-84"><a href="#Filters-84"><span class="linenos"> 84</span></a>        <span class="k">return</span> <span class="n">inner</span>
-</span><span id="Filters-85"><a href="#Filters-85"><span class="linenos"> 85</span></a>
-</span><span id="Filters-86"><a href="#Filters-86"><span class="linenos"> 86</span></a>    <span class="nd">@staticmethod</span>
-</span><span id="Filters-87"><a href="#Filters-87"><span class="linenos"> 87</span></a>    <span class="k">def</span> <span class="nf">expression_filter</span><span class="p">(</span><span class="n">exp</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">:</span>
-</span><span id="Filters-88"><a href="#Filters-88"><span class="linenos"> 88</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Filter a dataframe based on an expression.</span>
-</span><span id="Filters-89"><a href="#Filters-89"><span class="linenos"> 89</span></a>
-</span><span id="Filters-90"><a href="#Filters-90"><span class="linenos"> 90</span></a><span class="sd">        Args:</span>
-</span><span id="Filters-91"><a href="#Filters-91"><span class="linenos"> 91</span></a><span class="sd">            exp: filter expression.</span>
-</span><span id="Filters-92"><a href="#Filters-92"><span class="linenos"> 92</span></a>
-</span><span id="Filters-93"><a href="#Filters-93"><span class="linenos"> 93</span></a><span class="sd">        Returns:</span>
-</span><span id="Filters-94"><a href="#Filters-94"><span class="linenos"> 94</span></a><span class="sd">            A function to be called in .transform() spark function.</span>
-</span><span id="Filters-95"><a href="#Filters-95"><span class="linenos"> 95</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="Filters-96"><a href="#Filters-96"><span class="linenos"> 96</span></a>
-</span><span id="Filters-97"><a href="#Filters-97"><span class="linenos"> 97</span></a>        <span class="k">def</span> <span class="nf">inner</span><span class="p">(</span><span class="n">df</span><span class="p">:</span> <span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataFrame</span><span class="p">:</span>
-</span><span id="Filters-98"><a href="#Filters-98"><span class="linenos"> 98</span></a>            <span class="k">return</span> <span class="n">df</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">exp</span><span class="p">)</span>  <span class="c1"># type: ignore</span>
-</span><span id="Filters-99"><a href="#Filters-99"><span class="linenos"> 99</span></a>
-</span><span id="Filters-100"><a href="#Filters-100"><span class="linenos">100</span></a>        <span class="k">return</span> <span class="n">inner</span>
-</span><span id="Filters-101"><a href="#Filters-101"><span class="linenos">101</span></a>
-</span><span id="Filters-102"><a href="#Filters-102"><span class="linenos">102</span></a>    <span class="nd">@staticmethod</span>
-</span><span id="Filters-103"><a href="#Filters-103"><span class="linenos">103</span></a>    <span class="k">def</span> <span class="nf">column_filter_exp</span><span class="p">(</span><span class="n">exp</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">:</span>
-</span><span id="Filters-104"><a href="#Filters-104"><span class="linenos">104</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Filter a dataframe&#39;s columns based on a list of SQL expressions.</span>
-</span><span id="Filters-105"><a href="#Filters-105"><span class="linenos">105</span></a>
-</span><span id="Filters-106"><a href="#Filters-106"><span class="linenos">106</span></a><span class="sd">        Args:</span>
-</span><span id="Filters-107"><a href="#Filters-107"><span class="linenos">107</span></a><span class="sd">            exp: column filter expressions.</span>
-</span><span id="Filters-108"><a href="#Filters-108"><span class="linenos">108</span></a>
-</span><span id="Filters-109"><a href="#Filters-109"><span class="linenos">109</span></a><span class="sd">        Returns:</span>
-</span><span id="Filters-110"><a href="#Filters-110"><span class="linenos">110</span></a><span class="sd">            A function to be called in .transform() spark function.</span>
-</span><span id="Filters-111"><a href="#Filters-111"><span class="linenos">111</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="Filters-112"><a href="#Filters-112"><span class="linenos">112</span></a>
-</span><span id="Filters-113"><a href="#Filters-113"><span class="linenos">113</span></a>        <span class="k">def</span> <span class="nf">inner</span><span class="p">(</span><span class="n">df</span><span class="p">:</span> <span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataFrame</span><span class="p">:</span>
-</span><span id="Filters-114"><a href="#Filters-114"><span class="linenos">114</span></a>            <span class="k">return</span> <span class="n">df</span><span class="o">.</span><span class="n">selectExpr</span><span class="p">(</span><span class="o">*</span><span class="n">exp</span><span class="p">)</span>  <span class="c1"># type: ignore</span>
-</span><span id="Filters-115"><a href="#Filters-115"><span class="linenos">115</span></a>
-</span><span id="Filters-116"><a href="#Filters-116"><span class="linenos">116</span></a>        <span class="k">return</span> <span class="n">inner</span>
-</span><span id="Filters-117"><a href="#Filters-117"><span class="linenos">117</span></a>
-</span><span id="Filters-118"><a href="#Filters-118"><span class="linenos">118</span></a>    <span class="nd">@staticmethod</span>
-</span><span id="Filters-119"><a href="#Filters-119"><span class="linenos">119</span></a>    <span class="k">def</span> <span class="nf">drop_duplicate_rows</span><span class="p">(</span>
-</span><span id="Filters-120"><a href="#Filters-120"><span class="linenos">120</span></a>        <span class="n">cols</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">watermarker</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span>
-</span><span id="Filters-121"><a href="#Filters-121"><span class="linenos">121</span></a>    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">:</span>
-</span><span id="Filters-122"><a href="#Filters-122"><span class="linenos">122</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Drop duplicate rows using spark function dropDuplicates().</span>
-</span><span id="Filters-123"><a href="#Filters-123"><span class="linenos">123</span></a>
-</span><span id="Filters-124"><a href="#Filters-124"><span class="linenos">124</span></a><span class="sd">        This transformer can be used with or without arguments.</span>
-</span><span id="Filters-125"><a href="#Filters-125"><span class="linenos">125</span></a><span class="sd">        The provided argument needs to be a list of columns.</span>
-</span><span id="Filters-126"><a href="#Filters-126"><span class="linenos">126</span></a><span class="sd">        For example: [“Name”,”VAT”] will drop duplicate records within</span>
-</span><span id="Filters-127"><a href="#Filters-127"><span class="linenos">127</span></a><span class="sd">        &quot;Name&quot; and &quot;VAT&quot; columns.</span>
-</span><span id="Filters-128"><a href="#Filters-128"><span class="linenos">128</span></a><span class="sd">        If the transformer is used without providing any columns list or providing</span>
-</span><span id="Filters-129"><a href="#Filters-129"><span class="linenos">129</span></a><span class="sd">        an empty list, such as [] the result will be the same as using</span>
-</span><span id="Filters-130"><a href="#Filters-130"><span class="linenos">130</span></a><span class="sd">        the distinct() pyspark function. If the watermark dict is present it will</span>
-</span><span id="Filters-131"><a href="#Filters-131"><span class="linenos">131</span></a><span class="sd">        ensure that the drop operation will apply to rows within the watermark timeline</span>
-</span><span id="Filters-132"><a href="#Filters-132"><span class="linenos">132</span></a><span class="sd">        window.</span>
-</span><span id="Filters-133"><a href="#Filters-133"><span class="linenos">133</span></a>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="Filters-13"><a href="#Filters-13"><span class="linenos"> 13</span></a><span class="k">class</span> <span class="nc">Filters</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+</span><span id="Filters-14"><a href="#Filters-14"><span class="linenos"> 14</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Class containing the filters transformers.&quot;&quot;&quot;</span>
+</span><span id="Filters-15"><a href="#Filters-15"><span class="linenos"> 15</span></a>
+</span><span id="Filters-16"><a href="#Filters-16"><span class="linenos"> 16</span></a>    <span class="n">_logger</span> <span class="o">=</span> <span class="n">LoggingHandler</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span><span class="o">.</span><span class="n">get_logger</span><span class="p">()</span>
+</span><span id="Filters-17"><a href="#Filters-17"><span class="linenos"> 17</span></a>
+</span><span id="Filters-18"><a href="#Filters-18"><span class="linenos"> 18</span></a>    <span class="nd">@classmethod</span>
+</span><span id="Filters-19"><a href="#Filters-19"><span class="linenos"> 19</span></a>    <span class="k">def</span> <span class="nf">incremental_filter</span><span class="p">(</span>
+</span><span id="Filters-20"><a href="#Filters-20"><span class="linenos"> 20</span></a>        <span class="bp">cls</span><span class="p">,</span>
+</span><span id="Filters-21"><a href="#Filters-21"><span class="linenos"> 21</span></a>        <span class="n">input_col</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+</span><span id="Filters-22"><a href="#Filters-22"><span class="linenos"> 22</span></a>        <span class="n">increment_value</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+</span><span id="Filters-23"><a href="#Filters-23"><span class="linenos"> 23</span></a>        <span class="n">increment_df</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">DataFrame</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+</span><span id="Filters-24"><a href="#Filters-24"><span class="linenos"> 24</span></a>        <span class="n">increment_col</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;latest&quot;</span><span class="p">,</span>
+</span><span id="Filters-25"><a href="#Filters-25"><span class="linenos"> 25</span></a>        <span class="n">greater_or_equal</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+</span><span id="Filters-26"><a href="#Filters-26"><span class="linenos"> 26</span></a>    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">:</span>
+</span><span id="Filters-27"><a href="#Filters-27"><span class="linenos"> 27</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Incrementally Filter a certain dataframe given an increment logic.</span>
+</span><span id="Filters-28"><a href="#Filters-28"><span class="linenos"> 28</span></a>
+</span><span id="Filters-29"><a href="#Filters-29"><span class="linenos"> 29</span></a><span class="sd">        This logic can either be an increment value or an increment dataframe from</span>
+</span><span id="Filters-30"><a href="#Filters-30"><span class="linenos"> 30</span></a><span class="sd">        which the get the latest value from. By default, the operator for the</span>
+</span><span id="Filters-31"><a href="#Filters-31"><span class="linenos"> 31</span></a><span class="sd">        filtering process is greater or equal to cover cases where we receive late</span>
+</span><span id="Filters-32"><a href="#Filters-32"><span class="linenos"> 32</span></a><span class="sd">        arriving data not cover in a previous load. You can change greater_or_equal</span>
+</span><span id="Filters-33"><a href="#Filters-33"><span class="linenos"> 33</span></a><span class="sd">        to false to use greater, when you trust the source will never output more data</span>
+</span><span id="Filters-34"><a href="#Filters-34"><span class="linenos"> 34</span></a><span class="sd">        with the increment after you have load the data (e.g., you will never load</span>
+</span><span id="Filters-35"><a href="#Filters-35"><span class="linenos"> 35</span></a><span class="sd">        data until the source is still dumping data, which may cause you to get an</span>
+</span><span id="Filters-36"><a href="#Filters-36"><span class="linenos"> 36</span></a><span class="sd">        incomplete picture of the last arrived data).</span>
+</span><span id="Filters-37"><a href="#Filters-37"><span class="linenos"> 37</span></a>
+</span><span id="Filters-38"><a href="#Filters-38"><span class="linenos"> 38</span></a><span class="sd">        Args:</span>
+</span><span id="Filters-39"><a href="#Filters-39"><span class="linenos"> 39</span></a><span class="sd">            input_col: input column name</span>
+</span><span id="Filters-40"><a href="#Filters-40"><span class="linenos"> 40</span></a><span class="sd">            increment_value: value to which to filter the data, considering the</span>
+</span><span id="Filters-41"><a href="#Filters-41"><span class="linenos"> 41</span></a><span class="sd">                provided input_Col.</span>
+</span><span id="Filters-42"><a href="#Filters-42"><span class="linenos"> 42</span></a><span class="sd">            increment_df: a dataframe to get the increment value from.</span>
+</span><span id="Filters-43"><a href="#Filters-43"><span class="linenos"> 43</span></a><span class="sd">                you either specify this or the increment_value (this takes precedence).</span>
+</span><span id="Filters-44"><a href="#Filters-44"><span class="linenos"> 44</span></a><span class="sd">                This is a good approach to get the latest value from a given dataframe</span>
+</span><span id="Filters-45"><a href="#Filters-45"><span class="linenos"> 45</span></a><span class="sd">                that was read and apply that value as filter here. In this way you can</span>
+</span><span id="Filters-46"><a href="#Filters-46"><span class="linenos"> 46</span></a><span class="sd">                perform incremental loads based on the last value of a given dataframe</span>
+</span><span id="Filters-47"><a href="#Filters-47"><span class="linenos"> 47</span></a><span class="sd">                (e.g., table or file based). Can be used together with the</span>
+</span><span id="Filters-48"><a href="#Filters-48"><span class="linenos"> 48</span></a><span class="sd">                get_max_value transformer to accomplish these incremental based loads.</span>
+</span><span id="Filters-49"><a href="#Filters-49"><span class="linenos"> 49</span></a><span class="sd">                See our append load feature tests  to see how to provide an acon for</span>
+</span><span id="Filters-50"><a href="#Filters-50"><span class="linenos"> 50</span></a><span class="sd">                incremental loads, taking advantage of the scenario explained here.</span>
+</span><span id="Filters-51"><a href="#Filters-51"><span class="linenos"> 51</span></a><span class="sd">            increment_col: name of the column from which to get the increment</span>
+</span><span id="Filters-52"><a href="#Filters-52"><span class="linenos"> 52</span></a><span class="sd">                value from (when using increment_df approach). This assumes there&#39;s</span>
+</span><span id="Filters-53"><a href="#Filters-53"><span class="linenos"> 53</span></a><span class="sd">                only one row in the increment_df, reason why is a good idea to use</span>
+</span><span id="Filters-54"><a href="#Filters-54"><span class="linenos"> 54</span></a><span class="sd">                together with the get_max_value transformer. Defaults to &quot;latest&quot;</span>
+</span><span id="Filters-55"><a href="#Filters-55"><span class="linenos"> 55</span></a><span class="sd">                because that&#39;s the default output column name provided by the</span>
+</span><span id="Filters-56"><a href="#Filters-56"><span class="linenos"> 56</span></a><span class="sd">                get_max_value transformer.</span>
+</span><span id="Filters-57"><a href="#Filters-57"><span class="linenos"> 57</span></a><span class="sd">            greater_or_equal: if filtering should be done by also including the</span>
+</span><span id="Filters-58"><a href="#Filters-58"><span class="linenos"> 58</span></a><span class="sd">                increment value or not (useful for scenarios where you are performing</span>
+</span><span id="Filters-59"><a href="#Filters-59"><span class="linenos"> 59</span></a><span class="sd">                increment loads but still want to include data considering the increment</span>
+</span><span id="Filters-60"><a href="#Filters-60"><span class="linenos"> 60</span></a><span class="sd">                value, and not only values greater than that increment... examples may</span>
+</span><span id="Filters-61"><a href="#Filters-61"><span class="linenos"> 61</span></a><span class="sd">                include scenarios where you already loaded data including those values,</span>
+</span><span id="Filters-62"><a href="#Filters-62"><span class="linenos"> 62</span></a><span class="sd">                but the source produced more data containing those values).</span>
+</span><span id="Filters-63"><a href="#Filters-63"><span class="linenos"> 63</span></a><span class="sd">                Defaults to false.</span>
+</span><span id="Filters-64"><a href="#Filters-64"><span class="linenos"> 64</span></a>
+</span><span id="Filters-65"><a href="#Filters-65"><span class="linenos"> 65</span></a><span class="sd">        Returns:</span>
+</span><span id="Filters-66"><a href="#Filters-66"><span class="linenos"> 66</span></a><span class="sd">            A function to be called in .transform() spark function.</span>
+</span><span id="Filters-67"><a href="#Filters-67"><span class="linenos"> 67</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="Filters-68"><a href="#Filters-68"><span class="linenos"> 68</span></a>
+</span><span id="Filters-69"><a href="#Filters-69"><span class="linenos"> 69</span></a>        <span class="k">def</span> <span class="nf">inner</span><span class="p">(</span><span class="n">df</span><span class="p">:</span> <span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataFrame</span><span class="p">:</span>
+</span><span id="Filters-70"><a href="#Filters-70"><span class="linenos"> 70</span></a>            <span class="k">if</span> <span class="n">increment_df</span><span class="p">:</span>
+</span><span id="Filters-71"><a href="#Filters-71"><span class="linenos"> 71</span></a>                <span class="k">if</span> <span class="n">greater_or_equal</span><span class="p">:</span>
+</span><span id="Filters-72"><a href="#Filters-72"><span class="linenos"> 72</span></a>                    <span class="k">return</span> <span class="n">df</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span>  <span class="c1"># type: ignore</span>
+</span><span id="Filters-73"><a href="#Filters-73"><span class="linenos"> 73</span></a>                        <span class="n">col</span><span class="p">(</span><span class="n">input_col</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="n">increment_df</span><span class="o">.</span><span class="n">collect</span><span class="p">()[</span><span class="mi">0</span><span class="p">][</span><span class="n">increment_col</span><span class="p">]</span>
+</span><span id="Filters-74"><a href="#Filters-74"><span class="linenos"> 74</span></a>                    <span class="p">)</span>
+</span><span id="Filters-75"><a href="#Filters-75"><span class="linenos"> 75</span></a>                <span class="k">else</span><span class="p">:</span>
+</span><span id="Filters-76"><a href="#Filters-76"><span class="linenos"> 76</span></a>                    <span class="k">return</span> <span class="n">df</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span>  <span class="c1"># type: ignore</span>
+</span><span id="Filters-77"><a href="#Filters-77"><span class="linenos"> 77</span></a>                        <span class="n">col</span><span class="p">(</span><span class="n">input_col</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">increment_df</span><span class="o">.</span><span class="n">collect</span><span class="p">()[</span><span class="mi">0</span><span class="p">][</span><span class="n">increment_col</span><span class="p">]</span>
+</span><span id="Filters-78"><a href="#Filters-78"><span class="linenos"> 78</span></a>                    <span class="p">)</span>
+</span><span id="Filters-79"><a href="#Filters-79"><span class="linenos"> 79</span></a>            <span class="k">else</span><span class="p">:</span>
+</span><span id="Filters-80"><a href="#Filters-80"><span class="linenos"> 80</span></a>                <span class="k">if</span> <span class="n">greater_or_equal</span><span class="p">:</span>
+</span><span id="Filters-81"><a href="#Filters-81"><span class="linenos"> 81</span></a>                    <span class="k">return</span> <span class="n">df</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="n">input_col</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="n">increment_value</span><span class="p">)</span>  <span class="c1"># type: ignore</span>
+</span><span id="Filters-82"><a href="#Filters-82"><span class="linenos"> 82</span></a>                <span class="k">else</span><span class="p">:</span>
+</span><span id="Filters-83"><a href="#Filters-83"><span class="linenos"> 83</span></a>                    <span class="k">return</span> <span class="n">df</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="n">input_col</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">increment_value</span><span class="p">)</span>  <span class="c1"># type: ignore</span>
+</span><span id="Filters-84"><a href="#Filters-84"><span class="linenos"> 84</span></a>
+</span><span id="Filters-85"><a href="#Filters-85"><span class="linenos"> 85</span></a>        <span class="k">return</span> <span class="n">inner</span>
+</span><span id="Filters-86"><a href="#Filters-86"><span class="linenos"> 86</span></a>
+</span><span id="Filters-87"><a href="#Filters-87"><span class="linenos"> 87</span></a>    <span class="nd">@staticmethod</span>
+</span><span id="Filters-88"><a href="#Filters-88"><span class="linenos"> 88</span></a>    <span class="k">def</span> <span class="nf">expression_filter</span><span class="p">(</span><span class="n">exp</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">:</span>
+</span><span id="Filters-89"><a href="#Filters-89"><span class="linenos"> 89</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Filter a dataframe based on an expression.</span>
+</span><span id="Filters-90"><a href="#Filters-90"><span class="linenos"> 90</span></a>
+</span><span id="Filters-91"><a href="#Filters-91"><span class="linenos"> 91</span></a><span class="sd">        Args:</span>
+</span><span id="Filters-92"><a href="#Filters-92"><span class="linenos"> 92</span></a><span class="sd">            exp: filter expression.</span>
+</span><span id="Filters-93"><a href="#Filters-93"><span class="linenos"> 93</span></a>
+</span><span id="Filters-94"><a href="#Filters-94"><span class="linenos"> 94</span></a><span class="sd">        Returns:</span>
+</span><span id="Filters-95"><a href="#Filters-95"><span class="linenos"> 95</span></a><span class="sd">            A function to be called in .transform() spark function.</span>
+</span><span id="Filters-96"><a href="#Filters-96"><span class="linenos"> 96</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="Filters-97"><a href="#Filters-97"><span class="linenos"> 97</span></a>
+</span><span id="Filters-98"><a href="#Filters-98"><span class="linenos"> 98</span></a>        <span class="k">def</span> <span class="nf">inner</span><span class="p">(</span><span class="n">df</span><span class="p">:</span> <span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataFrame</span><span class="p">:</span>
+</span><span id="Filters-99"><a href="#Filters-99"><span class="linenos"> 99</span></a>            <span class="k">return</span> <span class="n">df</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">exp</span><span class="p">)</span>  <span class="c1"># type: ignore</span>
+</span><span id="Filters-100"><a href="#Filters-100"><span class="linenos">100</span></a>
+</span><span id="Filters-101"><a href="#Filters-101"><span class="linenos">101</span></a>        <span class="k">return</span> <span class="n">inner</span>
+</span><span id="Filters-102"><a href="#Filters-102"><span class="linenos">102</span></a>
+</span><span id="Filters-103"><a href="#Filters-103"><span class="linenos">103</span></a>    <span class="nd">@staticmethod</span>
+</span><span id="Filters-104"><a href="#Filters-104"><span class="linenos">104</span></a>    <span class="k">def</span> <span class="nf">column_filter_exp</span><span class="p">(</span><span class="n">exp</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">:</span>
+</span><span id="Filters-105"><a href="#Filters-105"><span class="linenos">105</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Filter a dataframe&#39;s columns based on a list of SQL expressions.</span>
+</span><span id="Filters-106"><a href="#Filters-106"><span class="linenos">106</span></a>
+</span><span id="Filters-107"><a href="#Filters-107"><span class="linenos">107</span></a><span class="sd">        Args:</span>
+</span><span id="Filters-108"><a href="#Filters-108"><span class="linenos">108</span></a><span class="sd">            exp: column filter expressions.</span>
+</span><span id="Filters-109"><a href="#Filters-109"><span class="linenos">109</span></a>
+</span><span id="Filters-110"><a href="#Filters-110"><span class="linenos">110</span></a><span class="sd">        Returns:</span>
+</span><span id="Filters-111"><a href="#Filters-111"><span class="linenos">111</span></a><span class="sd">            A function to be called in .transform() spark function.</span>
+</span><span id="Filters-112"><a href="#Filters-112"><span class="linenos">112</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="Filters-113"><a href="#Filters-113"><span class="linenos">113</span></a>
+</span><span id="Filters-114"><a href="#Filters-114"><span class="linenos">114</span></a>        <span class="k">def</span> <span class="nf">inner</span><span class="p">(</span><span class="n">df</span><span class="p">:</span> <span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataFrame</span><span class="p">:</span>
+</span><span id="Filters-115"><a href="#Filters-115"><span class="linenos">115</span></a>            <span class="k">return</span> <span class="n">df</span><span class="o">.</span><span class="n">selectExpr</span><span class="p">(</span><span class="o">*</span><span class="n">exp</span><span class="p">)</span>  <span class="c1"># type: ignore</span>
+</span><span id="Filters-116"><a href="#Filters-116"><span class="linenos">116</span></a>
+</span><span id="Filters-117"><a href="#Filters-117"><span class="linenos">117</span></a>        <span class="k">return</span> <span class="n">inner</span>
+</span><span id="Filters-118"><a href="#Filters-118"><span class="linenos">118</span></a>
+</span><span id="Filters-119"><a href="#Filters-119"><span class="linenos">119</span></a>    <span class="nd">@staticmethod</span>
+</span><span id="Filters-120"><a href="#Filters-120"><span class="linenos">120</span></a>    <span class="k">def</span> <span class="nf">drop_duplicate_rows</span><span class="p">(</span>
+</span><span id="Filters-121"><a href="#Filters-121"><span class="linenos">121</span></a>        <span class="n">cols</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">watermarker</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span>
+</span><span id="Filters-122"><a href="#Filters-122"><span class="linenos">122</span></a>    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">:</span>
+</span><span id="Filters-123"><a href="#Filters-123"><span class="linenos">123</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Drop duplicate rows using spark function dropDuplicates().</span>
+</span><span id="Filters-124"><a href="#Filters-124"><span class="linenos">124</span></a>
+</span><span id="Filters-125"><a href="#Filters-125"><span class="linenos">125</span></a><span class="sd">        This transformer can be used with or without arguments.</span>
+</span><span id="Filters-126"><a href="#Filters-126"><span class="linenos">126</span></a><span class="sd">        The provided argument needs to be a list of columns.</span>
+</span><span id="Filters-127"><a href="#Filters-127"><span class="linenos">127</span></a><span class="sd">        For example: [“Name”,”VAT”] will drop duplicate records within</span>
+</span><span id="Filters-128"><a href="#Filters-128"><span class="linenos">128</span></a><span class="sd">        &quot;Name&quot; and &quot;VAT&quot; columns.</span>
+</span><span id="Filters-129"><a href="#Filters-129"><span class="linenos">129</span></a><span class="sd">        If the transformer is used without providing any columns list or providing</span>
+</span><span id="Filters-130"><a href="#Filters-130"><span class="linenos">130</span></a><span class="sd">        an empty list, such as [] the result will be the same as using</span>
+</span><span id="Filters-131"><a href="#Filters-131"><span class="linenos">131</span></a><span class="sd">        the distinct() pyspark function. If the watermark dict is present it will</span>
+</span><span id="Filters-132"><a href="#Filters-132"><span class="linenos">132</span></a><span class="sd">        ensure that the drop operation will apply to rows within the watermark timeline</span>
+</span><span id="Filters-133"><a href="#Filters-133"><span class="linenos">133</span></a><span class="sd">        window.</span>
 </span><span id="Filters-134"><a href="#Filters-134"><span class="linenos">134</span></a>
-</span><span id="Filters-135"><a href="#Filters-135"><span class="linenos">135</span></a><span class="sd">        Args:</span>
-</span><span id="Filters-136"><a href="#Filters-136"><span class="linenos">136</span></a><span class="sd">            cols: column names.</span>
-</span><span id="Filters-137"><a href="#Filters-137"><span class="linenos">137</span></a><span class="sd">            watermarker: properties to apply watermarker to the transformer.</span>
-</span><span id="Filters-138"><a href="#Filters-138"><span class="linenos">138</span></a>
-</span><span id="Filters-139"><a href="#Filters-139"><span class="linenos">139</span></a><span class="sd">        Returns:</span>
-</span><span id="Filters-140"><a href="#Filters-140"><span class="linenos">140</span></a><span class="sd">            A function to be called in .transform() spark function.</span>
-</span><span id="Filters-141"><a href="#Filters-141"><span class="linenos">141</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="Filters-142"><a href="#Filters-142"><span class="linenos">142</span></a>
-</span><span id="Filters-143"><a href="#Filters-143"><span class="linenos">143</span></a>        <span class="k">def</span> <span class="nf">inner</span><span class="p">(</span><span class="n">df</span><span class="p">:</span> <span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataFrame</span><span class="p">:</span>
-</span><span id="Filters-144"><a href="#Filters-144"><span class="linenos">144</span></a>            <span class="k">if</span> <span class="n">watermarker</span><span class="p">:</span>
-</span><span id="Filters-145"><a href="#Filters-145"><span class="linenos">145</span></a>                <span class="n">df</span> <span class="o">=</span> <span class="n">Watermarker</span><span class="o">.</span><span class="n">with_watermark</span><span class="p">(</span>
-</span><span id="Filters-146"><a href="#Filters-146"><span class="linenos">146</span></a>                    <span class="n">watermarker</span><span class="p">[</span><span class="s2">&quot;col&quot;</span><span class="p">],</span> <span class="n">watermarker</span><span class="p">[</span><span class="s2">&quot;watermarking_time&quot;</span><span class="p">]</span>
-</span><span id="Filters-147"><a href="#Filters-147"><span class="linenos">147</span></a>                <span class="p">)(</span><span class="n">df</span><span class="p">)</span>
-</span><span id="Filters-148"><a href="#Filters-148"><span class="linenos">148</span></a>            <span class="k">if</span> <span class="ow">not</span> <span class="n">cols</span><span class="p">:</span>
-</span><span id="Filters-149"><a href="#Filters-149"><span class="linenos">149</span></a>                <span class="k">return</span> <span class="n">df</span><span class="o">.</span><span class="n">dropDuplicates</span><span class="p">()</span>
-</span><span id="Filters-150"><a href="#Filters-150"><span class="linenos">150</span></a>            <span class="k">else</span><span class="p">:</span>
-</span><span id="Filters-151"><a href="#Filters-151"><span class="linenos">151</span></a>                <span class="k">return</span> <span class="n">df</span><span class="o">.</span><span class="n">dropDuplicates</span><span class="p">(</span><span class="n">cols</span><span class="p">)</span>
-</span><span id="Filters-152"><a href="#Filters-152"><span class="linenos">152</span></a>
-</span><span id="Filters-153"><a href="#Filters-153"><span class="linenos">153</span></a>        <span class="k">return</span> <span class="n">inner</span>
+</span><span id="Filters-135"><a href="#Filters-135"><span class="linenos">135</span></a>
+</span><span id="Filters-136"><a href="#Filters-136"><span class="linenos">136</span></a><span class="sd">        Args:</span>
+</span><span id="Filters-137"><a href="#Filters-137"><span class="linenos">137</span></a><span class="sd">            cols: column names.</span>
+</span><span id="Filters-138"><a href="#Filters-138"><span class="linenos">138</span></a><span class="sd">            watermarker: properties to apply watermarker to the transformer.</span>
+</span><span id="Filters-139"><a href="#Filters-139"><span class="linenos">139</span></a>
+</span><span id="Filters-140"><a href="#Filters-140"><span class="linenos">140</span></a><span class="sd">        Returns:</span>
+</span><span id="Filters-141"><a href="#Filters-141"><span class="linenos">141</span></a><span class="sd">            A function to be called in .transform() spark function.</span>
+</span><span id="Filters-142"><a href="#Filters-142"><span class="linenos">142</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="Filters-143"><a href="#Filters-143"><span class="linenos">143</span></a>
+</span><span id="Filters-144"><a href="#Filters-144"><span class="linenos">144</span></a>        <span class="k">def</span> <span class="nf">inner</span><span class="p">(</span><span class="n">df</span><span class="p">:</span> <span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataFrame</span><span class="p">:</span>
+</span><span id="Filters-145"><a href="#Filters-145"><span class="linenos">145</span></a>            <span class="k">if</span> <span class="n">watermarker</span><span class="p">:</span>
+</span><span id="Filters-146"><a href="#Filters-146"><span class="linenos">146</span></a>                <span class="n">df</span> <span class="o">=</span> <span class="n">Watermarker</span><span class="o">.</span><span class="n">with_watermark</span><span class="p">(</span>
+</span><span id="Filters-147"><a href="#Filters-147"><span class="linenos">147</span></a>                    <span class="n">watermarker</span><span class="p">[</span><span class="s2">&quot;col&quot;</span><span class="p">],</span> <span class="n">watermarker</span><span class="p">[</span><span class="s2">&quot;watermarking_time&quot;</span><span class="p">]</span>
+</span><span id="Filters-148"><a href="#Filters-148"><span class="linenos">148</span></a>                <span class="p">)(</span><span class="n">df</span><span class="p">)</span>
+</span><span id="Filters-149"><a href="#Filters-149"><span class="linenos">149</span></a>            <span class="k">if</span> <span class="ow">not</span> <span class="n">cols</span><span class="p">:</span>
+</span><span id="Filters-150"><a href="#Filters-150"><span class="linenos">150</span></a>                <span class="k">return</span> <span class="n">df</span><span class="o">.</span><span class="n">dropDuplicates</span><span class="p">()</span>
+</span><span id="Filters-151"><a href="#Filters-151"><span class="linenos">151</span></a>            <span class="k">else</span><span class="p">:</span>
+</span><span id="Filters-152"><a href="#Filters-152"><span class="linenos">152</span></a>                <span class="k">return</span> <span class="n">df</span><span class="o">.</span><span class="n">dropDuplicates</span><span class="p">(</span><span class="n">cols</span><span class="p">)</span>
+</span><span id="Filters-153"><a href="#Filters-153"><span class="linenos">153</span></a>
+</span><span id="Filters-154"><a href="#Filters-154"><span class="linenos">154</span></a>        <span class="k">return</span> <span class="n">inner</span>
 </span></pre></div>
 
 
@@ -414,74 +415,74 @@
 
     </div>
     <a class="headerlink" href="#Filters.incremental_filter"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="Filters.incremental_filter-17"><a href="#Filters.incremental_filter-17"><span class="linenos">17</span></a>    <span class="nd">@classmethod</span>
-</span><span id="Filters.incremental_filter-18"><a href="#Filters.incremental_filter-18"><span class="linenos">18</span></a>    <span class="k">def</span> <span class="nf">incremental_filter</span><span class="p">(</span>
-</span><span id="Filters.incremental_filter-19"><a href="#Filters.incremental_filter-19"><span class="linenos">19</span></a>        <span class="bp">cls</span><span class="p">,</span>
-</span><span id="Filters.incremental_filter-20"><a href="#Filters.incremental_filter-20"><span class="linenos">20</span></a>        <span class="n">input_col</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-</span><span id="Filters.incremental_filter-21"><a href="#Filters.incremental_filter-21"><span class="linenos">21</span></a>        <span class="n">increment_value</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-</span><span id="Filters.incremental_filter-22"><a href="#Filters.incremental_filter-22"><span class="linenos">22</span></a>        <span class="n">increment_df</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">DataFrame</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-</span><span id="Filters.incremental_filter-23"><a href="#Filters.incremental_filter-23"><span class="linenos">23</span></a>        <span class="n">increment_col</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;latest&quot;</span><span class="p">,</span>
-</span><span id="Filters.incremental_filter-24"><a href="#Filters.incremental_filter-24"><span class="linenos">24</span></a>        <span class="n">greater_or_equal</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
-</span><span id="Filters.incremental_filter-25"><a href="#Filters.incremental_filter-25"><span class="linenos">25</span></a>    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">:</span>
-</span><span id="Filters.incremental_filter-26"><a href="#Filters.incremental_filter-26"><span class="linenos">26</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Incrementally Filter a certain dataframe given an increment logic.</span>
-</span><span id="Filters.incremental_filter-27"><a href="#Filters.incremental_filter-27"><span class="linenos">27</span></a>
-</span><span id="Filters.incremental_filter-28"><a href="#Filters.incremental_filter-28"><span class="linenos">28</span></a><span class="sd">        This logic can either be an increment value or an increment dataframe from</span>
-</span><span id="Filters.incremental_filter-29"><a href="#Filters.incremental_filter-29"><span class="linenos">29</span></a><span class="sd">        which the get the latest value from. By default, the operator for the</span>
-</span><span id="Filters.incremental_filter-30"><a href="#Filters.incremental_filter-30"><span class="linenos">30</span></a><span class="sd">        filtering process is greater or equal to cover cases where we receive late</span>
-</span><span id="Filters.incremental_filter-31"><a href="#Filters.incremental_filter-31"><span class="linenos">31</span></a><span class="sd">        arriving data not cover in a previous load. You can change greater_or_equal</span>
-</span><span id="Filters.incremental_filter-32"><a href="#Filters.incremental_filter-32"><span class="linenos">32</span></a><span class="sd">        to false to use greater, when you trust the source will never output more data</span>
-</span><span id="Filters.incremental_filter-33"><a href="#Filters.incremental_filter-33"><span class="linenos">33</span></a><span class="sd">        with the increment after you have load the data (e.g., you will never load</span>
-</span><span id="Filters.incremental_filter-34"><a href="#Filters.incremental_filter-34"><span class="linenos">34</span></a><span class="sd">        data until the source is still dumping data, which may cause you to get an</span>
-</span><span id="Filters.incremental_filter-35"><a href="#Filters.incremental_filter-35"><span class="linenos">35</span></a><span class="sd">        incomplete picture of the last arrived data).</span>
-</span><span id="Filters.incremental_filter-36"><a href="#Filters.incremental_filter-36"><span class="linenos">36</span></a>
-</span><span id="Filters.incremental_filter-37"><a href="#Filters.incremental_filter-37"><span class="linenos">37</span></a><span class="sd">        Args:</span>
-</span><span id="Filters.incremental_filter-38"><a href="#Filters.incremental_filter-38"><span class="linenos">38</span></a><span class="sd">            input_col: input column name</span>
-</span><span id="Filters.incremental_filter-39"><a href="#Filters.incremental_filter-39"><span class="linenos">39</span></a><span class="sd">            increment_value: value to which to filter the data, considering the</span>
-</span><span id="Filters.incremental_filter-40"><a href="#Filters.incremental_filter-40"><span class="linenos">40</span></a><span class="sd">                provided input_Col.</span>
-</span><span id="Filters.incremental_filter-41"><a href="#Filters.incremental_filter-41"><span class="linenos">41</span></a><span class="sd">            increment_df: a dataframe to get the increment value from.</span>
-</span><span id="Filters.incremental_filter-42"><a href="#Filters.incremental_filter-42"><span class="linenos">42</span></a><span class="sd">                you either specify this or the increment_value (this takes precedence).</span>
-</span><span id="Filters.incremental_filter-43"><a href="#Filters.incremental_filter-43"><span class="linenos">43</span></a><span class="sd">                This is a good approach to get the latest value from a given dataframe</span>
-</span><span id="Filters.incremental_filter-44"><a href="#Filters.incremental_filter-44"><span class="linenos">44</span></a><span class="sd">                that was read and apply that value as filter here. In this way you can</span>
-</span><span id="Filters.incremental_filter-45"><a href="#Filters.incremental_filter-45"><span class="linenos">45</span></a><span class="sd">                perform incremental loads based on the last value of a given dataframe</span>
-</span><span id="Filters.incremental_filter-46"><a href="#Filters.incremental_filter-46"><span class="linenos">46</span></a><span class="sd">                (e.g., table or file based). Can be used together with the</span>
-</span><span id="Filters.incremental_filter-47"><a href="#Filters.incremental_filter-47"><span class="linenos">47</span></a><span class="sd">                get_max_value transformer to accomplish these incremental based loads.</span>
-</span><span id="Filters.incremental_filter-48"><a href="#Filters.incremental_filter-48"><span class="linenos">48</span></a><span class="sd">                See our append load feature tests  to see how to provide an acon for</span>
-</span><span id="Filters.incremental_filter-49"><a href="#Filters.incremental_filter-49"><span class="linenos">49</span></a><span class="sd">                incremental loads, taking advantage of the scenario explained here.</span>
-</span><span id="Filters.incremental_filter-50"><a href="#Filters.incremental_filter-50"><span class="linenos">50</span></a><span class="sd">            increment_col: name of the column from which to get the increment</span>
-</span><span id="Filters.incremental_filter-51"><a href="#Filters.incremental_filter-51"><span class="linenos">51</span></a><span class="sd">                value from (when using increment_df approach). This assumes there&#39;s</span>
-</span><span id="Filters.incremental_filter-52"><a href="#Filters.incremental_filter-52"><span class="linenos">52</span></a><span class="sd">                only one row in the increment_df, reason why is a good idea to use</span>
-</span><span id="Filters.incremental_filter-53"><a href="#Filters.incremental_filter-53"><span class="linenos">53</span></a><span class="sd">                together with the get_max_value transformer. Defaults to &quot;latest&quot;</span>
-</span><span id="Filters.incremental_filter-54"><a href="#Filters.incremental_filter-54"><span class="linenos">54</span></a><span class="sd">                because that&#39;s the default output column name provided by the</span>
-</span><span id="Filters.incremental_filter-55"><a href="#Filters.incremental_filter-55"><span class="linenos">55</span></a><span class="sd">                get_max_value transformer.</span>
-</span><span id="Filters.incremental_filter-56"><a href="#Filters.incremental_filter-56"><span class="linenos">56</span></a><span class="sd">            greater_or_equal: if filtering should be done by also including the</span>
-</span><span id="Filters.incremental_filter-57"><a href="#Filters.incremental_filter-57"><span class="linenos">57</span></a><span class="sd">                increment value or not (useful for scenarios where you are performing</span>
-</span><span id="Filters.incremental_filter-58"><a href="#Filters.incremental_filter-58"><span class="linenos">58</span></a><span class="sd">                increment loads but still want to include data considering the increment</span>
-</span><span id="Filters.incremental_filter-59"><a href="#Filters.incremental_filter-59"><span class="linenos">59</span></a><span class="sd">                value, and not only values greater than that increment... examples may</span>
-</span><span id="Filters.incremental_filter-60"><a href="#Filters.incremental_filter-60"><span class="linenos">60</span></a><span class="sd">                include scenarios where you already loaded data including those values,</span>
-</span><span id="Filters.incremental_filter-61"><a href="#Filters.incremental_filter-61"><span class="linenos">61</span></a><span class="sd">                but the source produced more data containing those values).</span>
-</span><span id="Filters.incremental_filter-62"><a href="#Filters.incremental_filter-62"><span class="linenos">62</span></a><span class="sd">                Defaults to false.</span>
-</span><span id="Filters.incremental_filter-63"><a href="#Filters.incremental_filter-63"><span class="linenos">63</span></a>
-</span><span id="Filters.incremental_filter-64"><a href="#Filters.incremental_filter-64"><span class="linenos">64</span></a><span class="sd">        Returns:</span>
-</span><span id="Filters.incremental_filter-65"><a href="#Filters.incremental_filter-65"><span class="linenos">65</span></a><span class="sd">            A function to be called in .transform() spark function.</span>
-</span><span id="Filters.incremental_filter-66"><a href="#Filters.incremental_filter-66"><span class="linenos">66</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="Filters.incremental_filter-67"><a href="#Filters.incremental_filter-67"><span class="linenos">67</span></a>
-</span><span id="Filters.incremental_filter-68"><a href="#Filters.incremental_filter-68"><span class="linenos">68</span></a>        <span class="k">def</span> <span class="nf">inner</span><span class="p">(</span><span class="n">df</span><span class="p">:</span> <span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataFrame</span><span class="p">:</span>
-</span><span id="Filters.incremental_filter-69"><a href="#Filters.incremental_filter-69"><span class="linenos">69</span></a>            <span class="k">if</span> <span class="n">increment_df</span><span class="p">:</span>
-</span><span id="Filters.incremental_filter-70"><a href="#Filters.incremental_filter-70"><span class="linenos">70</span></a>                <span class="k">if</span> <span class="n">greater_or_equal</span><span class="p">:</span>
-</span><span id="Filters.incremental_filter-71"><a href="#Filters.incremental_filter-71"><span class="linenos">71</span></a>                    <span class="k">return</span> <span class="n">df</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span>  <span class="c1"># type: ignore</span>
-</span><span id="Filters.incremental_filter-72"><a href="#Filters.incremental_filter-72"><span class="linenos">72</span></a>                        <span class="n">col</span><span class="p">(</span><span class="n">input_col</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="n">increment_df</span><span class="o">.</span><span class="n">collect</span><span class="p">()[</span><span class="mi">0</span><span class="p">][</span><span class="n">increment_col</span><span class="p">]</span>
-</span><span id="Filters.incremental_filter-73"><a href="#Filters.incremental_filter-73"><span class="linenos">73</span></a>                    <span class="p">)</span>
-</span><span id="Filters.incremental_filter-74"><a href="#Filters.incremental_filter-74"><span class="linenos">74</span></a>                <span class="k">else</span><span class="p">:</span>
-</span><span id="Filters.incremental_filter-75"><a href="#Filters.incremental_filter-75"><span class="linenos">75</span></a>                    <span class="k">return</span> <span class="n">df</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span>  <span class="c1"># type: ignore</span>
-</span><span id="Filters.incremental_filter-76"><a href="#Filters.incremental_filter-76"><span class="linenos">76</span></a>                        <span class="n">col</span><span class="p">(</span><span class="n">input_col</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">increment_df</span><span class="o">.</span><span class="n">collect</span><span class="p">()[</span><span class="mi">0</span><span class="p">][</span><span class="n">increment_col</span><span class="p">]</span>
-</span><span id="Filters.incremental_filter-77"><a href="#Filters.incremental_filter-77"><span class="linenos">77</span></a>                    <span class="p">)</span>
-</span><span id="Filters.incremental_filter-78"><a href="#Filters.incremental_filter-78"><span class="linenos">78</span></a>            <span class="k">else</span><span class="p">:</span>
-</span><span id="Filters.incremental_filter-79"><a href="#Filters.incremental_filter-79"><span class="linenos">79</span></a>                <span class="k">if</span> <span class="n">greater_or_equal</span><span class="p">:</span>
-</span><span id="Filters.incremental_filter-80"><a href="#Filters.incremental_filter-80"><span class="linenos">80</span></a>                    <span class="k">return</span> <span class="n">df</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="n">input_col</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="n">increment_value</span><span class="p">)</span>  <span class="c1"># type: ignore</span>
-</span><span id="Filters.incremental_filter-81"><a href="#Filters.incremental_filter-81"><span class="linenos">81</span></a>                <span class="k">else</span><span class="p">:</span>
-</span><span id="Filters.incremental_filter-82"><a href="#Filters.incremental_filter-82"><span class="linenos">82</span></a>                    <span class="k">return</span> <span class="n">df</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="n">input_col</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">increment_value</span><span class="p">)</span>  <span class="c1"># type: ignore</span>
-</span><span id="Filters.incremental_filter-83"><a href="#Filters.incremental_filter-83"><span class="linenos">83</span></a>
-</span><span id="Filters.incremental_filter-84"><a href="#Filters.incremental_filter-84"><span class="linenos">84</span></a>        <span class="k">return</span> <span class="n">inner</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="Filters.incremental_filter-18"><a href="#Filters.incremental_filter-18"><span class="linenos">18</span></a>    <span class="nd">@classmethod</span>
+</span><span id="Filters.incremental_filter-19"><a href="#Filters.incremental_filter-19"><span class="linenos">19</span></a>    <span class="k">def</span> <span class="nf">incremental_filter</span><span class="p">(</span>
+</span><span id="Filters.incremental_filter-20"><a href="#Filters.incremental_filter-20"><span class="linenos">20</span></a>        <span class="bp">cls</span><span class="p">,</span>
+</span><span id="Filters.incremental_filter-21"><a href="#Filters.incremental_filter-21"><span class="linenos">21</span></a>        <span class="n">input_col</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+</span><span id="Filters.incremental_filter-22"><a href="#Filters.incremental_filter-22"><span class="linenos">22</span></a>        <span class="n">increment_value</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+</span><span id="Filters.incremental_filter-23"><a href="#Filters.incremental_filter-23"><span class="linenos">23</span></a>        <span class="n">increment_df</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">DataFrame</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+</span><span id="Filters.incremental_filter-24"><a href="#Filters.incremental_filter-24"><span class="linenos">24</span></a>        <span class="n">increment_col</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;latest&quot;</span><span class="p">,</span>
+</span><span id="Filters.incremental_filter-25"><a href="#Filters.incremental_filter-25"><span class="linenos">25</span></a>        <span class="n">greater_or_equal</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+</span><span id="Filters.incremental_filter-26"><a href="#Filters.incremental_filter-26"><span class="linenos">26</span></a>    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">:</span>
+</span><span id="Filters.incremental_filter-27"><a href="#Filters.incremental_filter-27"><span class="linenos">27</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Incrementally Filter a certain dataframe given an increment logic.</span>
+</span><span id="Filters.incremental_filter-28"><a href="#Filters.incremental_filter-28"><span class="linenos">28</span></a>
+</span><span id="Filters.incremental_filter-29"><a href="#Filters.incremental_filter-29"><span class="linenos">29</span></a><span class="sd">        This logic can either be an increment value or an increment dataframe from</span>
+</span><span id="Filters.incremental_filter-30"><a href="#Filters.incremental_filter-30"><span class="linenos">30</span></a><span class="sd">        which the get the latest value from. By default, the operator for the</span>
+</span><span id="Filters.incremental_filter-31"><a href="#Filters.incremental_filter-31"><span class="linenos">31</span></a><span class="sd">        filtering process is greater or equal to cover cases where we receive late</span>
+</span><span id="Filters.incremental_filter-32"><a href="#Filters.incremental_filter-32"><span class="linenos">32</span></a><span class="sd">        arriving data not cover in a previous load. You can change greater_or_equal</span>
+</span><span id="Filters.incremental_filter-33"><a href="#Filters.incremental_filter-33"><span class="linenos">33</span></a><span class="sd">        to false to use greater, when you trust the source will never output more data</span>
+</span><span id="Filters.incremental_filter-34"><a href="#Filters.incremental_filter-34"><span class="linenos">34</span></a><span class="sd">        with the increment after you have load the data (e.g., you will never load</span>
+</span><span id="Filters.incremental_filter-35"><a href="#Filters.incremental_filter-35"><span class="linenos">35</span></a><span class="sd">        data until the source is still dumping data, which may cause you to get an</span>
+</span><span id="Filters.incremental_filter-36"><a href="#Filters.incremental_filter-36"><span class="linenos">36</span></a><span class="sd">        incomplete picture of the last arrived data).</span>
+</span><span id="Filters.incremental_filter-37"><a href="#Filters.incremental_filter-37"><span class="linenos">37</span></a>
+</span><span id="Filters.incremental_filter-38"><a href="#Filters.incremental_filter-38"><span class="linenos">38</span></a><span class="sd">        Args:</span>
+</span><span id="Filters.incremental_filter-39"><a href="#Filters.incremental_filter-39"><span class="linenos">39</span></a><span class="sd">            input_col: input column name</span>
+</span><span id="Filters.incremental_filter-40"><a href="#Filters.incremental_filter-40"><span class="linenos">40</span></a><span class="sd">            increment_value: value to which to filter the data, considering the</span>
+</span><span id="Filters.incremental_filter-41"><a href="#Filters.incremental_filter-41"><span class="linenos">41</span></a><span class="sd">                provided input_Col.</span>
+</span><span id="Filters.incremental_filter-42"><a href="#Filters.incremental_filter-42"><span class="linenos">42</span></a><span class="sd">            increment_df: a dataframe to get the increment value from.</span>
+</span><span id="Filters.incremental_filter-43"><a href="#Filters.incremental_filter-43"><span class="linenos">43</span></a><span class="sd">                you either specify this or the increment_value (this takes precedence).</span>
+</span><span id="Filters.incremental_filter-44"><a href="#Filters.incremental_filter-44"><span class="linenos">44</span></a><span class="sd">                This is a good approach to get the latest value from a given dataframe</span>
+</span><span id="Filters.incremental_filter-45"><a href="#Filters.incremental_filter-45"><span class="linenos">45</span></a><span class="sd">                that was read and apply that value as filter here. In this way you can</span>
+</span><span id="Filters.incremental_filter-46"><a href="#Filters.incremental_filter-46"><span class="linenos">46</span></a><span class="sd">                perform incremental loads based on the last value of a given dataframe</span>
+</span><span id="Filters.incremental_filter-47"><a href="#Filters.incremental_filter-47"><span class="linenos">47</span></a><span class="sd">                (e.g., table or file based). Can be used together with the</span>
+</span><span id="Filters.incremental_filter-48"><a href="#Filters.incremental_filter-48"><span class="linenos">48</span></a><span class="sd">                get_max_value transformer to accomplish these incremental based loads.</span>
+</span><span id="Filters.incremental_filter-49"><a href="#Filters.incremental_filter-49"><span class="linenos">49</span></a><span class="sd">                See our append load feature tests  to see how to provide an acon for</span>
+</span><span id="Filters.incremental_filter-50"><a href="#Filters.incremental_filter-50"><span class="linenos">50</span></a><span class="sd">                incremental loads, taking advantage of the scenario explained here.</span>
+</span><span id="Filters.incremental_filter-51"><a href="#Filters.incremental_filter-51"><span class="linenos">51</span></a><span class="sd">            increment_col: name of the column from which to get the increment</span>
+</span><span id="Filters.incremental_filter-52"><a href="#Filters.incremental_filter-52"><span class="linenos">52</span></a><span class="sd">                value from (when using increment_df approach). This assumes there&#39;s</span>
+</span><span id="Filters.incremental_filter-53"><a href="#Filters.incremental_filter-53"><span class="linenos">53</span></a><span class="sd">                only one row in the increment_df, reason why is a good idea to use</span>
+</span><span id="Filters.incremental_filter-54"><a href="#Filters.incremental_filter-54"><span class="linenos">54</span></a><span class="sd">                together with the get_max_value transformer. Defaults to &quot;latest&quot;</span>
+</span><span id="Filters.incremental_filter-55"><a href="#Filters.incremental_filter-55"><span class="linenos">55</span></a><span class="sd">                because that&#39;s the default output column name provided by the</span>
+</span><span id="Filters.incremental_filter-56"><a href="#Filters.incremental_filter-56"><span class="linenos">56</span></a><span class="sd">                get_max_value transformer.</span>
+</span><span id="Filters.incremental_filter-57"><a href="#Filters.incremental_filter-57"><span class="linenos">57</span></a><span class="sd">            greater_or_equal: if filtering should be done by also including the</span>
+</span><span id="Filters.incremental_filter-58"><a href="#Filters.incremental_filter-58"><span class="linenos">58</span></a><span class="sd">                increment value or not (useful for scenarios where you are performing</span>
+</span><span id="Filters.incremental_filter-59"><a href="#Filters.incremental_filter-59"><span class="linenos">59</span></a><span class="sd">                increment loads but still want to include data considering the increment</span>
+</span><span id="Filters.incremental_filter-60"><a href="#Filters.incremental_filter-60"><span class="linenos">60</span></a><span class="sd">                value, and not only values greater than that increment... examples may</span>
+</span><span id="Filters.incremental_filter-61"><a href="#Filters.incremental_filter-61"><span class="linenos">61</span></a><span class="sd">                include scenarios where you already loaded data including those values,</span>
+</span><span id="Filters.incremental_filter-62"><a href="#Filters.incremental_filter-62"><span class="linenos">62</span></a><span class="sd">                but the source produced more data containing those values).</span>
+</span><span id="Filters.incremental_filter-63"><a href="#Filters.incremental_filter-63"><span class="linenos">63</span></a><span class="sd">                Defaults to false.</span>
+</span><span id="Filters.incremental_filter-64"><a href="#Filters.incremental_filter-64"><span class="linenos">64</span></a>
+</span><span id="Filters.incremental_filter-65"><a href="#Filters.incremental_filter-65"><span class="linenos">65</span></a><span class="sd">        Returns:</span>
+</span><span id="Filters.incremental_filter-66"><a href="#Filters.incremental_filter-66"><span class="linenos">66</span></a><span class="sd">            A function to be called in .transform() spark function.</span>
+</span><span id="Filters.incremental_filter-67"><a href="#Filters.incremental_filter-67"><span class="linenos">67</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="Filters.incremental_filter-68"><a href="#Filters.incremental_filter-68"><span class="linenos">68</span></a>
+</span><span id="Filters.incremental_filter-69"><a href="#Filters.incremental_filter-69"><span class="linenos">69</span></a>        <span class="k">def</span> <span class="nf">inner</span><span class="p">(</span><span class="n">df</span><span class="p">:</span> <span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataFrame</span><span class="p">:</span>
+</span><span id="Filters.incremental_filter-70"><a href="#Filters.incremental_filter-70"><span class="linenos">70</span></a>            <span class="k">if</span> <span class="n">increment_df</span><span class="p">:</span>
+</span><span id="Filters.incremental_filter-71"><a href="#Filters.incremental_filter-71"><span class="linenos">71</span></a>                <span class="k">if</span> <span class="n">greater_or_equal</span><span class="p">:</span>
+</span><span id="Filters.incremental_filter-72"><a href="#Filters.incremental_filter-72"><span class="linenos">72</span></a>                    <span class="k">return</span> <span class="n">df</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span>  <span class="c1"># type: ignore</span>
+</span><span id="Filters.incremental_filter-73"><a href="#Filters.incremental_filter-73"><span class="linenos">73</span></a>                        <span class="n">col</span><span class="p">(</span><span class="n">input_col</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="n">increment_df</span><span class="o">.</span><span class="n">collect</span><span class="p">()[</span><span class="mi">0</span><span class="p">][</span><span class="n">increment_col</span><span class="p">]</span>
+</span><span id="Filters.incremental_filter-74"><a href="#Filters.incremental_filter-74"><span class="linenos">74</span></a>                    <span class="p">)</span>
+</span><span id="Filters.incremental_filter-75"><a href="#Filters.incremental_filter-75"><span class="linenos">75</span></a>                <span class="k">else</span><span class="p">:</span>
+</span><span id="Filters.incremental_filter-76"><a href="#Filters.incremental_filter-76"><span class="linenos">76</span></a>                    <span class="k">return</span> <span class="n">df</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span>  <span class="c1"># type: ignore</span>
+</span><span id="Filters.incremental_filter-77"><a href="#Filters.incremental_filter-77"><span class="linenos">77</span></a>                        <span class="n">col</span><span class="p">(</span><span class="n">input_col</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">increment_df</span><span class="o">.</span><span class="n">collect</span><span class="p">()[</span><span class="mi">0</span><span class="p">][</span><span class="n">increment_col</span><span class="p">]</span>
+</span><span id="Filters.incremental_filter-78"><a href="#Filters.incremental_filter-78"><span class="linenos">78</span></a>                    <span class="p">)</span>
+</span><span id="Filters.incremental_filter-79"><a href="#Filters.incremental_filter-79"><span class="linenos">79</span></a>            <span class="k">else</span><span class="p">:</span>
+</span><span id="Filters.incremental_filter-80"><a href="#Filters.incremental_filter-80"><span class="linenos">80</span></a>                <span class="k">if</span> <span class="n">greater_or_equal</span><span class="p">:</span>
+</span><span id="Filters.incremental_filter-81"><a href="#Filters.incremental_filter-81"><span class="linenos">81</span></a>                    <span class="k">return</span> <span class="n">df</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="n">input_col</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="n">increment_value</span><span class="p">)</span>  <span class="c1"># type: ignore</span>
+</span><span id="Filters.incremental_filter-82"><a href="#Filters.incremental_filter-82"><span class="linenos">82</span></a>                <span class="k">else</span><span class="p">:</span>
+</span><span id="Filters.incremental_filter-83"><a href="#Filters.incremental_filter-83"><span class="linenos">83</span></a>                    <span class="k">return</span> <span class="n">df</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="n">input_col</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">increment_value</span><span class="p">)</span>  <span class="c1"># type: ignore</span>
+</span><span id="Filters.incremental_filter-84"><a href="#Filters.incremental_filter-84"><span class="linenos">84</span></a>
+</span><span id="Filters.incremental_filter-85"><a href="#Filters.incremental_filter-85"><span class="linenos">85</span></a>        <span class="k">return</span> <span class="n">inner</span>
 </span></pre></div>
 
 
@@ -566,21 +567,21 @@ Defaults to false.</li>
 
     </div>
     <a class="headerlink" href="#Filters.expression_filter"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="Filters.expression_filter-86"><a href="#Filters.expression_filter-86"><span class="linenos"> 86</span></a>    <span class="nd">@staticmethod</span>
-</span><span id="Filters.expression_filter-87"><a href="#Filters.expression_filter-87"><span class="linenos"> 87</span></a>    <span class="k">def</span> <span class="nf">expression_filter</span><span class="p">(</span><span class="n">exp</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">:</span>
-</span><span id="Filters.expression_filter-88"><a href="#Filters.expression_filter-88"><span class="linenos"> 88</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Filter a dataframe based on an expression.</span>
-</span><span id="Filters.expression_filter-89"><a href="#Filters.expression_filter-89"><span class="linenos"> 89</span></a>
-</span><span id="Filters.expression_filter-90"><a href="#Filters.expression_filter-90"><span class="linenos"> 90</span></a><span class="sd">        Args:</span>
-</span><span id="Filters.expression_filter-91"><a href="#Filters.expression_filter-91"><span class="linenos"> 91</span></a><span class="sd">            exp: filter expression.</span>
-</span><span id="Filters.expression_filter-92"><a href="#Filters.expression_filter-92"><span class="linenos"> 92</span></a>
-</span><span id="Filters.expression_filter-93"><a href="#Filters.expression_filter-93"><span class="linenos"> 93</span></a><span class="sd">        Returns:</span>
-</span><span id="Filters.expression_filter-94"><a href="#Filters.expression_filter-94"><span class="linenos"> 94</span></a><span class="sd">            A function to be called in .transform() spark function.</span>
-</span><span id="Filters.expression_filter-95"><a href="#Filters.expression_filter-95"><span class="linenos"> 95</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="Filters.expression_filter-96"><a href="#Filters.expression_filter-96"><span class="linenos"> 96</span></a>
-</span><span id="Filters.expression_filter-97"><a href="#Filters.expression_filter-97"><span class="linenos"> 97</span></a>        <span class="k">def</span> <span class="nf">inner</span><span class="p">(</span><span class="n">df</span><span class="p">:</span> <span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataFrame</span><span class="p">:</span>
-</span><span id="Filters.expression_filter-98"><a href="#Filters.expression_filter-98"><span class="linenos"> 98</span></a>            <span class="k">return</span> <span class="n">df</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">exp</span><span class="p">)</span>  <span class="c1"># type: ignore</span>
-</span><span id="Filters.expression_filter-99"><a href="#Filters.expression_filter-99"><span class="linenos"> 99</span></a>
-</span><span id="Filters.expression_filter-100"><a href="#Filters.expression_filter-100"><span class="linenos">100</span></a>        <span class="k">return</span> <span class="n">inner</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="Filters.expression_filter-87"><a href="#Filters.expression_filter-87"><span class="linenos"> 87</span></a>    <span class="nd">@staticmethod</span>
+</span><span id="Filters.expression_filter-88"><a href="#Filters.expression_filter-88"><span class="linenos"> 88</span></a>    <span class="k">def</span> <span class="nf">expression_filter</span><span class="p">(</span><span class="n">exp</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">:</span>
+</span><span id="Filters.expression_filter-89"><a href="#Filters.expression_filter-89"><span class="linenos"> 89</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Filter a dataframe based on an expression.</span>
+</span><span id="Filters.expression_filter-90"><a href="#Filters.expression_filter-90"><span class="linenos"> 90</span></a>
+</span><span id="Filters.expression_filter-91"><a href="#Filters.expression_filter-91"><span class="linenos"> 91</span></a><span class="sd">        Args:</span>
+</span><span id="Filters.expression_filter-92"><a href="#Filters.expression_filter-92"><span class="linenos"> 92</span></a><span class="sd">            exp: filter expression.</span>
+</span><span id="Filters.expression_filter-93"><a href="#Filters.expression_filter-93"><span class="linenos"> 93</span></a>
+</span><span id="Filters.expression_filter-94"><a href="#Filters.expression_filter-94"><span class="linenos"> 94</span></a><span class="sd">        Returns:</span>
+</span><span id="Filters.expression_filter-95"><a href="#Filters.expression_filter-95"><span class="linenos"> 95</span></a><span class="sd">            A function to be called in .transform() spark function.</span>
+</span><span id="Filters.expression_filter-96"><a href="#Filters.expression_filter-96"><span class="linenos"> 96</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="Filters.expression_filter-97"><a href="#Filters.expression_filter-97"><span class="linenos"> 97</span></a>
+</span><span id="Filters.expression_filter-98"><a href="#Filters.expression_filter-98"><span class="linenos"> 98</span></a>        <span class="k">def</span> <span class="nf">inner</span><span class="p">(</span><span class="n">df</span><span class="p">:</span> <span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataFrame</span><span class="p">:</span>
+</span><span id="Filters.expression_filter-99"><a href="#Filters.expression_filter-99"><span class="linenos"> 99</span></a>            <span class="k">return</span> <span class="n">df</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">exp</span><span class="p">)</span>  <span class="c1"># type: ignore</span>
+</span><span id="Filters.expression_filter-100"><a href="#Filters.expression_filter-100"><span class="linenos">100</span></a>
+</span><span id="Filters.expression_filter-101"><a href="#Filters.expression_filter-101"><span class="linenos">101</span></a>        <span class="k">return</span> <span class="n">inner</span>
 </span></pre></div>
 
 
@@ -631,21 +632,21 @@ Defaults to false.</li>
 
     </div>
     <a class="headerlink" href="#Filters.column_filter_exp"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="Filters.column_filter_exp-102"><a href="#Filters.column_filter_exp-102"><span class="linenos">102</span></a>    <span class="nd">@staticmethod</span>
-</span><span id="Filters.column_filter_exp-103"><a href="#Filters.column_filter_exp-103"><span class="linenos">103</span></a>    <span class="k">def</span> <span class="nf">column_filter_exp</span><span class="p">(</span><span class="n">exp</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">:</span>
-</span><span id="Filters.column_filter_exp-104"><a href="#Filters.column_filter_exp-104"><span class="linenos">104</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Filter a dataframe&#39;s columns based on a list of SQL expressions.</span>
-</span><span id="Filters.column_filter_exp-105"><a href="#Filters.column_filter_exp-105"><span class="linenos">105</span></a>
-</span><span id="Filters.column_filter_exp-106"><a href="#Filters.column_filter_exp-106"><span class="linenos">106</span></a><span class="sd">        Args:</span>
-</span><span id="Filters.column_filter_exp-107"><a href="#Filters.column_filter_exp-107"><span class="linenos">107</span></a><span class="sd">            exp: column filter expressions.</span>
-</span><span id="Filters.column_filter_exp-108"><a href="#Filters.column_filter_exp-108"><span class="linenos">108</span></a>
-</span><span id="Filters.column_filter_exp-109"><a href="#Filters.column_filter_exp-109"><span class="linenos">109</span></a><span class="sd">        Returns:</span>
-</span><span id="Filters.column_filter_exp-110"><a href="#Filters.column_filter_exp-110"><span class="linenos">110</span></a><span class="sd">            A function to be called in .transform() spark function.</span>
-</span><span id="Filters.column_filter_exp-111"><a href="#Filters.column_filter_exp-111"><span class="linenos">111</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="Filters.column_filter_exp-112"><a href="#Filters.column_filter_exp-112"><span class="linenos">112</span></a>
-</span><span id="Filters.column_filter_exp-113"><a href="#Filters.column_filter_exp-113"><span class="linenos">113</span></a>        <span class="k">def</span> <span class="nf">inner</span><span class="p">(</span><span class="n">df</span><span class="p">:</span> <span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataFrame</span><span class="p">:</span>
-</span><span id="Filters.column_filter_exp-114"><a href="#Filters.column_filter_exp-114"><span class="linenos">114</span></a>            <span class="k">return</span> <span class="n">df</span><span class="o">.</span><span class="n">selectExpr</span><span class="p">(</span><span class="o">*</span><span class="n">exp</span><span class="p">)</span>  <span class="c1"># type: ignore</span>
-</span><span id="Filters.column_filter_exp-115"><a href="#Filters.column_filter_exp-115"><span class="linenos">115</span></a>
-</span><span id="Filters.column_filter_exp-116"><a href="#Filters.column_filter_exp-116"><span class="linenos">116</span></a>        <span class="k">return</span> <span class="n">inner</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="Filters.column_filter_exp-103"><a href="#Filters.column_filter_exp-103"><span class="linenos">103</span></a>    <span class="nd">@staticmethod</span>
+</span><span id="Filters.column_filter_exp-104"><a href="#Filters.column_filter_exp-104"><span class="linenos">104</span></a>    <span class="k">def</span> <span class="nf">column_filter_exp</span><span class="p">(</span><span class="n">exp</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">:</span>
+</span><span id="Filters.column_filter_exp-105"><a href="#Filters.column_filter_exp-105"><span class="linenos">105</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Filter a dataframe&#39;s columns based on a list of SQL expressions.</span>
+</span><span id="Filters.column_filter_exp-106"><a href="#Filters.column_filter_exp-106"><span class="linenos">106</span></a>
+</span><span id="Filters.column_filter_exp-107"><a href="#Filters.column_filter_exp-107"><span class="linenos">107</span></a><span class="sd">        Args:</span>
+</span><span id="Filters.column_filter_exp-108"><a href="#Filters.column_filter_exp-108"><span class="linenos">108</span></a><span class="sd">            exp: column filter expressions.</span>
+</span><span id="Filters.column_filter_exp-109"><a href="#Filters.column_filter_exp-109"><span class="linenos">109</span></a>
+</span><span id="Filters.column_filter_exp-110"><a href="#Filters.column_filter_exp-110"><span class="linenos">110</span></a><span class="sd">        Returns:</span>
+</span><span id="Filters.column_filter_exp-111"><a href="#Filters.column_filter_exp-111"><span class="linenos">111</span></a><span class="sd">            A function to be called in .transform() spark function.</span>
+</span><span id="Filters.column_filter_exp-112"><a href="#Filters.column_filter_exp-112"><span class="linenos">112</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="Filters.column_filter_exp-113"><a href="#Filters.column_filter_exp-113"><span class="linenos">113</span></a>
+</span><span id="Filters.column_filter_exp-114"><a href="#Filters.column_filter_exp-114"><span class="linenos">114</span></a>        <span class="k">def</span> <span class="nf">inner</span><span class="p">(</span><span class="n">df</span><span class="p">:</span> <span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataFrame</span><span class="p">:</span>
+</span><span id="Filters.column_filter_exp-115"><a href="#Filters.column_filter_exp-115"><span class="linenos">115</span></a>            <span class="k">return</span> <span class="n">df</span><span class="o">.</span><span class="n">selectExpr</span><span class="p">(</span><span class="o">*</span><span class="n">exp</span><span class="p">)</span>  <span class="c1"># type: ignore</span>
+</span><span id="Filters.column_filter_exp-116"><a href="#Filters.column_filter_exp-116"><span class="linenos">116</span></a>
+</span><span id="Filters.column_filter_exp-117"><a href="#Filters.column_filter_exp-117"><span class="linenos">117</span></a>        <span class="k">return</span> <span class="n">inner</span>
 </span></pre></div>
 
 
@@ -700,42 +701,42 @@ Defaults to false.</li>
 
     </div>
     <a class="headerlink" href="#Filters.drop_duplicate_rows"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="Filters.drop_duplicate_rows-118"><a href="#Filters.drop_duplicate_rows-118"><span class="linenos">118</span></a>    <span class="nd">@staticmethod</span>
-</span><span id="Filters.drop_duplicate_rows-119"><a href="#Filters.drop_duplicate_rows-119"><span class="linenos">119</span></a>    <span class="k">def</span> <span class="nf">drop_duplicate_rows</span><span class="p">(</span>
-</span><span id="Filters.drop_duplicate_rows-120"><a href="#Filters.drop_duplicate_rows-120"><span class="linenos">120</span></a>        <span class="n">cols</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">watermarker</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span>
-</span><span id="Filters.drop_duplicate_rows-121"><a href="#Filters.drop_duplicate_rows-121"><span class="linenos">121</span></a>    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">:</span>
-</span><span id="Filters.drop_duplicate_rows-122"><a href="#Filters.drop_duplicate_rows-122"><span class="linenos">122</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Drop duplicate rows using spark function dropDuplicates().</span>
-</span><span id="Filters.drop_duplicate_rows-123"><a href="#Filters.drop_duplicate_rows-123"><span class="linenos">123</span></a>
-</span><span id="Filters.drop_duplicate_rows-124"><a href="#Filters.drop_duplicate_rows-124"><span class="linenos">124</span></a><span class="sd">        This transformer can be used with or without arguments.</span>
-</span><span id="Filters.drop_duplicate_rows-125"><a href="#Filters.drop_duplicate_rows-125"><span class="linenos">125</span></a><span class="sd">        The provided argument needs to be a list of columns.</span>
-</span><span id="Filters.drop_duplicate_rows-126"><a href="#Filters.drop_duplicate_rows-126"><span class="linenos">126</span></a><span class="sd">        For example: [“Name”,”VAT”] will drop duplicate records within</span>
-</span><span id="Filters.drop_duplicate_rows-127"><a href="#Filters.drop_duplicate_rows-127"><span class="linenos">127</span></a><span class="sd">        &quot;Name&quot; and &quot;VAT&quot; columns.</span>
-</span><span id="Filters.drop_duplicate_rows-128"><a href="#Filters.drop_duplicate_rows-128"><span class="linenos">128</span></a><span class="sd">        If the transformer is used without providing any columns list or providing</span>
-</span><span id="Filters.drop_duplicate_rows-129"><a href="#Filters.drop_duplicate_rows-129"><span class="linenos">129</span></a><span class="sd">        an empty list, such as [] the result will be the same as using</span>
-</span><span id="Filters.drop_duplicate_rows-130"><a href="#Filters.drop_duplicate_rows-130"><span class="linenos">130</span></a><span class="sd">        the distinct() pyspark function. If the watermark dict is present it will</span>
-</span><span id="Filters.drop_duplicate_rows-131"><a href="#Filters.drop_duplicate_rows-131"><span class="linenos">131</span></a><span class="sd">        ensure that the drop operation will apply to rows within the watermark timeline</span>
-</span><span id="Filters.drop_duplicate_rows-132"><a href="#Filters.drop_duplicate_rows-132"><span class="linenos">132</span></a><span class="sd">        window.</span>
-</span><span id="Filters.drop_duplicate_rows-133"><a href="#Filters.drop_duplicate_rows-133"><span class="linenos">133</span></a>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="Filters.drop_duplicate_rows-119"><a href="#Filters.drop_duplicate_rows-119"><span class="linenos">119</span></a>    <span class="nd">@staticmethod</span>
+</span><span id="Filters.drop_duplicate_rows-120"><a href="#Filters.drop_duplicate_rows-120"><span class="linenos">120</span></a>    <span class="k">def</span> <span class="nf">drop_duplicate_rows</span><span class="p">(</span>
+</span><span id="Filters.drop_duplicate_rows-121"><a href="#Filters.drop_duplicate_rows-121"><span class="linenos">121</span></a>        <span class="n">cols</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">watermarker</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span>
+</span><span id="Filters.drop_duplicate_rows-122"><a href="#Filters.drop_duplicate_rows-122"><span class="linenos">122</span></a>    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">:</span>
+</span><span id="Filters.drop_duplicate_rows-123"><a href="#Filters.drop_duplicate_rows-123"><span class="linenos">123</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Drop duplicate rows using spark function dropDuplicates().</span>
+</span><span id="Filters.drop_duplicate_rows-124"><a href="#Filters.drop_duplicate_rows-124"><span class="linenos">124</span></a>
+</span><span id="Filters.drop_duplicate_rows-125"><a href="#Filters.drop_duplicate_rows-125"><span class="linenos">125</span></a><span class="sd">        This transformer can be used with or without arguments.</span>
+</span><span id="Filters.drop_duplicate_rows-126"><a href="#Filters.drop_duplicate_rows-126"><span class="linenos">126</span></a><span class="sd">        The provided argument needs to be a list of columns.</span>
+</span><span id="Filters.drop_duplicate_rows-127"><a href="#Filters.drop_duplicate_rows-127"><span class="linenos">127</span></a><span class="sd">        For example: [“Name”,”VAT”] will drop duplicate records within</span>
+</span><span id="Filters.drop_duplicate_rows-128"><a href="#Filters.drop_duplicate_rows-128"><span class="linenos">128</span></a><span class="sd">        &quot;Name&quot; and &quot;VAT&quot; columns.</span>
+</span><span id="Filters.drop_duplicate_rows-129"><a href="#Filters.drop_duplicate_rows-129"><span class="linenos">129</span></a><span class="sd">        If the transformer is used without providing any columns list or providing</span>
+</span><span id="Filters.drop_duplicate_rows-130"><a href="#Filters.drop_duplicate_rows-130"><span class="linenos">130</span></a><span class="sd">        an empty list, such as [] the result will be the same as using</span>
+</span><span id="Filters.drop_duplicate_rows-131"><a href="#Filters.drop_duplicate_rows-131"><span class="linenos">131</span></a><span class="sd">        the distinct() pyspark function. If the watermark dict is present it will</span>
+</span><span id="Filters.drop_duplicate_rows-132"><a href="#Filters.drop_duplicate_rows-132"><span class="linenos">132</span></a><span class="sd">        ensure that the drop operation will apply to rows within the watermark timeline</span>
+</span><span id="Filters.drop_duplicate_rows-133"><a href="#Filters.drop_duplicate_rows-133"><span class="linenos">133</span></a><span class="sd">        window.</span>
 </span><span id="Filters.drop_duplicate_rows-134"><a href="#Filters.drop_duplicate_rows-134"><span class="linenos">134</span></a>
-</span><span id="Filters.drop_duplicate_rows-135"><a href="#Filters.drop_duplicate_rows-135"><span class="linenos">135</span></a><span class="sd">        Args:</span>
-</span><span id="Filters.drop_duplicate_rows-136"><a href="#Filters.drop_duplicate_rows-136"><span class="linenos">136</span></a><span class="sd">            cols: column names.</span>
-</span><span id="Filters.drop_duplicate_rows-137"><a href="#Filters.drop_duplicate_rows-137"><span class="linenos">137</span></a><span class="sd">            watermarker: properties to apply watermarker to the transformer.</span>
-</span><span id="Filters.drop_duplicate_rows-138"><a href="#Filters.drop_duplicate_rows-138"><span class="linenos">138</span></a>
-</span><span id="Filters.drop_duplicate_rows-139"><a href="#Filters.drop_duplicate_rows-139"><span class="linenos">139</span></a><span class="sd">        Returns:</span>
-</span><span id="Filters.drop_duplicate_rows-140"><a href="#Filters.drop_duplicate_rows-140"><span class="linenos">140</span></a><span class="sd">            A function to be called in .transform() spark function.</span>
-</span><span id="Filters.drop_duplicate_rows-141"><a href="#Filters.drop_duplicate_rows-141"><span class="linenos">141</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="Filters.drop_duplicate_rows-142"><a href="#Filters.drop_duplicate_rows-142"><span class="linenos">142</span></a>
-</span><span id="Filters.drop_duplicate_rows-143"><a href="#Filters.drop_duplicate_rows-143"><span class="linenos">143</span></a>        <span class="k">def</span> <span class="nf">inner</span><span class="p">(</span><span class="n">df</span><span class="p">:</span> <span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataFrame</span><span class="p">:</span>
-</span><span id="Filters.drop_duplicate_rows-144"><a href="#Filters.drop_duplicate_rows-144"><span class="linenos">144</span></a>            <span class="k">if</span> <span class="n">watermarker</span><span class="p">:</span>
-</span><span id="Filters.drop_duplicate_rows-145"><a href="#Filters.drop_duplicate_rows-145"><span class="linenos">145</span></a>                <span class="n">df</span> <span class="o">=</span> <span class="n">Watermarker</span><span class="o">.</span><span class="n">with_watermark</span><span class="p">(</span>
-</span><span id="Filters.drop_duplicate_rows-146"><a href="#Filters.drop_duplicate_rows-146"><span class="linenos">146</span></a>                    <span class="n">watermarker</span><span class="p">[</span><span class="s2">&quot;col&quot;</span><span class="p">],</span> <span class="n">watermarker</span><span class="p">[</span><span class="s2">&quot;watermarking_time&quot;</span><span class="p">]</span>
-</span><span id="Filters.drop_duplicate_rows-147"><a href="#Filters.drop_duplicate_rows-147"><span class="linenos">147</span></a>                <span class="p">)(</span><span class="n">df</span><span class="p">)</span>
-</span><span id="Filters.drop_duplicate_rows-148"><a href="#Filters.drop_duplicate_rows-148"><span class="linenos">148</span></a>            <span class="k">if</span> <span class="ow">not</span> <span class="n">cols</span><span class="p">:</span>
-</span><span id="Filters.drop_duplicate_rows-149"><a href="#Filters.drop_duplicate_rows-149"><span class="linenos">149</span></a>                <span class="k">return</span> <span class="n">df</span><span class="o">.</span><span class="n">dropDuplicates</span><span class="p">()</span>
-</span><span id="Filters.drop_duplicate_rows-150"><a href="#Filters.drop_duplicate_rows-150"><span class="linenos">150</span></a>            <span class="k">else</span><span class="p">:</span>
-</span><span id="Filters.drop_duplicate_rows-151"><a href="#Filters.drop_duplicate_rows-151"><span class="linenos">151</span></a>                <span class="k">return</span> <span class="n">df</span><span class="o">.</span><span class="n">dropDuplicates</span><span class="p">(</span><span class="n">cols</span><span class="p">)</span>
-</span><span id="Filters.drop_duplicate_rows-152"><a href="#Filters.drop_duplicate_rows-152"><span class="linenos">152</span></a>
-</span><span id="Filters.drop_duplicate_rows-153"><a href="#Filters.drop_duplicate_rows-153"><span class="linenos">153</span></a>        <span class="k">return</span> <span class="n">inner</span>
+</span><span id="Filters.drop_duplicate_rows-135"><a href="#Filters.drop_duplicate_rows-135"><span class="linenos">135</span></a>
+</span><span id="Filters.drop_duplicate_rows-136"><a href="#Filters.drop_duplicate_rows-136"><span class="linenos">136</span></a><span class="sd">        Args:</span>
+</span><span id="Filters.drop_duplicate_rows-137"><a href="#Filters.drop_duplicate_rows-137"><span class="linenos">137</span></a><span class="sd">            cols: column names.</span>
+</span><span id="Filters.drop_duplicate_rows-138"><a href="#Filters.drop_duplicate_rows-138"><span class="linenos">138</span></a><span class="sd">            watermarker: properties to apply watermarker to the transformer.</span>
+</span><span id="Filters.drop_duplicate_rows-139"><a href="#Filters.drop_duplicate_rows-139"><span class="linenos">139</span></a>
+</span><span id="Filters.drop_duplicate_rows-140"><a href="#Filters.drop_duplicate_rows-140"><span class="linenos">140</span></a><span class="sd">        Returns:</span>
+</span><span id="Filters.drop_duplicate_rows-141"><a href="#Filters.drop_duplicate_rows-141"><span class="linenos">141</span></a><span class="sd">            A function to be called in .transform() spark function.</span>
+</span><span id="Filters.drop_duplicate_rows-142"><a href="#Filters.drop_duplicate_rows-142"><span class="linenos">142</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="Filters.drop_duplicate_rows-143"><a href="#Filters.drop_duplicate_rows-143"><span class="linenos">143</span></a>
+</span><span id="Filters.drop_duplicate_rows-144"><a href="#Filters.drop_duplicate_rows-144"><span class="linenos">144</span></a>        <span class="k">def</span> <span class="nf">inner</span><span class="p">(</span><span class="n">df</span><span class="p">:</span> <span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataFrame</span><span class="p">:</span>
+</span><span id="Filters.drop_duplicate_rows-145"><a href="#Filters.drop_duplicate_rows-145"><span class="linenos">145</span></a>            <span class="k">if</span> <span class="n">watermarker</span><span class="p">:</span>
+</span><span id="Filters.drop_duplicate_rows-146"><a href="#Filters.drop_duplicate_rows-146"><span class="linenos">146</span></a>                <span class="n">df</span> <span class="o">=</span> <span class="n">Watermarker</span><span class="o">.</span><span class="n">with_watermark</span><span class="p">(</span>
+</span><span id="Filters.drop_duplicate_rows-147"><a href="#Filters.drop_duplicate_rows-147"><span class="linenos">147</span></a>                    <span class="n">watermarker</span><span class="p">[</span><span class="s2">&quot;col&quot;</span><span class="p">],</span> <span class="n">watermarker</span><span class="p">[</span><span class="s2">&quot;watermarking_time&quot;</span><span class="p">]</span>
+</span><span id="Filters.drop_duplicate_rows-148"><a href="#Filters.drop_duplicate_rows-148"><span class="linenos">148</span></a>                <span class="p">)(</span><span class="n">df</span><span class="p">)</span>
+</span><span id="Filters.drop_duplicate_rows-149"><a href="#Filters.drop_duplicate_rows-149"><span class="linenos">149</span></a>            <span class="k">if</span> <span class="ow">not</span> <span class="n">cols</span><span class="p">:</span>
+</span><span id="Filters.drop_duplicate_rows-150"><a href="#Filters.drop_duplicate_rows-150"><span class="linenos">150</span></a>                <span class="k">return</span> <span class="n">df</span><span class="o">.</span><span class="n">dropDuplicates</span><span class="p">()</span>
+</span><span id="Filters.drop_duplicate_rows-151"><a href="#Filters.drop_duplicate_rows-151"><span class="linenos">151</span></a>            <span class="k">else</span><span class="p">:</span>
+</span><span id="Filters.drop_duplicate_rows-152"><a href="#Filters.drop_duplicate_rows-152"><span class="linenos">152</span></a>                <span class="k">return</span> <span class="n">df</span><span class="o">.</span><span class="n">dropDuplicates</span><span class="p">(</span><span class="n">cols</span><span class="p">)</span>
+</span><span id="Filters.drop_duplicate_rows-153"><a href="#Filters.drop_duplicate_rows-153"><span class="linenos">153</span></a>
+</span><span id="Filters.drop_duplicate_rows-154"><a href="#Filters.drop_duplicate_rows-154"><span class="linenos">154</span></a>        <span class="k">return</span> <span class="n">inner</span>
 </span></pre></div>
 
 

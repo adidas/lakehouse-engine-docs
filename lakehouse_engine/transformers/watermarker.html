@@ -60,7 +60,7 @@
     </ul>
 
 
-            <footer>Lakehouse Engine v1.20.1</footer>
+            <footer>Lakehouse Engine v1.21.0version</footer>
 
 </div>
     </nav>
@@ -78,35 +78,36 @@
                     <label class="view-source-button" for="mod-watermarker-view-source"><span>View Source</span></label>
 
                     <div class="pdoc-code codehilite"><pre><span></span><span id="L-1"><a href="#L-1"><span class="linenos"> 1</span></a><span class="sd">&quot;&quot;&quot;Watermarker module.&quot;&quot;&quot;</span>
-</span><span id="L-2"><a href="#L-2"><span class="linenos"> 2</span></a><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Callable</span>
-</span><span id="L-3"><a href="#L-3"><span class="linenos"> 3</span></a>
-</span><span id="L-4"><a href="#L-4"><span class="linenos"> 4</span></a><span class="kn">from</span> <span class="nn">pyspark.sql</span> <span class="kn">import</span> <span class="n">DataFrame</span>
-</span><span id="L-5"><a href="#L-5"><span class="linenos"> 5</span></a>
-</span><span id="L-6"><a href="#L-6"><span class="linenos"> 6</span></a><span class="kn">from</span> <span class="nn">lakehouse_engine.utils.logging_handler</span> <span class="kn">import</span> <span class="n">LoggingHandler</span>
-</span><span id="L-7"><a href="#L-7"><span class="linenos"> 7</span></a>
+</span><span id="L-2"><a href="#L-2"><span class="linenos"> 2</span></a>
+</span><span id="L-3"><a href="#L-3"><span class="linenos"> 3</span></a><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Callable</span>
+</span><span id="L-4"><a href="#L-4"><span class="linenos"> 4</span></a>
+</span><span id="L-5"><a href="#L-5"><span class="linenos"> 5</span></a><span class="kn">from</span> <span class="nn">pyspark.sql</span> <span class="kn">import</span> <span class="n">DataFrame</span>
+</span><span id="L-6"><a href="#L-6"><span class="linenos"> 6</span></a>
+</span><span id="L-7"><a href="#L-7"><span class="linenos"> 7</span></a><span class="kn">from</span> <span class="nn">lakehouse_engine.utils.logging_handler</span> <span class="kn">import</span> <span class="n">LoggingHandler</span>
 </span><span id="L-8"><a href="#L-8"><span class="linenos"> 8</span></a>
-</span><span id="L-9"><a href="#L-9"><span class="linenos"> 9</span></a><span class="k">class</span> <span class="nc">Watermarker</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-</span><span id="L-10"><a href="#L-10"><span class="linenos">10</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Class containing all watermarker transformers.&quot;&quot;&quot;</span>
-</span><span id="L-11"><a href="#L-11"><span class="linenos">11</span></a>
-</span><span id="L-12"><a href="#L-12"><span class="linenos">12</span></a>    <span class="n">_logger</span> <span class="o">=</span> <span class="n">LoggingHandler</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span><span class="o">.</span><span class="n">get_logger</span><span class="p">()</span>
-</span><span id="L-13"><a href="#L-13"><span class="linenos">13</span></a>
-</span><span id="L-14"><a href="#L-14"><span class="linenos">14</span></a>    <span class="nd">@staticmethod</span>
-</span><span id="L-15"><a href="#L-15"><span class="linenos">15</span></a>    <span class="k">def</span> <span class="nf">with_watermark</span><span class="p">(</span><span class="n">watermarker_column</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">watermarker_time</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">:</span>
-</span><span id="L-16"><a href="#L-16"><span class="linenos">16</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Get the dataframe with watermarker defined.</span>
-</span><span id="L-17"><a href="#L-17"><span class="linenos">17</span></a>
-</span><span id="L-18"><a href="#L-18"><span class="linenos">18</span></a><span class="sd">        Args:</span>
-</span><span id="L-19"><a href="#L-19"><span class="linenos">19</span></a><span class="sd">            watermarker_column: name of the input column to be considered for</span>
-</span><span id="L-20"><a href="#L-20"><span class="linenos">20</span></a><span class="sd">                the watermarking. Note: it must be a timestamp.</span>
-</span><span id="L-21"><a href="#L-21"><span class="linenos">21</span></a><span class="sd">            watermarker_time: time window to define the watermark value.</span>
-</span><span id="L-22"><a href="#L-22"><span class="linenos">22</span></a>
-</span><span id="L-23"><a href="#L-23"><span class="linenos">23</span></a><span class="sd">        Returns:</span>
-</span><span id="L-24"><a href="#L-24"><span class="linenos">24</span></a><span class="sd">            A function to be executed on other transformers.</span>
-</span><span id="L-25"><a href="#L-25"><span class="linenos">25</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="L-26"><a href="#L-26"><span class="linenos">26</span></a>
-</span><span id="L-27"><a href="#L-27"><span class="linenos">27</span></a>        <span class="k">def</span> <span class="nf">inner</span><span class="p">(</span><span class="n">df</span><span class="p">:</span> <span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataFrame</span><span class="p">:</span>
-</span><span id="L-28"><a href="#L-28"><span class="linenos">28</span></a>            <span class="k">return</span> <span class="n">df</span><span class="o">.</span><span class="n">withWatermark</span><span class="p">(</span><span class="n">watermarker_column</span><span class="p">,</span> <span class="n">watermarker_time</span><span class="p">)</span>
-</span><span id="L-29"><a href="#L-29"><span class="linenos">29</span></a>
-</span><span id="L-30"><a href="#L-30"><span class="linenos">30</span></a>        <span class="k">return</span> <span class="n">inner</span>
+</span><span id="L-9"><a href="#L-9"><span class="linenos"> 9</span></a>
+</span><span id="L-10"><a href="#L-10"><span class="linenos">10</span></a><span class="k">class</span> <span class="nc">Watermarker</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+</span><span id="L-11"><a href="#L-11"><span class="linenos">11</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Class containing all watermarker transformers.&quot;&quot;&quot;</span>
+</span><span id="L-12"><a href="#L-12"><span class="linenos">12</span></a>
+</span><span id="L-13"><a href="#L-13"><span class="linenos">13</span></a>    <span class="n">_logger</span> <span class="o">=</span> <span class="n">LoggingHandler</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span><span class="o">.</span><span class="n">get_logger</span><span class="p">()</span>
+</span><span id="L-14"><a href="#L-14"><span class="linenos">14</span></a>
+</span><span id="L-15"><a href="#L-15"><span class="linenos">15</span></a>    <span class="nd">@staticmethod</span>
+</span><span id="L-16"><a href="#L-16"><span class="linenos">16</span></a>    <span class="k">def</span> <span class="nf">with_watermark</span><span class="p">(</span><span class="n">watermarker_column</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">watermarker_time</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">:</span>
+</span><span id="L-17"><a href="#L-17"><span class="linenos">17</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Get the dataframe with watermarker defined.</span>
+</span><span id="L-18"><a href="#L-18"><span class="linenos">18</span></a>
+</span><span id="L-19"><a href="#L-19"><span class="linenos">19</span></a><span class="sd">        Args:</span>
+</span><span id="L-20"><a href="#L-20"><span class="linenos">20</span></a><span class="sd">            watermarker_column: name of the input column to be considered for</span>
+</span><span id="L-21"><a href="#L-21"><span class="linenos">21</span></a><span class="sd">                the watermarking. Note: it must be a timestamp.</span>
+</span><span id="L-22"><a href="#L-22"><span class="linenos">22</span></a><span class="sd">            watermarker_time: time window to define the watermark value.</span>
+</span><span id="L-23"><a href="#L-23"><span class="linenos">23</span></a>
+</span><span id="L-24"><a href="#L-24"><span class="linenos">24</span></a><span class="sd">        Returns:</span>
+</span><span id="L-25"><a href="#L-25"><span class="linenos">25</span></a><span class="sd">            A function to be executed on other transformers.</span>
+</span><span id="L-26"><a href="#L-26"><span class="linenos">26</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="L-27"><a href="#L-27"><span class="linenos">27</span></a>
+</span><span id="L-28"><a href="#L-28"><span class="linenos">28</span></a>        <span class="k">def</span> <span class="nf">inner</span><span class="p">(</span><span class="n">df</span><span class="p">:</span> <span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataFrame</span><span class="p">:</span>
+</span><span id="L-29"><a href="#L-29"><span class="linenos">29</span></a>            <span class="k">return</span> <span class="n">df</span><span class="o">.</span><span class="n">withWatermark</span><span class="p">(</span><span class="n">watermarker_column</span><span class="p">,</span> <span class="n">watermarker_time</span><span class="p">)</span>
+</span><span id="L-30"><a href="#L-30"><span class="linenos">30</span></a>
+</span><span id="L-31"><a href="#L-31"><span class="linenos">31</span></a>        <span class="k">return</span> <span class="n">inner</span>
 </span></pre></div>
 
 
@@ -122,28 +123,28 @@
 
     </div>
     <a class="headerlink" href="#Watermarker"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="Watermarker-10"><a href="#Watermarker-10"><span class="linenos">10</span></a><span class="k">class</span> <span class="nc">Watermarker</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-</span><span id="Watermarker-11"><a href="#Watermarker-11"><span class="linenos">11</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Class containing all watermarker transformers.&quot;&quot;&quot;</span>
-</span><span id="Watermarker-12"><a href="#Watermarker-12"><span class="linenos">12</span></a>
-</span><span id="Watermarker-13"><a href="#Watermarker-13"><span class="linenos">13</span></a>    <span class="n">_logger</span> <span class="o">=</span> <span class="n">LoggingHandler</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span><span class="o">.</span><span class="n">get_logger</span><span class="p">()</span>
-</span><span id="Watermarker-14"><a href="#Watermarker-14"><span class="linenos">14</span></a>
-</span><span id="Watermarker-15"><a href="#Watermarker-15"><span class="linenos">15</span></a>    <span class="nd">@staticmethod</span>
-</span><span id="Watermarker-16"><a href="#Watermarker-16"><span class="linenos">16</span></a>    <span class="k">def</span> <span class="nf">with_watermark</span><span class="p">(</span><span class="n">watermarker_column</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">watermarker_time</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">:</span>
-</span><span id="Watermarker-17"><a href="#Watermarker-17"><span class="linenos">17</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Get the dataframe with watermarker defined.</span>
-</span><span id="Watermarker-18"><a href="#Watermarker-18"><span class="linenos">18</span></a>
-</span><span id="Watermarker-19"><a href="#Watermarker-19"><span class="linenos">19</span></a><span class="sd">        Args:</span>
-</span><span id="Watermarker-20"><a href="#Watermarker-20"><span class="linenos">20</span></a><span class="sd">            watermarker_column: name of the input column to be considered for</span>
-</span><span id="Watermarker-21"><a href="#Watermarker-21"><span class="linenos">21</span></a><span class="sd">                the watermarking. Note: it must be a timestamp.</span>
-</span><span id="Watermarker-22"><a href="#Watermarker-22"><span class="linenos">22</span></a><span class="sd">            watermarker_time: time window to define the watermark value.</span>
-</span><span id="Watermarker-23"><a href="#Watermarker-23"><span class="linenos">23</span></a>
-</span><span id="Watermarker-24"><a href="#Watermarker-24"><span class="linenos">24</span></a><span class="sd">        Returns:</span>
-</span><span id="Watermarker-25"><a href="#Watermarker-25"><span class="linenos">25</span></a><span class="sd">            A function to be executed on other transformers.</span>
-</span><span id="Watermarker-26"><a href="#Watermarker-26"><span class="linenos">26</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="Watermarker-27"><a href="#Watermarker-27"><span class="linenos">27</span></a>
-</span><span id="Watermarker-28"><a href="#Watermarker-28"><span class="linenos">28</span></a>        <span class="k">def</span> <span class="nf">inner</span><span class="p">(</span><span class="n">df</span><span class="p">:</span> <span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataFrame</span><span class="p">:</span>
-</span><span id="Watermarker-29"><a href="#Watermarker-29"><span class="linenos">29</span></a>            <span class="k">return</span> <span class="n">df</span><span class="o">.</span><span class="n">withWatermark</span><span class="p">(</span><span class="n">watermarker_column</span><span class="p">,</span> <span class="n">watermarker_time</span><span class="p">)</span>
-</span><span id="Watermarker-30"><a href="#Watermarker-30"><span class="linenos">30</span></a>
-</span><span id="Watermarker-31"><a href="#Watermarker-31"><span class="linenos">31</span></a>        <span class="k">return</span> <span class="n">inner</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="Watermarker-11"><a href="#Watermarker-11"><span class="linenos">11</span></a><span class="k">class</span> <span class="nc">Watermarker</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+</span><span id="Watermarker-12"><a href="#Watermarker-12"><span class="linenos">12</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Class containing all watermarker transformers.&quot;&quot;&quot;</span>
+</span><span id="Watermarker-13"><a href="#Watermarker-13"><span class="linenos">13</span></a>
+</span><span id="Watermarker-14"><a href="#Watermarker-14"><span class="linenos">14</span></a>    <span class="n">_logger</span> <span class="o">=</span> <span class="n">LoggingHandler</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span><span class="o">.</span><span class="n">get_logger</span><span class="p">()</span>
+</span><span id="Watermarker-15"><a href="#Watermarker-15"><span class="linenos">15</span></a>
+</span><span id="Watermarker-16"><a href="#Watermarker-16"><span class="linenos">16</span></a>    <span class="nd">@staticmethod</span>
+</span><span id="Watermarker-17"><a href="#Watermarker-17"><span class="linenos">17</span></a>    <span class="k">def</span> <span class="nf">with_watermark</span><span class="p">(</span><span class="n">watermarker_column</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">watermarker_time</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">:</span>
+</span><span id="Watermarker-18"><a href="#Watermarker-18"><span class="linenos">18</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Get the dataframe with watermarker defined.</span>
+</span><span id="Watermarker-19"><a href="#Watermarker-19"><span class="linenos">19</span></a>
+</span><span id="Watermarker-20"><a href="#Watermarker-20"><span class="linenos">20</span></a><span class="sd">        Args:</span>
+</span><span id="Watermarker-21"><a href="#Watermarker-21"><span class="linenos">21</span></a><span class="sd">            watermarker_column: name of the input column to be considered for</span>
+</span><span id="Watermarker-22"><a href="#Watermarker-22"><span class="linenos">22</span></a><span class="sd">                the watermarking. Note: it must be a timestamp.</span>
+</span><span id="Watermarker-23"><a href="#Watermarker-23"><span class="linenos">23</span></a><span class="sd">            watermarker_time: time window to define the watermark value.</span>
+</span><span id="Watermarker-24"><a href="#Watermarker-24"><span class="linenos">24</span></a>
+</span><span id="Watermarker-25"><a href="#Watermarker-25"><span class="linenos">25</span></a><span class="sd">        Returns:</span>
+</span><span id="Watermarker-26"><a href="#Watermarker-26"><span class="linenos">26</span></a><span class="sd">            A function to be executed on other transformers.</span>
+</span><span id="Watermarker-27"><a href="#Watermarker-27"><span class="linenos">27</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="Watermarker-28"><a href="#Watermarker-28"><span class="linenos">28</span></a>
+</span><span id="Watermarker-29"><a href="#Watermarker-29"><span class="linenos">29</span></a>        <span class="k">def</span> <span class="nf">inner</span><span class="p">(</span><span class="n">df</span><span class="p">:</span> <span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataFrame</span><span class="p">:</span>
+</span><span id="Watermarker-30"><a href="#Watermarker-30"><span class="linenos">30</span></a>            <span class="k">return</span> <span class="n">df</span><span class="o">.</span><span class="n">withWatermark</span><span class="p">(</span><span class="n">watermarker_column</span><span class="p">,</span> <span class="n">watermarker_time</span><span class="p">)</span>
+</span><span id="Watermarker-31"><a href="#Watermarker-31"><span class="linenos">31</span></a>
+</span><span id="Watermarker-32"><a href="#Watermarker-32"><span class="linenos">32</span></a>        <span class="k">return</span> <span class="n">inner</span>
 </span></pre></div>
 
 
@@ -163,23 +164,23 @@
 
     </div>
     <a class="headerlink" href="#Watermarker.with_watermark"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="Watermarker.with_watermark-15"><a href="#Watermarker.with_watermark-15"><span class="linenos">15</span></a>    <span class="nd">@staticmethod</span>
-</span><span id="Watermarker.with_watermark-16"><a href="#Watermarker.with_watermark-16"><span class="linenos">16</span></a>    <span class="k">def</span> <span class="nf">with_watermark</span><span class="p">(</span><span class="n">watermarker_column</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">watermarker_time</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">:</span>
-</span><span id="Watermarker.with_watermark-17"><a href="#Watermarker.with_watermark-17"><span class="linenos">17</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Get the dataframe with watermarker defined.</span>
-</span><span id="Watermarker.with_watermark-18"><a href="#Watermarker.with_watermark-18"><span class="linenos">18</span></a>
-</span><span id="Watermarker.with_watermark-19"><a href="#Watermarker.with_watermark-19"><span class="linenos">19</span></a><span class="sd">        Args:</span>
-</span><span id="Watermarker.with_watermark-20"><a href="#Watermarker.with_watermark-20"><span class="linenos">20</span></a><span class="sd">            watermarker_column: name of the input column to be considered for</span>
-</span><span id="Watermarker.with_watermark-21"><a href="#Watermarker.with_watermark-21"><span class="linenos">21</span></a><span class="sd">                the watermarking. Note: it must be a timestamp.</span>
-</span><span id="Watermarker.with_watermark-22"><a href="#Watermarker.with_watermark-22"><span class="linenos">22</span></a><span class="sd">            watermarker_time: time window to define the watermark value.</span>
-</span><span id="Watermarker.with_watermark-23"><a href="#Watermarker.with_watermark-23"><span class="linenos">23</span></a>
-</span><span id="Watermarker.with_watermark-24"><a href="#Watermarker.with_watermark-24"><span class="linenos">24</span></a><span class="sd">        Returns:</span>
-</span><span id="Watermarker.with_watermark-25"><a href="#Watermarker.with_watermark-25"><span class="linenos">25</span></a><span class="sd">            A function to be executed on other transformers.</span>
-</span><span id="Watermarker.with_watermark-26"><a href="#Watermarker.with_watermark-26"><span class="linenos">26</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="Watermarker.with_watermark-27"><a href="#Watermarker.with_watermark-27"><span class="linenos">27</span></a>
-</span><span id="Watermarker.with_watermark-28"><a href="#Watermarker.with_watermark-28"><span class="linenos">28</span></a>        <span class="k">def</span> <span class="nf">inner</span><span class="p">(</span><span class="n">df</span><span class="p">:</span> <span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataFrame</span><span class="p">:</span>
-</span><span id="Watermarker.with_watermark-29"><a href="#Watermarker.with_watermark-29"><span class="linenos">29</span></a>            <span class="k">return</span> <span class="n">df</span><span class="o">.</span><span class="n">withWatermark</span><span class="p">(</span><span class="n">watermarker_column</span><span class="p">,</span> <span class="n">watermarker_time</span><span class="p">)</span>
-</span><span id="Watermarker.with_watermark-30"><a href="#Watermarker.with_watermark-30"><span class="linenos">30</span></a>
-</span><span id="Watermarker.with_watermark-31"><a href="#Watermarker.with_watermark-31"><span class="linenos">31</span></a>        <span class="k">return</span> <span class="n">inner</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="Watermarker.with_watermark-16"><a href="#Watermarker.with_watermark-16"><span class="linenos">16</span></a>    <span class="nd">@staticmethod</span>
+</span><span id="Watermarker.with_watermark-17"><a href="#Watermarker.with_watermark-17"><span class="linenos">17</span></a>    <span class="k">def</span> <span class="nf">with_watermark</span><span class="p">(</span><span class="n">watermarker_column</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">watermarker_time</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">:</span>
+</span><span id="Watermarker.with_watermark-18"><a href="#Watermarker.with_watermark-18"><span class="linenos">18</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Get the dataframe with watermarker defined.</span>
+</span><span id="Watermarker.with_watermark-19"><a href="#Watermarker.with_watermark-19"><span class="linenos">19</span></a>
+</span><span id="Watermarker.with_watermark-20"><a href="#Watermarker.with_watermark-20"><span class="linenos">20</span></a><span class="sd">        Args:</span>
+</span><span id="Watermarker.with_watermark-21"><a href="#Watermarker.with_watermark-21"><span class="linenos">21</span></a><span class="sd">            watermarker_column: name of the input column to be considered for</span>
+</span><span id="Watermarker.with_watermark-22"><a href="#Watermarker.with_watermark-22"><span class="linenos">22</span></a><span class="sd">                the watermarking. Note: it must be a timestamp.</span>
+</span><span id="Watermarker.with_watermark-23"><a href="#Watermarker.with_watermark-23"><span class="linenos">23</span></a><span class="sd">            watermarker_time: time window to define the watermark value.</span>
+</span><span id="Watermarker.with_watermark-24"><a href="#Watermarker.with_watermark-24"><span class="linenos">24</span></a>
+</span><span id="Watermarker.with_watermark-25"><a href="#Watermarker.with_watermark-25"><span class="linenos">25</span></a><span class="sd">        Returns:</span>
+</span><span id="Watermarker.with_watermark-26"><a href="#Watermarker.with_watermark-26"><span class="linenos">26</span></a><span class="sd">            A function to be executed on other transformers.</span>
+</span><span id="Watermarker.with_watermark-27"><a href="#Watermarker.with_watermark-27"><span class="linenos">27</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="Watermarker.with_watermark-28"><a href="#Watermarker.with_watermark-28"><span class="linenos">28</span></a>
+</span><span id="Watermarker.with_watermark-29"><a href="#Watermarker.with_watermark-29"><span class="linenos">29</span></a>        <span class="k">def</span> <span class="nf">inner</span><span class="p">(</span><span class="n">df</span><span class="p">:</span> <span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataFrame</span><span class="p">:</span>
+</span><span id="Watermarker.with_watermark-30"><a href="#Watermarker.with_watermark-30"><span class="linenos">30</span></a>            <span class="k">return</span> <span class="n">df</span><span class="o">.</span><span class="n">withWatermark</span><span class="p">(</span><span class="n">watermarker_column</span><span class="p">,</span> <span class="n">watermarker_time</span><span class="p">)</span>
+</span><span id="Watermarker.with_watermark-31"><a href="#Watermarker.with_watermark-31"><span class="linenos">31</span></a>
+</span><span id="Watermarker.with_watermark-32"><a href="#Watermarker.with_watermark-32"><span class="linenos">32</span></a>        <span class="k">return</span> <span class="n">inner</span>
 </span></pre></div>
 
 

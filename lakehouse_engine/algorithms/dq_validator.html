@@ -69,7 +69,7 @@
     </ul>
 
 
-            <footer>Lakehouse Engine v1.20.1</footer>
+            <footer>Lakehouse Engine v1.21.0version</footer>
 
 </div>
     </nav>
@@ -87,157 +87,158 @@
                     <label class="view-source-button" for="mod-dq_validator-view-source"><span>View Source</span></label>
 
                     <div class="pdoc-code codehilite"><pre><span></span><span id="L-1"><a href="#L-1"><span class="linenos">  1</span></a><span class="sd">&quot;&quot;&quot;Module to define Data Validator class.&quot;&quot;&quot;</span>
-</span><span id="L-2"><a href="#L-2"><span class="linenos">  2</span></a><span class="kn">from</span> <span class="nn">delta.tables</span> <span class="kn">import</span> <span class="n">DeltaTable</span>
-</span><span id="L-3"><a href="#L-3"><span class="linenos">  3</span></a><span class="kn">from</span> <span class="nn">pyspark.sql</span> <span class="kn">import</span> <span class="n">DataFrame</span>
-</span><span id="L-4"><a href="#L-4"><span class="linenos">  4</span></a><span class="kn">from</span> <span class="nn">pyspark.sql.utils</span> <span class="kn">import</span> <span class="n">StreamingQueryException</span>
-</span><span id="L-5"><a href="#L-5"><span class="linenos">  5</span></a>
-</span><span id="L-6"><a href="#L-6"><span class="linenos">  6</span></a><span class="kn">from</span> <span class="nn">lakehouse_engine.algorithms.algorithm</span> <span class="kn">import</span> <span class="n">Algorithm</span>
-</span><span id="L-7"><a href="#L-7"><span class="linenos">  7</span></a><span class="kn">from</span> <span class="nn">lakehouse_engine.core.definitions</span> <span class="kn">import</span> <span class="n">DQSpec</span><span class="p">,</span> <span class="n">DQValidatorSpec</span><span class="p">,</span> <span class="n">InputSpec</span>
-</span><span id="L-8"><a href="#L-8"><span class="linenos">  8</span></a><span class="kn">from</span> <span class="nn">lakehouse_engine.core.exec_env</span> <span class="kn">import</span> <span class="n">ExecEnv</span>
-</span><span id="L-9"><a href="#L-9"><span class="linenos">  9</span></a><span class="kn">from</span> <span class="nn">lakehouse_engine.dq_processors.dq_factory</span> <span class="kn">import</span> <span class="n">DQFactory</span>
-</span><span id="L-10"><a href="#L-10"><span class="linenos"> 10</span></a><span class="kn">from</span> <span class="nn">lakehouse_engine.dq_processors.exceptions</span> <span class="kn">import</span> <span class="n">DQValidationsFailedException</span>
-</span><span id="L-11"><a href="#L-11"><span class="linenos"> 11</span></a><span class="kn">from</span> <span class="nn">lakehouse_engine.io.reader_factory</span> <span class="kn">import</span> <span class="n">ReaderFactory</span>
-</span><span id="L-12"><a href="#L-12"><span class="linenos"> 12</span></a><span class="kn">from</span> <span class="nn">lakehouse_engine.utils.logging_handler</span> <span class="kn">import</span> <span class="n">LoggingHandler</span>
-</span><span id="L-13"><a href="#L-13"><span class="linenos"> 13</span></a>
+</span><span id="L-2"><a href="#L-2"><span class="linenos">  2</span></a>
+</span><span id="L-3"><a href="#L-3"><span class="linenos">  3</span></a><span class="kn">from</span> <span class="nn">delta.tables</span> <span class="kn">import</span> <span class="n">DeltaTable</span>
+</span><span id="L-4"><a href="#L-4"><span class="linenos">  4</span></a><span class="kn">from</span> <span class="nn">pyspark.sql</span> <span class="kn">import</span> <span class="n">DataFrame</span>
+</span><span id="L-5"><a href="#L-5"><span class="linenos">  5</span></a><span class="kn">from</span> <span class="nn">pyspark.sql.utils</span> <span class="kn">import</span> <span class="n">StreamingQueryException</span>
+</span><span id="L-6"><a href="#L-6"><span class="linenos">  6</span></a>
+</span><span id="L-7"><a href="#L-7"><span class="linenos">  7</span></a><span class="kn">from</span> <span class="nn">lakehouse_engine.algorithms.algorithm</span> <span class="kn">import</span> <span class="n">Algorithm</span>
+</span><span id="L-8"><a href="#L-8"><span class="linenos">  8</span></a><span class="kn">from</span> <span class="nn">lakehouse_engine.core.definitions</span> <span class="kn">import</span> <span class="n">DQSpec</span><span class="p">,</span> <span class="n">DQValidatorSpec</span><span class="p">,</span> <span class="n">InputSpec</span>
+</span><span id="L-9"><a href="#L-9"><span class="linenos">  9</span></a><span class="kn">from</span> <span class="nn">lakehouse_engine.core.exec_env</span> <span class="kn">import</span> <span class="n">ExecEnv</span>
+</span><span id="L-10"><a href="#L-10"><span class="linenos"> 10</span></a><span class="kn">from</span> <span class="nn">lakehouse_engine.dq_processors.dq_factory</span> <span class="kn">import</span> <span class="n">DQFactory</span>
+</span><span id="L-11"><a href="#L-11"><span class="linenos"> 11</span></a><span class="kn">from</span> <span class="nn">lakehouse_engine.dq_processors.exceptions</span> <span class="kn">import</span> <span class="n">DQValidationsFailedException</span>
+</span><span id="L-12"><a href="#L-12"><span class="linenos"> 12</span></a><span class="kn">from</span> <span class="nn">lakehouse_engine.io.reader_factory</span> <span class="kn">import</span> <span class="n">ReaderFactory</span>
+</span><span id="L-13"><a href="#L-13"><span class="linenos"> 13</span></a><span class="kn">from</span> <span class="nn">lakehouse_engine.utils.logging_handler</span> <span class="kn">import</span> <span class="n">LoggingHandler</span>
 </span><span id="L-14"><a href="#L-14"><span class="linenos"> 14</span></a>
-</span><span id="L-15"><a href="#L-15"><span class="linenos"> 15</span></a><span class="k">class</span> <span class="nc">DQValidator</span><span class="p">(</span><span class="n">Algorithm</span><span class="p">):</span>
-</span><span id="L-16"><a href="#L-16"><span class="linenos"> 16</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Validate data using an algorithm configuration (ACON represented as dict).</span>
-</span><span id="L-17"><a href="#L-17"><span class="linenos"> 17</span></a>
-</span><span id="L-18"><a href="#L-18"><span class="linenos"> 18</span></a><span class="sd">    This algorithm focuses on isolate Data Quality Validations from loading,</span>
-</span><span id="L-19"><a href="#L-19"><span class="linenos"> 19</span></a><span class="sd">    applying a set of data quality functions to a specific input dataset,</span>
-</span><span id="L-20"><a href="#L-20"><span class="linenos"> 20</span></a><span class="sd">    without the need to define any output specification.</span>
-</span><span id="L-21"><a href="#L-21"><span class="linenos"> 21</span></a><span class="sd">    You can use any input specification compatible with the lakehouse engine</span>
-</span><span id="L-22"><a href="#L-22"><span class="linenos"> 22</span></a><span class="sd">    (dataframe, table, files, etc).</span>
-</span><span id="L-23"><a href="#L-23"><span class="linenos"> 23</span></a><span class="sd">    &quot;&quot;&quot;</span>
-</span><span id="L-24"><a href="#L-24"><span class="linenos"> 24</span></a>
-</span><span id="L-25"><a href="#L-25"><span class="linenos"> 25</span></a>    <span class="n">_LOGGER</span> <span class="o">=</span> <span class="n">LoggingHandler</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span><span class="o">.</span><span class="n">get_logger</span><span class="p">()</span>
-</span><span id="L-26"><a href="#L-26"><span class="linenos"> 26</span></a>
-</span><span id="L-27"><a href="#L-27"><span class="linenos"> 27</span></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">acon</span><span class="p">:</span> <span class="nb">dict</span><span class="p">):</span>
-</span><span id="L-28"><a href="#L-28"><span class="linenos"> 28</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Construct DQValidator algorithm instances.</span>
-</span><span id="L-29"><a href="#L-29"><span class="linenos"> 29</span></a>
-</span><span id="L-30"><a href="#L-30"><span class="linenos"> 30</span></a><span class="sd">        A data quality validator needs the following specifications to work</span>
-</span><span id="L-31"><a href="#L-31"><span class="linenos"> 31</span></a><span class="sd">        properly:</span>
-</span><span id="L-32"><a href="#L-32"><span class="linenos"> 32</span></a><span class="sd">            - input specification (mandatory): specify how and what data to</span>
-</span><span id="L-33"><a href="#L-33"><span class="linenos"> 33</span></a><span class="sd">            read.</span>
-</span><span id="L-34"><a href="#L-34"><span class="linenos"> 34</span></a><span class="sd">            - data quality specification (mandatory): specify how to execute</span>
-</span><span id="L-35"><a href="#L-35"><span class="linenos"> 35</span></a><span class="sd">            the data quality process.</span>
-</span><span id="L-36"><a href="#L-36"><span class="linenos"> 36</span></a><span class="sd">            - restore_prev_version (optional): specify if, having</span>
-</span><span id="L-37"><a href="#L-37"><span class="linenos"> 37</span></a><span class="sd">            delta table/files as input, they should be restored to the</span>
-</span><span id="L-38"><a href="#L-38"><span class="linenos"> 38</span></a><span class="sd">            previous version if the data quality process fails. Note: this</span>
-</span><span id="L-39"><a href="#L-39"><span class="linenos"> 39</span></a><span class="sd">            is only considered if fail_on_error is kept as True.</span>
-</span><span id="L-40"><a href="#L-40"><span class="linenos"> 40</span></a>
-</span><span id="L-41"><a href="#L-41"><span class="linenos"> 41</span></a><span class="sd">        Args:</span>
-</span><span id="L-42"><a href="#L-42"><span class="linenos"> 42</span></a><span class="sd">            acon: algorithm configuration.</span>
-</span><span id="L-43"><a href="#L-43"><span class="linenos"> 43</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="L-44"><a href="#L-44"><span class="linenos"> 44</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">spec</span><span class="p">:</span> <span class="n">DQValidatorSpec</span> <span class="o">=</span> <span class="n">DQValidatorSpec</span><span class="p">(</span>
-</span><span id="L-45"><a href="#L-45"><span class="linenos"> 45</span></a>            <span class="n">input_spec</span><span class="o">=</span><span class="n">InputSpec</span><span class="p">(</span><span class="o">**</span><span class="n">acon</span><span class="p">[</span><span class="s2">&quot;input_spec&quot;</span><span class="p">]),</span>
-</span><span id="L-46"><a href="#L-46"><span class="linenos"> 46</span></a>            <span class="n">dq_spec</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_get_dq_spec</span><span class="p">(</span><span class="n">acon</span><span class="p">[</span><span class="s2">&quot;dq_spec&quot;</span><span class="p">]),</span>
-</span><span id="L-47"><a href="#L-47"><span class="linenos"> 47</span></a>            <span class="n">restore_prev_version</span><span class="o">=</span><span class="n">acon</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;restore_prev_version&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
-</span><span id="L-48"><a href="#L-48"><span class="linenos"> 48</span></a>        <span class="p">)</span>
-</span><span id="L-49"><a href="#L-49"><span class="linenos"> 49</span></a>
-</span><span id="L-50"><a href="#L-50"><span class="linenos"> 50</span></a>    <span class="k">def</span> <span class="nf">read</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataFrame</span><span class="p">:</span>
-</span><span id="L-51"><a href="#L-51"><span class="linenos"> 51</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Read data from an input location into a distributed dataframe.</span>
-</span><span id="L-52"><a href="#L-52"><span class="linenos"> 52</span></a>
-</span><span id="L-53"><a href="#L-53"><span class="linenos"> 53</span></a><span class="sd">        Returns:</span>
-</span><span id="L-54"><a href="#L-54"><span class="linenos"> 54</span></a><span class="sd">             Dataframe with data that was read.</span>
-</span><span id="L-55"><a href="#L-55"><span class="linenos"> 55</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="L-56"><a href="#L-56"><span class="linenos"> 56</span></a>        <span class="n">current_df</span> <span class="o">=</span> <span class="n">ReaderFactory</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">spec</span><span class="o">.</span><span class="n">input_spec</span><span class="p">)</span>
-</span><span id="L-57"><a href="#L-57"><span class="linenos"> 57</span></a>
-</span><span id="L-58"><a href="#L-58"><span class="linenos"> 58</span></a>        <span class="k">return</span> <span class="n">current_df</span>
-</span><span id="L-59"><a href="#L-59"><span class="linenos"> 59</span></a>
-</span><span id="L-60"><a href="#L-60"><span class="linenos"> 60</span></a>    <span class="k">def</span> <span class="nf">process_dq</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataFrame</span><span class="p">:</span>
-</span><span id="L-61"><a href="#L-61"><span class="linenos"> 61</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Process the data quality tasks for the data that was read.</span>
-</span><span id="L-62"><a href="#L-62"><span class="linenos"> 62</span></a>
-</span><span id="L-63"><a href="#L-63"><span class="linenos"> 63</span></a><span class="sd">        It supports a single input dataframe.</span>
-</span><span id="L-64"><a href="#L-64"><span class="linenos"> 64</span></a>
-</span><span id="L-65"><a href="#L-65"><span class="linenos"> 65</span></a><span class="sd">        It is possible to use data quality validators/expectations that will validate</span>
-</span><span id="L-66"><a href="#L-66"><span class="linenos"> 66</span></a><span class="sd">        your data and fail the process in case the expectations are not met. The DQ</span>
-</span><span id="L-67"><a href="#L-67"><span class="linenos"> 67</span></a><span class="sd">        process also generates and keeps updating a site containing the results of the</span>
-</span><span id="L-68"><a href="#L-68"><span class="linenos"> 68</span></a><span class="sd">        expectations that were done on your data. The location of the site is</span>
-</span><span id="L-69"><a href="#L-69"><span class="linenos"> 69</span></a><span class="sd">        configurable and can either be on file system or S3. If you define it to be</span>
-</span><span id="L-70"><a href="#L-70"><span class="linenos"> 70</span></a><span class="sd">        stored on S3, you can even configure your S3 bucket to serve the site so that</span>
-</span><span id="L-71"><a href="#L-71"><span class="linenos"> 71</span></a><span class="sd">        people can easily check the quality of your data. Moreover, it is also</span>
-</span><span id="L-72"><a href="#L-72"><span class="linenos"> 72</span></a><span class="sd">        possible to store the result of the DQ process into a defined result sink.</span>
-</span><span id="L-73"><a href="#L-73"><span class="linenos"> 73</span></a>
-</span><span id="L-74"><a href="#L-74"><span class="linenos"> 74</span></a><span class="sd">        Args:</span>
-</span><span id="L-75"><a href="#L-75"><span class="linenos"> 75</span></a><span class="sd">            data: input dataframe on which to run the DQ process.</span>
-</span><span id="L-76"><a href="#L-76"><span class="linenos"> 76</span></a>
-</span><span id="L-77"><a href="#L-77"><span class="linenos"> 77</span></a><span class="sd">        Returns:</span>
-</span><span id="L-78"><a href="#L-78"><span class="linenos"> 78</span></a><span class="sd">            Validated dataframe.</span>
-</span><span id="L-79"><a href="#L-79"><span class="linenos"> 79</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="L-80"><a href="#L-80"><span class="linenos"> 80</span></a>        <span class="k">return</span> <span class="n">DQFactory</span><span class="o">.</span><span class="n">run_dq_process</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">spec</span><span class="o">.</span><span class="n">dq_spec</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
-</span><span id="L-81"><a href="#L-81"><span class="linenos"> 81</span></a>
-</span><span id="L-82"><a href="#L-82"><span class="linenos"> 82</span></a>    <span class="k">def</span> <span class="nf">execute</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-</span><span id="L-83"><a href="#L-83"><span class="linenos"> 83</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Define the algorithm execution behaviour.&quot;&quot;&quot;</span>
-</span><span id="L-84"><a href="#L-84"><span class="linenos"> 84</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">_LOGGER</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Starting read stage...&quot;</span><span class="p">)</span>
-</span><span id="L-85"><a href="#L-85"><span class="linenos"> 85</span></a>        <span class="n">read_df</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
-</span><span id="L-86"><a href="#L-86"><span class="linenos"> 86</span></a>
-</span><span id="L-87"><a href="#L-87"><span class="linenos"> 87</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">_LOGGER</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Starting data quality validator...&quot;</span><span class="p">)</span>
-</span><span id="L-88"><a href="#L-88"><span class="linenos"> 88</span></a>        <span class="k">try</span><span class="p">:</span>
-</span><span id="L-89"><a href="#L-89"><span class="linenos"> 89</span></a>            <span class="k">if</span> <span class="n">read_df</span><span class="o">.</span><span class="n">isStreaming</span><span class="p">:</span>
-</span><span id="L-90"><a href="#L-90"><span class="linenos"> 90</span></a>                <span class="c1"># To handle streaming, and although we are not interested in</span>
-</span><span id="L-91"><a href="#L-91"><span class="linenos"> 91</span></a>                <span class="c1"># writing any data, we still need to start the streaming and</span>
-</span><span id="L-92"><a href="#L-92"><span class="linenos"> 92</span></a>                <span class="c1"># execute the data quality process in micro batches of data.</span>
-</span><span id="L-93"><a href="#L-93"><span class="linenos"> 93</span></a>                <span class="k">def</span> <span class="nf">write_dq_validator_micro_batch</span><span class="p">(</span>
-</span><span id="L-94"><a href="#L-94"><span class="linenos"> 94</span></a>                    <span class="n">batch_df</span><span class="p">:</span> <span class="n">DataFrame</span><span class="p">,</span> <span class="n">batch_id</span><span class="p">:</span> <span class="nb">int</span>
-</span><span id="L-95"><a href="#L-95"><span class="linenos"> 95</span></a>                <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-</span><span id="L-96"><a href="#L-96"><span class="linenos"> 96</span></a>                    <span class="bp">self</span><span class="o">.</span><span class="n">process_dq</span><span class="p">(</span><span class="n">batch_df</span><span class="p">)</span>
-</span><span id="L-97"><a href="#L-97"><span class="linenos"> 97</span></a>
-</span><span id="L-98"><a href="#L-98"><span class="linenos"> 98</span></a>                <span class="n">read_df</span><span class="o">.</span><span class="n">writeStream</span><span class="o">.</span><span class="n">trigger</span><span class="p">(</span><span class="n">once</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">foreachBatch</span><span class="p">(</span>
-</span><span id="L-99"><a href="#L-99"><span class="linenos"> 99</span></a>                    <span class="n">write_dq_validator_micro_batch</span>
-</span><span id="L-100"><a href="#L-100"><span class="linenos">100</span></a>                <span class="p">)</span><span class="o">.</span><span class="n">start</span><span class="p">()</span><span class="o">.</span><span class="n">awaitTermination</span><span class="p">()</span>
-</span><span id="L-101"><a href="#L-101"><span class="linenos">101</span></a>
-</span><span id="L-102"><a href="#L-102"><span class="linenos">102</span></a>            <span class="k">else</span><span class="p">:</span>
-</span><span id="L-103"><a href="#L-103"><span class="linenos">103</span></a>                <span class="bp">self</span><span class="o">.</span><span class="n">process_dq</span><span class="p">(</span><span class="n">read_df</span><span class="p">)</span>
-</span><span id="L-104"><a href="#L-104"><span class="linenos">104</span></a>        <span class="k">except</span> <span class="p">(</span><span class="n">DQValidationsFailedException</span><span class="p">,</span> <span class="n">StreamingQueryException</span><span class="p">):</span>
-</span><span id="L-105"><a href="#L-105"><span class="linenos">105</span></a>            <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">spec</span><span class="o">.</span><span class="n">input_spec</span><span class="o">.</span><span class="n">df_name</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">spec</span><span class="o">.</span><span class="n">restore_prev_version</span><span class="p">:</span>
-</span><span id="L-106"><a href="#L-106"><span class="linenos">106</span></a>                <span class="bp">self</span><span class="o">.</span><span class="n">_LOGGER</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Restoring delta table/files to previous version...&quot;</span><span class="p">)</span>
-</span><span id="L-107"><a href="#L-107"><span class="linenos">107</span></a>
-</span><span id="L-108"><a href="#L-108"><span class="linenos">108</span></a>                <span class="bp">self</span><span class="o">.</span><span class="n">_restore_prev_version</span><span class="p">()</span>
-</span><span id="L-109"><a href="#L-109"><span class="linenos">109</span></a>
-</span><span id="L-110"><a href="#L-110"><span class="linenos">110</span></a>                <span class="k">raise</span> <span class="n">DQValidationsFailedException</span><span class="p">(</span>
-</span><span id="L-111"><a href="#L-111"><span class="linenos">111</span></a>                    <span class="s2">&quot;Data Quality Validations Failed! The delta &quot;</span>
-</span><span id="L-112"><a href="#L-112"><span class="linenos">112</span></a>                    <span class="s2">&quot;table/files were restored to the previous version!&quot;</span>
-</span><span id="L-113"><a href="#L-113"><span class="linenos">113</span></a>                <span class="p">)</span>
-</span><span id="L-114"><a href="#L-114"><span class="linenos">114</span></a>
-</span><span id="L-115"><a href="#L-115"><span class="linenos">115</span></a>            <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">spec</span><span class="o">.</span><span class="n">dq_spec</span><span class="o">.</span><span class="n">fail_on_error</span><span class="p">:</span>
-</span><span id="L-116"><a href="#L-116"><span class="linenos">116</span></a>                <span class="k">raise</span> <span class="n">DQValidationsFailedException</span><span class="p">(</span><span class="s2">&quot;Data Quality Validations Failed!&quot;</span><span class="p">)</span>
-</span><span id="L-117"><a href="#L-117"><span class="linenos">117</span></a>        <span class="k">else</span><span class="p">:</span>
-</span><span id="L-118"><a href="#L-118"><span class="linenos">118</span></a>            <span class="bp">self</span><span class="o">.</span><span class="n">_LOGGER</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Execution of the algorithm has finished!&quot;</span><span class="p">)</span>
-</span><span id="L-119"><a href="#L-119"><span class="linenos">119</span></a>
-</span><span id="L-120"><a href="#L-120"><span class="linenos">120</span></a>    <span class="nd">@staticmethod</span>
-</span><span id="L-121"><a href="#L-121"><span class="linenos">121</span></a>    <span class="k">def</span> <span class="nf">_get_dq_spec</span><span class="p">(</span><span class="n">input_dq_spec</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DQSpec</span><span class="p">:</span>
-</span><span id="L-122"><a href="#L-122"><span class="linenos">122</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Get data quality specification from acon.</span>
-</span><span id="L-123"><a href="#L-123"><span class="linenos">123</span></a>
-</span><span id="L-124"><a href="#L-124"><span class="linenos">124</span></a><span class="sd">        Args:</span>
-</span><span id="L-125"><a href="#L-125"><span class="linenos">125</span></a><span class="sd">            input_dq_spec: data quality specification.</span>
-</span><span id="L-126"><a href="#L-126"><span class="linenos">126</span></a>
-</span><span id="L-127"><a href="#L-127"><span class="linenos">127</span></a><span class="sd">        Returns:</span>
-</span><span id="L-128"><a href="#L-128"><span class="linenos">128</span></a><span class="sd">            Data quality spec.</span>
-</span><span id="L-129"><a href="#L-129"><span class="linenos">129</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="L-130"><a href="#L-130"><span class="linenos">130</span></a>        <span class="n">dq_spec</span><span class="p">,</span> <span class="n">dq_functions</span><span class="p">,</span> <span class="n">critical_functions</span> <span class="o">=</span> <span class="n">Algorithm</span><span class="o">.</span><span class="n">get_dq_spec</span><span class="p">(</span><span class="n">input_dq_spec</span><span class="p">)</span>
-</span><span id="L-131"><a href="#L-131"><span class="linenos">131</span></a>
-</span><span id="L-132"><a href="#L-132"><span class="linenos">132</span></a>        <span class="n">dq_spec</span><span class="o">.</span><span class="n">dq_functions</span> <span class="o">=</span> <span class="n">dq_functions</span>
-</span><span id="L-133"><a href="#L-133"><span class="linenos">133</span></a>        <span class="n">dq_spec</span><span class="o">.</span><span class="n">critical_functions</span> <span class="o">=</span> <span class="n">critical_functions</span>
-</span><span id="L-134"><a href="#L-134"><span class="linenos">134</span></a>
-</span><span id="L-135"><a href="#L-135"><span class="linenos">135</span></a>        <span class="k">return</span> <span class="n">dq_spec</span>
-</span><span id="L-136"><a href="#L-136"><span class="linenos">136</span></a>
-</span><span id="L-137"><a href="#L-137"><span class="linenos">137</span></a>    <span class="k">def</span> <span class="nf">_restore_prev_version</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-</span><span id="L-138"><a href="#L-138"><span class="linenos">138</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Restore delta table or delta files to previous version.&quot;&quot;&quot;</span>
-</span><span id="L-139"><a href="#L-139"><span class="linenos">139</span></a>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">spec</span><span class="o">.</span><span class="n">input_spec</span><span class="o">.</span><span class="n">db_table</span><span class="p">:</span>
-</span><span id="L-140"><a href="#L-140"><span class="linenos">140</span></a>            <span class="n">delta_table</span> <span class="o">=</span> <span class="n">DeltaTable</span><span class="o">.</span><span class="n">forName</span><span class="p">(</span>
-</span><span id="L-141"><a href="#L-141"><span class="linenos">141</span></a>                <span class="n">ExecEnv</span><span class="o">.</span><span class="n">SESSION</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">spec</span><span class="o">.</span><span class="n">input_spec</span><span class="o">.</span><span class="n">db_table</span>
-</span><span id="L-142"><a href="#L-142"><span class="linenos">142</span></a>            <span class="p">)</span>
-</span><span id="L-143"><a href="#L-143"><span class="linenos">143</span></a>        <span class="k">else</span><span class="p">:</span>
-</span><span id="L-144"><a href="#L-144"><span class="linenos">144</span></a>            <span class="n">delta_table</span> <span class="o">=</span> <span class="n">DeltaTable</span><span class="o">.</span><span class="n">forPath</span><span class="p">(</span>
-</span><span id="L-145"><a href="#L-145"><span class="linenos">145</span></a>                <span class="n">ExecEnv</span><span class="o">.</span><span class="n">SESSION</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">spec</span><span class="o">.</span><span class="n">input_spec</span><span class="o">.</span><span class="n">location</span>
-</span><span id="L-146"><a href="#L-146"><span class="linenos">146</span></a>            <span class="p">)</span>
-</span><span id="L-147"><a href="#L-147"><span class="linenos">147</span></a>
-</span><span id="L-148"><a href="#L-148"><span class="linenos">148</span></a>        <span class="n">previous_version</span> <span class="o">=</span> <span class="p">(</span>
-</span><span id="L-149"><a href="#L-149"><span class="linenos">149</span></a>            <span class="n">delta_table</span><span class="o">.</span><span class="n">history</span><span class="p">()</span><span class="o">.</span><span class="n">agg</span><span class="p">({</span><span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;max&quot;</span><span class="p">})</span><span class="o">.</span><span class="n">collect</span><span class="p">()[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span>
-</span><span id="L-150"><a href="#L-150"><span class="linenos">150</span></a>        <span class="p">)</span>
-</span><span id="L-151"><a href="#L-151"><span class="linenos">151</span></a>
-</span><span id="L-152"><a href="#L-152"><span class="linenos">152</span></a>        <span class="n">delta_table</span><span class="o">.</span><span class="n">restoreToVersion</span><span class="p">(</span><span class="n">previous_version</span><span class="p">)</span>
+</span><span id="L-15"><a href="#L-15"><span class="linenos"> 15</span></a>
+</span><span id="L-16"><a href="#L-16"><span class="linenos"> 16</span></a><span class="k">class</span> <span class="nc">DQValidator</span><span class="p">(</span><span class="n">Algorithm</span><span class="p">):</span>
+</span><span id="L-17"><a href="#L-17"><span class="linenos"> 17</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Validate data using an algorithm configuration (ACON represented as dict).</span>
+</span><span id="L-18"><a href="#L-18"><span class="linenos"> 18</span></a>
+</span><span id="L-19"><a href="#L-19"><span class="linenos"> 19</span></a><span class="sd">    This algorithm focuses on isolate Data Quality Validations from loading,</span>
+</span><span id="L-20"><a href="#L-20"><span class="linenos"> 20</span></a><span class="sd">    applying a set of data quality functions to a specific input dataset,</span>
+</span><span id="L-21"><a href="#L-21"><span class="linenos"> 21</span></a><span class="sd">    without the need to define any output specification.</span>
+</span><span id="L-22"><a href="#L-22"><span class="linenos"> 22</span></a><span class="sd">    You can use any input specification compatible with the lakehouse engine</span>
+</span><span id="L-23"><a href="#L-23"><span class="linenos"> 23</span></a><span class="sd">    (dataframe, table, files, etc).</span>
+</span><span id="L-24"><a href="#L-24"><span class="linenos"> 24</span></a><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="L-25"><a href="#L-25"><span class="linenos"> 25</span></a>
+</span><span id="L-26"><a href="#L-26"><span class="linenos"> 26</span></a>    <span class="n">_LOGGER</span> <span class="o">=</span> <span class="n">LoggingHandler</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span><span class="o">.</span><span class="n">get_logger</span><span class="p">()</span>
+</span><span id="L-27"><a href="#L-27"><span class="linenos"> 27</span></a>
+</span><span id="L-28"><a href="#L-28"><span class="linenos"> 28</span></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">acon</span><span class="p">:</span> <span class="nb">dict</span><span class="p">):</span>
+</span><span id="L-29"><a href="#L-29"><span class="linenos"> 29</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Construct DQValidator algorithm instances.</span>
+</span><span id="L-30"><a href="#L-30"><span class="linenos"> 30</span></a>
+</span><span id="L-31"><a href="#L-31"><span class="linenos"> 31</span></a><span class="sd">        A data quality validator needs the following specifications to work</span>
+</span><span id="L-32"><a href="#L-32"><span class="linenos"> 32</span></a><span class="sd">        properly:</span>
+</span><span id="L-33"><a href="#L-33"><span class="linenos"> 33</span></a><span class="sd">            - input specification (mandatory): specify how and what data to</span>
+</span><span id="L-34"><a href="#L-34"><span class="linenos"> 34</span></a><span class="sd">            read.</span>
+</span><span id="L-35"><a href="#L-35"><span class="linenos"> 35</span></a><span class="sd">            - data quality specification (mandatory): specify how to execute</span>
+</span><span id="L-36"><a href="#L-36"><span class="linenos"> 36</span></a><span class="sd">            the data quality process.</span>
+</span><span id="L-37"><a href="#L-37"><span class="linenos"> 37</span></a><span class="sd">            - restore_prev_version (optional): specify if, having</span>
+</span><span id="L-38"><a href="#L-38"><span class="linenos"> 38</span></a><span class="sd">            delta table/files as input, they should be restored to the</span>
+</span><span id="L-39"><a href="#L-39"><span class="linenos"> 39</span></a><span class="sd">            previous version if the data quality process fails. Note: this</span>
+</span><span id="L-40"><a href="#L-40"><span class="linenos"> 40</span></a><span class="sd">            is only considered if fail_on_error is kept as True.</span>
+</span><span id="L-41"><a href="#L-41"><span class="linenos"> 41</span></a>
+</span><span id="L-42"><a href="#L-42"><span class="linenos"> 42</span></a><span class="sd">        Args:</span>
+</span><span id="L-43"><a href="#L-43"><span class="linenos"> 43</span></a><span class="sd">            acon: algorithm configuration.</span>
+</span><span id="L-44"><a href="#L-44"><span class="linenos"> 44</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="L-45"><a href="#L-45"><span class="linenos"> 45</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">spec</span><span class="p">:</span> <span class="n">DQValidatorSpec</span> <span class="o">=</span> <span class="n">DQValidatorSpec</span><span class="p">(</span>
+</span><span id="L-46"><a href="#L-46"><span class="linenos"> 46</span></a>            <span class="n">input_spec</span><span class="o">=</span><span class="n">InputSpec</span><span class="p">(</span><span class="o">**</span><span class="n">acon</span><span class="p">[</span><span class="s2">&quot;input_spec&quot;</span><span class="p">]),</span>
+</span><span id="L-47"><a href="#L-47"><span class="linenos"> 47</span></a>            <span class="n">dq_spec</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_get_dq_spec</span><span class="p">(</span><span class="n">acon</span><span class="p">[</span><span class="s2">&quot;dq_spec&quot;</span><span class="p">]),</span>
+</span><span id="L-48"><a href="#L-48"><span class="linenos"> 48</span></a>            <span class="n">restore_prev_version</span><span class="o">=</span><span class="n">acon</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;restore_prev_version&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
+</span><span id="L-49"><a href="#L-49"><span class="linenos"> 49</span></a>        <span class="p">)</span>
+</span><span id="L-50"><a href="#L-50"><span class="linenos"> 50</span></a>
+</span><span id="L-51"><a href="#L-51"><span class="linenos"> 51</span></a>    <span class="k">def</span> <span class="nf">read</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataFrame</span><span class="p">:</span>
+</span><span id="L-52"><a href="#L-52"><span class="linenos"> 52</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Read data from an input location into a distributed dataframe.</span>
+</span><span id="L-53"><a href="#L-53"><span class="linenos"> 53</span></a>
+</span><span id="L-54"><a href="#L-54"><span class="linenos"> 54</span></a><span class="sd">        Returns:</span>
+</span><span id="L-55"><a href="#L-55"><span class="linenos"> 55</span></a><span class="sd">             Dataframe with data that was read.</span>
+</span><span id="L-56"><a href="#L-56"><span class="linenos"> 56</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="L-57"><a href="#L-57"><span class="linenos"> 57</span></a>        <span class="n">current_df</span> <span class="o">=</span> <span class="n">ReaderFactory</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">spec</span><span class="o">.</span><span class="n">input_spec</span><span class="p">)</span>
+</span><span id="L-58"><a href="#L-58"><span class="linenos"> 58</span></a>
+</span><span id="L-59"><a href="#L-59"><span class="linenos"> 59</span></a>        <span class="k">return</span> <span class="n">current_df</span>
+</span><span id="L-60"><a href="#L-60"><span class="linenos"> 60</span></a>
+</span><span id="L-61"><a href="#L-61"><span class="linenos"> 61</span></a>    <span class="k">def</span> <span class="nf">process_dq</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataFrame</span><span class="p">:</span>
+</span><span id="L-62"><a href="#L-62"><span class="linenos"> 62</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Process the data quality tasks for the data that was read.</span>
+</span><span id="L-63"><a href="#L-63"><span class="linenos"> 63</span></a>
+</span><span id="L-64"><a href="#L-64"><span class="linenos"> 64</span></a><span class="sd">        It supports a single input dataframe.</span>
+</span><span id="L-65"><a href="#L-65"><span class="linenos"> 65</span></a>
+</span><span id="L-66"><a href="#L-66"><span class="linenos"> 66</span></a><span class="sd">        It is possible to use data quality validators/expectations that will validate</span>
+</span><span id="L-67"><a href="#L-67"><span class="linenos"> 67</span></a><span class="sd">        your data and fail the process in case the expectations are not met. The DQ</span>
+</span><span id="L-68"><a href="#L-68"><span class="linenos"> 68</span></a><span class="sd">        process also generates and keeps updating a site containing the results of the</span>
+</span><span id="L-69"><a href="#L-69"><span class="linenos"> 69</span></a><span class="sd">        expectations that were done on your data. The location of the site is</span>
+</span><span id="L-70"><a href="#L-70"><span class="linenos"> 70</span></a><span class="sd">        configurable and can either be on file system or S3. If you define it to be</span>
+</span><span id="L-71"><a href="#L-71"><span class="linenos"> 71</span></a><span class="sd">        stored on S3, you can even configure your S3 bucket to serve the site so that</span>
+</span><span id="L-72"><a href="#L-72"><span class="linenos"> 72</span></a><span class="sd">        people can easily check the quality of your data. Moreover, it is also</span>
+</span><span id="L-73"><a href="#L-73"><span class="linenos"> 73</span></a><span class="sd">        possible to store the result of the DQ process into a defined result sink.</span>
+</span><span id="L-74"><a href="#L-74"><span class="linenos"> 74</span></a>
+</span><span id="L-75"><a href="#L-75"><span class="linenos"> 75</span></a><span class="sd">        Args:</span>
+</span><span id="L-76"><a href="#L-76"><span class="linenos"> 76</span></a><span class="sd">            data: input dataframe on which to run the DQ process.</span>
+</span><span id="L-77"><a href="#L-77"><span class="linenos"> 77</span></a>
+</span><span id="L-78"><a href="#L-78"><span class="linenos"> 78</span></a><span class="sd">        Returns:</span>
+</span><span id="L-79"><a href="#L-79"><span class="linenos"> 79</span></a><span class="sd">            Validated dataframe.</span>
+</span><span id="L-80"><a href="#L-80"><span class="linenos"> 80</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="L-81"><a href="#L-81"><span class="linenos"> 81</span></a>        <span class="k">return</span> <span class="n">DQFactory</span><span class="o">.</span><span class="n">run_dq_process</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">spec</span><span class="o">.</span><span class="n">dq_spec</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+</span><span id="L-82"><a href="#L-82"><span class="linenos"> 82</span></a>
+</span><span id="L-83"><a href="#L-83"><span class="linenos"> 83</span></a>    <span class="k">def</span> <span class="nf">execute</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="L-84"><a href="#L-84"><span class="linenos"> 84</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Define the algorithm execution behaviour.&quot;&quot;&quot;</span>
+</span><span id="L-85"><a href="#L-85"><span class="linenos"> 85</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">_LOGGER</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Starting read stage...&quot;</span><span class="p">)</span>
+</span><span id="L-86"><a href="#L-86"><span class="linenos"> 86</span></a>        <span class="n">read_df</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+</span><span id="L-87"><a href="#L-87"><span class="linenos"> 87</span></a>
+</span><span id="L-88"><a href="#L-88"><span class="linenos"> 88</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">_LOGGER</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Starting data quality validator...&quot;</span><span class="p">)</span>
+</span><span id="L-89"><a href="#L-89"><span class="linenos"> 89</span></a>        <span class="k">try</span><span class="p">:</span>
+</span><span id="L-90"><a href="#L-90"><span class="linenos"> 90</span></a>            <span class="k">if</span> <span class="n">read_df</span><span class="o">.</span><span class="n">isStreaming</span><span class="p">:</span>
+</span><span id="L-91"><a href="#L-91"><span class="linenos"> 91</span></a>                <span class="c1"># To handle streaming, and although we are not interested in</span>
+</span><span id="L-92"><a href="#L-92"><span class="linenos"> 92</span></a>                <span class="c1"># writing any data, we still need to start the streaming and</span>
+</span><span id="L-93"><a href="#L-93"><span class="linenos"> 93</span></a>                <span class="c1"># execute the data quality process in micro batches of data.</span>
+</span><span id="L-94"><a href="#L-94"><span class="linenos"> 94</span></a>                <span class="k">def</span> <span class="nf">write_dq_validator_micro_batch</span><span class="p">(</span>
+</span><span id="L-95"><a href="#L-95"><span class="linenos"> 95</span></a>                    <span class="n">batch_df</span><span class="p">:</span> <span class="n">DataFrame</span><span class="p">,</span> <span class="n">batch_id</span><span class="p">:</span> <span class="nb">int</span>
+</span><span id="L-96"><a href="#L-96"><span class="linenos"> 96</span></a>                <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="L-97"><a href="#L-97"><span class="linenos"> 97</span></a>                    <span class="bp">self</span><span class="o">.</span><span class="n">process_dq</span><span class="p">(</span><span class="n">batch_df</span><span class="p">)</span>
+</span><span id="L-98"><a href="#L-98"><span class="linenos"> 98</span></a>
+</span><span id="L-99"><a href="#L-99"><span class="linenos"> 99</span></a>                <span class="n">read_df</span><span class="o">.</span><span class="n">writeStream</span><span class="o">.</span><span class="n">trigger</span><span class="p">(</span><span class="n">once</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">foreachBatch</span><span class="p">(</span>
+</span><span id="L-100"><a href="#L-100"><span class="linenos">100</span></a>                    <span class="n">write_dq_validator_micro_batch</span>
+</span><span id="L-101"><a href="#L-101"><span class="linenos">101</span></a>                <span class="p">)</span><span class="o">.</span><span class="n">start</span><span class="p">()</span><span class="o">.</span><span class="n">awaitTermination</span><span class="p">()</span>
+</span><span id="L-102"><a href="#L-102"><span class="linenos">102</span></a>
+</span><span id="L-103"><a href="#L-103"><span class="linenos">103</span></a>            <span class="k">else</span><span class="p">:</span>
+</span><span id="L-104"><a href="#L-104"><span class="linenos">104</span></a>                <span class="bp">self</span><span class="o">.</span><span class="n">process_dq</span><span class="p">(</span><span class="n">read_df</span><span class="p">)</span>
+</span><span id="L-105"><a href="#L-105"><span class="linenos">105</span></a>        <span class="k">except</span> <span class="p">(</span><span class="n">DQValidationsFailedException</span><span class="p">,</span> <span class="n">StreamingQueryException</span><span class="p">):</span>
+</span><span id="L-106"><a href="#L-106"><span class="linenos">106</span></a>            <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">spec</span><span class="o">.</span><span class="n">input_spec</span><span class="o">.</span><span class="n">df_name</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">spec</span><span class="o">.</span><span class="n">restore_prev_version</span><span class="p">:</span>
+</span><span id="L-107"><a href="#L-107"><span class="linenos">107</span></a>                <span class="bp">self</span><span class="o">.</span><span class="n">_LOGGER</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Restoring delta table/files to previous version...&quot;</span><span class="p">)</span>
+</span><span id="L-108"><a href="#L-108"><span class="linenos">108</span></a>
+</span><span id="L-109"><a href="#L-109"><span class="linenos">109</span></a>                <span class="bp">self</span><span class="o">.</span><span class="n">_restore_prev_version</span><span class="p">()</span>
+</span><span id="L-110"><a href="#L-110"><span class="linenos">110</span></a>
+</span><span id="L-111"><a href="#L-111"><span class="linenos">111</span></a>                <span class="k">raise</span> <span class="n">DQValidationsFailedException</span><span class="p">(</span>
+</span><span id="L-112"><a href="#L-112"><span class="linenos">112</span></a>                    <span class="s2">&quot;Data Quality Validations Failed! The delta &quot;</span>
+</span><span id="L-113"><a href="#L-113"><span class="linenos">113</span></a>                    <span class="s2">&quot;table/files were restored to the previous version!&quot;</span>
+</span><span id="L-114"><a href="#L-114"><span class="linenos">114</span></a>                <span class="p">)</span>
+</span><span id="L-115"><a href="#L-115"><span class="linenos">115</span></a>
+</span><span id="L-116"><a href="#L-116"><span class="linenos">116</span></a>            <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">spec</span><span class="o">.</span><span class="n">dq_spec</span><span class="o">.</span><span class="n">fail_on_error</span><span class="p">:</span>
+</span><span id="L-117"><a href="#L-117"><span class="linenos">117</span></a>                <span class="k">raise</span> <span class="n">DQValidationsFailedException</span><span class="p">(</span><span class="s2">&quot;Data Quality Validations Failed!&quot;</span><span class="p">)</span>
+</span><span id="L-118"><a href="#L-118"><span class="linenos">118</span></a>        <span class="k">else</span><span class="p">:</span>
+</span><span id="L-119"><a href="#L-119"><span class="linenos">119</span></a>            <span class="bp">self</span><span class="o">.</span><span class="n">_LOGGER</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Execution of the algorithm has finished!&quot;</span><span class="p">)</span>
+</span><span id="L-120"><a href="#L-120"><span class="linenos">120</span></a>
+</span><span id="L-121"><a href="#L-121"><span class="linenos">121</span></a>    <span class="nd">@staticmethod</span>
+</span><span id="L-122"><a href="#L-122"><span class="linenos">122</span></a>    <span class="k">def</span> <span class="nf">_get_dq_spec</span><span class="p">(</span><span class="n">input_dq_spec</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DQSpec</span><span class="p">:</span>
+</span><span id="L-123"><a href="#L-123"><span class="linenos">123</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Get data quality specification from acon.</span>
+</span><span id="L-124"><a href="#L-124"><span class="linenos">124</span></a>
+</span><span id="L-125"><a href="#L-125"><span class="linenos">125</span></a><span class="sd">        Args:</span>
+</span><span id="L-126"><a href="#L-126"><span class="linenos">126</span></a><span class="sd">            input_dq_spec: data quality specification.</span>
+</span><span id="L-127"><a href="#L-127"><span class="linenos">127</span></a>
+</span><span id="L-128"><a href="#L-128"><span class="linenos">128</span></a><span class="sd">        Returns:</span>
+</span><span id="L-129"><a href="#L-129"><span class="linenos">129</span></a><span class="sd">            Data quality spec.</span>
+</span><span id="L-130"><a href="#L-130"><span class="linenos">130</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="L-131"><a href="#L-131"><span class="linenos">131</span></a>        <span class="n">dq_spec</span><span class="p">,</span> <span class="n">dq_functions</span><span class="p">,</span> <span class="n">critical_functions</span> <span class="o">=</span> <span class="n">Algorithm</span><span class="o">.</span><span class="n">get_dq_spec</span><span class="p">(</span><span class="n">input_dq_spec</span><span class="p">)</span>
+</span><span id="L-132"><a href="#L-132"><span class="linenos">132</span></a>
+</span><span id="L-133"><a href="#L-133"><span class="linenos">133</span></a>        <span class="n">dq_spec</span><span class="o">.</span><span class="n">dq_functions</span> <span class="o">=</span> <span class="n">dq_functions</span>
+</span><span id="L-134"><a href="#L-134"><span class="linenos">134</span></a>        <span class="n">dq_spec</span><span class="o">.</span><span class="n">critical_functions</span> <span class="o">=</span> <span class="n">critical_functions</span>
+</span><span id="L-135"><a href="#L-135"><span class="linenos">135</span></a>
+</span><span id="L-136"><a href="#L-136"><span class="linenos">136</span></a>        <span class="k">return</span> <span class="n">dq_spec</span>
+</span><span id="L-137"><a href="#L-137"><span class="linenos">137</span></a>
+</span><span id="L-138"><a href="#L-138"><span class="linenos">138</span></a>    <span class="k">def</span> <span class="nf">_restore_prev_version</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="L-139"><a href="#L-139"><span class="linenos">139</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Restore delta table or delta files to previous version.&quot;&quot;&quot;</span>
+</span><span id="L-140"><a href="#L-140"><span class="linenos">140</span></a>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">spec</span><span class="o">.</span><span class="n">input_spec</span><span class="o">.</span><span class="n">db_table</span><span class="p">:</span>
+</span><span id="L-141"><a href="#L-141"><span class="linenos">141</span></a>            <span class="n">delta_table</span> <span class="o">=</span> <span class="n">DeltaTable</span><span class="o">.</span><span class="n">forName</span><span class="p">(</span>
+</span><span id="L-142"><a href="#L-142"><span class="linenos">142</span></a>                <span class="n">ExecEnv</span><span class="o">.</span><span class="n">SESSION</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">spec</span><span class="o">.</span><span class="n">input_spec</span><span class="o">.</span><span class="n">db_table</span>
+</span><span id="L-143"><a href="#L-143"><span class="linenos">143</span></a>            <span class="p">)</span>
+</span><span id="L-144"><a href="#L-144"><span class="linenos">144</span></a>        <span class="k">else</span><span class="p">:</span>
+</span><span id="L-145"><a href="#L-145"><span class="linenos">145</span></a>            <span class="n">delta_table</span> <span class="o">=</span> <span class="n">DeltaTable</span><span class="o">.</span><span class="n">forPath</span><span class="p">(</span>
+</span><span id="L-146"><a href="#L-146"><span class="linenos">146</span></a>                <span class="n">ExecEnv</span><span class="o">.</span><span class="n">SESSION</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">spec</span><span class="o">.</span><span class="n">input_spec</span><span class="o">.</span><span class="n">location</span>
+</span><span id="L-147"><a href="#L-147"><span class="linenos">147</span></a>            <span class="p">)</span>
+</span><span id="L-148"><a href="#L-148"><span class="linenos">148</span></a>
+</span><span id="L-149"><a href="#L-149"><span class="linenos">149</span></a>        <span class="n">previous_version</span> <span class="o">=</span> <span class="p">(</span>
+</span><span id="L-150"><a href="#L-150"><span class="linenos">150</span></a>            <span class="n">delta_table</span><span class="o">.</span><span class="n">history</span><span class="p">()</span><span class="o">.</span><span class="n">agg</span><span class="p">({</span><span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;max&quot;</span><span class="p">})</span><span class="o">.</span><span class="n">collect</span><span class="p">()[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span>
+</span><span id="L-151"><a href="#L-151"><span class="linenos">151</span></a>        <span class="p">)</span>
+</span><span id="L-152"><a href="#L-152"><span class="linenos">152</span></a>
+</span><span id="L-153"><a href="#L-153"><span class="linenos">153</span></a>        <span class="n">delta_table</span><span class="o">.</span><span class="n">restoreToVersion</span><span class="p">(</span><span class="n">previous_version</span><span class="p">)</span>
 </span></pre></div>
 
 
@@ -253,144 +254,144 @@
 
     </div>
     <a class="headerlink" href="#DQValidator"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="DQValidator-16"><a href="#DQValidator-16"><span class="linenos"> 16</span></a><span class="k">class</span> <span class="nc">DQValidator</span><span class="p">(</span><span class="n">Algorithm</span><span class="p">):</span>
-</span><span id="DQValidator-17"><a href="#DQValidator-17"><span class="linenos"> 17</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Validate data using an algorithm configuration (ACON represented as dict).</span>
-</span><span id="DQValidator-18"><a href="#DQValidator-18"><span class="linenos"> 18</span></a>
-</span><span id="DQValidator-19"><a href="#DQValidator-19"><span class="linenos"> 19</span></a><span class="sd">    This algorithm focuses on isolate Data Quality Validations from loading,</span>
-</span><span id="DQValidator-20"><a href="#DQValidator-20"><span class="linenos"> 20</span></a><span class="sd">    applying a set of data quality functions to a specific input dataset,</span>
-</span><span id="DQValidator-21"><a href="#DQValidator-21"><span class="linenos"> 21</span></a><span class="sd">    without the need to define any output specification.</span>
-</span><span id="DQValidator-22"><a href="#DQValidator-22"><span class="linenos"> 22</span></a><span class="sd">    You can use any input specification compatible with the lakehouse engine</span>
-</span><span id="DQValidator-23"><a href="#DQValidator-23"><span class="linenos"> 23</span></a><span class="sd">    (dataframe, table, files, etc).</span>
-</span><span id="DQValidator-24"><a href="#DQValidator-24"><span class="linenos"> 24</span></a><span class="sd">    &quot;&quot;&quot;</span>
-</span><span id="DQValidator-25"><a href="#DQValidator-25"><span class="linenos"> 25</span></a>
-</span><span id="DQValidator-26"><a href="#DQValidator-26"><span class="linenos"> 26</span></a>    <span class="n">_LOGGER</span> <span class="o">=</span> <span class="n">LoggingHandler</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span><span class="o">.</span><span class="n">get_logger</span><span class="p">()</span>
-</span><span id="DQValidator-27"><a href="#DQValidator-27"><span class="linenos"> 27</span></a>
-</span><span id="DQValidator-28"><a href="#DQValidator-28"><span class="linenos"> 28</span></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">acon</span><span class="p">:</span> <span class="nb">dict</span><span class="p">):</span>
-</span><span id="DQValidator-29"><a href="#DQValidator-29"><span class="linenos"> 29</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Construct DQValidator algorithm instances.</span>
-</span><span id="DQValidator-30"><a href="#DQValidator-30"><span class="linenos"> 30</span></a>
-</span><span id="DQValidator-31"><a href="#DQValidator-31"><span class="linenos"> 31</span></a><span class="sd">        A data quality validator needs the following specifications to work</span>
-</span><span id="DQValidator-32"><a href="#DQValidator-32"><span class="linenos"> 32</span></a><span class="sd">        properly:</span>
-</span><span id="DQValidator-33"><a href="#DQValidator-33"><span class="linenos"> 33</span></a><span class="sd">            - input specification (mandatory): specify how and what data to</span>
-</span><span id="DQValidator-34"><a href="#DQValidator-34"><span class="linenos"> 34</span></a><span class="sd">            read.</span>
-</span><span id="DQValidator-35"><a href="#DQValidator-35"><span class="linenos"> 35</span></a><span class="sd">            - data quality specification (mandatory): specify how to execute</span>
-</span><span id="DQValidator-36"><a href="#DQValidator-36"><span class="linenos"> 36</span></a><span class="sd">            the data quality process.</span>
-</span><span id="DQValidator-37"><a href="#DQValidator-37"><span class="linenos"> 37</span></a><span class="sd">            - restore_prev_version (optional): specify if, having</span>
-</span><span id="DQValidator-38"><a href="#DQValidator-38"><span class="linenos"> 38</span></a><span class="sd">            delta table/files as input, they should be restored to the</span>
-</span><span id="DQValidator-39"><a href="#DQValidator-39"><span class="linenos"> 39</span></a><span class="sd">            previous version if the data quality process fails. Note: this</span>
-</span><span id="DQValidator-40"><a href="#DQValidator-40"><span class="linenos"> 40</span></a><span class="sd">            is only considered if fail_on_error is kept as True.</span>
-</span><span id="DQValidator-41"><a href="#DQValidator-41"><span class="linenos"> 41</span></a>
-</span><span id="DQValidator-42"><a href="#DQValidator-42"><span class="linenos"> 42</span></a><span class="sd">        Args:</span>
-</span><span id="DQValidator-43"><a href="#DQValidator-43"><span class="linenos"> 43</span></a><span class="sd">            acon: algorithm configuration.</span>
-</span><span id="DQValidator-44"><a href="#DQValidator-44"><span class="linenos"> 44</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="DQValidator-45"><a href="#DQValidator-45"><span class="linenos"> 45</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">spec</span><span class="p">:</span> <span class="n">DQValidatorSpec</span> <span class="o">=</span> <span class="n">DQValidatorSpec</span><span class="p">(</span>
-</span><span id="DQValidator-46"><a href="#DQValidator-46"><span class="linenos"> 46</span></a>            <span class="n">input_spec</span><span class="o">=</span><span class="n">InputSpec</span><span class="p">(</span><span class="o">**</span><span class="n">acon</span><span class="p">[</span><span class="s2">&quot;input_spec&quot;</span><span class="p">]),</span>
-</span><span id="DQValidator-47"><a href="#DQValidator-47"><span class="linenos"> 47</span></a>            <span class="n">dq_spec</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_get_dq_spec</span><span class="p">(</span><span class="n">acon</span><span class="p">[</span><span class="s2">&quot;dq_spec&quot;</span><span class="p">]),</span>
-</span><span id="DQValidator-48"><a href="#DQValidator-48"><span class="linenos"> 48</span></a>            <span class="n">restore_prev_version</span><span class="o">=</span><span class="n">acon</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;restore_prev_version&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
-</span><span id="DQValidator-49"><a href="#DQValidator-49"><span class="linenos"> 49</span></a>        <span class="p">)</span>
-</span><span id="DQValidator-50"><a href="#DQValidator-50"><span class="linenos"> 50</span></a>
-</span><span id="DQValidator-51"><a href="#DQValidator-51"><span class="linenos"> 51</span></a>    <span class="k">def</span> <span class="nf">read</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataFrame</span><span class="p">:</span>
-</span><span id="DQValidator-52"><a href="#DQValidator-52"><span class="linenos"> 52</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Read data from an input location into a distributed dataframe.</span>
-</span><span id="DQValidator-53"><a href="#DQValidator-53"><span class="linenos"> 53</span></a>
-</span><span id="DQValidator-54"><a href="#DQValidator-54"><span class="linenos"> 54</span></a><span class="sd">        Returns:</span>
-</span><span id="DQValidator-55"><a href="#DQValidator-55"><span class="linenos"> 55</span></a><span class="sd">             Dataframe with data that was read.</span>
-</span><span id="DQValidator-56"><a href="#DQValidator-56"><span class="linenos"> 56</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="DQValidator-57"><a href="#DQValidator-57"><span class="linenos"> 57</span></a>        <span class="n">current_df</span> <span class="o">=</span> <span class="n">ReaderFactory</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">spec</span><span class="o">.</span><span class="n">input_spec</span><span class="p">)</span>
-</span><span id="DQValidator-58"><a href="#DQValidator-58"><span class="linenos"> 58</span></a>
-</span><span id="DQValidator-59"><a href="#DQValidator-59"><span class="linenos"> 59</span></a>        <span class="k">return</span> <span class="n">current_df</span>
-</span><span id="DQValidator-60"><a href="#DQValidator-60"><span class="linenos"> 60</span></a>
-</span><span id="DQValidator-61"><a href="#DQValidator-61"><span class="linenos"> 61</span></a>    <span class="k">def</span> <span class="nf">process_dq</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataFrame</span><span class="p">:</span>
-</span><span id="DQValidator-62"><a href="#DQValidator-62"><span class="linenos"> 62</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Process the data quality tasks for the data that was read.</span>
-</span><span id="DQValidator-63"><a href="#DQValidator-63"><span class="linenos"> 63</span></a>
-</span><span id="DQValidator-64"><a href="#DQValidator-64"><span class="linenos"> 64</span></a><span class="sd">        It supports a single input dataframe.</span>
-</span><span id="DQValidator-65"><a href="#DQValidator-65"><span class="linenos"> 65</span></a>
-</span><span id="DQValidator-66"><a href="#DQValidator-66"><span class="linenos"> 66</span></a><span class="sd">        It is possible to use data quality validators/expectations that will validate</span>
-</span><span id="DQValidator-67"><a href="#DQValidator-67"><span class="linenos"> 67</span></a><span class="sd">        your data and fail the process in case the expectations are not met. The DQ</span>
-</span><span id="DQValidator-68"><a href="#DQValidator-68"><span class="linenos"> 68</span></a><span class="sd">        process also generates and keeps updating a site containing the results of the</span>
-</span><span id="DQValidator-69"><a href="#DQValidator-69"><span class="linenos"> 69</span></a><span class="sd">        expectations that were done on your data. The location of the site is</span>
-</span><span id="DQValidator-70"><a href="#DQValidator-70"><span class="linenos"> 70</span></a><span class="sd">        configurable and can either be on file system or S3. If you define it to be</span>
-</span><span id="DQValidator-71"><a href="#DQValidator-71"><span class="linenos"> 71</span></a><span class="sd">        stored on S3, you can even configure your S3 bucket to serve the site so that</span>
-</span><span id="DQValidator-72"><a href="#DQValidator-72"><span class="linenos"> 72</span></a><span class="sd">        people can easily check the quality of your data. Moreover, it is also</span>
-</span><span id="DQValidator-73"><a href="#DQValidator-73"><span class="linenos"> 73</span></a><span class="sd">        possible to store the result of the DQ process into a defined result sink.</span>
-</span><span id="DQValidator-74"><a href="#DQValidator-74"><span class="linenos"> 74</span></a>
-</span><span id="DQValidator-75"><a href="#DQValidator-75"><span class="linenos"> 75</span></a><span class="sd">        Args:</span>
-</span><span id="DQValidator-76"><a href="#DQValidator-76"><span class="linenos"> 76</span></a><span class="sd">            data: input dataframe on which to run the DQ process.</span>
-</span><span id="DQValidator-77"><a href="#DQValidator-77"><span class="linenos"> 77</span></a>
-</span><span id="DQValidator-78"><a href="#DQValidator-78"><span class="linenos"> 78</span></a><span class="sd">        Returns:</span>
-</span><span id="DQValidator-79"><a href="#DQValidator-79"><span class="linenos"> 79</span></a><span class="sd">            Validated dataframe.</span>
-</span><span id="DQValidator-80"><a href="#DQValidator-80"><span class="linenos"> 80</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="DQValidator-81"><a href="#DQValidator-81"><span class="linenos"> 81</span></a>        <span class="k">return</span> <span class="n">DQFactory</span><span class="o">.</span><span class="n">run_dq_process</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">spec</span><span class="o">.</span><span class="n">dq_spec</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
-</span><span id="DQValidator-82"><a href="#DQValidator-82"><span class="linenos"> 82</span></a>
-</span><span id="DQValidator-83"><a href="#DQValidator-83"><span class="linenos"> 83</span></a>    <span class="k">def</span> <span class="nf">execute</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-</span><span id="DQValidator-84"><a href="#DQValidator-84"><span class="linenos"> 84</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Define the algorithm execution behaviour.&quot;&quot;&quot;</span>
-</span><span id="DQValidator-85"><a href="#DQValidator-85"><span class="linenos"> 85</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">_LOGGER</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Starting read stage...&quot;</span><span class="p">)</span>
-</span><span id="DQValidator-86"><a href="#DQValidator-86"><span class="linenos"> 86</span></a>        <span class="n">read_df</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
-</span><span id="DQValidator-87"><a href="#DQValidator-87"><span class="linenos"> 87</span></a>
-</span><span id="DQValidator-88"><a href="#DQValidator-88"><span class="linenos"> 88</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">_LOGGER</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Starting data quality validator...&quot;</span><span class="p">)</span>
-</span><span id="DQValidator-89"><a href="#DQValidator-89"><span class="linenos"> 89</span></a>        <span class="k">try</span><span class="p">:</span>
-</span><span id="DQValidator-90"><a href="#DQValidator-90"><span class="linenos"> 90</span></a>            <span class="k">if</span> <span class="n">read_df</span><span class="o">.</span><span class="n">isStreaming</span><span class="p">:</span>
-</span><span id="DQValidator-91"><a href="#DQValidator-91"><span class="linenos"> 91</span></a>                <span class="c1"># To handle streaming, and although we are not interested in</span>
-</span><span id="DQValidator-92"><a href="#DQValidator-92"><span class="linenos"> 92</span></a>                <span class="c1"># writing any data, we still need to start the streaming and</span>
-</span><span id="DQValidator-93"><a href="#DQValidator-93"><span class="linenos"> 93</span></a>                <span class="c1"># execute the data quality process in micro batches of data.</span>
-</span><span id="DQValidator-94"><a href="#DQValidator-94"><span class="linenos"> 94</span></a>                <span class="k">def</span> <span class="nf">write_dq_validator_micro_batch</span><span class="p">(</span>
-</span><span id="DQValidator-95"><a href="#DQValidator-95"><span class="linenos"> 95</span></a>                    <span class="n">batch_df</span><span class="p">:</span> <span class="n">DataFrame</span><span class="p">,</span> <span class="n">batch_id</span><span class="p">:</span> <span class="nb">int</span>
-</span><span id="DQValidator-96"><a href="#DQValidator-96"><span class="linenos"> 96</span></a>                <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-</span><span id="DQValidator-97"><a href="#DQValidator-97"><span class="linenos"> 97</span></a>                    <span class="bp">self</span><span class="o">.</span><span class="n">process_dq</span><span class="p">(</span><span class="n">batch_df</span><span class="p">)</span>
-</span><span id="DQValidator-98"><a href="#DQValidator-98"><span class="linenos"> 98</span></a>
-</span><span id="DQValidator-99"><a href="#DQValidator-99"><span class="linenos"> 99</span></a>                <span class="n">read_df</span><span class="o">.</span><span class="n">writeStream</span><span class="o">.</span><span class="n">trigger</span><span class="p">(</span><span class="n">once</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">foreachBatch</span><span class="p">(</span>
-</span><span id="DQValidator-100"><a href="#DQValidator-100"><span class="linenos">100</span></a>                    <span class="n">write_dq_validator_micro_batch</span>
-</span><span id="DQValidator-101"><a href="#DQValidator-101"><span class="linenos">101</span></a>                <span class="p">)</span><span class="o">.</span><span class="n">start</span><span class="p">()</span><span class="o">.</span><span class="n">awaitTermination</span><span class="p">()</span>
-</span><span id="DQValidator-102"><a href="#DQValidator-102"><span class="linenos">102</span></a>
-</span><span id="DQValidator-103"><a href="#DQValidator-103"><span class="linenos">103</span></a>            <span class="k">else</span><span class="p">:</span>
-</span><span id="DQValidator-104"><a href="#DQValidator-104"><span class="linenos">104</span></a>                <span class="bp">self</span><span class="o">.</span><span class="n">process_dq</span><span class="p">(</span><span class="n">read_df</span><span class="p">)</span>
-</span><span id="DQValidator-105"><a href="#DQValidator-105"><span class="linenos">105</span></a>        <span class="k">except</span> <span class="p">(</span><span class="n">DQValidationsFailedException</span><span class="p">,</span> <span class="n">StreamingQueryException</span><span class="p">):</span>
-</span><span id="DQValidator-106"><a href="#DQValidator-106"><span class="linenos">106</span></a>            <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">spec</span><span class="o">.</span><span class="n">input_spec</span><span class="o">.</span><span class="n">df_name</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">spec</span><span class="o">.</span><span class="n">restore_prev_version</span><span class="p">:</span>
-</span><span id="DQValidator-107"><a href="#DQValidator-107"><span class="linenos">107</span></a>                <span class="bp">self</span><span class="o">.</span><span class="n">_LOGGER</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Restoring delta table/files to previous version...&quot;</span><span class="p">)</span>
-</span><span id="DQValidator-108"><a href="#DQValidator-108"><span class="linenos">108</span></a>
-</span><span id="DQValidator-109"><a href="#DQValidator-109"><span class="linenos">109</span></a>                <span class="bp">self</span><span class="o">.</span><span class="n">_restore_prev_version</span><span class="p">()</span>
-</span><span id="DQValidator-110"><a href="#DQValidator-110"><span class="linenos">110</span></a>
-</span><span id="DQValidator-111"><a href="#DQValidator-111"><span class="linenos">111</span></a>                <span class="k">raise</span> <span class="n">DQValidationsFailedException</span><span class="p">(</span>
-</span><span id="DQValidator-112"><a href="#DQValidator-112"><span class="linenos">112</span></a>                    <span class="s2">&quot;Data Quality Validations Failed! The delta &quot;</span>
-</span><span id="DQValidator-113"><a href="#DQValidator-113"><span class="linenos">113</span></a>                    <span class="s2">&quot;table/files were restored to the previous version!&quot;</span>
-</span><span id="DQValidator-114"><a href="#DQValidator-114"><span class="linenos">114</span></a>                <span class="p">)</span>
-</span><span id="DQValidator-115"><a href="#DQValidator-115"><span class="linenos">115</span></a>
-</span><span id="DQValidator-116"><a href="#DQValidator-116"><span class="linenos">116</span></a>            <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">spec</span><span class="o">.</span><span class="n">dq_spec</span><span class="o">.</span><span class="n">fail_on_error</span><span class="p">:</span>
-</span><span id="DQValidator-117"><a href="#DQValidator-117"><span class="linenos">117</span></a>                <span class="k">raise</span> <span class="n">DQValidationsFailedException</span><span class="p">(</span><span class="s2">&quot;Data Quality Validations Failed!&quot;</span><span class="p">)</span>
-</span><span id="DQValidator-118"><a href="#DQValidator-118"><span class="linenos">118</span></a>        <span class="k">else</span><span class="p">:</span>
-</span><span id="DQValidator-119"><a href="#DQValidator-119"><span class="linenos">119</span></a>            <span class="bp">self</span><span class="o">.</span><span class="n">_LOGGER</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Execution of the algorithm has finished!&quot;</span><span class="p">)</span>
-</span><span id="DQValidator-120"><a href="#DQValidator-120"><span class="linenos">120</span></a>
-</span><span id="DQValidator-121"><a href="#DQValidator-121"><span class="linenos">121</span></a>    <span class="nd">@staticmethod</span>
-</span><span id="DQValidator-122"><a href="#DQValidator-122"><span class="linenos">122</span></a>    <span class="k">def</span> <span class="nf">_get_dq_spec</span><span class="p">(</span><span class="n">input_dq_spec</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DQSpec</span><span class="p">:</span>
-</span><span id="DQValidator-123"><a href="#DQValidator-123"><span class="linenos">123</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Get data quality specification from acon.</span>
-</span><span id="DQValidator-124"><a href="#DQValidator-124"><span class="linenos">124</span></a>
-</span><span id="DQValidator-125"><a href="#DQValidator-125"><span class="linenos">125</span></a><span class="sd">        Args:</span>
-</span><span id="DQValidator-126"><a href="#DQValidator-126"><span class="linenos">126</span></a><span class="sd">            input_dq_spec: data quality specification.</span>
-</span><span id="DQValidator-127"><a href="#DQValidator-127"><span class="linenos">127</span></a>
-</span><span id="DQValidator-128"><a href="#DQValidator-128"><span class="linenos">128</span></a><span class="sd">        Returns:</span>
-</span><span id="DQValidator-129"><a href="#DQValidator-129"><span class="linenos">129</span></a><span class="sd">            Data quality spec.</span>
-</span><span id="DQValidator-130"><a href="#DQValidator-130"><span class="linenos">130</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="DQValidator-131"><a href="#DQValidator-131"><span class="linenos">131</span></a>        <span class="n">dq_spec</span><span class="p">,</span> <span class="n">dq_functions</span><span class="p">,</span> <span class="n">critical_functions</span> <span class="o">=</span> <span class="n">Algorithm</span><span class="o">.</span><span class="n">get_dq_spec</span><span class="p">(</span><span class="n">input_dq_spec</span><span class="p">)</span>
-</span><span id="DQValidator-132"><a href="#DQValidator-132"><span class="linenos">132</span></a>
-</span><span id="DQValidator-133"><a href="#DQValidator-133"><span class="linenos">133</span></a>        <span class="n">dq_spec</span><span class="o">.</span><span class="n">dq_functions</span> <span class="o">=</span> <span class="n">dq_functions</span>
-</span><span id="DQValidator-134"><a href="#DQValidator-134"><span class="linenos">134</span></a>        <span class="n">dq_spec</span><span class="o">.</span><span class="n">critical_functions</span> <span class="o">=</span> <span class="n">critical_functions</span>
-</span><span id="DQValidator-135"><a href="#DQValidator-135"><span class="linenos">135</span></a>
-</span><span id="DQValidator-136"><a href="#DQValidator-136"><span class="linenos">136</span></a>        <span class="k">return</span> <span class="n">dq_spec</span>
-</span><span id="DQValidator-137"><a href="#DQValidator-137"><span class="linenos">137</span></a>
-</span><span id="DQValidator-138"><a href="#DQValidator-138"><span class="linenos">138</span></a>    <span class="k">def</span> <span class="nf">_restore_prev_version</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-</span><span id="DQValidator-139"><a href="#DQValidator-139"><span class="linenos">139</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Restore delta table or delta files to previous version.&quot;&quot;&quot;</span>
-</span><span id="DQValidator-140"><a href="#DQValidator-140"><span class="linenos">140</span></a>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">spec</span><span class="o">.</span><span class="n">input_spec</span><span class="o">.</span><span class="n">db_table</span><span class="p">:</span>
-</span><span id="DQValidator-141"><a href="#DQValidator-141"><span class="linenos">141</span></a>            <span class="n">delta_table</span> <span class="o">=</span> <span class="n">DeltaTable</span><span class="o">.</span><span class="n">forName</span><span class="p">(</span>
-</span><span id="DQValidator-142"><a href="#DQValidator-142"><span class="linenos">142</span></a>                <span class="n">ExecEnv</span><span class="o">.</span><span class="n">SESSION</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">spec</span><span class="o">.</span><span class="n">input_spec</span><span class="o">.</span><span class="n">db_table</span>
-</span><span id="DQValidator-143"><a href="#DQValidator-143"><span class="linenos">143</span></a>            <span class="p">)</span>
-</span><span id="DQValidator-144"><a href="#DQValidator-144"><span class="linenos">144</span></a>        <span class="k">else</span><span class="p">:</span>
-</span><span id="DQValidator-145"><a href="#DQValidator-145"><span class="linenos">145</span></a>            <span class="n">delta_table</span> <span class="o">=</span> <span class="n">DeltaTable</span><span class="o">.</span><span class="n">forPath</span><span class="p">(</span>
-</span><span id="DQValidator-146"><a href="#DQValidator-146"><span class="linenos">146</span></a>                <span class="n">ExecEnv</span><span class="o">.</span><span class="n">SESSION</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">spec</span><span class="o">.</span><span class="n">input_spec</span><span class="o">.</span><span class="n">location</span>
-</span><span id="DQValidator-147"><a href="#DQValidator-147"><span class="linenos">147</span></a>            <span class="p">)</span>
-</span><span id="DQValidator-148"><a href="#DQValidator-148"><span class="linenos">148</span></a>
-</span><span id="DQValidator-149"><a href="#DQValidator-149"><span class="linenos">149</span></a>        <span class="n">previous_version</span> <span class="o">=</span> <span class="p">(</span>
-</span><span id="DQValidator-150"><a href="#DQValidator-150"><span class="linenos">150</span></a>            <span class="n">delta_table</span><span class="o">.</span><span class="n">history</span><span class="p">()</span><span class="o">.</span><span class="n">agg</span><span class="p">({</span><span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;max&quot;</span><span class="p">})</span><span class="o">.</span><span class="n">collect</span><span class="p">()[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span>
-</span><span id="DQValidator-151"><a href="#DQValidator-151"><span class="linenos">151</span></a>        <span class="p">)</span>
-</span><span id="DQValidator-152"><a href="#DQValidator-152"><span class="linenos">152</span></a>
-</span><span id="DQValidator-153"><a href="#DQValidator-153"><span class="linenos">153</span></a>        <span class="n">delta_table</span><span class="o">.</span><span class="n">restoreToVersion</span><span class="p">(</span><span class="n">previous_version</span><span class="p">)</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="DQValidator-17"><a href="#DQValidator-17"><span class="linenos"> 17</span></a><span class="k">class</span> <span class="nc">DQValidator</span><span class="p">(</span><span class="n">Algorithm</span><span class="p">):</span>
+</span><span id="DQValidator-18"><a href="#DQValidator-18"><span class="linenos"> 18</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Validate data using an algorithm configuration (ACON represented as dict).</span>
+</span><span id="DQValidator-19"><a href="#DQValidator-19"><span class="linenos"> 19</span></a>
+</span><span id="DQValidator-20"><a href="#DQValidator-20"><span class="linenos"> 20</span></a><span class="sd">    This algorithm focuses on isolate Data Quality Validations from loading,</span>
+</span><span id="DQValidator-21"><a href="#DQValidator-21"><span class="linenos"> 21</span></a><span class="sd">    applying a set of data quality functions to a specific input dataset,</span>
+</span><span id="DQValidator-22"><a href="#DQValidator-22"><span class="linenos"> 22</span></a><span class="sd">    without the need to define any output specification.</span>
+</span><span id="DQValidator-23"><a href="#DQValidator-23"><span class="linenos"> 23</span></a><span class="sd">    You can use any input specification compatible with the lakehouse engine</span>
+</span><span id="DQValidator-24"><a href="#DQValidator-24"><span class="linenos"> 24</span></a><span class="sd">    (dataframe, table, files, etc).</span>
+</span><span id="DQValidator-25"><a href="#DQValidator-25"><span class="linenos"> 25</span></a><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="DQValidator-26"><a href="#DQValidator-26"><span class="linenos"> 26</span></a>
+</span><span id="DQValidator-27"><a href="#DQValidator-27"><span class="linenos"> 27</span></a>    <span class="n">_LOGGER</span> <span class="o">=</span> <span class="n">LoggingHandler</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span><span class="o">.</span><span class="n">get_logger</span><span class="p">()</span>
+</span><span id="DQValidator-28"><a href="#DQValidator-28"><span class="linenos"> 28</span></a>
+</span><span id="DQValidator-29"><a href="#DQValidator-29"><span class="linenos"> 29</span></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">acon</span><span class="p">:</span> <span class="nb">dict</span><span class="p">):</span>
+</span><span id="DQValidator-30"><a href="#DQValidator-30"><span class="linenos"> 30</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Construct DQValidator algorithm instances.</span>
+</span><span id="DQValidator-31"><a href="#DQValidator-31"><span class="linenos"> 31</span></a>
+</span><span id="DQValidator-32"><a href="#DQValidator-32"><span class="linenos"> 32</span></a><span class="sd">        A data quality validator needs the following specifications to work</span>
+</span><span id="DQValidator-33"><a href="#DQValidator-33"><span class="linenos"> 33</span></a><span class="sd">        properly:</span>
+</span><span id="DQValidator-34"><a href="#DQValidator-34"><span class="linenos"> 34</span></a><span class="sd">            - input specification (mandatory): specify how and what data to</span>
+</span><span id="DQValidator-35"><a href="#DQValidator-35"><span class="linenos"> 35</span></a><span class="sd">            read.</span>
+</span><span id="DQValidator-36"><a href="#DQValidator-36"><span class="linenos"> 36</span></a><span class="sd">            - data quality specification (mandatory): specify how to execute</span>
+</span><span id="DQValidator-37"><a href="#DQValidator-37"><span class="linenos"> 37</span></a><span class="sd">            the data quality process.</span>
+</span><span id="DQValidator-38"><a href="#DQValidator-38"><span class="linenos"> 38</span></a><span class="sd">            - restore_prev_version (optional): specify if, having</span>
+</span><span id="DQValidator-39"><a href="#DQValidator-39"><span class="linenos"> 39</span></a><span class="sd">            delta table/files as input, they should be restored to the</span>
+</span><span id="DQValidator-40"><a href="#DQValidator-40"><span class="linenos"> 40</span></a><span class="sd">            previous version if the data quality process fails. Note: this</span>
+</span><span id="DQValidator-41"><a href="#DQValidator-41"><span class="linenos"> 41</span></a><span class="sd">            is only considered if fail_on_error is kept as True.</span>
+</span><span id="DQValidator-42"><a href="#DQValidator-42"><span class="linenos"> 42</span></a>
+</span><span id="DQValidator-43"><a href="#DQValidator-43"><span class="linenos"> 43</span></a><span class="sd">        Args:</span>
+</span><span id="DQValidator-44"><a href="#DQValidator-44"><span class="linenos"> 44</span></a><span class="sd">            acon: algorithm configuration.</span>
+</span><span id="DQValidator-45"><a href="#DQValidator-45"><span class="linenos"> 45</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="DQValidator-46"><a href="#DQValidator-46"><span class="linenos"> 46</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">spec</span><span class="p">:</span> <span class="n">DQValidatorSpec</span> <span class="o">=</span> <span class="n">DQValidatorSpec</span><span class="p">(</span>
+</span><span id="DQValidator-47"><a href="#DQValidator-47"><span class="linenos"> 47</span></a>            <span class="n">input_spec</span><span class="o">=</span><span class="n">InputSpec</span><span class="p">(</span><span class="o">**</span><span class="n">acon</span><span class="p">[</span><span class="s2">&quot;input_spec&quot;</span><span class="p">]),</span>
+</span><span id="DQValidator-48"><a href="#DQValidator-48"><span class="linenos"> 48</span></a>            <span class="n">dq_spec</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_get_dq_spec</span><span class="p">(</span><span class="n">acon</span><span class="p">[</span><span class="s2">&quot;dq_spec&quot;</span><span class="p">]),</span>
+</span><span id="DQValidator-49"><a href="#DQValidator-49"><span class="linenos"> 49</span></a>            <span class="n">restore_prev_version</span><span class="o">=</span><span class="n">acon</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;restore_prev_version&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
+</span><span id="DQValidator-50"><a href="#DQValidator-50"><span class="linenos"> 50</span></a>        <span class="p">)</span>
+</span><span id="DQValidator-51"><a href="#DQValidator-51"><span class="linenos"> 51</span></a>
+</span><span id="DQValidator-52"><a href="#DQValidator-52"><span class="linenos"> 52</span></a>    <span class="k">def</span> <span class="nf">read</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataFrame</span><span class="p">:</span>
+</span><span id="DQValidator-53"><a href="#DQValidator-53"><span class="linenos"> 53</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Read data from an input location into a distributed dataframe.</span>
+</span><span id="DQValidator-54"><a href="#DQValidator-54"><span class="linenos"> 54</span></a>
+</span><span id="DQValidator-55"><a href="#DQValidator-55"><span class="linenos"> 55</span></a><span class="sd">        Returns:</span>
+</span><span id="DQValidator-56"><a href="#DQValidator-56"><span class="linenos"> 56</span></a><span class="sd">             Dataframe with data that was read.</span>
+</span><span id="DQValidator-57"><a href="#DQValidator-57"><span class="linenos"> 57</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="DQValidator-58"><a href="#DQValidator-58"><span class="linenos"> 58</span></a>        <span class="n">current_df</span> <span class="o">=</span> <span class="n">ReaderFactory</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">spec</span><span class="o">.</span><span class="n">input_spec</span><span class="p">)</span>
+</span><span id="DQValidator-59"><a href="#DQValidator-59"><span class="linenos"> 59</span></a>
+</span><span id="DQValidator-60"><a href="#DQValidator-60"><span class="linenos"> 60</span></a>        <span class="k">return</span> <span class="n">current_df</span>
+</span><span id="DQValidator-61"><a href="#DQValidator-61"><span class="linenos"> 61</span></a>
+</span><span id="DQValidator-62"><a href="#DQValidator-62"><span class="linenos"> 62</span></a>    <span class="k">def</span> <span class="nf">process_dq</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataFrame</span><span class="p">:</span>
+</span><span id="DQValidator-63"><a href="#DQValidator-63"><span class="linenos"> 63</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Process the data quality tasks for the data that was read.</span>
+</span><span id="DQValidator-64"><a href="#DQValidator-64"><span class="linenos"> 64</span></a>
+</span><span id="DQValidator-65"><a href="#DQValidator-65"><span class="linenos"> 65</span></a><span class="sd">        It supports a single input dataframe.</span>
+</span><span id="DQValidator-66"><a href="#DQValidator-66"><span class="linenos"> 66</span></a>
+</span><span id="DQValidator-67"><a href="#DQValidator-67"><span class="linenos"> 67</span></a><span class="sd">        It is possible to use data quality validators/expectations that will validate</span>
+</span><span id="DQValidator-68"><a href="#DQValidator-68"><span class="linenos"> 68</span></a><span class="sd">        your data and fail the process in case the expectations are not met. The DQ</span>
+</span><span id="DQValidator-69"><a href="#DQValidator-69"><span class="linenos"> 69</span></a><span class="sd">        process also generates and keeps updating a site containing the results of the</span>
+</span><span id="DQValidator-70"><a href="#DQValidator-70"><span class="linenos"> 70</span></a><span class="sd">        expectations that were done on your data. The location of the site is</span>
+</span><span id="DQValidator-71"><a href="#DQValidator-71"><span class="linenos"> 71</span></a><span class="sd">        configurable and can either be on file system or S3. If you define it to be</span>
+</span><span id="DQValidator-72"><a href="#DQValidator-72"><span class="linenos"> 72</span></a><span class="sd">        stored on S3, you can even configure your S3 bucket to serve the site so that</span>
+</span><span id="DQValidator-73"><a href="#DQValidator-73"><span class="linenos"> 73</span></a><span class="sd">        people can easily check the quality of your data. Moreover, it is also</span>
+</span><span id="DQValidator-74"><a href="#DQValidator-74"><span class="linenos"> 74</span></a><span class="sd">        possible to store the result of the DQ process into a defined result sink.</span>
+</span><span id="DQValidator-75"><a href="#DQValidator-75"><span class="linenos"> 75</span></a>
+</span><span id="DQValidator-76"><a href="#DQValidator-76"><span class="linenos"> 76</span></a><span class="sd">        Args:</span>
+</span><span id="DQValidator-77"><a href="#DQValidator-77"><span class="linenos"> 77</span></a><span class="sd">            data: input dataframe on which to run the DQ process.</span>
+</span><span id="DQValidator-78"><a href="#DQValidator-78"><span class="linenos"> 78</span></a>
+</span><span id="DQValidator-79"><a href="#DQValidator-79"><span class="linenos"> 79</span></a><span class="sd">        Returns:</span>
+</span><span id="DQValidator-80"><a href="#DQValidator-80"><span class="linenos"> 80</span></a><span class="sd">            Validated dataframe.</span>
+</span><span id="DQValidator-81"><a href="#DQValidator-81"><span class="linenos"> 81</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="DQValidator-82"><a href="#DQValidator-82"><span class="linenos"> 82</span></a>        <span class="k">return</span> <span class="n">DQFactory</span><span class="o">.</span><span class="n">run_dq_process</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">spec</span><span class="o">.</span><span class="n">dq_spec</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+</span><span id="DQValidator-83"><a href="#DQValidator-83"><span class="linenos"> 83</span></a>
+</span><span id="DQValidator-84"><a href="#DQValidator-84"><span class="linenos"> 84</span></a>    <span class="k">def</span> <span class="nf">execute</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="DQValidator-85"><a href="#DQValidator-85"><span class="linenos"> 85</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Define the algorithm execution behaviour.&quot;&quot;&quot;</span>
+</span><span id="DQValidator-86"><a href="#DQValidator-86"><span class="linenos"> 86</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">_LOGGER</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Starting read stage...&quot;</span><span class="p">)</span>
+</span><span id="DQValidator-87"><a href="#DQValidator-87"><span class="linenos"> 87</span></a>        <span class="n">read_df</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+</span><span id="DQValidator-88"><a href="#DQValidator-88"><span class="linenos"> 88</span></a>
+</span><span id="DQValidator-89"><a href="#DQValidator-89"><span class="linenos"> 89</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">_LOGGER</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Starting data quality validator...&quot;</span><span class="p">)</span>
+</span><span id="DQValidator-90"><a href="#DQValidator-90"><span class="linenos"> 90</span></a>        <span class="k">try</span><span class="p">:</span>
+</span><span id="DQValidator-91"><a href="#DQValidator-91"><span class="linenos"> 91</span></a>            <span class="k">if</span> <span class="n">read_df</span><span class="o">.</span><span class="n">isStreaming</span><span class="p">:</span>
+</span><span id="DQValidator-92"><a href="#DQValidator-92"><span class="linenos"> 92</span></a>                <span class="c1"># To handle streaming, and although we are not interested in</span>
+</span><span id="DQValidator-93"><a href="#DQValidator-93"><span class="linenos"> 93</span></a>                <span class="c1"># writing any data, we still need to start the streaming and</span>
+</span><span id="DQValidator-94"><a href="#DQValidator-94"><span class="linenos"> 94</span></a>                <span class="c1"># execute the data quality process in micro batches of data.</span>
+</span><span id="DQValidator-95"><a href="#DQValidator-95"><span class="linenos"> 95</span></a>                <span class="k">def</span> <span class="nf">write_dq_validator_micro_batch</span><span class="p">(</span>
+</span><span id="DQValidator-96"><a href="#DQValidator-96"><span class="linenos"> 96</span></a>                    <span class="n">batch_df</span><span class="p">:</span> <span class="n">DataFrame</span><span class="p">,</span> <span class="n">batch_id</span><span class="p">:</span> <span class="nb">int</span>
+</span><span id="DQValidator-97"><a href="#DQValidator-97"><span class="linenos"> 97</span></a>                <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="DQValidator-98"><a href="#DQValidator-98"><span class="linenos"> 98</span></a>                    <span class="bp">self</span><span class="o">.</span><span class="n">process_dq</span><span class="p">(</span><span class="n">batch_df</span><span class="p">)</span>
+</span><span id="DQValidator-99"><a href="#DQValidator-99"><span class="linenos"> 99</span></a>
+</span><span id="DQValidator-100"><a href="#DQValidator-100"><span class="linenos">100</span></a>                <span class="n">read_df</span><span class="o">.</span><span class="n">writeStream</span><span class="o">.</span><span class="n">trigger</span><span class="p">(</span><span class="n">once</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">foreachBatch</span><span class="p">(</span>
+</span><span id="DQValidator-101"><a href="#DQValidator-101"><span class="linenos">101</span></a>                    <span class="n">write_dq_validator_micro_batch</span>
+</span><span id="DQValidator-102"><a href="#DQValidator-102"><span class="linenos">102</span></a>                <span class="p">)</span><span class="o">.</span><span class="n">start</span><span class="p">()</span><span class="o">.</span><span class="n">awaitTermination</span><span class="p">()</span>
+</span><span id="DQValidator-103"><a href="#DQValidator-103"><span class="linenos">103</span></a>
+</span><span id="DQValidator-104"><a href="#DQValidator-104"><span class="linenos">104</span></a>            <span class="k">else</span><span class="p">:</span>
+</span><span id="DQValidator-105"><a href="#DQValidator-105"><span class="linenos">105</span></a>                <span class="bp">self</span><span class="o">.</span><span class="n">process_dq</span><span class="p">(</span><span class="n">read_df</span><span class="p">)</span>
+</span><span id="DQValidator-106"><a href="#DQValidator-106"><span class="linenos">106</span></a>        <span class="k">except</span> <span class="p">(</span><span class="n">DQValidationsFailedException</span><span class="p">,</span> <span class="n">StreamingQueryException</span><span class="p">):</span>
+</span><span id="DQValidator-107"><a href="#DQValidator-107"><span class="linenos">107</span></a>            <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">spec</span><span class="o">.</span><span class="n">input_spec</span><span class="o">.</span><span class="n">df_name</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">spec</span><span class="o">.</span><span class="n">restore_prev_version</span><span class="p">:</span>
+</span><span id="DQValidator-108"><a href="#DQValidator-108"><span class="linenos">108</span></a>                <span class="bp">self</span><span class="o">.</span><span class="n">_LOGGER</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Restoring delta table/files to previous version...&quot;</span><span class="p">)</span>
+</span><span id="DQValidator-109"><a href="#DQValidator-109"><span class="linenos">109</span></a>
+</span><span id="DQValidator-110"><a href="#DQValidator-110"><span class="linenos">110</span></a>                <span class="bp">self</span><span class="o">.</span><span class="n">_restore_prev_version</span><span class="p">()</span>
+</span><span id="DQValidator-111"><a href="#DQValidator-111"><span class="linenos">111</span></a>
+</span><span id="DQValidator-112"><a href="#DQValidator-112"><span class="linenos">112</span></a>                <span class="k">raise</span> <span class="n">DQValidationsFailedException</span><span class="p">(</span>
+</span><span id="DQValidator-113"><a href="#DQValidator-113"><span class="linenos">113</span></a>                    <span class="s2">&quot;Data Quality Validations Failed! The delta &quot;</span>
+</span><span id="DQValidator-114"><a href="#DQValidator-114"><span class="linenos">114</span></a>                    <span class="s2">&quot;table/files were restored to the previous version!&quot;</span>
+</span><span id="DQValidator-115"><a href="#DQValidator-115"><span class="linenos">115</span></a>                <span class="p">)</span>
+</span><span id="DQValidator-116"><a href="#DQValidator-116"><span class="linenos">116</span></a>
+</span><span id="DQValidator-117"><a href="#DQValidator-117"><span class="linenos">117</span></a>            <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">spec</span><span class="o">.</span><span class="n">dq_spec</span><span class="o">.</span><span class="n">fail_on_error</span><span class="p">:</span>
+</span><span id="DQValidator-118"><a href="#DQValidator-118"><span class="linenos">118</span></a>                <span class="k">raise</span> <span class="n">DQValidationsFailedException</span><span class="p">(</span><span class="s2">&quot;Data Quality Validations Failed!&quot;</span><span class="p">)</span>
+</span><span id="DQValidator-119"><a href="#DQValidator-119"><span class="linenos">119</span></a>        <span class="k">else</span><span class="p">:</span>
+</span><span id="DQValidator-120"><a href="#DQValidator-120"><span class="linenos">120</span></a>            <span class="bp">self</span><span class="o">.</span><span class="n">_LOGGER</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Execution of the algorithm has finished!&quot;</span><span class="p">)</span>
+</span><span id="DQValidator-121"><a href="#DQValidator-121"><span class="linenos">121</span></a>
+</span><span id="DQValidator-122"><a href="#DQValidator-122"><span class="linenos">122</span></a>    <span class="nd">@staticmethod</span>
+</span><span id="DQValidator-123"><a href="#DQValidator-123"><span class="linenos">123</span></a>    <span class="k">def</span> <span class="nf">_get_dq_spec</span><span class="p">(</span><span class="n">input_dq_spec</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DQSpec</span><span class="p">:</span>
+</span><span id="DQValidator-124"><a href="#DQValidator-124"><span class="linenos">124</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Get data quality specification from acon.</span>
+</span><span id="DQValidator-125"><a href="#DQValidator-125"><span class="linenos">125</span></a>
+</span><span id="DQValidator-126"><a href="#DQValidator-126"><span class="linenos">126</span></a><span class="sd">        Args:</span>
+</span><span id="DQValidator-127"><a href="#DQValidator-127"><span class="linenos">127</span></a><span class="sd">            input_dq_spec: data quality specification.</span>
+</span><span id="DQValidator-128"><a href="#DQValidator-128"><span class="linenos">128</span></a>
+</span><span id="DQValidator-129"><a href="#DQValidator-129"><span class="linenos">129</span></a><span class="sd">        Returns:</span>
+</span><span id="DQValidator-130"><a href="#DQValidator-130"><span class="linenos">130</span></a><span class="sd">            Data quality spec.</span>
+</span><span id="DQValidator-131"><a href="#DQValidator-131"><span class="linenos">131</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="DQValidator-132"><a href="#DQValidator-132"><span class="linenos">132</span></a>        <span class="n">dq_spec</span><span class="p">,</span> <span class="n">dq_functions</span><span class="p">,</span> <span class="n">critical_functions</span> <span class="o">=</span> <span class="n">Algorithm</span><span class="o">.</span><span class="n">get_dq_spec</span><span class="p">(</span><span class="n">input_dq_spec</span><span class="p">)</span>
+</span><span id="DQValidator-133"><a href="#DQValidator-133"><span class="linenos">133</span></a>
+</span><span id="DQValidator-134"><a href="#DQValidator-134"><span class="linenos">134</span></a>        <span class="n">dq_spec</span><span class="o">.</span><span class="n">dq_functions</span> <span class="o">=</span> <span class="n">dq_functions</span>
+</span><span id="DQValidator-135"><a href="#DQValidator-135"><span class="linenos">135</span></a>        <span class="n">dq_spec</span><span class="o">.</span><span class="n">critical_functions</span> <span class="o">=</span> <span class="n">critical_functions</span>
+</span><span id="DQValidator-136"><a href="#DQValidator-136"><span class="linenos">136</span></a>
+</span><span id="DQValidator-137"><a href="#DQValidator-137"><span class="linenos">137</span></a>        <span class="k">return</span> <span class="n">dq_spec</span>
+</span><span id="DQValidator-138"><a href="#DQValidator-138"><span class="linenos">138</span></a>
+</span><span id="DQValidator-139"><a href="#DQValidator-139"><span class="linenos">139</span></a>    <span class="k">def</span> <span class="nf">_restore_prev_version</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="DQValidator-140"><a href="#DQValidator-140"><span class="linenos">140</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Restore delta table or delta files to previous version.&quot;&quot;&quot;</span>
+</span><span id="DQValidator-141"><a href="#DQValidator-141"><span class="linenos">141</span></a>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">spec</span><span class="o">.</span><span class="n">input_spec</span><span class="o">.</span><span class="n">db_table</span><span class="p">:</span>
+</span><span id="DQValidator-142"><a href="#DQValidator-142"><span class="linenos">142</span></a>            <span class="n">delta_table</span> <span class="o">=</span> <span class="n">DeltaTable</span><span class="o">.</span><span class="n">forName</span><span class="p">(</span>
+</span><span id="DQValidator-143"><a href="#DQValidator-143"><span class="linenos">143</span></a>                <span class="n">ExecEnv</span><span class="o">.</span><span class="n">SESSION</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">spec</span><span class="o">.</span><span class="n">input_spec</span><span class="o">.</span><span class="n">db_table</span>
+</span><span id="DQValidator-144"><a href="#DQValidator-144"><span class="linenos">144</span></a>            <span class="p">)</span>
+</span><span id="DQValidator-145"><a href="#DQValidator-145"><span class="linenos">145</span></a>        <span class="k">else</span><span class="p">:</span>
+</span><span id="DQValidator-146"><a href="#DQValidator-146"><span class="linenos">146</span></a>            <span class="n">delta_table</span> <span class="o">=</span> <span class="n">DeltaTable</span><span class="o">.</span><span class="n">forPath</span><span class="p">(</span>
+</span><span id="DQValidator-147"><a href="#DQValidator-147"><span class="linenos">147</span></a>                <span class="n">ExecEnv</span><span class="o">.</span><span class="n">SESSION</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">spec</span><span class="o">.</span><span class="n">input_spec</span><span class="o">.</span><span class="n">location</span>
+</span><span id="DQValidator-148"><a href="#DQValidator-148"><span class="linenos">148</span></a>            <span class="p">)</span>
+</span><span id="DQValidator-149"><a href="#DQValidator-149"><span class="linenos">149</span></a>
+</span><span id="DQValidator-150"><a href="#DQValidator-150"><span class="linenos">150</span></a>        <span class="n">previous_version</span> <span class="o">=</span> <span class="p">(</span>
+</span><span id="DQValidator-151"><a href="#DQValidator-151"><span class="linenos">151</span></a>            <span class="n">delta_table</span><span class="o">.</span><span class="n">history</span><span class="p">()</span><span class="o">.</span><span class="n">agg</span><span class="p">({</span><span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;max&quot;</span><span class="p">})</span><span class="o">.</span><span class="n">collect</span><span class="p">()[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span>
+</span><span id="DQValidator-152"><a href="#DQValidator-152"><span class="linenos">152</span></a>        <span class="p">)</span>
+</span><span id="DQValidator-153"><a href="#DQValidator-153"><span class="linenos">153</span></a>
+</span><span id="DQValidator-154"><a href="#DQValidator-154"><span class="linenos">154</span></a>        <span class="n">delta_table</span><span class="o">.</span><span class="n">restoreToVersion</span><span class="p">(</span><span class="n">previous_version</span><span class="p">)</span>
 </span></pre></div>
 
 
@@ -414,28 +415,28 @@ You can use any input specification compatible with the lakehouse engine
 
     </div>
     <a class="headerlink" href="#DQValidator.__init__"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="DQValidator.__init__-28"><a href="#DQValidator.__init__-28"><span class="linenos">28</span></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">acon</span><span class="p">:</span> <span class="nb">dict</span><span class="p">):</span>
-</span><span id="DQValidator.__init__-29"><a href="#DQValidator.__init__-29"><span class="linenos">29</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Construct DQValidator algorithm instances.</span>
-</span><span id="DQValidator.__init__-30"><a href="#DQValidator.__init__-30"><span class="linenos">30</span></a>
-</span><span id="DQValidator.__init__-31"><a href="#DQValidator.__init__-31"><span class="linenos">31</span></a><span class="sd">        A data quality validator needs the following specifications to work</span>
-</span><span id="DQValidator.__init__-32"><a href="#DQValidator.__init__-32"><span class="linenos">32</span></a><span class="sd">        properly:</span>
-</span><span id="DQValidator.__init__-33"><a href="#DQValidator.__init__-33"><span class="linenos">33</span></a><span class="sd">            - input specification (mandatory): specify how and what data to</span>
-</span><span id="DQValidator.__init__-34"><a href="#DQValidator.__init__-34"><span class="linenos">34</span></a><span class="sd">            read.</span>
-</span><span id="DQValidator.__init__-35"><a href="#DQValidator.__init__-35"><span class="linenos">35</span></a><span class="sd">            - data quality specification (mandatory): specify how to execute</span>
-</span><span id="DQValidator.__init__-36"><a href="#DQValidator.__init__-36"><span class="linenos">36</span></a><span class="sd">            the data quality process.</span>
-</span><span id="DQValidator.__init__-37"><a href="#DQValidator.__init__-37"><span class="linenos">37</span></a><span class="sd">            - restore_prev_version (optional): specify if, having</span>
-</span><span id="DQValidator.__init__-38"><a href="#DQValidator.__init__-38"><span class="linenos">38</span></a><span class="sd">            delta table/files as input, they should be restored to the</span>
-</span><span id="DQValidator.__init__-39"><a href="#DQValidator.__init__-39"><span class="linenos">39</span></a><span class="sd">            previous version if the data quality process fails. Note: this</span>
-</span><span id="DQValidator.__init__-40"><a href="#DQValidator.__init__-40"><span class="linenos">40</span></a><span class="sd">            is only considered if fail_on_error is kept as True.</span>
-</span><span id="DQValidator.__init__-41"><a href="#DQValidator.__init__-41"><span class="linenos">41</span></a>
-</span><span id="DQValidator.__init__-42"><a href="#DQValidator.__init__-42"><span class="linenos">42</span></a><span class="sd">        Args:</span>
-</span><span id="DQValidator.__init__-43"><a href="#DQValidator.__init__-43"><span class="linenos">43</span></a><span class="sd">            acon: algorithm configuration.</span>
-</span><span id="DQValidator.__init__-44"><a href="#DQValidator.__init__-44"><span class="linenos">44</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="DQValidator.__init__-45"><a href="#DQValidator.__init__-45"><span class="linenos">45</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">spec</span><span class="p">:</span> <span class="n">DQValidatorSpec</span> <span class="o">=</span> <span class="n">DQValidatorSpec</span><span class="p">(</span>
-</span><span id="DQValidator.__init__-46"><a href="#DQValidator.__init__-46"><span class="linenos">46</span></a>            <span class="n">input_spec</span><span class="o">=</span><span class="n">InputSpec</span><span class="p">(</span><span class="o">**</span><span class="n">acon</span><span class="p">[</span><span class="s2">&quot;input_spec&quot;</span><span class="p">]),</span>
-</span><span id="DQValidator.__init__-47"><a href="#DQValidator.__init__-47"><span class="linenos">47</span></a>            <span class="n">dq_spec</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_get_dq_spec</span><span class="p">(</span><span class="n">acon</span><span class="p">[</span><span class="s2">&quot;dq_spec&quot;</span><span class="p">]),</span>
-</span><span id="DQValidator.__init__-48"><a href="#DQValidator.__init__-48"><span class="linenos">48</span></a>            <span class="n">restore_prev_version</span><span class="o">=</span><span class="n">acon</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;restore_prev_version&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
-</span><span id="DQValidator.__init__-49"><a href="#DQValidator.__init__-49"><span class="linenos">49</span></a>        <span class="p">)</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="DQValidator.__init__-29"><a href="#DQValidator.__init__-29"><span class="linenos">29</span></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">acon</span><span class="p">:</span> <span class="nb">dict</span><span class="p">):</span>
+</span><span id="DQValidator.__init__-30"><a href="#DQValidator.__init__-30"><span class="linenos">30</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Construct DQValidator algorithm instances.</span>
+</span><span id="DQValidator.__init__-31"><a href="#DQValidator.__init__-31"><span class="linenos">31</span></a>
+</span><span id="DQValidator.__init__-32"><a href="#DQValidator.__init__-32"><span class="linenos">32</span></a><span class="sd">        A data quality validator needs the following specifications to work</span>
+</span><span id="DQValidator.__init__-33"><a href="#DQValidator.__init__-33"><span class="linenos">33</span></a><span class="sd">        properly:</span>
+</span><span id="DQValidator.__init__-34"><a href="#DQValidator.__init__-34"><span class="linenos">34</span></a><span class="sd">            - input specification (mandatory): specify how and what data to</span>
+</span><span id="DQValidator.__init__-35"><a href="#DQValidator.__init__-35"><span class="linenos">35</span></a><span class="sd">            read.</span>
+</span><span id="DQValidator.__init__-36"><a href="#DQValidator.__init__-36"><span class="linenos">36</span></a><span class="sd">            - data quality specification (mandatory): specify how to execute</span>
+</span><span id="DQValidator.__init__-37"><a href="#DQValidator.__init__-37"><span class="linenos">37</span></a><span class="sd">            the data quality process.</span>
+</span><span id="DQValidator.__init__-38"><a href="#DQValidator.__init__-38"><span class="linenos">38</span></a><span class="sd">            - restore_prev_version (optional): specify if, having</span>
+</span><span id="DQValidator.__init__-39"><a href="#DQValidator.__init__-39"><span class="linenos">39</span></a><span class="sd">            delta table/files as input, they should be restored to the</span>
+</span><span id="DQValidator.__init__-40"><a href="#DQValidator.__init__-40"><span class="linenos">40</span></a><span class="sd">            previous version if the data quality process fails. Note: this</span>
+</span><span id="DQValidator.__init__-41"><a href="#DQValidator.__init__-41"><span class="linenos">41</span></a><span class="sd">            is only considered if fail_on_error is kept as True.</span>
+</span><span id="DQValidator.__init__-42"><a href="#DQValidator.__init__-42"><span class="linenos">42</span></a>
+</span><span id="DQValidator.__init__-43"><a href="#DQValidator.__init__-43"><span class="linenos">43</span></a><span class="sd">        Args:</span>
+</span><span id="DQValidator.__init__-44"><a href="#DQValidator.__init__-44"><span class="linenos">44</span></a><span class="sd">            acon: algorithm configuration.</span>
+</span><span id="DQValidator.__init__-45"><a href="#DQValidator.__init__-45"><span class="linenos">45</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="DQValidator.__init__-46"><a href="#DQValidator.__init__-46"><span class="linenos">46</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">spec</span><span class="p">:</span> <span class="n">DQValidatorSpec</span> <span class="o">=</span> <span class="n">DQValidatorSpec</span><span class="p">(</span>
+</span><span id="DQValidator.__init__-47"><a href="#DQValidator.__init__-47"><span class="linenos">47</span></a>            <span class="n">input_spec</span><span class="o">=</span><span class="n">InputSpec</span><span class="p">(</span><span class="o">**</span><span class="n">acon</span><span class="p">[</span><span class="s2">&quot;input_spec&quot;</span><span class="p">]),</span>
+</span><span id="DQValidator.__init__-48"><a href="#DQValidator.__init__-48"><span class="linenos">48</span></a>            <span class="n">dq_spec</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_get_dq_spec</span><span class="p">(</span><span class="n">acon</span><span class="p">[</span><span class="s2">&quot;dq_spec&quot;</span><span class="p">]),</span>
+</span><span id="DQValidator.__init__-49"><a href="#DQValidator.__init__-49"><span class="linenos">49</span></a>            <span class="n">restore_prev_version</span><span class="o">=</span><span class="n">acon</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;restore_prev_version&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
+</span><span id="DQValidator.__init__-50"><a href="#DQValidator.__init__-50"><span class="linenos">50</span></a>        <span class="p">)</span>
 </span></pre></div>
 
 
@@ -472,15 +473,15 @@ properly:
 
     </div>
     <a class="headerlink" href="#DQValidator.read"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="DQValidator.read-51"><a href="#DQValidator.read-51"><span class="linenos">51</span></a>    <span class="k">def</span> <span class="nf">read</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataFrame</span><span class="p">:</span>
-</span><span id="DQValidator.read-52"><a href="#DQValidator.read-52"><span class="linenos">52</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Read data from an input location into a distributed dataframe.</span>
-</span><span id="DQValidator.read-53"><a href="#DQValidator.read-53"><span class="linenos">53</span></a>
-</span><span id="DQValidator.read-54"><a href="#DQValidator.read-54"><span class="linenos">54</span></a><span class="sd">        Returns:</span>
-</span><span id="DQValidator.read-55"><a href="#DQValidator.read-55"><span class="linenos">55</span></a><span class="sd">             Dataframe with data that was read.</span>
-</span><span id="DQValidator.read-56"><a href="#DQValidator.read-56"><span class="linenos">56</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="DQValidator.read-57"><a href="#DQValidator.read-57"><span class="linenos">57</span></a>        <span class="n">current_df</span> <span class="o">=</span> <span class="n">ReaderFactory</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">spec</span><span class="o">.</span><span class="n">input_spec</span><span class="p">)</span>
-</span><span id="DQValidator.read-58"><a href="#DQValidator.read-58"><span class="linenos">58</span></a>
-</span><span id="DQValidator.read-59"><a href="#DQValidator.read-59"><span class="linenos">59</span></a>        <span class="k">return</span> <span class="n">current_df</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="DQValidator.read-52"><a href="#DQValidator.read-52"><span class="linenos">52</span></a>    <span class="k">def</span> <span class="nf">read</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataFrame</span><span class="p">:</span>
+</span><span id="DQValidator.read-53"><a href="#DQValidator.read-53"><span class="linenos">53</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Read data from an input location into a distributed dataframe.</span>
+</span><span id="DQValidator.read-54"><a href="#DQValidator.read-54"><span class="linenos">54</span></a>
+</span><span id="DQValidator.read-55"><a href="#DQValidator.read-55"><span class="linenos">55</span></a><span class="sd">        Returns:</span>
+</span><span id="DQValidator.read-56"><a href="#DQValidator.read-56"><span class="linenos">56</span></a><span class="sd">             Dataframe with data that was read.</span>
+</span><span id="DQValidator.read-57"><a href="#DQValidator.read-57"><span class="linenos">57</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="DQValidator.read-58"><a href="#DQValidator.read-58"><span class="linenos">58</span></a>        <span class="n">current_df</span> <span class="o">=</span> <span class="n">ReaderFactory</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">spec</span><span class="o">.</span><span class="n">input_spec</span><span class="p">)</span>
+</span><span id="DQValidator.read-59"><a href="#DQValidator.read-59"><span class="linenos">59</span></a>
+</span><span id="DQValidator.read-60"><a href="#DQValidator.read-60"><span class="linenos">60</span></a>        <span class="k">return</span> <span class="n">current_df</span>
 </span></pre></div>
 
 
@@ -506,27 +507,27 @@ properly:
 
     </div>
     <a class="headerlink" href="#DQValidator.process_dq"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="DQValidator.process_dq-61"><a href="#DQValidator.process_dq-61"><span class="linenos">61</span></a>    <span class="k">def</span> <span class="nf">process_dq</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataFrame</span><span class="p">:</span>
-</span><span id="DQValidator.process_dq-62"><a href="#DQValidator.process_dq-62"><span class="linenos">62</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Process the data quality tasks for the data that was read.</span>
-</span><span id="DQValidator.process_dq-63"><a href="#DQValidator.process_dq-63"><span class="linenos">63</span></a>
-</span><span id="DQValidator.process_dq-64"><a href="#DQValidator.process_dq-64"><span class="linenos">64</span></a><span class="sd">        It supports a single input dataframe.</span>
-</span><span id="DQValidator.process_dq-65"><a href="#DQValidator.process_dq-65"><span class="linenos">65</span></a>
-</span><span id="DQValidator.process_dq-66"><a href="#DQValidator.process_dq-66"><span class="linenos">66</span></a><span class="sd">        It is possible to use data quality validators/expectations that will validate</span>
-</span><span id="DQValidator.process_dq-67"><a href="#DQValidator.process_dq-67"><span class="linenos">67</span></a><span class="sd">        your data and fail the process in case the expectations are not met. The DQ</span>
-</span><span id="DQValidator.process_dq-68"><a href="#DQValidator.process_dq-68"><span class="linenos">68</span></a><span class="sd">        process also generates and keeps updating a site containing the results of the</span>
-</span><span id="DQValidator.process_dq-69"><a href="#DQValidator.process_dq-69"><span class="linenos">69</span></a><span class="sd">        expectations that were done on your data. The location of the site is</span>
-</span><span id="DQValidator.process_dq-70"><a href="#DQValidator.process_dq-70"><span class="linenos">70</span></a><span class="sd">        configurable and can either be on file system or S3. If you define it to be</span>
-</span><span id="DQValidator.process_dq-71"><a href="#DQValidator.process_dq-71"><span class="linenos">71</span></a><span class="sd">        stored on S3, you can even configure your S3 bucket to serve the site so that</span>
-</span><span id="DQValidator.process_dq-72"><a href="#DQValidator.process_dq-72"><span class="linenos">72</span></a><span class="sd">        people can easily check the quality of your data. Moreover, it is also</span>
-</span><span id="DQValidator.process_dq-73"><a href="#DQValidator.process_dq-73"><span class="linenos">73</span></a><span class="sd">        possible to store the result of the DQ process into a defined result sink.</span>
-</span><span id="DQValidator.process_dq-74"><a href="#DQValidator.process_dq-74"><span class="linenos">74</span></a>
-</span><span id="DQValidator.process_dq-75"><a href="#DQValidator.process_dq-75"><span class="linenos">75</span></a><span class="sd">        Args:</span>
-</span><span id="DQValidator.process_dq-76"><a href="#DQValidator.process_dq-76"><span class="linenos">76</span></a><span class="sd">            data: input dataframe on which to run the DQ process.</span>
-</span><span id="DQValidator.process_dq-77"><a href="#DQValidator.process_dq-77"><span class="linenos">77</span></a>
-</span><span id="DQValidator.process_dq-78"><a href="#DQValidator.process_dq-78"><span class="linenos">78</span></a><span class="sd">        Returns:</span>
-</span><span id="DQValidator.process_dq-79"><a href="#DQValidator.process_dq-79"><span class="linenos">79</span></a><span class="sd">            Validated dataframe.</span>
-</span><span id="DQValidator.process_dq-80"><a href="#DQValidator.process_dq-80"><span class="linenos">80</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="DQValidator.process_dq-81"><a href="#DQValidator.process_dq-81"><span class="linenos">81</span></a>        <span class="k">return</span> <span class="n">DQFactory</span><span class="o">.</span><span class="n">run_dq_process</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">spec</span><span class="o">.</span><span class="n">dq_spec</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="DQValidator.process_dq-62"><a href="#DQValidator.process_dq-62"><span class="linenos">62</span></a>    <span class="k">def</span> <span class="nf">process_dq</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataFrame</span><span class="p">:</span>
+</span><span id="DQValidator.process_dq-63"><a href="#DQValidator.process_dq-63"><span class="linenos">63</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Process the data quality tasks for the data that was read.</span>
+</span><span id="DQValidator.process_dq-64"><a href="#DQValidator.process_dq-64"><span class="linenos">64</span></a>
+</span><span id="DQValidator.process_dq-65"><a href="#DQValidator.process_dq-65"><span class="linenos">65</span></a><span class="sd">        It supports a single input dataframe.</span>
+</span><span id="DQValidator.process_dq-66"><a href="#DQValidator.process_dq-66"><span class="linenos">66</span></a>
+</span><span id="DQValidator.process_dq-67"><a href="#DQValidator.process_dq-67"><span class="linenos">67</span></a><span class="sd">        It is possible to use data quality validators/expectations that will validate</span>
+</span><span id="DQValidator.process_dq-68"><a href="#DQValidator.process_dq-68"><span class="linenos">68</span></a><span class="sd">        your data and fail the process in case the expectations are not met. The DQ</span>
+</span><span id="DQValidator.process_dq-69"><a href="#DQValidator.process_dq-69"><span class="linenos">69</span></a><span class="sd">        process also generates and keeps updating a site containing the results of the</span>
+</span><span id="DQValidator.process_dq-70"><a href="#DQValidator.process_dq-70"><span class="linenos">70</span></a><span class="sd">        expectations that were done on your data. The location of the site is</span>
+</span><span id="DQValidator.process_dq-71"><a href="#DQValidator.process_dq-71"><span class="linenos">71</span></a><span class="sd">        configurable and can either be on file system or S3. If you define it to be</span>
+</span><span id="DQValidator.process_dq-72"><a href="#DQValidator.process_dq-72"><span class="linenos">72</span></a><span class="sd">        stored on S3, you can even configure your S3 bucket to serve the site so that</span>
+</span><span id="DQValidator.process_dq-73"><a href="#DQValidator.process_dq-73"><span class="linenos">73</span></a><span class="sd">        people can easily check the quality of your data. Moreover, it is also</span>
+</span><span id="DQValidator.process_dq-74"><a href="#DQValidator.process_dq-74"><span class="linenos">74</span></a><span class="sd">        possible to store the result of the DQ process into a defined result sink.</span>
+</span><span id="DQValidator.process_dq-75"><a href="#DQValidator.process_dq-75"><span class="linenos">75</span></a>
+</span><span id="DQValidator.process_dq-76"><a href="#DQValidator.process_dq-76"><span class="linenos">76</span></a><span class="sd">        Args:</span>
+</span><span id="DQValidator.process_dq-77"><a href="#DQValidator.process_dq-77"><span class="linenos">77</span></a><span class="sd">            data: input dataframe on which to run the DQ process.</span>
+</span><span id="DQValidator.process_dq-78"><a href="#DQValidator.process_dq-78"><span class="linenos">78</span></a>
+</span><span id="DQValidator.process_dq-79"><a href="#DQValidator.process_dq-79"><span class="linenos">79</span></a><span class="sd">        Returns:</span>
+</span><span id="DQValidator.process_dq-80"><a href="#DQValidator.process_dq-80"><span class="linenos">80</span></a><span class="sd">            Validated dataframe.</span>
+</span><span id="DQValidator.process_dq-81"><a href="#DQValidator.process_dq-81"><span class="linenos">81</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="DQValidator.process_dq-82"><a href="#DQValidator.process_dq-82"><span class="linenos">82</span></a>        <span class="k">return</span> <span class="n">DQFactory</span><span class="o">.</span><span class="n">run_dq_process</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">spec</span><span class="o">.</span><span class="n">dq_spec</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
 </span></pre></div>
 
 
@@ -569,43 +570,43 @@ possible to store the result of the DQ process into a defined result sink.</p>
 
     </div>
     <a class="headerlink" href="#DQValidator.execute"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="DQValidator.execute-83"><a href="#DQValidator.execute-83"><span class="linenos"> 83</span></a>    <span class="k">def</span> <span class="nf">execute</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-</span><span id="DQValidator.execute-84"><a href="#DQValidator.execute-84"><span class="linenos"> 84</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Define the algorithm execution behaviour.&quot;&quot;&quot;</span>
-</span><span id="DQValidator.execute-85"><a href="#DQValidator.execute-85"><span class="linenos"> 85</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">_LOGGER</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Starting read stage...&quot;</span><span class="p">)</span>
-</span><span id="DQValidator.execute-86"><a href="#DQValidator.execute-86"><span class="linenos"> 86</span></a>        <span class="n">read_df</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
-</span><span id="DQValidator.execute-87"><a href="#DQValidator.execute-87"><span class="linenos"> 87</span></a>
-</span><span id="DQValidator.execute-88"><a href="#DQValidator.execute-88"><span class="linenos"> 88</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">_LOGGER</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Starting data quality validator...&quot;</span><span class="p">)</span>
-</span><span id="DQValidator.execute-89"><a href="#DQValidator.execute-89"><span class="linenos"> 89</span></a>        <span class="k">try</span><span class="p">:</span>
-</span><span id="DQValidator.execute-90"><a href="#DQValidator.execute-90"><span class="linenos"> 90</span></a>            <span class="k">if</span> <span class="n">read_df</span><span class="o">.</span><span class="n">isStreaming</span><span class="p">:</span>
-</span><span id="DQValidator.execute-91"><a href="#DQValidator.execute-91"><span class="linenos"> 91</span></a>                <span class="c1"># To handle streaming, and although we are not interested in</span>
-</span><span id="DQValidator.execute-92"><a href="#DQValidator.execute-92"><span class="linenos"> 92</span></a>                <span class="c1"># writing any data, we still need to start the streaming and</span>
-</span><span id="DQValidator.execute-93"><a href="#DQValidator.execute-93"><span class="linenos"> 93</span></a>                <span class="c1"># execute the data quality process in micro batches of data.</span>
-</span><span id="DQValidator.execute-94"><a href="#DQValidator.execute-94"><span class="linenos"> 94</span></a>                <span class="k">def</span> <span class="nf">write_dq_validator_micro_batch</span><span class="p">(</span>
-</span><span id="DQValidator.execute-95"><a href="#DQValidator.execute-95"><span class="linenos"> 95</span></a>                    <span class="n">batch_df</span><span class="p">:</span> <span class="n">DataFrame</span><span class="p">,</span> <span class="n">batch_id</span><span class="p">:</span> <span class="nb">int</span>
-</span><span id="DQValidator.execute-96"><a href="#DQValidator.execute-96"><span class="linenos"> 96</span></a>                <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-</span><span id="DQValidator.execute-97"><a href="#DQValidator.execute-97"><span class="linenos"> 97</span></a>                    <span class="bp">self</span><span class="o">.</span><span class="n">process_dq</span><span class="p">(</span><span class="n">batch_df</span><span class="p">)</span>
-</span><span id="DQValidator.execute-98"><a href="#DQValidator.execute-98"><span class="linenos"> 98</span></a>
-</span><span id="DQValidator.execute-99"><a href="#DQValidator.execute-99"><span class="linenos"> 99</span></a>                <span class="n">read_df</span><span class="o">.</span><span class="n">writeStream</span><span class="o">.</span><span class="n">trigger</span><span class="p">(</span><span class="n">once</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">foreachBatch</span><span class="p">(</span>
-</span><span id="DQValidator.execute-100"><a href="#DQValidator.execute-100"><span class="linenos">100</span></a>                    <span class="n">write_dq_validator_micro_batch</span>
-</span><span id="DQValidator.execute-101"><a href="#DQValidator.execute-101"><span class="linenos">101</span></a>                <span class="p">)</span><span class="o">.</span><span class="n">start</span><span class="p">()</span><span class="o">.</span><span class="n">awaitTermination</span><span class="p">()</span>
-</span><span id="DQValidator.execute-102"><a href="#DQValidator.execute-102"><span class="linenos">102</span></a>
-</span><span id="DQValidator.execute-103"><a href="#DQValidator.execute-103"><span class="linenos">103</span></a>            <span class="k">else</span><span class="p">:</span>
-</span><span id="DQValidator.execute-104"><a href="#DQValidator.execute-104"><span class="linenos">104</span></a>                <span class="bp">self</span><span class="o">.</span><span class="n">process_dq</span><span class="p">(</span><span class="n">read_df</span><span class="p">)</span>
-</span><span id="DQValidator.execute-105"><a href="#DQValidator.execute-105"><span class="linenos">105</span></a>        <span class="k">except</span> <span class="p">(</span><span class="n">DQValidationsFailedException</span><span class="p">,</span> <span class="n">StreamingQueryException</span><span class="p">):</span>
-</span><span id="DQValidator.execute-106"><a href="#DQValidator.execute-106"><span class="linenos">106</span></a>            <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">spec</span><span class="o">.</span><span class="n">input_spec</span><span class="o">.</span><span class="n">df_name</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">spec</span><span class="o">.</span><span class="n">restore_prev_version</span><span class="p">:</span>
-</span><span id="DQValidator.execute-107"><a href="#DQValidator.execute-107"><span class="linenos">107</span></a>                <span class="bp">self</span><span class="o">.</span><span class="n">_LOGGER</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Restoring delta table/files to previous version...&quot;</span><span class="p">)</span>
-</span><span id="DQValidator.execute-108"><a href="#DQValidator.execute-108"><span class="linenos">108</span></a>
-</span><span id="DQValidator.execute-109"><a href="#DQValidator.execute-109"><span class="linenos">109</span></a>                <span class="bp">self</span><span class="o">.</span><span class="n">_restore_prev_version</span><span class="p">()</span>
-</span><span id="DQValidator.execute-110"><a href="#DQValidator.execute-110"><span class="linenos">110</span></a>
-</span><span id="DQValidator.execute-111"><a href="#DQValidator.execute-111"><span class="linenos">111</span></a>                <span class="k">raise</span> <span class="n">DQValidationsFailedException</span><span class="p">(</span>
-</span><span id="DQValidator.execute-112"><a href="#DQValidator.execute-112"><span class="linenos">112</span></a>                    <span class="s2">&quot;Data Quality Validations Failed! The delta &quot;</span>
-</span><span id="DQValidator.execute-113"><a href="#DQValidator.execute-113"><span class="linenos">113</span></a>                    <span class="s2">&quot;table/files were restored to the previous version!&quot;</span>
-</span><span id="DQValidator.execute-114"><a href="#DQValidator.execute-114"><span class="linenos">114</span></a>                <span class="p">)</span>
-</span><span id="DQValidator.execute-115"><a href="#DQValidator.execute-115"><span class="linenos">115</span></a>
-</span><span id="DQValidator.execute-116"><a href="#DQValidator.execute-116"><span class="linenos">116</span></a>            <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">spec</span><span class="o">.</span><span class="n">dq_spec</span><span class="o">.</span><span class="n">fail_on_error</span><span class="p">:</span>
-</span><span id="DQValidator.execute-117"><a href="#DQValidator.execute-117"><span class="linenos">117</span></a>                <span class="k">raise</span> <span class="n">DQValidationsFailedException</span><span class="p">(</span><span class="s2">&quot;Data Quality Validations Failed!&quot;</span><span class="p">)</span>
-</span><span id="DQValidator.execute-118"><a href="#DQValidator.execute-118"><span class="linenos">118</span></a>        <span class="k">else</span><span class="p">:</span>
-</span><span id="DQValidator.execute-119"><a href="#DQValidator.execute-119"><span class="linenos">119</span></a>            <span class="bp">self</span><span class="o">.</span><span class="n">_LOGGER</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Execution of the algorithm has finished!&quot;</span><span class="p">)</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="DQValidator.execute-84"><a href="#DQValidator.execute-84"><span class="linenos"> 84</span></a>    <span class="k">def</span> <span class="nf">execute</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="DQValidator.execute-85"><a href="#DQValidator.execute-85"><span class="linenos"> 85</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Define the algorithm execution behaviour.&quot;&quot;&quot;</span>
+</span><span id="DQValidator.execute-86"><a href="#DQValidator.execute-86"><span class="linenos"> 86</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">_LOGGER</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Starting read stage...&quot;</span><span class="p">)</span>
+</span><span id="DQValidator.execute-87"><a href="#DQValidator.execute-87"><span class="linenos"> 87</span></a>        <span class="n">read_df</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+</span><span id="DQValidator.execute-88"><a href="#DQValidator.execute-88"><span class="linenos"> 88</span></a>
+</span><span id="DQValidator.execute-89"><a href="#DQValidator.execute-89"><span class="linenos"> 89</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">_LOGGER</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Starting data quality validator...&quot;</span><span class="p">)</span>
+</span><span id="DQValidator.execute-90"><a href="#DQValidator.execute-90"><span class="linenos"> 90</span></a>        <span class="k">try</span><span class="p">:</span>
+</span><span id="DQValidator.execute-91"><a href="#DQValidator.execute-91"><span class="linenos"> 91</span></a>            <span class="k">if</span> <span class="n">read_df</span><span class="o">.</span><span class="n">isStreaming</span><span class="p">:</span>
+</span><span id="DQValidator.execute-92"><a href="#DQValidator.execute-92"><span class="linenos"> 92</span></a>                <span class="c1"># To handle streaming, and although we are not interested in</span>
+</span><span id="DQValidator.execute-93"><a href="#DQValidator.execute-93"><span class="linenos"> 93</span></a>                <span class="c1"># writing any data, we still need to start the streaming and</span>
+</span><span id="DQValidator.execute-94"><a href="#DQValidator.execute-94"><span class="linenos"> 94</span></a>                <span class="c1"># execute the data quality process in micro batches of data.</span>
+</span><span id="DQValidator.execute-95"><a href="#DQValidator.execute-95"><span class="linenos"> 95</span></a>                <span class="k">def</span> <span class="nf">write_dq_validator_micro_batch</span><span class="p">(</span>
+</span><span id="DQValidator.execute-96"><a href="#DQValidator.execute-96"><span class="linenos"> 96</span></a>                    <span class="n">batch_df</span><span class="p">:</span> <span class="n">DataFrame</span><span class="p">,</span> <span class="n">batch_id</span><span class="p">:</span> <span class="nb">int</span>
+</span><span id="DQValidator.execute-97"><a href="#DQValidator.execute-97"><span class="linenos"> 97</span></a>                <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="DQValidator.execute-98"><a href="#DQValidator.execute-98"><span class="linenos"> 98</span></a>                    <span class="bp">self</span><span class="o">.</span><span class="n">process_dq</span><span class="p">(</span><span class="n">batch_df</span><span class="p">)</span>
+</span><span id="DQValidator.execute-99"><a href="#DQValidator.execute-99"><span class="linenos"> 99</span></a>
+</span><span id="DQValidator.execute-100"><a href="#DQValidator.execute-100"><span class="linenos">100</span></a>                <span class="n">read_df</span><span class="o">.</span><span class="n">writeStream</span><span class="o">.</span><span class="n">trigger</span><span class="p">(</span><span class="n">once</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">foreachBatch</span><span class="p">(</span>
+</span><span id="DQValidator.execute-101"><a href="#DQValidator.execute-101"><span class="linenos">101</span></a>                    <span class="n">write_dq_validator_micro_batch</span>
+</span><span id="DQValidator.execute-102"><a href="#DQValidator.execute-102"><span class="linenos">102</span></a>                <span class="p">)</span><span class="o">.</span><span class="n">start</span><span class="p">()</span><span class="o">.</span><span class="n">awaitTermination</span><span class="p">()</span>
+</span><span id="DQValidator.execute-103"><a href="#DQValidator.execute-103"><span class="linenos">103</span></a>
+</span><span id="DQValidator.execute-104"><a href="#DQValidator.execute-104"><span class="linenos">104</span></a>            <span class="k">else</span><span class="p">:</span>
+</span><span id="DQValidator.execute-105"><a href="#DQValidator.execute-105"><span class="linenos">105</span></a>                <span class="bp">self</span><span class="o">.</span><span class="n">process_dq</span><span class="p">(</span><span class="n">read_df</span><span class="p">)</span>
+</span><span id="DQValidator.execute-106"><a href="#DQValidator.execute-106"><span class="linenos">106</span></a>        <span class="k">except</span> <span class="p">(</span><span class="n">DQValidationsFailedException</span><span class="p">,</span> <span class="n">StreamingQueryException</span><span class="p">):</span>
+</span><span id="DQValidator.execute-107"><a href="#DQValidator.execute-107"><span class="linenos">107</span></a>            <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">spec</span><span class="o">.</span><span class="n">input_spec</span><span class="o">.</span><span class="n">df_name</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">spec</span><span class="o">.</span><span class="n">restore_prev_version</span><span class="p">:</span>
+</span><span id="DQValidator.execute-108"><a href="#DQValidator.execute-108"><span class="linenos">108</span></a>                <span class="bp">self</span><span class="o">.</span><span class="n">_LOGGER</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Restoring delta table/files to previous version...&quot;</span><span class="p">)</span>
+</span><span id="DQValidator.execute-109"><a href="#DQValidator.execute-109"><span class="linenos">109</span></a>
+</span><span id="DQValidator.execute-110"><a href="#DQValidator.execute-110"><span class="linenos">110</span></a>                <span class="bp">self</span><span class="o">.</span><span class="n">_restore_prev_version</span><span class="p">()</span>
+</span><span id="DQValidator.execute-111"><a href="#DQValidator.execute-111"><span class="linenos">111</span></a>
+</span><span id="DQValidator.execute-112"><a href="#DQValidator.execute-112"><span class="linenos">112</span></a>                <span class="k">raise</span> <span class="n">DQValidationsFailedException</span><span class="p">(</span>
+</span><span id="DQValidator.execute-113"><a href="#DQValidator.execute-113"><span class="linenos">113</span></a>                    <span class="s2">&quot;Data Quality Validations Failed! The delta &quot;</span>
+</span><span id="DQValidator.execute-114"><a href="#DQValidator.execute-114"><span class="linenos">114</span></a>                    <span class="s2">&quot;table/files were restored to the previous version!&quot;</span>
+</span><span id="DQValidator.execute-115"><a href="#DQValidator.execute-115"><span class="linenos">115</span></a>                <span class="p">)</span>
+</span><span id="DQValidator.execute-116"><a href="#DQValidator.execute-116"><span class="linenos">116</span></a>
+</span><span id="DQValidator.execute-117"><a href="#DQValidator.execute-117"><span class="linenos">117</span></a>            <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">spec</span><span class="o">.</span><span class="n">dq_spec</span><span class="o">.</span><span class="n">fail_on_error</span><span class="p">:</span>
+</span><span id="DQValidator.execute-118"><a href="#DQValidator.execute-118"><span class="linenos">118</span></a>                <span class="k">raise</span> <span class="n">DQValidationsFailedException</span><span class="p">(</span><span class="s2">&quot;Data Quality Validations Failed!&quot;</span><span class="p">)</span>
+</span><span id="DQValidator.execute-119"><a href="#DQValidator.execute-119"><span class="linenos">119</span></a>        <span class="k">else</span><span class="p">:</span>
+</span><span id="DQValidator.execute-120"><a href="#DQValidator.execute-120"><span class="linenos">120</span></a>            <span class="bp">self</span><span class="o">.</span><span class="n">_LOGGER</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Execution of the algorithm has finished!&quot;</span><span class="p">)</span>
 </span></pre></div>
 
 

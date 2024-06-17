@@ -63,7 +63,7 @@
     </ul>
 
 
-            <footer>Lakehouse Engine v1.20.1</footer>
+            <footer>Lakehouse Engine v1.21.0version</footer>
 
 </div>
     </nav>
@@ -81,74 +81,75 @@
                     <label class="view-source-button" for="mod-data_maskers-view-source"><span>View Source</span></label>
 
                     <div class="pdoc-code codehilite"><pre><span></span><span id="L-1"><a href="#L-1"><span class="linenos"> 1</span></a><span class="sd">&quot;&quot;&quot;Module with data masking transformers.&quot;&quot;&quot;</span>
-</span><span id="L-2"><a href="#L-2"><span class="linenos"> 2</span></a><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">List</span>
-</span><span id="L-3"><a href="#L-3"><span class="linenos"> 3</span></a>
-</span><span id="L-4"><a href="#L-4"><span class="linenos"> 4</span></a><span class="kn">from</span> <span class="nn">pyspark.sql</span> <span class="kn">import</span> <span class="n">DataFrame</span>
-</span><span id="L-5"><a href="#L-5"><span class="linenos"> 5</span></a><span class="kn">from</span> <span class="nn">pyspark.sql.functions</span> <span class="kn">import</span> <span class="nb">hash</span><span class="p">,</span> <span class="n">sha2</span>
-</span><span id="L-6"><a href="#L-6"><span class="linenos"> 6</span></a>
-</span><span id="L-7"><a href="#L-7"><span class="linenos"> 7</span></a><span class="kn">from</span> <span class="nn">lakehouse_engine.transformers.exceptions</span> <span class="kn">import</span> <span class="n">WrongArgumentsException</span>
-</span><span id="L-8"><a href="#L-8"><span class="linenos"> 8</span></a><span class="kn">from</span> <span class="nn">lakehouse_engine.utils.logging_handler</span> <span class="kn">import</span> <span class="n">LoggingHandler</span>
-</span><span id="L-9"><a href="#L-9"><span class="linenos"> 9</span></a>
+</span><span id="L-2"><a href="#L-2"><span class="linenos"> 2</span></a>
+</span><span id="L-3"><a href="#L-3"><span class="linenos"> 3</span></a><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">List</span>
+</span><span id="L-4"><a href="#L-4"><span class="linenos"> 4</span></a>
+</span><span id="L-5"><a href="#L-5"><span class="linenos"> 5</span></a><span class="kn">from</span> <span class="nn">pyspark.sql</span> <span class="kn">import</span> <span class="n">DataFrame</span>
+</span><span id="L-6"><a href="#L-6"><span class="linenos"> 6</span></a><span class="kn">from</span> <span class="nn">pyspark.sql.functions</span> <span class="kn">import</span> <span class="nb">hash</span><span class="p">,</span> <span class="n">sha2</span>  <span class="c1"># noqa: A004</span>
+</span><span id="L-7"><a href="#L-7"><span class="linenos"> 7</span></a>
+</span><span id="L-8"><a href="#L-8"><span class="linenos"> 8</span></a><span class="kn">from</span> <span class="nn">lakehouse_engine.transformers.exceptions</span> <span class="kn">import</span> <span class="n">WrongArgumentsException</span>
+</span><span id="L-9"><a href="#L-9"><span class="linenos"> 9</span></a><span class="kn">from</span> <span class="nn">lakehouse_engine.utils.logging_handler</span> <span class="kn">import</span> <span class="n">LoggingHandler</span>
 </span><span id="L-10"><a href="#L-10"><span class="linenos">10</span></a>
-</span><span id="L-11"><a href="#L-11"><span class="linenos">11</span></a><span class="k">class</span> <span class="nc">DataMaskers</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-</span><span id="L-12"><a href="#L-12"><span class="linenos">12</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Class containing data masking transformers.&quot;&quot;&quot;</span>
-</span><span id="L-13"><a href="#L-13"><span class="linenos">13</span></a>
-</span><span id="L-14"><a href="#L-14"><span class="linenos">14</span></a>    <span class="n">_logger</span> <span class="o">=</span> <span class="n">LoggingHandler</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span><span class="o">.</span><span class="n">get_logger</span><span class="p">()</span>
-</span><span id="L-15"><a href="#L-15"><span class="linenos">15</span></a>
-</span><span id="L-16"><a href="#L-16"><span class="linenos">16</span></a>    <span class="nd">@classmethod</span>
-</span><span id="L-17"><a href="#L-17"><span class="linenos">17</span></a>    <span class="k">def</span> <span class="nf">hash_masker</span><span class="p">(</span>
-</span><span id="L-18"><a href="#L-18"><span class="linenos">18</span></a>        <span class="bp">cls</span><span class="p">,</span>
-</span><span id="L-19"><a href="#L-19"><span class="linenos">19</span></a>        <span class="n">cols</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
-</span><span id="L-20"><a href="#L-20"><span class="linenos">20</span></a>        <span class="n">approach</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;SHA&quot;</span><span class="p">,</span>
-</span><span id="L-21"><a href="#L-21"><span class="linenos">21</span></a>        <span class="n">num_bits</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">256</span><span class="p">,</span>
-</span><span id="L-22"><a href="#L-22"><span class="linenos">22</span></a>        <span class="n">suffix</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;_hash&quot;</span><span class="p">,</span>
-</span><span id="L-23"><a href="#L-23"><span class="linenos">23</span></a>    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">:</span>
-</span><span id="L-24"><a href="#L-24"><span class="linenos">24</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Mask specific columns using an hashing approach.</span>
-</span><span id="L-25"><a href="#L-25"><span class="linenos">25</span></a>
-</span><span id="L-26"><a href="#L-26"><span class="linenos">26</span></a><span class="sd">        Args:</span>
-</span><span id="L-27"><a href="#L-27"><span class="linenos">27</span></a><span class="sd">            cols: list of column names to mask.</span>
-</span><span id="L-28"><a href="#L-28"><span class="linenos">28</span></a><span class="sd">            approach: hashing approach. Defaults to &#39;SHA&#39;. There&#39;s &quot;MURMUR3&quot; as well.</span>
-</span><span id="L-29"><a href="#L-29"><span class="linenos">29</span></a><span class="sd">            num_bits: number of bits of the SHA approach. Only applies to SHA approach.</span>
-</span><span id="L-30"><a href="#L-30"><span class="linenos">30</span></a><span class="sd">            suffix: suffix to apply to new column name. Defaults to &quot;_hash&quot;.</span>
-</span><span id="L-31"><a href="#L-31"><span class="linenos">31</span></a><span class="sd">                Note: you can pass an empty suffix to have the original column replaced.</span>
-</span><span id="L-32"><a href="#L-32"><span class="linenos">32</span></a>
-</span><span id="L-33"><a href="#L-33"><span class="linenos">33</span></a><span class="sd">        Returns:</span>
-</span><span id="L-34"><a href="#L-34"><span class="linenos">34</span></a><span class="sd">            A function to be called in .transform() spark function.</span>
-</span><span id="L-35"><a href="#L-35"><span class="linenos">35</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="L-36"><a href="#L-36"><span class="linenos">36</span></a>
-</span><span id="L-37"><a href="#L-37"><span class="linenos">37</span></a>        <span class="k">def</span> <span class="nf">inner</span><span class="p">(</span><span class="n">df</span><span class="p">:</span> <span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataFrame</span><span class="p">:</span>
-</span><span id="L-38"><a href="#L-38"><span class="linenos">38</span></a>            <span class="n">masked_df</span> <span class="o">=</span> <span class="n">df</span>
-</span><span id="L-39"><a href="#L-39"><span class="linenos">39</span></a>            <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">cols</span><span class="p">:</span>
-</span><span id="L-40"><a href="#L-40"><span class="linenos">40</span></a>                <span class="k">if</span> <span class="n">approach</span> <span class="o">==</span> <span class="s2">&quot;MURMUR3&quot;</span><span class="p">:</span>
-</span><span id="L-41"><a href="#L-41"><span class="linenos">41</span></a>                    <span class="n">masked_df</span> <span class="o">=</span> <span class="n">masked_df</span><span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="n">col</span> <span class="o">+</span> <span class="n">suffix</span><span class="p">,</span> <span class="nb">hash</span><span class="p">(</span><span class="n">col</span><span class="p">))</span>
-</span><span id="L-42"><a href="#L-42"><span class="linenos">42</span></a>                <span class="k">elif</span> <span class="n">approach</span> <span class="o">==</span> <span class="s2">&quot;SHA&quot;</span><span class="p">:</span>
-</span><span id="L-43"><a href="#L-43"><span class="linenos">43</span></a>                    <span class="n">masked_df</span> <span class="o">=</span> <span class="n">masked_df</span><span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="n">col</span> <span class="o">+</span> <span class="n">suffix</span><span class="p">,</span> <span class="n">sha2</span><span class="p">(</span><span class="n">col</span><span class="p">,</span> <span class="n">num_bits</span><span class="p">))</span>
-</span><span id="L-44"><a href="#L-44"><span class="linenos">44</span></a>                <span class="k">else</span><span class="p">:</span>
-</span><span id="L-45"><a href="#L-45"><span class="linenos">45</span></a>                    <span class="k">raise</span> <span class="n">WrongArgumentsException</span><span class="p">(</span><span class="s2">&quot;Hashing approach is not supported.&quot;</span><span class="p">)</span>
-</span><span id="L-46"><a href="#L-46"><span class="linenos">46</span></a>
-</span><span id="L-47"><a href="#L-47"><span class="linenos">47</span></a>            <span class="k">return</span> <span class="n">masked_df</span>
-</span><span id="L-48"><a href="#L-48"><span class="linenos">48</span></a>
-</span><span id="L-49"><a href="#L-49"><span class="linenos">49</span></a>        <span class="k">return</span> <span class="n">inner</span>
-</span><span id="L-50"><a href="#L-50"><span class="linenos">50</span></a>
-</span><span id="L-51"><a href="#L-51"><span class="linenos">51</span></a>    <span class="nd">@classmethod</span>
-</span><span id="L-52"><a href="#L-52"><span class="linenos">52</span></a>    <span class="k">def</span> <span class="nf">column_dropper</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">cols</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">:</span>
-</span><span id="L-53"><a href="#L-53"><span class="linenos">53</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Drop specific columns.</span>
-</span><span id="L-54"><a href="#L-54"><span class="linenos">54</span></a>
-</span><span id="L-55"><a href="#L-55"><span class="linenos">55</span></a><span class="sd">        Args:</span>
-</span><span id="L-56"><a href="#L-56"><span class="linenos">56</span></a><span class="sd">            cols: list of column names to drop.</span>
-</span><span id="L-57"><a href="#L-57"><span class="linenos">57</span></a>
-</span><span id="L-58"><a href="#L-58"><span class="linenos">58</span></a><span class="sd">        Returns:</span>
-</span><span id="L-59"><a href="#L-59"><span class="linenos">59</span></a><span class="sd">            A function to be called in .transform() spark function.</span>
-</span><span id="L-60"><a href="#L-60"><span class="linenos">60</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="L-61"><a href="#L-61"><span class="linenos">61</span></a>
-</span><span id="L-62"><a href="#L-62"><span class="linenos">62</span></a>        <span class="k">def</span> <span class="nf">inner</span><span class="p">(</span><span class="n">df</span><span class="p">:</span> <span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataFrame</span><span class="p">:</span>
-</span><span id="L-63"><a href="#L-63"><span class="linenos">63</span></a>            <span class="n">drop_df</span> <span class="o">=</span> <span class="n">df</span>
-</span><span id="L-64"><a href="#L-64"><span class="linenos">64</span></a>            <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">cols</span><span class="p">:</span>
-</span><span id="L-65"><a href="#L-65"><span class="linenos">65</span></a>                <span class="n">drop_df</span> <span class="o">=</span> <span class="n">drop_df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">col</span><span class="p">)</span>
-</span><span id="L-66"><a href="#L-66"><span class="linenos">66</span></a>
-</span><span id="L-67"><a href="#L-67"><span class="linenos">67</span></a>            <span class="k">return</span> <span class="n">drop_df</span>
-</span><span id="L-68"><a href="#L-68"><span class="linenos">68</span></a>
-</span><span id="L-69"><a href="#L-69"><span class="linenos">69</span></a>        <span class="k">return</span> <span class="n">inner</span>
+</span><span id="L-11"><a href="#L-11"><span class="linenos">11</span></a>
+</span><span id="L-12"><a href="#L-12"><span class="linenos">12</span></a><span class="k">class</span> <span class="nc">DataMaskers</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+</span><span id="L-13"><a href="#L-13"><span class="linenos">13</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Class containing data masking transformers.&quot;&quot;&quot;</span>
+</span><span id="L-14"><a href="#L-14"><span class="linenos">14</span></a>
+</span><span id="L-15"><a href="#L-15"><span class="linenos">15</span></a>    <span class="n">_logger</span> <span class="o">=</span> <span class="n">LoggingHandler</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span><span class="o">.</span><span class="n">get_logger</span><span class="p">()</span>
+</span><span id="L-16"><a href="#L-16"><span class="linenos">16</span></a>
+</span><span id="L-17"><a href="#L-17"><span class="linenos">17</span></a>    <span class="nd">@classmethod</span>
+</span><span id="L-18"><a href="#L-18"><span class="linenos">18</span></a>    <span class="k">def</span> <span class="nf">hash_masker</span><span class="p">(</span>
+</span><span id="L-19"><a href="#L-19"><span class="linenos">19</span></a>        <span class="bp">cls</span><span class="p">,</span>
+</span><span id="L-20"><a href="#L-20"><span class="linenos">20</span></a>        <span class="n">cols</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
+</span><span id="L-21"><a href="#L-21"><span class="linenos">21</span></a>        <span class="n">approach</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;SHA&quot;</span><span class="p">,</span>
+</span><span id="L-22"><a href="#L-22"><span class="linenos">22</span></a>        <span class="n">num_bits</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">256</span><span class="p">,</span>
+</span><span id="L-23"><a href="#L-23"><span class="linenos">23</span></a>        <span class="n">suffix</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;_hash&quot;</span><span class="p">,</span>
+</span><span id="L-24"><a href="#L-24"><span class="linenos">24</span></a>    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">:</span>
+</span><span id="L-25"><a href="#L-25"><span class="linenos">25</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Mask specific columns using an hashing approach.</span>
+</span><span id="L-26"><a href="#L-26"><span class="linenos">26</span></a>
+</span><span id="L-27"><a href="#L-27"><span class="linenos">27</span></a><span class="sd">        Args:</span>
+</span><span id="L-28"><a href="#L-28"><span class="linenos">28</span></a><span class="sd">            cols: list of column names to mask.</span>
+</span><span id="L-29"><a href="#L-29"><span class="linenos">29</span></a><span class="sd">            approach: hashing approach. Defaults to &#39;SHA&#39;. There&#39;s &quot;MURMUR3&quot; as well.</span>
+</span><span id="L-30"><a href="#L-30"><span class="linenos">30</span></a><span class="sd">            num_bits: number of bits of the SHA approach. Only applies to SHA approach.</span>
+</span><span id="L-31"><a href="#L-31"><span class="linenos">31</span></a><span class="sd">            suffix: suffix to apply to new column name. Defaults to &quot;_hash&quot;.</span>
+</span><span id="L-32"><a href="#L-32"><span class="linenos">32</span></a><span class="sd">                Note: you can pass an empty suffix to have the original column replaced.</span>
+</span><span id="L-33"><a href="#L-33"><span class="linenos">33</span></a>
+</span><span id="L-34"><a href="#L-34"><span class="linenos">34</span></a><span class="sd">        Returns:</span>
+</span><span id="L-35"><a href="#L-35"><span class="linenos">35</span></a><span class="sd">            A function to be called in .transform() spark function.</span>
+</span><span id="L-36"><a href="#L-36"><span class="linenos">36</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="L-37"><a href="#L-37"><span class="linenos">37</span></a>
+</span><span id="L-38"><a href="#L-38"><span class="linenos">38</span></a>        <span class="k">def</span> <span class="nf">inner</span><span class="p">(</span><span class="n">df</span><span class="p">:</span> <span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataFrame</span><span class="p">:</span>
+</span><span id="L-39"><a href="#L-39"><span class="linenos">39</span></a>            <span class="n">masked_df</span> <span class="o">=</span> <span class="n">df</span>
+</span><span id="L-40"><a href="#L-40"><span class="linenos">40</span></a>            <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">cols</span><span class="p">:</span>
+</span><span id="L-41"><a href="#L-41"><span class="linenos">41</span></a>                <span class="k">if</span> <span class="n">approach</span> <span class="o">==</span> <span class="s2">&quot;MURMUR3&quot;</span><span class="p">:</span>
+</span><span id="L-42"><a href="#L-42"><span class="linenos">42</span></a>                    <span class="n">masked_df</span> <span class="o">=</span> <span class="n">masked_df</span><span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="n">col</span> <span class="o">+</span> <span class="n">suffix</span><span class="p">,</span> <span class="nb">hash</span><span class="p">(</span><span class="n">col</span><span class="p">))</span>
+</span><span id="L-43"><a href="#L-43"><span class="linenos">43</span></a>                <span class="k">elif</span> <span class="n">approach</span> <span class="o">==</span> <span class="s2">&quot;SHA&quot;</span><span class="p">:</span>
+</span><span id="L-44"><a href="#L-44"><span class="linenos">44</span></a>                    <span class="n">masked_df</span> <span class="o">=</span> <span class="n">masked_df</span><span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="n">col</span> <span class="o">+</span> <span class="n">suffix</span><span class="p">,</span> <span class="n">sha2</span><span class="p">(</span><span class="n">col</span><span class="p">,</span> <span class="n">num_bits</span><span class="p">))</span>
+</span><span id="L-45"><a href="#L-45"><span class="linenos">45</span></a>                <span class="k">else</span><span class="p">:</span>
+</span><span id="L-46"><a href="#L-46"><span class="linenos">46</span></a>                    <span class="k">raise</span> <span class="n">WrongArgumentsException</span><span class="p">(</span><span class="s2">&quot;Hashing approach is not supported.&quot;</span><span class="p">)</span>
+</span><span id="L-47"><a href="#L-47"><span class="linenos">47</span></a>
+</span><span id="L-48"><a href="#L-48"><span class="linenos">48</span></a>            <span class="k">return</span> <span class="n">masked_df</span>
+</span><span id="L-49"><a href="#L-49"><span class="linenos">49</span></a>
+</span><span id="L-50"><a href="#L-50"><span class="linenos">50</span></a>        <span class="k">return</span> <span class="n">inner</span>
+</span><span id="L-51"><a href="#L-51"><span class="linenos">51</span></a>
+</span><span id="L-52"><a href="#L-52"><span class="linenos">52</span></a>    <span class="nd">@classmethod</span>
+</span><span id="L-53"><a href="#L-53"><span class="linenos">53</span></a>    <span class="k">def</span> <span class="nf">column_dropper</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">cols</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">:</span>
+</span><span id="L-54"><a href="#L-54"><span class="linenos">54</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Drop specific columns.</span>
+</span><span id="L-55"><a href="#L-55"><span class="linenos">55</span></a>
+</span><span id="L-56"><a href="#L-56"><span class="linenos">56</span></a><span class="sd">        Args:</span>
+</span><span id="L-57"><a href="#L-57"><span class="linenos">57</span></a><span class="sd">            cols: list of column names to drop.</span>
+</span><span id="L-58"><a href="#L-58"><span class="linenos">58</span></a>
+</span><span id="L-59"><a href="#L-59"><span class="linenos">59</span></a><span class="sd">        Returns:</span>
+</span><span id="L-60"><a href="#L-60"><span class="linenos">60</span></a><span class="sd">            A function to be called in .transform() spark function.</span>
+</span><span id="L-61"><a href="#L-61"><span class="linenos">61</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="L-62"><a href="#L-62"><span class="linenos">62</span></a>
+</span><span id="L-63"><a href="#L-63"><span class="linenos">63</span></a>        <span class="k">def</span> <span class="nf">inner</span><span class="p">(</span><span class="n">df</span><span class="p">:</span> <span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataFrame</span><span class="p">:</span>
+</span><span id="L-64"><a href="#L-64"><span class="linenos">64</span></a>            <span class="n">drop_df</span> <span class="o">=</span> <span class="n">df</span>
+</span><span id="L-65"><a href="#L-65"><span class="linenos">65</span></a>            <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">cols</span><span class="p">:</span>
+</span><span id="L-66"><a href="#L-66"><span class="linenos">66</span></a>                <span class="n">drop_df</span> <span class="o">=</span> <span class="n">drop_df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">col</span><span class="p">)</span>
+</span><span id="L-67"><a href="#L-67"><span class="linenos">67</span></a>
+</span><span id="L-68"><a href="#L-68"><span class="linenos">68</span></a>            <span class="k">return</span> <span class="n">drop_df</span>
+</span><span id="L-69"><a href="#L-69"><span class="linenos">69</span></a>
+</span><span id="L-70"><a href="#L-70"><span class="linenos">70</span></a>        <span class="k">return</span> <span class="n">inner</span>
 </span></pre></div>
 
 
@@ -164,65 +165,65 @@
 
     </div>
     <a class="headerlink" href="#DataMaskers"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="DataMaskers-12"><a href="#DataMaskers-12"><span class="linenos">12</span></a><span class="k">class</span> <span class="nc">DataMaskers</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-</span><span id="DataMaskers-13"><a href="#DataMaskers-13"><span class="linenos">13</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Class containing data masking transformers.&quot;&quot;&quot;</span>
-</span><span id="DataMaskers-14"><a href="#DataMaskers-14"><span class="linenos">14</span></a>
-</span><span id="DataMaskers-15"><a href="#DataMaskers-15"><span class="linenos">15</span></a>    <span class="n">_logger</span> <span class="o">=</span> <span class="n">LoggingHandler</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span><span class="o">.</span><span class="n">get_logger</span><span class="p">()</span>
-</span><span id="DataMaskers-16"><a href="#DataMaskers-16"><span class="linenos">16</span></a>
-</span><span id="DataMaskers-17"><a href="#DataMaskers-17"><span class="linenos">17</span></a>    <span class="nd">@classmethod</span>
-</span><span id="DataMaskers-18"><a href="#DataMaskers-18"><span class="linenos">18</span></a>    <span class="k">def</span> <span class="nf">hash_masker</span><span class="p">(</span>
-</span><span id="DataMaskers-19"><a href="#DataMaskers-19"><span class="linenos">19</span></a>        <span class="bp">cls</span><span class="p">,</span>
-</span><span id="DataMaskers-20"><a href="#DataMaskers-20"><span class="linenos">20</span></a>        <span class="n">cols</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
-</span><span id="DataMaskers-21"><a href="#DataMaskers-21"><span class="linenos">21</span></a>        <span class="n">approach</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;SHA&quot;</span><span class="p">,</span>
-</span><span id="DataMaskers-22"><a href="#DataMaskers-22"><span class="linenos">22</span></a>        <span class="n">num_bits</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">256</span><span class="p">,</span>
-</span><span id="DataMaskers-23"><a href="#DataMaskers-23"><span class="linenos">23</span></a>        <span class="n">suffix</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;_hash&quot;</span><span class="p">,</span>
-</span><span id="DataMaskers-24"><a href="#DataMaskers-24"><span class="linenos">24</span></a>    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">:</span>
-</span><span id="DataMaskers-25"><a href="#DataMaskers-25"><span class="linenos">25</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Mask specific columns using an hashing approach.</span>
-</span><span id="DataMaskers-26"><a href="#DataMaskers-26"><span class="linenos">26</span></a>
-</span><span id="DataMaskers-27"><a href="#DataMaskers-27"><span class="linenos">27</span></a><span class="sd">        Args:</span>
-</span><span id="DataMaskers-28"><a href="#DataMaskers-28"><span class="linenos">28</span></a><span class="sd">            cols: list of column names to mask.</span>
-</span><span id="DataMaskers-29"><a href="#DataMaskers-29"><span class="linenos">29</span></a><span class="sd">            approach: hashing approach. Defaults to &#39;SHA&#39;. There&#39;s &quot;MURMUR3&quot; as well.</span>
-</span><span id="DataMaskers-30"><a href="#DataMaskers-30"><span class="linenos">30</span></a><span class="sd">            num_bits: number of bits of the SHA approach. Only applies to SHA approach.</span>
-</span><span id="DataMaskers-31"><a href="#DataMaskers-31"><span class="linenos">31</span></a><span class="sd">            suffix: suffix to apply to new column name. Defaults to &quot;_hash&quot;.</span>
-</span><span id="DataMaskers-32"><a href="#DataMaskers-32"><span class="linenos">32</span></a><span class="sd">                Note: you can pass an empty suffix to have the original column replaced.</span>
-</span><span id="DataMaskers-33"><a href="#DataMaskers-33"><span class="linenos">33</span></a>
-</span><span id="DataMaskers-34"><a href="#DataMaskers-34"><span class="linenos">34</span></a><span class="sd">        Returns:</span>
-</span><span id="DataMaskers-35"><a href="#DataMaskers-35"><span class="linenos">35</span></a><span class="sd">            A function to be called in .transform() spark function.</span>
-</span><span id="DataMaskers-36"><a href="#DataMaskers-36"><span class="linenos">36</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="DataMaskers-37"><a href="#DataMaskers-37"><span class="linenos">37</span></a>
-</span><span id="DataMaskers-38"><a href="#DataMaskers-38"><span class="linenos">38</span></a>        <span class="k">def</span> <span class="nf">inner</span><span class="p">(</span><span class="n">df</span><span class="p">:</span> <span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataFrame</span><span class="p">:</span>
-</span><span id="DataMaskers-39"><a href="#DataMaskers-39"><span class="linenos">39</span></a>            <span class="n">masked_df</span> <span class="o">=</span> <span class="n">df</span>
-</span><span id="DataMaskers-40"><a href="#DataMaskers-40"><span class="linenos">40</span></a>            <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">cols</span><span class="p">:</span>
-</span><span id="DataMaskers-41"><a href="#DataMaskers-41"><span class="linenos">41</span></a>                <span class="k">if</span> <span class="n">approach</span> <span class="o">==</span> <span class="s2">&quot;MURMUR3&quot;</span><span class="p">:</span>
-</span><span id="DataMaskers-42"><a href="#DataMaskers-42"><span class="linenos">42</span></a>                    <span class="n">masked_df</span> <span class="o">=</span> <span class="n">masked_df</span><span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="n">col</span> <span class="o">+</span> <span class="n">suffix</span><span class="p">,</span> <span class="nb">hash</span><span class="p">(</span><span class="n">col</span><span class="p">))</span>
-</span><span id="DataMaskers-43"><a href="#DataMaskers-43"><span class="linenos">43</span></a>                <span class="k">elif</span> <span class="n">approach</span> <span class="o">==</span> <span class="s2">&quot;SHA&quot;</span><span class="p">:</span>
-</span><span id="DataMaskers-44"><a href="#DataMaskers-44"><span class="linenos">44</span></a>                    <span class="n">masked_df</span> <span class="o">=</span> <span class="n">masked_df</span><span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="n">col</span> <span class="o">+</span> <span class="n">suffix</span><span class="p">,</span> <span class="n">sha2</span><span class="p">(</span><span class="n">col</span><span class="p">,</span> <span class="n">num_bits</span><span class="p">))</span>
-</span><span id="DataMaskers-45"><a href="#DataMaskers-45"><span class="linenos">45</span></a>                <span class="k">else</span><span class="p">:</span>
-</span><span id="DataMaskers-46"><a href="#DataMaskers-46"><span class="linenos">46</span></a>                    <span class="k">raise</span> <span class="n">WrongArgumentsException</span><span class="p">(</span><span class="s2">&quot;Hashing approach is not supported.&quot;</span><span class="p">)</span>
-</span><span id="DataMaskers-47"><a href="#DataMaskers-47"><span class="linenos">47</span></a>
-</span><span id="DataMaskers-48"><a href="#DataMaskers-48"><span class="linenos">48</span></a>            <span class="k">return</span> <span class="n">masked_df</span>
-</span><span id="DataMaskers-49"><a href="#DataMaskers-49"><span class="linenos">49</span></a>
-</span><span id="DataMaskers-50"><a href="#DataMaskers-50"><span class="linenos">50</span></a>        <span class="k">return</span> <span class="n">inner</span>
-</span><span id="DataMaskers-51"><a href="#DataMaskers-51"><span class="linenos">51</span></a>
-</span><span id="DataMaskers-52"><a href="#DataMaskers-52"><span class="linenos">52</span></a>    <span class="nd">@classmethod</span>
-</span><span id="DataMaskers-53"><a href="#DataMaskers-53"><span class="linenos">53</span></a>    <span class="k">def</span> <span class="nf">column_dropper</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">cols</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">:</span>
-</span><span id="DataMaskers-54"><a href="#DataMaskers-54"><span class="linenos">54</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Drop specific columns.</span>
-</span><span id="DataMaskers-55"><a href="#DataMaskers-55"><span class="linenos">55</span></a>
-</span><span id="DataMaskers-56"><a href="#DataMaskers-56"><span class="linenos">56</span></a><span class="sd">        Args:</span>
-</span><span id="DataMaskers-57"><a href="#DataMaskers-57"><span class="linenos">57</span></a><span class="sd">            cols: list of column names to drop.</span>
-</span><span id="DataMaskers-58"><a href="#DataMaskers-58"><span class="linenos">58</span></a>
-</span><span id="DataMaskers-59"><a href="#DataMaskers-59"><span class="linenos">59</span></a><span class="sd">        Returns:</span>
-</span><span id="DataMaskers-60"><a href="#DataMaskers-60"><span class="linenos">60</span></a><span class="sd">            A function to be called in .transform() spark function.</span>
-</span><span id="DataMaskers-61"><a href="#DataMaskers-61"><span class="linenos">61</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="DataMaskers-62"><a href="#DataMaskers-62"><span class="linenos">62</span></a>
-</span><span id="DataMaskers-63"><a href="#DataMaskers-63"><span class="linenos">63</span></a>        <span class="k">def</span> <span class="nf">inner</span><span class="p">(</span><span class="n">df</span><span class="p">:</span> <span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataFrame</span><span class="p">:</span>
-</span><span id="DataMaskers-64"><a href="#DataMaskers-64"><span class="linenos">64</span></a>            <span class="n">drop_df</span> <span class="o">=</span> <span class="n">df</span>
-</span><span id="DataMaskers-65"><a href="#DataMaskers-65"><span class="linenos">65</span></a>            <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">cols</span><span class="p">:</span>
-</span><span id="DataMaskers-66"><a href="#DataMaskers-66"><span class="linenos">66</span></a>                <span class="n">drop_df</span> <span class="o">=</span> <span class="n">drop_df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">col</span><span class="p">)</span>
-</span><span id="DataMaskers-67"><a href="#DataMaskers-67"><span class="linenos">67</span></a>
-</span><span id="DataMaskers-68"><a href="#DataMaskers-68"><span class="linenos">68</span></a>            <span class="k">return</span> <span class="n">drop_df</span>
-</span><span id="DataMaskers-69"><a href="#DataMaskers-69"><span class="linenos">69</span></a>
-</span><span id="DataMaskers-70"><a href="#DataMaskers-70"><span class="linenos">70</span></a>        <span class="k">return</span> <span class="n">inner</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="DataMaskers-13"><a href="#DataMaskers-13"><span class="linenos">13</span></a><span class="k">class</span> <span class="nc">DataMaskers</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+</span><span id="DataMaskers-14"><a href="#DataMaskers-14"><span class="linenos">14</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Class containing data masking transformers.&quot;&quot;&quot;</span>
+</span><span id="DataMaskers-15"><a href="#DataMaskers-15"><span class="linenos">15</span></a>
+</span><span id="DataMaskers-16"><a href="#DataMaskers-16"><span class="linenos">16</span></a>    <span class="n">_logger</span> <span class="o">=</span> <span class="n">LoggingHandler</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span><span class="o">.</span><span class="n">get_logger</span><span class="p">()</span>
+</span><span id="DataMaskers-17"><a href="#DataMaskers-17"><span class="linenos">17</span></a>
+</span><span id="DataMaskers-18"><a href="#DataMaskers-18"><span class="linenos">18</span></a>    <span class="nd">@classmethod</span>
+</span><span id="DataMaskers-19"><a href="#DataMaskers-19"><span class="linenos">19</span></a>    <span class="k">def</span> <span class="nf">hash_masker</span><span class="p">(</span>
+</span><span id="DataMaskers-20"><a href="#DataMaskers-20"><span class="linenos">20</span></a>        <span class="bp">cls</span><span class="p">,</span>
+</span><span id="DataMaskers-21"><a href="#DataMaskers-21"><span class="linenos">21</span></a>        <span class="n">cols</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
+</span><span id="DataMaskers-22"><a href="#DataMaskers-22"><span class="linenos">22</span></a>        <span class="n">approach</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;SHA&quot;</span><span class="p">,</span>
+</span><span id="DataMaskers-23"><a href="#DataMaskers-23"><span class="linenos">23</span></a>        <span class="n">num_bits</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">256</span><span class="p">,</span>
+</span><span id="DataMaskers-24"><a href="#DataMaskers-24"><span class="linenos">24</span></a>        <span class="n">suffix</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;_hash&quot;</span><span class="p">,</span>
+</span><span id="DataMaskers-25"><a href="#DataMaskers-25"><span class="linenos">25</span></a>    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">:</span>
+</span><span id="DataMaskers-26"><a href="#DataMaskers-26"><span class="linenos">26</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Mask specific columns using an hashing approach.</span>
+</span><span id="DataMaskers-27"><a href="#DataMaskers-27"><span class="linenos">27</span></a>
+</span><span id="DataMaskers-28"><a href="#DataMaskers-28"><span class="linenos">28</span></a><span class="sd">        Args:</span>
+</span><span id="DataMaskers-29"><a href="#DataMaskers-29"><span class="linenos">29</span></a><span class="sd">            cols: list of column names to mask.</span>
+</span><span id="DataMaskers-30"><a href="#DataMaskers-30"><span class="linenos">30</span></a><span class="sd">            approach: hashing approach. Defaults to &#39;SHA&#39;. There&#39;s &quot;MURMUR3&quot; as well.</span>
+</span><span id="DataMaskers-31"><a href="#DataMaskers-31"><span class="linenos">31</span></a><span class="sd">            num_bits: number of bits of the SHA approach. Only applies to SHA approach.</span>
+</span><span id="DataMaskers-32"><a href="#DataMaskers-32"><span class="linenos">32</span></a><span class="sd">            suffix: suffix to apply to new column name. Defaults to &quot;_hash&quot;.</span>
+</span><span id="DataMaskers-33"><a href="#DataMaskers-33"><span class="linenos">33</span></a><span class="sd">                Note: you can pass an empty suffix to have the original column replaced.</span>
+</span><span id="DataMaskers-34"><a href="#DataMaskers-34"><span class="linenos">34</span></a>
+</span><span id="DataMaskers-35"><a href="#DataMaskers-35"><span class="linenos">35</span></a><span class="sd">        Returns:</span>
+</span><span id="DataMaskers-36"><a href="#DataMaskers-36"><span class="linenos">36</span></a><span class="sd">            A function to be called in .transform() spark function.</span>
+</span><span id="DataMaskers-37"><a href="#DataMaskers-37"><span class="linenos">37</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="DataMaskers-38"><a href="#DataMaskers-38"><span class="linenos">38</span></a>
+</span><span id="DataMaskers-39"><a href="#DataMaskers-39"><span class="linenos">39</span></a>        <span class="k">def</span> <span class="nf">inner</span><span class="p">(</span><span class="n">df</span><span class="p">:</span> <span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataFrame</span><span class="p">:</span>
+</span><span id="DataMaskers-40"><a href="#DataMaskers-40"><span class="linenos">40</span></a>            <span class="n">masked_df</span> <span class="o">=</span> <span class="n">df</span>
+</span><span id="DataMaskers-41"><a href="#DataMaskers-41"><span class="linenos">41</span></a>            <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">cols</span><span class="p">:</span>
+</span><span id="DataMaskers-42"><a href="#DataMaskers-42"><span class="linenos">42</span></a>                <span class="k">if</span> <span class="n">approach</span> <span class="o">==</span> <span class="s2">&quot;MURMUR3&quot;</span><span class="p">:</span>
+</span><span id="DataMaskers-43"><a href="#DataMaskers-43"><span class="linenos">43</span></a>                    <span class="n">masked_df</span> <span class="o">=</span> <span class="n">masked_df</span><span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="n">col</span> <span class="o">+</span> <span class="n">suffix</span><span class="p">,</span> <span class="nb">hash</span><span class="p">(</span><span class="n">col</span><span class="p">))</span>
+</span><span id="DataMaskers-44"><a href="#DataMaskers-44"><span class="linenos">44</span></a>                <span class="k">elif</span> <span class="n">approach</span> <span class="o">==</span> <span class="s2">&quot;SHA&quot;</span><span class="p">:</span>
+</span><span id="DataMaskers-45"><a href="#DataMaskers-45"><span class="linenos">45</span></a>                    <span class="n">masked_df</span> <span class="o">=</span> <span class="n">masked_df</span><span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="n">col</span> <span class="o">+</span> <span class="n">suffix</span><span class="p">,</span> <span class="n">sha2</span><span class="p">(</span><span class="n">col</span><span class="p">,</span> <span class="n">num_bits</span><span class="p">))</span>
+</span><span id="DataMaskers-46"><a href="#DataMaskers-46"><span class="linenos">46</span></a>                <span class="k">else</span><span class="p">:</span>
+</span><span id="DataMaskers-47"><a href="#DataMaskers-47"><span class="linenos">47</span></a>                    <span class="k">raise</span> <span class="n">WrongArgumentsException</span><span class="p">(</span><span class="s2">&quot;Hashing approach is not supported.&quot;</span><span class="p">)</span>
+</span><span id="DataMaskers-48"><a href="#DataMaskers-48"><span class="linenos">48</span></a>
+</span><span id="DataMaskers-49"><a href="#DataMaskers-49"><span class="linenos">49</span></a>            <span class="k">return</span> <span class="n">masked_df</span>
+</span><span id="DataMaskers-50"><a href="#DataMaskers-50"><span class="linenos">50</span></a>
+</span><span id="DataMaskers-51"><a href="#DataMaskers-51"><span class="linenos">51</span></a>        <span class="k">return</span> <span class="n">inner</span>
+</span><span id="DataMaskers-52"><a href="#DataMaskers-52"><span class="linenos">52</span></a>
+</span><span id="DataMaskers-53"><a href="#DataMaskers-53"><span class="linenos">53</span></a>    <span class="nd">@classmethod</span>
+</span><span id="DataMaskers-54"><a href="#DataMaskers-54"><span class="linenos">54</span></a>    <span class="k">def</span> <span class="nf">column_dropper</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">cols</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">:</span>
+</span><span id="DataMaskers-55"><a href="#DataMaskers-55"><span class="linenos">55</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Drop specific columns.</span>
+</span><span id="DataMaskers-56"><a href="#DataMaskers-56"><span class="linenos">56</span></a>
+</span><span id="DataMaskers-57"><a href="#DataMaskers-57"><span class="linenos">57</span></a><span class="sd">        Args:</span>
+</span><span id="DataMaskers-58"><a href="#DataMaskers-58"><span class="linenos">58</span></a><span class="sd">            cols: list of column names to drop.</span>
+</span><span id="DataMaskers-59"><a href="#DataMaskers-59"><span class="linenos">59</span></a>
+</span><span id="DataMaskers-60"><a href="#DataMaskers-60"><span class="linenos">60</span></a><span class="sd">        Returns:</span>
+</span><span id="DataMaskers-61"><a href="#DataMaskers-61"><span class="linenos">61</span></a><span class="sd">            A function to be called in .transform() spark function.</span>
+</span><span id="DataMaskers-62"><a href="#DataMaskers-62"><span class="linenos">62</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="DataMaskers-63"><a href="#DataMaskers-63"><span class="linenos">63</span></a>
+</span><span id="DataMaskers-64"><a href="#DataMaskers-64"><span class="linenos">64</span></a>        <span class="k">def</span> <span class="nf">inner</span><span class="p">(</span><span class="n">df</span><span class="p">:</span> <span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataFrame</span><span class="p">:</span>
+</span><span id="DataMaskers-65"><a href="#DataMaskers-65"><span class="linenos">65</span></a>            <span class="n">drop_df</span> <span class="o">=</span> <span class="n">df</span>
+</span><span id="DataMaskers-66"><a href="#DataMaskers-66"><span class="linenos">66</span></a>            <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">cols</span><span class="p">:</span>
+</span><span id="DataMaskers-67"><a href="#DataMaskers-67"><span class="linenos">67</span></a>                <span class="n">drop_df</span> <span class="o">=</span> <span class="n">drop_df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">col</span><span class="p">)</span>
+</span><span id="DataMaskers-68"><a href="#DataMaskers-68"><span class="linenos">68</span></a>
+</span><span id="DataMaskers-69"><a href="#DataMaskers-69"><span class="linenos">69</span></a>            <span class="k">return</span> <span class="n">drop_df</span>
+</span><span id="DataMaskers-70"><a href="#DataMaskers-70"><span class="linenos">70</span></a>
+</span><span id="DataMaskers-71"><a href="#DataMaskers-71"><span class="linenos">71</span></a>        <span class="k">return</span> <span class="n">inner</span>
 </span></pre></div>
 
 
@@ -242,40 +243,40 @@
 
     </div>
     <a class="headerlink" href="#DataMaskers.hash_masker"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="DataMaskers.hash_masker-17"><a href="#DataMaskers.hash_masker-17"><span class="linenos">17</span></a>    <span class="nd">@classmethod</span>
-</span><span id="DataMaskers.hash_masker-18"><a href="#DataMaskers.hash_masker-18"><span class="linenos">18</span></a>    <span class="k">def</span> <span class="nf">hash_masker</span><span class="p">(</span>
-</span><span id="DataMaskers.hash_masker-19"><a href="#DataMaskers.hash_masker-19"><span class="linenos">19</span></a>        <span class="bp">cls</span><span class="p">,</span>
-</span><span id="DataMaskers.hash_masker-20"><a href="#DataMaskers.hash_masker-20"><span class="linenos">20</span></a>        <span class="n">cols</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
-</span><span id="DataMaskers.hash_masker-21"><a href="#DataMaskers.hash_masker-21"><span class="linenos">21</span></a>        <span class="n">approach</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;SHA&quot;</span><span class="p">,</span>
-</span><span id="DataMaskers.hash_masker-22"><a href="#DataMaskers.hash_masker-22"><span class="linenos">22</span></a>        <span class="n">num_bits</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">256</span><span class="p">,</span>
-</span><span id="DataMaskers.hash_masker-23"><a href="#DataMaskers.hash_masker-23"><span class="linenos">23</span></a>        <span class="n">suffix</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;_hash&quot;</span><span class="p">,</span>
-</span><span id="DataMaskers.hash_masker-24"><a href="#DataMaskers.hash_masker-24"><span class="linenos">24</span></a>    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">:</span>
-</span><span id="DataMaskers.hash_masker-25"><a href="#DataMaskers.hash_masker-25"><span class="linenos">25</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Mask specific columns using an hashing approach.</span>
-</span><span id="DataMaskers.hash_masker-26"><a href="#DataMaskers.hash_masker-26"><span class="linenos">26</span></a>
-</span><span id="DataMaskers.hash_masker-27"><a href="#DataMaskers.hash_masker-27"><span class="linenos">27</span></a><span class="sd">        Args:</span>
-</span><span id="DataMaskers.hash_masker-28"><a href="#DataMaskers.hash_masker-28"><span class="linenos">28</span></a><span class="sd">            cols: list of column names to mask.</span>
-</span><span id="DataMaskers.hash_masker-29"><a href="#DataMaskers.hash_masker-29"><span class="linenos">29</span></a><span class="sd">            approach: hashing approach. Defaults to &#39;SHA&#39;. There&#39;s &quot;MURMUR3&quot; as well.</span>
-</span><span id="DataMaskers.hash_masker-30"><a href="#DataMaskers.hash_masker-30"><span class="linenos">30</span></a><span class="sd">            num_bits: number of bits of the SHA approach. Only applies to SHA approach.</span>
-</span><span id="DataMaskers.hash_masker-31"><a href="#DataMaskers.hash_masker-31"><span class="linenos">31</span></a><span class="sd">            suffix: suffix to apply to new column name. Defaults to &quot;_hash&quot;.</span>
-</span><span id="DataMaskers.hash_masker-32"><a href="#DataMaskers.hash_masker-32"><span class="linenos">32</span></a><span class="sd">                Note: you can pass an empty suffix to have the original column replaced.</span>
-</span><span id="DataMaskers.hash_masker-33"><a href="#DataMaskers.hash_masker-33"><span class="linenos">33</span></a>
-</span><span id="DataMaskers.hash_masker-34"><a href="#DataMaskers.hash_masker-34"><span class="linenos">34</span></a><span class="sd">        Returns:</span>
-</span><span id="DataMaskers.hash_masker-35"><a href="#DataMaskers.hash_masker-35"><span class="linenos">35</span></a><span class="sd">            A function to be called in .transform() spark function.</span>
-</span><span id="DataMaskers.hash_masker-36"><a href="#DataMaskers.hash_masker-36"><span class="linenos">36</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="DataMaskers.hash_masker-37"><a href="#DataMaskers.hash_masker-37"><span class="linenos">37</span></a>
-</span><span id="DataMaskers.hash_masker-38"><a href="#DataMaskers.hash_masker-38"><span class="linenos">38</span></a>        <span class="k">def</span> <span class="nf">inner</span><span class="p">(</span><span class="n">df</span><span class="p">:</span> <span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataFrame</span><span class="p">:</span>
-</span><span id="DataMaskers.hash_masker-39"><a href="#DataMaskers.hash_masker-39"><span class="linenos">39</span></a>            <span class="n">masked_df</span> <span class="o">=</span> <span class="n">df</span>
-</span><span id="DataMaskers.hash_masker-40"><a href="#DataMaskers.hash_masker-40"><span class="linenos">40</span></a>            <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">cols</span><span class="p">:</span>
-</span><span id="DataMaskers.hash_masker-41"><a href="#DataMaskers.hash_masker-41"><span class="linenos">41</span></a>                <span class="k">if</span> <span class="n">approach</span> <span class="o">==</span> <span class="s2">&quot;MURMUR3&quot;</span><span class="p">:</span>
-</span><span id="DataMaskers.hash_masker-42"><a href="#DataMaskers.hash_masker-42"><span class="linenos">42</span></a>                    <span class="n">masked_df</span> <span class="o">=</span> <span class="n">masked_df</span><span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="n">col</span> <span class="o">+</span> <span class="n">suffix</span><span class="p">,</span> <span class="nb">hash</span><span class="p">(</span><span class="n">col</span><span class="p">))</span>
-</span><span id="DataMaskers.hash_masker-43"><a href="#DataMaskers.hash_masker-43"><span class="linenos">43</span></a>                <span class="k">elif</span> <span class="n">approach</span> <span class="o">==</span> <span class="s2">&quot;SHA&quot;</span><span class="p">:</span>
-</span><span id="DataMaskers.hash_masker-44"><a href="#DataMaskers.hash_masker-44"><span class="linenos">44</span></a>                    <span class="n">masked_df</span> <span class="o">=</span> <span class="n">masked_df</span><span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="n">col</span> <span class="o">+</span> <span class="n">suffix</span><span class="p">,</span> <span class="n">sha2</span><span class="p">(</span><span class="n">col</span><span class="p">,</span> <span class="n">num_bits</span><span class="p">))</span>
-</span><span id="DataMaskers.hash_masker-45"><a href="#DataMaskers.hash_masker-45"><span class="linenos">45</span></a>                <span class="k">else</span><span class="p">:</span>
-</span><span id="DataMaskers.hash_masker-46"><a href="#DataMaskers.hash_masker-46"><span class="linenos">46</span></a>                    <span class="k">raise</span> <span class="n">WrongArgumentsException</span><span class="p">(</span><span class="s2">&quot;Hashing approach is not supported.&quot;</span><span class="p">)</span>
-</span><span id="DataMaskers.hash_masker-47"><a href="#DataMaskers.hash_masker-47"><span class="linenos">47</span></a>
-</span><span id="DataMaskers.hash_masker-48"><a href="#DataMaskers.hash_masker-48"><span class="linenos">48</span></a>            <span class="k">return</span> <span class="n">masked_df</span>
-</span><span id="DataMaskers.hash_masker-49"><a href="#DataMaskers.hash_masker-49"><span class="linenos">49</span></a>
-</span><span id="DataMaskers.hash_masker-50"><a href="#DataMaskers.hash_masker-50"><span class="linenos">50</span></a>        <span class="k">return</span> <span class="n">inner</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="DataMaskers.hash_masker-18"><a href="#DataMaskers.hash_masker-18"><span class="linenos">18</span></a>    <span class="nd">@classmethod</span>
+</span><span id="DataMaskers.hash_masker-19"><a href="#DataMaskers.hash_masker-19"><span class="linenos">19</span></a>    <span class="k">def</span> <span class="nf">hash_masker</span><span class="p">(</span>
+</span><span id="DataMaskers.hash_masker-20"><a href="#DataMaskers.hash_masker-20"><span class="linenos">20</span></a>        <span class="bp">cls</span><span class="p">,</span>
+</span><span id="DataMaskers.hash_masker-21"><a href="#DataMaskers.hash_masker-21"><span class="linenos">21</span></a>        <span class="n">cols</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
+</span><span id="DataMaskers.hash_masker-22"><a href="#DataMaskers.hash_masker-22"><span class="linenos">22</span></a>        <span class="n">approach</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;SHA&quot;</span><span class="p">,</span>
+</span><span id="DataMaskers.hash_masker-23"><a href="#DataMaskers.hash_masker-23"><span class="linenos">23</span></a>        <span class="n">num_bits</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">256</span><span class="p">,</span>
+</span><span id="DataMaskers.hash_masker-24"><a href="#DataMaskers.hash_masker-24"><span class="linenos">24</span></a>        <span class="n">suffix</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;_hash&quot;</span><span class="p">,</span>
+</span><span id="DataMaskers.hash_masker-25"><a href="#DataMaskers.hash_masker-25"><span class="linenos">25</span></a>    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">:</span>
+</span><span id="DataMaskers.hash_masker-26"><a href="#DataMaskers.hash_masker-26"><span class="linenos">26</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Mask specific columns using an hashing approach.</span>
+</span><span id="DataMaskers.hash_masker-27"><a href="#DataMaskers.hash_masker-27"><span class="linenos">27</span></a>
+</span><span id="DataMaskers.hash_masker-28"><a href="#DataMaskers.hash_masker-28"><span class="linenos">28</span></a><span class="sd">        Args:</span>
+</span><span id="DataMaskers.hash_masker-29"><a href="#DataMaskers.hash_masker-29"><span class="linenos">29</span></a><span class="sd">            cols: list of column names to mask.</span>
+</span><span id="DataMaskers.hash_masker-30"><a href="#DataMaskers.hash_masker-30"><span class="linenos">30</span></a><span class="sd">            approach: hashing approach. Defaults to &#39;SHA&#39;. There&#39;s &quot;MURMUR3&quot; as well.</span>
+</span><span id="DataMaskers.hash_masker-31"><a href="#DataMaskers.hash_masker-31"><span class="linenos">31</span></a><span class="sd">            num_bits: number of bits of the SHA approach. Only applies to SHA approach.</span>
+</span><span id="DataMaskers.hash_masker-32"><a href="#DataMaskers.hash_masker-32"><span class="linenos">32</span></a><span class="sd">            suffix: suffix to apply to new column name. Defaults to &quot;_hash&quot;.</span>
+</span><span id="DataMaskers.hash_masker-33"><a href="#DataMaskers.hash_masker-33"><span class="linenos">33</span></a><span class="sd">                Note: you can pass an empty suffix to have the original column replaced.</span>
+</span><span id="DataMaskers.hash_masker-34"><a href="#DataMaskers.hash_masker-34"><span class="linenos">34</span></a>
+</span><span id="DataMaskers.hash_masker-35"><a href="#DataMaskers.hash_masker-35"><span class="linenos">35</span></a><span class="sd">        Returns:</span>
+</span><span id="DataMaskers.hash_masker-36"><a href="#DataMaskers.hash_masker-36"><span class="linenos">36</span></a><span class="sd">            A function to be called in .transform() spark function.</span>
+</span><span id="DataMaskers.hash_masker-37"><a href="#DataMaskers.hash_masker-37"><span class="linenos">37</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="DataMaskers.hash_masker-38"><a href="#DataMaskers.hash_masker-38"><span class="linenos">38</span></a>
+</span><span id="DataMaskers.hash_masker-39"><a href="#DataMaskers.hash_masker-39"><span class="linenos">39</span></a>        <span class="k">def</span> <span class="nf">inner</span><span class="p">(</span><span class="n">df</span><span class="p">:</span> <span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataFrame</span><span class="p">:</span>
+</span><span id="DataMaskers.hash_masker-40"><a href="#DataMaskers.hash_masker-40"><span class="linenos">40</span></a>            <span class="n">masked_df</span> <span class="o">=</span> <span class="n">df</span>
+</span><span id="DataMaskers.hash_masker-41"><a href="#DataMaskers.hash_masker-41"><span class="linenos">41</span></a>            <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">cols</span><span class="p">:</span>
+</span><span id="DataMaskers.hash_masker-42"><a href="#DataMaskers.hash_masker-42"><span class="linenos">42</span></a>                <span class="k">if</span> <span class="n">approach</span> <span class="o">==</span> <span class="s2">&quot;MURMUR3&quot;</span><span class="p">:</span>
+</span><span id="DataMaskers.hash_masker-43"><a href="#DataMaskers.hash_masker-43"><span class="linenos">43</span></a>                    <span class="n">masked_df</span> <span class="o">=</span> <span class="n">masked_df</span><span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="n">col</span> <span class="o">+</span> <span class="n">suffix</span><span class="p">,</span> <span class="nb">hash</span><span class="p">(</span><span class="n">col</span><span class="p">))</span>
+</span><span id="DataMaskers.hash_masker-44"><a href="#DataMaskers.hash_masker-44"><span class="linenos">44</span></a>                <span class="k">elif</span> <span class="n">approach</span> <span class="o">==</span> <span class="s2">&quot;SHA&quot;</span><span class="p">:</span>
+</span><span id="DataMaskers.hash_masker-45"><a href="#DataMaskers.hash_masker-45"><span class="linenos">45</span></a>                    <span class="n">masked_df</span> <span class="o">=</span> <span class="n">masked_df</span><span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="n">col</span> <span class="o">+</span> <span class="n">suffix</span><span class="p">,</span> <span class="n">sha2</span><span class="p">(</span><span class="n">col</span><span class="p">,</span> <span class="n">num_bits</span><span class="p">))</span>
+</span><span id="DataMaskers.hash_masker-46"><a href="#DataMaskers.hash_masker-46"><span class="linenos">46</span></a>                <span class="k">else</span><span class="p">:</span>
+</span><span id="DataMaskers.hash_masker-47"><a href="#DataMaskers.hash_masker-47"><span class="linenos">47</span></a>                    <span class="k">raise</span> <span class="n">WrongArgumentsException</span><span class="p">(</span><span class="s2">&quot;Hashing approach is not supported.&quot;</span><span class="p">)</span>
+</span><span id="DataMaskers.hash_masker-48"><a href="#DataMaskers.hash_masker-48"><span class="linenos">48</span></a>
+</span><span id="DataMaskers.hash_masker-49"><a href="#DataMaskers.hash_masker-49"><span class="linenos">49</span></a>            <span class="k">return</span> <span class="n">masked_df</span>
+</span><span id="DataMaskers.hash_masker-50"><a href="#DataMaskers.hash_masker-50"><span class="linenos">50</span></a>
+</span><span id="DataMaskers.hash_masker-51"><a href="#DataMaskers.hash_masker-51"><span class="linenos">51</span></a>        <span class="k">return</span> <span class="n">inner</span>
 </span></pre></div>
 
 
@@ -333,25 +334,25 @@ Note: you can pass an empty suffix to have the original column replaced.</li>
 
     </div>
     <a class="headerlink" href="#DataMaskers.column_dropper"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="DataMaskers.column_dropper-52"><a href="#DataMaskers.column_dropper-52"><span class="linenos">52</span></a>    <span class="nd">@classmethod</span>
-</span><span id="DataMaskers.column_dropper-53"><a href="#DataMaskers.column_dropper-53"><span class="linenos">53</span></a>    <span class="k">def</span> <span class="nf">column_dropper</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">cols</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">:</span>
-</span><span id="DataMaskers.column_dropper-54"><a href="#DataMaskers.column_dropper-54"><span class="linenos">54</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Drop specific columns.</span>
-</span><span id="DataMaskers.column_dropper-55"><a href="#DataMaskers.column_dropper-55"><span class="linenos">55</span></a>
-</span><span id="DataMaskers.column_dropper-56"><a href="#DataMaskers.column_dropper-56"><span class="linenos">56</span></a><span class="sd">        Args:</span>
-</span><span id="DataMaskers.column_dropper-57"><a href="#DataMaskers.column_dropper-57"><span class="linenos">57</span></a><span class="sd">            cols: list of column names to drop.</span>
-</span><span id="DataMaskers.column_dropper-58"><a href="#DataMaskers.column_dropper-58"><span class="linenos">58</span></a>
-</span><span id="DataMaskers.column_dropper-59"><a href="#DataMaskers.column_dropper-59"><span class="linenos">59</span></a><span class="sd">        Returns:</span>
-</span><span id="DataMaskers.column_dropper-60"><a href="#DataMaskers.column_dropper-60"><span class="linenos">60</span></a><span class="sd">            A function to be called in .transform() spark function.</span>
-</span><span id="DataMaskers.column_dropper-61"><a href="#DataMaskers.column_dropper-61"><span class="linenos">61</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="DataMaskers.column_dropper-62"><a href="#DataMaskers.column_dropper-62"><span class="linenos">62</span></a>
-</span><span id="DataMaskers.column_dropper-63"><a href="#DataMaskers.column_dropper-63"><span class="linenos">63</span></a>        <span class="k">def</span> <span class="nf">inner</span><span class="p">(</span><span class="n">df</span><span class="p">:</span> <span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataFrame</span><span class="p">:</span>
-</span><span id="DataMaskers.column_dropper-64"><a href="#DataMaskers.column_dropper-64"><span class="linenos">64</span></a>            <span class="n">drop_df</span> <span class="o">=</span> <span class="n">df</span>
-</span><span id="DataMaskers.column_dropper-65"><a href="#DataMaskers.column_dropper-65"><span class="linenos">65</span></a>            <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">cols</span><span class="p">:</span>
-</span><span id="DataMaskers.column_dropper-66"><a href="#DataMaskers.column_dropper-66"><span class="linenos">66</span></a>                <span class="n">drop_df</span> <span class="o">=</span> <span class="n">drop_df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">col</span><span class="p">)</span>
-</span><span id="DataMaskers.column_dropper-67"><a href="#DataMaskers.column_dropper-67"><span class="linenos">67</span></a>
-</span><span id="DataMaskers.column_dropper-68"><a href="#DataMaskers.column_dropper-68"><span class="linenos">68</span></a>            <span class="k">return</span> <span class="n">drop_df</span>
-</span><span id="DataMaskers.column_dropper-69"><a href="#DataMaskers.column_dropper-69"><span class="linenos">69</span></a>
-</span><span id="DataMaskers.column_dropper-70"><a href="#DataMaskers.column_dropper-70"><span class="linenos">70</span></a>        <span class="k">return</span> <span class="n">inner</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="DataMaskers.column_dropper-53"><a href="#DataMaskers.column_dropper-53"><span class="linenos">53</span></a>    <span class="nd">@classmethod</span>
+</span><span id="DataMaskers.column_dropper-54"><a href="#DataMaskers.column_dropper-54"><span class="linenos">54</span></a>    <span class="k">def</span> <span class="nf">column_dropper</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">cols</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">:</span>
+</span><span id="DataMaskers.column_dropper-55"><a href="#DataMaskers.column_dropper-55"><span class="linenos">55</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Drop specific columns.</span>
+</span><span id="DataMaskers.column_dropper-56"><a href="#DataMaskers.column_dropper-56"><span class="linenos">56</span></a>
+</span><span id="DataMaskers.column_dropper-57"><a href="#DataMaskers.column_dropper-57"><span class="linenos">57</span></a><span class="sd">        Args:</span>
+</span><span id="DataMaskers.column_dropper-58"><a href="#DataMaskers.column_dropper-58"><span class="linenos">58</span></a><span class="sd">            cols: list of column names to drop.</span>
+</span><span id="DataMaskers.column_dropper-59"><a href="#DataMaskers.column_dropper-59"><span class="linenos">59</span></a>
+</span><span id="DataMaskers.column_dropper-60"><a href="#DataMaskers.column_dropper-60"><span class="linenos">60</span></a><span class="sd">        Returns:</span>
+</span><span id="DataMaskers.column_dropper-61"><a href="#DataMaskers.column_dropper-61"><span class="linenos">61</span></a><span class="sd">            A function to be called in .transform() spark function.</span>
+</span><span id="DataMaskers.column_dropper-62"><a href="#DataMaskers.column_dropper-62"><span class="linenos">62</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="DataMaskers.column_dropper-63"><a href="#DataMaskers.column_dropper-63"><span class="linenos">63</span></a>
+</span><span id="DataMaskers.column_dropper-64"><a href="#DataMaskers.column_dropper-64"><span class="linenos">64</span></a>        <span class="k">def</span> <span class="nf">inner</span><span class="p">(</span><span class="n">df</span><span class="p">:</span> <span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataFrame</span><span class="p">:</span>
+</span><span id="DataMaskers.column_dropper-65"><a href="#DataMaskers.column_dropper-65"><span class="linenos">65</span></a>            <span class="n">drop_df</span> <span class="o">=</span> <span class="n">df</span>
+</span><span id="DataMaskers.column_dropper-66"><a href="#DataMaskers.column_dropper-66"><span class="linenos">66</span></a>            <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">cols</span><span class="p">:</span>
+</span><span id="DataMaskers.column_dropper-67"><a href="#DataMaskers.column_dropper-67"><span class="linenos">67</span></a>                <span class="n">drop_df</span> <span class="o">=</span> <span class="n">drop_df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">col</span><span class="p">)</span>
+</span><span id="DataMaskers.column_dropper-68"><a href="#DataMaskers.column_dropper-68"><span class="linenos">68</span></a>
+</span><span id="DataMaskers.column_dropper-69"><a href="#DataMaskers.column_dropper-69"><span class="linenos">69</span></a>            <span class="k">return</span> <span class="n">drop_df</span>
+</span><span id="DataMaskers.column_dropper-70"><a href="#DataMaskers.column_dropper-70"><span class="linenos">70</span></a>
+</span><span id="DataMaskers.column_dropper-71"><a href="#DataMaskers.column_dropper-71"><span class="linenos">71</span></a>        <span class="k">return</span> <span class="n">inner</span>
 </span></pre></div>
 
 

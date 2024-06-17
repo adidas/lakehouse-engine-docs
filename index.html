@@ -184,7 +184,26 @@ or even send e-mail notifications. Thus, it is specifically used in Data Loads, 
 <hr />
 
 <blockquote>
-  <p><strong><em>Note:</em></strong> It is advisable for a Data Product to pin a specific version of the Lakehouse Engine (and have recurring upgrading activities)
+  <p><strong><em>Note:</em></strong> The Lakehouse Engine is packaged with plugins or optional dependencies, which are not installed by default. The goal is
+  to make its installation lighter and to avoid unnecessary dependencies. You can check all the optional dependencies in
+  the [tool.setuptools.dynamic] section of the <a href="pyproject.toml">pyproject.toml</a> file. They are currently: os, dq, azure and sftp. So,
+  in case you want to make usage of the Data Quality features offered in the Lakehouse Engine, instead of running the previous command, you should run
+  the command below, which will bring the core functionalities, plus DQ.</p>
+
+<pre><code>pip install lakehouse_engine[dq]
+</code></pre>
+  
+  <p>In case you are in an environment without pre-install spark and delta, you will also want to install the <code>os</code> optional dependencies, like so:</p>
+
+<pre><code>pip install lakehouse_engine[os]
+</code></pre>
+  
+  <p>And in case you want to install several optional dependencies, you can run a command like:</p>
+
+<pre><code>pip install lakehouse_engine[dq,sftp]
+</code></pre>
+  
+  <p>It is advisable for a Data Product to pin a specific version of the Lakehouse Engine (and have recurring upgrading activities)
   to avoid breaking changes in a new release.
   In case you don't want to be so conservative, you can pin to a major version, which usually shouldn't include changes that break backwards compatibility.</p>
 </blockquote>

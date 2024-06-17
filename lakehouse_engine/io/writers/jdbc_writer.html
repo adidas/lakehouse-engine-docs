@@ -63,7 +63,7 @@
     </ul>
 
 
-            <footer>Lakehouse Engine v1.20.1</footer>
+            <footer>Lakehouse Engine v1.21.0version</footer>
 
 </div>
     </nav>
@@ -81,93 +81,94 @@
                     <label class="view-source-button" for="mod-jdbc_writer-view-source"><span>View Source</span></label>
 
                     <div class="pdoc-code codehilite"><pre><span></span><span id="L-1"><a href="#L-1"><span class="linenos"> 1</span></a><span class="sd">&quot;&quot;&quot;Module that defines the behaviour to write to JDBC targets.&quot;&quot;&quot;</span>
-</span><span id="L-2"><a href="#L-2"><span class="linenos"> 2</span></a><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">OrderedDict</span>
-</span><span id="L-3"><a href="#L-3"><span class="linenos"> 3</span></a>
-</span><span id="L-4"><a href="#L-4"><span class="linenos"> 4</span></a><span class="kn">from</span> <span class="nn">pyspark.sql</span> <span class="kn">import</span> <span class="n">DataFrame</span>
-</span><span id="L-5"><a href="#L-5"><span class="linenos"> 5</span></a>
-</span><span id="L-6"><a href="#L-6"><span class="linenos"> 6</span></a><span class="kn">from</span> <span class="nn">lakehouse_engine.core.definitions</span> <span class="kn">import</span> <span class="n">OutputSpec</span>
-</span><span id="L-7"><a href="#L-7"><span class="linenos"> 7</span></a><span class="kn">from</span> <span class="nn">lakehouse_engine.io.writer</span> <span class="kn">import</span> <span class="n">Writer</span>
-</span><span id="L-8"><a href="#L-8"><span class="linenos"> 8</span></a>
+</span><span id="L-2"><a href="#L-2"><span class="linenos"> 2</span></a>
+</span><span id="L-3"><a href="#L-3"><span class="linenos"> 3</span></a><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">OrderedDict</span>
+</span><span id="L-4"><a href="#L-4"><span class="linenos"> 4</span></a>
+</span><span id="L-5"><a href="#L-5"><span class="linenos"> 5</span></a><span class="kn">from</span> <span class="nn">pyspark.sql</span> <span class="kn">import</span> <span class="n">DataFrame</span>
+</span><span id="L-6"><a href="#L-6"><span class="linenos"> 6</span></a>
+</span><span id="L-7"><a href="#L-7"><span class="linenos"> 7</span></a><span class="kn">from</span> <span class="nn">lakehouse_engine.core.definitions</span> <span class="kn">import</span> <span class="n">OutputSpec</span>
+</span><span id="L-8"><a href="#L-8"><span class="linenos"> 8</span></a><span class="kn">from</span> <span class="nn">lakehouse_engine.io.writer</span> <span class="kn">import</span> <span class="n">Writer</span>
 </span><span id="L-9"><a href="#L-9"><span class="linenos"> 9</span></a>
-</span><span id="L-10"><a href="#L-10"><span class="linenos">10</span></a><span class="k">class</span> <span class="nc">JDBCWriter</span><span class="p">(</span><span class="n">Writer</span><span class="p">):</span>
-</span><span id="L-11"><a href="#L-11"><span class="linenos">11</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Class to write to JDBC targets.&quot;&quot;&quot;</span>
-</span><span id="L-12"><a href="#L-12"><span class="linenos">12</span></a>
-</span><span id="L-13"><a href="#L-13"><span class="linenos">13</span></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">output_spec</span><span class="p">:</span> <span class="n">OutputSpec</span><span class="p">,</span> <span class="n">df</span><span class="p">:</span> <span class="n">DataFrame</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">OrderedDict</span><span class="p">):</span>
-</span><span id="L-14"><a href="#L-14"><span class="linenos">14</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Construct JDBCWriter instances.</span>
-</span><span id="L-15"><a href="#L-15"><span class="linenos">15</span></a>
-</span><span id="L-16"><a href="#L-16"><span class="linenos">16</span></a><span class="sd">        Args:</span>
-</span><span id="L-17"><a href="#L-17"><span class="linenos">17</span></a><span class="sd">            output_spec: output specification.</span>
-</span><span id="L-18"><a href="#L-18"><span class="linenos">18</span></a><span class="sd">            df: dataframe to be writen.</span>
-</span><span id="L-19"><a href="#L-19"><span class="linenos">19</span></a><span class="sd">            data: list of all dfs generated on previous steps before writer.</span>
-</span><span id="L-20"><a href="#L-20"><span class="linenos">20</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="L-21"><a href="#L-21"><span class="linenos">21</span></a>        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">output_spec</span><span class="p">,</span> <span class="n">df</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
-</span><span id="L-22"><a href="#L-22"><span class="linenos">22</span></a>
-</span><span id="L-23"><a href="#L-23"><span class="linenos">23</span></a>    <span class="k">def</span> <span class="nf">write</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-</span><span id="L-24"><a href="#L-24"><span class="linenos">24</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Write data into JDBC target.&quot;&quot;&quot;</span>
-</span><span id="L-25"><a href="#L-25"><span class="linenos">25</span></a>        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_df</span><span class="o">.</span><span class="n">isStreaming</span><span class="p">:</span>
-</span><span id="L-26"><a href="#L-26"><span class="linenos">26</span></a>            <span class="bp">self</span><span class="o">.</span><span class="n">_write_to_jdbc_in_batch_mode</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_df</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_output_spec</span><span class="p">)</span>
-</span><span id="L-27"><a href="#L-27"><span class="linenos">27</span></a>        <span class="k">else</span><span class="p">:</span>
-</span><span id="L-28"><a href="#L-28"><span class="linenos">28</span></a>            <span class="n">stream_df</span> <span class="o">=</span> <span class="p">(</span>
-</span><span id="L-29"><a href="#L-29"><span class="linenos">29</span></a>                <span class="bp">self</span><span class="o">.</span><span class="n">_df</span><span class="o">.</span><span class="n">writeStream</span><span class="o">.</span><span class="n">trigger</span><span class="p">(</span>
-</span><span id="L-30"><a href="#L-30"><span class="linenos">30</span></a>                    <span class="o">**</span><span class="n">Writer</span><span class="o">.</span><span class="n">get_streaming_trigger</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_output_spec</span><span class="p">)</span>
-</span><span id="L-31"><a href="#L-31"><span class="linenos">31</span></a>                <span class="p">)</span>
-</span><span id="L-32"><a href="#L-32"><span class="linenos">32</span></a>                <span class="o">.</span><span class="n">options</span><span class="p">(</span>
-</span><span id="L-33"><a href="#L-33"><span class="linenos">33</span></a>                    <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">_output_spec</span><span class="o">.</span><span class="n">options</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_output_spec</span><span class="o">.</span><span class="n">options</span> <span class="k">else</span> <span class="p">{}</span>
-</span><span id="L-34"><a href="#L-34"><span class="linenos">34</span></a>                <span class="p">)</span>
-</span><span id="L-35"><a href="#L-35"><span class="linenos">35</span></a>                <span class="o">.</span><span class="n">foreachBatch</span><span class="p">(</span>
-</span><span id="L-36"><a href="#L-36"><span class="linenos">36</span></a>                    <span class="bp">self</span><span class="o">.</span><span class="n">_write_transformed_micro_batch</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_output_spec</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="p">)</span>
-</span><span id="L-37"><a href="#L-37"><span class="linenos">37</span></a>                <span class="p">)</span>
-</span><span id="L-38"><a href="#L-38"><span class="linenos">38</span></a>                <span class="o">.</span><span class="n">start</span><span class="p">()</span>
-</span><span id="L-39"><a href="#L-39"><span class="linenos">39</span></a>            <span class="p">)</span>
-</span><span id="L-40"><a href="#L-40"><span class="linenos">40</span></a>
-</span><span id="L-41"><a href="#L-41"><span class="linenos">41</span></a>            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_output_spec</span><span class="o">.</span><span class="n">streaming_await_termination</span><span class="p">:</span>
-</span><span id="L-42"><a href="#L-42"><span class="linenos">42</span></a>                <span class="n">stream_df</span><span class="o">.</span><span class="n">awaitTermination</span><span class="p">(</span>
-</span><span id="L-43"><a href="#L-43"><span class="linenos">43</span></a>                    <span class="bp">self</span><span class="o">.</span><span class="n">_output_spec</span><span class="o">.</span><span class="n">streaming_await_termination_timeout</span>
-</span><span id="L-44"><a href="#L-44"><span class="linenos">44</span></a>                <span class="p">)</span>
-</span><span id="L-45"><a href="#L-45"><span class="linenos">45</span></a>
-</span><span id="L-46"><a href="#L-46"><span class="linenos">46</span></a>    <span class="nd">@staticmethod</span>
-</span><span id="L-47"><a href="#L-47"><span class="linenos">47</span></a>    <span class="k">def</span> <span class="nf">_write_to_jdbc_in_batch_mode</span><span class="p">(</span><span class="n">df</span><span class="p">:</span> <span class="n">DataFrame</span><span class="p">,</span> <span class="n">output_spec</span><span class="p">:</span> <span class="n">OutputSpec</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-</span><span id="L-48"><a href="#L-48"><span class="linenos">48</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Write to jdbc in batch mode.</span>
-</span><span id="L-49"><a href="#L-49"><span class="linenos">49</span></a>
-</span><span id="L-50"><a href="#L-50"><span class="linenos">50</span></a><span class="sd">        Args:</span>
-</span><span id="L-51"><a href="#L-51"><span class="linenos">51</span></a><span class="sd">            df: dataframe to write.</span>
-</span><span id="L-52"><a href="#L-52"><span class="linenos">52</span></a><span class="sd">            output_spec: output specification.</span>
-</span><span id="L-53"><a href="#L-53"><span class="linenos">53</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="L-54"><a href="#L-54"><span class="linenos">54</span></a>        <span class="n">df</span><span class="o">.</span><span class="n">write</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">output_spec</span><span class="o">.</span><span class="n">data_format</span><span class="p">)</span><span class="o">.</span><span class="n">partitionBy</span><span class="p">(</span>
-</span><span id="L-55"><a href="#L-55"><span class="linenos">55</span></a>            <span class="n">output_spec</span><span class="o">.</span><span class="n">partitions</span>
-</span><span id="L-56"><a href="#L-56"><span class="linenos">56</span></a>        <span class="p">)</span><span class="o">.</span><span class="n">options</span><span class="p">(</span><span class="o">**</span><span class="n">output_spec</span><span class="o">.</span><span class="n">options</span> <span class="k">if</span> <span class="n">output_spec</span><span class="o">.</span><span class="n">options</span> <span class="k">else</span> <span class="p">{})</span><span class="o">.</span><span class="n">mode</span><span class="p">(</span>
-</span><span id="L-57"><a href="#L-57"><span class="linenos">57</span></a>            <span class="n">output_spec</span><span class="o">.</span><span class="n">write_type</span>
-</span><span id="L-58"><a href="#L-58"><span class="linenos">58</span></a>        <span class="p">)</span><span class="o">.</span><span class="n">save</span><span class="p">(</span>
-</span><span id="L-59"><a href="#L-59"><span class="linenos">59</span></a>            <span class="n">output_spec</span><span class="o">.</span><span class="n">location</span>
-</span><span id="L-60"><a href="#L-60"><span class="linenos">60</span></a>        <span class="p">)</span>
-</span><span id="L-61"><a href="#L-61"><span class="linenos">61</span></a>
-</span><span id="L-62"><a href="#L-62"><span class="linenos">62</span></a>    <span class="nd">@staticmethod</span>
-</span><span id="L-63"><a href="#L-63"><span class="linenos">63</span></a>    <span class="k">def</span> <span class="nf">_write_transformed_micro_batch</span><span class="p">(</span>  <span class="c1"># type: ignore</span>
-</span><span id="L-64"><a href="#L-64"><span class="linenos">64</span></a>        <span class="n">output_spec</span><span class="p">:</span> <span class="n">OutputSpec</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">OrderedDict</span>
-</span><span id="L-65"><a href="#L-65"><span class="linenos">65</span></a>    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">:</span>
-</span><span id="L-66"><a href="#L-66"><span class="linenos">66</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Define how to write a streaming micro batch after transforming it.</span>
-</span><span id="L-67"><a href="#L-67"><span class="linenos">67</span></a>
-</span><span id="L-68"><a href="#L-68"><span class="linenos">68</span></a><span class="sd">        Args:</span>
-</span><span id="L-69"><a href="#L-69"><span class="linenos">69</span></a><span class="sd">            output_spec: output specification.</span>
-</span><span id="L-70"><a href="#L-70"><span class="linenos">70</span></a><span class="sd">            data: list of all dfs generated on previous steps before writer.</span>
-</span><span id="L-71"><a href="#L-71"><span class="linenos">71</span></a>
-</span><span id="L-72"><a href="#L-72"><span class="linenos">72</span></a><span class="sd">        Returns:</span>
-</span><span id="L-73"><a href="#L-73"><span class="linenos">73</span></a><span class="sd">            A function to be executed in the foreachBatch spark write method.</span>
-</span><span id="L-74"><a href="#L-74"><span class="linenos">74</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="L-75"><a href="#L-75"><span class="linenos">75</span></a>
-</span><span id="L-76"><a href="#L-76"><span class="linenos">76</span></a>        <span class="k">def</span> <span class="nf">inner</span><span class="p">(</span><span class="n">batch_df</span><span class="p">:</span> <span class="n">DataFrame</span><span class="p">,</span> <span class="n">batch_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-</span><span id="L-77"><a href="#L-77"><span class="linenos">77</span></a>            <span class="n">transformed_df</span> <span class="o">=</span> <span class="n">Writer</span><span class="o">.</span><span class="n">get_transformed_micro_batch</span><span class="p">(</span>
-</span><span id="L-78"><a href="#L-78"><span class="linenos">78</span></a>                <span class="n">output_spec</span><span class="p">,</span> <span class="n">batch_df</span><span class="p">,</span> <span class="n">batch_id</span><span class="p">,</span> <span class="n">data</span>
-</span><span id="L-79"><a href="#L-79"><span class="linenos">79</span></a>            <span class="p">)</span>
-</span><span id="L-80"><a href="#L-80"><span class="linenos">80</span></a>
-</span><span id="L-81"><a href="#L-81"><span class="linenos">81</span></a>            <span class="k">if</span> <span class="n">output_spec</span><span class="o">.</span><span class="n">streaming_micro_batch_dq_processors</span><span class="p">:</span>
-</span><span id="L-82"><a href="#L-82"><span class="linenos">82</span></a>                <span class="n">transformed_df</span> <span class="o">=</span> <span class="n">Writer</span><span class="o">.</span><span class="n">run_micro_batch_dq_process</span><span class="p">(</span>
-</span><span id="L-83"><a href="#L-83"><span class="linenos">83</span></a>                    <span class="n">transformed_df</span><span class="p">,</span> <span class="n">output_spec</span><span class="o">.</span><span class="n">streaming_micro_batch_dq_processors</span>
-</span><span id="L-84"><a href="#L-84"><span class="linenos">84</span></a>                <span class="p">)</span>
-</span><span id="L-85"><a href="#L-85"><span class="linenos">85</span></a>
-</span><span id="L-86"><a href="#L-86"><span class="linenos">86</span></a>            <span class="n">JDBCWriter</span><span class="o">.</span><span class="n">_write_to_jdbc_in_batch_mode</span><span class="p">(</span><span class="n">transformed_df</span><span class="p">,</span> <span class="n">output_spec</span><span class="p">)</span>
-</span><span id="L-87"><a href="#L-87"><span class="linenos">87</span></a>
-</span><span id="L-88"><a href="#L-88"><span class="linenos">88</span></a>        <span class="k">return</span> <span class="n">inner</span>
+</span><span id="L-10"><a href="#L-10"><span class="linenos">10</span></a>
+</span><span id="L-11"><a href="#L-11"><span class="linenos">11</span></a><span class="k">class</span> <span class="nc">JDBCWriter</span><span class="p">(</span><span class="n">Writer</span><span class="p">):</span>
+</span><span id="L-12"><a href="#L-12"><span class="linenos">12</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Class to write to JDBC targets.&quot;&quot;&quot;</span>
+</span><span id="L-13"><a href="#L-13"><span class="linenos">13</span></a>
+</span><span id="L-14"><a href="#L-14"><span class="linenos">14</span></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">output_spec</span><span class="p">:</span> <span class="n">OutputSpec</span><span class="p">,</span> <span class="n">df</span><span class="p">:</span> <span class="n">DataFrame</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">OrderedDict</span><span class="p">):</span>
+</span><span id="L-15"><a href="#L-15"><span class="linenos">15</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Construct JDBCWriter instances.</span>
+</span><span id="L-16"><a href="#L-16"><span class="linenos">16</span></a>
+</span><span id="L-17"><a href="#L-17"><span class="linenos">17</span></a><span class="sd">        Args:</span>
+</span><span id="L-18"><a href="#L-18"><span class="linenos">18</span></a><span class="sd">            output_spec: output specification.</span>
+</span><span id="L-19"><a href="#L-19"><span class="linenos">19</span></a><span class="sd">            df: dataframe to be writen.</span>
+</span><span id="L-20"><a href="#L-20"><span class="linenos">20</span></a><span class="sd">            data: list of all dfs generated on previous steps before writer.</span>
+</span><span id="L-21"><a href="#L-21"><span class="linenos">21</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="L-22"><a href="#L-22"><span class="linenos">22</span></a>        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">output_spec</span><span class="p">,</span> <span class="n">df</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+</span><span id="L-23"><a href="#L-23"><span class="linenos">23</span></a>
+</span><span id="L-24"><a href="#L-24"><span class="linenos">24</span></a>    <span class="k">def</span> <span class="nf">write</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="L-25"><a href="#L-25"><span class="linenos">25</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Write data into JDBC target.&quot;&quot;&quot;</span>
+</span><span id="L-26"><a href="#L-26"><span class="linenos">26</span></a>        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_df</span><span class="o">.</span><span class="n">isStreaming</span><span class="p">:</span>
+</span><span id="L-27"><a href="#L-27"><span class="linenos">27</span></a>            <span class="bp">self</span><span class="o">.</span><span class="n">_write_to_jdbc_in_batch_mode</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_df</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_output_spec</span><span class="p">)</span>
+</span><span id="L-28"><a href="#L-28"><span class="linenos">28</span></a>        <span class="k">else</span><span class="p">:</span>
+</span><span id="L-29"><a href="#L-29"><span class="linenos">29</span></a>            <span class="n">stream_df</span> <span class="o">=</span> <span class="p">(</span>
+</span><span id="L-30"><a href="#L-30"><span class="linenos">30</span></a>                <span class="bp">self</span><span class="o">.</span><span class="n">_df</span><span class="o">.</span><span class="n">writeStream</span><span class="o">.</span><span class="n">trigger</span><span class="p">(</span>
+</span><span id="L-31"><a href="#L-31"><span class="linenos">31</span></a>                    <span class="o">**</span><span class="n">Writer</span><span class="o">.</span><span class="n">get_streaming_trigger</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_output_spec</span><span class="p">)</span>
+</span><span id="L-32"><a href="#L-32"><span class="linenos">32</span></a>                <span class="p">)</span>
+</span><span id="L-33"><a href="#L-33"><span class="linenos">33</span></a>                <span class="o">.</span><span class="n">options</span><span class="p">(</span>
+</span><span id="L-34"><a href="#L-34"><span class="linenos">34</span></a>                    <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">_output_spec</span><span class="o">.</span><span class="n">options</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_output_spec</span><span class="o">.</span><span class="n">options</span> <span class="k">else</span> <span class="p">{}</span>
+</span><span id="L-35"><a href="#L-35"><span class="linenos">35</span></a>                <span class="p">)</span>
+</span><span id="L-36"><a href="#L-36"><span class="linenos">36</span></a>                <span class="o">.</span><span class="n">foreachBatch</span><span class="p">(</span>
+</span><span id="L-37"><a href="#L-37"><span class="linenos">37</span></a>                    <span class="bp">self</span><span class="o">.</span><span class="n">_write_transformed_micro_batch</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_output_spec</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="p">)</span>
+</span><span id="L-38"><a href="#L-38"><span class="linenos">38</span></a>                <span class="p">)</span>
+</span><span id="L-39"><a href="#L-39"><span class="linenos">39</span></a>                <span class="o">.</span><span class="n">start</span><span class="p">()</span>
+</span><span id="L-40"><a href="#L-40"><span class="linenos">40</span></a>            <span class="p">)</span>
+</span><span id="L-41"><a href="#L-41"><span class="linenos">41</span></a>
+</span><span id="L-42"><a href="#L-42"><span class="linenos">42</span></a>            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_output_spec</span><span class="o">.</span><span class="n">streaming_await_termination</span><span class="p">:</span>
+</span><span id="L-43"><a href="#L-43"><span class="linenos">43</span></a>                <span class="n">stream_df</span><span class="o">.</span><span class="n">awaitTermination</span><span class="p">(</span>
+</span><span id="L-44"><a href="#L-44"><span class="linenos">44</span></a>                    <span class="bp">self</span><span class="o">.</span><span class="n">_output_spec</span><span class="o">.</span><span class="n">streaming_await_termination_timeout</span>
+</span><span id="L-45"><a href="#L-45"><span class="linenos">45</span></a>                <span class="p">)</span>
+</span><span id="L-46"><a href="#L-46"><span class="linenos">46</span></a>
+</span><span id="L-47"><a href="#L-47"><span class="linenos">47</span></a>    <span class="nd">@staticmethod</span>
+</span><span id="L-48"><a href="#L-48"><span class="linenos">48</span></a>    <span class="k">def</span> <span class="nf">_write_to_jdbc_in_batch_mode</span><span class="p">(</span><span class="n">df</span><span class="p">:</span> <span class="n">DataFrame</span><span class="p">,</span> <span class="n">output_spec</span><span class="p">:</span> <span class="n">OutputSpec</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="L-49"><a href="#L-49"><span class="linenos">49</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Write to jdbc in batch mode.</span>
+</span><span id="L-50"><a href="#L-50"><span class="linenos">50</span></a>
+</span><span id="L-51"><a href="#L-51"><span class="linenos">51</span></a><span class="sd">        Args:</span>
+</span><span id="L-52"><a href="#L-52"><span class="linenos">52</span></a><span class="sd">            df: dataframe to write.</span>
+</span><span id="L-53"><a href="#L-53"><span class="linenos">53</span></a><span class="sd">            output_spec: output specification.</span>
+</span><span id="L-54"><a href="#L-54"><span class="linenos">54</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="L-55"><a href="#L-55"><span class="linenos">55</span></a>        <span class="n">df</span><span class="o">.</span><span class="n">write</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">output_spec</span><span class="o">.</span><span class="n">data_format</span><span class="p">)</span><span class="o">.</span><span class="n">partitionBy</span><span class="p">(</span>
+</span><span id="L-56"><a href="#L-56"><span class="linenos">56</span></a>            <span class="n">output_spec</span><span class="o">.</span><span class="n">partitions</span>
+</span><span id="L-57"><a href="#L-57"><span class="linenos">57</span></a>        <span class="p">)</span><span class="o">.</span><span class="n">options</span><span class="p">(</span><span class="o">**</span><span class="n">output_spec</span><span class="o">.</span><span class="n">options</span> <span class="k">if</span> <span class="n">output_spec</span><span class="o">.</span><span class="n">options</span> <span class="k">else</span> <span class="p">{})</span><span class="o">.</span><span class="n">mode</span><span class="p">(</span>
+</span><span id="L-58"><a href="#L-58"><span class="linenos">58</span></a>            <span class="n">output_spec</span><span class="o">.</span><span class="n">write_type</span>
+</span><span id="L-59"><a href="#L-59"><span class="linenos">59</span></a>        <span class="p">)</span><span class="o">.</span><span class="n">save</span><span class="p">(</span>
+</span><span id="L-60"><a href="#L-60"><span class="linenos">60</span></a>            <span class="n">output_spec</span><span class="o">.</span><span class="n">location</span>
+</span><span id="L-61"><a href="#L-61"><span class="linenos">61</span></a>        <span class="p">)</span>
+</span><span id="L-62"><a href="#L-62"><span class="linenos">62</span></a>
+</span><span id="L-63"><a href="#L-63"><span class="linenos">63</span></a>    <span class="nd">@staticmethod</span>
+</span><span id="L-64"><a href="#L-64"><span class="linenos">64</span></a>    <span class="k">def</span> <span class="nf">_write_transformed_micro_batch</span><span class="p">(</span>  <span class="c1"># type: ignore</span>
+</span><span id="L-65"><a href="#L-65"><span class="linenos">65</span></a>        <span class="n">output_spec</span><span class="p">:</span> <span class="n">OutputSpec</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">OrderedDict</span>
+</span><span id="L-66"><a href="#L-66"><span class="linenos">66</span></a>    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">:</span>
+</span><span id="L-67"><a href="#L-67"><span class="linenos">67</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Define how to write a streaming micro batch after transforming it.</span>
+</span><span id="L-68"><a href="#L-68"><span class="linenos">68</span></a>
+</span><span id="L-69"><a href="#L-69"><span class="linenos">69</span></a><span class="sd">        Args:</span>
+</span><span id="L-70"><a href="#L-70"><span class="linenos">70</span></a><span class="sd">            output_spec: output specification.</span>
+</span><span id="L-71"><a href="#L-71"><span class="linenos">71</span></a><span class="sd">            data: list of all dfs generated on previous steps before writer.</span>
+</span><span id="L-72"><a href="#L-72"><span class="linenos">72</span></a>
+</span><span id="L-73"><a href="#L-73"><span class="linenos">73</span></a><span class="sd">        Returns:</span>
+</span><span id="L-74"><a href="#L-74"><span class="linenos">74</span></a><span class="sd">            A function to be executed in the foreachBatch spark write method.</span>
+</span><span id="L-75"><a href="#L-75"><span class="linenos">75</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="L-76"><a href="#L-76"><span class="linenos">76</span></a>
+</span><span id="L-77"><a href="#L-77"><span class="linenos">77</span></a>        <span class="k">def</span> <span class="nf">inner</span><span class="p">(</span><span class="n">batch_df</span><span class="p">:</span> <span class="n">DataFrame</span><span class="p">,</span> <span class="n">batch_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="L-78"><a href="#L-78"><span class="linenos">78</span></a>            <span class="n">transformed_df</span> <span class="o">=</span> <span class="n">Writer</span><span class="o">.</span><span class="n">get_transformed_micro_batch</span><span class="p">(</span>
+</span><span id="L-79"><a href="#L-79"><span class="linenos">79</span></a>                <span class="n">output_spec</span><span class="p">,</span> <span class="n">batch_df</span><span class="p">,</span> <span class="n">batch_id</span><span class="p">,</span> <span class="n">data</span>
+</span><span id="L-80"><a href="#L-80"><span class="linenos">80</span></a>            <span class="p">)</span>
+</span><span id="L-81"><a href="#L-81"><span class="linenos">81</span></a>
+</span><span id="L-82"><a href="#L-82"><span class="linenos">82</span></a>            <span class="k">if</span> <span class="n">output_spec</span><span class="o">.</span><span class="n">streaming_micro_batch_dq_processors</span><span class="p">:</span>
+</span><span id="L-83"><a href="#L-83"><span class="linenos">83</span></a>                <span class="n">transformed_df</span> <span class="o">=</span> <span class="n">Writer</span><span class="o">.</span><span class="n">run_micro_batch_dq_process</span><span class="p">(</span>
+</span><span id="L-84"><a href="#L-84"><span class="linenos">84</span></a>                    <span class="n">transformed_df</span><span class="p">,</span> <span class="n">output_spec</span><span class="o">.</span><span class="n">streaming_micro_batch_dq_processors</span>
+</span><span id="L-85"><a href="#L-85"><span class="linenos">85</span></a>                <span class="p">)</span>
+</span><span id="L-86"><a href="#L-86"><span class="linenos">86</span></a>
+</span><span id="L-87"><a href="#L-87"><span class="linenos">87</span></a>            <span class="n">JDBCWriter</span><span class="o">.</span><span class="n">_write_to_jdbc_in_batch_mode</span><span class="p">(</span><span class="n">transformed_df</span><span class="p">,</span> <span class="n">output_spec</span><span class="p">)</span>
+</span><span id="L-88"><a href="#L-88"><span class="linenos">88</span></a>
+</span><span id="L-89"><a href="#L-89"><span class="linenos">89</span></a>        <span class="k">return</span> <span class="n">inner</span>
 </span></pre></div>
 
 
@@ -183,85 +184,85 @@
 
     </div>
     <a class="headerlink" href="#JDBCWriter"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="JDBCWriter-11"><a href="#JDBCWriter-11"><span class="linenos">11</span></a><span class="k">class</span> <span class="nc">JDBCWriter</span><span class="p">(</span><span class="n">Writer</span><span class="p">):</span>
-</span><span id="JDBCWriter-12"><a href="#JDBCWriter-12"><span class="linenos">12</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Class to write to JDBC targets.&quot;&quot;&quot;</span>
-</span><span id="JDBCWriter-13"><a href="#JDBCWriter-13"><span class="linenos">13</span></a>
-</span><span id="JDBCWriter-14"><a href="#JDBCWriter-14"><span class="linenos">14</span></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">output_spec</span><span class="p">:</span> <span class="n">OutputSpec</span><span class="p">,</span> <span class="n">df</span><span class="p">:</span> <span class="n">DataFrame</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">OrderedDict</span><span class="p">):</span>
-</span><span id="JDBCWriter-15"><a href="#JDBCWriter-15"><span class="linenos">15</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Construct JDBCWriter instances.</span>
-</span><span id="JDBCWriter-16"><a href="#JDBCWriter-16"><span class="linenos">16</span></a>
-</span><span id="JDBCWriter-17"><a href="#JDBCWriter-17"><span class="linenos">17</span></a><span class="sd">        Args:</span>
-</span><span id="JDBCWriter-18"><a href="#JDBCWriter-18"><span class="linenos">18</span></a><span class="sd">            output_spec: output specification.</span>
-</span><span id="JDBCWriter-19"><a href="#JDBCWriter-19"><span class="linenos">19</span></a><span class="sd">            df: dataframe to be writen.</span>
-</span><span id="JDBCWriter-20"><a href="#JDBCWriter-20"><span class="linenos">20</span></a><span class="sd">            data: list of all dfs generated on previous steps before writer.</span>
-</span><span id="JDBCWriter-21"><a href="#JDBCWriter-21"><span class="linenos">21</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="JDBCWriter-22"><a href="#JDBCWriter-22"><span class="linenos">22</span></a>        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">output_spec</span><span class="p">,</span> <span class="n">df</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
-</span><span id="JDBCWriter-23"><a href="#JDBCWriter-23"><span class="linenos">23</span></a>
-</span><span id="JDBCWriter-24"><a href="#JDBCWriter-24"><span class="linenos">24</span></a>    <span class="k">def</span> <span class="nf">write</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-</span><span id="JDBCWriter-25"><a href="#JDBCWriter-25"><span class="linenos">25</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Write data into JDBC target.&quot;&quot;&quot;</span>
-</span><span id="JDBCWriter-26"><a href="#JDBCWriter-26"><span class="linenos">26</span></a>        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_df</span><span class="o">.</span><span class="n">isStreaming</span><span class="p">:</span>
-</span><span id="JDBCWriter-27"><a href="#JDBCWriter-27"><span class="linenos">27</span></a>            <span class="bp">self</span><span class="o">.</span><span class="n">_write_to_jdbc_in_batch_mode</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_df</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_output_spec</span><span class="p">)</span>
-</span><span id="JDBCWriter-28"><a href="#JDBCWriter-28"><span class="linenos">28</span></a>        <span class="k">else</span><span class="p">:</span>
-</span><span id="JDBCWriter-29"><a href="#JDBCWriter-29"><span class="linenos">29</span></a>            <span class="n">stream_df</span> <span class="o">=</span> <span class="p">(</span>
-</span><span id="JDBCWriter-30"><a href="#JDBCWriter-30"><span class="linenos">30</span></a>                <span class="bp">self</span><span class="o">.</span><span class="n">_df</span><span class="o">.</span><span class="n">writeStream</span><span class="o">.</span><span class="n">trigger</span><span class="p">(</span>
-</span><span id="JDBCWriter-31"><a href="#JDBCWriter-31"><span class="linenos">31</span></a>                    <span class="o">**</span><span class="n">Writer</span><span class="o">.</span><span class="n">get_streaming_trigger</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_output_spec</span><span class="p">)</span>
-</span><span id="JDBCWriter-32"><a href="#JDBCWriter-32"><span class="linenos">32</span></a>                <span class="p">)</span>
-</span><span id="JDBCWriter-33"><a href="#JDBCWriter-33"><span class="linenos">33</span></a>                <span class="o">.</span><span class="n">options</span><span class="p">(</span>
-</span><span id="JDBCWriter-34"><a href="#JDBCWriter-34"><span class="linenos">34</span></a>                    <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">_output_spec</span><span class="o">.</span><span class="n">options</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_output_spec</span><span class="o">.</span><span class="n">options</span> <span class="k">else</span> <span class="p">{}</span>
-</span><span id="JDBCWriter-35"><a href="#JDBCWriter-35"><span class="linenos">35</span></a>                <span class="p">)</span>
-</span><span id="JDBCWriter-36"><a href="#JDBCWriter-36"><span class="linenos">36</span></a>                <span class="o">.</span><span class="n">foreachBatch</span><span class="p">(</span>
-</span><span id="JDBCWriter-37"><a href="#JDBCWriter-37"><span class="linenos">37</span></a>                    <span class="bp">self</span><span class="o">.</span><span class="n">_write_transformed_micro_batch</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_output_spec</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="p">)</span>
-</span><span id="JDBCWriter-38"><a href="#JDBCWriter-38"><span class="linenos">38</span></a>                <span class="p">)</span>
-</span><span id="JDBCWriter-39"><a href="#JDBCWriter-39"><span class="linenos">39</span></a>                <span class="o">.</span><span class="n">start</span><span class="p">()</span>
-</span><span id="JDBCWriter-40"><a href="#JDBCWriter-40"><span class="linenos">40</span></a>            <span class="p">)</span>
-</span><span id="JDBCWriter-41"><a href="#JDBCWriter-41"><span class="linenos">41</span></a>
-</span><span id="JDBCWriter-42"><a href="#JDBCWriter-42"><span class="linenos">42</span></a>            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_output_spec</span><span class="o">.</span><span class="n">streaming_await_termination</span><span class="p">:</span>
-</span><span id="JDBCWriter-43"><a href="#JDBCWriter-43"><span class="linenos">43</span></a>                <span class="n">stream_df</span><span class="o">.</span><span class="n">awaitTermination</span><span class="p">(</span>
-</span><span id="JDBCWriter-44"><a href="#JDBCWriter-44"><span class="linenos">44</span></a>                    <span class="bp">self</span><span class="o">.</span><span class="n">_output_spec</span><span class="o">.</span><span class="n">streaming_await_termination_timeout</span>
-</span><span id="JDBCWriter-45"><a href="#JDBCWriter-45"><span class="linenos">45</span></a>                <span class="p">)</span>
-</span><span id="JDBCWriter-46"><a href="#JDBCWriter-46"><span class="linenos">46</span></a>
-</span><span id="JDBCWriter-47"><a href="#JDBCWriter-47"><span class="linenos">47</span></a>    <span class="nd">@staticmethod</span>
-</span><span id="JDBCWriter-48"><a href="#JDBCWriter-48"><span class="linenos">48</span></a>    <span class="k">def</span> <span class="nf">_write_to_jdbc_in_batch_mode</span><span class="p">(</span><span class="n">df</span><span class="p">:</span> <span class="n">DataFrame</span><span class="p">,</span> <span class="n">output_spec</span><span class="p">:</span> <span class="n">OutputSpec</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-</span><span id="JDBCWriter-49"><a href="#JDBCWriter-49"><span class="linenos">49</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Write to jdbc in batch mode.</span>
-</span><span id="JDBCWriter-50"><a href="#JDBCWriter-50"><span class="linenos">50</span></a>
-</span><span id="JDBCWriter-51"><a href="#JDBCWriter-51"><span class="linenos">51</span></a><span class="sd">        Args:</span>
-</span><span id="JDBCWriter-52"><a href="#JDBCWriter-52"><span class="linenos">52</span></a><span class="sd">            df: dataframe to write.</span>
-</span><span id="JDBCWriter-53"><a href="#JDBCWriter-53"><span class="linenos">53</span></a><span class="sd">            output_spec: output specification.</span>
-</span><span id="JDBCWriter-54"><a href="#JDBCWriter-54"><span class="linenos">54</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="JDBCWriter-55"><a href="#JDBCWriter-55"><span class="linenos">55</span></a>        <span class="n">df</span><span class="o">.</span><span class="n">write</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">output_spec</span><span class="o">.</span><span class="n">data_format</span><span class="p">)</span><span class="o">.</span><span class="n">partitionBy</span><span class="p">(</span>
-</span><span id="JDBCWriter-56"><a href="#JDBCWriter-56"><span class="linenos">56</span></a>            <span class="n">output_spec</span><span class="o">.</span><span class="n">partitions</span>
-</span><span id="JDBCWriter-57"><a href="#JDBCWriter-57"><span class="linenos">57</span></a>        <span class="p">)</span><span class="o">.</span><span class="n">options</span><span class="p">(</span><span class="o">**</span><span class="n">output_spec</span><span class="o">.</span><span class="n">options</span> <span class="k">if</span> <span class="n">output_spec</span><span class="o">.</span><span class="n">options</span> <span class="k">else</span> <span class="p">{})</span><span class="o">.</span><span class="n">mode</span><span class="p">(</span>
-</span><span id="JDBCWriter-58"><a href="#JDBCWriter-58"><span class="linenos">58</span></a>            <span class="n">output_spec</span><span class="o">.</span><span class="n">write_type</span>
-</span><span id="JDBCWriter-59"><a href="#JDBCWriter-59"><span class="linenos">59</span></a>        <span class="p">)</span><span class="o">.</span><span class="n">save</span><span class="p">(</span>
-</span><span id="JDBCWriter-60"><a href="#JDBCWriter-60"><span class="linenos">60</span></a>            <span class="n">output_spec</span><span class="o">.</span><span class="n">location</span>
-</span><span id="JDBCWriter-61"><a href="#JDBCWriter-61"><span class="linenos">61</span></a>        <span class="p">)</span>
-</span><span id="JDBCWriter-62"><a href="#JDBCWriter-62"><span class="linenos">62</span></a>
-</span><span id="JDBCWriter-63"><a href="#JDBCWriter-63"><span class="linenos">63</span></a>    <span class="nd">@staticmethod</span>
-</span><span id="JDBCWriter-64"><a href="#JDBCWriter-64"><span class="linenos">64</span></a>    <span class="k">def</span> <span class="nf">_write_transformed_micro_batch</span><span class="p">(</span>  <span class="c1"># type: ignore</span>
-</span><span id="JDBCWriter-65"><a href="#JDBCWriter-65"><span class="linenos">65</span></a>        <span class="n">output_spec</span><span class="p">:</span> <span class="n">OutputSpec</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">OrderedDict</span>
-</span><span id="JDBCWriter-66"><a href="#JDBCWriter-66"><span class="linenos">66</span></a>    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">:</span>
-</span><span id="JDBCWriter-67"><a href="#JDBCWriter-67"><span class="linenos">67</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Define how to write a streaming micro batch after transforming it.</span>
-</span><span id="JDBCWriter-68"><a href="#JDBCWriter-68"><span class="linenos">68</span></a>
-</span><span id="JDBCWriter-69"><a href="#JDBCWriter-69"><span class="linenos">69</span></a><span class="sd">        Args:</span>
-</span><span id="JDBCWriter-70"><a href="#JDBCWriter-70"><span class="linenos">70</span></a><span class="sd">            output_spec: output specification.</span>
-</span><span id="JDBCWriter-71"><a href="#JDBCWriter-71"><span class="linenos">71</span></a><span class="sd">            data: list of all dfs generated on previous steps before writer.</span>
-</span><span id="JDBCWriter-72"><a href="#JDBCWriter-72"><span class="linenos">72</span></a>
-</span><span id="JDBCWriter-73"><a href="#JDBCWriter-73"><span class="linenos">73</span></a><span class="sd">        Returns:</span>
-</span><span id="JDBCWriter-74"><a href="#JDBCWriter-74"><span class="linenos">74</span></a><span class="sd">            A function to be executed in the foreachBatch spark write method.</span>
-</span><span id="JDBCWriter-75"><a href="#JDBCWriter-75"><span class="linenos">75</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="JDBCWriter-76"><a href="#JDBCWriter-76"><span class="linenos">76</span></a>
-</span><span id="JDBCWriter-77"><a href="#JDBCWriter-77"><span class="linenos">77</span></a>        <span class="k">def</span> <span class="nf">inner</span><span class="p">(</span><span class="n">batch_df</span><span class="p">:</span> <span class="n">DataFrame</span><span class="p">,</span> <span class="n">batch_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-</span><span id="JDBCWriter-78"><a href="#JDBCWriter-78"><span class="linenos">78</span></a>            <span class="n">transformed_df</span> <span class="o">=</span> <span class="n">Writer</span><span class="o">.</span><span class="n">get_transformed_micro_batch</span><span class="p">(</span>
-</span><span id="JDBCWriter-79"><a href="#JDBCWriter-79"><span class="linenos">79</span></a>                <span class="n">output_spec</span><span class="p">,</span> <span class="n">batch_df</span><span class="p">,</span> <span class="n">batch_id</span><span class="p">,</span> <span class="n">data</span>
-</span><span id="JDBCWriter-80"><a href="#JDBCWriter-80"><span class="linenos">80</span></a>            <span class="p">)</span>
-</span><span id="JDBCWriter-81"><a href="#JDBCWriter-81"><span class="linenos">81</span></a>
-</span><span id="JDBCWriter-82"><a href="#JDBCWriter-82"><span class="linenos">82</span></a>            <span class="k">if</span> <span class="n">output_spec</span><span class="o">.</span><span class="n">streaming_micro_batch_dq_processors</span><span class="p">:</span>
-</span><span id="JDBCWriter-83"><a href="#JDBCWriter-83"><span class="linenos">83</span></a>                <span class="n">transformed_df</span> <span class="o">=</span> <span class="n">Writer</span><span class="o">.</span><span class="n">run_micro_batch_dq_process</span><span class="p">(</span>
-</span><span id="JDBCWriter-84"><a href="#JDBCWriter-84"><span class="linenos">84</span></a>                    <span class="n">transformed_df</span><span class="p">,</span> <span class="n">output_spec</span><span class="o">.</span><span class="n">streaming_micro_batch_dq_processors</span>
-</span><span id="JDBCWriter-85"><a href="#JDBCWriter-85"><span class="linenos">85</span></a>                <span class="p">)</span>
-</span><span id="JDBCWriter-86"><a href="#JDBCWriter-86"><span class="linenos">86</span></a>
-</span><span id="JDBCWriter-87"><a href="#JDBCWriter-87"><span class="linenos">87</span></a>            <span class="n">JDBCWriter</span><span class="o">.</span><span class="n">_write_to_jdbc_in_batch_mode</span><span class="p">(</span><span class="n">transformed_df</span><span class="p">,</span> <span class="n">output_spec</span><span class="p">)</span>
-</span><span id="JDBCWriter-88"><a href="#JDBCWriter-88"><span class="linenos">88</span></a>
-</span><span id="JDBCWriter-89"><a href="#JDBCWriter-89"><span class="linenos">89</span></a>        <span class="k">return</span> <span class="n">inner</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="JDBCWriter-12"><a href="#JDBCWriter-12"><span class="linenos">12</span></a><span class="k">class</span> <span class="nc">JDBCWriter</span><span class="p">(</span><span class="n">Writer</span><span class="p">):</span>
+</span><span id="JDBCWriter-13"><a href="#JDBCWriter-13"><span class="linenos">13</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Class to write to JDBC targets.&quot;&quot;&quot;</span>
+</span><span id="JDBCWriter-14"><a href="#JDBCWriter-14"><span class="linenos">14</span></a>
+</span><span id="JDBCWriter-15"><a href="#JDBCWriter-15"><span class="linenos">15</span></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">output_spec</span><span class="p">:</span> <span class="n">OutputSpec</span><span class="p">,</span> <span class="n">df</span><span class="p">:</span> <span class="n">DataFrame</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">OrderedDict</span><span class="p">):</span>
+</span><span id="JDBCWriter-16"><a href="#JDBCWriter-16"><span class="linenos">16</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Construct JDBCWriter instances.</span>
+</span><span id="JDBCWriter-17"><a href="#JDBCWriter-17"><span class="linenos">17</span></a>
+</span><span id="JDBCWriter-18"><a href="#JDBCWriter-18"><span class="linenos">18</span></a><span class="sd">        Args:</span>
+</span><span id="JDBCWriter-19"><a href="#JDBCWriter-19"><span class="linenos">19</span></a><span class="sd">            output_spec: output specification.</span>
+</span><span id="JDBCWriter-20"><a href="#JDBCWriter-20"><span class="linenos">20</span></a><span class="sd">            df: dataframe to be writen.</span>
+</span><span id="JDBCWriter-21"><a href="#JDBCWriter-21"><span class="linenos">21</span></a><span class="sd">            data: list of all dfs generated on previous steps before writer.</span>
+</span><span id="JDBCWriter-22"><a href="#JDBCWriter-22"><span class="linenos">22</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="JDBCWriter-23"><a href="#JDBCWriter-23"><span class="linenos">23</span></a>        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">output_spec</span><span class="p">,</span> <span class="n">df</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+</span><span id="JDBCWriter-24"><a href="#JDBCWriter-24"><span class="linenos">24</span></a>
+</span><span id="JDBCWriter-25"><a href="#JDBCWriter-25"><span class="linenos">25</span></a>    <span class="k">def</span> <span class="nf">write</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="JDBCWriter-26"><a href="#JDBCWriter-26"><span class="linenos">26</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Write data into JDBC target.&quot;&quot;&quot;</span>
+</span><span id="JDBCWriter-27"><a href="#JDBCWriter-27"><span class="linenos">27</span></a>        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_df</span><span class="o">.</span><span class="n">isStreaming</span><span class="p">:</span>
+</span><span id="JDBCWriter-28"><a href="#JDBCWriter-28"><span class="linenos">28</span></a>            <span class="bp">self</span><span class="o">.</span><span class="n">_write_to_jdbc_in_batch_mode</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_df</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_output_spec</span><span class="p">)</span>
+</span><span id="JDBCWriter-29"><a href="#JDBCWriter-29"><span class="linenos">29</span></a>        <span class="k">else</span><span class="p">:</span>
+</span><span id="JDBCWriter-30"><a href="#JDBCWriter-30"><span class="linenos">30</span></a>            <span class="n">stream_df</span> <span class="o">=</span> <span class="p">(</span>
+</span><span id="JDBCWriter-31"><a href="#JDBCWriter-31"><span class="linenos">31</span></a>                <span class="bp">self</span><span class="o">.</span><span class="n">_df</span><span class="o">.</span><span class="n">writeStream</span><span class="o">.</span><span class="n">trigger</span><span class="p">(</span>
+</span><span id="JDBCWriter-32"><a href="#JDBCWriter-32"><span class="linenos">32</span></a>                    <span class="o">**</span><span class="n">Writer</span><span class="o">.</span><span class="n">get_streaming_trigger</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_output_spec</span><span class="p">)</span>
+</span><span id="JDBCWriter-33"><a href="#JDBCWriter-33"><span class="linenos">33</span></a>                <span class="p">)</span>
+</span><span id="JDBCWriter-34"><a href="#JDBCWriter-34"><span class="linenos">34</span></a>                <span class="o">.</span><span class="n">options</span><span class="p">(</span>
+</span><span id="JDBCWriter-35"><a href="#JDBCWriter-35"><span class="linenos">35</span></a>                    <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">_output_spec</span><span class="o">.</span><span class="n">options</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_output_spec</span><span class="o">.</span><span class="n">options</span> <span class="k">else</span> <span class="p">{}</span>
+</span><span id="JDBCWriter-36"><a href="#JDBCWriter-36"><span class="linenos">36</span></a>                <span class="p">)</span>
+</span><span id="JDBCWriter-37"><a href="#JDBCWriter-37"><span class="linenos">37</span></a>                <span class="o">.</span><span class="n">foreachBatch</span><span class="p">(</span>
+</span><span id="JDBCWriter-38"><a href="#JDBCWriter-38"><span class="linenos">38</span></a>                    <span class="bp">self</span><span class="o">.</span><span class="n">_write_transformed_micro_batch</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_output_spec</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="p">)</span>
+</span><span id="JDBCWriter-39"><a href="#JDBCWriter-39"><span class="linenos">39</span></a>                <span class="p">)</span>
+</span><span id="JDBCWriter-40"><a href="#JDBCWriter-40"><span class="linenos">40</span></a>                <span class="o">.</span><span class="n">start</span><span class="p">()</span>
+</span><span id="JDBCWriter-41"><a href="#JDBCWriter-41"><span class="linenos">41</span></a>            <span class="p">)</span>
+</span><span id="JDBCWriter-42"><a href="#JDBCWriter-42"><span class="linenos">42</span></a>
+</span><span id="JDBCWriter-43"><a href="#JDBCWriter-43"><span class="linenos">43</span></a>            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_output_spec</span><span class="o">.</span><span class="n">streaming_await_termination</span><span class="p">:</span>
+</span><span id="JDBCWriter-44"><a href="#JDBCWriter-44"><span class="linenos">44</span></a>                <span class="n">stream_df</span><span class="o">.</span><span class="n">awaitTermination</span><span class="p">(</span>
+</span><span id="JDBCWriter-45"><a href="#JDBCWriter-45"><span class="linenos">45</span></a>                    <span class="bp">self</span><span class="o">.</span><span class="n">_output_spec</span><span class="o">.</span><span class="n">streaming_await_termination_timeout</span>
+</span><span id="JDBCWriter-46"><a href="#JDBCWriter-46"><span class="linenos">46</span></a>                <span class="p">)</span>
+</span><span id="JDBCWriter-47"><a href="#JDBCWriter-47"><span class="linenos">47</span></a>
+</span><span id="JDBCWriter-48"><a href="#JDBCWriter-48"><span class="linenos">48</span></a>    <span class="nd">@staticmethod</span>
+</span><span id="JDBCWriter-49"><a href="#JDBCWriter-49"><span class="linenos">49</span></a>    <span class="k">def</span> <span class="nf">_write_to_jdbc_in_batch_mode</span><span class="p">(</span><span class="n">df</span><span class="p">:</span> <span class="n">DataFrame</span><span class="p">,</span> <span class="n">output_spec</span><span class="p">:</span> <span class="n">OutputSpec</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="JDBCWriter-50"><a href="#JDBCWriter-50"><span class="linenos">50</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Write to jdbc in batch mode.</span>
+</span><span id="JDBCWriter-51"><a href="#JDBCWriter-51"><span class="linenos">51</span></a>
+</span><span id="JDBCWriter-52"><a href="#JDBCWriter-52"><span class="linenos">52</span></a><span class="sd">        Args:</span>
+</span><span id="JDBCWriter-53"><a href="#JDBCWriter-53"><span class="linenos">53</span></a><span class="sd">            df: dataframe to write.</span>
+</span><span id="JDBCWriter-54"><a href="#JDBCWriter-54"><span class="linenos">54</span></a><span class="sd">            output_spec: output specification.</span>
+</span><span id="JDBCWriter-55"><a href="#JDBCWriter-55"><span class="linenos">55</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="JDBCWriter-56"><a href="#JDBCWriter-56"><span class="linenos">56</span></a>        <span class="n">df</span><span class="o">.</span><span class="n">write</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">output_spec</span><span class="o">.</span><span class="n">data_format</span><span class="p">)</span><span class="o">.</span><span class="n">partitionBy</span><span class="p">(</span>
+</span><span id="JDBCWriter-57"><a href="#JDBCWriter-57"><span class="linenos">57</span></a>            <span class="n">output_spec</span><span class="o">.</span><span class="n">partitions</span>
+</span><span id="JDBCWriter-58"><a href="#JDBCWriter-58"><span class="linenos">58</span></a>        <span class="p">)</span><span class="o">.</span><span class="n">options</span><span class="p">(</span><span class="o">**</span><span class="n">output_spec</span><span class="o">.</span><span class="n">options</span> <span class="k">if</span> <span class="n">output_spec</span><span class="o">.</span><span class="n">options</span> <span class="k">else</span> <span class="p">{})</span><span class="o">.</span><span class="n">mode</span><span class="p">(</span>
+</span><span id="JDBCWriter-59"><a href="#JDBCWriter-59"><span class="linenos">59</span></a>            <span class="n">output_spec</span><span class="o">.</span><span class="n">write_type</span>
+</span><span id="JDBCWriter-60"><a href="#JDBCWriter-60"><span class="linenos">60</span></a>        <span class="p">)</span><span class="o">.</span><span class="n">save</span><span class="p">(</span>
+</span><span id="JDBCWriter-61"><a href="#JDBCWriter-61"><span class="linenos">61</span></a>            <span class="n">output_spec</span><span class="o">.</span><span class="n">location</span>
+</span><span id="JDBCWriter-62"><a href="#JDBCWriter-62"><span class="linenos">62</span></a>        <span class="p">)</span>
+</span><span id="JDBCWriter-63"><a href="#JDBCWriter-63"><span class="linenos">63</span></a>
+</span><span id="JDBCWriter-64"><a href="#JDBCWriter-64"><span class="linenos">64</span></a>    <span class="nd">@staticmethod</span>
+</span><span id="JDBCWriter-65"><a href="#JDBCWriter-65"><span class="linenos">65</span></a>    <span class="k">def</span> <span class="nf">_write_transformed_micro_batch</span><span class="p">(</span>  <span class="c1"># type: ignore</span>
+</span><span id="JDBCWriter-66"><a href="#JDBCWriter-66"><span class="linenos">66</span></a>        <span class="n">output_spec</span><span class="p">:</span> <span class="n">OutputSpec</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">OrderedDict</span>
+</span><span id="JDBCWriter-67"><a href="#JDBCWriter-67"><span class="linenos">67</span></a>    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">:</span>
+</span><span id="JDBCWriter-68"><a href="#JDBCWriter-68"><span class="linenos">68</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Define how to write a streaming micro batch after transforming it.</span>
+</span><span id="JDBCWriter-69"><a href="#JDBCWriter-69"><span class="linenos">69</span></a>
+</span><span id="JDBCWriter-70"><a href="#JDBCWriter-70"><span class="linenos">70</span></a><span class="sd">        Args:</span>
+</span><span id="JDBCWriter-71"><a href="#JDBCWriter-71"><span class="linenos">71</span></a><span class="sd">            output_spec: output specification.</span>
+</span><span id="JDBCWriter-72"><a href="#JDBCWriter-72"><span class="linenos">72</span></a><span class="sd">            data: list of all dfs generated on previous steps before writer.</span>
+</span><span id="JDBCWriter-73"><a href="#JDBCWriter-73"><span class="linenos">73</span></a>
+</span><span id="JDBCWriter-74"><a href="#JDBCWriter-74"><span class="linenos">74</span></a><span class="sd">        Returns:</span>
+</span><span id="JDBCWriter-75"><a href="#JDBCWriter-75"><span class="linenos">75</span></a><span class="sd">            A function to be executed in the foreachBatch spark write method.</span>
+</span><span id="JDBCWriter-76"><a href="#JDBCWriter-76"><span class="linenos">76</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="JDBCWriter-77"><a href="#JDBCWriter-77"><span class="linenos">77</span></a>
+</span><span id="JDBCWriter-78"><a href="#JDBCWriter-78"><span class="linenos">78</span></a>        <span class="k">def</span> <span class="nf">inner</span><span class="p">(</span><span class="n">batch_df</span><span class="p">:</span> <span class="n">DataFrame</span><span class="p">,</span> <span class="n">batch_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="JDBCWriter-79"><a href="#JDBCWriter-79"><span class="linenos">79</span></a>            <span class="n">transformed_df</span> <span class="o">=</span> <span class="n">Writer</span><span class="o">.</span><span class="n">get_transformed_micro_batch</span><span class="p">(</span>
+</span><span id="JDBCWriter-80"><a href="#JDBCWriter-80"><span class="linenos">80</span></a>                <span class="n">output_spec</span><span class="p">,</span> <span class="n">batch_df</span><span class="p">,</span> <span class="n">batch_id</span><span class="p">,</span> <span class="n">data</span>
+</span><span id="JDBCWriter-81"><a href="#JDBCWriter-81"><span class="linenos">81</span></a>            <span class="p">)</span>
+</span><span id="JDBCWriter-82"><a href="#JDBCWriter-82"><span class="linenos">82</span></a>
+</span><span id="JDBCWriter-83"><a href="#JDBCWriter-83"><span class="linenos">83</span></a>            <span class="k">if</span> <span class="n">output_spec</span><span class="o">.</span><span class="n">streaming_micro_batch_dq_processors</span><span class="p">:</span>
+</span><span id="JDBCWriter-84"><a href="#JDBCWriter-84"><span class="linenos">84</span></a>                <span class="n">transformed_df</span> <span class="o">=</span> <span class="n">Writer</span><span class="o">.</span><span class="n">run_micro_batch_dq_process</span><span class="p">(</span>
+</span><span id="JDBCWriter-85"><a href="#JDBCWriter-85"><span class="linenos">85</span></a>                    <span class="n">transformed_df</span><span class="p">,</span> <span class="n">output_spec</span><span class="o">.</span><span class="n">streaming_micro_batch_dq_processors</span>
+</span><span id="JDBCWriter-86"><a href="#JDBCWriter-86"><span class="linenos">86</span></a>                <span class="p">)</span>
+</span><span id="JDBCWriter-87"><a href="#JDBCWriter-87"><span class="linenos">87</span></a>
+</span><span id="JDBCWriter-88"><a href="#JDBCWriter-88"><span class="linenos">88</span></a>            <span class="n">JDBCWriter</span><span class="o">.</span><span class="n">_write_to_jdbc_in_batch_mode</span><span class="p">(</span><span class="n">transformed_df</span><span class="p">,</span> <span class="n">output_spec</span><span class="p">)</span>
+</span><span id="JDBCWriter-89"><a href="#JDBCWriter-89"><span class="linenos">89</span></a>
+</span><span id="JDBCWriter-90"><a href="#JDBCWriter-90"><span class="linenos">90</span></a>        <span class="k">return</span> <span class="n">inner</span>
 </span></pre></div>
 
 
@@ -279,15 +280,15 @@
 
     </div>
     <a class="headerlink" href="#JDBCWriter.__init__"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="JDBCWriter.__init__-14"><a href="#JDBCWriter.__init__-14"><span class="linenos">14</span></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">output_spec</span><span class="p">:</span> <span class="n">OutputSpec</span><span class="p">,</span> <span class="n">df</span><span class="p">:</span> <span class="n">DataFrame</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">OrderedDict</span><span class="p">):</span>
-</span><span id="JDBCWriter.__init__-15"><a href="#JDBCWriter.__init__-15"><span class="linenos">15</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Construct JDBCWriter instances.</span>
-</span><span id="JDBCWriter.__init__-16"><a href="#JDBCWriter.__init__-16"><span class="linenos">16</span></a>
-</span><span id="JDBCWriter.__init__-17"><a href="#JDBCWriter.__init__-17"><span class="linenos">17</span></a><span class="sd">        Args:</span>
-</span><span id="JDBCWriter.__init__-18"><a href="#JDBCWriter.__init__-18"><span class="linenos">18</span></a><span class="sd">            output_spec: output specification.</span>
-</span><span id="JDBCWriter.__init__-19"><a href="#JDBCWriter.__init__-19"><span class="linenos">19</span></a><span class="sd">            df: dataframe to be writen.</span>
-</span><span id="JDBCWriter.__init__-20"><a href="#JDBCWriter.__init__-20"><span class="linenos">20</span></a><span class="sd">            data: list of all dfs generated on previous steps before writer.</span>
-</span><span id="JDBCWriter.__init__-21"><a href="#JDBCWriter.__init__-21"><span class="linenos">21</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="JDBCWriter.__init__-22"><a href="#JDBCWriter.__init__-22"><span class="linenos">22</span></a>        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">output_spec</span><span class="p">,</span> <span class="n">df</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="JDBCWriter.__init__-15"><a href="#JDBCWriter.__init__-15"><span class="linenos">15</span></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">output_spec</span><span class="p">:</span> <span class="n">OutputSpec</span><span class="p">,</span> <span class="n">df</span><span class="p">:</span> <span class="n">DataFrame</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">OrderedDict</span><span class="p">):</span>
+</span><span id="JDBCWriter.__init__-16"><a href="#JDBCWriter.__init__-16"><span class="linenos">16</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Construct JDBCWriter instances.</span>
+</span><span id="JDBCWriter.__init__-17"><a href="#JDBCWriter.__init__-17"><span class="linenos">17</span></a>
+</span><span id="JDBCWriter.__init__-18"><a href="#JDBCWriter.__init__-18"><span class="linenos">18</span></a><span class="sd">        Args:</span>
+</span><span id="JDBCWriter.__init__-19"><a href="#JDBCWriter.__init__-19"><span class="linenos">19</span></a><span class="sd">            output_spec: output specification.</span>
+</span><span id="JDBCWriter.__init__-20"><a href="#JDBCWriter.__init__-20"><span class="linenos">20</span></a><span class="sd">            df: dataframe to be writen.</span>
+</span><span id="JDBCWriter.__init__-21"><a href="#JDBCWriter.__init__-21"><span class="linenos">21</span></a><span class="sd">            data: list of all dfs generated on previous steps before writer.</span>
+</span><span id="JDBCWriter.__init__-22"><a href="#JDBCWriter.__init__-22"><span class="linenos">22</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="JDBCWriter.__init__-23"><a href="#JDBCWriter.__init__-23"><span class="linenos">23</span></a>        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">output_spec</span><span class="p">,</span> <span class="n">df</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
 </span></pre></div>
 
 
@@ -315,28 +316,28 @@
 
     </div>
     <a class="headerlink" href="#JDBCWriter.write"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="JDBCWriter.write-24"><a href="#JDBCWriter.write-24"><span class="linenos">24</span></a>    <span class="k">def</span> <span class="nf">write</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-</span><span id="JDBCWriter.write-25"><a href="#JDBCWriter.write-25"><span class="linenos">25</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Write data into JDBC target.&quot;&quot;&quot;</span>
-</span><span id="JDBCWriter.write-26"><a href="#JDBCWriter.write-26"><span class="linenos">26</span></a>        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_df</span><span class="o">.</span><span class="n">isStreaming</span><span class="p">:</span>
-</span><span id="JDBCWriter.write-27"><a href="#JDBCWriter.write-27"><span class="linenos">27</span></a>            <span class="bp">self</span><span class="o">.</span><span class="n">_write_to_jdbc_in_batch_mode</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_df</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_output_spec</span><span class="p">)</span>
-</span><span id="JDBCWriter.write-28"><a href="#JDBCWriter.write-28"><span class="linenos">28</span></a>        <span class="k">else</span><span class="p">:</span>
-</span><span id="JDBCWriter.write-29"><a href="#JDBCWriter.write-29"><span class="linenos">29</span></a>            <span class="n">stream_df</span> <span class="o">=</span> <span class="p">(</span>
-</span><span id="JDBCWriter.write-30"><a href="#JDBCWriter.write-30"><span class="linenos">30</span></a>                <span class="bp">self</span><span class="o">.</span><span class="n">_df</span><span class="o">.</span><span class="n">writeStream</span><span class="o">.</span><span class="n">trigger</span><span class="p">(</span>
-</span><span id="JDBCWriter.write-31"><a href="#JDBCWriter.write-31"><span class="linenos">31</span></a>                    <span class="o">**</span><span class="n">Writer</span><span class="o">.</span><span class="n">get_streaming_trigger</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_output_spec</span><span class="p">)</span>
-</span><span id="JDBCWriter.write-32"><a href="#JDBCWriter.write-32"><span class="linenos">32</span></a>                <span class="p">)</span>
-</span><span id="JDBCWriter.write-33"><a href="#JDBCWriter.write-33"><span class="linenos">33</span></a>                <span class="o">.</span><span class="n">options</span><span class="p">(</span>
-</span><span id="JDBCWriter.write-34"><a href="#JDBCWriter.write-34"><span class="linenos">34</span></a>                    <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">_output_spec</span><span class="o">.</span><span class="n">options</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_output_spec</span><span class="o">.</span><span class="n">options</span> <span class="k">else</span> <span class="p">{}</span>
-</span><span id="JDBCWriter.write-35"><a href="#JDBCWriter.write-35"><span class="linenos">35</span></a>                <span class="p">)</span>
-</span><span id="JDBCWriter.write-36"><a href="#JDBCWriter.write-36"><span class="linenos">36</span></a>                <span class="o">.</span><span class="n">foreachBatch</span><span class="p">(</span>
-</span><span id="JDBCWriter.write-37"><a href="#JDBCWriter.write-37"><span class="linenos">37</span></a>                    <span class="bp">self</span><span class="o">.</span><span class="n">_write_transformed_micro_batch</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_output_spec</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="p">)</span>
-</span><span id="JDBCWriter.write-38"><a href="#JDBCWriter.write-38"><span class="linenos">38</span></a>                <span class="p">)</span>
-</span><span id="JDBCWriter.write-39"><a href="#JDBCWriter.write-39"><span class="linenos">39</span></a>                <span class="o">.</span><span class="n">start</span><span class="p">()</span>
-</span><span id="JDBCWriter.write-40"><a href="#JDBCWriter.write-40"><span class="linenos">40</span></a>            <span class="p">)</span>
-</span><span id="JDBCWriter.write-41"><a href="#JDBCWriter.write-41"><span class="linenos">41</span></a>
-</span><span id="JDBCWriter.write-42"><a href="#JDBCWriter.write-42"><span class="linenos">42</span></a>            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_output_spec</span><span class="o">.</span><span class="n">streaming_await_termination</span><span class="p">:</span>
-</span><span id="JDBCWriter.write-43"><a href="#JDBCWriter.write-43"><span class="linenos">43</span></a>                <span class="n">stream_df</span><span class="o">.</span><span class="n">awaitTermination</span><span class="p">(</span>
-</span><span id="JDBCWriter.write-44"><a href="#JDBCWriter.write-44"><span class="linenos">44</span></a>                    <span class="bp">self</span><span class="o">.</span><span class="n">_output_spec</span><span class="o">.</span><span class="n">streaming_await_termination_timeout</span>
-</span><span id="JDBCWriter.write-45"><a href="#JDBCWriter.write-45"><span class="linenos">45</span></a>                <span class="p">)</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="JDBCWriter.write-25"><a href="#JDBCWriter.write-25"><span class="linenos">25</span></a>    <span class="k">def</span> <span class="nf">write</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="JDBCWriter.write-26"><a href="#JDBCWriter.write-26"><span class="linenos">26</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Write data into JDBC target.&quot;&quot;&quot;</span>
+</span><span id="JDBCWriter.write-27"><a href="#JDBCWriter.write-27"><span class="linenos">27</span></a>        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_df</span><span class="o">.</span><span class="n">isStreaming</span><span class="p">:</span>
+</span><span id="JDBCWriter.write-28"><a href="#JDBCWriter.write-28"><span class="linenos">28</span></a>            <span class="bp">self</span><span class="o">.</span><span class="n">_write_to_jdbc_in_batch_mode</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_df</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_output_spec</span><span class="p">)</span>
+</span><span id="JDBCWriter.write-29"><a href="#JDBCWriter.write-29"><span class="linenos">29</span></a>        <span class="k">else</span><span class="p">:</span>
+</span><span id="JDBCWriter.write-30"><a href="#JDBCWriter.write-30"><span class="linenos">30</span></a>            <span class="n">stream_df</span> <span class="o">=</span> <span class="p">(</span>
+</span><span id="JDBCWriter.write-31"><a href="#JDBCWriter.write-31"><span class="linenos">31</span></a>                <span class="bp">self</span><span class="o">.</span><span class="n">_df</span><span class="o">.</span><span class="n">writeStream</span><span class="o">.</span><span class="n">trigger</span><span class="p">(</span>
+</span><span id="JDBCWriter.write-32"><a href="#JDBCWriter.write-32"><span class="linenos">32</span></a>                    <span class="o">**</span><span class="n">Writer</span><span class="o">.</span><span class="n">get_streaming_trigger</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_output_spec</span><span class="p">)</span>
+</span><span id="JDBCWriter.write-33"><a href="#JDBCWriter.write-33"><span class="linenos">33</span></a>                <span class="p">)</span>
+</span><span id="JDBCWriter.write-34"><a href="#JDBCWriter.write-34"><span class="linenos">34</span></a>                <span class="o">.</span><span class="n">options</span><span class="p">(</span>
+</span><span id="JDBCWriter.write-35"><a href="#JDBCWriter.write-35"><span class="linenos">35</span></a>                    <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">_output_spec</span><span class="o">.</span><span class="n">options</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_output_spec</span><span class="o">.</span><span class="n">options</span> <span class="k">else</span> <span class="p">{}</span>
+</span><span id="JDBCWriter.write-36"><a href="#JDBCWriter.write-36"><span class="linenos">36</span></a>                <span class="p">)</span>
+</span><span id="JDBCWriter.write-37"><a href="#JDBCWriter.write-37"><span class="linenos">37</span></a>                <span class="o">.</span><span class="n">foreachBatch</span><span class="p">(</span>
+</span><span id="JDBCWriter.write-38"><a href="#JDBCWriter.write-38"><span class="linenos">38</span></a>                    <span class="bp">self</span><span class="o">.</span><span class="n">_write_transformed_micro_batch</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_output_spec</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="p">)</span>
+</span><span id="JDBCWriter.write-39"><a href="#JDBCWriter.write-39"><span class="linenos">39</span></a>                <span class="p">)</span>
+</span><span id="JDBCWriter.write-40"><a href="#JDBCWriter.write-40"><span class="linenos">40</span></a>                <span class="o">.</span><span class="n">start</span><span class="p">()</span>
+</span><span id="JDBCWriter.write-41"><a href="#JDBCWriter.write-41"><span class="linenos">41</span></a>            <span class="p">)</span>
+</span><span id="JDBCWriter.write-42"><a href="#JDBCWriter.write-42"><span class="linenos">42</span></a>
+</span><span id="JDBCWriter.write-43"><a href="#JDBCWriter.write-43"><span class="linenos">43</span></a>            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_output_spec</span><span class="o">.</span><span class="n">streaming_await_termination</span><span class="p">:</span>
+</span><span id="JDBCWriter.write-44"><a href="#JDBCWriter.write-44"><span class="linenos">44</span></a>                <span class="n">stream_df</span><span class="o">.</span><span class="n">awaitTermination</span><span class="p">(</span>
+</span><span id="JDBCWriter.write-45"><a href="#JDBCWriter.write-45"><span class="linenos">45</span></a>                    <span class="bp">self</span><span class="o">.</span><span class="n">_output_spec</span><span class="o">.</span><span class="n">streaming_await_termination_timeout</span>
+</span><span id="JDBCWriter.write-46"><a href="#JDBCWriter.write-46"><span class="linenos">46</span></a>                <span class="p">)</span>
 </span></pre></div>
 
 

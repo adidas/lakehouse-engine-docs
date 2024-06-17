@@ -63,7 +63,7 @@
     </ul>
 
 
-            <footer>Lakehouse Engine v1.20.1</footer>
+            <footer>Lakehouse Engine v1.21.0version</footer>
 
 </div>
     </nav>
@@ -81,36 +81,37 @@
                     <label class="view-source-button" for="mod-kafka_reader-view-source"><span>View Source</span></label>
 
                     <div class="pdoc-code codehilite"><pre><span></span><span id="L-1"><a href="#L-1"><span class="linenos"> 1</span></a><span class="sd">&quot;&quot;&quot;Module to define behaviour to read from Kafka.&quot;&quot;&quot;</span>
-</span><span id="L-2"><a href="#L-2"><span class="linenos"> 2</span></a><span class="kn">from</span> <span class="nn">pyspark.sql</span> <span class="kn">import</span> <span class="n">DataFrame</span>
-</span><span id="L-3"><a href="#L-3"><span class="linenos"> 3</span></a>
-</span><span id="L-4"><a href="#L-4"><span class="linenos"> 4</span></a><span class="kn">from</span> <span class="nn">lakehouse_engine.core.definitions</span> <span class="kn">import</span> <span class="n">InputFormat</span><span class="p">,</span> <span class="n">InputSpec</span>
-</span><span id="L-5"><a href="#L-5"><span class="linenos"> 5</span></a><span class="kn">from</span> <span class="nn">lakehouse_engine.core.exec_env</span> <span class="kn">import</span> <span class="n">ExecEnv</span>
-</span><span id="L-6"><a href="#L-6"><span class="linenos"> 6</span></a><span class="kn">from</span> <span class="nn">lakehouse_engine.io.reader</span> <span class="kn">import</span> <span class="n">Reader</span>
-</span><span id="L-7"><a href="#L-7"><span class="linenos"> 7</span></a>
+</span><span id="L-2"><a href="#L-2"><span class="linenos"> 2</span></a>
+</span><span id="L-3"><a href="#L-3"><span class="linenos"> 3</span></a><span class="kn">from</span> <span class="nn">pyspark.sql</span> <span class="kn">import</span> <span class="n">DataFrame</span>
+</span><span id="L-4"><a href="#L-4"><span class="linenos"> 4</span></a>
+</span><span id="L-5"><a href="#L-5"><span class="linenos"> 5</span></a><span class="kn">from</span> <span class="nn">lakehouse_engine.core.definitions</span> <span class="kn">import</span> <span class="n">InputFormat</span><span class="p">,</span> <span class="n">InputSpec</span>
+</span><span id="L-6"><a href="#L-6"><span class="linenos"> 6</span></a><span class="kn">from</span> <span class="nn">lakehouse_engine.core.exec_env</span> <span class="kn">import</span> <span class="n">ExecEnv</span>
+</span><span id="L-7"><a href="#L-7"><span class="linenos"> 7</span></a><span class="kn">from</span> <span class="nn">lakehouse_engine.io.reader</span> <span class="kn">import</span> <span class="n">Reader</span>
 </span><span id="L-8"><a href="#L-8"><span class="linenos"> 8</span></a>
-</span><span id="L-9"><a href="#L-9"><span class="linenos"> 9</span></a><span class="k">class</span> <span class="nc">KafkaReader</span><span class="p">(</span><span class="n">Reader</span><span class="p">):</span>
-</span><span id="L-10"><a href="#L-10"><span class="linenos">10</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Class to read from Kafka.&quot;&quot;&quot;</span>
-</span><span id="L-11"><a href="#L-11"><span class="linenos">11</span></a>
-</span><span id="L-12"><a href="#L-12"><span class="linenos">12</span></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_spec</span><span class="p">:</span> <span class="n">InputSpec</span><span class="p">):</span>
-</span><span id="L-13"><a href="#L-13"><span class="linenos">13</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Construct KafkaReader instances.</span>
-</span><span id="L-14"><a href="#L-14"><span class="linenos">14</span></a>
-</span><span id="L-15"><a href="#L-15"><span class="linenos">15</span></a><span class="sd">        Args:</span>
-</span><span id="L-16"><a href="#L-16"><span class="linenos">16</span></a><span class="sd">            input_spec: input specification.</span>
-</span><span id="L-17"><a href="#L-17"><span class="linenos">17</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="L-18"><a href="#L-18"><span class="linenos">18</span></a>        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">input_spec</span><span class="p">)</span>
-</span><span id="L-19"><a href="#L-19"><span class="linenos">19</span></a>
-</span><span id="L-20"><a href="#L-20"><span class="linenos">20</span></a>    <span class="k">def</span> <span class="nf">read</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataFrame</span><span class="p">:</span>
-</span><span id="L-21"><a href="#L-21"><span class="linenos">21</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Read Kafka data.</span>
-</span><span id="L-22"><a href="#L-22"><span class="linenos">22</span></a>
-</span><span id="L-23"><a href="#L-23"><span class="linenos">23</span></a><span class="sd">        Returns:</span>
-</span><span id="L-24"><a href="#L-24"><span class="linenos">24</span></a><span class="sd">            A dataframe containing the data from Kafka.</span>
-</span><span id="L-25"><a href="#L-25"><span class="linenos">25</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="L-26"><a href="#L-26"><span class="linenos">26</span></a>        <span class="n">df</span> <span class="o">=</span> <span class="n">ExecEnv</span><span class="o">.</span><span class="n">SESSION</span><span class="o">.</span><span class="n">readStream</span><span class="o">.</span><span class="n">load</span><span class="p">(</span>
-</span><span id="L-27"><a href="#L-27"><span class="linenos">27</span></a>            <span class="nb">format</span><span class="o">=</span><span class="n">InputFormat</span><span class="o">.</span><span class="n">KAFKA</span><span class="o">.</span><span class="n">value</span><span class="p">,</span>
-</span><span id="L-28"><a href="#L-28"><span class="linenos">28</span></a>            <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">_input_spec</span><span class="o">.</span><span class="n">options</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_input_spec</span><span class="o">.</span><span class="n">options</span> <span class="k">else</span> <span class="p">{}</span>
-</span><span id="L-29"><a href="#L-29"><span class="linenos">29</span></a>        <span class="p">)</span>
-</span><span id="L-30"><a href="#L-30"><span class="linenos">30</span></a>
-</span><span id="L-31"><a href="#L-31"><span class="linenos">31</span></a>        <span class="k">return</span> <span class="n">df</span>
+</span><span id="L-9"><a href="#L-9"><span class="linenos"> 9</span></a>
+</span><span id="L-10"><a href="#L-10"><span class="linenos">10</span></a><span class="k">class</span> <span class="nc">KafkaReader</span><span class="p">(</span><span class="n">Reader</span><span class="p">):</span>
+</span><span id="L-11"><a href="#L-11"><span class="linenos">11</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Class to read from Kafka.&quot;&quot;&quot;</span>
+</span><span id="L-12"><a href="#L-12"><span class="linenos">12</span></a>
+</span><span id="L-13"><a href="#L-13"><span class="linenos">13</span></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_spec</span><span class="p">:</span> <span class="n">InputSpec</span><span class="p">):</span>
+</span><span id="L-14"><a href="#L-14"><span class="linenos">14</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Construct KafkaReader instances.</span>
+</span><span id="L-15"><a href="#L-15"><span class="linenos">15</span></a>
+</span><span id="L-16"><a href="#L-16"><span class="linenos">16</span></a><span class="sd">        Args:</span>
+</span><span id="L-17"><a href="#L-17"><span class="linenos">17</span></a><span class="sd">            input_spec: input specification.</span>
+</span><span id="L-18"><a href="#L-18"><span class="linenos">18</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="L-19"><a href="#L-19"><span class="linenos">19</span></a>        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">input_spec</span><span class="p">)</span>
+</span><span id="L-20"><a href="#L-20"><span class="linenos">20</span></a>
+</span><span id="L-21"><a href="#L-21"><span class="linenos">21</span></a>    <span class="k">def</span> <span class="nf">read</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataFrame</span><span class="p">:</span>
+</span><span id="L-22"><a href="#L-22"><span class="linenos">22</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Read Kafka data.</span>
+</span><span id="L-23"><a href="#L-23"><span class="linenos">23</span></a>
+</span><span id="L-24"><a href="#L-24"><span class="linenos">24</span></a><span class="sd">        Returns:</span>
+</span><span id="L-25"><a href="#L-25"><span class="linenos">25</span></a><span class="sd">            A dataframe containing the data from Kafka.</span>
+</span><span id="L-26"><a href="#L-26"><span class="linenos">26</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="L-27"><a href="#L-27"><span class="linenos">27</span></a>        <span class="n">df</span> <span class="o">=</span> <span class="n">ExecEnv</span><span class="o">.</span><span class="n">SESSION</span><span class="o">.</span><span class="n">readStream</span><span class="o">.</span><span class="n">load</span><span class="p">(</span>
+</span><span id="L-28"><a href="#L-28"><span class="linenos">28</span></a>            <span class="nb">format</span><span class="o">=</span><span class="n">InputFormat</span><span class="o">.</span><span class="n">KAFKA</span><span class="o">.</span><span class="n">value</span><span class="p">,</span>
+</span><span id="L-29"><a href="#L-29"><span class="linenos">29</span></a>            <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">_input_spec</span><span class="o">.</span><span class="n">options</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_input_spec</span><span class="o">.</span><span class="n">options</span> <span class="k">else</span> <span class="p">{},</span>
+</span><span id="L-30"><a href="#L-30"><span class="linenos">30</span></a>        <span class="p">)</span>
+</span><span id="L-31"><a href="#L-31"><span class="linenos">31</span></a>
+</span><span id="L-32"><a href="#L-32"><span class="linenos">32</span></a>        <span class="k">return</span> <span class="n">df</span>
 </span></pre></div>
 
 
@@ -126,29 +127,29 @@
 
     </div>
     <a class="headerlink" href="#KafkaReader"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="KafkaReader-10"><a href="#KafkaReader-10"><span class="linenos">10</span></a><span class="k">class</span> <span class="nc">KafkaReader</span><span class="p">(</span><span class="n">Reader</span><span class="p">):</span>
-</span><span id="KafkaReader-11"><a href="#KafkaReader-11"><span class="linenos">11</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Class to read from Kafka.&quot;&quot;&quot;</span>
-</span><span id="KafkaReader-12"><a href="#KafkaReader-12"><span class="linenos">12</span></a>
-</span><span id="KafkaReader-13"><a href="#KafkaReader-13"><span class="linenos">13</span></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_spec</span><span class="p">:</span> <span class="n">InputSpec</span><span class="p">):</span>
-</span><span id="KafkaReader-14"><a href="#KafkaReader-14"><span class="linenos">14</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Construct KafkaReader instances.</span>
-</span><span id="KafkaReader-15"><a href="#KafkaReader-15"><span class="linenos">15</span></a>
-</span><span id="KafkaReader-16"><a href="#KafkaReader-16"><span class="linenos">16</span></a><span class="sd">        Args:</span>
-</span><span id="KafkaReader-17"><a href="#KafkaReader-17"><span class="linenos">17</span></a><span class="sd">            input_spec: input specification.</span>
-</span><span id="KafkaReader-18"><a href="#KafkaReader-18"><span class="linenos">18</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="KafkaReader-19"><a href="#KafkaReader-19"><span class="linenos">19</span></a>        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">input_spec</span><span class="p">)</span>
-</span><span id="KafkaReader-20"><a href="#KafkaReader-20"><span class="linenos">20</span></a>
-</span><span id="KafkaReader-21"><a href="#KafkaReader-21"><span class="linenos">21</span></a>    <span class="k">def</span> <span class="nf">read</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataFrame</span><span class="p">:</span>
-</span><span id="KafkaReader-22"><a href="#KafkaReader-22"><span class="linenos">22</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Read Kafka data.</span>
-</span><span id="KafkaReader-23"><a href="#KafkaReader-23"><span class="linenos">23</span></a>
-</span><span id="KafkaReader-24"><a href="#KafkaReader-24"><span class="linenos">24</span></a><span class="sd">        Returns:</span>
-</span><span id="KafkaReader-25"><a href="#KafkaReader-25"><span class="linenos">25</span></a><span class="sd">            A dataframe containing the data from Kafka.</span>
-</span><span id="KafkaReader-26"><a href="#KafkaReader-26"><span class="linenos">26</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="KafkaReader-27"><a href="#KafkaReader-27"><span class="linenos">27</span></a>        <span class="n">df</span> <span class="o">=</span> <span class="n">ExecEnv</span><span class="o">.</span><span class="n">SESSION</span><span class="o">.</span><span class="n">readStream</span><span class="o">.</span><span class="n">load</span><span class="p">(</span>
-</span><span id="KafkaReader-28"><a href="#KafkaReader-28"><span class="linenos">28</span></a>            <span class="nb">format</span><span class="o">=</span><span class="n">InputFormat</span><span class="o">.</span><span class="n">KAFKA</span><span class="o">.</span><span class="n">value</span><span class="p">,</span>
-</span><span id="KafkaReader-29"><a href="#KafkaReader-29"><span class="linenos">29</span></a>            <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">_input_spec</span><span class="o">.</span><span class="n">options</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_input_spec</span><span class="o">.</span><span class="n">options</span> <span class="k">else</span> <span class="p">{}</span>
-</span><span id="KafkaReader-30"><a href="#KafkaReader-30"><span class="linenos">30</span></a>        <span class="p">)</span>
-</span><span id="KafkaReader-31"><a href="#KafkaReader-31"><span class="linenos">31</span></a>
-</span><span id="KafkaReader-32"><a href="#KafkaReader-32"><span class="linenos">32</span></a>        <span class="k">return</span> <span class="n">df</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="KafkaReader-11"><a href="#KafkaReader-11"><span class="linenos">11</span></a><span class="k">class</span> <span class="nc">KafkaReader</span><span class="p">(</span><span class="n">Reader</span><span class="p">):</span>
+</span><span id="KafkaReader-12"><a href="#KafkaReader-12"><span class="linenos">12</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Class to read from Kafka.&quot;&quot;&quot;</span>
+</span><span id="KafkaReader-13"><a href="#KafkaReader-13"><span class="linenos">13</span></a>
+</span><span id="KafkaReader-14"><a href="#KafkaReader-14"><span class="linenos">14</span></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_spec</span><span class="p">:</span> <span class="n">InputSpec</span><span class="p">):</span>
+</span><span id="KafkaReader-15"><a href="#KafkaReader-15"><span class="linenos">15</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Construct KafkaReader instances.</span>
+</span><span id="KafkaReader-16"><a href="#KafkaReader-16"><span class="linenos">16</span></a>
+</span><span id="KafkaReader-17"><a href="#KafkaReader-17"><span class="linenos">17</span></a><span class="sd">        Args:</span>
+</span><span id="KafkaReader-18"><a href="#KafkaReader-18"><span class="linenos">18</span></a><span class="sd">            input_spec: input specification.</span>
+</span><span id="KafkaReader-19"><a href="#KafkaReader-19"><span class="linenos">19</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="KafkaReader-20"><a href="#KafkaReader-20"><span class="linenos">20</span></a>        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">input_spec</span><span class="p">)</span>
+</span><span id="KafkaReader-21"><a href="#KafkaReader-21"><span class="linenos">21</span></a>
+</span><span id="KafkaReader-22"><a href="#KafkaReader-22"><span class="linenos">22</span></a>    <span class="k">def</span> <span class="nf">read</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataFrame</span><span class="p">:</span>
+</span><span id="KafkaReader-23"><a href="#KafkaReader-23"><span class="linenos">23</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Read Kafka data.</span>
+</span><span id="KafkaReader-24"><a href="#KafkaReader-24"><span class="linenos">24</span></a>
+</span><span id="KafkaReader-25"><a href="#KafkaReader-25"><span class="linenos">25</span></a><span class="sd">        Returns:</span>
+</span><span id="KafkaReader-26"><a href="#KafkaReader-26"><span class="linenos">26</span></a><span class="sd">            A dataframe containing the data from Kafka.</span>
+</span><span id="KafkaReader-27"><a href="#KafkaReader-27"><span class="linenos">27</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="KafkaReader-28"><a href="#KafkaReader-28"><span class="linenos">28</span></a>        <span class="n">df</span> <span class="o">=</span> <span class="n">ExecEnv</span><span class="o">.</span><span class="n">SESSION</span><span class="o">.</span><span class="n">readStream</span><span class="o">.</span><span class="n">load</span><span class="p">(</span>
+</span><span id="KafkaReader-29"><a href="#KafkaReader-29"><span class="linenos">29</span></a>            <span class="nb">format</span><span class="o">=</span><span class="n">InputFormat</span><span class="o">.</span><span class="n">KAFKA</span><span class="o">.</span><span class="n">value</span><span class="p">,</span>
+</span><span id="KafkaReader-30"><a href="#KafkaReader-30"><span class="linenos">30</span></a>            <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">_input_spec</span><span class="o">.</span><span class="n">options</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_input_spec</span><span class="o">.</span><span class="n">options</span> <span class="k">else</span> <span class="p">{},</span>
+</span><span id="KafkaReader-31"><a href="#KafkaReader-31"><span class="linenos">31</span></a>        <span class="p">)</span>
+</span><span id="KafkaReader-32"><a href="#KafkaReader-32"><span class="linenos">32</span></a>
+</span><span id="KafkaReader-33"><a href="#KafkaReader-33"><span class="linenos">33</span></a>        <span class="k">return</span> <span class="n">df</span>
 </span></pre></div>
 
 
@@ -166,13 +167,13 @@
 
     </div>
     <a class="headerlink" href="#KafkaReader.__init__"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="KafkaReader.__init__-13"><a href="#KafkaReader.__init__-13"><span class="linenos">13</span></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_spec</span><span class="p">:</span> <span class="n">InputSpec</span><span class="p">):</span>
-</span><span id="KafkaReader.__init__-14"><a href="#KafkaReader.__init__-14"><span class="linenos">14</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Construct KafkaReader instances.</span>
-</span><span id="KafkaReader.__init__-15"><a href="#KafkaReader.__init__-15"><span class="linenos">15</span></a>
-</span><span id="KafkaReader.__init__-16"><a href="#KafkaReader.__init__-16"><span class="linenos">16</span></a><span class="sd">        Args:</span>
-</span><span id="KafkaReader.__init__-17"><a href="#KafkaReader.__init__-17"><span class="linenos">17</span></a><span class="sd">            input_spec: input specification.</span>
-</span><span id="KafkaReader.__init__-18"><a href="#KafkaReader.__init__-18"><span class="linenos">18</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="KafkaReader.__init__-19"><a href="#KafkaReader.__init__-19"><span class="linenos">19</span></a>        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">input_spec</span><span class="p">)</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="KafkaReader.__init__-14"><a href="#KafkaReader.__init__-14"><span class="linenos">14</span></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_spec</span><span class="p">:</span> <span class="n">InputSpec</span><span class="p">):</span>
+</span><span id="KafkaReader.__init__-15"><a href="#KafkaReader.__init__-15"><span class="linenos">15</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Construct KafkaReader instances.</span>
+</span><span id="KafkaReader.__init__-16"><a href="#KafkaReader.__init__-16"><span class="linenos">16</span></a>
+</span><span id="KafkaReader.__init__-17"><a href="#KafkaReader.__init__-17"><span class="linenos">17</span></a><span class="sd">        Args:</span>
+</span><span id="KafkaReader.__init__-18"><a href="#KafkaReader.__init__-18"><span class="linenos">18</span></a><span class="sd">            input_spec: input specification.</span>
+</span><span id="KafkaReader.__init__-19"><a href="#KafkaReader.__init__-19"><span class="linenos">19</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="KafkaReader.__init__-20"><a href="#KafkaReader.__init__-20"><span class="linenos">20</span></a>        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">input_spec</span><span class="p">)</span>
 </span></pre></div>
 
 
@@ -198,18 +199,18 @@
 
     </div>
     <a class="headerlink" href="#KafkaReader.read"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="KafkaReader.read-21"><a href="#KafkaReader.read-21"><span class="linenos">21</span></a>    <span class="k">def</span> <span class="nf">read</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataFrame</span><span class="p">:</span>
-</span><span id="KafkaReader.read-22"><a href="#KafkaReader.read-22"><span class="linenos">22</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Read Kafka data.</span>
-</span><span id="KafkaReader.read-23"><a href="#KafkaReader.read-23"><span class="linenos">23</span></a>
-</span><span id="KafkaReader.read-24"><a href="#KafkaReader.read-24"><span class="linenos">24</span></a><span class="sd">        Returns:</span>
-</span><span id="KafkaReader.read-25"><a href="#KafkaReader.read-25"><span class="linenos">25</span></a><span class="sd">            A dataframe containing the data from Kafka.</span>
-</span><span id="KafkaReader.read-26"><a href="#KafkaReader.read-26"><span class="linenos">26</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="KafkaReader.read-27"><a href="#KafkaReader.read-27"><span class="linenos">27</span></a>        <span class="n">df</span> <span class="o">=</span> <span class="n">ExecEnv</span><span class="o">.</span><span class="n">SESSION</span><span class="o">.</span><span class="n">readStream</span><span class="o">.</span><span class="n">load</span><span class="p">(</span>
-</span><span id="KafkaReader.read-28"><a href="#KafkaReader.read-28"><span class="linenos">28</span></a>            <span class="nb">format</span><span class="o">=</span><span class="n">InputFormat</span><span class="o">.</span><span class="n">KAFKA</span><span class="o">.</span><span class="n">value</span><span class="p">,</span>
-</span><span id="KafkaReader.read-29"><a href="#KafkaReader.read-29"><span class="linenos">29</span></a>            <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">_input_spec</span><span class="o">.</span><span class="n">options</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_input_spec</span><span class="o">.</span><span class="n">options</span> <span class="k">else</span> <span class="p">{}</span>
-</span><span id="KafkaReader.read-30"><a href="#KafkaReader.read-30"><span class="linenos">30</span></a>        <span class="p">)</span>
-</span><span id="KafkaReader.read-31"><a href="#KafkaReader.read-31"><span class="linenos">31</span></a>
-</span><span id="KafkaReader.read-32"><a href="#KafkaReader.read-32"><span class="linenos">32</span></a>        <span class="k">return</span> <span class="n">df</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="KafkaReader.read-22"><a href="#KafkaReader.read-22"><span class="linenos">22</span></a>    <span class="k">def</span> <span class="nf">read</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataFrame</span><span class="p">:</span>
+</span><span id="KafkaReader.read-23"><a href="#KafkaReader.read-23"><span class="linenos">23</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Read Kafka data.</span>
+</span><span id="KafkaReader.read-24"><a href="#KafkaReader.read-24"><span class="linenos">24</span></a>
+</span><span id="KafkaReader.read-25"><a href="#KafkaReader.read-25"><span class="linenos">25</span></a><span class="sd">        Returns:</span>
+</span><span id="KafkaReader.read-26"><a href="#KafkaReader.read-26"><span class="linenos">26</span></a><span class="sd">            A dataframe containing the data from Kafka.</span>
+</span><span id="KafkaReader.read-27"><a href="#KafkaReader.read-27"><span class="linenos">27</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="KafkaReader.read-28"><a href="#KafkaReader.read-28"><span class="linenos">28</span></a>        <span class="n">df</span> <span class="o">=</span> <span class="n">ExecEnv</span><span class="o">.</span><span class="n">SESSION</span><span class="o">.</span><span class="n">readStream</span><span class="o">.</span><span class="n">load</span><span class="p">(</span>
+</span><span id="KafkaReader.read-29"><a href="#KafkaReader.read-29"><span class="linenos">29</span></a>            <span class="nb">format</span><span class="o">=</span><span class="n">InputFormat</span><span class="o">.</span><span class="n">KAFKA</span><span class="o">.</span><span class="n">value</span><span class="p">,</span>
+</span><span id="KafkaReader.read-30"><a href="#KafkaReader.read-30"><span class="linenos">30</span></a>            <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">_input_spec</span><span class="o">.</span><span class="n">options</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_input_spec</span><span class="o">.</span><span class="n">options</span> <span class="k">else</span> <span class="p">{},</span>
+</span><span id="KafkaReader.read-31"><a href="#KafkaReader.read-31"><span class="linenos">31</span></a>        <span class="p">)</span>
+</span><span id="KafkaReader.read-32"><a href="#KafkaReader.read-32"><span class="linenos">32</span></a>
+</span><span id="KafkaReader.read-33"><a href="#KafkaReader.read-33"><span class="linenos">33</span></a>        <span class="k">return</span> <span class="n">df</span>
 </span></pre></div>
 
 

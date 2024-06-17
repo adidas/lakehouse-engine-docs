@@ -75,7 +75,7 @@
     </ul>
 
 
-            <footer>Lakehouse Engine v1.20.1</footer>
+            <footer>Lakehouse Engine v1.21.0version</footer>
 
 </div>
     </nav>
@@ -93,139 +93,140 @@
                     <label class="view-source-button" for="mod-writer-view-source"><span>View Source</span></label>
 
                     <div class="pdoc-code codehilite"><pre><span></span><span id="L-1"><a href="#L-1"><span class="linenos">  1</span></a><span class="sd">&quot;&quot;&quot;Defines abstract writer behaviour.&quot;&quot;&quot;</span>
-</span><span id="L-2"><a href="#L-2"><span class="linenos">  2</span></a><span class="kn">from</span> <span class="nn">abc</span> <span class="kn">import</span> <span class="n">ABC</span><span class="p">,</span> <span class="n">abstractmethod</span>
-</span><span id="L-3"><a href="#L-3"><span class="linenos">  3</span></a><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">OrderedDict</span>
-</span><span id="L-4"><a href="#L-4"><span class="linenos">  4</span></a>
-</span><span id="L-5"><a href="#L-5"><span class="linenos">  5</span></a><span class="kn">from</span> <span class="nn">pyspark.sql</span> <span class="kn">import</span> <span class="n">DataFrame</span>
-</span><span id="L-6"><a href="#L-6"><span class="linenos">  6</span></a><span class="kn">from</span> <span class="nn">pyspark.sql.functions</span> <span class="kn">import</span> <span class="n">lit</span>
-</span><span id="L-7"><a href="#L-7"><span class="linenos">  7</span></a>
-</span><span id="L-8"><a href="#L-8"><span class="linenos">  8</span></a><span class="kn">from</span> <span class="nn">lakehouse_engine.core.definitions</span> <span class="kn">import</span> <span class="n">DQSpec</span><span class="p">,</span> <span class="n">OutputSpec</span>
-</span><span id="L-9"><a href="#L-9"><span class="linenos">  9</span></a><span class="kn">from</span> <span class="nn">lakehouse_engine.transformers.transformer_factory</span> <span class="kn">import</span> <span class="n">TransformerFactory</span>
-</span><span id="L-10"><a href="#L-10"><span class="linenos"> 10</span></a><span class="kn">from</span> <span class="nn">lakehouse_engine.utils.logging_handler</span> <span class="kn">import</span> <span class="n">LoggingHandler</span>
-</span><span id="L-11"><a href="#L-11"><span class="linenos"> 11</span></a>
+</span><span id="L-2"><a href="#L-2"><span class="linenos">  2</span></a>
+</span><span id="L-3"><a href="#L-3"><span class="linenos">  3</span></a><span class="kn">from</span> <span class="nn">abc</span> <span class="kn">import</span> <span class="n">ABC</span><span class="p">,</span> <span class="n">abstractmethod</span>
+</span><span id="L-4"><a href="#L-4"><span class="linenos">  4</span></a><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">OrderedDict</span>
+</span><span id="L-5"><a href="#L-5"><span class="linenos">  5</span></a>
+</span><span id="L-6"><a href="#L-6"><span class="linenos">  6</span></a><span class="kn">from</span> <span class="nn">pyspark.sql</span> <span class="kn">import</span> <span class="n">DataFrame</span>
+</span><span id="L-7"><a href="#L-7"><span class="linenos">  7</span></a><span class="kn">from</span> <span class="nn">pyspark.sql.functions</span> <span class="kn">import</span> <span class="n">lit</span>
+</span><span id="L-8"><a href="#L-8"><span class="linenos">  8</span></a>
+</span><span id="L-9"><a href="#L-9"><span class="linenos">  9</span></a><span class="kn">from</span> <span class="nn">lakehouse_engine.core.definitions</span> <span class="kn">import</span> <span class="n">DQSpec</span><span class="p">,</span> <span class="n">OutputSpec</span>
+</span><span id="L-10"><a href="#L-10"><span class="linenos"> 10</span></a><span class="kn">from</span> <span class="nn">lakehouse_engine.transformers.transformer_factory</span> <span class="kn">import</span> <span class="n">TransformerFactory</span>
+</span><span id="L-11"><a href="#L-11"><span class="linenos"> 11</span></a><span class="kn">from</span> <span class="nn">lakehouse_engine.utils.logging_handler</span> <span class="kn">import</span> <span class="n">LoggingHandler</span>
 </span><span id="L-12"><a href="#L-12"><span class="linenos"> 12</span></a>
-</span><span id="L-13"><a href="#L-13"><span class="linenos"> 13</span></a><span class="k">class</span> <span class="nc">Writer</span><span class="p">(</span><span class="n">ABC</span><span class="p">):</span>
-</span><span id="L-14"><a href="#L-14"><span class="linenos"> 14</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Abstract Writer class.&quot;&quot;&quot;</span>
-</span><span id="L-15"><a href="#L-15"><span class="linenos"> 15</span></a>
-</span><span id="L-16"><a href="#L-16"><span class="linenos"> 16</span></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
-</span><span id="L-17"><a href="#L-17"><span class="linenos"> 17</span></a>        <span class="bp">self</span><span class="p">,</span> <span class="n">output_spec</span><span class="p">:</span> <span class="n">OutputSpec</span><span class="p">,</span> <span class="n">df</span><span class="p">:</span> <span class="n">DataFrame</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">OrderedDict</span> <span class="o">=</span> <span class="kc">None</span>
-</span><span id="L-18"><a href="#L-18"><span class="linenos"> 18</span></a>    <span class="p">):</span>
-</span><span id="L-19"><a href="#L-19"><span class="linenos"> 19</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Construct Writer instances.</span>
-</span><span id="L-20"><a href="#L-20"><span class="linenos"> 20</span></a>
-</span><span id="L-21"><a href="#L-21"><span class="linenos"> 21</span></a><span class="sd">        Args:</span>
-</span><span id="L-22"><a href="#L-22"><span class="linenos"> 22</span></a><span class="sd">            output_spec: output specification to write data.</span>
-</span><span id="L-23"><a href="#L-23"><span class="linenos"> 23</span></a><span class="sd">            df: dataframe to write.</span>
-</span><span id="L-24"><a href="#L-24"><span class="linenos"> 24</span></a><span class="sd">            data: list of all dfs generated on previous steps before writer.</span>
-</span><span id="L-25"><a href="#L-25"><span class="linenos"> 25</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="L-26"><a href="#L-26"><span class="linenos"> 26</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">_logger</span> <span class="o">=</span> <span class="n">LoggingHandler</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">)</span><span class="o">.</span><span class="n">get_logger</span><span class="p">()</span>
-</span><span id="L-27"><a href="#L-27"><span class="linenos"> 27</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">_output_spec</span> <span class="o">=</span> <span class="n">output_spec</span>
-</span><span id="L-28"><a href="#L-28"><span class="linenos"> 28</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">_df</span> <span class="o">=</span> <span class="n">df</span>
-</span><span id="L-29"><a href="#L-29"><span class="linenos"> 29</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">_data</span> <span class="o">=</span> <span class="n">data</span>
-</span><span id="L-30"><a href="#L-30"><span class="linenos"> 30</span></a>
-</span><span id="L-31"><a href="#L-31"><span class="linenos"> 31</span></a>    <span class="nd">@abstractmethod</span>
-</span><span id="L-32"><a href="#L-32"><span class="linenos"> 32</span></a>    <span class="k">def</span> <span class="nf">write</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">OrderedDict</span><span class="p">]:</span>
-</span><span id="L-33"><a href="#L-33"><span class="linenos"> 33</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Abstract write method.&quot;&quot;&quot;</span>
-</span><span id="L-34"><a href="#L-34"><span class="linenos"> 34</span></a>        <span class="k">raise</span> <span class="ne">NotImplementedError</span>
-</span><span id="L-35"><a href="#L-35"><span class="linenos"> 35</span></a>
-</span><span id="L-36"><a href="#L-36"><span class="linenos"> 36</span></a>    <span class="nd">@staticmethod</span>
-</span><span id="L-37"><a href="#L-37"><span class="linenos"> 37</span></a>    <span class="k">def</span> <span class="nf">write_transformed_micro_batch</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">:</span>
-</span><span id="L-38"><a href="#L-38"><span class="linenos"> 38</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Define how to write a streaming micro batch after transforming it.</span>
-</span><span id="L-39"><a href="#L-39"><span class="linenos"> 39</span></a>
-</span><span id="L-40"><a href="#L-40"><span class="linenos"> 40</span></a><span class="sd">        This function must define an inner function that manipulates a streaming batch,</span>
-</span><span id="L-41"><a href="#L-41"><span class="linenos"> 41</span></a><span class="sd">        and then return that function. Look for concrete implementations of this</span>
-</span><span id="L-42"><a href="#L-42"><span class="linenos"> 42</span></a><span class="sd">        function for more clarity.</span>
-</span><span id="L-43"><a href="#L-43"><span class="linenos"> 43</span></a>
-</span><span id="L-44"><a href="#L-44"><span class="linenos"> 44</span></a><span class="sd">        Args:</span>
-</span><span id="L-45"><a href="#L-45"><span class="linenos"> 45</span></a><span class="sd">            kwargs: any keyword arguments.</span>
-</span><span id="L-46"><a href="#L-46"><span class="linenos"> 46</span></a>
-</span><span id="L-47"><a href="#L-47"><span class="linenos"> 47</span></a><span class="sd">        Returns:</span>
-</span><span id="L-48"><a href="#L-48"><span class="linenos"> 48</span></a><span class="sd">            A function to be executed in the foreachBatch spark write method.</span>
-</span><span id="L-49"><a href="#L-49"><span class="linenos"> 49</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="L-50"><a href="#L-50"><span class="linenos"> 50</span></a>
-</span><span id="L-51"><a href="#L-51"><span class="linenos"> 51</span></a>        <span class="k">def</span> <span class="nf">inner</span><span class="p">(</span><span class="n">batch_df</span><span class="p">:</span> <span class="n">DataFrame</span><span class="p">,</span> <span class="n">batch_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-</span><span id="L-52"><a href="#L-52"><span class="linenos"> 52</span></a>            <span class="n">logger</span> <span class="o">=</span> <span class="n">LoggingHandler</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span><span class="o">.</span><span class="n">get_logger</span><span class="p">()</span>
-</span><span id="L-53"><a href="#L-53"><span class="linenos"> 53</span></a>            <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;Skipping transform micro batch... nothing to do.&quot;</span><span class="p">)</span>
-</span><span id="L-54"><a href="#L-54"><span class="linenos"> 54</span></a>
-</span><span id="L-55"><a href="#L-55"><span class="linenos"> 55</span></a>        <span class="k">return</span> <span class="n">inner</span>
-</span><span id="L-56"><a href="#L-56"><span class="linenos"> 56</span></a>
-</span><span id="L-57"><a href="#L-57"><span class="linenos"> 57</span></a>    <span class="nd">@classmethod</span>
-</span><span id="L-58"><a href="#L-58"><span class="linenos"> 58</span></a>    <span class="k">def</span> <span class="nf">get_transformed_micro_batch</span><span class="p">(</span>
-</span><span id="L-59"><a href="#L-59"><span class="linenos"> 59</span></a>        <span class="bp">cls</span><span class="p">,</span>
-</span><span id="L-60"><a href="#L-60"><span class="linenos"> 60</span></a>        <span class="n">output_spec</span><span class="p">:</span> <span class="n">OutputSpec</span><span class="p">,</span>
-</span><span id="L-61"><a href="#L-61"><span class="linenos"> 61</span></a>        <span class="n">batch_df</span><span class="p">:</span> <span class="n">DataFrame</span><span class="p">,</span>
-</span><span id="L-62"><a href="#L-62"><span class="linenos"> 62</span></a>        <span class="n">batch_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
-</span><span id="L-63"><a href="#L-63"><span class="linenos"> 63</span></a>        <span class="n">data</span><span class="p">:</span> <span class="n">OrderedDict</span><span class="p">,</span>
-</span><span id="L-64"><a href="#L-64"><span class="linenos"> 64</span></a>    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataFrame</span><span class="p">:</span>
-</span><span id="L-65"><a href="#L-65"><span class="linenos"> 65</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Get the result of the transformations applied to a micro batch dataframe.</span>
-</span><span id="L-66"><a href="#L-66"><span class="linenos"> 66</span></a>
-</span><span id="L-67"><a href="#L-67"><span class="linenos"> 67</span></a><span class="sd">        Args:</span>
-</span><span id="L-68"><a href="#L-68"><span class="linenos"> 68</span></a><span class="sd">            output_spec: output specification associated with the writer.</span>
-</span><span id="L-69"><a href="#L-69"><span class="linenos"> 69</span></a><span class="sd">            batch_df: batch dataframe (given from streaming foreachBatch).</span>
-</span><span id="L-70"><a href="#L-70"><span class="linenos"> 70</span></a><span class="sd">            batch_id: if of the batch (given from streaming foreachBatch).</span>
-</span><span id="L-71"><a href="#L-71"><span class="linenos"> 71</span></a><span class="sd">            data: list of all dfs generated on previous steps before writer</span>
-</span><span id="L-72"><a href="#L-72"><span class="linenos"> 72</span></a><span class="sd">                to be available on micro batch transforms.</span>
-</span><span id="L-73"><a href="#L-73"><span class="linenos"> 73</span></a>
-</span><span id="L-74"><a href="#L-74"><span class="linenos"> 74</span></a><span class="sd">        Returns:</span>
-</span><span id="L-75"><a href="#L-75"><span class="linenos"> 75</span></a><span class="sd">            The transformed dataframe.</span>
-</span><span id="L-76"><a href="#L-76"><span class="linenos"> 76</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="L-77"><a href="#L-77"><span class="linenos"> 77</span></a>        <span class="n">transformed_df</span> <span class="o">=</span> <span class="n">batch_df</span>
-</span><span id="L-78"><a href="#L-78"><span class="linenos"> 78</span></a>        <span class="k">if</span> <span class="n">output_spec</span><span class="o">.</span><span class="n">with_batch_id</span><span class="p">:</span>
-</span><span id="L-79"><a href="#L-79"><span class="linenos"> 79</span></a>            <span class="n">transformed_df</span> <span class="o">=</span> <span class="n">transformed_df</span><span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="s2">&quot;lhe_batch_id&quot;</span><span class="p">,</span> <span class="n">lit</span><span class="p">(</span><span class="n">batch_id</span><span class="p">))</span>
-</span><span id="L-80"><a href="#L-80"><span class="linenos"> 80</span></a>
-</span><span id="L-81"><a href="#L-81"><span class="linenos"> 81</span></a>        <span class="k">for</span> <span class="n">transformer</span> <span class="ow">in</span> <span class="n">output_spec</span><span class="o">.</span><span class="n">streaming_micro_batch_transformers</span><span class="p">:</span>
-</span><span id="L-82"><a href="#L-82"><span class="linenos"> 82</span></a>            <span class="n">transformed_df</span> <span class="o">=</span> <span class="n">transformed_df</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span>
-</span><span id="L-83"><a href="#L-83"><span class="linenos"> 83</span></a>                <span class="n">TransformerFactory</span><span class="o">.</span><span class="n">get_transformer</span><span class="p">(</span><span class="n">transformer</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
-</span><span id="L-84"><a href="#L-84"><span class="linenos"> 84</span></a>            <span class="p">)</span>
-</span><span id="L-85"><a href="#L-85"><span class="linenos"> 85</span></a>
-</span><span id="L-86"><a href="#L-86"><span class="linenos"> 86</span></a>        <span class="k">return</span> <span class="n">transformed_df</span>
-</span><span id="L-87"><a href="#L-87"><span class="linenos"> 87</span></a>
-</span><span id="L-88"><a href="#L-88"><span class="linenos"> 88</span></a>    <span class="nd">@classmethod</span>
-</span><span id="L-89"><a href="#L-89"><span class="linenos"> 89</span></a>    <span class="k">def</span> <span class="nf">get_streaming_trigger</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">output_spec</span><span class="p">:</span> <span class="n">OutputSpec</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">:</span>
-</span><span id="L-90"><a href="#L-90"><span class="linenos"> 90</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Define which streaming trigger will be used.</span>
-</span><span id="L-91"><a href="#L-91"><span class="linenos"> 91</span></a>
-</span><span id="L-92"><a href="#L-92"><span class="linenos"> 92</span></a><span class="sd">        Args:</span>
-</span><span id="L-93"><a href="#L-93"><span class="linenos"> 93</span></a><span class="sd">            output_spec: output specification.</span>
-</span><span id="L-94"><a href="#L-94"><span class="linenos"> 94</span></a>
-</span><span id="L-95"><a href="#L-95"><span class="linenos"> 95</span></a><span class="sd">        Returns:</span>
-</span><span id="L-96"><a href="#L-96"><span class="linenos"> 96</span></a><span class="sd">            A dict containing streaming trigger.</span>
-</span><span id="L-97"><a href="#L-97"><span class="linenos"> 97</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="L-98"><a href="#L-98"><span class="linenos"> 98</span></a>        <span class="n">trigger</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
-</span><span id="L-99"><a href="#L-99"><span class="linenos"> 99</span></a>
-</span><span id="L-100"><a href="#L-100"><span class="linenos">100</span></a>        <span class="k">if</span> <span class="n">output_spec</span><span class="o">.</span><span class="n">streaming_available_now</span><span class="p">:</span>
-</span><span id="L-101"><a href="#L-101"><span class="linenos">101</span></a>            <span class="n">trigger</span><span class="p">[</span><span class="s2">&quot;availableNow&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">output_spec</span><span class="o">.</span><span class="n">streaming_available_now</span>
-</span><span id="L-102"><a href="#L-102"><span class="linenos">102</span></a>        <span class="k">elif</span> <span class="n">output_spec</span><span class="o">.</span><span class="n">streaming_once</span><span class="p">:</span>
-</span><span id="L-103"><a href="#L-103"><span class="linenos">103</span></a>            <span class="n">trigger</span><span class="p">[</span><span class="s2">&quot;once&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">output_spec</span><span class="o">.</span><span class="n">streaming_once</span>
-</span><span id="L-104"><a href="#L-104"><span class="linenos">104</span></a>        <span class="k">elif</span> <span class="n">output_spec</span><span class="o">.</span><span class="n">streaming_processing_time</span><span class="p">:</span>
-</span><span id="L-105"><a href="#L-105"><span class="linenos">105</span></a>            <span class="n">trigger</span><span class="p">[</span><span class="s2">&quot;processingTime&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">output_spec</span><span class="o">.</span><span class="n">streaming_processing_time</span>
-</span><span id="L-106"><a href="#L-106"><span class="linenos">106</span></a>        <span class="k">elif</span> <span class="n">output_spec</span><span class="o">.</span><span class="n">streaming_continuous</span><span class="p">:</span>
-</span><span id="L-107"><a href="#L-107"><span class="linenos">107</span></a>            <span class="n">trigger</span><span class="p">[</span><span class="s2">&quot;continuous&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">output_spec</span><span class="o">.</span><span class="n">streaming_continuous</span>
-</span><span id="L-108"><a href="#L-108"><span class="linenos">108</span></a>        <span class="k">else</span><span class="p">:</span>
-</span><span id="L-109"><a href="#L-109"><span class="linenos">109</span></a>            <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span>
-</span><span id="L-110"><a href="#L-110"><span class="linenos">110</span></a>                <span class="s2">&quot;The requested output spec streaming trigger is not supported.&quot;</span>
-</span><span id="L-111"><a href="#L-111"><span class="linenos">111</span></a>            <span class="p">)</span>
-</span><span id="L-112"><a href="#L-112"><span class="linenos">112</span></a>
-</span><span id="L-113"><a href="#L-113"><span class="linenos">113</span></a>        <span class="k">return</span> <span class="n">trigger</span>
-</span><span id="L-114"><a href="#L-114"><span class="linenos">114</span></a>
-</span><span id="L-115"><a href="#L-115"><span class="linenos">115</span></a>    <span class="nd">@staticmethod</span>
-</span><span id="L-116"><a href="#L-116"><span class="linenos">116</span></a>    <span class="k">def</span> <span class="nf">run_micro_batch_dq_process</span><span class="p">(</span><span class="n">df</span><span class="p">:</span> <span class="n">DataFrame</span><span class="p">,</span> <span class="n">dq_spec</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">DQSpec</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">DataFrame</span><span class="p">:</span>
-</span><span id="L-117"><a href="#L-117"><span class="linenos">117</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Run the data quality process in a streaming micro batch dataframe.</span>
-</span><span id="L-118"><a href="#L-118"><span class="linenos">118</span></a>
-</span><span id="L-119"><a href="#L-119"><span class="linenos">119</span></a><span class="sd">        Iterates over the specs and performs the checks or analysis depending on the</span>
-</span><span id="L-120"><a href="#L-120"><span class="linenos">120</span></a><span class="sd">        data quality specification provided in the configuration.</span>
-</span><span id="L-121"><a href="#L-121"><span class="linenos">121</span></a>
-</span><span id="L-122"><a href="#L-122"><span class="linenos">122</span></a><span class="sd">        Args:</span>
-</span><span id="L-123"><a href="#L-123"><span class="linenos">123</span></a><span class="sd">            df: the dataframe in which to run the dq process on.</span>
-</span><span id="L-124"><a href="#L-124"><span class="linenos">124</span></a><span class="sd">            dq_spec: data quality specification.</span>
-</span><span id="L-125"><a href="#L-125"><span class="linenos">125</span></a>
-</span><span id="L-126"><a href="#L-126"><span class="linenos">126</span></a><span class="sd">        Returns: the validated dataframe.</span>
-</span><span id="L-127"><a href="#L-127"><span class="linenos">127</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="L-128"><a href="#L-128"><span class="linenos">128</span></a>        <span class="kn">from</span> <span class="nn">lakehouse_engine.dq_processors.dq_factory</span> <span class="kn">import</span> <span class="n">DQFactory</span>
-</span><span id="L-129"><a href="#L-129"><span class="linenos">129</span></a>
-</span><span id="L-130"><a href="#L-130"><span class="linenos">130</span></a>        <span class="n">validated_df</span> <span class="o">=</span> <span class="n">df</span>
-</span><span id="L-131"><a href="#L-131"><span class="linenos">131</span></a>        <span class="k">for</span> <span class="n">spec</span> <span class="ow">in</span> <span class="n">dq_spec</span><span class="p">:</span>
-</span><span id="L-132"><a href="#L-132"><span class="linenos">132</span></a>            <span class="n">validated_df</span> <span class="o">=</span> <span class="n">DQFactory</span><span class="o">.</span><span class="n">run_dq_process</span><span class="p">(</span><span class="n">spec</span><span class="p">,</span> <span class="n">df</span><span class="p">)</span>
-</span><span id="L-133"><a href="#L-133"><span class="linenos">133</span></a>
-</span><span id="L-134"><a href="#L-134"><span class="linenos">134</span></a>        <span class="k">return</span> <span class="n">validated_df</span>
+</span><span id="L-13"><a href="#L-13"><span class="linenos"> 13</span></a>
+</span><span id="L-14"><a href="#L-14"><span class="linenos"> 14</span></a><span class="k">class</span> <span class="nc">Writer</span><span class="p">(</span><span class="n">ABC</span><span class="p">):</span>
+</span><span id="L-15"><a href="#L-15"><span class="linenos"> 15</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Abstract Writer class.&quot;&quot;&quot;</span>
+</span><span id="L-16"><a href="#L-16"><span class="linenos"> 16</span></a>
+</span><span id="L-17"><a href="#L-17"><span class="linenos"> 17</span></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+</span><span id="L-18"><a href="#L-18"><span class="linenos"> 18</span></a>        <span class="bp">self</span><span class="p">,</span> <span class="n">output_spec</span><span class="p">:</span> <span class="n">OutputSpec</span><span class="p">,</span> <span class="n">df</span><span class="p">:</span> <span class="n">DataFrame</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">OrderedDict</span> <span class="o">=</span> <span class="kc">None</span>
+</span><span id="L-19"><a href="#L-19"><span class="linenos"> 19</span></a>    <span class="p">):</span>
+</span><span id="L-20"><a href="#L-20"><span class="linenos"> 20</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Construct Writer instances.</span>
+</span><span id="L-21"><a href="#L-21"><span class="linenos"> 21</span></a>
+</span><span id="L-22"><a href="#L-22"><span class="linenos"> 22</span></a><span class="sd">        Args:</span>
+</span><span id="L-23"><a href="#L-23"><span class="linenos"> 23</span></a><span class="sd">            output_spec: output specification to write data.</span>
+</span><span id="L-24"><a href="#L-24"><span class="linenos"> 24</span></a><span class="sd">            df: dataframe to write.</span>
+</span><span id="L-25"><a href="#L-25"><span class="linenos"> 25</span></a><span class="sd">            data: list of all dfs generated on previous steps before writer.</span>
+</span><span id="L-26"><a href="#L-26"><span class="linenos"> 26</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="L-27"><a href="#L-27"><span class="linenos"> 27</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">_logger</span> <span class="o">=</span> <span class="n">LoggingHandler</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">)</span><span class="o">.</span><span class="n">get_logger</span><span class="p">()</span>
+</span><span id="L-28"><a href="#L-28"><span class="linenos"> 28</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">_output_spec</span> <span class="o">=</span> <span class="n">output_spec</span>
+</span><span id="L-29"><a href="#L-29"><span class="linenos"> 29</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">_df</span> <span class="o">=</span> <span class="n">df</span>
+</span><span id="L-30"><a href="#L-30"><span class="linenos"> 30</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">_data</span> <span class="o">=</span> <span class="n">data</span>
+</span><span id="L-31"><a href="#L-31"><span class="linenos"> 31</span></a>
+</span><span id="L-32"><a href="#L-32"><span class="linenos"> 32</span></a>    <span class="nd">@abstractmethod</span>
+</span><span id="L-33"><a href="#L-33"><span class="linenos"> 33</span></a>    <span class="k">def</span> <span class="nf">write</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">OrderedDict</span><span class="p">]:</span>
+</span><span id="L-34"><a href="#L-34"><span class="linenos"> 34</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Abstract write method.&quot;&quot;&quot;</span>
+</span><span id="L-35"><a href="#L-35"><span class="linenos"> 35</span></a>        <span class="k">raise</span> <span class="ne">NotImplementedError</span>
+</span><span id="L-36"><a href="#L-36"><span class="linenos"> 36</span></a>
+</span><span id="L-37"><a href="#L-37"><span class="linenos"> 37</span></a>    <span class="nd">@staticmethod</span>
+</span><span id="L-38"><a href="#L-38"><span class="linenos"> 38</span></a>    <span class="k">def</span> <span class="nf">write_transformed_micro_batch</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">:</span>
+</span><span id="L-39"><a href="#L-39"><span class="linenos"> 39</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Define how to write a streaming micro batch after transforming it.</span>
+</span><span id="L-40"><a href="#L-40"><span class="linenos"> 40</span></a>
+</span><span id="L-41"><a href="#L-41"><span class="linenos"> 41</span></a><span class="sd">        This function must define an inner function that manipulates a streaming batch,</span>
+</span><span id="L-42"><a href="#L-42"><span class="linenos"> 42</span></a><span class="sd">        and then return that function. Look for concrete implementations of this</span>
+</span><span id="L-43"><a href="#L-43"><span class="linenos"> 43</span></a><span class="sd">        function for more clarity.</span>
+</span><span id="L-44"><a href="#L-44"><span class="linenos"> 44</span></a>
+</span><span id="L-45"><a href="#L-45"><span class="linenos"> 45</span></a><span class="sd">        Args:</span>
+</span><span id="L-46"><a href="#L-46"><span class="linenos"> 46</span></a><span class="sd">            kwargs: any keyword arguments.</span>
+</span><span id="L-47"><a href="#L-47"><span class="linenos"> 47</span></a>
+</span><span id="L-48"><a href="#L-48"><span class="linenos"> 48</span></a><span class="sd">        Returns:</span>
+</span><span id="L-49"><a href="#L-49"><span class="linenos"> 49</span></a><span class="sd">            A function to be executed in the foreachBatch spark write method.</span>
+</span><span id="L-50"><a href="#L-50"><span class="linenos"> 50</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="L-51"><a href="#L-51"><span class="linenos"> 51</span></a>
+</span><span id="L-52"><a href="#L-52"><span class="linenos"> 52</span></a>        <span class="k">def</span> <span class="nf">inner</span><span class="p">(</span><span class="n">batch_df</span><span class="p">:</span> <span class="n">DataFrame</span><span class="p">,</span> <span class="n">batch_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="L-53"><a href="#L-53"><span class="linenos"> 53</span></a>            <span class="n">logger</span> <span class="o">=</span> <span class="n">LoggingHandler</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span><span class="o">.</span><span class="n">get_logger</span><span class="p">()</span>
+</span><span id="L-54"><a href="#L-54"><span class="linenos"> 54</span></a>            <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;Skipping transform micro batch... nothing to do.&quot;</span><span class="p">)</span>
+</span><span id="L-55"><a href="#L-55"><span class="linenos"> 55</span></a>
+</span><span id="L-56"><a href="#L-56"><span class="linenos"> 56</span></a>        <span class="k">return</span> <span class="n">inner</span>
+</span><span id="L-57"><a href="#L-57"><span class="linenos"> 57</span></a>
+</span><span id="L-58"><a href="#L-58"><span class="linenos"> 58</span></a>    <span class="nd">@classmethod</span>
+</span><span id="L-59"><a href="#L-59"><span class="linenos"> 59</span></a>    <span class="k">def</span> <span class="nf">get_transformed_micro_batch</span><span class="p">(</span>
+</span><span id="L-60"><a href="#L-60"><span class="linenos"> 60</span></a>        <span class="bp">cls</span><span class="p">,</span>
+</span><span id="L-61"><a href="#L-61"><span class="linenos"> 61</span></a>        <span class="n">output_spec</span><span class="p">:</span> <span class="n">OutputSpec</span><span class="p">,</span>
+</span><span id="L-62"><a href="#L-62"><span class="linenos"> 62</span></a>        <span class="n">batch_df</span><span class="p">:</span> <span class="n">DataFrame</span><span class="p">,</span>
+</span><span id="L-63"><a href="#L-63"><span class="linenos"> 63</span></a>        <span class="n">batch_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+</span><span id="L-64"><a href="#L-64"><span class="linenos"> 64</span></a>        <span class="n">data</span><span class="p">:</span> <span class="n">OrderedDict</span><span class="p">,</span>
+</span><span id="L-65"><a href="#L-65"><span class="linenos"> 65</span></a>    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataFrame</span><span class="p">:</span>
+</span><span id="L-66"><a href="#L-66"><span class="linenos"> 66</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Get the result of the transformations applied to a micro batch dataframe.</span>
+</span><span id="L-67"><a href="#L-67"><span class="linenos"> 67</span></a>
+</span><span id="L-68"><a href="#L-68"><span class="linenos"> 68</span></a><span class="sd">        Args:</span>
+</span><span id="L-69"><a href="#L-69"><span class="linenos"> 69</span></a><span class="sd">            output_spec: output specification associated with the writer.</span>
+</span><span id="L-70"><a href="#L-70"><span class="linenos"> 70</span></a><span class="sd">            batch_df: batch dataframe (given from streaming foreachBatch).</span>
+</span><span id="L-71"><a href="#L-71"><span class="linenos"> 71</span></a><span class="sd">            batch_id: if of the batch (given from streaming foreachBatch).</span>
+</span><span id="L-72"><a href="#L-72"><span class="linenos"> 72</span></a><span class="sd">            data: list of all dfs generated on previous steps before writer</span>
+</span><span id="L-73"><a href="#L-73"><span class="linenos"> 73</span></a><span class="sd">                to be available on micro batch transforms.</span>
+</span><span id="L-74"><a href="#L-74"><span class="linenos"> 74</span></a>
+</span><span id="L-75"><a href="#L-75"><span class="linenos"> 75</span></a><span class="sd">        Returns:</span>
+</span><span id="L-76"><a href="#L-76"><span class="linenos"> 76</span></a><span class="sd">            The transformed dataframe.</span>
+</span><span id="L-77"><a href="#L-77"><span class="linenos"> 77</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="L-78"><a href="#L-78"><span class="linenos"> 78</span></a>        <span class="n">transformed_df</span> <span class="o">=</span> <span class="n">batch_df</span>
+</span><span id="L-79"><a href="#L-79"><span class="linenos"> 79</span></a>        <span class="k">if</span> <span class="n">output_spec</span><span class="o">.</span><span class="n">with_batch_id</span><span class="p">:</span>
+</span><span id="L-80"><a href="#L-80"><span class="linenos"> 80</span></a>            <span class="n">transformed_df</span> <span class="o">=</span> <span class="n">transformed_df</span><span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="s2">&quot;lhe_batch_id&quot;</span><span class="p">,</span> <span class="n">lit</span><span class="p">(</span><span class="n">batch_id</span><span class="p">))</span>
+</span><span id="L-81"><a href="#L-81"><span class="linenos"> 81</span></a>
+</span><span id="L-82"><a href="#L-82"><span class="linenos"> 82</span></a>        <span class="k">for</span> <span class="n">transformer</span> <span class="ow">in</span> <span class="n">output_spec</span><span class="o">.</span><span class="n">streaming_micro_batch_transformers</span><span class="p">:</span>
+</span><span id="L-83"><a href="#L-83"><span class="linenos"> 83</span></a>            <span class="n">transformed_df</span> <span class="o">=</span> <span class="n">transformed_df</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span>
+</span><span id="L-84"><a href="#L-84"><span class="linenos"> 84</span></a>                <span class="n">TransformerFactory</span><span class="o">.</span><span class="n">get_transformer</span><span class="p">(</span><span class="n">transformer</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+</span><span id="L-85"><a href="#L-85"><span class="linenos"> 85</span></a>            <span class="p">)</span>
+</span><span id="L-86"><a href="#L-86"><span class="linenos"> 86</span></a>
+</span><span id="L-87"><a href="#L-87"><span class="linenos"> 87</span></a>        <span class="k">return</span> <span class="n">transformed_df</span>
+</span><span id="L-88"><a href="#L-88"><span class="linenos"> 88</span></a>
+</span><span id="L-89"><a href="#L-89"><span class="linenos"> 89</span></a>    <span class="nd">@classmethod</span>
+</span><span id="L-90"><a href="#L-90"><span class="linenos"> 90</span></a>    <span class="k">def</span> <span class="nf">get_streaming_trigger</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">output_spec</span><span class="p">:</span> <span class="n">OutputSpec</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">:</span>
+</span><span id="L-91"><a href="#L-91"><span class="linenos"> 91</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Define which streaming trigger will be used.</span>
+</span><span id="L-92"><a href="#L-92"><span class="linenos"> 92</span></a>
+</span><span id="L-93"><a href="#L-93"><span class="linenos"> 93</span></a><span class="sd">        Args:</span>
+</span><span id="L-94"><a href="#L-94"><span class="linenos"> 94</span></a><span class="sd">            output_spec: output specification.</span>
+</span><span id="L-95"><a href="#L-95"><span class="linenos"> 95</span></a>
+</span><span id="L-96"><a href="#L-96"><span class="linenos"> 96</span></a><span class="sd">        Returns:</span>
+</span><span id="L-97"><a href="#L-97"><span class="linenos"> 97</span></a><span class="sd">            A dict containing streaming trigger.</span>
+</span><span id="L-98"><a href="#L-98"><span class="linenos"> 98</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="L-99"><a href="#L-99"><span class="linenos"> 99</span></a>        <span class="n">trigger</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+</span><span id="L-100"><a href="#L-100"><span class="linenos">100</span></a>
+</span><span id="L-101"><a href="#L-101"><span class="linenos">101</span></a>        <span class="k">if</span> <span class="n">output_spec</span><span class="o">.</span><span class="n">streaming_available_now</span><span class="p">:</span>
+</span><span id="L-102"><a href="#L-102"><span class="linenos">102</span></a>            <span class="n">trigger</span><span class="p">[</span><span class="s2">&quot;availableNow&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">output_spec</span><span class="o">.</span><span class="n">streaming_available_now</span>
+</span><span id="L-103"><a href="#L-103"><span class="linenos">103</span></a>        <span class="k">elif</span> <span class="n">output_spec</span><span class="o">.</span><span class="n">streaming_once</span><span class="p">:</span>
+</span><span id="L-104"><a href="#L-104"><span class="linenos">104</span></a>            <span class="n">trigger</span><span class="p">[</span><span class="s2">&quot;once&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">output_spec</span><span class="o">.</span><span class="n">streaming_once</span>
+</span><span id="L-105"><a href="#L-105"><span class="linenos">105</span></a>        <span class="k">elif</span> <span class="n">output_spec</span><span class="o">.</span><span class="n">streaming_processing_time</span><span class="p">:</span>
+</span><span id="L-106"><a href="#L-106"><span class="linenos">106</span></a>            <span class="n">trigger</span><span class="p">[</span><span class="s2">&quot;processingTime&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">output_spec</span><span class="o">.</span><span class="n">streaming_processing_time</span>
+</span><span id="L-107"><a href="#L-107"><span class="linenos">107</span></a>        <span class="k">elif</span> <span class="n">output_spec</span><span class="o">.</span><span class="n">streaming_continuous</span><span class="p">:</span>
+</span><span id="L-108"><a href="#L-108"><span class="linenos">108</span></a>            <span class="n">trigger</span><span class="p">[</span><span class="s2">&quot;continuous&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">output_spec</span><span class="o">.</span><span class="n">streaming_continuous</span>
+</span><span id="L-109"><a href="#L-109"><span class="linenos">109</span></a>        <span class="k">else</span><span class="p">:</span>
+</span><span id="L-110"><a href="#L-110"><span class="linenos">110</span></a>            <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span>
+</span><span id="L-111"><a href="#L-111"><span class="linenos">111</span></a>                <span class="s2">&quot;The requested output spec streaming trigger is not supported.&quot;</span>
+</span><span id="L-112"><a href="#L-112"><span class="linenos">112</span></a>            <span class="p">)</span>
+</span><span id="L-113"><a href="#L-113"><span class="linenos">113</span></a>
+</span><span id="L-114"><a href="#L-114"><span class="linenos">114</span></a>        <span class="k">return</span> <span class="n">trigger</span>
+</span><span id="L-115"><a href="#L-115"><span class="linenos">115</span></a>
+</span><span id="L-116"><a href="#L-116"><span class="linenos">116</span></a>    <span class="nd">@staticmethod</span>
+</span><span id="L-117"><a href="#L-117"><span class="linenos">117</span></a>    <span class="k">def</span> <span class="nf">run_micro_batch_dq_process</span><span class="p">(</span><span class="n">df</span><span class="p">:</span> <span class="n">DataFrame</span><span class="p">,</span> <span class="n">dq_spec</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">DQSpec</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">DataFrame</span><span class="p">:</span>
+</span><span id="L-118"><a href="#L-118"><span class="linenos">118</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Run the data quality process in a streaming micro batch dataframe.</span>
+</span><span id="L-119"><a href="#L-119"><span class="linenos">119</span></a>
+</span><span id="L-120"><a href="#L-120"><span class="linenos">120</span></a><span class="sd">        Iterates over the specs and performs the checks or analysis depending on the</span>
+</span><span id="L-121"><a href="#L-121"><span class="linenos">121</span></a><span class="sd">        data quality specification provided in the configuration.</span>
+</span><span id="L-122"><a href="#L-122"><span class="linenos">122</span></a>
+</span><span id="L-123"><a href="#L-123"><span class="linenos">123</span></a><span class="sd">        Args:</span>
+</span><span id="L-124"><a href="#L-124"><span class="linenos">124</span></a><span class="sd">            df: the dataframe in which to run the dq process on.</span>
+</span><span id="L-125"><a href="#L-125"><span class="linenos">125</span></a><span class="sd">            dq_spec: data quality specification.</span>
+</span><span id="L-126"><a href="#L-126"><span class="linenos">126</span></a>
+</span><span id="L-127"><a href="#L-127"><span class="linenos">127</span></a><span class="sd">        Returns: the validated dataframe.</span>
+</span><span id="L-128"><a href="#L-128"><span class="linenos">128</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="L-129"><a href="#L-129"><span class="linenos">129</span></a>        <span class="kn">from</span> <span class="nn">lakehouse_engine.dq_processors.dq_factory</span> <span class="kn">import</span> <span class="n">DQFactory</span>
+</span><span id="L-130"><a href="#L-130"><span class="linenos">130</span></a>
+</span><span id="L-131"><a href="#L-131"><span class="linenos">131</span></a>        <span class="n">validated_df</span> <span class="o">=</span> <span class="n">df</span>
+</span><span id="L-132"><a href="#L-132"><span class="linenos">132</span></a>        <span class="k">for</span> <span class="n">spec</span> <span class="ow">in</span> <span class="n">dq_spec</span><span class="p">:</span>
+</span><span id="L-133"><a href="#L-133"><span class="linenos">133</span></a>            <span class="n">validated_df</span> <span class="o">=</span> <span class="n">DQFactory</span><span class="o">.</span><span class="n">run_dq_process</span><span class="p">(</span><span class="n">spec</span><span class="p">,</span> <span class="n">df</span><span class="p">)</span>
+</span><span id="L-134"><a href="#L-134"><span class="linenos">134</span></a>
+</span><span id="L-135"><a href="#L-135"><span class="linenos">135</span></a>        <span class="k">return</span> <span class="n">validated_df</span>
 </span></pre></div>
 
 
@@ -241,128 +242,128 @@
 
     </div>
     <a class="headerlink" href="#Writer"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="Writer-14"><a href="#Writer-14"><span class="linenos"> 14</span></a><span class="k">class</span> <span class="nc">Writer</span><span class="p">(</span><span class="n">ABC</span><span class="p">):</span>
-</span><span id="Writer-15"><a href="#Writer-15"><span class="linenos"> 15</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Abstract Writer class.&quot;&quot;&quot;</span>
-</span><span id="Writer-16"><a href="#Writer-16"><span class="linenos"> 16</span></a>
-</span><span id="Writer-17"><a href="#Writer-17"><span class="linenos"> 17</span></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
-</span><span id="Writer-18"><a href="#Writer-18"><span class="linenos"> 18</span></a>        <span class="bp">self</span><span class="p">,</span> <span class="n">output_spec</span><span class="p">:</span> <span class="n">OutputSpec</span><span class="p">,</span> <span class="n">df</span><span class="p">:</span> <span class="n">DataFrame</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">OrderedDict</span> <span class="o">=</span> <span class="kc">None</span>
-</span><span id="Writer-19"><a href="#Writer-19"><span class="linenos"> 19</span></a>    <span class="p">):</span>
-</span><span id="Writer-20"><a href="#Writer-20"><span class="linenos"> 20</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Construct Writer instances.</span>
-</span><span id="Writer-21"><a href="#Writer-21"><span class="linenos"> 21</span></a>
-</span><span id="Writer-22"><a href="#Writer-22"><span class="linenos"> 22</span></a><span class="sd">        Args:</span>
-</span><span id="Writer-23"><a href="#Writer-23"><span class="linenos"> 23</span></a><span class="sd">            output_spec: output specification to write data.</span>
-</span><span id="Writer-24"><a href="#Writer-24"><span class="linenos"> 24</span></a><span class="sd">            df: dataframe to write.</span>
-</span><span id="Writer-25"><a href="#Writer-25"><span class="linenos"> 25</span></a><span class="sd">            data: list of all dfs generated on previous steps before writer.</span>
-</span><span id="Writer-26"><a href="#Writer-26"><span class="linenos"> 26</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="Writer-27"><a href="#Writer-27"><span class="linenos"> 27</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">_logger</span> <span class="o">=</span> <span class="n">LoggingHandler</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">)</span><span class="o">.</span><span class="n">get_logger</span><span class="p">()</span>
-</span><span id="Writer-28"><a href="#Writer-28"><span class="linenos"> 28</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">_output_spec</span> <span class="o">=</span> <span class="n">output_spec</span>
-</span><span id="Writer-29"><a href="#Writer-29"><span class="linenos"> 29</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">_df</span> <span class="o">=</span> <span class="n">df</span>
-</span><span id="Writer-30"><a href="#Writer-30"><span class="linenos"> 30</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">_data</span> <span class="o">=</span> <span class="n">data</span>
-</span><span id="Writer-31"><a href="#Writer-31"><span class="linenos"> 31</span></a>
-</span><span id="Writer-32"><a href="#Writer-32"><span class="linenos"> 32</span></a>    <span class="nd">@abstractmethod</span>
-</span><span id="Writer-33"><a href="#Writer-33"><span class="linenos"> 33</span></a>    <span class="k">def</span> <span class="nf">write</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">OrderedDict</span><span class="p">]:</span>
-</span><span id="Writer-34"><a href="#Writer-34"><span class="linenos"> 34</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Abstract write method.&quot;&quot;&quot;</span>
-</span><span id="Writer-35"><a href="#Writer-35"><span class="linenos"> 35</span></a>        <span class="k">raise</span> <span class="ne">NotImplementedError</span>
-</span><span id="Writer-36"><a href="#Writer-36"><span class="linenos"> 36</span></a>
-</span><span id="Writer-37"><a href="#Writer-37"><span class="linenos"> 37</span></a>    <span class="nd">@staticmethod</span>
-</span><span id="Writer-38"><a href="#Writer-38"><span class="linenos"> 38</span></a>    <span class="k">def</span> <span class="nf">write_transformed_micro_batch</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">:</span>
-</span><span id="Writer-39"><a href="#Writer-39"><span class="linenos"> 39</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Define how to write a streaming micro batch after transforming it.</span>
-</span><span id="Writer-40"><a href="#Writer-40"><span class="linenos"> 40</span></a>
-</span><span id="Writer-41"><a href="#Writer-41"><span class="linenos"> 41</span></a><span class="sd">        This function must define an inner function that manipulates a streaming batch,</span>
-</span><span id="Writer-42"><a href="#Writer-42"><span class="linenos"> 42</span></a><span class="sd">        and then return that function. Look for concrete implementations of this</span>
-</span><span id="Writer-43"><a href="#Writer-43"><span class="linenos"> 43</span></a><span class="sd">        function for more clarity.</span>
-</span><span id="Writer-44"><a href="#Writer-44"><span class="linenos"> 44</span></a>
-</span><span id="Writer-45"><a href="#Writer-45"><span class="linenos"> 45</span></a><span class="sd">        Args:</span>
-</span><span id="Writer-46"><a href="#Writer-46"><span class="linenos"> 46</span></a><span class="sd">            kwargs: any keyword arguments.</span>
-</span><span id="Writer-47"><a href="#Writer-47"><span class="linenos"> 47</span></a>
-</span><span id="Writer-48"><a href="#Writer-48"><span class="linenos"> 48</span></a><span class="sd">        Returns:</span>
-</span><span id="Writer-49"><a href="#Writer-49"><span class="linenos"> 49</span></a><span class="sd">            A function to be executed in the foreachBatch spark write method.</span>
-</span><span id="Writer-50"><a href="#Writer-50"><span class="linenos"> 50</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="Writer-51"><a href="#Writer-51"><span class="linenos"> 51</span></a>
-</span><span id="Writer-52"><a href="#Writer-52"><span class="linenos"> 52</span></a>        <span class="k">def</span> <span class="nf">inner</span><span class="p">(</span><span class="n">batch_df</span><span class="p">:</span> <span class="n">DataFrame</span><span class="p">,</span> <span class="n">batch_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-</span><span id="Writer-53"><a href="#Writer-53"><span class="linenos"> 53</span></a>            <span class="n">logger</span> <span class="o">=</span> <span class="n">LoggingHandler</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span><span class="o">.</span><span class="n">get_logger</span><span class="p">()</span>
-</span><span id="Writer-54"><a href="#Writer-54"><span class="linenos"> 54</span></a>            <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;Skipping transform micro batch... nothing to do.&quot;</span><span class="p">)</span>
-</span><span id="Writer-55"><a href="#Writer-55"><span class="linenos"> 55</span></a>
-</span><span id="Writer-56"><a href="#Writer-56"><span class="linenos"> 56</span></a>        <span class="k">return</span> <span class="n">inner</span>
-</span><span id="Writer-57"><a href="#Writer-57"><span class="linenos"> 57</span></a>
-</span><span id="Writer-58"><a href="#Writer-58"><span class="linenos"> 58</span></a>    <span class="nd">@classmethod</span>
-</span><span id="Writer-59"><a href="#Writer-59"><span class="linenos"> 59</span></a>    <span class="k">def</span> <span class="nf">get_transformed_micro_batch</span><span class="p">(</span>
-</span><span id="Writer-60"><a href="#Writer-60"><span class="linenos"> 60</span></a>        <span class="bp">cls</span><span class="p">,</span>
-</span><span id="Writer-61"><a href="#Writer-61"><span class="linenos"> 61</span></a>        <span class="n">output_spec</span><span class="p">:</span> <span class="n">OutputSpec</span><span class="p">,</span>
-</span><span id="Writer-62"><a href="#Writer-62"><span class="linenos"> 62</span></a>        <span class="n">batch_df</span><span class="p">:</span> <span class="n">DataFrame</span><span class="p">,</span>
-</span><span id="Writer-63"><a href="#Writer-63"><span class="linenos"> 63</span></a>        <span class="n">batch_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
-</span><span id="Writer-64"><a href="#Writer-64"><span class="linenos"> 64</span></a>        <span class="n">data</span><span class="p">:</span> <span class="n">OrderedDict</span><span class="p">,</span>
-</span><span id="Writer-65"><a href="#Writer-65"><span class="linenos"> 65</span></a>    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataFrame</span><span class="p">:</span>
-</span><span id="Writer-66"><a href="#Writer-66"><span class="linenos"> 66</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Get the result of the transformations applied to a micro batch dataframe.</span>
-</span><span id="Writer-67"><a href="#Writer-67"><span class="linenos"> 67</span></a>
-</span><span id="Writer-68"><a href="#Writer-68"><span class="linenos"> 68</span></a><span class="sd">        Args:</span>
-</span><span id="Writer-69"><a href="#Writer-69"><span class="linenos"> 69</span></a><span class="sd">            output_spec: output specification associated with the writer.</span>
-</span><span id="Writer-70"><a href="#Writer-70"><span class="linenos"> 70</span></a><span class="sd">            batch_df: batch dataframe (given from streaming foreachBatch).</span>
-</span><span id="Writer-71"><a href="#Writer-71"><span class="linenos"> 71</span></a><span class="sd">            batch_id: if of the batch (given from streaming foreachBatch).</span>
-</span><span id="Writer-72"><a href="#Writer-72"><span class="linenos"> 72</span></a><span class="sd">            data: list of all dfs generated on previous steps before writer</span>
-</span><span id="Writer-73"><a href="#Writer-73"><span class="linenos"> 73</span></a><span class="sd">                to be available on micro batch transforms.</span>
-</span><span id="Writer-74"><a href="#Writer-74"><span class="linenos"> 74</span></a>
-</span><span id="Writer-75"><a href="#Writer-75"><span class="linenos"> 75</span></a><span class="sd">        Returns:</span>
-</span><span id="Writer-76"><a href="#Writer-76"><span class="linenos"> 76</span></a><span class="sd">            The transformed dataframe.</span>
-</span><span id="Writer-77"><a href="#Writer-77"><span class="linenos"> 77</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="Writer-78"><a href="#Writer-78"><span class="linenos"> 78</span></a>        <span class="n">transformed_df</span> <span class="o">=</span> <span class="n">batch_df</span>
-</span><span id="Writer-79"><a href="#Writer-79"><span class="linenos"> 79</span></a>        <span class="k">if</span> <span class="n">output_spec</span><span class="o">.</span><span class="n">with_batch_id</span><span class="p">:</span>
-</span><span id="Writer-80"><a href="#Writer-80"><span class="linenos"> 80</span></a>            <span class="n">transformed_df</span> <span class="o">=</span> <span class="n">transformed_df</span><span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="s2">&quot;lhe_batch_id&quot;</span><span class="p">,</span> <span class="n">lit</span><span class="p">(</span><span class="n">batch_id</span><span class="p">))</span>
-</span><span id="Writer-81"><a href="#Writer-81"><span class="linenos"> 81</span></a>
-</span><span id="Writer-82"><a href="#Writer-82"><span class="linenos"> 82</span></a>        <span class="k">for</span> <span class="n">transformer</span> <span class="ow">in</span> <span class="n">output_spec</span><span class="o">.</span><span class="n">streaming_micro_batch_transformers</span><span class="p">:</span>
-</span><span id="Writer-83"><a href="#Writer-83"><span class="linenos"> 83</span></a>            <span class="n">transformed_df</span> <span class="o">=</span> <span class="n">transformed_df</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span>
-</span><span id="Writer-84"><a href="#Writer-84"><span class="linenos"> 84</span></a>                <span class="n">TransformerFactory</span><span class="o">.</span><span class="n">get_transformer</span><span class="p">(</span><span class="n">transformer</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
-</span><span id="Writer-85"><a href="#Writer-85"><span class="linenos"> 85</span></a>            <span class="p">)</span>
-</span><span id="Writer-86"><a href="#Writer-86"><span class="linenos"> 86</span></a>
-</span><span id="Writer-87"><a href="#Writer-87"><span class="linenos"> 87</span></a>        <span class="k">return</span> <span class="n">transformed_df</span>
-</span><span id="Writer-88"><a href="#Writer-88"><span class="linenos"> 88</span></a>
-</span><span id="Writer-89"><a href="#Writer-89"><span class="linenos"> 89</span></a>    <span class="nd">@classmethod</span>
-</span><span id="Writer-90"><a href="#Writer-90"><span class="linenos"> 90</span></a>    <span class="k">def</span> <span class="nf">get_streaming_trigger</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">output_spec</span><span class="p">:</span> <span class="n">OutputSpec</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">:</span>
-</span><span id="Writer-91"><a href="#Writer-91"><span class="linenos"> 91</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Define which streaming trigger will be used.</span>
-</span><span id="Writer-92"><a href="#Writer-92"><span class="linenos"> 92</span></a>
-</span><span id="Writer-93"><a href="#Writer-93"><span class="linenos"> 93</span></a><span class="sd">        Args:</span>
-</span><span id="Writer-94"><a href="#Writer-94"><span class="linenos"> 94</span></a><span class="sd">            output_spec: output specification.</span>
-</span><span id="Writer-95"><a href="#Writer-95"><span class="linenos"> 95</span></a>
-</span><span id="Writer-96"><a href="#Writer-96"><span class="linenos"> 96</span></a><span class="sd">        Returns:</span>
-</span><span id="Writer-97"><a href="#Writer-97"><span class="linenos"> 97</span></a><span class="sd">            A dict containing streaming trigger.</span>
-</span><span id="Writer-98"><a href="#Writer-98"><span class="linenos"> 98</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="Writer-99"><a href="#Writer-99"><span class="linenos"> 99</span></a>        <span class="n">trigger</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
-</span><span id="Writer-100"><a href="#Writer-100"><span class="linenos">100</span></a>
-</span><span id="Writer-101"><a href="#Writer-101"><span class="linenos">101</span></a>        <span class="k">if</span> <span class="n">output_spec</span><span class="o">.</span><span class="n">streaming_available_now</span><span class="p">:</span>
-</span><span id="Writer-102"><a href="#Writer-102"><span class="linenos">102</span></a>            <span class="n">trigger</span><span class="p">[</span><span class="s2">&quot;availableNow&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">output_spec</span><span class="o">.</span><span class="n">streaming_available_now</span>
-</span><span id="Writer-103"><a href="#Writer-103"><span class="linenos">103</span></a>        <span class="k">elif</span> <span class="n">output_spec</span><span class="o">.</span><span class="n">streaming_once</span><span class="p">:</span>
-</span><span id="Writer-104"><a href="#Writer-104"><span class="linenos">104</span></a>            <span class="n">trigger</span><span class="p">[</span><span class="s2">&quot;once&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">output_spec</span><span class="o">.</span><span class="n">streaming_once</span>
-</span><span id="Writer-105"><a href="#Writer-105"><span class="linenos">105</span></a>        <span class="k">elif</span> <span class="n">output_spec</span><span class="o">.</span><span class="n">streaming_processing_time</span><span class="p">:</span>
-</span><span id="Writer-106"><a href="#Writer-106"><span class="linenos">106</span></a>            <span class="n">trigger</span><span class="p">[</span><span class="s2">&quot;processingTime&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">output_spec</span><span class="o">.</span><span class="n">streaming_processing_time</span>
-</span><span id="Writer-107"><a href="#Writer-107"><span class="linenos">107</span></a>        <span class="k">elif</span> <span class="n">output_spec</span><span class="o">.</span><span class="n">streaming_continuous</span><span class="p">:</span>
-</span><span id="Writer-108"><a href="#Writer-108"><span class="linenos">108</span></a>            <span class="n">trigger</span><span class="p">[</span><span class="s2">&quot;continuous&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">output_spec</span><span class="o">.</span><span class="n">streaming_continuous</span>
-</span><span id="Writer-109"><a href="#Writer-109"><span class="linenos">109</span></a>        <span class="k">else</span><span class="p">:</span>
-</span><span id="Writer-110"><a href="#Writer-110"><span class="linenos">110</span></a>            <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span>
-</span><span id="Writer-111"><a href="#Writer-111"><span class="linenos">111</span></a>                <span class="s2">&quot;The requested output spec streaming trigger is not supported.&quot;</span>
-</span><span id="Writer-112"><a href="#Writer-112"><span class="linenos">112</span></a>            <span class="p">)</span>
-</span><span id="Writer-113"><a href="#Writer-113"><span class="linenos">113</span></a>
-</span><span id="Writer-114"><a href="#Writer-114"><span class="linenos">114</span></a>        <span class="k">return</span> <span class="n">trigger</span>
-</span><span id="Writer-115"><a href="#Writer-115"><span class="linenos">115</span></a>
-</span><span id="Writer-116"><a href="#Writer-116"><span class="linenos">116</span></a>    <span class="nd">@staticmethod</span>
-</span><span id="Writer-117"><a href="#Writer-117"><span class="linenos">117</span></a>    <span class="k">def</span> <span class="nf">run_micro_batch_dq_process</span><span class="p">(</span><span class="n">df</span><span class="p">:</span> <span class="n">DataFrame</span><span class="p">,</span> <span class="n">dq_spec</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">DQSpec</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">DataFrame</span><span class="p">:</span>
-</span><span id="Writer-118"><a href="#Writer-118"><span class="linenos">118</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Run the data quality process in a streaming micro batch dataframe.</span>
-</span><span id="Writer-119"><a href="#Writer-119"><span class="linenos">119</span></a>
-</span><span id="Writer-120"><a href="#Writer-120"><span class="linenos">120</span></a><span class="sd">        Iterates over the specs and performs the checks or analysis depending on the</span>
-</span><span id="Writer-121"><a href="#Writer-121"><span class="linenos">121</span></a><span class="sd">        data quality specification provided in the configuration.</span>
-</span><span id="Writer-122"><a href="#Writer-122"><span class="linenos">122</span></a>
-</span><span id="Writer-123"><a href="#Writer-123"><span class="linenos">123</span></a><span class="sd">        Args:</span>
-</span><span id="Writer-124"><a href="#Writer-124"><span class="linenos">124</span></a><span class="sd">            df: the dataframe in which to run the dq process on.</span>
-</span><span id="Writer-125"><a href="#Writer-125"><span class="linenos">125</span></a><span class="sd">            dq_spec: data quality specification.</span>
-</span><span id="Writer-126"><a href="#Writer-126"><span class="linenos">126</span></a>
-</span><span id="Writer-127"><a href="#Writer-127"><span class="linenos">127</span></a><span class="sd">        Returns: the validated dataframe.</span>
-</span><span id="Writer-128"><a href="#Writer-128"><span class="linenos">128</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="Writer-129"><a href="#Writer-129"><span class="linenos">129</span></a>        <span class="kn">from</span> <span class="nn">lakehouse_engine.dq_processors.dq_factory</span> <span class="kn">import</span> <span class="n">DQFactory</span>
-</span><span id="Writer-130"><a href="#Writer-130"><span class="linenos">130</span></a>
-</span><span id="Writer-131"><a href="#Writer-131"><span class="linenos">131</span></a>        <span class="n">validated_df</span> <span class="o">=</span> <span class="n">df</span>
-</span><span id="Writer-132"><a href="#Writer-132"><span class="linenos">132</span></a>        <span class="k">for</span> <span class="n">spec</span> <span class="ow">in</span> <span class="n">dq_spec</span><span class="p">:</span>
-</span><span id="Writer-133"><a href="#Writer-133"><span class="linenos">133</span></a>            <span class="n">validated_df</span> <span class="o">=</span> <span class="n">DQFactory</span><span class="o">.</span><span class="n">run_dq_process</span><span class="p">(</span><span class="n">spec</span><span class="p">,</span> <span class="n">df</span><span class="p">)</span>
-</span><span id="Writer-134"><a href="#Writer-134"><span class="linenos">134</span></a>
-</span><span id="Writer-135"><a href="#Writer-135"><span class="linenos">135</span></a>        <span class="k">return</span> <span class="n">validated_df</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="Writer-15"><a href="#Writer-15"><span class="linenos"> 15</span></a><span class="k">class</span> <span class="nc">Writer</span><span class="p">(</span><span class="n">ABC</span><span class="p">):</span>
+</span><span id="Writer-16"><a href="#Writer-16"><span class="linenos"> 16</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Abstract Writer class.&quot;&quot;&quot;</span>
+</span><span id="Writer-17"><a href="#Writer-17"><span class="linenos"> 17</span></a>
+</span><span id="Writer-18"><a href="#Writer-18"><span class="linenos"> 18</span></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+</span><span id="Writer-19"><a href="#Writer-19"><span class="linenos"> 19</span></a>        <span class="bp">self</span><span class="p">,</span> <span class="n">output_spec</span><span class="p">:</span> <span class="n">OutputSpec</span><span class="p">,</span> <span class="n">df</span><span class="p">:</span> <span class="n">DataFrame</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">OrderedDict</span> <span class="o">=</span> <span class="kc">None</span>
+</span><span id="Writer-20"><a href="#Writer-20"><span class="linenos"> 20</span></a>    <span class="p">):</span>
+</span><span id="Writer-21"><a href="#Writer-21"><span class="linenos"> 21</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Construct Writer instances.</span>
+</span><span id="Writer-22"><a href="#Writer-22"><span class="linenos"> 22</span></a>
+</span><span id="Writer-23"><a href="#Writer-23"><span class="linenos"> 23</span></a><span class="sd">        Args:</span>
+</span><span id="Writer-24"><a href="#Writer-24"><span class="linenos"> 24</span></a><span class="sd">            output_spec: output specification to write data.</span>
+</span><span id="Writer-25"><a href="#Writer-25"><span class="linenos"> 25</span></a><span class="sd">            df: dataframe to write.</span>
+</span><span id="Writer-26"><a href="#Writer-26"><span class="linenos"> 26</span></a><span class="sd">            data: list of all dfs generated on previous steps before writer.</span>
+</span><span id="Writer-27"><a href="#Writer-27"><span class="linenos"> 27</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="Writer-28"><a href="#Writer-28"><span class="linenos"> 28</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">_logger</span> <span class="o">=</span> <span class="n">LoggingHandler</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">)</span><span class="o">.</span><span class="n">get_logger</span><span class="p">()</span>
+</span><span id="Writer-29"><a href="#Writer-29"><span class="linenos"> 29</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">_output_spec</span> <span class="o">=</span> <span class="n">output_spec</span>
+</span><span id="Writer-30"><a href="#Writer-30"><span class="linenos"> 30</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">_df</span> <span class="o">=</span> <span class="n">df</span>
+</span><span id="Writer-31"><a href="#Writer-31"><span class="linenos"> 31</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">_data</span> <span class="o">=</span> <span class="n">data</span>
+</span><span id="Writer-32"><a href="#Writer-32"><span class="linenos"> 32</span></a>
+</span><span id="Writer-33"><a href="#Writer-33"><span class="linenos"> 33</span></a>    <span class="nd">@abstractmethod</span>
+</span><span id="Writer-34"><a href="#Writer-34"><span class="linenos"> 34</span></a>    <span class="k">def</span> <span class="nf">write</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">OrderedDict</span><span class="p">]:</span>
+</span><span id="Writer-35"><a href="#Writer-35"><span class="linenos"> 35</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Abstract write method.&quot;&quot;&quot;</span>
+</span><span id="Writer-36"><a href="#Writer-36"><span class="linenos"> 36</span></a>        <span class="k">raise</span> <span class="ne">NotImplementedError</span>
+</span><span id="Writer-37"><a href="#Writer-37"><span class="linenos"> 37</span></a>
+</span><span id="Writer-38"><a href="#Writer-38"><span class="linenos"> 38</span></a>    <span class="nd">@staticmethod</span>
+</span><span id="Writer-39"><a href="#Writer-39"><span class="linenos"> 39</span></a>    <span class="k">def</span> <span class="nf">write_transformed_micro_batch</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">:</span>
+</span><span id="Writer-40"><a href="#Writer-40"><span class="linenos"> 40</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Define how to write a streaming micro batch after transforming it.</span>
+</span><span id="Writer-41"><a href="#Writer-41"><span class="linenos"> 41</span></a>
+</span><span id="Writer-42"><a href="#Writer-42"><span class="linenos"> 42</span></a><span class="sd">        This function must define an inner function that manipulates a streaming batch,</span>
+</span><span id="Writer-43"><a href="#Writer-43"><span class="linenos"> 43</span></a><span class="sd">        and then return that function. Look for concrete implementations of this</span>
+</span><span id="Writer-44"><a href="#Writer-44"><span class="linenos"> 44</span></a><span class="sd">        function for more clarity.</span>
+</span><span id="Writer-45"><a href="#Writer-45"><span class="linenos"> 45</span></a>
+</span><span id="Writer-46"><a href="#Writer-46"><span class="linenos"> 46</span></a><span class="sd">        Args:</span>
+</span><span id="Writer-47"><a href="#Writer-47"><span class="linenos"> 47</span></a><span class="sd">            kwargs: any keyword arguments.</span>
+</span><span id="Writer-48"><a href="#Writer-48"><span class="linenos"> 48</span></a>
+</span><span id="Writer-49"><a href="#Writer-49"><span class="linenos"> 49</span></a><span class="sd">        Returns:</span>
+</span><span id="Writer-50"><a href="#Writer-50"><span class="linenos"> 50</span></a><span class="sd">            A function to be executed in the foreachBatch spark write method.</span>
+</span><span id="Writer-51"><a href="#Writer-51"><span class="linenos"> 51</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="Writer-52"><a href="#Writer-52"><span class="linenos"> 52</span></a>
+</span><span id="Writer-53"><a href="#Writer-53"><span class="linenos"> 53</span></a>        <span class="k">def</span> <span class="nf">inner</span><span class="p">(</span><span class="n">batch_df</span><span class="p">:</span> <span class="n">DataFrame</span><span class="p">,</span> <span class="n">batch_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="Writer-54"><a href="#Writer-54"><span class="linenos"> 54</span></a>            <span class="n">logger</span> <span class="o">=</span> <span class="n">LoggingHandler</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span><span class="o">.</span><span class="n">get_logger</span><span class="p">()</span>
+</span><span id="Writer-55"><a href="#Writer-55"><span class="linenos"> 55</span></a>            <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;Skipping transform micro batch... nothing to do.&quot;</span><span class="p">)</span>
+</span><span id="Writer-56"><a href="#Writer-56"><span class="linenos"> 56</span></a>
+</span><span id="Writer-57"><a href="#Writer-57"><span class="linenos"> 57</span></a>        <span class="k">return</span> <span class="n">inner</span>
+</span><span id="Writer-58"><a href="#Writer-58"><span class="linenos"> 58</span></a>
+</span><span id="Writer-59"><a href="#Writer-59"><span class="linenos"> 59</span></a>    <span class="nd">@classmethod</span>
+</span><span id="Writer-60"><a href="#Writer-60"><span class="linenos"> 60</span></a>    <span class="k">def</span> <span class="nf">get_transformed_micro_batch</span><span class="p">(</span>
+</span><span id="Writer-61"><a href="#Writer-61"><span class="linenos"> 61</span></a>        <span class="bp">cls</span><span class="p">,</span>
+</span><span id="Writer-62"><a href="#Writer-62"><span class="linenos"> 62</span></a>        <span class="n">output_spec</span><span class="p">:</span> <span class="n">OutputSpec</span><span class="p">,</span>
+</span><span id="Writer-63"><a href="#Writer-63"><span class="linenos"> 63</span></a>        <span class="n">batch_df</span><span class="p">:</span> <span class="n">DataFrame</span><span class="p">,</span>
+</span><span id="Writer-64"><a href="#Writer-64"><span class="linenos"> 64</span></a>        <span class="n">batch_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+</span><span id="Writer-65"><a href="#Writer-65"><span class="linenos"> 65</span></a>        <span class="n">data</span><span class="p">:</span> <span class="n">OrderedDict</span><span class="p">,</span>
+</span><span id="Writer-66"><a href="#Writer-66"><span class="linenos"> 66</span></a>    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataFrame</span><span class="p">:</span>
+</span><span id="Writer-67"><a href="#Writer-67"><span class="linenos"> 67</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Get the result of the transformations applied to a micro batch dataframe.</span>
+</span><span id="Writer-68"><a href="#Writer-68"><span class="linenos"> 68</span></a>
+</span><span id="Writer-69"><a href="#Writer-69"><span class="linenos"> 69</span></a><span class="sd">        Args:</span>
+</span><span id="Writer-70"><a href="#Writer-70"><span class="linenos"> 70</span></a><span class="sd">            output_spec: output specification associated with the writer.</span>
+</span><span id="Writer-71"><a href="#Writer-71"><span class="linenos"> 71</span></a><span class="sd">            batch_df: batch dataframe (given from streaming foreachBatch).</span>
+</span><span id="Writer-72"><a href="#Writer-72"><span class="linenos"> 72</span></a><span class="sd">            batch_id: if of the batch (given from streaming foreachBatch).</span>
+</span><span id="Writer-73"><a href="#Writer-73"><span class="linenos"> 73</span></a><span class="sd">            data: list of all dfs generated on previous steps before writer</span>
+</span><span id="Writer-74"><a href="#Writer-74"><span class="linenos"> 74</span></a><span class="sd">                to be available on micro batch transforms.</span>
+</span><span id="Writer-75"><a href="#Writer-75"><span class="linenos"> 75</span></a>
+</span><span id="Writer-76"><a href="#Writer-76"><span class="linenos"> 76</span></a><span class="sd">        Returns:</span>
+</span><span id="Writer-77"><a href="#Writer-77"><span class="linenos"> 77</span></a><span class="sd">            The transformed dataframe.</span>
+</span><span id="Writer-78"><a href="#Writer-78"><span class="linenos"> 78</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="Writer-79"><a href="#Writer-79"><span class="linenos"> 79</span></a>        <span class="n">transformed_df</span> <span class="o">=</span> <span class="n">batch_df</span>
+</span><span id="Writer-80"><a href="#Writer-80"><span class="linenos"> 80</span></a>        <span class="k">if</span> <span class="n">output_spec</span><span class="o">.</span><span class="n">with_batch_id</span><span class="p">:</span>
+</span><span id="Writer-81"><a href="#Writer-81"><span class="linenos"> 81</span></a>            <span class="n">transformed_df</span> <span class="o">=</span> <span class="n">transformed_df</span><span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="s2">&quot;lhe_batch_id&quot;</span><span class="p">,</span> <span class="n">lit</span><span class="p">(</span><span class="n">batch_id</span><span class="p">))</span>
+</span><span id="Writer-82"><a href="#Writer-82"><span class="linenos"> 82</span></a>
+</span><span id="Writer-83"><a href="#Writer-83"><span class="linenos"> 83</span></a>        <span class="k">for</span> <span class="n">transformer</span> <span class="ow">in</span> <span class="n">output_spec</span><span class="o">.</span><span class="n">streaming_micro_batch_transformers</span><span class="p">:</span>
+</span><span id="Writer-84"><a href="#Writer-84"><span class="linenos"> 84</span></a>            <span class="n">transformed_df</span> <span class="o">=</span> <span class="n">transformed_df</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span>
+</span><span id="Writer-85"><a href="#Writer-85"><span class="linenos"> 85</span></a>                <span class="n">TransformerFactory</span><span class="o">.</span><span class="n">get_transformer</span><span class="p">(</span><span class="n">transformer</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+</span><span id="Writer-86"><a href="#Writer-86"><span class="linenos"> 86</span></a>            <span class="p">)</span>
+</span><span id="Writer-87"><a href="#Writer-87"><span class="linenos"> 87</span></a>
+</span><span id="Writer-88"><a href="#Writer-88"><span class="linenos"> 88</span></a>        <span class="k">return</span> <span class="n">transformed_df</span>
+</span><span id="Writer-89"><a href="#Writer-89"><span class="linenos"> 89</span></a>
+</span><span id="Writer-90"><a href="#Writer-90"><span class="linenos"> 90</span></a>    <span class="nd">@classmethod</span>
+</span><span id="Writer-91"><a href="#Writer-91"><span class="linenos"> 91</span></a>    <span class="k">def</span> <span class="nf">get_streaming_trigger</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">output_spec</span><span class="p">:</span> <span class="n">OutputSpec</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">:</span>
+</span><span id="Writer-92"><a href="#Writer-92"><span class="linenos"> 92</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Define which streaming trigger will be used.</span>
+</span><span id="Writer-93"><a href="#Writer-93"><span class="linenos"> 93</span></a>
+</span><span id="Writer-94"><a href="#Writer-94"><span class="linenos"> 94</span></a><span class="sd">        Args:</span>
+</span><span id="Writer-95"><a href="#Writer-95"><span class="linenos"> 95</span></a><span class="sd">            output_spec: output specification.</span>
+</span><span id="Writer-96"><a href="#Writer-96"><span class="linenos"> 96</span></a>
+</span><span id="Writer-97"><a href="#Writer-97"><span class="linenos"> 97</span></a><span class="sd">        Returns:</span>
+</span><span id="Writer-98"><a href="#Writer-98"><span class="linenos"> 98</span></a><span class="sd">            A dict containing streaming trigger.</span>
+</span><span id="Writer-99"><a href="#Writer-99"><span class="linenos"> 99</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="Writer-100"><a href="#Writer-100"><span class="linenos">100</span></a>        <span class="n">trigger</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+</span><span id="Writer-101"><a href="#Writer-101"><span class="linenos">101</span></a>
+</span><span id="Writer-102"><a href="#Writer-102"><span class="linenos">102</span></a>        <span class="k">if</span> <span class="n">output_spec</span><span class="o">.</span><span class="n">streaming_available_now</span><span class="p">:</span>
+</span><span id="Writer-103"><a href="#Writer-103"><span class="linenos">103</span></a>            <span class="n">trigger</span><span class="p">[</span><span class="s2">&quot;availableNow&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">output_spec</span><span class="o">.</span><span class="n">streaming_available_now</span>
+</span><span id="Writer-104"><a href="#Writer-104"><span class="linenos">104</span></a>        <span class="k">elif</span> <span class="n">output_spec</span><span class="o">.</span><span class="n">streaming_once</span><span class="p">:</span>
+</span><span id="Writer-105"><a href="#Writer-105"><span class="linenos">105</span></a>            <span class="n">trigger</span><span class="p">[</span><span class="s2">&quot;once&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">output_spec</span><span class="o">.</span><span class="n">streaming_once</span>
+</span><span id="Writer-106"><a href="#Writer-106"><span class="linenos">106</span></a>        <span class="k">elif</span> <span class="n">output_spec</span><span class="o">.</span><span class="n">streaming_processing_time</span><span class="p">:</span>
+</span><span id="Writer-107"><a href="#Writer-107"><span class="linenos">107</span></a>            <span class="n">trigger</span><span class="p">[</span><span class="s2">&quot;processingTime&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">output_spec</span><span class="o">.</span><span class="n">streaming_processing_time</span>
+</span><span id="Writer-108"><a href="#Writer-108"><span class="linenos">108</span></a>        <span class="k">elif</span> <span class="n">output_spec</span><span class="o">.</span><span class="n">streaming_continuous</span><span class="p">:</span>
+</span><span id="Writer-109"><a href="#Writer-109"><span class="linenos">109</span></a>            <span class="n">trigger</span><span class="p">[</span><span class="s2">&quot;continuous&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">output_spec</span><span class="o">.</span><span class="n">streaming_continuous</span>
+</span><span id="Writer-110"><a href="#Writer-110"><span class="linenos">110</span></a>        <span class="k">else</span><span class="p">:</span>
+</span><span id="Writer-111"><a href="#Writer-111"><span class="linenos">111</span></a>            <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span>
+</span><span id="Writer-112"><a href="#Writer-112"><span class="linenos">112</span></a>                <span class="s2">&quot;The requested output spec streaming trigger is not supported.&quot;</span>
+</span><span id="Writer-113"><a href="#Writer-113"><span class="linenos">113</span></a>            <span class="p">)</span>
+</span><span id="Writer-114"><a href="#Writer-114"><span class="linenos">114</span></a>
+</span><span id="Writer-115"><a href="#Writer-115"><span class="linenos">115</span></a>        <span class="k">return</span> <span class="n">trigger</span>
+</span><span id="Writer-116"><a href="#Writer-116"><span class="linenos">116</span></a>
+</span><span id="Writer-117"><a href="#Writer-117"><span class="linenos">117</span></a>    <span class="nd">@staticmethod</span>
+</span><span id="Writer-118"><a href="#Writer-118"><span class="linenos">118</span></a>    <span class="k">def</span> <span class="nf">run_micro_batch_dq_process</span><span class="p">(</span><span class="n">df</span><span class="p">:</span> <span class="n">DataFrame</span><span class="p">,</span> <span class="n">dq_spec</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">DQSpec</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">DataFrame</span><span class="p">:</span>
+</span><span id="Writer-119"><a href="#Writer-119"><span class="linenos">119</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Run the data quality process in a streaming micro batch dataframe.</span>
+</span><span id="Writer-120"><a href="#Writer-120"><span class="linenos">120</span></a>
+</span><span id="Writer-121"><a href="#Writer-121"><span class="linenos">121</span></a><span class="sd">        Iterates over the specs and performs the checks or analysis depending on the</span>
+</span><span id="Writer-122"><a href="#Writer-122"><span class="linenos">122</span></a><span class="sd">        data quality specification provided in the configuration.</span>
+</span><span id="Writer-123"><a href="#Writer-123"><span class="linenos">123</span></a>
+</span><span id="Writer-124"><a href="#Writer-124"><span class="linenos">124</span></a><span class="sd">        Args:</span>
+</span><span id="Writer-125"><a href="#Writer-125"><span class="linenos">125</span></a><span class="sd">            df: the dataframe in which to run the dq process on.</span>
+</span><span id="Writer-126"><a href="#Writer-126"><span class="linenos">126</span></a><span class="sd">            dq_spec: data quality specification.</span>
+</span><span id="Writer-127"><a href="#Writer-127"><span class="linenos">127</span></a>
+</span><span id="Writer-128"><a href="#Writer-128"><span class="linenos">128</span></a><span class="sd">        Returns: the validated dataframe.</span>
+</span><span id="Writer-129"><a href="#Writer-129"><span class="linenos">129</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="Writer-130"><a href="#Writer-130"><span class="linenos">130</span></a>        <span class="kn">from</span> <span class="nn">lakehouse_engine.dq_processors.dq_factory</span> <span class="kn">import</span> <span class="n">DQFactory</span>
+</span><span id="Writer-131"><a href="#Writer-131"><span class="linenos">131</span></a>
+</span><span id="Writer-132"><a href="#Writer-132"><span class="linenos">132</span></a>        <span class="n">validated_df</span> <span class="o">=</span> <span class="n">df</span>
+</span><span id="Writer-133"><a href="#Writer-133"><span class="linenos">133</span></a>        <span class="k">for</span> <span class="n">spec</span> <span class="ow">in</span> <span class="n">dq_spec</span><span class="p">:</span>
+</span><span id="Writer-134"><a href="#Writer-134"><span class="linenos">134</span></a>            <span class="n">validated_df</span> <span class="o">=</span> <span class="n">DQFactory</span><span class="o">.</span><span class="n">run_dq_process</span><span class="p">(</span><span class="n">spec</span><span class="p">,</span> <span class="n">df</span><span class="p">)</span>
+</span><span id="Writer-135"><a href="#Writer-135"><span class="linenos">135</span></a>
+</span><span id="Writer-136"><a href="#Writer-136"><span class="linenos">136</span></a>        <span class="k">return</span> <span class="n">validated_df</span>
 </span></pre></div>
 
 
@@ -380,20 +381,20 @@
 
     </div>
     <a class="headerlink" href="#Writer.__init__"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="Writer.__init__-17"><a href="#Writer.__init__-17"><span class="linenos">17</span></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
-</span><span id="Writer.__init__-18"><a href="#Writer.__init__-18"><span class="linenos">18</span></a>        <span class="bp">self</span><span class="p">,</span> <span class="n">output_spec</span><span class="p">:</span> <span class="n">OutputSpec</span><span class="p">,</span> <span class="n">df</span><span class="p">:</span> <span class="n">DataFrame</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">OrderedDict</span> <span class="o">=</span> <span class="kc">None</span>
-</span><span id="Writer.__init__-19"><a href="#Writer.__init__-19"><span class="linenos">19</span></a>    <span class="p">):</span>
-</span><span id="Writer.__init__-20"><a href="#Writer.__init__-20"><span class="linenos">20</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Construct Writer instances.</span>
-</span><span id="Writer.__init__-21"><a href="#Writer.__init__-21"><span class="linenos">21</span></a>
-</span><span id="Writer.__init__-22"><a href="#Writer.__init__-22"><span class="linenos">22</span></a><span class="sd">        Args:</span>
-</span><span id="Writer.__init__-23"><a href="#Writer.__init__-23"><span class="linenos">23</span></a><span class="sd">            output_spec: output specification to write data.</span>
-</span><span id="Writer.__init__-24"><a href="#Writer.__init__-24"><span class="linenos">24</span></a><span class="sd">            df: dataframe to write.</span>
-</span><span id="Writer.__init__-25"><a href="#Writer.__init__-25"><span class="linenos">25</span></a><span class="sd">            data: list of all dfs generated on previous steps before writer.</span>
-</span><span id="Writer.__init__-26"><a href="#Writer.__init__-26"><span class="linenos">26</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="Writer.__init__-27"><a href="#Writer.__init__-27"><span class="linenos">27</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">_logger</span> <span class="o">=</span> <span class="n">LoggingHandler</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">)</span><span class="o">.</span><span class="n">get_logger</span><span class="p">()</span>
-</span><span id="Writer.__init__-28"><a href="#Writer.__init__-28"><span class="linenos">28</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">_output_spec</span> <span class="o">=</span> <span class="n">output_spec</span>
-</span><span id="Writer.__init__-29"><a href="#Writer.__init__-29"><span class="linenos">29</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">_df</span> <span class="o">=</span> <span class="n">df</span>
-</span><span id="Writer.__init__-30"><a href="#Writer.__init__-30"><span class="linenos">30</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">_data</span> <span class="o">=</span> <span class="n">data</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="Writer.__init__-18"><a href="#Writer.__init__-18"><span class="linenos">18</span></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+</span><span id="Writer.__init__-19"><a href="#Writer.__init__-19"><span class="linenos">19</span></a>        <span class="bp">self</span><span class="p">,</span> <span class="n">output_spec</span><span class="p">:</span> <span class="n">OutputSpec</span><span class="p">,</span> <span class="n">df</span><span class="p">:</span> <span class="n">DataFrame</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">OrderedDict</span> <span class="o">=</span> <span class="kc">None</span>
+</span><span id="Writer.__init__-20"><a href="#Writer.__init__-20"><span class="linenos">20</span></a>    <span class="p">):</span>
+</span><span id="Writer.__init__-21"><a href="#Writer.__init__-21"><span class="linenos">21</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Construct Writer instances.</span>
+</span><span id="Writer.__init__-22"><a href="#Writer.__init__-22"><span class="linenos">22</span></a>
+</span><span id="Writer.__init__-23"><a href="#Writer.__init__-23"><span class="linenos">23</span></a><span class="sd">        Args:</span>
+</span><span id="Writer.__init__-24"><a href="#Writer.__init__-24"><span class="linenos">24</span></a><span class="sd">            output_spec: output specification to write data.</span>
+</span><span id="Writer.__init__-25"><a href="#Writer.__init__-25"><span class="linenos">25</span></a><span class="sd">            df: dataframe to write.</span>
+</span><span id="Writer.__init__-26"><a href="#Writer.__init__-26"><span class="linenos">26</span></a><span class="sd">            data: list of all dfs generated on previous steps before writer.</span>
+</span><span id="Writer.__init__-27"><a href="#Writer.__init__-27"><span class="linenos">27</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="Writer.__init__-28"><a href="#Writer.__init__-28"><span class="linenos">28</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">_logger</span> <span class="o">=</span> <span class="n">LoggingHandler</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">)</span><span class="o">.</span><span class="n">get_logger</span><span class="p">()</span>
+</span><span id="Writer.__init__-29"><a href="#Writer.__init__-29"><span class="linenos">29</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">_output_spec</span> <span class="o">=</span> <span class="n">output_spec</span>
+</span><span id="Writer.__init__-30"><a href="#Writer.__init__-30"><span class="linenos">30</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">_df</span> <span class="o">=</span> <span class="n">df</span>
+</span><span id="Writer.__init__-31"><a href="#Writer.__init__-31"><span class="linenos">31</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">_data</span> <span class="o">=</span> <span class="n">data</span>
 </span></pre></div>
 
 
@@ -422,10 +423,10 @@
 
     </div>
     <a class="headerlink" href="#Writer.write"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="Writer.write-32"><a href="#Writer.write-32"><span class="linenos">32</span></a>    <span class="nd">@abstractmethod</span>
-</span><span id="Writer.write-33"><a href="#Writer.write-33"><span class="linenos">33</span></a>    <span class="k">def</span> <span class="nf">write</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">OrderedDict</span><span class="p">]:</span>
-</span><span id="Writer.write-34"><a href="#Writer.write-34"><span class="linenos">34</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Abstract write method.&quot;&quot;&quot;</span>
-</span><span id="Writer.write-35"><a href="#Writer.write-35"><span class="linenos">35</span></a>        <span class="k">raise</span> <span class="ne">NotImplementedError</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="Writer.write-33"><a href="#Writer.write-33"><span class="linenos">33</span></a>    <span class="nd">@abstractmethod</span>
+</span><span id="Writer.write-34"><a href="#Writer.write-34"><span class="linenos">34</span></a>    <span class="k">def</span> <span class="nf">write</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">OrderedDict</span><span class="p">]:</span>
+</span><span id="Writer.write-35"><a href="#Writer.write-35"><span class="linenos">35</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Abstract write method.&quot;&quot;&quot;</span>
+</span><span id="Writer.write-36"><a href="#Writer.write-36"><span class="linenos">36</span></a>        <span class="k">raise</span> <span class="ne">NotImplementedError</span>
 </span></pre></div>
 
 
@@ -446,26 +447,26 @@
 
     </div>
     <a class="headerlink" href="#Writer.write_transformed_micro_batch"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="Writer.write_transformed_micro_batch-37"><a href="#Writer.write_transformed_micro_batch-37"><span class="linenos">37</span></a>    <span class="nd">@staticmethod</span>
-</span><span id="Writer.write_transformed_micro_batch-38"><a href="#Writer.write_transformed_micro_batch-38"><span class="linenos">38</span></a>    <span class="k">def</span> <span class="nf">write_transformed_micro_batch</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">:</span>
-</span><span id="Writer.write_transformed_micro_batch-39"><a href="#Writer.write_transformed_micro_batch-39"><span class="linenos">39</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Define how to write a streaming micro batch after transforming it.</span>
-</span><span id="Writer.write_transformed_micro_batch-40"><a href="#Writer.write_transformed_micro_batch-40"><span class="linenos">40</span></a>
-</span><span id="Writer.write_transformed_micro_batch-41"><a href="#Writer.write_transformed_micro_batch-41"><span class="linenos">41</span></a><span class="sd">        This function must define an inner function that manipulates a streaming batch,</span>
-</span><span id="Writer.write_transformed_micro_batch-42"><a href="#Writer.write_transformed_micro_batch-42"><span class="linenos">42</span></a><span class="sd">        and then return that function. Look for concrete implementations of this</span>
-</span><span id="Writer.write_transformed_micro_batch-43"><a href="#Writer.write_transformed_micro_batch-43"><span class="linenos">43</span></a><span class="sd">        function for more clarity.</span>
-</span><span id="Writer.write_transformed_micro_batch-44"><a href="#Writer.write_transformed_micro_batch-44"><span class="linenos">44</span></a>
-</span><span id="Writer.write_transformed_micro_batch-45"><a href="#Writer.write_transformed_micro_batch-45"><span class="linenos">45</span></a><span class="sd">        Args:</span>
-</span><span id="Writer.write_transformed_micro_batch-46"><a href="#Writer.write_transformed_micro_batch-46"><span class="linenos">46</span></a><span class="sd">            kwargs: any keyword arguments.</span>
-</span><span id="Writer.write_transformed_micro_batch-47"><a href="#Writer.write_transformed_micro_batch-47"><span class="linenos">47</span></a>
-</span><span id="Writer.write_transformed_micro_batch-48"><a href="#Writer.write_transformed_micro_batch-48"><span class="linenos">48</span></a><span class="sd">        Returns:</span>
-</span><span id="Writer.write_transformed_micro_batch-49"><a href="#Writer.write_transformed_micro_batch-49"><span class="linenos">49</span></a><span class="sd">            A function to be executed in the foreachBatch spark write method.</span>
-</span><span id="Writer.write_transformed_micro_batch-50"><a href="#Writer.write_transformed_micro_batch-50"><span class="linenos">50</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="Writer.write_transformed_micro_batch-51"><a href="#Writer.write_transformed_micro_batch-51"><span class="linenos">51</span></a>
-</span><span id="Writer.write_transformed_micro_batch-52"><a href="#Writer.write_transformed_micro_batch-52"><span class="linenos">52</span></a>        <span class="k">def</span> <span class="nf">inner</span><span class="p">(</span><span class="n">batch_df</span><span class="p">:</span> <span class="n">DataFrame</span><span class="p">,</span> <span class="n">batch_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-</span><span id="Writer.write_transformed_micro_batch-53"><a href="#Writer.write_transformed_micro_batch-53"><span class="linenos">53</span></a>            <span class="n">logger</span> <span class="o">=</span> <span class="n">LoggingHandler</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span><span class="o">.</span><span class="n">get_logger</span><span class="p">()</span>
-</span><span id="Writer.write_transformed_micro_batch-54"><a href="#Writer.write_transformed_micro_batch-54"><span class="linenos">54</span></a>            <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;Skipping transform micro batch... nothing to do.&quot;</span><span class="p">)</span>
-</span><span id="Writer.write_transformed_micro_batch-55"><a href="#Writer.write_transformed_micro_batch-55"><span class="linenos">55</span></a>
-</span><span id="Writer.write_transformed_micro_batch-56"><a href="#Writer.write_transformed_micro_batch-56"><span class="linenos">56</span></a>        <span class="k">return</span> <span class="n">inner</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="Writer.write_transformed_micro_batch-38"><a href="#Writer.write_transformed_micro_batch-38"><span class="linenos">38</span></a>    <span class="nd">@staticmethod</span>
+</span><span id="Writer.write_transformed_micro_batch-39"><a href="#Writer.write_transformed_micro_batch-39"><span class="linenos">39</span></a>    <span class="k">def</span> <span class="nf">write_transformed_micro_batch</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">:</span>
+</span><span id="Writer.write_transformed_micro_batch-40"><a href="#Writer.write_transformed_micro_batch-40"><span class="linenos">40</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Define how to write a streaming micro batch after transforming it.</span>
+</span><span id="Writer.write_transformed_micro_batch-41"><a href="#Writer.write_transformed_micro_batch-41"><span class="linenos">41</span></a>
+</span><span id="Writer.write_transformed_micro_batch-42"><a href="#Writer.write_transformed_micro_batch-42"><span class="linenos">42</span></a><span class="sd">        This function must define an inner function that manipulates a streaming batch,</span>
+</span><span id="Writer.write_transformed_micro_batch-43"><a href="#Writer.write_transformed_micro_batch-43"><span class="linenos">43</span></a><span class="sd">        and then return that function. Look for concrete implementations of this</span>
+</span><span id="Writer.write_transformed_micro_batch-44"><a href="#Writer.write_transformed_micro_batch-44"><span class="linenos">44</span></a><span class="sd">        function for more clarity.</span>
+</span><span id="Writer.write_transformed_micro_batch-45"><a href="#Writer.write_transformed_micro_batch-45"><span class="linenos">45</span></a>
+</span><span id="Writer.write_transformed_micro_batch-46"><a href="#Writer.write_transformed_micro_batch-46"><span class="linenos">46</span></a><span class="sd">        Args:</span>
+</span><span id="Writer.write_transformed_micro_batch-47"><a href="#Writer.write_transformed_micro_batch-47"><span class="linenos">47</span></a><span class="sd">            kwargs: any keyword arguments.</span>
+</span><span id="Writer.write_transformed_micro_batch-48"><a href="#Writer.write_transformed_micro_batch-48"><span class="linenos">48</span></a>
+</span><span id="Writer.write_transformed_micro_batch-49"><a href="#Writer.write_transformed_micro_batch-49"><span class="linenos">49</span></a><span class="sd">        Returns:</span>
+</span><span id="Writer.write_transformed_micro_batch-50"><a href="#Writer.write_transformed_micro_batch-50"><span class="linenos">50</span></a><span class="sd">            A function to be executed in the foreachBatch spark write method.</span>
+</span><span id="Writer.write_transformed_micro_batch-51"><a href="#Writer.write_transformed_micro_batch-51"><span class="linenos">51</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="Writer.write_transformed_micro_batch-52"><a href="#Writer.write_transformed_micro_batch-52"><span class="linenos">52</span></a>
+</span><span id="Writer.write_transformed_micro_batch-53"><a href="#Writer.write_transformed_micro_batch-53"><span class="linenos">53</span></a>        <span class="k">def</span> <span class="nf">inner</span><span class="p">(</span><span class="n">batch_df</span><span class="p">:</span> <span class="n">DataFrame</span><span class="p">,</span> <span class="n">batch_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="Writer.write_transformed_micro_batch-54"><a href="#Writer.write_transformed_micro_batch-54"><span class="linenos">54</span></a>            <span class="n">logger</span> <span class="o">=</span> <span class="n">LoggingHandler</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span><span class="o">.</span><span class="n">get_logger</span><span class="p">()</span>
+</span><span id="Writer.write_transformed_micro_batch-55"><a href="#Writer.write_transformed_micro_batch-55"><span class="linenos">55</span></a>            <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;Skipping transform micro batch... nothing to do.&quot;</span><span class="p">)</span>
+</span><span id="Writer.write_transformed_micro_batch-56"><a href="#Writer.write_transformed_micro_batch-56"><span class="linenos">56</span></a>
+</span><span id="Writer.write_transformed_micro_batch-57"><a href="#Writer.write_transformed_micro_batch-57"><span class="linenos">57</span></a>        <span class="k">return</span> <span class="n">inner</span>
 </span></pre></div>
 
 
@@ -502,36 +503,36 @@ function for more clarity.</p>
 
     </div>
     <a class="headerlink" href="#Writer.get_transformed_micro_batch"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="Writer.get_transformed_micro_batch-58"><a href="#Writer.get_transformed_micro_batch-58"><span class="linenos">58</span></a>    <span class="nd">@classmethod</span>
-</span><span id="Writer.get_transformed_micro_batch-59"><a href="#Writer.get_transformed_micro_batch-59"><span class="linenos">59</span></a>    <span class="k">def</span> <span class="nf">get_transformed_micro_batch</span><span class="p">(</span>
-</span><span id="Writer.get_transformed_micro_batch-60"><a href="#Writer.get_transformed_micro_batch-60"><span class="linenos">60</span></a>        <span class="bp">cls</span><span class="p">,</span>
-</span><span id="Writer.get_transformed_micro_batch-61"><a href="#Writer.get_transformed_micro_batch-61"><span class="linenos">61</span></a>        <span class="n">output_spec</span><span class="p">:</span> <span class="n">OutputSpec</span><span class="p">,</span>
-</span><span id="Writer.get_transformed_micro_batch-62"><a href="#Writer.get_transformed_micro_batch-62"><span class="linenos">62</span></a>        <span class="n">batch_df</span><span class="p">:</span> <span class="n">DataFrame</span><span class="p">,</span>
-</span><span id="Writer.get_transformed_micro_batch-63"><a href="#Writer.get_transformed_micro_batch-63"><span class="linenos">63</span></a>        <span class="n">batch_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
-</span><span id="Writer.get_transformed_micro_batch-64"><a href="#Writer.get_transformed_micro_batch-64"><span class="linenos">64</span></a>        <span class="n">data</span><span class="p">:</span> <span class="n">OrderedDict</span><span class="p">,</span>
-</span><span id="Writer.get_transformed_micro_batch-65"><a href="#Writer.get_transformed_micro_batch-65"><span class="linenos">65</span></a>    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataFrame</span><span class="p">:</span>
-</span><span id="Writer.get_transformed_micro_batch-66"><a href="#Writer.get_transformed_micro_batch-66"><span class="linenos">66</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Get the result of the transformations applied to a micro batch dataframe.</span>
-</span><span id="Writer.get_transformed_micro_batch-67"><a href="#Writer.get_transformed_micro_batch-67"><span class="linenos">67</span></a>
-</span><span id="Writer.get_transformed_micro_batch-68"><a href="#Writer.get_transformed_micro_batch-68"><span class="linenos">68</span></a><span class="sd">        Args:</span>
-</span><span id="Writer.get_transformed_micro_batch-69"><a href="#Writer.get_transformed_micro_batch-69"><span class="linenos">69</span></a><span class="sd">            output_spec: output specification associated with the writer.</span>
-</span><span id="Writer.get_transformed_micro_batch-70"><a href="#Writer.get_transformed_micro_batch-70"><span class="linenos">70</span></a><span class="sd">            batch_df: batch dataframe (given from streaming foreachBatch).</span>
-</span><span id="Writer.get_transformed_micro_batch-71"><a href="#Writer.get_transformed_micro_batch-71"><span class="linenos">71</span></a><span class="sd">            batch_id: if of the batch (given from streaming foreachBatch).</span>
-</span><span id="Writer.get_transformed_micro_batch-72"><a href="#Writer.get_transformed_micro_batch-72"><span class="linenos">72</span></a><span class="sd">            data: list of all dfs generated on previous steps before writer</span>
-</span><span id="Writer.get_transformed_micro_batch-73"><a href="#Writer.get_transformed_micro_batch-73"><span class="linenos">73</span></a><span class="sd">                to be available on micro batch transforms.</span>
-</span><span id="Writer.get_transformed_micro_batch-74"><a href="#Writer.get_transformed_micro_batch-74"><span class="linenos">74</span></a>
-</span><span id="Writer.get_transformed_micro_batch-75"><a href="#Writer.get_transformed_micro_batch-75"><span class="linenos">75</span></a><span class="sd">        Returns:</span>
-</span><span id="Writer.get_transformed_micro_batch-76"><a href="#Writer.get_transformed_micro_batch-76"><span class="linenos">76</span></a><span class="sd">            The transformed dataframe.</span>
-</span><span id="Writer.get_transformed_micro_batch-77"><a href="#Writer.get_transformed_micro_batch-77"><span class="linenos">77</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="Writer.get_transformed_micro_batch-78"><a href="#Writer.get_transformed_micro_batch-78"><span class="linenos">78</span></a>        <span class="n">transformed_df</span> <span class="o">=</span> <span class="n">batch_df</span>
-</span><span id="Writer.get_transformed_micro_batch-79"><a href="#Writer.get_transformed_micro_batch-79"><span class="linenos">79</span></a>        <span class="k">if</span> <span class="n">output_spec</span><span class="o">.</span><span class="n">with_batch_id</span><span class="p">:</span>
-</span><span id="Writer.get_transformed_micro_batch-80"><a href="#Writer.get_transformed_micro_batch-80"><span class="linenos">80</span></a>            <span class="n">transformed_df</span> <span class="o">=</span> <span class="n">transformed_df</span><span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="s2">&quot;lhe_batch_id&quot;</span><span class="p">,</span> <span class="n">lit</span><span class="p">(</span><span class="n">batch_id</span><span class="p">))</span>
-</span><span id="Writer.get_transformed_micro_batch-81"><a href="#Writer.get_transformed_micro_batch-81"><span class="linenos">81</span></a>
-</span><span id="Writer.get_transformed_micro_batch-82"><a href="#Writer.get_transformed_micro_batch-82"><span class="linenos">82</span></a>        <span class="k">for</span> <span class="n">transformer</span> <span class="ow">in</span> <span class="n">output_spec</span><span class="o">.</span><span class="n">streaming_micro_batch_transformers</span><span class="p">:</span>
-</span><span id="Writer.get_transformed_micro_batch-83"><a href="#Writer.get_transformed_micro_batch-83"><span class="linenos">83</span></a>            <span class="n">transformed_df</span> <span class="o">=</span> <span class="n">transformed_df</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span>
-</span><span id="Writer.get_transformed_micro_batch-84"><a href="#Writer.get_transformed_micro_batch-84"><span class="linenos">84</span></a>                <span class="n">TransformerFactory</span><span class="o">.</span><span class="n">get_transformer</span><span class="p">(</span><span class="n">transformer</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
-</span><span id="Writer.get_transformed_micro_batch-85"><a href="#Writer.get_transformed_micro_batch-85"><span class="linenos">85</span></a>            <span class="p">)</span>
-</span><span id="Writer.get_transformed_micro_batch-86"><a href="#Writer.get_transformed_micro_batch-86"><span class="linenos">86</span></a>
-</span><span id="Writer.get_transformed_micro_batch-87"><a href="#Writer.get_transformed_micro_batch-87"><span class="linenos">87</span></a>        <span class="k">return</span> <span class="n">transformed_df</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="Writer.get_transformed_micro_batch-59"><a href="#Writer.get_transformed_micro_batch-59"><span class="linenos">59</span></a>    <span class="nd">@classmethod</span>
+</span><span id="Writer.get_transformed_micro_batch-60"><a href="#Writer.get_transformed_micro_batch-60"><span class="linenos">60</span></a>    <span class="k">def</span> <span class="nf">get_transformed_micro_batch</span><span class="p">(</span>
+</span><span id="Writer.get_transformed_micro_batch-61"><a href="#Writer.get_transformed_micro_batch-61"><span class="linenos">61</span></a>        <span class="bp">cls</span><span class="p">,</span>
+</span><span id="Writer.get_transformed_micro_batch-62"><a href="#Writer.get_transformed_micro_batch-62"><span class="linenos">62</span></a>        <span class="n">output_spec</span><span class="p">:</span> <span class="n">OutputSpec</span><span class="p">,</span>
+</span><span id="Writer.get_transformed_micro_batch-63"><a href="#Writer.get_transformed_micro_batch-63"><span class="linenos">63</span></a>        <span class="n">batch_df</span><span class="p">:</span> <span class="n">DataFrame</span><span class="p">,</span>
+</span><span id="Writer.get_transformed_micro_batch-64"><a href="#Writer.get_transformed_micro_batch-64"><span class="linenos">64</span></a>        <span class="n">batch_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+</span><span id="Writer.get_transformed_micro_batch-65"><a href="#Writer.get_transformed_micro_batch-65"><span class="linenos">65</span></a>        <span class="n">data</span><span class="p">:</span> <span class="n">OrderedDict</span><span class="p">,</span>
+</span><span id="Writer.get_transformed_micro_batch-66"><a href="#Writer.get_transformed_micro_batch-66"><span class="linenos">66</span></a>    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataFrame</span><span class="p">:</span>
+</span><span id="Writer.get_transformed_micro_batch-67"><a href="#Writer.get_transformed_micro_batch-67"><span class="linenos">67</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Get the result of the transformations applied to a micro batch dataframe.</span>
+</span><span id="Writer.get_transformed_micro_batch-68"><a href="#Writer.get_transformed_micro_batch-68"><span class="linenos">68</span></a>
+</span><span id="Writer.get_transformed_micro_batch-69"><a href="#Writer.get_transformed_micro_batch-69"><span class="linenos">69</span></a><span class="sd">        Args:</span>
+</span><span id="Writer.get_transformed_micro_batch-70"><a href="#Writer.get_transformed_micro_batch-70"><span class="linenos">70</span></a><span class="sd">            output_spec: output specification associated with the writer.</span>
+</span><span id="Writer.get_transformed_micro_batch-71"><a href="#Writer.get_transformed_micro_batch-71"><span class="linenos">71</span></a><span class="sd">            batch_df: batch dataframe (given from streaming foreachBatch).</span>
+</span><span id="Writer.get_transformed_micro_batch-72"><a href="#Writer.get_transformed_micro_batch-72"><span class="linenos">72</span></a><span class="sd">            batch_id: if of the batch (given from streaming foreachBatch).</span>
+</span><span id="Writer.get_transformed_micro_batch-73"><a href="#Writer.get_transformed_micro_batch-73"><span class="linenos">73</span></a><span class="sd">            data: list of all dfs generated on previous steps before writer</span>
+</span><span id="Writer.get_transformed_micro_batch-74"><a href="#Writer.get_transformed_micro_batch-74"><span class="linenos">74</span></a><span class="sd">                to be available on micro batch transforms.</span>
+</span><span id="Writer.get_transformed_micro_batch-75"><a href="#Writer.get_transformed_micro_batch-75"><span class="linenos">75</span></a>
+</span><span id="Writer.get_transformed_micro_batch-76"><a href="#Writer.get_transformed_micro_batch-76"><span class="linenos">76</span></a><span class="sd">        Returns:</span>
+</span><span id="Writer.get_transformed_micro_batch-77"><a href="#Writer.get_transformed_micro_batch-77"><span class="linenos">77</span></a><span class="sd">            The transformed dataframe.</span>
+</span><span id="Writer.get_transformed_micro_batch-78"><a href="#Writer.get_transformed_micro_batch-78"><span class="linenos">78</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="Writer.get_transformed_micro_batch-79"><a href="#Writer.get_transformed_micro_batch-79"><span class="linenos">79</span></a>        <span class="n">transformed_df</span> <span class="o">=</span> <span class="n">batch_df</span>
+</span><span id="Writer.get_transformed_micro_batch-80"><a href="#Writer.get_transformed_micro_batch-80"><span class="linenos">80</span></a>        <span class="k">if</span> <span class="n">output_spec</span><span class="o">.</span><span class="n">with_batch_id</span><span class="p">:</span>
+</span><span id="Writer.get_transformed_micro_batch-81"><a href="#Writer.get_transformed_micro_batch-81"><span class="linenos">81</span></a>            <span class="n">transformed_df</span> <span class="o">=</span> <span class="n">transformed_df</span><span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="s2">&quot;lhe_batch_id&quot;</span><span class="p">,</span> <span class="n">lit</span><span class="p">(</span><span class="n">batch_id</span><span class="p">))</span>
+</span><span id="Writer.get_transformed_micro_batch-82"><a href="#Writer.get_transformed_micro_batch-82"><span class="linenos">82</span></a>
+</span><span id="Writer.get_transformed_micro_batch-83"><a href="#Writer.get_transformed_micro_batch-83"><span class="linenos">83</span></a>        <span class="k">for</span> <span class="n">transformer</span> <span class="ow">in</span> <span class="n">output_spec</span><span class="o">.</span><span class="n">streaming_micro_batch_transformers</span><span class="p">:</span>
+</span><span id="Writer.get_transformed_micro_batch-84"><a href="#Writer.get_transformed_micro_batch-84"><span class="linenos">84</span></a>            <span class="n">transformed_df</span> <span class="o">=</span> <span class="n">transformed_df</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span>
+</span><span id="Writer.get_transformed_micro_batch-85"><a href="#Writer.get_transformed_micro_batch-85"><span class="linenos">85</span></a>                <span class="n">TransformerFactory</span><span class="o">.</span><span class="n">get_transformer</span><span class="p">(</span><span class="n">transformer</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+</span><span id="Writer.get_transformed_micro_batch-86"><a href="#Writer.get_transformed_micro_batch-86"><span class="linenos">86</span></a>            <span class="p">)</span>
+</span><span id="Writer.get_transformed_micro_batch-87"><a href="#Writer.get_transformed_micro_batch-87"><span class="linenos">87</span></a>
+</span><span id="Writer.get_transformed_micro_batch-88"><a href="#Writer.get_transformed_micro_batch-88"><span class="linenos">88</span></a>        <span class="k">return</span> <span class="n">transformed_df</span>
 </span></pre></div>
 
 
@@ -568,32 +569,32 @@ to be available on micro batch transforms.</li>
 
     </div>
     <a class="headerlink" href="#Writer.get_streaming_trigger"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="Writer.get_streaming_trigger-89"><a href="#Writer.get_streaming_trigger-89"><span class="linenos"> 89</span></a>    <span class="nd">@classmethod</span>
-</span><span id="Writer.get_streaming_trigger-90"><a href="#Writer.get_streaming_trigger-90"><span class="linenos"> 90</span></a>    <span class="k">def</span> <span class="nf">get_streaming_trigger</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">output_spec</span><span class="p">:</span> <span class="n">OutputSpec</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">:</span>
-</span><span id="Writer.get_streaming_trigger-91"><a href="#Writer.get_streaming_trigger-91"><span class="linenos"> 91</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Define which streaming trigger will be used.</span>
-</span><span id="Writer.get_streaming_trigger-92"><a href="#Writer.get_streaming_trigger-92"><span class="linenos"> 92</span></a>
-</span><span id="Writer.get_streaming_trigger-93"><a href="#Writer.get_streaming_trigger-93"><span class="linenos"> 93</span></a><span class="sd">        Args:</span>
-</span><span id="Writer.get_streaming_trigger-94"><a href="#Writer.get_streaming_trigger-94"><span class="linenos"> 94</span></a><span class="sd">            output_spec: output specification.</span>
-</span><span id="Writer.get_streaming_trigger-95"><a href="#Writer.get_streaming_trigger-95"><span class="linenos"> 95</span></a>
-</span><span id="Writer.get_streaming_trigger-96"><a href="#Writer.get_streaming_trigger-96"><span class="linenos"> 96</span></a><span class="sd">        Returns:</span>
-</span><span id="Writer.get_streaming_trigger-97"><a href="#Writer.get_streaming_trigger-97"><span class="linenos"> 97</span></a><span class="sd">            A dict containing streaming trigger.</span>
-</span><span id="Writer.get_streaming_trigger-98"><a href="#Writer.get_streaming_trigger-98"><span class="linenos"> 98</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="Writer.get_streaming_trigger-99"><a href="#Writer.get_streaming_trigger-99"><span class="linenos"> 99</span></a>        <span class="n">trigger</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
-</span><span id="Writer.get_streaming_trigger-100"><a href="#Writer.get_streaming_trigger-100"><span class="linenos">100</span></a>
-</span><span id="Writer.get_streaming_trigger-101"><a href="#Writer.get_streaming_trigger-101"><span class="linenos">101</span></a>        <span class="k">if</span> <span class="n">output_spec</span><span class="o">.</span><span class="n">streaming_available_now</span><span class="p">:</span>
-</span><span id="Writer.get_streaming_trigger-102"><a href="#Writer.get_streaming_trigger-102"><span class="linenos">102</span></a>            <span class="n">trigger</span><span class="p">[</span><span class="s2">&quot;availableNow&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">output_spec</span><span class="o">.</span><span class="n">streaming_available_now</span>
-</span><span id="Writer.get_streaming_trigger-103"><a href="#Writer.get_streaming_trigger-103"><span class="linenos">103</span></a>        <span class="k">elif</span> <span class="n">output_spec</span><span class="o">.</span><span class="n">streaming_once</span><span class="p">:</span>
-</span><span id="Writer.get_streaming_trigger-104"><a href="#Writer.get_streaming_trigger-104"><span class="linenos">104</span></a>            <span class="n">trigger</span><span class="p">[</span><span class="s2">&quot;once&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">output_spec</span><span class="o">.</span><span class="n">streaming_once</span>
-</span><span id="Writer.get_streaming_trigger-105"><a href="#Writer.get_streaming_trigger-105"><span class="linenos">105</span></a>        <span class="k">elif</span> <span class="n">output_spec</span><span class="o">.</span><span class="n">streaming_processing_time</span><span class="p">:</span>
-</span><span id="Writer.get_streaming_trigger-106"><a href="#Writer.get_streaming_trigger-106"><span class="linenos">106</span></a>            <span class="n">trigger</span><span class="p">[</span><span class="s2">&quot;processingTime&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">output_spec</span><span class="o">.</span><span class="n">streaming_processing_time</span>
-</span><span id="Writer.get_streaming_trigger-107"><a href="#Writer.get_streaming_trigger-107"><span class="linenos">107</span></a>        <span class="k">elif</span> <span class="n">output_spec</span><span class="o">.</span><span class="n">streaming_continuous</span><span class="p">:</span>
-</span><span id="Writer.get_streaming_trigger-108"><a href="#Writer.get_streaming_trigger-108"><span class="linenos">108</span></a>            <span class="n">trigger</span><span class="p">[</span><span class="s2">&quot;continuous&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">output_spec</span><span class="o">.</span><span class="n">streaming_continuous</span>
-</span><span id="Writer.get_streaming_trigger-109"><a href="#Writer.get_streaming_trigger-109"><span class="linenos">109</span></a>        <span class="k">else</span><span class="p">:</span>
-</span><span id="Writer.get_streaming_trigger-110"><a href="#Writer.get_streaming_trigger-110"><span class="linenos">110</span></a>            <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span>
-</span><span id="Writer.get_streaming_trigger-111"><a href="#Writer.get_streaming_trigger-111"><span class="linenos">111</span></a>                <span class="s2">&quot;The requested output spec streaming trigger is not supported.&quot;</span>
-</span><span id="Writer.get_streaming_trigger-112"><a href="#Writer.get_streaming_trigger-112"><span class="linenos">112</span></a>            <span class="p">)</span>
-</span><span id="Writer.get_streaming_trigger-113"><a href="#Writer.get_streaming_trigger-113"><span class="linenos">113</span></a>
-</span><span id="Writer.get_streaming_trigger-114"><a href="#Writer.get_streaming_trigger-114"><span class="linenos">114</span></a>        <span class="k">return</span> <span class="n">trigger</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="Writer.get_streaming_trigger-90"><a href="#Writer.get_streaming_trigger-90"><span class="linenos"> 90</span></a>    <span class="nd">@classmethod</span>
+</span><span id="Writer.get_streaming_trigger-91"><a href="#Writer.get_streaming_trigger-91"><span class="linenos"> 91</span></a>    <span class="k">def</span> <span class="nf">get_streaming_trigger</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">output_spec</span><span class="p">:</span> <span class="n">OutputSpec</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">:</span>
+</span><span id="Writer.get_streaming_trigger-92"><a href="#Writer.get_streaming_trigger-92"><span class="linenos"> 92</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Define which streaming trigger will be used.</span>
+</span><span id="Writer.get_streaming_trigger-93"><a href="#Writer.get_streaming_trigger-93"><span class="linenos"> 93</span></a>
+</span><span id="Writer.get_streaming_trigger-94"><a href="#Writer.get_streaming_trigger-94"><span class="linenos"> 94</span></a><span class="sd">        Args:</span>
+</span><span id="Writer.get_streaming_trigger-95"><a href="#Writer.get_streaming_trigger-95"><span class="linenos"> 95</span></a><span class="sd">            output_spec: output specification.</span>
+</span><span id="Writer.get_streaming_trigger-96"><a href="#Writer.get_streaming_trigger-96"><span class="linenos"> 96</span></a>
+</span><span id="Writer.get_streaming_trigger-97"><a href="#Writer.get_streaming_trigger-97"><span class="linenos"> 97</span></a><span class="sd">        Returns:</span>
+</span><span id="Writer.get_streaming_trigger-98"><a href="#Writer.get_streaming_trigger-98"><span class="linenos"> 98</span></a><span class="sd">            A dict containing streaming trigger.</span>
+</span><span id="Writer.get_streaming_trigger-99"><a href="#Writer.get_streaming_trigger-99"><span class="linenos"> 99</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="Writer.get_streaming_trigger-100"><a href="#Writer.get_streaming_trigger-100"><span class="linenos">100</span></a>        <span class="n">trigger</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+</span><span id="Writer.get_streaming_trigger-101"><a href="#Writer.get_streaming_trigger-101"><span class="linenos">101</span></a>
+</span><span id="Writer.get_streaming_trigger-102"><a href="#Writer.get_streaming_trigger-102"><span class="linenos">102</span></a>        <span class="k">if</span> <span class="n">output_spec</span><span class="o">.</span><span class="n">streaming_available_now</span><span class="p">:</span>
+</span><span id="Writer.get_streaming_trigger-103"><a href="#Writer.get_streaming_trigger-103"><span class="linenos">103</span></a>            <span class="n">trigger</span><span class="p">[</span><span class="s2">&quot;availableNow&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">output_spec</span><span class="o">.</span><span class="n">streaming_available_now</span>
+</span><span id="Writer.get_streaming_trigger-104"><a href="#Writer.get_streaming_trigger-104"><span class="linenos">104</span></a>        <span class="k">elif</span> <span class="n">output_spec</span><span class="o">.</span><span class="n">streaming_once</span><span class="p">:</span>
+</span><span id="Writer.get_streaming_trigger-105"><a href="#Writer.get_streaming_trigger-105"><span class="linenos">105</span></a>            <span class="n">trigger</span><span class="p">[</span><span class="s2">&quot;once&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">output_spec</span><span class="o">.</span><span class="n">streaming_once</span>
+</span><span id="Writer.get_streaming_trigger-106"><a href="#Writer.get_streaming_trigger-106"><span class="linenos">106</span></a>        <span class="k">elif</span> <span class="n">output_spec</span><span class="o">.</span><span class="n">streaming_processing_time</span><span class="p">:</span>
+</span><span id="Writer.get_streaming_trigger-107"><a href="#Writer.get_streaming_trigger-107"><span class="linenos">107</span></a>            <span class="n">trigger</span><span class="p">[</span><span class="s2">&quot;processingTime&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">output_spec</span><span class="o">.</span><span class="n">streaming_processing_time</span>
+</span><span id="Writer.get_streaming_trigger-108"><a href="#Writer.get_streaming_trigger-108"><span class="linenos">108</span></a>        <span class="k">elif</span> <span class="n">output_spec</span><span class="o">.</span><span class="n">streaming_continuous</span><span class="p">:</span>
+</span><span id="Writer.get_streaming_trigger-109"><a href="#Writer.get_streaming_trigger-109"><span class="linenos">109</span></a>            <span class="n">trigger</span><span class="p">[</span><span class="s2">&quot;continuous&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">output_spec</span><span class="o">.</span><span class="n">streaming_continuous</span>
+</span><span id="Writer.get_streaming_trigger-110"><a href="#Writer.get_streaming_trigger-110"><span class="linenos">110</span></a>        <span class="k">else</span><span class="p">:</span>
+</span><span id="Writer.get_streaming_trigger-111"><a href="#Writer.get_streaming_trigger-111"><span class="linenos">111</span></a>            <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span>
+</span><span id="Writer.get_streaming_trigger-112"><a href="#Writer.get_streaming_trigger-112"><span class="linenos">112</span></a>                <span class="s2">&quot;The requested output spec streaming trigger is not supported.&quot;</span>
+</span><span id="Writer.get_streaming_trigger-113"><a href="#Writer.get_streaming_trigger-113"><span class="linenos">113</span></a>            <span class="p">)</span>
+</span><span id="Writer.get_streaming_trigger-114"><a href="#Writer.get_streaming_trigger-114"><span class="linenos">114</span></a>
+</span><span id="Writer.get_streaming_trigger-115"><a href="#Writer.get_streaming_trigger-115"><span class="linenos">115</span></a>        <span class="k">return</span> <span class="n">trigger</span>
 </span></pre></div>
 
 
@@ -626,26 +627,26 @@ to be available on micro batch transforms.</li>
 
     </div>
     <a class="headerlink" href="#Writer.run_micro_batch_dq_process"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="Writer.run_micro_batch_dq_process-116"><a href="#Writer.run_micro_batch_dq_process-116"><span class="linenos">116</span></a>    <span class="nd">@staticmethod</span>
-</span><span id="Writer.run_micro_batch_dq_process-117"><a href="#Writer.run_micro_batch_dq_process-117"><span class="linenos">117</span></a>    <span class="k">def</span> <span class="nf">run_micro_batch_dq_process</span><span class="p">(</span><span class="n">df</span><span class="p">:</span> <span class="n">DataFrame</span><span class="p">,</span> <span class="n">dq_spec</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">DQSpec</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">DataFrame</span><span class="p">:</span>
-</span><span id="Writer.run_micro_batch_dq_process-118"><a href="#Writer.run_micro_batch_dq_process-118"><span class="linenos">118</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Run the data quality process in a streaming micro batch dataframe.</span>
-</span><span id="Writer.run_micro_batch_dq_process-119"><a href="#Writer.run_micro_batch_dq_process-119"><span class="linenos">119</span></a>
-</span><span id="Writer.run_micro_batch_dq_process-120"><a href="#Writer.run_micro_batch_dq_process-120"><span class="linenos">120</span></a><span class="sd">        Iterates over the specs and performs the checks or analysis depending on the</span>
-</span><span id="Writer.run_micro_batch_dq_process-121"><a href="#Writer.run_micro_batch_dq_process-121"><span class="linenos">121</span></a><span class="sd">        data quality specification provided in the configuration.</span>
-</span><span id="Writer.run_micro_batch_dq_process-122"><a href="#Writer.run_micro_batch_dq_process-122"><span class="linenos">122</span></a>
-</span><span id="Writer.run_micro_batch_dq_process-123"><a href="#Writer.run_micro_batch_dq_process-123"><span class="linenos">123</span></a><span class="sd">        Args:</span>
-</span><span id="Writer.run_micro_batch_dq_process-124"><a href="#Writer.run_micro_batch_dq_process-124"><span class="linenos">124</span></a><span class="sd">            df: the dataframe in which to run the dq process on.</span>
-</span><span id="Writer.run_micro_batch_dq_process-125"><a href="#Writer.run_micro_batch_dq_process-125"><span class="linenos">125</span></a><span class="sd">            dq_spec: data quality specification.</span>
-</span><span id="Writer.run_micro_batch_dq_process-126"><a href="#Writer.run_micro_batch_dq_process-126"><span class="linenos">126</span></a>
-</span><span id="Writer.run_micro_batch_dq_process-127"><a href="#Writer.run_micro_batch_dq_process-127"><span class="linenos">127</span></a><span class="sd">        Returns: the validated dataframe.</span>
-</span><span id="Writer.run_micro_batch_dq_process-128"><a href="#Writer.run_micro_batch_dq_process-128"><span class="linenos">128</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="Writer.run_micro_batch_dq_process-129"><a href="#Writer.run_micro_batch_dq_process-129"><span class="linenos">129</span></a>        <span class="kn">from</span> <span class="nn">lakehouse_engine.dq_processors.dq_factory</span> <span class="kn">import</span> <span class="n">DQFactory</span>
-</span><span id="Writer.run_micro_batch_dq_process-130"><a href="#Writer.run_micro_batch_dq_process-130"><span class="linenos">130</span></a>
-</span><span id="Writer.run_micro_batch_dq_process-131"><a href="#Writer.run_micro_batch_dq_process-131"><span class="linenos">131</span></a>        <span class="n">validated_df</span> <span class="o">=</span> <span class="n">df</span>
-</span><span id="Writer.run_micro_batch_dq_process-132"><a href="#Writer.run_micro_batch_dq_process-132"><span class="linenos">132</span></a>        <span class="k">for</span> <span class="n">spec</span> <span class="ow">in</span> <span class="n">dq_spec</span><span class="p">:</span>
-</span><span id="Writer.run_micro_batch_dq_process-133"><a href="#Writer.run_micro_batch_dq_process-133"><span class="linenos">133</span></a>            <span class="n">validated_df</span> <span class="o">=</span> <span class="n">DQFactory</span><span class="o">.</span><span class="n">run_dq_process</span><span class="p">(</span><span class="n">spec</span><span class="p">,</span> <span class="n">df</span><span class="p">)</span>
-</span><span id="Writer.run_micro_batch_dq_process-134"><a href="#Writer.run_micro_batch_dq_process-134"><span class="linenos">134</span></a>
-</span><span id="Writer.run_micro_batch_dq_process-135"><a href="#Writer.run_micro_batch_dq_process-135"><span class="linenos">135</span></a>        <span class="k">return</span> <span class="n">validated_df</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="Writer.run_micro_batch_dq_process-117"><a href="#Writer.run_micro_batch_dq_process-117"><span class="linenos">117</span></a>    <span class="nd">@staticmethod</span>
+</span><span id="Writer.run_micro_batch_dq_process-118"><a href="#Writer.run_micro_batch_dq_process-118"><span class="linenos">118</span></a>    <span class="k">def</span> <span class="nf">run_micro_batch_dq_process</span><span class="p">(</span><span class="n">df</span><span class="p">:</span> <span class="n">DataFrame</span><span class="p">,</span> <span class="n">dq_spec</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">DQSpec</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">DataFrame</span><span class="p">:</span>
+</span><span id="Writer.run_micro_batch_dq_process-119"><a href="#Writer.run_micro_batch_dq_process-119"><span class="linenos">119</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Run the data quality process in a streaming micro batch dataframe.</span>
+</span><span id="Writer.run_micro_batch_dq_process-120"><a href="#Writer.run_micro_batch_dq_process-120"><span class="linenos">120</span></a>
+</span><span id="Writer.run_micro_batch_dq_process-121"><a href="#Writer.run_micro_batch_dq_process-121"><span class="linenos">121</span></a><span class="sd">        Iterates over the specs and performs the checks or analysis depending on the</span>
+</span><span id="Writer.run_micro_batch_dq_process-122"><a href="#Writer.run_micro_batch_dq_process-122"><span class="linenos">122</span></a><span class="sd">        data quality specification provided in the configuration.</span>
+</span><span id="Writer.run_micro_batch_dq_process-123"><a href="#Writer.run_micro_batch_dq_process-123"><span class="linenos">123</span></a>
+</span><span id="Writer.run_micro_batch_dq_process-124"><a href="#Writer.run_micro_batch_dq_process-124"><span class="linenos">124</span></a><span class="sd">        Args:</span>
+</span><span id="Writer.run_micro_batch_dq_process-125"><a href="#Writer.run_micro_batch_dq_process-125"><span class="linenos">125</span></a><span class="sd">            df: the dataframe in which to run the dq process on.</span>
+</span><span id="Writer.run_micro_batch_dq_process-126"><a href="#Writer.run_micro_batch_dq_process-126"><span class="linenos">126</span></a><span class="sd">            dq_spec: data quality specification.</span>
+</span><span id="Writer.run_micro_batch_dq_process-127"><a href="#Writer.run_micro_batch_dq_process-127"><span class="linenos">127</span></a>
+</span><span id="Writer.run_micro_batch_dq_process-128"><a href="#Writer.run_micro_batch_dq_process-128"><span class="linenos">128</span></a><span class="sd">        Returns: the validated dataframe.</span>
+</span><span id="Writer.run_micro_batch_dq_process-129"><a href="#Writer.run_micro_batch_dq_process-129"><span class="linenos">129</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="Writer.run_micro_batch_dq_process-130"><a href="#Writer.run_micro_batch_dq_process-130"><span class="linenos">130</span></a>        <span class="kn">from</span> <span class="nn">lakehouse_engine.dq_processors.dq_factory</span> <span class="kn">import</span> <span class="n">DQFactory</span>
+</span><span id="Writer.run_micro_batch_dq_process-131"><a href="#Writer.run_micro_batch_dq_process-131"><span class="linenos">131</span></a>
+</span><span id="Writer.run_micro_batch_dq_process-132"><a href="#Writer.run_micro_batch_dq_process-132"><span class="linenos">132</span></a>        <span class="n">validated_df</span> <span class="o">=</span> <span class="n">df</span>
+</span><span id="Writer.run_micro_batch_dq_process-133"><a href="#Writer.run_micro_batch_dq_process-133"><span class="linenos">133</span></a>        <span class="k">for</span> <span class="n">spec</span> <span class="ow">in</span> <span class="n">dq_spec</span><span class="p">:</span>
+</span><span id="Writer.run_micro_batch_dq_process-134"><a href="#Writer.run_micro_batch_dq_process-134"><span class="linenos">134</span></a>            <span class="n">validated_df</span> <span class="o">=</span> <span class="n">DQFactory</span><span class="o">.</span><span class="n">run_dq_process</span><span class="p">(</span><span class="n">spec</span><span class="p">,</span> <span class="n">df</span><span class="p">)</span>
+</span><span id="Writer.run_micro_batch_dq_process-135"><a href="#Writer.run_micro_batch_dq_process-135"><span class="linenos">135</span></a>
+</span><span id="Writer.run_micro_batch_dq_process-136"><a href="#Writer.run_micro_batch_dq_process-136"><span class="linenos">136</span></a>        <span class="k">return</span> <span class="n">validated_df</span>
 </span></pre></div>
 
 

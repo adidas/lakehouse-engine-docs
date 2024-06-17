@@ -60,7 +60,7 @@
     </ul>
 
 
-            <footer>Lakehouse Engine v1.20.1</footer>
+            <footer>Lakehouse Engine v1.21.0version</footer>
 
 </div>
     </nav>
@@ -78,35 +78,36 @@
                     <label class="view-source-button" for="mod-aggregators-view-source"><span>View Source</span></label>
 
                     <div class="pdoc-code codehilite"><pre><span></span><span id="L-1"><a href="#L-1"><span class="linenos"> 1</span></a><span class="sd">&quot;&quot;&quot;Aggregators module.&quot;&quot;&quot;</span>
-</span><span id="L-2"><a href="#L-2"><span class="linenos"> 2</span></a><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Callable</span>
-</span><span id="L-3"><a href="#L-3"><span class="linenos"> 3</span></a>
-</span><span id="L-4"><a href="#L-4"><span class="linenos"> 4</span></a><span class="kn">from</span> <span class="nn">pyspark.sql</span> <span class="kn">import</span> <span class="n">DataFrame</span>
-</span><span id="L-5"><a href="#L-5"><span class="linenos"> 5</span></a><span class="kn">from</span> <span class="nn">pyspark.sql.functions</span> <span class="kn">import</span> <span class="n">col</span><span class="p">,</span> <span class="nb">max</span>
-</span><span id="L-6"><a href="#L-6"><span class="linenos"> 6</span></a>
-</span><span id="L-7"><a href="#L-7"><span class="linenos"> 7</span></a><span class="kn">from</span> <span class="nn">lakehouse_engine.utils.logging_handler</span> <span class="kn">import</span> <span class="n">LoggingHandler</span>
-</span><span id="L-8"><a href="#L-8"><span class="linenos"> 8</span></a>
+</span><span id="L-2"><a href="#L-2"><span class="linenos"> 2</span></a>
+</span><span id="L-3"><a href="#L-3"><span class="linenos"> 3</span></a><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Callable</span>
+</span><span id="L-4"><a href="#L-4"><span class="linenos"> 4</span></a>
+</span><span id="L-5"><a href="#L-5"><span class="linenos"> 5</span></a><span class="kn">from</span> <span class="nn">pyspark.sql</span> <span class="kn">import</span> <span class="n">DataFrame</span>
+</span><span id="L-6"><a href="#L-6"><span class="linenos"> 6</span></a><span class="kn">from</span> <span class="nn">pyspark.sql.functions</span> <span class="kn">import</span> <span class="n">col</span><span class="p">,</span> <span class="nb">max</span>  <span class="c1"># noqa: A004</span>
+</span><span id="L-7"><a href="#L-7"><span class="linenos"> 7</span></a>
+</span><span id="L-8"><a href="#L-8"><span class="linenos"> 8</span></a><span class="kn">from</span> <span class="nn">lakehouse_engine.utils.logging_handler</span> <span class="kn">import</span> <span class="n">LoggingHandler</span>
 </span><span id="L-9"><a href="#L-9"><span class="linenos"> 9</span></a>
-</span><span id="L-10"><a href="#L-10"><span class="linenos">10</span></a><span class="k">class</span> <span class="nc">Aggregators</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-</span><span id="L-11"><a href="#L-11"><span class="linenos">11</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Class containing all aggregation functions.&quot;&quot;&quot;</span>
-</span><span id="L-12"><a href="#L-12"><span class="linenos">12</span></a>
-</span><span id="L-13"><a href="#L-13"><span class="linenos">13</span></a>    <span class="n">_logger</span> <span class="o">=</span> <span class="n">LoggingHandler</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span><span class="o">.</span><span class="n">get_logger</span><span class="p">()</span>
-</span><span id="L-14"><a href="#L-14"><span class="linenos">14</span></a>
-</span><span id="L-15"><a href="#L-15"><span class="linenos">15</span></a>    <span class="nd">@staticmethod</span>
-</span><span id="L-16"><a href="#L-16"><span class="linenos">16</span></a>    <span class="k">def</span> <span class="nf">get_max_value</span><span class="p">(</span><span class="n">input_col</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">output_col</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;latest&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">:</span>
-</span><span id="L-17"><a href="#L-17"><span class="linenos">17</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Get the maximum value of a given column of a dataframe.</span>
-</span><span id="L-18"><a href="#L-18"><span class="linenos">18</span></a>
-</span><span id="L-19"><a href="#L-19"><span class="linenos">19</span></a><span class="sd">        Args:</span>
-</span><span id="L-20"><a href="#L-20"><span class="linenos">20</span></a><span class="sd">            input_col: name of the input column.</span>
-</span><span id="L-21"><a href="#L-21"><span class="linenos">21</span></a><span class="sd">            output_col: name of the output column (defaults to &quot;latest&quot;).</span>
-</span><span id="L-22"><a href="#L-22"><span class="linenos">22</span></a>
-</span><span id="L-23"><a href="#L-23"><span class="linenos">23</span></a><span class="sd">        Returns:</span>
-</span><span id="L-24"><a href="#L-24"><span class="linenos">24</span></a><span class="sd">            A function to be executed in the .transform() spark function.</span>
-</span><span id="L-25"><a href="#L-25"><span class="linenos">25</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="L-26"><a href="#L-26"><span class="linenos">26</span></a>
-</span><span id="L-27"><a href="#L-27"><span class="linenos">27</span></a>        <span class="k">def</span> <span class="nf">inner</span><span class="p">(</span><span class="n">df</span><span class="p">:</span> <span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataFrame</span><span class="p">:</span>
-</span><span id="L-28"><a href="#L-28"><span class="linenos">28</span></a>            <span class="k">return</span> <span class="n">df</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="n">input_col</span><span class="p">))</span><span class="o">.</span><span class="n">agg</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="n">input_col</span><span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="n">output_col</span><span class="p">))</span>
-</span><span id="L-29"><a href="#L-29"><span class="linenos">29</span></a>
-</span><span id="L-30"><a href="#L-30"><span class="linenos">30</span></a>        <span class="k">return</span> <span class="n">inner</span>
+</span><span id="L-10"><a href="#L-10"><span class="linenos">10</span></a>
+</span><span id="L-11"><a href="#L-11"><span class="linenos">11</span></a><span class="k">class</span> <span class="nc">Aggregators</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+</span><span id="L-12"><a href="#L-12"><span class="linenos">12</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Class containing all aggregation functions.&quot;&quot;&quot;</span>
+</span><span id="L-13"><a href="#L-13"><span class="linenos">13</span></a>
+</span><span id="L-14"><a href="#L-14"><span class="linenos">14</span></a>    <span class="n">_logger</span> <span class="o">=</span> <span class="n">LoggingHandler</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span><span class="o">.</span><span class="n">get_logger</span><span class="p">()</span>
+</span><span id="L-15"><a href="#L-15"><span class="linenos">15</span></a>
+</span><span id="L-16"><a href="#L-16"><span class="linenos">16</span></a>    <span class="nd">@staticmethod</span>
+</span><span id="L-17"><a href="#L-17"><span class="linenos">17</span></a>    <span class="k">def</span> <span class="nf">get_max_value</span><span class="p">(</span><span class="n">input_col</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">output_col</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;latest&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">:</span>
+</span><span id="L-18"><a href="#L-18"><span class="linenos">18</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Get the maximum value of a given column of a dataframe.</span>
+</span><span id="L-19"><a href="#L-19"><span class="linenos">19</span></a>
+</span><span id="L-20"><a href="#L-20"><span class="linenos">20</span></a><span class="sd">        Args:</span>
+</span><span id="L-21"><a href="#L-21"><span class="linenos">21</span></a><span class="sd">            input_col: name of the input column.</span>
+</span><span id="L-22"><a href="#L-22"><span class="linenos">22</span></a><span class="sd">            output_col: name of the output column (defaults to &quot;latest&quot;).</span>
+</span><span id="L-23"><a href="#L-23"><span class="linenos">23</span></a>
+</span><span id="L-24"><a href="#L-24"><span class="linenos">24</span></a><span class="sd">        Returns:</span>
+</span><span id="L-25"><a href="#L-25"><span class="linenos">25</span></a><span class="sd">            A function to be executed in the .transform() spark function.</span>
+</span><span id="L-26"><a href="#L-26"><span class="linenos">26</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="L-27"><a href="#L-27"><span class="linenos">27</span></a>
+</span><span id="L-28"><a href="#L-28"><span class="linenos">28</span></a>        <span class="k">def</span> <span class="nf">inner</span><span class="p">(</span><span class="n">df</span><span class="p">:</span> <span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataFrame</span><span class="p">:</span>
+</span><span id="L-29"><a href="#L-29"><span class="linenos">29</span></a>            <span class="k">return</span> <span class="n">df</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="n">input_col</span><span class="p">))</span><span class="o">.</span><span class="n">agg</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="n">input_col</span><span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="n">output_col</span><span class="p">))</span>
+</span><span id="L-30"><a href="#L-30"><span class="linenos">30</span></a>
+</span><span id="L-31"><a href="#L-31"><span class="linenos">31</span></a>        <span class="k">return</span> <span class="n">inner</span>
 </span></pre></div>
 
 
@@ -122,27 +123,27 @@
 
     </div>
     <a class="headerlink" href="#Aggregators"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="Aggregators-11"><a href="#Aggregators-11"><span class="linenos">11</span></a><span class="k">class</span> <span class="nc">Aggregators</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-</span><span id="Aggregators-12"><a href="#Aggregators-12"><span class="linenos">12</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Class containing all aggregation functions.&quot;&quot;&quot;</span>
-</span><span id="Aggregators-13"><a href="#Aggregators-13"><span class="linenos">13</span></a>
-</span><span id="Aggregators-14"><a href="#Aggregators-14"><span class="linenos">14</span></a>    <span class="n">_logger</span> <span class="o">=</span> <span class="n">LoggingHandler</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span><span class="o">.</span><span class="n">get_logger</span><span class="p">()</span>
-</span><span id="Aggregators-15"><a href="#Aggregators-15"><span class="linenos">15</span></a>
-</span><span id="Aggregators-16"><a href="#Aggregators-16"><span class="linenos">16</span></a>    <span class="nd">@staticmethod</span>
-</span><span id="Aggregators-17"><a href="#Aggregators-17"><span class="linenos">17</span></a>    <span class="k">def</span> <span class="nf">get_max_value</span><span class="p">(</span><span class="n">input_col</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">output_col</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;latest&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">:</span>
-</span><span id="Aggregators-18"><a href="#Aggregators-18"><span class="linenos">18</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Get the maximum value of a given column of a dataframe.</span>
-</span><span id="Aggregators-19"><a href="#Aggregators-19"><span class="linenos">19</span></a>
-</span><span id="Aggregators-20"><a href="#Aggregators-20"><span class="linenos">20</span></a><span class="sd">        Args:</span>
-</span><span id="Aggregators-21"><a href="#Aggregators-21"><span class="linenos">21</span></a><span class="sd">            input_col: name of the input column.</span>
-</span><span id="Aggregators-22"><a href="#Aggregators-22"><span class="linenos">22</span></a><span class="sd">            output_col: name of the output column (defaults to &quot;latest&quot;).</span>
-</span><span id="Aggregators-23"><a href="#Aggregators-23"><span class="linenos">23</span></a>
-</span><span id="Aggregators-24"><a href="#Aggregators-24"><span class="linenos">24</span></a><span class="sd">        Returns:</span>
-</span><span id="Aggregators-25"><a href="#Aggregators-25"><span class="linenos">25</span></a><span class="sd">            A function to be executed in the .transform() spark function.</span>
-</span><span id="Aggregators-26"><a href="#Aggregators-26"><span class="linenos">26</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="Aggregators-27"><a href="#Aggregators-27"><span class="linenos">27</span></a>
-</span><span id="Aggregators-28"><a href="#Aggregators-28"><span class="linenos">28</span></a>        <span class="k">def</span> <span class="nf">inner</span><span class="p">(</span><span class="n">df</span><span class="p">:</span> <span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataFrame</span><span class="p">:</span>
-</span><span id="Aggregators-29"><a href="#Aggregators-29"><span class="linenos">29</span></a>            <span class="k">return</span> <span class="n">df</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="n">input_col</span><span class="p">))</span><span class="o">.</span><span class="n">agg</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="n">input_col</span><span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="n">output_col</span><span class="p">))</span>
-</span><span id="Aggregators-30"><a href="#Aggregators-30"><span class="linenos">30</span></a>
-</span><span id="Aggregators-31"><a href="#Aggregators-31"><span class="linenos">31</span></a>        <span class="k">return</span> <span class="n">inner</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="Aggregators-12"><a href="#Aggregators-12"><span class="linenos">12</span></a><span class="k">class</span> <span class="nc">Aggregators</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+</span><span id="Aggregators-13"><a href="#Aggregators-13"><span class="linenos">13</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Class containing all aggregation functions.&quot;&quot;&quot;</span>
+</span><span id="Aggregators-14"><a href="#Aggregators-14"><span class="linenos">14</span></a>
+</span><span id="Aggregators-15"><a href="#Aggregators-15"><span class="linenos">15</span></a>    <span class="n">_logger</span> <span class="o">=</span> <span class="n">LoggingHandler</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span><span class="o">.</span><span class="n">get_logger</span><span class="p">()</span>
+</span><span id="Aggregators-16"><a href="#Aggregators-16"><span class="linenos">16</span></a>
+</span><span id="Aggregators-17"><a href="#Aggregators-17"><span class="linenos">17</span></a>    <span class="nd">@staticmethod</span>
+</span><span id="Aggregators-18"><a href="#Aggregators-18"><span class="linenos">18</span></a>    <span class="k">def</span> <span class="nf">get_max_value</span><span class="p">(</span><span class="n">input_col</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">output_col</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;latest&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">:</span>
+</span><span id="Aggregators-19"><a href="#Aggregators-19"><span class="linenos">19</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Get the maximum value of a given column of a dataframe.</span>
+</span><span id="Aggregators-20"><a href="#Aggregators-20"><span class="linenos">20</span></a>
+</span><span id="Aggregators-21"><a href="#Aggregators-21"><span class="linenos">21</span></a><span class="sd">        Args:</span>
+</span><span id="Aggregators-22"><a href="#Aggregators-22"><span class="linenos">22</span></a><span class="sd">            input_col: name of the input column.</span>
+</span><span id="Aggregators-23"><a href="#Aggregators-23"><span class="linenos">23</span></a><span class="sd">            output_col: name of the output column (defaults to &quot;latest&quot;).</span>
+</span><span id="Aggregators-24"><a href="#Aggregators-24"><span class="linenos">24</span></a>
+</span><span id="Aggregators-25"><a href="#Aggregators-25"><span class="linenos">25</span></a><span class="sd">        Returns:</span>
+</span><span id="Aggregators-26"><a href="#Aggregators-26"><span class="linenos">26</span></a><span class="sd">            A function to be executed in the .transform() spark function.</span>
+</span><span id="Aggregators-27"><a href="#Aggregators-27"><span class="linenos">27</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="Aggregators-28"><a href="#Aggregators-28"><span class="linenos">28</span></a>
+</span><span id="Aggregators-29"><a href="#Aggregators-29"><span class="linenos">29</span></a>        <span class="k">def</span> <span class="nf">inner</span><span class="p">(</span><span class="n">df</span><span class="p">:</span> <span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataFrame</span><span class="p">:</span>
+</span><span id="Aggregators-30"><a href="#Aggregators-30"><span class="linenos">30</span></a>            <span class="k">return</span> <span class="n">df</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="n">input_col</span><span class="p">))</span><span class="o">.</span><span class="n">agg</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="n">input_col</span><span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="n">output_col</span><span class="p">))</span>
+</span><span id="Aggregators-31"><a href="#Aggregators-31"><span class="linenos">31</span></a>
+</span><span id="Aggregators-32"><a href="#Aggregators-32"><span class="linenos">32</span></a>        <span class="k">return</span> <span class="n">inner</span>
 </span></pre></div>
 
 
@@ -162,22 +163,22 @@
 
     </div>
     <a class="headerlink" href="#Aggregators.get_max_value"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="Aggregators.get_max_value-16"><a href="#Aggregators.get_max_value-16"><span class="linenos">16</span></a>    <span class="nd">@staticmethod</span>
-</span><span id="Aggregators.get_max_value-17"><a href="#Aggregators.get_max_value-17"><span class="linenos">17</span></a>    <span class="k">def</span> <span class="nf">get_max_value</span><span class="p">(</span><span class="n">input_col</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">output_col</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;latest&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">:</span>
-</span><span id="Aggregators.get_max_value-18"><a href="#Aggregators.get_max_value-18"><span class="linenos">18</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Get the maximum value of a given column of a dataframe.</span>
-</span><span id="Aggregators.get_max_value-19"><a href="#Aggregators.get_max_value-19"><span class="linenos">19</span></a>
-</span><span id="Aggregators.get_max_value-20"><a href="#Aggregators.get_max_value-20"><span class="linenos">20</span></a><span class="sd">        Args:</span>
-</span><span id="Aggregators.get_max_value-21"><a href="#Aggregators.get_max_value-21"><span class="linenos">21</span></a><span class="sd">            input_col: name of the input column.</span>
-</span><span id="Aggregators.get_max_value-22"><a href="#Aggregators.get_max_value-22"><span class="linenos">22</span></a><span class="sd">            output_col: name of the output column (defaults to &quot;latest&quot;).</span>
-</span><span id="Aggregators.get_max_value-23"><a href="#Aggregators.get_max_value-23"><span class="linenos">23</span></a>
-</span><span id="Aggregators.get_max_value-24"><a href="#Aggregators.get_max_value-24"><span class="linenos">24</span></a><span class="sd">        Returns:</span>
-</span><span id="Aggregators.get_max_value-25"><a href="#Aggregators.get_max_value-25"><span class="linenos">25</span></a><span class="sd">            A function to be executed in the .transform() spark function.</span>
-</span><span id="Aggregators.get_max_value-26"><a href="#Aggregators.get_max_value-26"><span class="linenos">26</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="Aggregators.get_max_value-27"><a href="#Aggregators.get_max_value-27"><span class="linenos">27</span></a>
-</span><span id="Aggregators.get_max_value-28"><a href="#Aggregators.get_max_value-28"><span class="linenos">28</span></a>        <span class="k">def</span> <span class="nf">inner</span><span class="p">(</span><span class="n">df</span><span class="p">:</span> <span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataFrame</span><span class="p">:</span>
-</span><span id="Aggregators.get_max_value-29"><a href="#Aggregators.get_max_value-29"><span class="linenos">29</span></a>            <span class="k">return</span> <span class="n">df</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="n">input_col</span><span class="p">))</span><span class="o">.</span><span class="n">agg</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="n">input_col</span><span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="n">output_col</span><span class="p">))</span>
-</span><span id="Aggregators.get_max_value-30"><a href="#Aggregators.get_max_value-30"><span class="linenos">30</span></a>
-</span><span id="Aggregators.get_max_value-31"><a href="#Aggregators.get_max_value-31"><span class="linenos">31</span></a>        <span class="k">return</span> <span class="n">inner</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="Aggregators.get_max_value-17"><a href="#Aggregators.get_max_value-17"><span class="linenos">17</span></a>    <span class="nd">@staticmethod</span>
+</span><span id="Aggregators.get_max_value-18"><a href="#Aggregators.get_max_value-18"><span class="linenos">18</span></a>    <span class="k">def</span> <span class="nf">get_max_value</span><span class="p">(</span><span class="n">input_col</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">output_col</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;latest&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">:</span>
+</span><span id="Aggregators.get_max_value-19"><a href="#Aggregators.get_max_value-19"><span class="linenos">19</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Get the maximum value of a given column of a dataframe.</span>
+</span><span id="Aggregators.get_max_value-20"><a href="#Aggregators.get_max_value-20"><span class="linenos">20</span></a>
+</span><span id="Aggregators.get_max_value-21"><a href="#Aggregators.get_max_value-21"><span class="linenos">21</span></a><span class="sd">        Args:</span>
+</span><span id="Aggregators.get_max_value-22"><a href="#Aggregators.get_max_value-22"><span class="linenos">22</span></a><span class="sd">            input_col: name of the input column.</span>
+</span><span id="Aggregators.get_max_value-23"><a href="#Aggregators.get_max_value-23"><span class="linenos">23</span></a><span class="sd">            output_col: name of the output column (defaults to &quot;latest&quot;).</span>
+</span><span id="Aggregators.get_max_value-24"><a href="#Aggregators.get_max_value-24"><span class="linenos">24</span></a>
+</span><span id="Aggregators.get_max_value-25"><a href="#Aggregators.get_max_value-25"><span class="linenos">25</span></a><span class="sd">        Returns:</span>
+</span><span id="Aggregators.get_max_value-26"><a href="#Aggregators.get_max_value-26"><span class="linenos">26</span></a><span class="sd">            A function to be executed in the .transform() spark function.</span>
+</span><span id="Aggregators.get_max_value-27"><a href="#Aggregators.get_max_value-27"><span class="linenos">27</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="Aggregators.get_max_value-28"><a href="#Aggregators.get_max_value-28"><span class="linenos">28</span></a>
+</span><span id="Aggregators.get_max_value-29"><a href="#Aggregators.get_max_value-29"><span class="linenos">29</span></a>        <span class="k">def</span> <span class="nf">inner</span><span class="p">(</span><span class="n">df</span><span class="p">:</span> <span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataFrame</span><span class="p">:</span>
+</span><span id="Aggregators.get_max_value-30"><a href="#Aggregators.get_max_value-30"><span class="linenos">30</span></a>            <span class="k">return</span> <span class="n">df</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="n">input_col</span><span class="p">))</span><span class="o">.</span><span class="n">agg</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="n">input_col</span><span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="n">output_col</span><span class="p">))</span>
+</span><span id="Aggregators.get_max_value-31"><a href="#Aggregators.get_max_value-31"><span class="linenos">31</span></a>
+</span><span id="Aggregators.get_max_value-32"><a href="#Aggregators.get_max_value-32"><span class="linenos">32</span></a>        <span class="k">return</span> <span class="n">inner</span>
 </span></pre></div>
 
 

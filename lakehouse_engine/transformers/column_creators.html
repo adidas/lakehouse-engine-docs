@@ -66,7 +66,7 @@
     </ul>
 
 
-            <footer>Lakehouse Engine v1.20.1</footer>
+            <footer>Lakehouse Engine v1.21.0version</footer>
 
 </div>
     </nav>
@@ -84,105 +84,106 @@
                     <label class="view-source-button" for="mod-column_creators-view-source"><span>View Source</span></label>
 
                     <div class="pdoc-code codehilite"><pre><span></span><span id="L-1"><a href="#L-1"><span class="linenos">  1</span></a><span class="sd">&quot;&quot;&quot;Column creators transformers module.&quot;&quot;&quot;</span>
-</span><span id="L-2"><a href="#L-2"><span class="linenos">  2</span></a><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Dict</span>
-</span><span id="L-3"><a href="#L-3"><span class="linenos">  3</span></a>
-</span><span id="L-4"><a href="#L-4"><span class="linenos">  4</span></a><span class="kn">from</span> <span class="nn">pyspark.sql</span> <span class="kn">import</span> <span class="n">DataFrame</span><span class="p">,</span> <span class="n">Window</span>
-</span><span id="L-5"><a href="#L-5"><span class="linenos">  5</span></a><span class="kn">from</span> <span class="nn">pyspark.sql.functions</span> <span class="kn">import</span> <span class="n">col</span><span class="p">,</span> <span class="n">lit</span><span class="p">,</span> <span class="n">monotonically_increasing_id</span><span class="p">,</span> <span class="n">row_number</span>
-</span><span id="L-6"><a href="#L-6"><span class="linenos">  6</span></a><span class="kn">from</span> <span class="nn">pyspark.sql.types</span> <span class="kn">import</span> <span class="n">IntegerType</span>
-</span><span id="L-7"><a href="#L-7"><span class="linenos">  7</span></a>
-</span><span id="L-8"><a href="#L-8"><span class="linenos">  8</span></a><span class="kn">from</span> <span class="nn">lakehouse_engine.transformers.exceptions</span> <span class="kn">import</span> <span class="p">(</span>
-</span><span id="L-9"><a href="#L-9"><span class="linenos">  9</span></a>    <span class="n">UnsupportedStreamingTransformerException</span><span class="p">,</span>
-</span><span id="L-10"><a href="#L-10"><span class="linenos"> 10</span></a><span class="p">)</span>
-</span><span id="L-11"><a href="#L-11"><span class="linenos"> 11</span></a><span class="kn">from</span> <span class="nn">lakehouse_engine.utils.logging_handler</span> <span class="kn">import</span> <span class="n">LoggingHandler</span>
-</span><span id="L-12"><a href="#L-12"><span class="linenos"> 12</span></a>
+</span><span id="L-2"><a href="#L-2"><span class="linenos">  2</span></a>
+</span><span id="L-3"><a href="#L-3"><span class="linenos">  3</span></a><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Dict</span>
+</span><span id="L-4"><a href="#L-4"><span class="linenos">  4</span></a>
+</span><span id="L-5"><a href="#L-5"><span class="linenos">  5</span></a><span class="kn">from</span> <span class="nn">pyspark.sql</span> <span class="kn">import</span> <span class="n">DataFrame</span><span class="p">,</span> <span class="n">Window</span>
+</span><span id="L-6"><a href="#L-6"><span class="linenos">  6</span></a><span class="kn">from</span> <span class="nn">pyspark.sql.functions</span> <span class="kn">import</span> <span class="n">col</span><span class="p">,</span> <span class="n">lit</span><span class="p">,</span> <span class="n">monotonically_increasing_id</span><span class="p">,</span> <span class="n">row_number</span>
+</span><span id="L-7"><a href="#L-7"><span class="linenos">  7</span></a><span class="kn">from</span> <span class="nn">pyspark.sql.types</span> <span class="kn">import</span> <span class="n">IntegerType</span>
+</span><span id="L-8"><a href="#L-8"><span class="linenos">  8</span></a>
+</span><span id="L-9"><a href="#L-9"><span class="linenos">  9</span></a><span class="kn">from</span> <span class="nn">lakehouse_engine.transformers.exceptions</span> <span class="kn">import</span> <span class="p">(</span>
+</span><span id="L-10"><a href="#L-10"><span class="linenos"> 10</span></a>    <span class="n">UnsupportedStreamingTransformerException</span><span class="p">,</span>
+</span><span id="L-11"><a href="#L-11"><span class="linenos"> 11</span></a><span class="p">)</span>
+</span><span id="L-12"><a href="#L-12"><span class="linenos"> 12</span></a><span class="kn">from</span> <span class="nn">lakehouse_engine.utils.logging_handler</span> <span class="kn">import</span> <span class="n">LoggingHandler</span>
 </span><span id="L-13"><a href="#L-13"><span class="linenos"> 13</span></a>
-</span><span id="L-14"><a href="#L-14"><span class="linenos"> 14</span></a><span class="k">class</span> <span class="nc">ColumnCreators</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-</span><span id="L-15"><a href="#L-15"><span class="linenos"> 15</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Class containing all functions that can create columns to add value.&quot;&quot;&quot;</span>
-</span><span id="L-16"><a href="#L-16"><span class="linenos"> 16</span></a>
-</span><span id="L-17"><a href="#L-17"><span class="linenos"> 17</span></a>    <span class="n">_logger</span> <span class="o">=</span> <span class="n">LoggingHandler</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span><span class="o">.</span><span class="n">get_logger</span><span class="p">()</span>
-</span><span id="L-18"><a href="#L-18"><span class="linenos"> 18</span></a>
-</span><span id="L-19"><a href="#L-19"><span class="linenos"> 19</span></a>    <span class="nd">@classmethod</span>
-</span><span id="L-20"><a href="#L-20"><span class="linenos"> 20</span></a>    <span class="k">def</span> <span class="nf">with_row_id</span><span class="p">(</span>
-</span><span id="L-21"><a href="#L-21"><span class="linenos"> 21</span></a>        <span class="bp">cls</span><span class="p">,</span>
-</span><span id="L-22"><a href="#L-22"><span class="linenos"> 22</span></a>        <span class="n">output_col</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;lhe_row_id&quot;</span><span class="p">,</span>
-</span><span id="L-23"><a href="#L-23"><span class="linenos"> 23</span></a>    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">:</span>
-</span><span id="L-24"><a href="#L-24"><span class="linenos"> 24</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Create a sequential but not consecutive id.</span>
-</span><span id="L-25"><a href="#L-25"><span class="linenos"> 25</span></a>
-</span><span id="L-26"><a href="#L-26"><span class="linenos"> 26</span></a><span class="sd">        Args:</span>
-</span><span id="L-27"><a href="#L-27"><span class="linenos"> 27</span></a><span class="sd">            output_col: optional name of the output column.</span>
-</span><span id="L-28"><a href="#L-28"><span class="linenos"> 28</span></a>
-</span><span id="L-29"><a href="#L-29"><span class="linenos"> 29</span></a><span class="sd">        Returns:</span>
-</span><span id="L-30"><a href="#L-30"><span class="linenos"> 30</span></a><span class="sd">            A function to be executed in the .transform() spark function.</span>
-</span><span id="L-31"><a href="#L-31"><span class="linenos"> 31</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="L-32"><a href="#L-32"><span class="linenos"> 32</span></a>
-</span><span id="L-33"><a href="#L-33"><span class="linenos"> 33</span></a>        <span class="k">def</span> <span class="nf">inner</span><span class="p">(</span><span class="n">df</span><span class="p">:</span> <span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataFrame</span><span class="p">:</span>
-</span><span id="L-34"><a href="#L-34"><span class="linenos"> 34</span></a>            <span class="k">if</span> <span class="ow">not</span> <span class="n">df</span><span class="o">.</span><span class="n">isStreaming</span><span class="p">:</span>
-</span><span id="L-35"><a href="#L-35"><span class="linenos"> 35</span></a>                <span class="k">return</span> <span class="n">df</span><span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="n">output_col</span><span class="p">,</span> <span class="n">monotonically_increasing_id</span><span class="p">())</span>
-</span><span id="L-36"><a href="#L-36"><span class="linenos"> 36</span></a>            <span class="k">else</span><span class="p">:</span>
-</span><span id="L-37"><a href="#L-37"><span class="linenos"> 37</span></a>                <span class="k">raise</span> <span class="n">UnsupportedStreamingTransformerException</span><span class="p">(</span>
-</span><span id="L-38"><a href="#L-38"><span class="linenos"> 38</span></a>                    <span class="s2">&quot;Transformer with_row_id is not supported in streaming mode.&quot;</span>
-</span><span id="L-39"><a href="#L-39"><span class="linenos"> 39</span></a>                <span class="p">)</span>
-</span><span id="L-40"><a href="#L-40"><span class="linenos"> 40</span></a>
-</span><span id="L-41"><a href="#L-41"><span class="linenos"> 41</span></a>        <span class="k">return</span> <span class="n">inner</span>
-</span><span id="L-42"><a href="#L-42"><span class="linenos"> 42</span></a>
-</span><span id="L-43"><a href="#L-43"><span class="linenos"> 43</span></a>    <span class="nd">@classmethod</span>
-</span><span id="L-44"><a href="#L-44"><span class="linenos"> 44</span></a>    <span class="k">def</span> <span class="nf">with_auto_increment_id</span><span class="p">(</span>
-</span><span id="L-45"><a href="#L-45"><span class="linenos"> 45</span></a>        <span class="bp">cls</span><span class="p">,</span> <span class="n">output_col</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;lhe_row_id&quot;</span><span class="p">,</span> <span class="n">rdd</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span>
-</span><span id="L-46"><a href="#L-46"><span class="linenos"> 46</span></a>    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">:</span>
-</span><span id="L-47"><a href="#L-47"><span class="linenos"> 47</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Create a sequential and consecutive id.</span>
-</span><span id="L-48"><a href="#L-48"><span class="linenos"> 48</span></a>
-</span><span id="L-49"><a href="#L-49"><span class="linenos"> 49</span></a><span class="sd">        Args:</span>
-</span><span id="L-50"><a href="#L-50"><span class="linenos"> 50</span></a><span class="sd">            output_col: optional name of the output column.</span>
-</span><span id="L-51"><a href="#L-51"><span class="linenos"> 51</span></a><span class="sd">            rdd: optional parameter to use spark rdd.</span>
-</span><span id="L-52"><a href="#L-52"><span class="linenos"> 52</span></a>
-</span><span id="L-53"><a href="#L-53"><span class="linenos"> 53</span></a><span class="sd">        Returns:</span>
-</span><span id="L-54"><a href="#L-54"><span class="linenos"> 54</span></a><span class="sd">            A function to be executed in the .transform() spark function.</span>
-</span><span id="L-55"><a href="#L-55"><span class="linenos"> 55</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="L-56"><a href="#L-56"><span class="linenos"> 56</span></a>
-</span><span id="L-57"><a href="#L-57"><span class="linenos"> 57</span></a>        <span class="k">def</span> <span class="nf">inner</span><span class="p">(</span><span class="n">df</span><span class="p">:</span> <span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataFrame</span><span class="p">:</span>
-</span><span id="L-58"><a href="#L-58"><span class="linenos"> 58</span></a>            <span class="k">if</span> <span class="ow">not</span> <span class="n">df</span><span class="o">.</span><span class="n">isStreaming</span><span class="p">:</span>
-</span><span id="L-59"><a href="#L-59"><span class="linenos"> 59</span></a>                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">take</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-</span><span id="L-60"><a href="#L-60"><span class="linenos"> 60</span></a>                    <span class="c1"># if df is empty we have to prevent the algorithm from failing</span>
-</span><span id="L-61"><a href="#L-61"><span class="linenos"> 61</span></a>                    <span class="k">return</span> <span class="n">df</span><span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="n">output_col</span><span class="p">,</span> <span class="n">lit</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="n">IntegerType</span><span class="p">()))</span>
-</span><span id="L-62"><a href="#L-62"><span class="linenos"> 62</span></a>                <span class="k">elif</span> <span class="n">rdd</span><span class="p">:</span>
-</span><span id="L-63"><a href="#L-63"><span class="linenos"> 63</span></a>                    <span class="k">return</span> <span class="p">(</span>
-</span><span id="L-64"><a href="#L-64"><span class="linenos"> 64</span></a>                        <span class="n">df</span><span class="o">.</span><span class="n">rdd</span><span class="o">.</span><span class="n">zipWithIndex</span><span class="p">()</span>
-</span><span id="L-65"><a href="#L-65"><span class="linenos"> 65</span></a>                        <span class="o">.</span><span class="n">toDF</span><span class="p">()</span>
-</span><span id="L-66"><a href="#L-66"><span class="linenos"> 66</span></a>                        <span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s2">&quot;_1.*&quot;</span><span class="p">),</span> <span class="n">col</span><span class="p">(</span><span class="s2">&quot;_2&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="n">output_col</span><span class="p">))</span>
-</span><span id="L-67"><a href="#L-67"><span class="linenos"> 67</span></a>                    <span class="p">)</span>
-</span><span id="L-68"><a href="#L-68"><span class="linenos"> 68</span></a>                <span class="k">else</span><span class="p">:</span>
-</span><span id="L-69"><a href="#L-69"><span class="linenos"> 69</span></a>                    <span class="n">w</span> <span class="o">=</span> <span class="n">Window</span><span class="o">.</span><span class="n">orderBy</span><span class="p">(</span><span class="n">monotonically_increasing_id</span><span class="p">())</span>
-</span><span id="L-70"><a href="#L-70"><span class="linenos"> 70</span></a>                    <span class="k">return</span> <span class="n">df</span><span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="n">output_col</span><span class="p">,</span> <span class="p">(</span><span class="n">row_number</span><span class="p">()</span><span class="o">.</span><span class="n">over</span><span class="p">(</span><span class="n">w</span><span class="p">))</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
-</span><span id="L-71"><a href="#L-71"><span class="linenos"> 71</span></a>
-</span><span id="L-72"><a href="#L-72"><span class="linenos"> 72</span></a>            <span class="k">else</span><span class="p">:</span>
-</span><span id="L-73"><a href="#L-73"><span class="linenos"> 73</span></a>                <span class="k">raise</span> <span class="n">UnsupportedStreamingTransformerException</span><span class="p">(</span>
-</span><span id="L-74"><a href="#L-74"><span class="linenos"> 74</span></a>                    <span class="s2">&quot;Transformer with_auto_increment_id is not supported in &quot;</span>
-</span><span id="L-75"><a href="#L-75"><span class="linenos"> 75</span></a>                    <span class="s2">&quot;streaming mode.&quot;</span>
-</span><span id="L-76"><a href="#L-76"><span class="linenos"> 76</span></a>                <span class="p">)</span>
-</span><span id="L-77"><a href="#L-77"><span class="linenos"> 77</span></a>
-</span><span id="L-78"><a href="#L-78"><span class="linenos"> 78</span></a>        <span class="k">return</span> <span class="n">inner</span>
-</span><span id="L-79"><a href="#L-79"><span class="linenos"> 79</span></a>
-</span><span id="L-80"><a href="#L-80"><span class="linenos"> 80</span></a>    <span class="nd">@classmethod</span>
-</span><span id="L-81"><a href="#L-81"><span class="linenos"> 81</span></a>    <span class="k">def</span> <span class="nf">with_literals</span><span class="p">(</span>
-</span><span id="L-82"><a href="#L-82"><span class="linenos"> 82</span></a>        <span class="bp">cls</span><span class="p">,</span>
-</span><span id="L-83"><a href="#L-83"><span class="linenos"> 83</span></a>        <span class="n">literals</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span>
-</span><span id="L-84"><a href="#L-84"><span class="linenos"> 84</span></a>    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">:</span>
-</span><span id="L-85"><a href="#L-85"><span class="linenos"> 85</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Create columns given a map of column names and literal values (constants).</span>
-</span><span id="L-86"><a href="#L-86"><span class="linenos"> 86</span></a>
-</span><span id="L-87"><a href="#L-87"><span class="linenos"> 87</span></a><span class="sd">        Args:</span>
-</span><span id="L-88"><a href="#L-88"><span class="linenos"> 88</span></a><span class="sd">            Dict[str, Any] literals: map of column names and literal values (constants).</span>
-</span><span id="L-89"><a href="#L-89"><span class="linenos"> 89</span></a>
-</span><span id="L-90"><a href="#L-90"><span class="linenos"> 90</span></a><span class="sd">        Returns:</span>
-</span><span id="L-91"><a href="#L-91"><span class="linenos"> 91</span></a><span class="sd">            Callable: A function to be executed in the .transform() spark function.</span>
-</span><span id="L-92"><a href="#L-92"><span class="linenos"> 92</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="L-93"><a href="#L-93"><span class="linenos"> 93</span></a>
-</span><span id="L-94"><a href="#L-94"><span class="linenos"> 94</span></a>        <span class="k">def</span> <span class="nf">inner</span><span class="p">(</span><span class="n">df</span><span class="p">:</span> <span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataFrame</span><span class="p">:</span>
-</span><span id="L-95"><a href="#L-95"><span class="linenos"> 95</span></a>            <span class="n">df_with_literals</span> <span class="o">=</span> <span class="n">df</span>
-</span><span id="L-96"><a href="#L-96"><span class="linenos"> 96</span></a>            <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">literals</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-</span><span id="L-97"><a href="#L-97"><span class="linenos"> 97</span></a>                <span class="n">df_with_literals</span> <span class="o">=</span> <span class="n">df_with_literals</span><span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">lit</span><span class="p">(</span><span class="n">value</span><span class="p">))</span>
-</span><span id="L-98"><a href="#L-98"><span class="linenos"> 98</span></a>            <span class="k">return</span> <span class="n">df_with_literals</span>
-</span><span id="L-99"><a href="#L-99"><span class="linenos"> 99</span></a>
-</span><span id="L-100"><a href="#L-100"><span class="linenos">100</span></a>        <span class="k">return</span> <span class="n">inner</span>
+</span><span id="L-14"><a href="#L-14"><span class="linenos"> 14</span></a>
+</span><span id="L-15"><a href="#L-15"><span class="linenos"> 15</span></a><span class="k">class</span> <span class="nc">ColumnCreators</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+</span><span id="L-16"><a href="#L-16"><span class="linenos"> 16</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Class containing all functions that can create columns to add value.&quot;&quot;&quot;</span>
+</span><span id="L-17"><a href="#L-17"><span class="linenos"> 17</span></a>
+</span><span id="L-18"><a href="#L-18"><span class="linenos"> 18</span></a>    <span class="n">_logger</span> <span class="o">=</span> <span class="n">LoggingHandler</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span><span class="o">.</span><span class="n">get_logger</span><span class="p">()</span>
+</span><span id="L-19"><a href="#L-19"><span class="linenos"> 19</span></a>
+</span><span id="L-20"><a href="#L-20"><span class="linenos"> 20</span></a>    <span class="nd">@classmethod</span>
+</span><span id="L-21"><a href="#L-21"><span class="linenos"> 21</span></a>    <span class="k">def</span> <span class="nf">with_row_id</span><span class="p">(</span>
+</span><span id="L-22"><a href="#L-22"><span class="linenos"> 22</span></a>        <span class="bp">cls</span><span class="p">,</span>
+</span><span id="L-23"><a href="#L-23"><span class="linenos"> 23</span></a>        <span class="n">output_col</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;lhe_row_id&quot;</span><span class="p">,</span>
+</span><span id="L-24"><a href="#L-24"><span class="linenos"> 24</span></a>    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">:</span>
+</span><span id="L-25"><a href="#L-25"><span class="linenos"> 25</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Create a sequential but not consecutive id.</span>
+</span><span id="L-26"><a href="#L-26"><span class="linenos"> 26</span></a>
+</span><span id="L-27"><a href="#L-27"><span class="linenos"> 27</span></a><span class="sd">        Args:</span>
+</span><span id="L-28"><a href="#L-28"><span class="linenos"> 28</span></a><span class="sd">            output_col: optional name of the output column.</span>
+</span><span id="L-29"><a href="#L-29"><span class="linenos"> 29</span></a>
+</span><span id="L-30"><a href="#L-30"><span class="linenos"> 30</span></a><span class="sd">        Returns:</span>
+</span><span id="L-31"><a href="#L-31"><span class="linenos"> 31</span></a><span class="sd">            A function to be executed in the .transform() spark function.</span>
+</span><span id="L-32"><a href="#L-32"><span class="linenos"> 32</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="L-33"><a href="#L-33"><span class="linenos"> 33</span></a>
+</span><span id="L-34"><a href="#L-34"><span class="linenos"> 34</span></a>        <span class="k">def</span> <span class="nf">inner</span><span class="p">(</span><span class="n">df</span><span class="p">:</span> <span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataFrame</span><span class="p">:</span>
+</span><span id="L-35"><a href="#L-35"><span class="linenos"> 35</span></a>            <span class="k">if</span> <span class="ow">not</span> <span class="n">df</span><span class="o">.</span><span class="n">isStreaming</span><span class="p">:</span>
+</span><span id="L-36"><a href="#L-36"><span class="linenos"> 36</span></a>                <span class="k">return</span> <span class="n">df</span><span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="n">output_col</span><span class="p">,</span> <span class="n">monotonically_increasing_id</span><span class="p">())</span>
+</span><span id="L-37"><a href="#L-37"><span class="linenos"> 37</span></a>            <span class="k">else</span><span class="p">:</span>
+</span><span id="L-38"><a href="#L-38"><span class="linenos"> 38</span></a>                <span class="k">raise</span> <span class="n">UnsupportedStreamingTransformerException</span><span class="p">(</span>
+</span><span id="L-39"><a href="#L-39"><span class="linenos"> 39</span></a>                    <span class="s2">&quot;Transformer with_row_id is not supported in streaming mode.&quot;</span>
+</span><span id="L-40"><a href="#L-40"><span class="linenos"> 40</span></a>                <span class="p">)</span>
+</span><span id="L-41"><a href="#L-41"><span class="linenos"> 41</span></a>
+</span><span id="L-42"><a href="#L-42"><span class="linenos"> 42</span></a>        <span class="k">return</span> <span class="n">inner</span>
+</span><span id="L-43"><a href="#L-43"><span class="linenos"> 43</span></a>
+</span><span id="L-44"><a href="#L-44"><span class="linenos"> 44</span></a>    <span class="nd">@classmethod</span>
+</span><span id="L-45"><a href="#L-45"><span class="linenos"> 45</span></a>    <span class="k">def</span> <span class="nf">with_auto_increment_id</span><span class="p">(</span>
+</span><span id="L-46"><a href="#L-46"><span class="linenos"> 46</span></a>        <span class="bp">cls</span><span class="p">,</span> <span class="n">output_col</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;lhe_row_id&quot;</span><span class="p">,</span> <span class="n">rdd</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span>
+</span><span id="L-47"><a href="#L-47"><span class="linenos"> 47</span></a>    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">:</span>
+</span><span id="L-48"><a href="#L-48"><span class="linenos"> 48</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Create a sequential and consecutive id.</span>
+</span><span id="L-49"><a href="#L-49"><span class="linenos"> 49</span></a>
+</span><span id="L-50"><a href="#L-50"><span class="linenos"> 50</span></a><span class="sd">        Args:</span>
+</span><span id="L-51"><a href="#L-51"><span class="linenos"> 51</span></a><span class="sd">            output_col: optional name of the output column.</span>
+</span><span id="L-52"><a href="#L-52"><span class="linenos"> 52</span></a><span class="sd">            rdd: optional parameter to use spark rdd.</span>
+</span><span id="L-53"><a href="#L-53"><span class="linenos"> 53</span></a>
+</span><span id="L-54"><a href="#L-54"><span class="linenos"> 54</span></a><span class="sd">        Returns:</span>
+</span><span id="L-55"><a href="#L-55"><span class="linenos"> 55</span></a><span class="sd">            A function to be executed in the .transform() spark function.</span>
+</span><span id="L-56"><a href="#L-56"><span class="linenos"> 56</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="L-57"><a href="#L-57"><span class="linenos"> 57</span></a>
+</span><span id="L-58"><a href="#L-58"><span class="linenos"> 58</span></a>        <span class="k">def</span> <span class="nf">inner</span><span class="p">(</span><span class="n">df</span><span class="p">:</span> <span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataFrame</span><span class="p">:</span>
+</span><span id="L-59"><a href="#L-59"><span class="linenos"> 59</span></a>            <span class="k">if</span> <span class="ow">not</span> <span class="n">df</span><span class="o">.</span><span class="n">isStreaming</span><span class="p">:</span>
+</span><span id="L-60"><a href="#L-60"><span class="linenos"> 60</span></a>                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">take</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+</span><span id="L-61"><a href="#L-61"><span class="linenos"> 61</span></a>                    <span class="c1"># if df is empty we have to prevent the algorithm from failing</span>
+</span><span id="L-62"><a href="#L-62"><span class="linenos"> 62</span></a>                    <span class="k">return</span> <span class="n">df</span><span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="n">output_col</span><span class="p">,</span> <span class="n">lit</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="n">IntegerType</span><span class="p">()))</span>
+</span><span id="L-63"><a href="#L-63"><span class="linenos"> 63</span></a>                <span class="k">elif</span> <span class="n">rdd</span><span class="p">:</span>
+</span><span id="L-64"><a href="#L-64"><span class="linenos"> 64</span></a>                    <span class="k">return</span> <span class="p">(</span>
+</span><span id="L-65"><a href="#L-65"><span class="linenos"> 65</span></a>                        <span class="n">df</span><span class="o">.</span><span class="n">rdd</span><span class="o">.</span><span class="n">zipWithIndex</span><span class="p">()</span>
+</span><span id="L-66"><a href="#L-66"><span class="linenos"> 66</span></a>                        <span class="o">.</span><span class="n">toDF</span><span class="p">()</span>
+</span><span id="L-67"><a href="#L-67"><span class="linenos"> 67</span></a>                        <span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s2">&quot;_1.*&quot;</span><span class="p">),</span> <span class="n">col</span><span class="p">(</span><span class="s2">&quot;_2&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="n">output_col</span><span class="p">))</span>
+</span><span id="L-68"><a href="#L-68"><span class="linenos"> 68</span></a>                    <span class="p">)</span>
+</span><span id="L-69"><a href="#L-69"><span class="linenos"> 69</span></a>                <span class="k">else</span><span class="p">:</span>
+</span><span id="L-70"><a href="#L-70"><span class="linenos"> 70</span></a>                    <span class="n">w</span> <span class="o">=</span> <span class="n">Window</span><span class="o">.</span><span class="n">orderBy</span><span class="p">(</span><span class="n">monotonically_increasing_id</span><span class="p">())</span>
+</span><span id="L-71"><a href="#L-71"><span class="linenos"> 71</span></a>                    <span class="k">return</span> <span class="n">df</span><span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="n">output_col</span><span class="p">,</span> <span class="p">(</span><span class="n">row_number</span><span class="p">()</span><span class="o">.</span><span class="n">over</span><span class="p">(</span><span class="n">w</span><span class="p">))</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+</span><span id="L-72"><a href="#L-72"><span class="linenos"> 72</span></a>
+</span><span id="L-73"><a href="#L-73"><span class="linenos"> 73</span></a>            <span class="k">else</span><span class="p">:</span>
+</span><span id="L-74"><a href="#L-74"><span class="linenos"> 74</span></a>                <span class="k">raise</span> <span class="n">UnsupportedStreamingTransformerException</span><span class="p">(</span>
+</span><span id="L-75"><a href="#L-75"><span class="linenos"> 75</span></a>                    <span class="s2">&quot;Transformer with_auto_increment_id is not supported in &quot;</span>
+</span><span id="L-76"><a href="#L-76"><span class="linenos"> 76</span></a>                    <span class="s2">&quot;streaming mode.&quot;</span>
+</span><span id="L-77"><a href="#L-77"><span class="linenos"> 77</span></a>                <span class="p">)</span>
+</span><span id="L-78"><a href="#L-78"><span class="linenos"> 78</span></a>
+</span><span id="L-79"><a href="#L-79"><span class="linenos"> 79</span></a>        <span class="k">return</span> <span class="n">inner</span>
+</span><span id="L-80"><a href="#L-80"><span class="linenos"> 80</span></a>
+</span><span id="L-81"><a href="#L-81"><span class="linenos"> 81</span></a>    <span class="nd">@classmethod</span>
+</span><span id="L-82"><a href="#L-82"><span class="linenos"> 82</span></a>    <span class="k">def</span> <span class="nf">with_literals</span><span class="p">(</span>
+</span><span id="L-83"><a href="#L-83"><span class="linenos"> 83</span></a>        <span class="bp">cls</span><span class="p">,</span>
+</span><span id="L-84"><a href="#L-84"><span class="linenos"> 84</span></a>        <span class="n">literals</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span>
+</span><span id="L-85"><a href="#L-85"><span class="linenos"> 85</span></a>    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">:</span>
+</span><span id="L-86"><a href="#L-86"><span class="linenos"> 86</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Create columns given a map of column names and literal values (constants).</span>
+</span><span id="L-87"><a href="#L-87"><span class="linenos"> 87</span></a>
+</span><span id="L-88"><a href="#L-88"><span class="linenos"> 88</span></a><span class="sd">        Args:</span>
+</span><span id="L-89"><a href="#L-89"><span class="linenos"> 89</span></a><span class="sd">            Dict[str, Any] literals: map of column names and literal values (constants).</span>
+</span><span id="L-90"><a href="#L-90"><span class="linenos"> 90</span></a>
+</span><span id="L-91"><a href="#L-91"><span class="linenos"> 91</span></a><span class="sd">        Returns:</span>
+</span><span id="L-92"><a href="#L-92"><span class="linenos"> 92</span></a><span class="sd">            Callable: A function to be executed in the .transform() spark function.</span>
+</span><span id="L-93"><a href="#L-93"><span class="linenos"> 93</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="L-94"><a href="#L-94"><span class="linenos"> 94</span></a>
+</span><span id="L-95"><a href="#L-95"><span class="linenos"> 95</span></a>        <span class="k">def</span> <span class="nf">inner</span><span class="p">(</span><span class="n">df</span><span class="p">:</span> <span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataFrame</span><span class="p">:</span>
+</span><span id="L-96"><a href="#L-96"><span class="linenos"> 96</span></a>            <span class="n">df_with_literals</span> <span class="o">=</span> <span class="n">df</span>
+</span><span id="L-97"><a href="#L-97"><span class="linenos"> 97</span></a>            <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">literals</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+</span><span id="L-98"><a href="#L-98"><span class="linenos"> 98</span></a>                <span class="n">df_with_literals</span> <span class="o">=</span> <span class="n">df_with_literals</span><span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">lit</span><span class="p">(</span><span class="n">value</span><span class="p">))</span>
+</span><span id="L-99"><a href="#L-99"><span class="linenos"> 99</span></a>            <span class="k">return</span> <span class="n">df_with_literals</span>
+</span><span id="L-100"><a href="#L-100"><span class="linenos">100</span></a>
+</span><span id="L-101"><a href="#L-101"><span class="linenos">101</span></a>        <span class="k">return</span> <span class="n">inner</span>
 </span></pre></div>
 
 
@@ -198,93 +199,93 @@
 
     </div>
     <a class="headerlink" href="#ColumnCreators"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="ColumnCreators-15"><a href="#ColumnCreators-15"><span class="linenos"> 15</span></a><span class="k">class</span> <span class="nc">ColumnCreators</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-</span><span id="ColumnCreators-16"><a href="#ColumnCreators-16"><span class="linenos"> 16</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Class containing all functions that can create columns to add value.&quot;&quot;&quot;</span>
-</span><span id="ColumnCreators-17"><a href="#ColumnCreators-17"><span class="linenos"> 17</span></a>
-</span><span id="ColumnCreators-18"><a href="#ColumnCreators-18"><span class="linenos"> 18</span></a>    <span class="n">_logger</span> <span class="o">=</span> <span class="n">LoggingHandler</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span><span class="o">.</span><span class="n">get_logger</span><span class="p">()</span>
-</span><span id="ColumnCreators-19"><a href="#ColumnCreators-19"><span class="linenos"> 19</span></a>
-</span><span id="ColumnCreators-20"><a href="#ColumnCreators-20"><span class="linenos"> 20</span></a>    <span class="nd">@classmethod</span>
-</span><span id="ColumnCreators-21"><a href="#ColumnCreators-21"><span class="linenos"> 21</span></a>    <span class="k">def</span> <span class="nf">with_row_id</span><span class="p">(</span>
-</span><span id="ColumnCreators-22"><a href="#ColumnCreators-22"><span class="linenos"> 22</span></a>        <span class="bp">cls</span><span class="p">,</span>
-</span><span id="ColumnCreators-23"><a href="#ColumnCreators-23"><span class="linenos"> 23</span></a>        <span class="n">output_col</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;lhe_row_id&quot;</span><span class="p">,</span>
-</span><span id="ColumnCreators-24"><a href="#ColumnCreators-24"><span class="linenos"> 24</span></a>    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">:</span>
-</span><span id="ColumnCreators-25"><a href="#ColumnCreators-25"><span class="linenos"> 25</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Create a sequential but not consecutive id.</span>
-</span><span id="ColumnCreators-26"><a href="#ColumnCreators-26"><span class="linenos"> 26</span></a>
-</span><span id="ColumnCreators-27"><a href="#ColumnCreators-27"><span class="linenos"> 27</span></a><span class="sd">        Args:</span>
-</span><span id="ColumnCreators-28"><a href="#ColumnCreators-28"><span class="linenos"> 28</span></a><span class="sd">            output_col: optional name of the output column.</span>
-</span><span id="ColumnCreators-29"><a href="#ColumnCreators-29"><span class="linenos"> 29</span></a>
-</span><span id="ColumnCreators-30"><a href="#ColumnCreators-30"><span class="linenos"> 30</span></a><span class="sd">        Returns:</span>
-</span><span id="ColumnCreators-31"><a href="#ColumnCreators-31"><span class="linenos"> 31</span></a><span class="sd">            A function to be executed in the .transform() spark function.</span>
-</span><span id="ColumnCreators-32"><a href="#ColumnCreators-32"><span class="linenos"> 32</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="ColumnCreators-33"><a href="#ColumnCreators-33"><span class="linenos"> 33</span></a>
-</span><span id="ColumnCreators-34"><a href="#ColumnCreators-34"><span class="linenos"> 34</span></a>        <span class="k">def</span> <span class="nf">inner</span><span class="p">(</span><span class="n">df</span><span class="p">:</span> <span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataFrame</span><span class="p">:</span>
-</span><span id="ColumnCreators-35"><a href="#ColumnCreators-35"><span class="linenos"> 35</span></a>            <span class="k">if</span> <span class="ow">not</span> <span class="n">df</span><span class="o">.</span><span class="n">isStreaming</span><span class="p">:</span>
-</span><span id="ColumnCreators-36"><a href="#ColumnCreators-36"><span class="linenos"> 36</span></a>                <span class="k">return</span> <span class="n">df</span><span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="n">output_col</span><span class="p">,</span> <span class="n">monotonically_increasing_id</span><span class="p">())</span>
-</span><span id="ColumnCreators-37"><a href="#ColumnCreators-37"><span class="linenos"> 37</span></a>            <span class="k">else</span><span class="p">:</span>
-</span><span id="ColumnCreators-38"><a href="#ColumnCreators-38"><span class="linenos"> 38</span></a>                <span class="k">raise</span> <span class="n">UnsupportedStreamingTransformerException</span><span class="p">(</span>
-</span><span id="ColumnCreators-39"><a href="#ColumnCreators-39"><span class="linenos"> 39</span></a>                    <span class="s2">&quot;Transformer with_row_id is not supported in streaming mode.&quot;</span>
-</span><span id="ColumnCreators-40"><a href="#ColumnCreators-40"><span class="linenos"> 40</span></a>                <span class="p">)</span>
-</span><span id="ColumnCreators-41"><a href="#ColumnCreators-41"><span class="linenos"> 41</span></a>
-</span><span id="ColumnCreators-42"><a href="#ColumnCreators-42"><span class="linenos"> 42</span></a>        <span class="k">return</span> <span class="n">inner</span>
-</span><span id="ColumnCreators-43"><a href="#ColumnCreators-43"><span class="linenos"> 43</span></a>
-</span><span id="ColumnCreators-44"><a href="#ColumnCreators-44"><span class="linenos"> 44</span></a>    <span class="nd">@classmethod</span>
-</span><span id="ColumnCreators-45"><a href="#ColumnCreators-45"><span class="linenos"> 45</span></a>    <span class="k">def</span> <span class="nf">with_auto_increment_id</span><span class="p">(</span>
-</span><span id="ColumnCreators-46"><a href="#ColumnCreators-46"><span class="linenos"> 46</span></a>        <span class="bp">cls</span><span class="p">,</span> <span class="n">output_col</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;lhe_row_id&quot;</span><span class="p">,</span> <span class="n">rdd</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span>
-</span><span id="ColumnCreators-47"><a href="#ColumnCreators-47"><span class="linenos"> 47</span></a>    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">:</span>
-</span><span id="ColumnCreators-48"><a href="#ColumnCreators-48"><span class="linenos"> 48</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Create a sequential and consecutive id.</span>
-</span><span id="ColumnCreators-49"><a href="#ColumnCreators-49"><span class="linenos"> 49</span></a>
-</span><span id="ColumnCreators-50"><a href="#ColumnCreators-50"><span class="linenos"> 50</span></a><span class="sd">        Args:</span>
-</span><span id="ColumnCreators-51"><a href="#ColumnCreators-51"><span class="linenos"> 51</span></a><span class="sd">            output_col: optional name of the output column.</span>
-</span><span id="ColumnCreators-52"><a href="#ColumnCreators-52"><span class="linenos"> 52</span></a><span class="sd">            rdd: optional parameter to use spark rdd.</span>
-</span><span id="ColumnCreators-53"><a href="#ColumnCreators-53"><span class="linenos"> 53</span></a>
-</span><span id="ColumnCreators-54"><a href="#ColumnCreators-54"><span class="linenos"> 54</span></a><span class="sd">        Returns:</span>
-</span><span id="ColumnCreators-55"><a href="#ColumnCreators-55"><span class="linenos"> 55</span></a><span class="sd">            A function to be executed in the .transform() spark function.</span>
-</span><span id="ColumnCreators-56"><a href="#ColumnCreators-56"><span class="linenos"> 56</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="ColumnCreators-57"><a href="#ColumnCreators-57"><span class="linenos"> 57</span></a>
-</span><span id="ColumnCreators-58"><a href="#ColumnCreators-58"><span class="linenos"> 58</span></a>        <span class="k">def</span> <span class="nf">inner</span><span class="p">(</span><span class="n">df</span><span class="p">:</span> <span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataFrame</span><span class="p">:</span>
-</span><span id="ColumnCreators-59"><a href="#ColumnCreators-59"><span class="linenos"> 59</span></a>            <span class="k">if</span> <span class="ow">not</span> <span class="n">df</span><span class="o">.</span><span class="n">isStreaming</span><span class="p">:</span>
-</span><span id="ColumnCreators-60"><a href="#ColumnCreators-60"><span class="linenos"> 60</span></a>                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">take</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-</span><span id="ColumnCreators-61"><a href="#ColumnCreators-61"><span class="linenos"> 61</span></a>                    <span class="c1"># if df is empty we have to prevent the algorithm from failing</span>
-</span><span id="ColumnCreators-62"><a href="#ColumnCreators-62"><span class="linenos"> 62</span></a>                    <span class="k">return</span> <span class="n">df</span><span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="n">output_col</span><span class="p">,</span> <span class="n">lit</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="n">IntegerType</span><span class="p">()))</span>
-</span><span id="ColumnCreators-63"><a href="#ColumnCreators-63"><span class="linenos"> 63</span></a>                <span class="k">elif</span> <span class="n">rdd</span><span class="p">:</span>
-</span><span id="ColumnCreators-64"><a href="#ColumnCreators-64"><span class="linenos"> 64</span></a>                    <span class="k">return</span> <span class="p">(</span>
-</span><span id="ColumnCreators-65"><a href="#ColumnCreators-65"><span class="linenos"> 65</span></a>                        <span class="n">df</span><span class="o">.</span><span class="n">rdd</span><span class="o">.</span><span class="n">zipWithIndex</span><span class="p">()</span>
-</span><span id="ColumnCreators-66"><a href="#ColumnCreators-66"><span class="linenos"> 66</span></a>                        <span class="o">.</span><span class="n">toDF</span><span class="p">()</span>
-</span><span id="ColumnCreators-67"><a href="#ColumnCreators-67"><span class="linenos"> 67</span></a>                        <span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s2">&quot;_1.*&quot;</span><span class="p">),</span> <span class="n">col</span><span class="p">(</span><span class="s2">&quot;_2&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="n">output_col</span><span class="p">))</span>
-</span><span id="ColumnCreators-68"><a href="#ColumnCreators-68"><span class="linenos"> 68</span></a>                    <span class="p">)</span>
-</span><span id="ColumnCreators-69"><a href="#ColumnCreators-69"><span class="linenos"> 69</span></a>                <span class="k">else</span><span class="p">:</span>
-</span><span id="ColumnCreators-70"><a href="#ColumnCreators-70"><span class="linenos"> 70</span></a>                    <span class="n">w</span> <span class="o">=</span> <span class="n">Window</span><span class="o">.</span><span class="n">orderBy</span><span class="p">(</span><span class="n">monotonically_increasing_id</span><span class="p">())</span>
-</span><span id="ColumnCreators-71"><a href="#ColumnCreators-71"><span class="linenos"> 71</span></a>                    <span class="k">return</span> <span class="n">df</span><span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="n">output_col</span><span class="p">,</span> <span class="p">(</span><span class="n">row_number</span><span class="p">()</span><span class="o">.</span><span class="n">over</span><span class="p">(</span><span class="n">w</span><span class="p">))</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
-</span><span id="ColumnCreators-72"><a href="#ColumnCreators-72"><span class="linenos"> 72</span></a>
-</span><span id="ColumnCreators-73"><a href="#ColumnCreators-73"><span class="linenos"> 73</span></a>            <span class="k">else</span><span class="p">:</span>
-</span><span id="ColumnCreators-74"><a href="#ColumnCreators-74"><span class="linenos"> 74</span></a>                <span class="k">raise</span> <span class="n">UnsupportedStreamingTransformerException</span><span class="p">(</span>
-</span><span id="ColumnCreators-75"><a href="#ColumnCreators-75"><span class="linenos"> 75</span></a>                    <span class="s2">&quot;Transformer with_auto_increment_id is not supported in &quot;</span>
-</span><span id="ColumnCreators-76"><a href="#ColumnCreators-76"><span class="linenos"> 76</span></a>                    <span class="s2">&quot;streaming mode.&quot;</span>
-</span><span id="ColumnCreators-77"><a href="#ColumnCreators-77"><span class="linenos"> 77</span></a>                <span class="p">)</span>
-</span><span id="ColumnCreators-78"><a href="#ColumnCreators-78"><span class="linenos"> 78</span></a>
-</span><span id="ColumnCreators-79"><a href="#ColumnCreators-79"><span class="linenos"> 79</span></a>        <span class="k">return</span> <span class="n">inner</span>
-</span><span id="ColumnCreators-80"><a href="#ColumnCreators-80"><span class="linenos"> 80</span></a>
-</span><span id="ColumnCreators-81"><a href="#ColumnCreators-81"><span class="linenos"> 81</span></a>    <span class="nd">@classmethod</span>
-</span><span id="ColumnCreators-82"><a href="#ColumnCreators-82"><span class="linenos"> 82</span></a>    <span class="k">def</span> <span class="nf">with_literals</span><span class="p">(</span>
-</span><span id="ColumnCreators-83"><a href="#ColumnCreators-83"><span class="linenos"> 83</span></a>        <span class="bp">cls</span><span class="p">,</span>
-</span><span id="ColumnCreators-84"><a href="#ColumnCreators-84"><span class="linenos"> 84</span></a>        <span class="n">literals</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span>
-</span><span id="ColumnCreators-85"><a href="#ColumnCreators-85"><span class="linenos"> 85</span></a>    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">:</span>
-</span><span id="ColumnCreators-86"><a href="#ColumnCreators-86"><span class="linenos"> 86</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Create columns given a map of column names and literal values (constants).</span>
-</span><span id="ColumnCreators-87"><a href="#ColumnCreators-87"><span class="linenos"> 87</span></a>
-</span><span id="ColumnCreators-88"><a href="#ColumnCreators-88"><span class="linenos"> 88</span></a><span class="sd">        Args:</span>
-</span><span id="ColumnCreators-89"><a href="#ColumnCreators-89"><span class="linenos"> 89</span></a><span class="sd">            Dict[str, Any] literals: map of column names and literal values (constants).</span>
-</span><span id="ColumnCreators-90"><a href="#ColumnCreators-90"><span class="linenos"> 90</span></a>
-</span><span id="ColumnCreators-91"><a href="#ColumnCreators-91"><span class="linenos"> 91</span></a><span class="sd">        Returns:</span>
-</span><span id="ColumnCreators-92"><a href="#ColumnCreators-92"><span class="linenos"> 92</span></a><span class="sd">            Callable: A function to be executed in the .transform() spark function.</span>
-</span><span id="ColumnCreators-93"><a href="#ColumnCreators-93"><span class="linenos"> 93</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="ColumnCreators-94"><a href="#ColumnCreators-94"><span class="linenos"> 94</span></a>
-</span><span id="ColumnCreators-95"><a href="#ColumnCreators-95"><span class="linenos"> 95</span></a>        <span class="k">def</span> <span class="nf">inner</span><span class="p">(</span><span class="n">df</span><span class="p">:</span> <span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataFrame</span><span class="p">:</span>
-</span><span id="ColumnCreators-96"><a href="#ColumnCreators-96"><span class="linenos"> 96</span></a>            <span class="n">df_with_literals</span> <span class="o">=</span> <span class="n">df</span>
-</span><span id="ColumnCreators-97"><a href="#ColumnCreators-97"><span class="linenos"> 97</span></a>            <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">literals</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-</span><span id="ColumnCreators-98"><a href="#ColumnCreators-98"><span class="linenos"> 98</span></a>                <span class="n">df_with_literals</span> <span class="o">=</span> <span class="n">df_with_literals</span><span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">lit</span><span class="p">(</span><span class="n">value</span><span class="p">))</span>
-</span><span id="ColumnCreators-99"><a href="#ColumnCreators-99"><span class="linenos"> 99</span></a>            <span class="k">return</span> <span class="n">df_with_literals</span>
-</span><span id="ColumnCreators-100"><a href="#ColumnCreators-100"><span class="linenos">100</span></a>
-</span><span id="ColumnCreators-101"><a href="#ColumnCreators-101"><span class="linenos">101</span></a>        <span class="k">return</span> <span class="n">inner</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="ColumnCreators-16"><a href="#ColumnCreators-16"><span class="linenos"> 16</span></a><span class="k">class</span> <span class="nc">ColumnCreators</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+</span><span id="ColumnCreators-17"><a href="#ColumnCreators-17"><span class="linenos"> 17</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Class containing all functions that can create columns to add value.&quot;&quot;&quot;</span>
+</span><span id="ColumnCreators-18"><a href="#ColumnCreators-18"><span class="linenos"> 18</span></a>
+</span><span id="ColumnCreators-19"><a href="#ColumnCreators-19"><span class="linenos"> 19</span></a>    <span class="n">_logger</span> <span class="o">=</span> <span class="n">LoggingHandler</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span><span class="o">.</span><span class="n">get_logger</span><span class="p">()</span>
+</span><span id="ColumnCreators-20"><a href="#ColumnCreators-20"><span class="linenos"> 20</span></a>
+</span><span id="ColumnCreators-21"><a href="#ColumnCreators-21"><span class="linenos"> 21</span></a>    <span class="nd">@classmethod</span>
+</span><span id="ColumnCreators-22"><a href="#ColumnCreators-22"><span class="linenos"> 22</span></a>    <span class="k">def</span> <span class="nf">with_row_id</span><span class="p">(</span>
+</span><span id="ColumnCreators-23"><a href="#ColumnCreators-23"><span class="linenos"> 23</span></a>        <span class="bp">cls</span><span class="p">,</span>
+</span><span id="ColumnCreators-24"><a href="#ColumnCreators-24"><span class="linenos"> 24</span></a>        <span class="n">output_col</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;lhe_row_id&quot;</span><span class="p">,</span>
+</span><span id="ColumnCreators-25"><a href="#ColumnCreators-25"><span class="linenos"> 25</span></a>    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">:</span>
+</span><span id="ColumnCreators-26"><a href="#ColumnCreators-26"><span class="linenos"> 26</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Create a sequential but not consecutive id.</span>
+</span><span id="ColumnCreators-27"><a href="#ColumnCreators-27"><span class="linenos"> 27</span></a>
+</span><span id="ColumnCreators-28"><a href="#ColumnCreators-28"><span class="linenos"> 28</span></a><span class="sd">        Args:</span>
+</span><span id="ColumnCreators-29"><a href="#ColumnCreators-29"><span class="linenos"> 29</span></a><span class="sd">            output_col: optional name of the output column.</span>
+</span><span id="ColumnCreators-30"><a href="#ColumnCreators-30"><span class="linenos"> 30</span></a>
+</span><span id="ColumnCreators-31"><a href="#ColumnCreators-31"><span class="linenos"> 31</span></a><span class="sd">        Returns:</span>
+</span><span id="ColumnCreators-32"><a href="#ColumnCreators-32"><span class="linenos"> 32</span></a><span class="sd">            A function to be executed in the .transform() spark function.</span>
+</span><span id="ColumnCreators-33"><a href="#ColumnCreators-33"><span class="linenos"> 33</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="ColumnCreators-34"><a href="#ColumnCreators-34"><span class="linenos"> 34</span></a>
+</span><span id="ColumnCreators-35"><a href="#ColumnCreators-35"><span class="linenos"> 35</span></a>        <span class="k">def</span> <span class="nf">inner</span><span class="p">(</span><span class="n">df</span><span class="p">:</span> <span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataFrame</span><span class="p">:</span>
+</span><span id="ColumnCreators-36"><a href="#ColumnCreators-36"><span class="linenos"> 36</span></a>            <span class="k">if</span> <span class="ow">not</span> <span class="n">df</span><span class="o">.</span><span class="n">isStreaming</span><span class="p">:</span>
+</span><span id="ColumnCreators-37"><a href="#ColumnCreators-37"><span class="linenos"> 37</span></a>                <span class="k">return</span> <span class="n">df</span><span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="n">output_col</span><span class="p">,</span> <span class="n">monotonically_increasing_id</span><span class="p">())</span>
+</span><span id="ColumnCreators-38"><a href="#ColumnCreators-38"><span class="linenos"> 38</span></a>            <span class="k">else</span><span class="p">:</span>
+</span><span id="ColumnCreators-39"><a href="#ColumnCreators-39"><span class="linenos"> 39</span></a>                <span class="k">raise</span> <span class="n">UnsupportedStreamingTransformerException</span><span class="p">(</span>
+</span><span id="ColumnCreators-40"><a href="#ColumnCreators-40"><span class="linenos"> 40</span></a>                    <span class="s2">&quot;Transformer with_row_id is not supported in streaming mode.&quot;</span>
+</span><span id="ColumnCreators-41"><a href="#ColumnCreators-41"><span class="linenos"> 41</span></a>                <span class="p">)</span>
+</span><span id="ColumnCreators-42"><a href="#ColumnCreators-42"><span class="linenos"> 42</span></a>
+</span><span id="ColumnCreators-43"><a href="#ColumnCreators-43"><span class="linenos"> 43</span></a>        <span class="k">return</span> <span class="n">inner</span>
+</span><span id="ColumnCreators-44"><a href="#ColumnCreators-44"><span class="linenos"> 44</span></a>
+</span><span id="ColumnCreators-45"><a href="#ColumnCreators-45"><span class="linenos"> 45</span></a>    <span class="nd">@classmethod</span>
+</span><span id="ColumnCreators-46"><a href="#ColumnCreators-46"><span class="linenos"> 46</span></a>    <span class="k">def</span> <span class="nf">with_auto_increment_id</span><span class="p">(</span>
+</span><span id="ColumnCreators-47"><a href="#ColumnCreators-47"><span class="linenos"> 47</span></a>        <span class="bp">cls</span><span class="p">,</span> <span class="n">output_col</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;lhe_row_id&quot;</span><span class="p">,</span> <span class="n">rdd</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span>
+</span><span id="ColumnCreators-48"><a href="#ColumnCreators-48"><span class="linenos"> 48</span></a>    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">:</span>
+</span><span id="ColumnCreators-49"><a href="#ColumnCreators-49"><span class="linenos"> 49</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Create a sequential and consecutive id.</span>
+</span><span id="ColumnCreators-50"><a href="#ColumnCreators-50"><span class="linenos"> 50</span></a>
+</span><span id="ColumnCreators-51"><a href="#ColumnCreators-51"><span class="linenos"> 51</span></a><span class="sd">        Args:</span>
+</span><span id="ColumnCreators-52"><a href="#ColumnCreators-52"><span class="linenos"> 52</span></a><span class="sd">            output_col: optional name of the output column.</span>
+</span><span id="ColumnCreators-53"><a href="#ColumnCreators-53"><span class="linenos"> 53</span></a><span class="sd">            rdd: optional parameter to use spark rdd.</span>
+</span><span id="ColumnCreators-54"><a href="#ColumnCreators-54"><span class="linenos"> 54</span></a>
+</span><span id="ColumnCreators-55"><a href="#ColumnCreators-55"><span class="linenos"> 55</span></a><span class="sd">        Returns:</span>
+</span><span id="ColumnCreators-56"><a href="#ColumnCreators-56"><span class="linenos"> 56</span></a><span class="sd">            A function to be executed in the .transform() spark function.</span>
+</span><span id="ColumnCreators-57"><a href="#ColumnCreators-57"><span class="linenos"> 57</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="ColumnCreators-58"><a href="#ColumnCreators-58"><span class="linenos"> 58</span></a>
+</span><span id="ColumnCreators-59"><a href="#ColumnCreators-59"><span class="linenos"> 59</span></a>        <span class="k">def</span> <span class="nf">inner</span><span class="p">(</span><span class="n">df</span><span class="p">:</span> <span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataFrame</span><span class="p">:</span>
+</span><span id="ColumnCreators-60"><a href="#ColumnCreators-60"><span class="linenos"> 60</span></a>            <span class="k">if</span> <span class="ow">not</span> <span class="n">df</span><span class="o">.</span><span class="n">isStreaming</span><span class="p">:</span>
+</span><span id="ColumnCreators-61"><a href="#ColumnCreators-61"><span class="linenos"> 61</span></a>                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">take</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+</span><span id="ColumnCreators-62"><a href="#ColumnCreators-62"><span class="linenos"> 62</span></a>                    <span class="c1"># if df is empty we have to prevent the algorithm from failing</span>
+</span><span id="ColumnCreators-63"><a href="#ColumnCreators-63"><span class="linenos"> 63</span></a>                    <span class="k">return</span> <span class="n">df</span><span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="n">output_col</span><span class="p">,</span> <span class="n">lit</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="n">IntegerType</span><span class="p">()))</span>
+</span><span id="ColumnCreators-64"><a href="#ColumnCreators-64"><span class="linenos"> 64</span></a>                <span class="k">elif</span> <span class="n">rdd</span><span class="p">:</span>
+</span><span id="ColumnCreators-65"><a href="#ColumnCreators-65"><span class="linenos"> 65</span></a>                    <span class="k">return</span> <span class="p">(</span>
+</span><span id="ColumnCreators-66"><a href="#ColumnCreators-66"><span class="linenos"> 66</span></a>                        <span class="n">df</span><span class="o">.</span><span class="n">rdd</span><span class="o">.</span><span class="n">zipWithIndex</span><span class="p">()</span>
+</span><span id="ColumnCreators-67"><a href="#ColumnCreators-67"><span class="linenos"> 67</span></a>                        <span class="o">.</span><span class="n">toDF</span><span class="p">()</span>
+</span><span id="ColumnCreators-68"><a href="#ColumnCreators-68"><span class="linenos"> 68</span></a>                        <span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s2">&quot;_1.*&quot;</span><span class="p">),</span> <span class="n">col</span><span class="p">(</span><span class="s2">&quot;_2&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="n">output_col</span><span class="p">))</span>
+</span><span id="ColumnCreators-69"><a href="#ColumnCreators-69"><span class="linenos"> 69</span></a>                    <span class="p">)</span>
+</span><span id="ColumnCreators-70"><a href="#ColumnCreators-70"><span class="linenos"> 70</span></a>                <span class="k">else</span><span class="p">:</span>
+</span><span id="ColumnCreators-71"><a href="#ColumnCreators-71"><span class="linenos"> 71</span></a>                    <span class="n">w</span> <span class="o">=</span> <span class="n">Window</span><span class="o">.</span><span class="n">orderBy</span><span class="p">(</span><span class="n">monotonically_increasing_id</span><span class="p">())</span>
+</span><span id="ColumnCreators-72"><a href="#ColumnCreators-72"><span class="linenos"> 72</span></a>                    <span class="k">return</span> <span class="n">df</span><span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="n">output_col</span><span class="p">,</span> <span class="p">(</span><span class="n">row_number</span><span class="p">()</span><span class="o">.</span><span class="n">over</span><span class="p">(</span><span class="n">w</span><span class="p">))</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+</span><span id="ColumnCreators-73"><a href="#ColumnCreators-73"><span class="linenos"> 73</span></a>
+</span><span id="ColumnCreators-74"><a href="#ColumnCreators-74"><span class="linenos"> 74</span></a>            <span class="k">else</span><span class="p">:</span>
+</span><span id="ColumnCreators-75"><a href="#ColumnCreators-75"><span class="linenos"> 75</span></a>                <span class="k">raise</span> <span class="n">UnsupportedStreamingTransformerException</span><span class="p">(</span>
+</span><span id="ColumnCreators-76"><a href="#ColumnCreators-76"><span class="linenos"> 76</span></a>                    <span class="s2">&quot;Transformer with_auto_increment_id is not supported in &quot;</span>
+</span><span id="ColumnCreators-77"><a href="#ColumnCreators-77"><span class="linenos"> 77</span></a>                    <span class="s2">&quot;streaming mode.&quot;</span>
+</span><span id="ColumnCreators-78"><a href="#ColumnCreators-78"><span class="linenos"> 78</span></a>                <span class="p">)</span>
+</span><span id="ColumnCreators-79"><a href="#ColumnCreators-79"><span class="linenos"> 79</span></a>
+</span><span id="ColumnCreators-80"><a href="#ColumnCreators-80"><span class="linenos"> 80</span></a>        <span class="k">return</span> <span class="n">inner</span>
+</span><span id="ColumnCreators-81"><a href="#ColumnCreators-81"><span class="linenos"> 81</span></a>
+</span><span id="ColumnCreators-82"><a href="#ColumnCreators-82"><span class="linenos"> 82</span></a>    <span class="nd">@classmethod</span>
+</span><span id="ColumnCreators-83"><a href="#ColumnCreators-83"><span class="linenos"> 83</span></a>    <span class="k">def</span> <span class="nf">with_literals</span><span class="p">(</span>
+</span><span id="ColumnCreators-84"><a href="#ColumnCreators-84"><span class="linenos"> 84</span></a>        <span class="bp">cls</span><span class="p">,</span>
+</span><span id="ColumnCreators-85"><a href="#ColumnCreators-85"><span class="linenos"> 85</span></a>        <span class="n">literals</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span>
+</span><span id="ColumnCreators-86"><a href="#ColumnCreators-86"><span class="linenos"> 86</span></a>    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">:</span>
+</span><span id="ColumnCreators-87"><a href="#ColumnCreators-87"><span class="linenos"> 87</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Create columns given a map of column names and literal values (constants).</span>
+</span><span id="ColumnCreators-88"><a href="#ColumnCreators-88"><span class="linenos"> 88</span></a>
+</span><span id="ColumnCreators-89"><a href="#ColumnCreators-89"><span class="linenos"> 89</span></a><span class="sd">        Args:</span>
+</span><span id="ColumnCreators-90"><a href="#ColumnCreators-90"><span class="linenos"> 90</span></a><span class="sd">            Dict[str, Any] literals: map of column names and literal values (constants).</span>
+</span><span id="ColumnCreators-91"><a href="#ColumnCreators-91"><span class="linenos"> 91</span></a>
+</span><span id="ColumnCreators-92"><a href="#ColumnCreators-92"><span class="linenos"> 92</span></a><span class="sd">        Returns:</span>
+</span><span id="ColumnCreators-93"><a href="#ColumnCreators-93"><span class="linenos"> 93</span></a><span class="sd">            Callable: A function to be executed in the .transform() spark function.</span>
+</span><span id="ColumnCreators-94"><a href="#ColumnCreators-94"><span class="linenos"> 94</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="ColumnCreators-95"><a href="#ColumnCreators-95"><span class="linenos"> 95</span></a>
+</span><span id="ColumnCreators-96"><a href="#ColumnCreators-96"><span class="linenos"> 96</span></a>        <span class="k">def</span> <span class="nf">inner</span><span class="p">(</span><span class="n">df</span><span class="p">:</span> <span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataFrame</span><span class="p">:</span>
+</span><span id="ColumnCreators-97"><a href="#ColumnCreators-97"><span class="linenos"> 97</span></a>            <span class="n">df_with_literals</span> <span class="o">=</span> <span class="n">df</span>
+</span><span id="ColumnCreators-98"><a href="#ColumnCreators-98"><span class="linenos"> 98</span></a>            <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">literals</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+</span><span id="ColumnCreators-99"><a href="#ColumnCreators-99"><span class="linenos"> 99</span></a>                <span class="n">df_with_literals</span> <span class="o">=</span> <span class="n">df_with_literals</span><span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">lit</span><span class="p">(</span><span class="n">value</span><span class="p">))</span>
+</span><span id="ColumnCreators-100"><a href="#ColumnCreators-100"><span class="linenos">100</span></a>            <span class="k">return</span> <span class="n">df_with_literals</span>
+</span><span id="ColumnCreators-101"><a href="#ColumnCreators-101"><span class="linenos">101</span></a>
+</span><span id="ColumnCreators-102"><a href="#ColumnCreators-102"><span class="linenos">102</span></a>        <span class="k">return</span> <span class="n">inner</span>
 </span></pre></div>
 
 
@@ -304,29 +305,29 @@
 
     </div>
     <a class="headerlink" href="#ColumnCreators.with_row_id"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="ColumnCreators.with_row_id-20"><a href="#ColumnCreators.with_row_id-20"><span class="linenos">20</span></a>    <span class="nd">@classmethod</span>
-</span><span id="ColumnCreators.with_row_id-21"><a href="#ColumnCreators.with_row_id-21"><span class="linenos">21</span></a>    <span class="k">def</span> <span class="nf">with_row_id</span><span class="p">(</span>
-</span><span id="ColumnCreators.with_row_id-22"><a href="#ColumnCreators.with_row_id-22"><span class="linenos">22</span></a>        <span class="bp">cls</span><span class="p">,</span>
-</span><span id="ColumnCreators.with_row_id-23"><a href="#ColumnCreators.with_row_id-23"><span class="linenos">23</span></a>        <span class="n">output_col</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;lhe_row_id&quot;</span><span class="p">,</span>
-</span><span id="ColumnCreators.with_row_id-24"><a href="#ColumnCreators.with_row_id-24"><span class="linenos">24</span></a>    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">:</span>
-</span><span id="ColumnCreators.with_row_id-25"><a href="#ColumnCreators.with_row_id-25"><span class="linenos">25</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Create a sequential but not consecutive id.</span>
-</span><span id="ColumnCreators.with_row_id-26"><a href="#ColumnCreators.with_row_id-26"><span class="linenos">26</span></a>
-</span><span id="ColumnCreators.with_row_id-27"><a href="#ColumnCreators.with_row_id-27"><span class="linenos">27</span></a><span class="sd">        Args:</span>
-</span><span id="ColumnCreators.with_row_id-28"><a href="#ColumnCreators.with_row_id-28"><span class="linenos">28</span></a><span class="sd">            output_col: optional name of the output column.</span>
-</span><span id="ColumnCreators.with_row_id-29"><a href="#ColumnCreators.with_row_id-29"><span class="linenos">29</span></a>
-</span><span id="ColumnCreators.with_row_id-30"><a href="#ColumnCreators.with_row_id-30"><span class="linenos">30</span></a><span class="sd">        Returns:</span>
-</span><span id="ColumnCreators.with_row_id-31"><a href="#ColumnCreators.with_row_id-31"><span class="linenos">31</span></a><span class="sd">            A function to be executed in the .transform() spark function.</span>
-</span><span id="ColumnCreators.with_row_id-32"><a href="#ColumnCreators.with_row_id-32"><span class="linenos">32</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="ColumnCreators.with_row_id-33"><a href="#ColumnCreators.with_row_id-33"><span class="linenos">33</span></a>
-</span><span id="ColumnCreators.with_row_id-34"><a href="#ColumnCreators.with_row_id-34"><span class="linenos">34</span></a>        <span class="k">def</span> <span class="nf">inner</span><span class="p">(</span><span class="n">df</span><span class="p">:</span> <span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataFrame</span><span class="p">:</span>
-</span><span id="ColumnCreators.with_row_id-35"><a href="#ColumnCreators.with_row_id-35"><span class="linenos">35</span></a>            <span class="k">if</span> <span class="ow">not</span> <span class="n">df</span><span class="o">.</span><span class="n">isStreaming</span><span class="p">:</span>
-</span><span id="ColumnCreators.with_row_id-36"><a href="#ColumnCreators.with_row_id-36"><span class="linenos">36</span></a>                <span class="k">return</span> <span class="n">df</span><span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="n">output_col</span><span class="p">,</span> <span class="n">monotonically_increasing_id</span><span class="p">())</span>
-</span><span id="ColumnCreators.with_row_id-37"><a href="#ColumnCreators.with_row_id-37"><span class="linenos">37</span></a>            <span class="k">else</span><span class="p">:</span>
-</span><span id="ColumnCreators.with_row_id-38"><a href="#ColumnCreators.with_row_id-38"><span class="linenos">38</span></a>                <span class="k">raise</span> <span class="n">UnsupportedStreamingTransformerException</span><span class="p">(</span>
-</span><span id="ColumnCreators.with_row_id-39"><a href="#ColumnCreators.with_row_id-39"><span class="linenos">39</span></a>                    <span class="s2">&quot;Transformer with_row_id is not supported in streaming mode.&quot;</span>
-</span><span id="ColumnCreators.with_row_id-40"><a href="#ColumnCreators.with_row_id-40"><span class="linenos">40</span></a>                <span class="p">)</span>
-</span><span id="ColumnCreators.with_row_id-41"><a href="#ColumnCreators.with_row_id-41"><span class="linenos">41</span></a>
-</span><span id="ColumnCreators.with_row_id-42"><a href="#ColumnCreators.with_row_id-42"><span class="linenos">42</span></a>        <span class="k">return</span> <span class="n">inner</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="ColumnCreators.with_row_id-21"><a href="#ColumnCreators.with_row_id-21"><span class="linenos">21</span></a>    <span class="nd">@classmethod</span>
+</span><span id="ColumnCreators.with_row_id-22"><a href="#ColumnCreators.with_row_id-22"><span class="linenos">22</span></a>    <span class="k">def</span> <span class="nf">with_row_id</span><span class="p">(</span>
+</span><span id="ColumnCreators.with_row_id-23"><a href="#ColumnCreators.with_row_id-23"><span class="linenos">23</span></a>        <span class="bp">cls</span><span class="p">,</span>
+</span><span id="ColumnCreators.with_row_id-24"><a href="#ColumnCreators.with_row_id-24"><span class="linenos">24</span></a>        <span class="n">output_col</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;lhe_row_id&quot;</span><span class="p">,</span>
+</span><span id="ColumnCreators.with_row_id-25"><a href="#ColumnCreators.with_row_id-25"><span class="linenos">25</span></a>    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">:</span>
+</span><span id="ColumnCreators.with_row_id-26"><a href="#ColumnCreators.with_row_id-26"><span class="linenos">26</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Create a sequential but not consecutive id.</span>
+</span><span id="ColumnCreators.with_row_id-27"><a href="#ColumnCreators.with_row_id-27"><span class="linenos">27</span></a>
+</span><span id="ColumnCreators.with_row_id-28"><a href="#ColumnCreators.with_row_id-28"><span class="linenos">28</span></a><span class="sd">        Args:</span>
+</span><span id="ColumnCreators.with_row_id-29"><a href="#ColumnCreators.with_row_id-29"><span class="linenos">29</span></a><span class="sd">            output_col: optional name of the output column.</span>
+</span><span id="ColumnCreators.with_row_id-30"><a href="#ColumnCreators.with_row_id-30"><span class="linenos">30</span></a>
+</span><span id="ColumnCreators.with_row_id-31"><a href="#ColumnCreators.with_row_id-31"><span class="linenos">31</span></a><span class="sd">        Returns:</span>
+</span><span id="ColumnCreators.with_row_id-32"><a href="#ColumnCreators.with_row_id-32"><span class="linenos">32</span></a><span class="sd">            A function to be executed in the .transform() spark function.</span>
+</span><span id="ColumnCreators.with_row_id-33"><a href="#ColumnCreators.with_row_id-33"><span class="linenos">33</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="ColumnCreators.with_row_id-34"><a href="#ColumnCreators.with_row_id-34"><span class="linenos">34</span></a>
+</span><span id="ColumnCreators.with_row_id-35"><a href="#ColumnCreators.with_row_id-35"><span class="linenos">35</span></a>        <span class="k">def</span> <span class="nf">inner</span><span class="p">(</span><span class="n">df</span><span class="p">:</span> <span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataFrame</span><span class="p">:</span>
+</span><span id="ColumnCreators.with_row_id-36"><a href="#ColumnCreators.with_row_id-36"><span class="linenos">36</span></a>            <span class="k">if</span> <span class="ow">not</span> <span class="n">df</span><span class="o">.</span><span class="n">isStreaming</span><span class="p">:</span>
+</span><span id="ColumnCreators.with_row_id-37"><a href="#ColumnCreators.with_row_id-37"><span class="linenos">37</span></a>                <span class="k">return</span> <span class="n">df</span><span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="n">output_col</span><span class="p">,</span> <span class="n">monotonically_increasing_id</span><span class="p">())</span>
+</span><span id="ColumnCreators.with_row_id-38"><a href="#ColumnCreators.with_row_id-38"><span class="linenos">38</span></a>            <span class="k">else</span><span class="p">:</span>
+</span><span id="ColumnCreators.with_row_id-39"><a href="#ColumnCreators.with_row_id-39"><span class="linenos">39</span></a>                <span class="k">raise</span> <span class="n">UnsupportedStreamingTransformerException</span><span class="p">(</span>
+</span><span id="ColumnCreators.with_row_id-40"><a href="#ColumnCreators.with_row_id-40"><span class="linenos">40</span></a>                    <span class="s2">&quot;Transformer with_row_id is not supported in streaming mode.&quot;</span>
+</span><span id="ColumnCreators.with_row_id-41"><a href="#ColumnCreators.with_row_id-41"><span class="linenos">41</span></a>                <span class="p">)</span>
+</span><span id="ColumnCreators.with_row_id-42"><a href="#ColumnCreators.with_row_id-42"><span class="linenos">42</span></a>
+</span><span id="ColumnCreators.with_row_id-43"><a href="#ColumnCreators.with_row_id-43"><span class="linenos">43</span></a>        <span class="k">return</span> <span class="n">inner</span>
 </span></pre></div>
 
 
@@ -374,42 +375,42 @@
 
     </div>
     <a class="headerlink" href="#ColumnCreators.with_auto_increment_id"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="ColumnCreators.with_auto_increment_id-44"><a href="#ColumnCreators.with_auto_increment_id-44"><span class="linenos">44</span></a>    <span class="nd">@classmethod</span>
-</span><span id="ColumnCreators.with_auto_increment_id-45"><a href="#ColumnCreators.with_auto_increment_id-45"><span class="linenos">45</span></a>    <span class="k">def</span> <span class="nf">with_auto_increment_id</span><span class="p">(</span>
-</span><span id="ColumnCreators.with_auto_increment_id-46"><a href="#ColumnCreators.with_auto_increment_id-46"><span class="linenos">46</span></a>        <span class="bp">cls</span><span class="p">,</span> <span class="n">output_col</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;lhe_row_id&quot;</span><span class="p">,</span> <span class="n">rdd</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span>
-</span><span id="ColumnCreators.with_auto_increment_id-47"><a href="#ColumnCreators.with_auto_increment_id-47"><span class="linenos">47</span></a>    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">:</span>
-</span><span id="ColumnCreators.with_auto_increment_id-48"><a href="#ColumnCreators.with_auto_increment_id-48"><span class="linenos">48</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Create a sequential and consecutive id.</span>
-</span><span id="ColumnCreators.with_auto_increment_id-49"><a href="#ColumnCreators.with_auto_increment_id-49"><span class="linenos">49</span></a>
-</span><span id="ColumnCreators.with_auto_increment_id-50"><a href="#ColumnCreators.with_auto_increment_id-50"><span class="linenos">50</span></a><span class="sd">        Args:</span>
-</span><span id="ColumnCreators.with_auto_increment_id-51"><a href="#ColumnCreators.with_auto_increment_id-51"><span class="linenos">51</span></a><span class="sd">            output_col: optional name of the output column.</span>
-</span><span id="ColumnCreators.with_auto_increment_id-52"><a href="#ColumnCreators.with_auto_increment_id-52"><span class="linenos">52</span></a><span class="sd">            rdd: optional parameter to use spark rdd.</span>
-</span><span id="ColumnCreators.with_auto_increment_id-53"><a href="#ColumnCreators.with_auto_increment_id-53"><span class="linenos">53</span></a>
-</span><span id="ColumnCreators.with_auto_increment_id-54"><a href="#ColumnCreators.with_auto_increment_id-54"><span class="linenos">54</span></a><span class="sd">        Returns:</span>
-</span><span id="ColumnCreators.with_auto_increment_id-55"><a href="#ColumnCreators.with_auto_increment_id-55"><span class="linenos">55</span></a><span class="sd">            A function to be executed in the .transform() spark function.</span>
-</span><span id="ColumnCreators.with_auto_increment_id-56"><a href="#ColumnCreators.with_auto_increment_id-56"><span class="linenos">56</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="ColumnCreators.with_auto_increment_id-57"><a href="#ColumnCreators.with_auto_increment_id-57"><span class="linenos">57</span></a>
-</span><span id="ColumnCreators.with_auto_increment_id-58"><a href="#ColumnCreators.with_auto_increment_id-58"><span class="linenos">58</span></a>        <span class="k">def</span> <span class="nf">inner</span><span class="p">(</span><span class="n">df</span><span class="p">:</span> <span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataFrame</span><span class="p">:</span>
-</span><span id="ColumnCreators.with_auto_increment_id-59"><a href="#ColumnCreators.with_auto_increment_id-59"><span class="linenos">59</span></a>            <span class="k">if</span> <span class="ow">not</span> <span class="n">df</span><span class="o">.</span><span class="n">isStreaming</span><span class="p">:</span>
-</span><span id="ColumnCreators.with_auto_increment_id-60"><a href="#ColumnCreators.with_auto_increment_id-60"><span class="linenos">60</span></a>                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">take</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-</span><span id="ColumnCreators.with_auto_increment_id-61"><a href="#ColumnCreators.with_auto_increment_id-61"><span class="linenos">61</span></a>                    <span class="c1"># if df is empty we have to prevent the algorithm from failing</span>
-</span><span id="ColumnCreators.with_auto_increment_id-62"><a href="#ColumnCreators.with_auto_increment_id-62"><span class="linenos">62</span></a>                    <span class="k">return</span> <span class="n">df</span><span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="n">output_col</span><span class="p">,</span> <span class="n">lit</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="n">IntegerType</span><span class="p">()))</span>
-</span><span id="ColumnCreators.with_auto_increment_id-63"><a href="#ColumnCreators.with_auto_increment_id-63"><span class="linenos">63</span></a>                <span class="k">elif</span> <span class="n">rdd</span><span class="p">:</span>
-</span><span id="ColumnCreators.with_auto_increment_id-64"><a href="#ColumnCreators.with_auto_increment_id-64"><span class="linenos">64</span></a>                    <span class="k">return</span> <span class="p">(</span>
-</span><span id="ColumnCreators.with_auto_increment_id-65"><a href="#ColumnCreators.with_auto_increment_id-65"><span class="linenos">65</span></a>                        <span class="n">df</span><span class="o">.</span><span class="n">rdd</span><span class="o">.</span><span class="n">zipWithIndex</span><span class="p">()</span>
-</span><span id="ColumnCreators.with_auto_increment_id-66"><a href="#ColumnCreators.with_auto_increment_id-66"><span class="linenos">66</span></a>                        <span class="o">.</span><span class="n">toDF</span><span class="p">()</span>
-</span><span id="ColumnCreators.with_auto_increment_id-67"><a href="#ColumnCreators.with_auto_increment_id-67"><span class="linenos">67</span></a>                        <span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s2">&quot;_1.*&quot;</span><span class="p">),</span> <span class="n">col</span><span class="p">(</span><span class="s2">&quot;_2&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="n">output_col</span><span class="p">))</span>
-</span><span id="ColumnCreators.with_auto_increment_id-68"><a href="#ColumnCreators.with_auto_increment_id-68"><span class="linenos">68</span></a>                    <span class="p">)</span>
-</span><span id="ColumnCreators.with_auto_increment_id-69"><a href="#ColumnCreators.with_auto_increment_id-69"><span class="linenos">69</span></a>                <span class="k">else</span><span class="p">:</span>
-</span><span id="ColumnCreators.with_auto_increment_id-70"><a href="#ColumnCreators.with_auto_increment_id-70"><span class="linenos">70</span></a>                    <span class="n">w</span> <span class="o">=</span> <span class="n">Window</span><span class="o">.</span><span class="n">orderBy</span><span class="p">(</span><span class="n">monotonically_increasing_id</span><span class="p">())</span>
-</span><span id="ColumnCreators.with_auto_increment_id-71"><a href="#ColumnCreators.with_auto_increment_id-71"><span class="linenos">71</span></a>                    <span class="k">return</span> <span class="n">df</span><span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="n">output_col</span><span class="p">,</span> <span class="p">(</span><span class="n">row_number</span><span class="p">()</span><span class="o">.</span><span class="n">over</span><span class="p">(</span><span class="n">w</span><span class="p">))</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
-</span><span id="ColumnCreators.with_auto_increment_id-72"><a href="#ColumnCreators.with_auto_increment_id-72"><span class="linenos">72</span></a>
-</span><span id="ColumnCreators.with_auto_increment_id-73"><a href="#ColumnCreators.with_auto_increment_id-73"><span class="linenos">73</span></a>            <span class="k">else</span><span class="p">:</span>
-</span><span id="ColumnCreators.with_auto_increment_id-74"><a href="#ColumnCreators.with_auto_increment_id-74"><span class="linenos">74</span></a>                <span class="k">raise</span> <span class="n">UnsupportedStreamingTransformerException</span><span class="p">(</span>
-</span><span id="ColumnCreators.with_auto_increment_id-75"><a href="#ColumnCreators.with_auto_increment_id-75"><span class="linenos">75</span></a>                    <span class="s2">&quot;Transformer with_auto_increment_id is not supported in &quot;</span>
-</span><span id="ColumnCreators.with_auto_increment_id-76"><a href="#ColumnCreators.with_auto_increment_id-76"><span class="linenos">76</span></a>                    <span class="s2">&quot;streaming mode.&quot;</span>
-</span><span id="ColumnCreators.with_auto_increment_id-77"><a href="#ColumnCreators.with_auto_increment_id-77"><span class="linenos">77</span></a>                <span class="p">)</span>
-</span><span id="ColumnCreators.with_auto_increment_id-78"><a href="#ColumnCreators.with_auto_increment_id-78"><span class="linenos">78</span></a>
-</span><span id="ColumnCreators.with_auto_increment_id-79"><a href="#ColumnCreators.with_auto_increment_id-79"><span class="linenos">79</span></a>        <span class="k">return</span> <span class="n">inner</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="ColumnCreators.with_auto_increment_id-45"><a href="#ColumnCreators.with_auto_increment_id-45"><span class="linenos">45</span></a>    <span class="nd">@classmethod</span>
+</span><span id="ColumnCreators.with_auto_increment_id-46"><a href="#ColumnCreators.with_auto_increment_id-46"><span class="linenos">46</span></a>    <span class="k">def</span> <span class="nf">with_auto_increment_id</span><span class="p">(</span>
+</span><span id="ColumnCreators.with_auto_increment_id-47"><a href="#ColumnCreators.with_auto_increment_id-47"><span class="linenos">47</span></a>        <span class="bp">cls</span><span class="p">,</span> <span class="n">output_col</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;lhe_row_id&quot;</span><span class="p">,</span> <span class="n">rdd</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span>
+</span><span id="ColumnCreators.with_auto_increment_id-48"><a href="#ColumnCreators.with_auto_increment_id-48"><span class="linenos">48</span></a>    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">:</span>
+</span><span id="ColumnCreators.with_auto_increment_id-49"><a href="#ColumnCreators.with_auto_increment_id-49"><span class="linenos">49</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Create a sequential and consecutive id.</span>
+</span><span id="ColumnCreators.with_auto_increment_id-50"><a href="#ColumnCreators.with_auto_increment_id-50"><span class="linenos">50</span></a>
+</span><span id="ColumnCreators.with_auto_increment_id-51"><a href="#ColumnCreators.with_auto_increment_id-51"><span class="linenos">51</span></a><span class="sd">        Args:</span>
+</span><span id="ColumnCreators.with_auto_increment_id-52"><a href="#ColumnCreators.with_auto_increment_id-52"><span class="linenos">52</span></a><span class="sd">            output_col: optional name of the output column.</span>
+</span><span id="ColumnCreators.with_auto_increment_id-53"><a href="#ColumnCreators.with_auto_increment_id-53"><span class="linenos">53</span></a><span class="sd">            rdd: optional parameter to use spark rdd.</span>
+</span><span id="ColumnCreators.with_auto_increment_id-54"><a href="#ColumnCreators.with_auto_increment_id-54"><span class="linenos">54</span></a>
+</span><span id="ColumnCreators.with_auto_increment_id-55"><a href="#ColumnCreators.with_auto_increment_id-55"><span class="linenos">55</span></a><span class="sd">        Returns:</span>
+</span><span id="ColumnCreators.with_auto_increment_id-56"><a href="#ColumnCreators.with_auto_increment_id-56"><span class="linenos">56</span></a><span class="sd">            A function to be executed in the .transform() spark function.</span>
+</span><span id="ColumnCreators.with_auto_increment_id-57"><a href="#ColumnCreators.with_auto_increment_id-57"><span class="linenos">57</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="ColumnCreators.with_auto_increment_id-58"><a href="#ColumnCreators.with_auto_increment_id-58"><span class="linenos">58</span></a>
+</span><span id="ColumnCreators.with_auto_increment_id-59"><a href="#ColumnCreators.with_auto_increment_id-59"><span class="linenos">59</span></a>        <span class="k">def</span> <span class="nf">inner</span><span class="p">(</span><span class="n">df</span><span class="p">:</span> <span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataFrame</span><span class="p">:</span>
+</span><span id="ColumnCreators.with_auto_increment_id-60"><a href="#ColumnCreators.with_auto_increment_id-60"><span class="linenos">60</span></a>            <span class="k">if</span> <span class="ow">not</span> <span class="n">df</span><span class="o">.</span><span class="n">isStreaming</span><span class="p">:</span>
+</span><span id="ColumnCreators.with_auto_increment_id-61"><a href="#ColumnCreators.with_auto_increment_id-61"><span class="linenos">61</span></a>                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">take</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+</span><span id="ColumnCreators.with_auto_increment_id-62"><a href="#ColumnCreators.with_auto_increment_id-62"><span class="linenos">62</span></a>                    <span class="c1"># if df is empty we have to prevent the algorithm from failing</span>
+</span><span id="ColumnCreators.with_auto_increment_id-63"><a href="#ColumnCreators.with_auto_increment_id-63"><span class="linenos">63</span></a>                    <span class="k">return</span> <span class="n">df</span><span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="n">output_col</span><span class="p">,</span> <span class="n">lit</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="n">IntegerType</span><span class="p">()))</span>
+</span><span id="ColumnCreators.with_auto_increment_id-64"><a href="#ColumnCreators.with_auto_increment_id-64"><span class="linenos">64</span></a>                <span class="k">elif</span> <span class="n">rdd</span><span class="p">:</span>
+</span><span id="ColumnCreators.with_auto_increment_id-65"><a href="#ColumnCreators.with_auto_increment_id-65"><span class="linenos">65</span></a>                    <span class="k">return</span> <span class="p">(</span>
+</span><span id="ColumnCreators.with_auto_increment_id-66"><a href="#ColumnCreators.with_auto_increment_id-66"><span class="linenos">66</span></a>                        <span class="n">df</span><span class="o">.</span><span class="n">rdd</span><span class="o">.</span><span class="n">zipWithIndex</span><span class="p">()</span>
+</span><span id="ColumnCreators.with_auto_increment_id-67"><a href="#ColumnCreators.with_auto_increment_id-67"><span class="linenos">67</span></a>                        <span class="o">.</span><span class="n">toDF</span><span class="p">()</span>
+</span><span id="ColumnCreators.with_auto_increment_id-68"><a href="#ColumnCreators.with_auto_increment_id-68"><span class="linenos">68</span></a>                        <span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s2">&quot;_1.*&quot;</span><span class="p">),</span> <span class="n">col</span><span class="p">(</span><span class="s2">&quot;_2&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="n">output_col</span><span class="p">))</span>
+</span><span id="ColumnCreators.with_auto_increment_id-69"><a href="#ColumnCreators.with_auto_increment_id-69"><span class="linenos">69</span></a>                    <span class="p">)</span>
+</span><span id="ColumnCreators.with_auto_increment_id-70"><a href="#ColumnCreators.with_auto_increment_id-70"><span class="linenos">70</span></a>                <span class="k">else</span><span class="p">:</span>
+</span><span id="ColumnCreators.with_auto_increment_id-71"><a href="#ColumnCreators.with_auto_increment_id-71"><span class="linenos">71</span></a>                    <span class="n">w</span> <span class="o">=</span> <span class="n">Window</span><span class="o">.</span><span class="n">orderBy</span><span class="p">(</span><span class="n">monotonically_increasing_id</span><span class="p">())</span>
+</span><span id="ColumnCreators.with_auto_increment_id-72"><a href="#ColumnCreators.with_auto_increment_id-72"><span class="linenos">72</span></a>                    <span class="k">return</span> <span class="n">df</span><span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="n">output_col</span><span class="p">,</span> <span class="p">(</span><span class="n">row_number</span><span class="p">()</span><span class="o">.</span><span class="n">over</span><span class="p">(</span><span class="n">w</span><span class="p">))</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+</span><span id="ColumnCreators.with_auto_increment_id-73"><a href="#ColumnCreators.with_auto_increment_id-73"><span class="linenos">73</span></a>
+</span><span id="ColumnCreators.with_auto_increment_id-74"><a href="#ColumnCreators.with_auto_increment_id-74"><span class="linenos">74</span></a>            <span class="k">else</span><span class="p">:</span>
+</span><span id="ColumnCreators.with_auto_increment_id-75"><a href="#ColumnCreators.with_auto_increment_id-75"><span class="linenos">75</span></a>                <span class="k">raise</span> <span class="n">UnsupportedStreamingTransformerException</span><span class="p">(</span>
+</span><span id="ColumnCreators.with_auto_increment_id-76"><a href="#ColumnCreators.with_auto_increment_id-76"><span class="linenos">76</span></a>                    <span class="s2">&quot;Transformer with_auto_increment_id is not supported in &quot;</span>
+</span><span id="ColumnCreators.with_auto_increment_id-77"><a href="#ColumnCreators.with_auto_increment_id-77"><span class="linenos">77</span></a>                    <span class="s2">&quot;streaming mode.&quot;</span>
+</span><span id="ColumnCreators.with_auto_increment_id-78"><a href="#ColumnCreators.with_auto_increment_id-78"><span class="linenos">78</span></a>                <span class="p">)</span>
+</span><span id="ColumnCreators.with_auto_increment_id-79"><a href="#ColumnCreators.with_auto_increment_id-79"><span class="linenos">79</span></a>
+</span><span id="ColumnCreators.with_auto_increment_id-80"><a href="#ColumnCreators.with_auto_increment_id-80"><span class="linenos">80</span></a>        <span class="k">return</span> <span class="n">inner</span>
 </span></pre></div>
 
 
@@ -458,27 +459,27 @@
 
     </div>
     <a class="headerlink" href="#ColumnCreators.with_literals"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="ColumnCreators.with_literals-81"><a href="#ColumnCreators.with_literals-81"><span class="linenos"> 81</span></a>    <span class="nd">@classmethod</span>
-</span><span id="ColumnCreators.with_literals-82"><a href="#ColumnCreators.with_literals-82"><span class="linenos"> 82</span></a>    <span class="k">def</span> <span class="nf">with_literals</span><span class="p">(</span>
-</span><span id="ColumnCreators.with_literals-83"><a href="#ColumnCreators.with_literals-83"><span class="linenos"> 83</span></a>        <span class="bp">cls</span><span class="p">,</span>
-</span><span id="ColumnCreators.with_literals-84"><a href="#ColumnCreators.with_literals-84"><span class="linenos"> 84</span></a>        <span class="n">literals</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span>
-</span><span id="ColumnCreators.with_literals-85"><a href="#ColumnCreators.with_literals-85"><span class="linenos"> 85</span></a>    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">:</span>
-</span><span id="ColumnCreators.with_literals-86"><a href="#ColumnCreators.with_literals-86"><span class="linenos"> 86</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Create columns given a map of column names and literal values (constants).</span>
-</span><span id="ColumnCreators.with_literals-87"><a href="#ColumnCreators.with_literals-87"><span class="linenos"> 87</span></a>
-</span><span id="ColumnCreators.with_literals-88"><a href="#ColumnCreators.with_literals-88"><span class="linenos"> 88</span></a><span class="sd">        Args:</span>
-</span><span id="ColumnCreators.with_literals-89"><a href="#ColumnCreators.with_literals-89"><span class="linenos"> 89</span></a><span class="sd">            Dict[str, Any] literals: map of column names and literal values (constants).</span>
-</span><span id="ColumnCreators.with_literals-90"><a href="#ColumnCreators.with_literals-90"><span class="linenos"> 90</span></a>
-</span><span id="ColumnCreators.with_literals-91"><a href="#ColumnCreators.with_literals-91"><span class="linenos"> 91</span></a><span class="sd">        Returns:</span>
-</span><span id="ColumnCreators.with_literals-92"><a href="#ColumnCreators.with_literals-92"><span class="linenos"> 92</span></a><span class="sd">            Callable: A function to be executed in the .transform() spark function.</span>
-</span><span id="ColumnCreators.with_literals-93"><a href="#ColumnCreators.with_literals-93"><span class="linenos"> 93</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="ColumnCreators.with_literals-94"><a href="#ColumnCreators.with_literals-94"><span class="linenos"> 94</span></a>
-</span><span id="ColumnCreators.with_literals-95"><a href="#ColumnCreators.with_literals-95"><span class="linenos"> 95</span></a>        <span class="k">def</span> <span class="nf">inner</span><span class="p">(</span><span class="n">df</span><span class="p">:</span> <span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataFrame</span><span class="p">:</span>
-</span><span id="ColumnCreators.with_literals-96"><a href="#ColumnCreators.with_literals-96"><span class="linenos"> 96</span></a>            <span class="n">df_with_literals</span> <span class="o">=</span> <span class="n">df</span>
-</span><span id="ColumnCreators.with_literals-97"><a href="#ColumnCreators.with_literals-97"><span class="linenos"> 97</span></a>            <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">literals</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-</span><span id="ColumnCreators.with_literals-98"><a href="#ColumnCreators.with_literals-98"><span class="linenos"> 98</span></a>                <span class="n">df_with_literals</span> <span class="o">=</span> <span class="n">df_with_literals</span><span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">lit</span><span class="p">(</span><span class="n">value</span><span class="p">))</span>
-</span><span id="ColumnCreators.with_literals-99"><a href="#ColumnCreators.with_literals-99"><span class="linenos"> 99</span></a>            <span class="k">return</span> <span class="n">df_with_literals</span>
-</span><span id="ColumnCreators.with_literals-100"><a href="#ColumnCreators.with_literals-100"><span class="linenos">100</span></a>
-</span><span id="ColumnCreators.with_literals-101"><a href="#ColumnCreators.with_literals-101"><span class="linenos">101</span></a>        <span class="k">return</span> <span class="n">inner</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="ColumnCreators.with_literals-82"><a href="#ColumnCreators.with_literals-82"><span class="linenos"> 82</span></a>    <span class="nd">@classmethod</span>
+</span><span id="ColumnCreators.with_literals-83"><a href="#ColumnCreators.with_literals-83"><span class="linenos"> 83</span></a>    <span class="k">def</span> <span class="nf">with_literals</span><span class="p">(</span>
+</span><span id="ColumnCreators.with_literals-84"><a href="#ColumnCreators.with_literals-84"><span class="linenos"> 84</span></a>        <span class="bp">cls</span><span class="p">,</span>
+</span><span id="ColumnCreators.with_literals-85"><a href="#ColumnCreators.with_literals-85"><span class="linenos"> 85</span></a>        <span class="n">literals</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span>
+</span><span id="ColumnCreators.with_literals-86"><a href="#ColumnCreators.with_literals-86"><span class="linenos"> 86</span></a>    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">:</span>
+</span><span id="ColumnCreators.with_literals-87"><a href="#ColumnCreators.with_literals-87"><span class="linenos"> 87</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Create columns given a map of column names and literal values (constants).</span>
+</span><span id="ColumnCreators.with_literals-88"><a href="#ColumnCreators.with_literals-88"><span class="linenos"> 88</span></a>
+</span><span id="ColumnCreators.with_literals-89"><a href="#ColumnCreators.with_literals-89"><span class="linenos"> 89</span></a><span class="sd">        Args:</span>
+</span><span id="ColumnCreators.with_literals-90"><a href="#ColumnCreators.with_literals-90"><span class="linenos"> 90</span></a><span class="sd">            Dict[str, Any] literals: map of column names and literal values (constants).</span>
+</span><span id="ColumnCreators.with_literals-91"><a href="#ColumnCreators.with_literals-91"><span class="linenos"> 91</span></a>
+</span><span id="ColumnCreators.with_literals-92"><a href="#ColumnCreators.with_literals-92"><span class="linenos"> 92</span></a><span class="sd">        Returns:</span>
+</span><span id="ColumnCreators.with_literals-93"><a href="#ColumnCreators.with_literals-93"><span class="linenos"> 93</span></a><span class="sd">            Callable: A function to be executed in the .transform() spark function.</span>
+</span><span id="ColumnCreators.with_literals-94"><a href="#ColumnCreators.with_literals-94"><span class="linenos"> 94</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="ColumnCreators.with_literals-95"><a href="#ColumnCreators.with_literals-95"><span class="linenos"> 95</span></a>
+</span><span id="ColumnCreators.with_literals-96"><a href="#ColumnCreators.with_literals-96"><span class="linenos"> 96</span></a>        <span class="k">def</span> <span class="nf">inner</span><span class="p">(</span><span class="n">df</span><span class="p">:</span> <span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataFrame</span><span class="p">:</span>
+</span><span id="ColumnCreators.with_literals-97"><a href="#ColumnCreators.with_literals-97"><span class="linenos"> 97</span></a>            <span class="n">df_with_literals</span> <span class="o">=</span> <span class="n">df</span>
+</span><span id="ColumnCreators.with_literals-98"><a href="#ColumnCreators.with_literals-98"><span class="linenos"> 98</span></a>            <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">literals</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+</span><span id="ColumnCreators.with_literals-99"><a href="#ColumnCreators.with_literals-99"><span class="linenos"> 99</span></a>                <span class="n">df_with_literals</span> <span class="o">=</span> <span class="n">df_with_literals</span><span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">lit</span><span class="p">(</span><span class="n">value</span><span class="p">))</span>
+</span><span id="ColumnCreators.with_literals-100"><a href="#ColumnCreators.with_literals-100"><span class="linenos">100</span></a>            <span class="k">return</span> <span class="n">df_with_literals</span>
+</span><span id="ColumnCreators.with_literals-101"><a href="#ColumnCreators.with_literals-101"><span class="linenos">101</span></a>
+</span><span id="ColumnCreators.with_literals-102"><a href="#ColumnCreators.with_literals-102"><span class="linenos">102</span></a>        <span class="k">return</span> <span class="n">inner</span>
 </span></pre></div>
 
 
