@@ -176,7 +176,7 @@ or even send e-mail notifications. Thus, it is specifically used in Data Loads, 
 
 <p>As the Lakehouse Engine is built as wheel (look into our <strong>build</strong> and <strong>deploy</strong> make targets) you can install it as any other python package using <strong>pip</strong>.</p>
 
-<pre><code>pip install lakehouse_engine
+<pre><code>pip install lakehouse-engine
 </code></pre>
 
 <p>Alternatively, you can also upload the wheel to any target of your like (e.g. S3) and perform a pip installation pointing to that target location.</p>
@@ -190,17 +190,17 @@ or even send e-mail notifications. Thus, it is specifically used in Data Loads, 
   in case you want to make usage of the Data Quality features offered in the Lakehouse Engine, instead of running the previous command, you should run
   the command below, which will bring the core functionalities, plus DQ.</p>
 
-<pre><code>pip install lakehouse_engine[dq]
+<pre><code>pip install lakehouse-engine[dq]
 </code></pre>
   
   <p>In case you are in an environment without pre-install spark and delta, you will also want to install the <code>os</code> optional dependencies, like so:</p>
 
-<pre><code>pip install lakehouse_engine[os]
+<pre><code>pip install lakehouse-engine[os]
 </code></pre>
   
   <p>And in case you want to install several optional dependencies, you can run a command like:</p>
 
-<pre><code>pip install lakehouse_engine[dq,sftp]
+<pre><code>pip install lakehouse-engine[dq,sftp]
 </code></pre>
   
   <p>It is advisable for a Data Product to pin a specific version of the Lakehouse Engine (and have recurring upgrading activities)

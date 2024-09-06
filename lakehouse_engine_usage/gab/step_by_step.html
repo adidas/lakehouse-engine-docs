@@ -1,0 +1,746 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="generator" content="pdoc 14.5.1"/>
+    <title>lakehouse_engine_usage.gab.step_by_step</title>
+            <link rel="icon" href="https://github.com/adidas/lakehouse-engine/blob/master/assets/img/lakehouse_engine_logo_no_bg_160.png?raw=true"/>
+
+    <style>/*! * Bootstrap Reboot v5.0.0 (https://getbootstrap.com/) * Copyright 2011-2021 The Bootstrap Authors * Copyright 2011-2021 Twitter, Inc. * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE) * Forked from Normalize.css, licensed MIT (https://github.com/necolas/normalize.css/blob/master/LICENSE.md) */*,::after,::before{box-sizing:border-box}@media (prefers-reduced-motion:no-preference){:root{scroll-behavior:smooth}}body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans","Liberation Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";font-size:1rem;font-weight:400;line-height:1.5;color:#212529;background-color:#fff;-webkit-text-size-adjust:100%;-webkit-tap-highlight-color:transparent}hr{margin:1rem 0;color:inherit;background-color:currentColor;border:0;opacity:.25}hr:not([size]){height:1px}h1,h2,h3,h4,h5,h6{margin-top:0;margin-bottom:.5rem;font-weight:500;line-height:1.2}h1{font-size:calc(1.375rem + 1.5vw)}@media (min-width:1200px){h1{font-size:2.5rem}}h2{font-size:calc(1.325rem + .9vw)}@media (min-width:1200px){h2{font-size:2rem}}h3{font-size:calc(1.3rem + .6vw)}@media (min-width:1200px){h3{font-size:1.75rem}}h4{font-size:calc(1.275rem + .3vw)}@media (min-width:1200px){h4{font-size:1.5rem}}h5{font-size:1.25rem}h6{font-size:1rem}p{margin-top:0;margin-bottom:1rem}abbr[data-bs-original-title],abbr[title]{-webkit-text-decoration:underline dotted;text-decoration:underline dotted;cursor:help;-webkit-text-decoration-skip-ink:none;text-decoration-skip-ink:none}address{margin-bottom:1rem;font-style:normal;line-height:inherit}ol,ul{padding-left:2rem}dl,ol,ul{margin-top:0;margin-bottom:1rem}ol ol,ol ul,ul ol,ul ul{margin-bottom:0}dt{font-weight:700}dd{margin-bottom:.5rem;margin-left:0}blockquote{margin:0 0 1rem}b,strong{font-weight:bolder}small{font-size:.875em}mark{padding:.2em;background-color:#fcf8e3}sub,sup{position:relative;font-size:.75em;line-height:0;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}a{color:#0d6efd;text-decoration:underline}a:hover{color:#0a58ca}a:not([href]):not([class]),a:not([href]):not([class]):hover{color:inherit;text-decoration:none}code,kbd,pre,samp{font-family:SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;font-size:1em;direction:ltr;unicode-bidi:bidi-override}pre{display:block;margin-top:0;margin-bottom:1rem;overflow:auto;font-size:.875em}pre code{font-size:inherit;color:inherit;word-break:normal}code{font-size:.875em;color:#d63384;word-wrap:break-word}a>code{color:inherit}kbd{padding:.2rem .4rem;font-size:.875em;color:#fff;background-color:#212529;border-radius:.2rem}kbd kbd{padding:0;font-size:1em;font-weight:700}figure{margin:0 0 1rem}img,svg{vertical-align:middle}table{caption-side:bottom;border-collapse:collapse}caption{padding-top:.5rem;padding-bottom:.5rem;color:#6c757d;text-align:left}th{text-align:inherit;text-align:-webkit-match-parent}tbody,td,tfoot,th,thead,tr{border-color:inherit;border-style:solid;border-width:0}label{display:inline-block}button{border-radius:0}button:focus:not(:focus-visible){outline:0}button,input,optgroup,select,textarea{margin:0;font-family:inherit;font-size:inherit;line-height:inherit}button,select{text-transform:none}[role=button]{cursor:pointer}select{word-wrap:normal}select:disabled{opacity:1}[list]::-webkit-calendar-picker-indicator{display:none}[type=button],[type=reset],[type=submit],button{-webkit-appearance:button}[type=button]:not(:disabled),[type=reset]:not(:disabled),[type=submit]:not(:disabled),button:not(:disabled){cursor:pointer}::-moz-focus-inner{padding:0;border-style:none}textarea{resize:vertical}fieldset{min-width:0;padding:0;margin:0;border:0}legend{float:left;width:100%;padding:0;margin-bottom:.5rem;font-size:calc(1.275rem + .3vw);line-height:inherit}@media (min-width:1200px){legend{font-size:1.5rem}}legend+*{clear:left}::-webkit-datetime-edit-day-field,::-webkit-datetime-edit-fields-wrapper,::-webkit-datetime-edit-hour-field,::-webkit-datetime-edit-minute,::-webkit-datetime-edit-month-field,::-webkit-datetime-edit-text,::-webkit-datetime-edit-year-field{padding:0}::-webkit-inner-spin-button{height:auto}[type=search]{outline-offset:-2px;-webkit-appearance:textfield}::-webkit-search-decoration{-webkit-appearance:none}::-webkit-color-swatch-wrapper{padding:0}::file-selector-button{font:inherit}::-webkit-file-upload-button{font:inherit;-webkit-appearance:button}output{display:inline-block}iframe{border:0}summary{display:list-item;cursor:pointer}progress{vertical-align:baseline}[hidden]{display:none!important}</style>
+    <style>/*! syntax-highlighting.css */pre{line-height:125%;}span.linenos{color:inherit; background-color:transparent; padding-left:5px; padding-right:20px;}.pdoc-code .hll{background-color:#ffffcc}.pdoc-code{background:#f8f8f8;}.pdoc-code .c{color:#3D7B7B; font-style:italic}.pdoc-code .err{border:1px solid #FF0000}.pdoc-code .k{color:#008000; font-weight:bold}.pdoc-code .o{color:#666666}.pdoc-code .ch{color:#3D7B7B; font-style:italic}.pdoc-code .cm{color:#3D7B7B; font-style:italic}.pdoc-code .cp{color:#9C6500}.pdoc-code .cpf{color:#3D7B7B; font-style:italic}.pdoc-code .c1{color:#3D7B7B; font-style:italic}.pdoc-code .cs{color:#3D7B7B; font-style:italic}.pdoc-code .gd{color:#A00000}.pdoc-code .ge{font-style:italic}.pdoc-code .gr{color:#E40000}.pdoc-code .gh{color:#000080; font-weight:bold}.pdoc-code .gi{color:#008400}.pdoc-code .go{color:#717171}.pdoc-code .gp{color:#000080; font-weight:bold}.pdoc-code .gs{font-weight:bold}.pdoc-code .gu{color:#800080; font-weight:bold}.pdoc-code .gt{color:#0044DD}.pdoc-code .kc{color:#008000; font-weight:bold}.pdoc-code .kd{color:#008000; font-weight:bold}.pdoc-code .kn{color:#008000; font-weight:bold}.pdoc-code .kp{color:#008000}.pdoc-code .kr{color:#008000; font-weight:bold}.pdoc-code .kt{color:#B00040}.pdoc-code .m{color:#666666}.pdoc-code .s{color:#BA2121}.pdoc-code .na{color:#687822}.pdoc-code .nb{color:#008000}.pdoc-code .nc{color:#0000FF; font-weight:bold}.pdoc-code .no{color:#880000}.pdoc-code .nd{color:#AA22FF}.pdoc-code .ni{color:#717171; font-weight:bold}.pdoc-code .ne{color:#CB3F38; font-weight:bold}.pdoc-code .nf{color:#0000FF}.pdoc-code .nl{color:#767600}.pdoc-code .nn{color:#0000FF; font-weight:bold}.pdoc-code .nt{color:#008000; font-weight:bold}.pdoc-code .nv{color:#19177C}.pdoc-code .ow{color:#AA22FF; font-weight:bold}.pdoc-code .w{color:#bbbbbb}.pdoc-code .mb{color:#666666}.pdoc-code .mf{color:#666666}.pdoc-code .mh{color:#666666}.pdoc-code .mi{color:#666666}.pdoc-code .mo{color:#666666}.pdoc-code .sa{color:#BA2121}.pdoc-code .sb{color:#BA2121}.pdoc-code .sc{color:#BA2121}.pdoc-code .dl{color:#BA2121}.pdoc-code .sd{color:#BA2121; font-style:italic}.pdoc-code .s2{color:#BA2121}.pdoc-code .se{color:#AA5D1F; font-weight:bold}.pdoc-code .sh{color:#BA2121}.pdoc-code .si{color:#A45A77; font-weight:bold}.pdoc-code .sx{color:#008000}.pdoc-code .sr{color:#A45A77}.pdoc-code .s1{color:#BA2121}.pdoc-code .ss{color:#19177C}.pdoc-code .bp{color:#008000}.pdoc-code .fm{color:#0000FF}.pdoc-code .vc{color:#19177C}.pdoc-code .vg{color:#19177C}.pdoc-code .vi{color:#19177C}.pdoc-code .vm{color:#19177C}.pdoc-code .il{color:#666666}</style>
+    <style>/*! theme.css */:root{--pdoc-background:#fff;}.pdoc{--text:#212529;--muted:#6c757d;--link:#3660a5;--link-hover:#1659c5;--code:#f8f8f8;--active:#fff598;--accent:#eee;--accent2:#c1c1c1;--nav-hover:rgba(255, 255, 255, 0.5);--name:#0066BB;--def:#008800;--annotation:#007020;}</style>
+    <style>/*! layout.css */html, body{width:100%;height:100%;}html, main{scroll-behavior:smooth;}body{background-color:var(--pdoc-background);}@media (max-width:769px){#navtoggle{cursor:pointer;position:absolute;width:50px;height:40px;top:1rem;right:1rem;border-color:var(--text);color:var(--text);display:flex;opacity:0.8;z-index:999;}#navtoggle:hover{opacity:1;}#togglestate + div{display:none;}#togglestate:checked + div{display:inherit;}main, header{padding:2rem 3vw;}header + main{margin-top:-3rem;}.git-button{display:none !important;}nav input[type="search"]{max-width:77%;}nav input[type="search"]:first-child{margin-top:-6px;}nav input[type="search"]:valid ~ *{display:none !important;}}@media (min-width:770px){:root{--sidebar-width:clamp(12.5rem, 28vw, 22rem);}nav{position:fixed;overflow:auto;height:100vh;width:var(--sidebar-width);}main, header{padding:3rem 2rem 3rem calc(var(--sidebar-width) + 3rem);width:calc(54rem + var(--sidebar-width));max-width:100%;}header + main{margin-top:-4rem;}#navtoggle{display:none;}}#togglestate{position:absolute;height:0;opacity:0;}nav.pdoc{--pad:clamp(0.5rem, 2vw, 1.75rem);--indent:1.5rem;background-color:var(--accent);border-right:1px solid var(--accent2);box-shadow:0 0 20px rgba(50, 50, 50, .2) inset;padding:0 0 0 var(--pad);overflow-wrap:anywhere;scrollbar-width:thin; scrollbar-color:var(--accent2) transparent; z-index:1}nav.pdoc::-webkit-scrollbar{width:.4rem; }nav.pdoc::-webkit-scrollbar-thumb{background-color:var(--accent2); }nav.pdoc > div{padding:var(--pad) 0;}nav.pdoc .module-list-button{display:inline-flex;align-items:center;color:var(--text);border-color:var(--muted);margin-bottom:1rem;}nav.pdoc .module-list-button:hover{border-color:var(--text);}nav.pdoc input[type=search]{display:block;outline-offset:0;width:calc(100% - var(--pad));}nav.pdoc .logo{max-width:calc(100% - var(--pad));max-height:35vh;display:block;margin:0 auto 1rem;transform:translate(calc(-.5 * var(--pad)), 0);}nav.pdoc ul{list-style:none;padding-left:0;}nav.pdoc > div > ul{margin-left:calc(0px - var(--pad));}nav.pdoc li a{padding:.2rem 0 .2rem calc(var(--pad) + var(--indent));}nav.pdoc > div > ul > li > a{padding-left:var(--pad);}nav.pdoc li{transition:all 100ms;}nav.pdoc li:hover{background-color:var(--nav-hover);}nav.pdoc a, nav.pdoc a:hover{color:var(--text);}nav.pdoc a{display:block;}nav.pdoc > h2:first-of-type{margin-top:1.5rem;}nav.pdoc .class:before{content:"class ";color:var(--muted);}nav.pdoc .function:after{content:"()";color:var(--muted);}nav.pdoc footer:before{content:"";display:block;width:calc(100% - var(--pad));border-top:solid var(--accent2) 1px;margin-top:1.5rem;padding-top:.5rem;}nav.pdoc footer{font-size:small;}</style>
+    <style>/*! content.css */.pdoc{color:var(--text);box-sizing:border-box;line-height:1.5;background:none;}.pdoc .pdoc-button{cursor:pointer;display:inline-block;border:solid black 1px;border-radius:2px;font-size:.75rem;padding:calc(0.5em - 1px) 1em;transition:100ms all;}.pdoc .pdoc-alert{padding:1rem 1rem 1rem calc(1.5rem + 24px);border:1px solid transparent;border-radius:.25rem;background-repeat:no-repeat;background-position:1rem center;margin-bottom:1rem;}.pdoc .pdoc-alert > *:last-child{margin-bottom:0;}.pdoc .pdoc-alert-note {color:#000000;background-color:#f1efef;border-color:#f1f1f1;background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%2224%22%20height%3D%2224%22%20fill%3D%22%23084298%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M8%2016A8%208%200%201%200%208%200a8%208%200%200%200%200%2016zm.93-9.412-1%204.705c-.07.34.029.533.304.533.194%200%20.487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703%200-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381%202.29-.287zM8%205.5a1%201%200%201%201%200-2%201%201%200%200%201%200%202z%22/%3E%3C/svg%3E");}.pdoc .pdoc-alert-warning{color:#664d03;background-color:#fff3cd;border-color:#ffecb5;background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%2224%22%20height%3D%2224%22%20fill%3D%22%23664d03%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M8.982%201.566a1.13%201.13%200%200%200-1.96%200L.165%2013.233c-.457.778.091%201.767.98%201.767h13.713c.889%200%201.438-.99.98-1.767L8.982%201.566zM8%205c.535%200%20.954.462.9.995l-.35%203.507a.552.552%200%200%201-1.1%200L7.1%205.995A.905.905%200%200%201%208%205zm.002%206a1%201%200%201%201%200%202%201%201%200%200%201%200-2z%22/%3E%3C/svg%3E");}.pdoc .pdoc-alert-danger{color:#842029;background-color:#f8d7da;border-color:#f5c2c7;background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%2224%22%20height%3D%2224%22%20fill%3D%22%23842029%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M5.52.359A.5.5%200%200%201%206%200h4a.5.5%200%200%201%20.474.658L8.694%206H12.5a.5.5%200%200%201%20.395.807l-7%209a.5.5%200%200%201-.873-.454L6.823%209.5H3.5a.5.5%200%200%201-.48-.641l2.5-8.5z%22/%3E%3C/svg%3E");}.pdoc .visually-hidden{position:absolute !important;width:1px !important;height:1px !important;padding:0 !important;margin:-1px !important;overflow:hidden !important;clip:rect(0, 0, 0, 0) !important;white-space:nowrap !important;border:0 !important;}.pdoc h1, .pdoc h2, .pdoc h3{font-weight:300;margin:.3em 0;padding:.2em 0;}.pdoc > section:not(.module-info) h1{font-size:1.5rem;font-weight:500;}.pdoc > section:not(.module-info) h2{font-size:1.4rem;font-weight:500;}.pdoc > section:not(.module-info) h3{font-size:1.3rem;font-weight:500;}.pdoc > section:not(.module-info) h4{font-size:1.2rem;}.pdoc > section:not(.module-info) h5{font-size:1.1rem;}.pdoc a{text-decoration:none;color:var(--link);}.pdoc a:hover{color:var(--link-hover);}.pdoc blockquote{margin-left:2rem;}.pdoc pre{border-top:1px solid var(--accent2);border-bottom:1px solid var(--accent2);margin-top:0;margin-bottom:1em;padding:.5rem 0 .5rem .5rem;overflow-x:auto;background-color:var(--code);}.pdoc code{color:var(--text);padding:.2em .4em;margin:0;font-size:85%;background-color:var(--accent);border-radius:6px;}.pdoc a > code{color:inherit;}.pdoc pre > code{display:inline-block;font-size:inherit;background:none;border:none;padding:0;}.pdoc > section:not(.module-info){margin-bottom:1.5rem;}.pdoc .modulename{margin-top:0;font-weight:bold;}.pdoc .modulename a{color:var(--link);transition:100ms all;}.pdoc .git-button{float:right;border:solid var(--link) 1px;}.pdoc .git-button:hover{background-color:var(--link);color:var(--pdoc-background);}.view-source-toggle-state,.view-source-toggle-state ~ .pdoc-code{display:none;}.view-source-toggle-state:checked ~ .pdoc-code{display:block;}.view-source-button{display:inline-block;float:right;font-size:.75rem;line-height:1.5rem;color:var(--muted);padding:0 .4rem 0 1.3rem;cursor:pointer;text-indent:-2px;}.view-source-button > span{visibility:hidden;}.module-info .view-source-button{float:none;display:flex;justify-content:flex-end;margin:-1.2rem .4rem -.2rem 0;}.view-source-button::before{position:absolute;content:"View Source";display:list-item;list-style-type:disclosure-closed;}.view-source-toggle-state:checked ~ .attr .view-source-button::before,.view-source-toggle-state:checked ~ .view-source-button::before{list-style-type:disclosure-open;}.pdoc .docstring{margin-bottom:1.5rem;}.pdoc section:not(.module-info) .docstring{margin-left:clamp(0rem, 5vw - 2rem, 1rem);}.pdoc .docstring .pdoc-code{margin-left:1em;margin-right:1em;}.pdoc h1:target,.pdoc h2:target,.pdoc h3:target,.pdoc h4:target,.pdoc h5:target,.pdoc h6:target,.pdoc .pdoc-code > pre > span:target{background-color:var(--active);box-shadow:-1rem 0 0 0 var(--active);}.pdoc .pdoc-code > pre > span:target{display:block;}.pdoc div:target > .attr,.pdoc section:target > .attr,.pdoc dd:target > a{background-color:var(--active);}.pdoc *{scroll-margin:2rem;}.pdoc .pdoc-code .linenos{user-select:none;}.pdoc .attr:hover{filter:contrast(0.95);}.pdoc section, .pdoc .classattr{position:relative;}.pdoc .headerlink{--width:clamp(1rem, 3vw, 2rem);position:absolute;top:0;left:calc(0rem - var(--width));transition:all 100ms ease-in-out;opacity:0;}.pdoc .headerlink::before{content:"#";display:block;text-align:center;width:var(--width);height:2.3rem;line-height:2.3rem;font-size:1.5rem;}.pdoc .attr:hover ~ .headerlink,.pdoc *:target > .headerlink,.pdoc .headerlink:hover{opacity:1;}.pdoc .attr{display:block;margin:.5rem 0 .5rem;padding:.4rem .4rem .4rem 1rem;background-color:var(--accent);overflow-x:auto;}.pdoc .classattr{margin-left:2rem;}.pdoc .name{color:var(--name);font-weight:bold;}.pdoc .def{color:var(--def);font-weight:bold;}.pdoc .signature{background-color:transparent;}.pdoc .param, .pdoc .return-annotation{white-space:pre;}.pdoc .signature.multiline .param{display:block;}.pdoc .signature.condensed .param{display:inline-block;}.pdoc .annotation{color:var(--annotation);}.pdoc .view-value-toggle-state,.pdoc .view-value-toggle-state ~ .default_value{display:none;}.pdoc .view-value-toggle-state:checked ~ .default_value{display:inherit;}.pdoc .view-value-button{font-size:.5rem;vertical-align:middle;border-style:dashed;margin-top:-0.1rem;}.pdoc .view-value-button:hover{background:white;}.pdoc .view-value-button::before{content:"show";text-align:center;width:2.2em;display:inline-block;}.pdoc .view-value-toggle-state:checked ~ .view-value-button::before{content:"hide";}.pdoc .inherited{margin-left:2rem;}.pdoc .inherited dt{font-weight:700;}.pdoc .inherited dt, .pdoc .inherited dd{display:inline;margin-left:0;margin-bottom:.5rem;}.pdoc .inherited dd:not(:last-child):after{content:", ";}.pdoc .inherited .class:before{content:"class ";}.pdoc .inherited .function a:after{content:"()";}.pdoc .search-result .docstring{overflow:auto;max-height:25vh;}.pdoc .search-result.focused > .attr{background-color:var(--active);}.pdoc .attribution{margin-top:2rem;display:block;opacity:0.5;transition:all 200ms;filter:grayscale(100%);}.pdoc .attribution:hover{opacity:1;filter:grayscale(0%);}.pdoc .attribution img{margin-left:5px;height:35px;vertical-align:middle;width:70px;transition:all 200ms;}.pdoc table{display:block;width:max-content;max-width:150%;overflow:auto;margin-bottom:1rem;}.pdoc table th, .pdoc table td{padding:12px 13px;border:1px solid var(--accent2);}.pdoc table th{font-weight:600;}</style>
+    <style>/*! custom.css */</style><style>
+    .pdoc .mermaid-pre {
+        border: none;
+        background: none;
+    }
+</style>
+<script type="module" defer>
+    import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
+
+    /* Re-invoke Mermaid when DOM content changes, for example during search. */
+    document.addEventListener("DOMContentLoaded", () => {
+        new MutationObserver(() => mermaid.run()).observe(
+            document.querySelector("main.pdoc").parentNode,
+            {childList: true}
+        );
+    })
+</script></head>
+<body>
+    <nav class="pdoc">
+        <label id="navtoggle" for="togglestate" class="pdoc-button"><svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'><path stroke-linecap='round' stroke="currentColor" stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/></svg></label>
+        <input id="togglestate" type="checkbox" aria-hidden="true" tabindex="-1">
+        <div>            <a class="pdoc-button module-list-button" href="../gab.html">
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-in-left" viewBox="0 0 16 16">
+  <path fill-rule="evenodd" d="M10 3.5a.5.5 0 0 0-.5-.5h-8a.5.5 0 0 0-.5.5v9a.5.5 0 0 0 .5.5h8a.5.5 0 0 0 .5-.5v-2a.5.5 0 0 1 1 0v2A1.5 1.5 0 0 1 9.5 14h-8A1.5 1.5 0 0 1 0 12.5v-9A1.5 1.5 0 0 1 1.5 2h8A1.5 1.5 0 0 1 11 3.5v2a.5.5 0 0 1-1 0v-2z"/>
+  <path fill-rule="evenodd" d="M4.146 8.354a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H14.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3z"/>
+</svg>                &nbsp;lakehouse_engine_usage.gab</a>
+
+            <img src="https://github.com/adidas/lakehouse-engine/blob/master/assets/img/lakehouse_engine_logo_no_bg_160.png?raw=true" class="logo" alt="project logo"/>
+
+            <input type="search" placeholder="Search..." role="searchbox" aria-label="search"
+                   pattern=".+" required>
+
+            <h2>Contents</h2>
+            <ul>
+  <li><a href="#gab-step-by-step">GAB step-by-step</a>
+  <ul>
+    <li><a href="#1-data-product-setup-based-on-templated-files">1. Data Product Setup based on templated files</a></li>
+    <li><a href="#2-use-case-setup">2. Use case setup</a></li>
+    <li><a href="#3-use-case-execution">3. Use case execution</a></li>
+    <li><a href="#4-consuming-the-data">4. Consuming the data</a></li>
+  </ul></li>
+</ul>
+
+
+
+
+            <footer>Lakehouse Engine v1.22.1</footer>
+
+</div>
+    </nav>
+    <main class="pdoc">
+    <section class="module-info">
+
+                <div class="docstring"><h1 id="gab-step-by-step">GAB step-by-step</h1>
+
+<h2 id="1-data-product-setup-based-on-templated-files">1. Data Product Setup based on templated files</h2>
+
+<ul>
+<li>Lakehouse engine: 1.20.0+</li>
+<li>Copy GAB assets from templated files to your data product:
+<ul>
+<li>GAB tables:
+<ul>
+<li><a href="../../assets/gab/metadata/dim_calendar.sql">Calendar table - dim_calendar</a></li>
+<li><a href="../../assets/gab/metadata/lkp_query_builder.sql">Use case configuration table - lkp_query_builder</a></li>
+<li><a href="../../assets/gab/metadata/gab_use_case_results.sql">Unified data table - gab_use_case_results</a></li>
+<li><a href="../../assets/gab/metadata/gab_log_events.sql">GAB log events table - gab_log_events</a></li>
+</ul></li>
+<li>GAB notebooks:
+<ul>
+<li><a href="../../assets/gab/notebooks/gab_dim_calendar.py">Feed Calendar table - gab_dim_calendar</a></li>
+<li><a href="../../assets/gab/notebooks/query_builder_helper.py">Use case creation - query_builder_helper</a></li>
+<li><a href="../../assets/gab/notebooks/gab.py">GAB execution - gab</a></li>
+<li><a href="../../assets/gab/notebooks/gab_job_manager.py">GAB job manager - gab_job_manager</a></li>
+</ul></li>
+</ul></li>
+</ul>
+
+<h2 id="2-use-case-setup">2. Use case setup</h2>
+
+<h3 id="templating-sql-query">Templating SQL Query</h3>
+
+<p><strong>The placeholder will always use <a href="#use-case-configuration-using-the-query_builder_helper">pre-configured values from the use case</a> (lkp_query_builder).</strong> </p>
+
+<h4 id="available-placeholders">Available Placeholders:</h4>
+
+<ul>
+<li><p>Date Aggregation:</p>
+
+<ul>
+<li>Reference date (the date column used to compute the cadences and the extended window)
+<div class="pdoc-code codehilite">
+<pre><span></span><code><span class="p">{</span><span class="o">%</span> <span class="k">if</span> <span class="n">replace_offset_value</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">%</span><span class="p">}</span> <span class="p">{{</span> <span class="n">project_date_column</span> <span class="p">}}</span>
+<span class="p">{</span><span class="o">%</span> <span class="k">else</span> <span class="o">%</span><span class="p">}</span> <span class="p">({{</span> <span class="n">project_date_column</span> <span class="p">}}</span> <span class="o">+</span> <span class="n">interval</span> <span class="s1">&#39;{{offset_value}}&#39;</span> <span class="n">hour</span><span class="p">)</span>
+<span class="p">{</span><span class="o">%</span> <span class="n">endif</span> <span class="o">%</span><span class="p">}</span>
+</code></pre>
+</div></li>
+</ul>
+
+<p><strong>Note:</strong> The <code>replace_offset_value</code> have the responsibility to use directly the date column or shift it to the specified timezone using the <code>offset_value</code> from the configured use case.</p>
+
+<ul>
+<li>Last day of the cadence and if snapshots are enabled then it contains the snapshot end day:
+<div class="pdoc-code codehilite">
+<pre><span></span><code><span class="p">{{</span> <span class="n">to_date</span> <span class="p">}}</span>
+</code></pre>
+</div></li>
+</ul></li>
+<li><p>Filter:</p>
+
+<ul>
+<li>It expects to have the data partitioned by date (year/month/day) and it replaces the placeholder with a filter like <code>year = **** and month = ** and day = **</code>:
+<div class="pdoc-code codehilite">
+<pre><span></span><code><span class="p">{{</span> <span class="n">partition_filter</span> <span class="p">}}</span>
+</code></pre>
+</div></li>
+</ul>
+
+<p><strong>Note:</strong> if your table does not have the Year, Month, Day columns you should not add this template</p>
+
+<ul>
+<li>Shift the data consumed on your use case to be between the specified offset timezone:
+<div class="pdoc-code codehilite">
+<pre><span></span><code><span class="p">{{</span> <span class="n">filter_date_column</span> <span class="p">}}</span> <span class="o">&gt;=</span> <span class="p">(</span><span class="s1">&#39;{{ start_date }}&#39;</span> <span class="o">+</span> <span class="n">interval</span> <span class="s1">&#39;{{offset_value}}&#39;</span> <span class="n">hour</span><span class="p">)</span> <span class="n">AND</span> <span class="p">{{</span> <span class="n">filter_date_column</span> <span class="p">}}</span> <span class="o">&lt;</span> <span class="p">(</span><span class="s1">&#39;{{ end_date}}&#39;</span> <span class="o">+</span> <span class="n">interval</span> <span class="s1">&#39;{{offset_value}}&#39;</span> <span class="n">hour</span><span class="p">)</span>
+</code></pre>
+</div></li>
+</ul></li>
+<li><p>The source database to consume the data:</p>
+
+<div class="pdoc-code codehilite">
+<pre><span></span><code><span class="p">{{</span> <span class="n">database</span> <span class="p">}}</span>
+</code></pre>
+</div></li>
+<li><p>Calendar join:</p>
+
+<div class="pdoc-code codehilite">
+<pre><span></span><code><span class="p">{{</span> <span class="n">joins</span> <span class="p">}}</span>
+</code></pre>
+</div>
+
+<p><strong>Note:</strong> Can be added after any of the table names in the <code>from</code> statement. The framework renders this <code>joins</code> with an internal calendar join and populates the <code>to_date</code> and the <code>project_date_column</code> as per the configured cadences, which means, <strong>it will need to be added</strong> when using <strong>Cadence</strong>, <strong>Extended Window Calculation</strong>, <strong>Reconciliation</strong> and <strong>Snapshot</strong>.</p></li>
+</ul>
+
+<h4 id="sample-combined-query-making-use-of-the-placeholders">Sample combined query making use of the placeholders:</h4>
+
+<div class="pdoc-code codehilite">
+<pre><span></span><code><span class="n">SELECT</span>
+    <span class="p">{</span><span class="o">%</span> <span class="k">if</span> <span class="n">replace_offset_value</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">%</span><span class="p">}</span> <span class="p">{{</span> <span class="n">project_date_column</span> <span class="p">}}</span> <span class="p">{</span><span class="o">%</span> <span class="k">else</span> <span class="o">%</span><span class="p">}</span> <span class="p">({{</span> <span class="n">project_date_column</span> <span class="p">}}</span> <span class="o">+</span> <span class="n">interval</span> <span class="s1">&#39;{{offset_value}}&#39;</span> <span class="n">hour</span><span class="p">)</span> <span class="p">{</span><span class="o">%</span> <span class="n">endif</span> <span class="o">%</span><span class="p">}</span> <span class="n">AS</span> <span class="n">order_date</span><span class="p">,</span>  <span class="c1"># date aggregation: computed cadence start date</span>
+    <span class="p">{{</span> <span class="n">to_date</span> <span class="p">}}</span> <span class="n">AS</span> <span class="n">to_date</span><span class="p">,</span>  <span class="c1"># date aggregation: last day of the cadence or of the snapshot if enabled</span>
+    <span class="n">b</span><span class="o">.</span><span class="n">category_name</span><span class="p">,</span>
+    <span class="n">COUNT</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">article_id</span><span class="p">)</span> <span class="n">qty_articles</span><span class="p">,</span>
+    <span class="n">SUM</span><span class="p">(</span><span class="n">amount</span><span class="p">)</span> <span class="n">total_amount</span>
+<span class="n">FROM</span>
+    <span class="p">{{</span> <span class="n">database</span> <span class="p">}}</span><span class="o">.</span><span class="n">dummy_sales_kpi</span> <span class="n">a</span>  <span class="c1"># source database</span>
+    <span class="p">{{</span> <span class="n">joins</span> <span class="p">}}</span>  <span class="c1"># calendar table join: used to compute the cadence start and end date</span>
+<span class="n">LEFT</span> <span class="n">JOIN</span>
+    <span class="n">article_categories</span> <span class="n">b</span> <span class="n">ON</span> <span class="n">a</span><span class="o">.</span><span class="n">article_id</span> <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">article_id</span>
+<span class="n">WHERE</span>
+    <span class="p">{{</span> <span class="n">partition_filter</span> <span class="p">}}</span>  <span class="c1"># filter: partition filter</span>
+<span class="n">AND</span>
+    <span class="n">TO_DATE</span><span class="p">({{</span> <span class="n">filter_date_column</span> <span class="p">}},</span> <span class="s1">&#39;yyyyMMdd&#39;</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="p">(</span>
+        <span class="s1">&#39;{{ start_date }}&#39;</span> <span class="o">+</span> <span class="n">interval</span> <span class="s1">&#39;{{ offset_value }}&#39;</span> <span class="n">hour</span>
+    <span class="p">)</span>  <span class="c1"># filter by date column configured in the use case for this file and timezone shift</span>
+<span class="n">AND</span>
+    <span class="n">TO_DATE</span><span class="p">({{</span> <span class="n">filter_date_column</span> <span class="p">}},</span> <span class="s1">&#39;yyyyMMdd&#39;</span><span class="p">)</span> <span class="o">&lt;</span> <span class="p">(</span>
+        <span class="s1">&#39;{{ end_date }}&#39;</span> <span class="o">+</span> <span class="n">interval</span> <span class="s1">&#39;{{ offset_value }}&#39;</span> <span class="n">hour</span>
+    <span class="p">)</span>  <span class="c1"># filter by date column configured in the use case for this file and timezone shift</span>
+<span class="n">GROUP</span> <span class="n">BY</span> <span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span>
+</code></pre>
+</div>
+
+<p><strong>Note:</strong> If there's just one sql file for the use case, the file should start with 1_. When the use case has several different intermediate stages/temp tables, please create them according to the sequence order, as shown in the screenshot, and a final combined script, example:</p>
+
+<p><img src="../../assets/gab/img/gab_sample_templated_query.png" alt="image" width="auto" height="auto"></p>
+
+<p>We suggest using the folder <strong>metadata/gab</strong> to use as the SQL use case folder but this is a parametrised property which you can override with the property <a href="../../assets/gab/notebooks/gab.py">gab_base_path</a>. This property is used in the <a href="../../assets/gab/notebooks/gab_job_manager.py">job manager as well</a>.</p>
+
+<h3 id="use-case-configuration-using-the-query_builder_helper">Use case configuration using the <strong>query_builder_helper</strong></h3>
+
+<p><details>
+  <summary>1. General configuration</summary>
+  GAB will pull information from <strong><code>lkp_query_builder</code></strong> in order to retrieve information/configuration to execute the process. To help us on this task a <a href="../../assets/gab/notebooks/query_builder_helper.py">query_builder_help notebook was provided</a>. We will follow the notebook instructions to add necessary configuration.</p>
+
+<p><img src="../../assets/gab/img/gab_use_case.png" alt="image" width="1000px" height="auto"></p>
+
+<table>
+<thead>
+<tr>
+  <th>Variable</th>
+  <th>Value</th>
+  <th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><strong>Complexity</strong></td>
+  <td>Low</td>
+  <td>Defines the complexity of your use case.<br />You should mainly consider the volume of data.<br />Possible values: <strong>Low</strong>, <strong>Medium</strong> and <strong>High</strong>.</td>
+</tr>
+<tr>
+  <td><strong>Database Name</strong></td>
+  <td>example_database</td>
+  <td>Refers to the name of the development environment database where the <strong>lkp_query_builder</strong> table resides.<br />This parameter is used at the end of the notebook to insert data into the <strong>lkp_query_builder</strong> table.</td>
+</tr>
+<tr>
+  <td><strong>How many dimensions</strong></td>
+  <td>1</td>
+  <td>Number of dimensions (columns) expected in the use case.<br /><strong>Note: Do not consider the reference date or metrics here, as they have their own parameters.</strong></td>
+</tr>
+<tr>
+  <td><strong>How many views</strong></td>
+  <td>1</td>
+  <td>Defines how many views to generate in the use case, it's possible to have as many as the use case need.<br />All views will have the same structure (dimensions and metrics), the only difference possible to specify between the views is the <strong>view filter</strong>.<br /><strong>Default value is 1.</strong><br /><strong>Note</strong>: This configuration have a direct impact in the <code>3. Configure View Name and Filters</code> configuration.</td>
+</tr>
+<tr>
+  <td><strong>Is Active</strong></td>
+  <td>Y</td>
+  <td>Flag to make the use case active or not.<br /><strong>Default value is Y</strong>.</td>
+</tr>
+<tr>
+  <td><strong>Market</strong></td>
+  <td>GLOBAL</td>
+  <td>Used in the <strong>gab_job_manager</strong> to execute the use cases for each <strong>market</strong>.</td>
+</tr>
+<tr>
+  <td><strong>SQL File Names</strong></td>
+  <td>1_article_category.sql,<br />2_f_agg_dummy_sales_kpi.sql</td>
+  <td>Name of the SQL files used in the use case. <br />You can combine different layers of dependencies between them as shown in the example, where the <strong>2_combined.sql</strong> file depends on <strong>1_product_category.sql</strong> file. <br />The file name should follow the pattern x_file_name (where x is an integer digit) and be separated by a comma (e.g.: 1_first_query.sql, 2_second_query.sql).</td>
+</tr>
+<tr>
+  <td><strong>Snapshot End Date</strong></td>
+  <td>to_date</td>
+  <td>This parameter is used in the template, by default its value must be <strong><em>to_date</em></strong>.<br />You can change it if you have managed this in your SQL files.<br />The values stored in this column depend on the use case behavior:<br /><ul><li>if snapshots are enabled, it will contain the snapshot end day.</li><li>If no snapshot is enabled, it will contain the last day of the cadence.</li></ul>The snapshot behaviour is set in the reconciliation steps.</td>
+</tr>
+<tr>
+  <td><strong>Timezone Offset</strong></td>
+  <td>0</td>
+  <td>The time zone offset that you want to apply to the reference date column.<br />It should be a number to decrement or add to the date (e.g., -8 or 8).<br /><strong>The default value is zero</strong>, which means that any time zone transformation will be applied to the date.</td>
+</tr>
+<tr>
+  <td><strong>Use Case Name</strong></td>
+  <td>f_agg_dummy_sales_kpi</td>
+  <td>Name of the use case.<br />The suggestion is to use lowercase and underlined alphanumeric characters.</td>
+</tr>
+<tr>
+  <td><strong>Use Case Reference Date</strong></td>
+  <td>order_date</td>
+  <td>Reference date of the use case.<br /The parameter should be the column name and the selected column should have the date/datetime format.</td>
+</tr>
+<tr>
+  <td><strong>Week Start</strong></td>
+  <td>MONDAY</td>
+  <td>The start of the business week of the use case.<br />Possible values: <strong>SUNDAY</strong> or <strong>MONDAY</strong>.</td>
+</tr>
+</tbody>
+</table>
+
+<p></details></p>
+
+<p><details>
+  <summary>2. Configure Dimension Names</summary></p>
+
+<p><img src="../../assets/gab/img/gab_dimensions.png" alt="image" width="1000px" height="auto"></p>
+
+<p></details></p>
+
+<p><details>
+  <summary>3. Configure View Name and Filters</summary></p>
+
+<p>This will be the name of the view at the end of the process. Filters should be applied at this step if needed.</p>
+
+<p><img src="../../assets/gab/img/gab_view_name_and_filters.png" alt="image" width="1000px" height="auto"></p>
+
+<table>
+<thead>
+<tr>
+  <th>Variable</th>
+  <th>Value</th>
+  <th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><strong>View Filter</strong></td>
+  <td></td>
+  <td>Based on the dimensions defined in the previous step.<br /><strong>Example</strong>: if you have set the country as <code>D1</code>, the filter here could be <strong>D1 = "Germany"</strong>. The commands allowed for the filter step are the same as those supported in the where clause in SQL language.</td>
+</tr>
+<tr>
+  <td><strong>View Name</strong></td>
+  <td>vw_f_agg_dummy_sales_kpi</td>
+  <td>Name of the view to output the computed data.</td>
+</tr>
+</tbody>
+</table>
+
+<p></details></p>
+
+<p><details>
+  <summary>4. Configure RECON</summary></p>
+
+<p>This step is where we define which will be the cadence displayed at the view.
+  <img src="../../assets/gab/img/gab_recon.png" alt="image" width="1000px" height="auto"></p>
+
+<table>
+<thead>
+<tr>
+  <th>Variable</th>
+  <th>Value</th>
+  <th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><strong>Reconciliation Cadence</strong></td>
+  <td>YEAR</td>
+  <td>Compute the data aggregated by the specified cadence but with the reconciliation frequency.<br /><a href="../gab.html#reconciliation">Check more about it here</a></td>
+</tr>
+</tbody>
+</table>
+
+<p></details></p>
+
+<p><details>
+  <summary>5. Configure METRICS</summary></p>
+
+<p>First question regarding metrics is how many metrics do we have on our SQL use case query.</p>
+
+<p>On our template we have two metrics (<code>qty_articles</code> and <code>total_amount</code>).</p>
+
+<p><img src="../../assets/gab/img/gab_query_metrics.png" alt="image" width="1000px" height="auto"></p>
+
+<p><img src="../../assets/gab/img/gab_metrics.png" alt="image" width="1000px" height="auto"></p>
+
+<p>The next paragraph will create widgets for us to be able to define if we want GAB to create secondary calculations for us based on the metric name. <strong>Note: metrics should follow the same order as defined on the SQL use case query.</strong></p>
+
+<p><img src="../../assets/gab/img/gab_metrics_configuration.png" alt="image" width="1000px" height="auto"></p>
+
+<table>
+<thead>
+<tr>
+  <th>Variable</th>
+  <th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><a href="../gab.html#metric"><strong>Calculated Metric</strong></a></td>
+  <td>It's possible to derive (add secondary calculations) 4 new columns based on each metric.<br />Those new columns will be based on cadences like <strong><em>last_cadence</em></strong>, <strong><em>last_year_cadence</em></strong> and <strong><em>window function</em></strong>.<br />But also, you can create a derived column,<br />which is a SQL statement that you can write on your own by selecting the <strong><em>derived_metric</em></strong> option.</td>
+</tr>
+<tr>
+  <td><strong>Metric Name</strong></td>
+  <td>Name of the base metric. Should have the same name as on the SQL use case query.</td>
+</tr>
+</tbody>
+</table>
+
+<p>The next metrics configuration is where we configure secondary calculations.
+  <img src="../../assets/gab/img/gab_metrics_calculations.png" alt="image" width="1000px" height="auto"></p>
+
+<table>
+<thead>
+<tr>
+  <th>Variable</th>
+  <th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><strong>derived_metric.Formula</strong></td>
+  <td>Formula to calculate the metric referring any of previous configured metrics by the <strong>Metric Name</strong>.<br /><strong>Example</strong>: <code>total_amount*0.56</code></td>
+</tr>
+<tr>
+  <td><strong>derived_metric.Label</strong></td>
+  <td>Name of the generated metric by <strong><em>derived_metric</em></strong>.</td>
+</tr>
+<tr>
+  <td><strong>last_cadence.Label</strong></td>
+  <td>Name of the generated metric by <strong><em>last_cadence</em></strong>.</td>
+</tr>
+<tr>
+  <td><strong>last_cadence.Window</strong></td>
+  <td>Cadence lookback window, which means in this example,<br />a lookback from the previous year (as the use case is on <strong>YEARLY</strong> cadence)</td>
+</tr>
+<tr>
+  <td><strong>window_function.Agg Func</strong></td>
+  <td>SQL Function to calculate the metric.<br />Possible values: <strong><em>sum</em></strong>, <strong><em>avg</em></strong>, <strong><em>max</em></strong>, <strong><em>min</em></strong>, <strong><em>count</em></strong></td>
+</tr>
+<tr>
+  <td><strong>window_function.Label</strong></td>
+  <td>Name of the generated metric by <strong><em>window_function</em></strong>.</td>
+</tr>
+<tr>
+  <td><strong>window_function.Window Interval</strong></td>
+  <td>Window interval to use on the metric generation.</td>
+</tr>
+</tbody>
+</table>
+
+<p></details></p>
+
+<p><details>
+  <summary>6. Configure Stages</summary></p>
+
+<p>Stages are related to each SQL statement at the use case.</p>
+
+<p><img src="../../assets/gab/img/gab_stages_configuration.png" alt="image" width="1000px" height="auto"></p>
+
+<table>
+<thead>
+<tr>
+  <th>Variable</th>
+  <th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><strong>Script Filter Date Column</strong></td>
+  <td>It will be used to filter the data of your use case.<br />This information will be replaced in the placeholder of the GAB template.</td>
+</tr>
+<tr>
+  <td><strong>Script Project Date Column</strong></td>
+  <td>It will be used as reference date for the query given.<br />This information will be replaced in the placeholder of the GAB template.</td>
+</tr>
+<tr>
+  <td><strong>Script Repartition Type</strong></td>
+  <td>Type of repartitioning the data of the query.<br />Possible values: <strong><em>Key</em></strong> and <strong><em>Number</em></strong>.<br />When use Key, it expects column names separated by a comma.<br />When use number it expects an integer of how many partitions the user want.</td>
+</tr>
+<tr>
+  <td><strong>Script Repartition Value</strong></td>
+  <td>This parameter only has effect when used <strong>with Repartition Type parameter</strong>.<br />It sets the way of repartitioning the data while processing.</td>
+</tr>
+<tr>
+  <td><strong>Script Storage Level</strong></td>
+  <td>Defines the type of spark persistence storage levels you want to define<br />(e.g. <strong><em>Memory Only</em></strong>, <strong><em>Memory and Disk</em></strong> etc).</td>
+</tr>
+<tr>
+  <td><strong>Script Table Alias</strong></td>
+  <td>The alias name of the sql file that will run, this name can be used to <br />consume the output of the execution in the next stage(next sql file).</td>
+</tr>
+</tbody>
+</table>
+
+<p></details></p>
+
+<p><details>
+  <summary>7. Build and Insert SQL Instruction</summary></p>
+
+<p><img src="../../assets/gab/img/gab_build_insert_sql_instruction.png" alt="image" width="1000px" height="auto"></p>
+
+<p><img src="../../assets/gab/img/gab_insert_use_case.png" alt="image" width="1000px" height="auto"></p>
+
+<p>At the end of the process it should have data inserted on lkp_query_builder table:
+  <img src="../../assets/gab/img/gab_lkp_query_builder.png" alt="image" width="1000px" height="auto"></p>
+
+<p></details></p>
+
+<p><details>
+  <summary>Configured Use case</summary></p>
+
+<p>After configuring the use case, it would generate a SQL command to create it on the <code>lkp_query_builder</code>, like this:</p>
+
+<div class="pdoc-code codehilite">
+<pre><span></span><code><span class="k">DELETE</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">example_database</span><span class="p">.</span><span class="n">lkp_query_builder</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">QUERY_LABEL</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;f_agg_dummy_sales_kpi&#39;</span><span class="p">;</span>
+<span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">example_database</span><span class="p">.</span><span class="n">lkp_query_builder</span><span class="w"> </span><span class="k">VALUES</span><span class="w"> </span><span class="p">(</span>
+<span class="w">  </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">  </span><span class="s1">&#39;f_agg_dummy_sales_kpi&#39;</span><span class="p">,</span>
+<span class="w">  </span><span class="s1">&#39;GLOBAL&#39;</span><span class="p">,</span>
+<span class="w">  </span><span class="ss">&quot;&quot;&quot;{</span>
+<span class="ss">    &#39;vw_f_agg_dummy_sales_kpi&#39;: {</span>
+<span class="ss">      &#39;dimensions&#39;: {</span>
+<span class="ss">        &#39;from_date&#39;: &#39;order_date&#39;,</span>
+<span class="ss">        &#39;to_date&#39;: &#39;to_date&#39;,</span>
+<span class="ss">        &#39;d1&#39;: &#39;category_name&#39;</span>
+<span class="ss">      },</span>
+<span class="ss">      &#39;metric&#39;: {</span>
+<span class="ss">        &#39;m1&#39;: {</span>
+<span class="ss">          &#39;metric_name&#39;: &#39;qty_articles&#39;,</span>
+<span class="ss">          &#39;calculated_metric&#39;: {},</span>
+<span class="ss">          &#39;derived_metric&#39;: {}</span>
+<span class="ss">        },</span>
+<span class="ss">        &#39;m2&#39;: {</span>
+<span class="ss">          &#39;metric_name&#39;: &#39;total_amount&#39;,</span>
+<span class="ss">            &#39;calculated_metric&#39;: {</span>
+<span class="ss">              &#39;last_cadence&#39;: [</span>
+<span class="ss">                {</span>
+<span class="ss">                  &#39;label&#39;: &#39;total_amount_last_year&#39;,</span>
+<span class="ss">                  &#39;window&#39;: &#39;1&#39;</span>
+<span class="ss">                }</span>
+<span class="ss">              ],</span>
+<span class="ss">              &#39;window_function&#39;: [</span>
+<span class="ss">                {</span>
+<span class="ss">                  &#39;label&#39;: &#39;avg_total_amount_last_2_years&#39;,</span>
+<span class="ss">                  &#39;window&#39;: [2, 1],</span>
+<span class="ss">                  &#39;agg_func&#39;: &#39;avg&#39;</span>
+<span class="ss">                }</span>
+<span class="ss">              ]</span>
+<span class="ss">            },</span>
+<span class="ss">            &#39;derived_metric&#39;: [</span>
+<span class="ss">              {</span>
+<span class="ss">                &#39;label&#39;: &#39;discounted_total_amount&#39;,</span>
+<span class="ss">                &#39;formula&#39;: &#39;total_amount*0.56&#39;</span>
+<span class="ss">              }</span>
+<span class="ss">            ]</span>
+<span class="ss">          }</span>
+<span class="ss">        },</span>
+<span class="ss">      &#39;filter&#39;: {}</span>
+<span class="ss">    }</span>
+<span class="ss">  }&quot;&quot;&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="ss">&quot;&quot;&quot;{</span>
+<span class="ss">    &#39;1&#39;: {</span>
+<span class="ss">        &#39;file_path&#39;: &#39;f_agg_dummy_sales_kpi/1_article_category.sql&#39;,</span>
+<span class="ss">        &#39;table_alias&#39;: &#39;article_categories&#39;,</span>
+<span class="ss">        &#39;storage_level&#39;: &#39;MEMORY_ONLY&#39;,</span>
+<span class="ss">        &#39;project_date_column&#39;: &#39;&#39;,</span>
+<span class="ss">        &#39;filter_date_column&#39;: &#39;&#39;,</span>
+<span class="ss">        &#39;repartition&#39;: {}</span>
+<span class="ss">    },</span>
+<span class="ss">    &#39;2&#39;: {</span>
+<span class="ss">        &#39;file_path&#39;: &#39;f_agg_dummy_sales_kpi/2_f_agg_dummy_sales_kpi.sql&#39;,</span>
+<span class="ss">        &#39;table_alias&#39;: &#39;dummy_sales_kpi&#39;,</span>
+<span class="ss">        &#39;storage_level&#39;: &#39;MEMORY_ONLY&#39;,</span>
+<span class="ss">        &#39;project_date_column&#39;: &#39;order_date&#39;,</span>
+<span class="ss">        &#39;filter_date_column&#39;: &#39;order_date&#39;,</span>
+<span class="ss">        &#39;repartition&#39;: {}</span>
+<span class="ss">    }</span>
+<span class="ss">  }&quot;&quot;&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="ss">&quot;&quot;&quot;{&#39;YEAR&#39;: {}}&quot;&quot;&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="s1">&#39;0&#39;</span><span class="p">,</span>
+<span class="w">  </span><span class="s1">&#39;MONDAY&#39;</span><span class="p">,</span>
+<span class="w">  </span><span class="s1">&#39;Y&#39;</span><span class="p">,</span>
+<span class="w">  </span><span class="s1">&#39;Low&#39;</span><span class="p">,</span>
+<span class="w">  </span><span class="k">current_timestamp</span><span class="p">()</span>
+<span class="p">);</span>
+</code></pre>
+</div>
+
+<p></details></p>
+
+<h2 id="3-use-case-execution">3. Use case execution</h2>
+
+<p>After the initial setup and adding your use case to the <strong><em>lkp_query_builder</em></strong> you can schedule the <a href="../../assets/gab/notebooks/gab_job_manager.py">gab_job_manager</a> to manage the use case execution in any schedule time you want.</p>
+
+<h2 id="4-consuming-the-data">4. Consuming the data</h2>
+
+<p>The data is available in the view you specified as output from the use-case, so you can normally consume the view as you would consume any other data (directly on power bi or in another pipeline).</p>
+</div>
+
+    </section>
+    </main>
+<script>
+    function escapeHTML(html) {
+        return document.createElement('div').appendChild(document.createTextNode(html)).parentNode.innerHTML;
+    }
+
+    const originalContent = document.querySelector("main.pdoc");
+    let currentContent = originalContent;
+
+    function setContent(innerHTML) {
+        let elem;
+        if (innerHTML) {
+            elem = document.createElement("main");
+            elem.classList.add("pdoc");
+            elem.innerHTML = innerHTML;
+        } else {
+            elem = originalContent;
+        }
+        if (currentContent !== elem) {
+            currentContent.replaceWith(elem);
+            currentContent = elem;
+        }
+    }
+
+    function getSearchTerm() {
+        return (new URL(window.location)).searchParams.get("search");
+    }
+
+    const searchBox = document.querySelector(".pdoc input[type=search]");
+    searchBox.addEventListener("input", function () {
+        let url = new URL(window.location);
+        if (searchBox.value.trim()) {
+            url.hash = "";
+            url.searchParams.set("search", searchBox.value);
+        } else {
+            url.searchParams.delete("search");
+        }
+        history.replaceState("", "", url.toString());
+        onInput();
+    });
+    window.addEventListener("popstate", onInput);
+
+
+    let search, searchErr;
+
+    async function initialize() {
+        try {
+            search = await new Promise((resolve, reject) => {
+                const script = document.createElement("script");
+                script.type = "text/javascript";
+                script.async = true;
+                script.onload = () => resolve(window.pdocSearch);
+                script.onerror = (e) => reject(e);
+                script.src = "../../search.js";
+                document.getElementsByTagName("head")[0].appendChild(script);
+            });
+        } catch (e) {
+            console.error("Cannot fetch pdoc search index");
+            searchErr = "Cannot fetch search index.";
+        }
+        onInput();
+
+        document.querySelector("nav.pdoc").addEventListener("click", e => {
+            if (e.target.hash) {
+                searchBox.value = "";
+                searchBox.dispatchEvent(new Event("input"));
+            }
+        });
+    }
+
+    function onInput() {
+        setContent((() => {
+            const term = getSearchTerm();
+            if (!term) {
+                return null
+            }
+            if (searchErr) {
+                return `<h3>Error: ${searchErr}</h3>`
+            }
+            if (!search) {
+                return "<h3>Searching...</h3>"
+            }
+
+            window.scrollTo({top: 0, left: 0, behavior: 'auto'});
+
+            const results = search(term);
+
+            let html;
+            if (results.length === 0) {
+                html = `No search results for '${escapeHTML(term)}'.`
+            } else {
+                html = `<h4>${results.length} search result${results.length > 1 ? "s" : ""} for '${escapeHTML(term)}'.</h4>`;
+            }
+            for (let result of results.slice(0, 10)) {
+                let doc = result.doc;
+                let url = `../../${doc.modulename.replaceAll(".", "/")}.html`;
+                if (doc.qualname) {
+                    url += `#${doc.qualname}`;
+                }
+
+                let heading;
+                switch (result.doc.kind) {
+                    case "function":
+                        if (doc.fullname.endsWith(".__init__")) {
+                            heading = `<span class="name">${doc.fullname.replace(/\.__init__$/, "")}</span>${doc.signature}`;
+                        } else {
+                            heading = `<span class="def">${doc.funcdef}</span> <span class="name">${doc.fullname}</span>${doc.signature}`;
+                        }
+                        break;
+                    case "class":
+                        heading = `<span class="def">class</span> <span class="name">${doc.fullname}</span>`;
+                        if (doc.bases)
+                            heading += `<wbr>(<span class="base">${doc.bases}</span>)`;
+                        heading += `:`;
+                        break;
+                    case "variable":
+                        heading = `<span class="name">${doc.fullname}</span>`;
+                        if (doc.annotation)
+                            heading += `<span class="annotation">${doc.annotation}</span>`;
+                        if (doc.default_value)
+                            heading += `<span class="default_value"> = ${doc.default_value}</span>`;
+                        break;
+                    default:
+                        heading = `<span class="name">${doc.fullname}</span>`;
+                        break;
+                }
+                html += `
+                        <section class="search-result">
+                        <a href="${url}" class="attr ${doc.kind}">${heading}</a>
+                        <div class="docstring">${doc.doc}</div>
+                        </section>
+                    `;
+
+            }
+            return html;
+        })());
+    }
+
+    if (getSearchTerm()) {
+        initialize();
+        searchBox.value = getSearchTerm();
+        onInput();
+    } else {
+        searchBox.addEventListener("focus", initialize, {once: true});
+    }
+
+    searchBox.addEventListener("keydown", e => {
+        if (["ArrowDown", "ArrowUp", "Enter"].includes(e.key)) {
+            let focused = currentContent.querySelector(".search-result.focused");
+            if (!focused) {
+                currentContent.querySelector(".search-result").classList.add("focused");
+            } else if (
+                e.key === "ArrowDown"
+                && focused.nextElementSibling
+                && focused.nextElementSibling.classList.contains("search-result")
+            ) {
+                focused.classList.remove("focused");
+                focused.nextElementSibling.classList.add("focused");
+                focused.nextElementSibling.scrollIntoView({
+                    behavior: "smooth",
+                    block: "nearest",
+                    inline: "nearest"
+                });
+            } else if (
+                e.key === "ArrowUp"
+                && focused.previousElementSibling
+                && focused.previousElementSibling.classList.contains("search-result")
+            ) {
+                focused.classList.remove("focused");
+                focused.previousElementSibling.classList.add("focused");
+                focused.previousElementSibling.scrollIntoView({
+                    behavior: "smooth",
+                    block: "nearest",
+                    inline: "nearest"
+                });
+            } else if (
+                e.key === "Enter"
+            ) {
+                focused.querySelector("a").click();
+            }
+        }
+    });
+</script></body>
+</html>
