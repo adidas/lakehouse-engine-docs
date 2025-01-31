@@ -8,27 +8,23 @@
       
       
       
-        <link rel="canonical" href="https://adidas.github.io/lakehouse-engine-docs/reference/packages/utils/storage/file_storage.html">
+        <link rel="canonical" href="https://adidas.github.io/lakehouse-engine-docs/lakehouse_engine_usage/data_loader/custom_transformer/sql_custom_transformer.html">
       
       
-        <link rel="prev" href="dbfs_storage.html">
       
-      
-        <link rel="next" href="file_storage_functions.html">
-      
-      <link rel="icon" href="../../../../assets/img/lakehouse_engine_logo_symbol_large.png">
+      <link rel="icon" href="../../../assets/img/lakehouse_engine_logo_symbol_large.png">
       <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.17">
     
     
       
-        <title>File storage - Lakehouse Engine Documentation</title>
+        <title>SQL Custom Transformer - Lakehouse Engine Documentation</title>
       
     
     
-      <link rel="stylesheet" href="../../../../assets/stylesheets/main.26e3688c.min.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.26e3688c.min.css">
       
         
-        <link rel="stylesheet" href="../../../../assets/stylesheets/palette.ecc896b0.min.css">
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ecc896b0.min.css">
       
       
 
@@ -44,11 +40,11 @@
       
     
     
-      <link rel="stylesheet" href="../../../../assets/_markdown_exec_pyodide.css">
+      <link rel="stylesheet" href="../../../assets/_markdown_exec_pyodide.css">
     
-      <link rel="stylesheet" href="../../../../assets/_mkdocstrings.css">
+      <link rel="stylesheet" href="../../../assets/_mkdocstrings.css">
     
-    <script>__md_scope=new URL("../../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -77,7 +73,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#packages.utils.storage.file_storage" class="md-skip">
+        <a href="#sql-custom-transformer" class="md-skip">
           Skip to content
         </a>
       
@@ -93,9 +89,9 @@
 
 <header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="../../../../index.html" title="Lakehouse Engine Documentation" class="md-header__button md-logo" aria-label="Lakehouse Engine Documentation" data-md-component="logo">
+    <a href="../../../index.html" title="Lakehouse Engine Documentation" class="md-header__button md-logo" aria-label="Lakehouse Engine Documentation" data-md-component="logo">
       
-  <img src="../../../../assets/img/lakehouse_engine_logo.png" alt="logo">
+  <img src="../../../assets/img/lakehouse_engine_logo.png" alt="logo">
 
     </a>
     <label class="md-header__button md-icon" for="__drawer">
@@ -111,7 +107,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              File storage
+              SQL Custom Transformer
             
           </span>
         </div>
@@ -208,7 +204,7 @@
 
 
   <li class="md-tabs__item">
-    <a href="../../../../index.html" class="md-tabs__link">
+    <a href="../../../index.html" class="md-tabs__link">
       Lakehouse Engine
     </a>
   </li>
@@ -223,7 +219,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../../../../lakehouse_engine_usage/lakehouse_engine_usage.html" class="md-tabs__link">
+      <a href="../../lakehouse_engine_usage.html" class="md-tabs__link">
         How to use the Lakehouse Engine?
       </a>
     </li>
@@ -233,12 +229,10 @@
         
   
   
-    
-  
 
 
   <li class="md-tabs__item">
-    <a href="../../../index.html" class="md-tabs__link md-tabs__link--active">
+    <a href="../../../reference/index.html" class="md-tabs__link">
       API Documentation
     </a>
   </li>
@@ -273,9 +267,9 @@
 
 <nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../../../../index.html" title="Lakehouse Engine Documentation" class="md-nav__button md-logo" aria-label="Lakehouse Engine Documentation" data-md-component="logo">
+    <a href="../../../index.html" title="Lakehouse Engine Documentation" class="md-nav__button md-logo" aria-label="Lakehouse Engine Documentation" data-md-component="logo">
       
-  <img src="../../../../assets/img/lakehouse_engine_logo.png" alt="logo">
+  <img src="../../../assets/img/lakehouse_engine_logo.png" alt="logo">
 
     </a>
     Lakehouse Engine Documentation
@@ -303,7 +297,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../index.html" class="md-nav__link">
+      <a href="../../../index.html" class="md-nav__link">
         Lakehouse Engine
       </a>
     </li>
@@ -351,7 +345,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../lakehouse_engine_usage/lakehouse_engine_usage.html" class="md-nav__link">
+      <a href="../../lakehouse_engine_usage.html" class="md-nav__link">
         Overview
       </a>
     </li>
@@ -439,7 +433,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../lakehouse_engine_usage/data_loader/data_loader.html" class="md-nav__link">
+      <a href="../data_loader.html" class="md-nav__link">
         Overview
       </a>
     </li>
@@ -524,7 +518,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../lakehouse_engine_usage/data_loader/append_load_from_jdbc_with_permissive_mode/append_load_from_jdbc_with_permissive_mode.html" class="md-nav__link">
+      <a href="../append_load_from_jdbc_with_permissive_mode/append_load_from_jdbc_with_permissive_mode.html" class="md-nav__link">
         Append Load from JDBC with PERMISSIVE mode (default)
       </a>
     </li>
@@ -538,7 +532,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../lakehouse_engine_usage/data_loader/append_load_with_failfast/append_load_with_failfast.html" class="md-nav__link">
+      <a href="../append_load_with_failfast/append_load_with_failfast.html" class="md-nav__link">
         Append Load with FAILFAST
       </a>
     </li>
@@ -552,7 +546,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../lakehouse_engine_usage/data_loader/batch_delta_load_init_delta_backfill_with_merge/batch_delta_load_init_delta_backfill_with_merge.html" class="md-nav__link">
+      <a href="../batch_delta_load_init_delta_backfill_with_merge/batch_delta_load_init_delta_backfill_with_merge.html" class="md-nav__link">
         Batch Delta Load Init, Delta and Backfill with Merge
       </a>
     </li>
@@ -566,7 +560,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../lakehouse_engine_usage/data_loader/custom_transformer/custom_transformer.html" class="md-nav__link">
+      <a href="custom_transformer.html" class="md-nav__link">
         Custom Transformer
       </a>
     </li>
@@ -580,7 +574,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../lakehouse_engine_usage/data_loader/custom_transformer_sql/custom_transformer_sql.html" class="md-nav__link">
+      <a href="../custom_transformer_sql/custom_transformer_sql.html" class="md-nav__link">
         Custom Transformer (SQL)
       </a>
     </li>
@@ -594,7 +588,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../lakehouse_engine_usage/data_loader/extract_from_sap_b4_adso/extract_from_sap_b4_adso.html" class="md-nav__link">
+      <a href="../extract_from_sap_b4_adso/extract_from_sap_b4_adso.html" class="md-nav__link">
         Extract from SAP B4 ADSOs
       </a>
     </li>
@@ -608,7 +602,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../lakehouse_engine_usage/data_loader/extract_from_sap_bw_dso/extract_from_sap_bw_dso.html" class="md-nav__link">
+      <a href="../extract_from_sap_bw_dso/extract_from_sap_bw_dso.html" class="md-nav__link">
         Extract from SAP BW DSOs
       </a>
     </li>
@@ -622,7 +616,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../lakehouse_engine_usage/data_loader/extract_from_sftp/extract_from_sftp.html" class="md-nav__link">
+      <a href="../extract_from_sftp/extract_from_sftp.html" class="md-nav__link">
         Extract from SFTP
       </a>
     </li>
@@ -636,7 +630,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../lakehouse_engine_usage/data_loader/extract_using_jdbc_connection/extract_using_jdbc_connection.html" class="md-nav__link">
+      <a href="../extract_using_jdbc_connection/extract_using_jdbc_connection.html" class="md-nav__link">
         Extract using JDBC connection
       </a>
     </li>
@@ -650,7 +644,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../lakehouse_engine_usage/data_loader/filtered_full_load/filtered_full_load.html" class="md-nav__link">
+      <a href="../filtered_full_load/filtered_full_load.html" class="md-nav__link">
         Filtered Full Load
       </a>
     </li>
@@ -664,7 +658,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../lakehouse_engine_usage/data_loader/filtered_full_load_with_selective_replace/filtered_full_load_with_selective_replace.html" class="md-nav__link">
+      <a href="../filtered_full_load_with_selective_replace/filtered_full_load_with_selective_replace.html" class="md-nav__link">
         Filtered Full Load with Selective Replace
       </a>
     </li>
@@ -678,7 +672,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../lakehouse_engine_usage/data_loader/flatten_schema_and_explode_columns/flatten_schema_and_explode_columns.html" class="md-nav__link">
+      <a href="../flatten_schema_and_explode_columns/flatten_schema_and_explode_columns.html" class="md-nav__link">
         Flatten Schema and Explode Columns
       </a>
     </li>
@@ -692,7 +686,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../lakehouse_engine_usage/data_loader/full_load/full_load.html" class="md-nav__link">
+      <a href="../full_load/full_load.html" class="md-nav__link">
         Full Load
       </a>
     </li>
@@ -706,7 +700,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../lakehouse_engine_usage/data_loader/read_from_dataframe/read_from_dataframe.html" class="md-nav__link">
+      <a href="../read_from_dataframe/read_from_dataframe.html" class="md-nav__link">
         Read from Dataframe
       </a>
     </li>
@@ -720,7 +714,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../lakehouse_engine_usage/data_loader/streaming_append_load_with_malformed/streaming_append_load_with_malformed.html" class="md-nav__link">
+      <a href="../streaming_append_load_with_malformed/streaming_append_load_with_malformed.html" class="md-nav__link">
         Streaming Append Load with DROPMALFORMED
       </a>
     </li>
@@ -734,7 +728,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../lakehouse_engine_usage/data_loader/streaming_append_load_with_terminator/streaming_append_load_with_terminator.html" class="md-nav__link">
+      <a href="../streaming_append_load_with_terminator/streaming_append_load_with_terminator.html" class="md-nav__link">
         Streaming Append Load with Optimize Dataset Terminator
       </a>
     </li>
@@ -748,7 +742,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../lakehouse_engine_usage/data_loader/streaming_delta_load_with_group_and_rank_condensation/streaming_delta_load_with_group_and_rank_condensation.html" class="md-nav__link">
+      <a href="../streaming_delta_load_with_group_and_rank_condensation/streaming_delta_load_with_group_and_rank_condensation.html" class="md-nav__link">
         Streaming Delta Load with Group and Rank Condensation
       </a>
     </li>
@@ -762,7 +756,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../lakehouse_engine_usage/data_loader/streaming_delta_with_late_arriving_and_out_of_order_events/streaming_delta_with_late_arriving_and_out_of_order_events.html" class="md-nav__link">
+      <a href="../streaming_delta_with_late_arriving_and_out_of_order_events/streaming_delta_with_late_arriving_and_out_of_order_events.html" class="md-nav__link">
         Streaming Delta Load with Late Arriving and Out of Order Events (with and without watermarking)
       </a>
     </li>
@@ -776,7 +770,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../lakehouse_engine_usage/data_loader/write_and_read_dataframe/write_and_read_dataframe.html" class="md-nav__link">
+      <a href="../write_and_read_dataframe/write_and_read_dataframe.html" class="md-nav__link">
         Write and Read Dataframe
       </a>
     </li>
@@ -790,7 +784,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../lakehouse_engine_usage/data_loader/write_to_console/write_to_console.html" class="md-nav__link">
+      <a href="../write_to_console/write_to_console.html" class="md-nav__link">
         Write to Console
       </a>
     </li>
@@ -804,7 +798,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../lakehouse_engine_usage/data_loader/write_to_rest_api/write_to_rest_api.html" class="md-nav__link">
+      <a href="../write_to_rest_api/write_to_rest_api.html" class="md-nav__link">
         Write to REST API
       </a>
     </li>
@@ -865,7 +859,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../lakehouse_engine_usage/data_quality/data_quality.html" class="md-nav__link">
+      <a href="../../data_quality/data_quality.html" class="md-nav__link">
         Overview
       </a>
     </li>
@@ -922,7 +916,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../lakehouse_engine_usage/data_quality/custom_expectations/custom_expectations.html" class="md-nav__link">
+      <a href="../../data_quality/custom_expectations/custom_expectations.html" class="md-nav__link">
         Custom Expectations
       </a>
     </li>
@@ -936,7 +930,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../lakehouse_engine_usage/data_quality/data_quality_validator/data_quality_validator.html" class="md-nav__link">
+      <a href="../../data_quality/data_quality_validator/data_quality_validator.html" class="md-nav__link">
         Data Quality Validator
       </a>
     </li>
@@ -950,7 +944,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../lakehouse_engine_usage/data_quality/minimal_example/minimal_example.html" class="md-nav__link">
+      <a href="../../data_quality/minimal_example/minimal_example.html" class="md-nav__link">
         Minimal Example
       </a>
     </li>
@@ -964,7 +958,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../lakehouse_engine_usage/data_quality/prisma/prisma.html" class="md-nav__link">
+      <a href="../../data_quality/prisma/prisma.html" class="md-nav__link">
         Prisma
       </a>
     </li>
@@ -978,7 +972,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../lakehouse_engine_usage/data_quality/result_sink/result_sink.html" class="md-nav__link">
+      <a href="../../data_quality/result_sink/result_sink.html" class="md-nav__link">
         Result Sink
       </a>
     </li>
@@ -992,7 +986,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../lakehouse_engine_usage/data_quality/row_tagging/row_tagging.html" class="md-nav__link">
+      <a href="../../data_quality/row_tagging/row_tagging.html" class="md-nav__link">
         Row Tagging
       </a>
     </li>
@@ -1006,7 +1000,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../lakehouse_engine_usage/data_quality/validations_failing/validations_failing.html" class="md-nav__link">
+      <a href="../../data_quality/validations_failing/validations_failing.html" class="md-nav__link">
         Validations Failing
       </a>
     </li>
@@ -1065,7 +1059,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../lakehouse_engine_usage/reconciliator/reconciliator.html" class="md-nav__link">
+      <a href="../../reconciliator/reconciliator.html" class="md-nav__link">
         Overview
       </a>
     </li>
@@ -1119,7 +1113,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../lakehouse_engine_usage/sensor/sensor.html" class="md-nav__link">
+      <a href="../../sensor/sensor.html" class="md-nav__link">
         Overview
       </a>
     </li>
@@ -1176,7 +1170,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../lakehouse_engine_usage/sensor/delta_table/delta_table.html" class="md-nav__link">
+      <a href="../../sensor/delta_table/delta_table.html" class="md-nav__link">
         Delta Table
       </a>
     </li>
@@ -1190,7 +1184,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../lakehouse_engine_usage/sensor/delta_upstream_sensor_table/delta_upstream_sensor_table.html" class="md-nav__link">
+      <a href="../../sensor/delta_upstream_sensor_table/delta_upstream_sensor_table.html" class="md-nav__link">
         Sensor from other Sensor Delta Table
       </a>
     </li>
@@ -1204,7 +1198,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../lakehouse_engine_usage/sensor/file/file.html" class="md-nav__link">
+      <a href="../../sensor/file/file.html" class="md-nav__link">
         Sensor from Files
       </a>
     </li>
@@ -1218,7 +1212,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../lakehouse_engine_usage/sensor/jdbc_table/jdbc_table.html" class="md-nav__link">
+      <a href="../../sensor/jdbc_table/jdbc_table.html" class="md-nav__link">
         Sensor from JDBC
       </a>
     </li>
@@ -1232,7 +1226,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../lakehouse_engine_usage/sensor/kafka/kafka.html" class="md-nav__link">
+      <a href="../../sensor/kafka/kafka.html" class="md-nav__link">
         Sensor from Kafka
       </a>
     </li>
@@ -1246,7 +1240,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../lakehouse_engine_usage/sensor/sap_bw_b4/sap_bw_b4.html" class="md-nav__link">
+      <a href="../../sensor/sap_bw_b4/sap_bw_b4.html" class="md-nav__link">
         Sensor from SAP
       </a>
     </li>
@@ -1260,7 +1254,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../lakehouse_engine_usage/sensor/update_sensor_status/update_sensor_status.html" class="md-nav__link">
+      <a href="../../sensor/update_sensor_status/update_sensor_status.html" class="md-nav__link">
         Update Sensor control Delta Table after processing the data
       </a>
     </li>
@@ -1321,7 +1315,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../lakehouse_engine_usage/gab/gab.html" class="md-nav__link">
+      <a href="../../gab/gab.html" class="md-nav__link">
         Overview
       </a>
     </li>
@@ -1335,7 +1329,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../lakehouse_engine_usage/gab/step_by_step/step_by_step.html" class="md-nav__link">
+      <a href="../../gab/step_by_step/step_by_step.html" class="md-nav__link">
         Step-by-Step
       </a>
     </li>
@@ -1369,16 +1363,14 @@
 
   
   
-    
-  
   
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
       
       
       
-      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
       
       
         
@@ -1391,7 +1383,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../../../index.html">API Documentation</a>
+          <a href="../../../reference/index.html">API Documentation</a>
           
             <label for="__nav_3">
               <span class="md-nav__icon md-icon"></span>
@@ -1399,7 +1391,7 @@
           
         </div>
       
-      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
         <label class="md-nav__title" for="__nav_3">
           <span class="md-nav__icon md-icon"></span>
           API Documentation
@@ -1410,18 +1402,16 @@
               
   
   
-    
-  
   
     
       
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
       
       
       
       
-      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1" checked>
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1" >
       
       
         
@@ -1464,7 +1454,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../../index.html">Packages</a>
+          <a href="../../../reference/packages/index.html">Packages</a>
           
             <label for="__nav_3_1">
               <span class="md-nav__icon md-icon"></span>
@@ -1472,7 +1462,7 @@
           
         </div>
       
-      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="true">
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="false">
         <label class="md-nav__title" for="__nav_3_1">
           <span class="md-nav__icon md-icon"></span>
           Packages
@@ -1485,7 +1475,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../engine.html" class="md-nav__link">
+      <a href="../../../reference/packages/engine.html" class="md-nav__link">
         Engine
       </a>
     </li>
@@ -1527,7 +1517,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../../algorithms/index.html">Algorithms</a>
+          <a href="../../../reference/packages/algorithms/index.html">Algorithms</a>
           
             <label for="__nav_3_1_2">
               <span class="md-nav__icon md-icon"></span>
@@ -1548,7 +1538,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../algorithms/algorithm.html" class="md-nav__link">
+      <a href="../../../reference/packages/algorithms/algorithm.html" class="md-nav__link">
         Algorithm
       </a>
     </li>
@@ -1562,7 +1552,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../algorithms/data_loader.html" class="md-nav__link">
+      <a href="../../../reference/packages/algorithms/data_loader.html" class="md-nav__link">
         Data loader
       </a>
     </li>
@@ -1576,7 +1566,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../algorithms/dq_validator.html" class="md-nav__link">
+      <a href="../../../reference/packages/algorithms/dq_validator.html" class="md-nav__link">
         Dq validator
       </a>
     </li>
@@ -1590,7 +1580,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../algorithms/exceptions.html" class="md-nav__link">
+      <a href="../../../reference/packages/algorithms/exceptions.html" class="md-nav__link">
         Exceptions
       </a>
     </li>
@@ -1604,7 +1594,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../algorithms/gab.html" class="md-nav__link">
+      <a href="../../../reference/packages/algorithms/gab.html" class="md-nav__link">
         Gab
       </a>
     </li>
@@ -1618,7 +1608,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../algorithms/reconciliator.html" class="md-nav__link">
+      <a href="../../../reference/packages/algorithms/reconciliator.html" class="md-nav__link">
         Reconciliator
       </a>
     </li>
@@ -1632,7 +1622,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../algorithms/sensor.html" class="md-nav__link">
+      <a href="../../../reference/packages/algorithms/sensor.html" class="md-nav__link">
         Sensor
       </a>
     </li>
@@ -1653,7 +1643,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../configs/index.html" class="md-nav__link">
+      <a href="../../../reference/packages/configs/index.html" class="md-nav__link">
         Configs
       </a>
     </li>
@@ -1701,7 +1691,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../../core/index.html">Core</a>
+          <a href="../../../reference/packages/core/index.html">Core</a>
           
             <label for="__nav_3_1_4">
               <span class="md-nav__icon md-icon"></span>
@@ -1722,7 +1712,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../core/dbfs_file_manager.html" class="md-nav__link">
+      <a href="../../../reference/packages/core/dbfs_file_manager.html" class="md-nav__link">
         Dbfs file manager
       </a>
     </li>
@@ -1736,7 +1726,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../core/definitions.html" class="md-nav__link">
+      <a href="../../../reference/packages/core/definitions.html" class="md-nav__link">
         Definitions
       </a>
     </li>
@@ -1750,7 +1740,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../core/exec_env.html" class="md-nav__link">
+      <a href="../../../reference/packages/core/exec_env.html" class="md-nav__link">
         Exec env
       </a>
     </li>
@@ -1764,7 +1754,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../core/executable.html" class="md-nav__link">
+      <a href="../../../reference/packages/core/executable.html" class="md-nav__link">
         Executable
       </a>
     </li>
@@ -1778,7 +1768,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../core/file_manager.html" class="md-nav__link">
+      <a href="../../../reference/packages/core/file_manager.html" class="md-nav__link">
         File manager
       </a>
     </li>
@@ -1792,7 +1782,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../core/gab_manager.html" class="md-nav__link">
+      <a href="../../../reference/packages/core/gab_manager.html" class="md-nav__link">
         Gab manager
       </a>
     </li>
@@ -1806,7 +1796,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../core/gab_sql_generator.html" class="md-nav__link">
+      <a href="../../../reference/packages/core/gab_sql_generator.html" class="md-nav__link">
         Gab sql generator
       </a>
     </li>
@@ -1820,7 +1810,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../core/s3_file_manager.html" class="md-nav__link">
+      <a href="../../../reference/packages/core/s3_file_manager.html" class="md-nav__link">
         S3 file manager
       </a>
     </li>
@@ -1834,7 +1824,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../core/sensor_manager.html" class="md-nav__link">
+      <a href="../../../reference/packages/core/sensor_manager.html" class="md-nav__link">
         Sensor manager
       </a>
     </li>
@@ -1848,7 +1838,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../core/table_manager.html" class="md-nav__link">
+      <a href="../../../reference/packages/core/table_manager.html" class="md-nav__link">
         Table manager
       </a>
     </li>
@@ -1893,7 +1883,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../../dq_processors/index.html">Dq processors</a>
+          <a href="../../../reference/packages/dq_processors/index.html">Dq processors</a>
           
             <label for="__nav_3_1_5">
               <span class="md-nav__icon md-icon"></span>
@@ -1914,7 +1904,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../dq_processors/dq_factory.html" class="md-nav__link">
+      <a href="../../../reference/packages/dq_processors/dq_factory.html" class="md-nav__link">
         Dq factory
       </a>
     </li>
@@ -1928,7 +1918,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../dq_processors/exceptions.html" class="md-nav__link">
+      <a href="../../../reference/packages/dq_processors/exceptions.html" class="md-nav__link">
         Exceptions
       </a>
     </li>
@@ -1942,7 +1932,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../dq_processors/validator.html" class="md-nav__link">
+      <a href="../../../reference/packages/dq_processors/validator.html" class="md-nav__link">
         Validator
       </a>
     </li>
@@ -1984,7 +1974,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../../dq_processors/custom_expectations/index.html">Custom expectations</a>
+          <a href="../../../reference/packages/dq_processors/custom_expectations/index.html">Custom expectations</a>
           
             <label for="__nav_3_1_5_4">
               <span class="md-nav__icon md-icon"></span>
@@ -2005,7 +1995,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../dq_processors/custom_expectations/expect_column_pair_a_to_be_not_equal_to_b.html" class="md-nav__link">
+      <a href="../../../reference/packages/dq_processors/custom_expectations/expect_column_pair_a_to_be_not_equal_to_b.html" class="md-nav__link">
         Expect column pair a to be not equal to b
       </a>
     </li>
@@ -2019,7 +2009,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../dq_processors/custom_expectations/expect_column_pair_a_to_be_smaller_or_equal_than_b.html" class="md-nav__link">
+      <a href="../../../reference/packages/dq_processors/custom_expectations/expect_column_pair_a_to_be_smaller_or_equal_than_b.html" class="md-nav__link">
         Expect column pair a to be smaller or equal than b
       </a>
     </li>
@@ -2033,7 +2023,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../dq_processors/custom_expectations/expect_column_pair_date_a_to_be_greater_than_or_equal_to_date_b.html" class="md-nav__link">
+      <a href="../../../reference/packages/dq_processors/custom_expectations/expect_column_pair_date_a_to_be_greater_than_or_equal_to_date_b.html" class="md-nav__link">
         Expect column pair date a to be greater than or equal to date b
       </a>
     </li>
@@ -2047,7 +2037,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../dq_processors/custom_expectations/expect_column_values_to_be_date_not_older_than.html" class="md-nav__link">
+      <a href="../../../reference/packages/dq_processors/custom_expectations/expect_column_values_to_be_date_not_older_than.html" class="md-nav__link">
         Expect column values to be date not older than
       </a>
     </li>
@@ -2061,7 +2051,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../dq_processors/custom_expectations/expect_column_values_to_not_be_null_or_empty_string.html" class="md-nav__link">
+      <a href="../../../reference/packages/dq_processors/custom_expectations/expect_column_values_to_not_be_null_or_empty_string.html" class="md-nav__link">
         Expect column values to not be null or empty string
       </a>
     </li>
@@ -2075,7 +2065,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../dq_processors/custom_expectations/expect_multicolumn_column_a_must_equal_b_or_c.html" class="md-nav__link">
+      <a href="../../../reference/packages/dq_processors/custom_expectations/expect_multicolumn_column_a_must_equal_b_or_c.html" class="md-nav__link">
         Expect multicolumn column a must equal b or c
       </a>
     </li>
@@ -2089,7 +2079,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../dq_processors/custom_expectations/expect_queried_column_agg_value_to_be.html" class="md-nav__link">
+      <a href="../../../reference/packages/dq_processors/custom_expectations/expect_queried_column_agg_value_to_be.html" class="md-nav__link">
         Expect queried column agg value to be
       </a>
     </li>
@@ -2149,7 +2139,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../../io/index.html">Io</a>
+          <a href="../../../reference/packages/io/index.html">Io</a>
           
             <label for="__nav_3_1_6">
               <span class="md-nav__icon md-icon"></span>
@@ -2170,7 +2160,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../io/exceptions.html" class="md-nav__link">
+      <a href="../../../reference/packages/io/exceptions.html" class="md-nav__link">
         Exceptions
       </a>
     </li>
@@ -2184,7 +2174,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../io/reader.html" class="md-nav__link">
+      <a href="../../../reference/packages/io/reader.html" class="md-nav__link">
         Reader
       </a>
     </li>
@@ -2198,7 +2188,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../io/reader_factory.html" class="md-nav__link">
+      <a href="../../../reference/packages/io/reader_factory.html" class="md-nav__link">
         Reader factory
       </a>
     </li>
@@ -2212,7 +2202,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../io/writer.html" class="md-nav__link">
+      <a href="../../../reference/packages/io/writer.html" class="md-nav__link">
         Writer
       </a>
     </li>
@@ -2226,7 +2216,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../io/writer_factory.html" class="md-nav__link">
+      <a href="../../../reference/packages/io/writer_factory.html" class="md-nav__link">
         Writer factory
       </a>
     </li>
@@ -2272,7 +2262,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../../io/readers/index.html">Readers</a>
+          <a href="../../../reference/packages/io/readers/index.html">Readers</a>
           
             <label for="__nav_3_1_6_6">
               <span class="md-nav__icon md-icon"></span>
@@ -2293,7 +2283,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../io/readers/dataframe_reader.html" class="md-nav__link">
+      <a href="../../../reference/packages/io/readers/dataframe_reader.html" class="md-nav__link">
         Dataframe reader
       </a>
     </li>
@@ -2307,7 +2297,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../io/readers/file_reader.html" class="md-nav__link">
+      <a href="../../../reference/packages/io/readers/file_reader.html" class="md-nav__link">
         File reader
       </a>
     </li>
@@ -2321,7 +2311,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../io/readers/jdbc_reader.html" class="md-nav__link">
+      <a href="../../../reference/packages/io/readers/jdbc_reader.html" class="md-nav__link">
         Jdbc reader
       </a>
     </li>
@@ -2335,7 +2325,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../io/readers/kafka_reader.html" class="md-nav__link">
+      <a href="../../../reference/packages/io/readers/kafka_reader.html" class="md-nav__link">
         Kafka reader
       </a>
     </li>
@@ -2349,7 +2339,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../io/readers/query_reader.html" class="md-nav__link">
+      <a href="../../../reference/packages/io/readers/query_reader.html" class="md-nav__link">
         Query reader
       </a>
     </li>
@@ -2363,7 +2353,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../io/readers/sap_b4_reader.html" class="md-nav__link">
+      <a href="../../../reference/packages/io/readers/sap_b4_reader.html" class="md-nav__link">
         Sap b4 reader
       </a>
     </li>
@@ -2377,7 +2367,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../io/readers/sap_bw_reader.html" class="md-nav__link">
+      <a href="../../../reference/packages/io/readers/sap_bw_reader.html" class="md-nav__link">
         Sap bw reader
       </a>
     </li>
@@ -2391,7 +2381,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../io/readers/sftp_reader.html" class="md-nav__link">
+      <a href="../../../reference/packages/io/readers/sftp_reader.html" class="md-nav__link">
         Sftp reader
       </a>
     </li>
@@ -2405,7 +2395,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../io/readers/table_reader.html" class="md-nav__link">
+      <a href="../../../reference/packages/io/readers/table_reader.html" class="md-nav__link">
         Table reader
       </a>
     </li>
@@ -2458,7 +2448,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../../io/writers/index.html">Writers</a>
+          <a href="../../../reference/packages/io/writers/index.html">Writers</a>
           
             <label for="__nav_3_1_6_7">
               <span class="md-nav__icon md-icon"></span>
@@ -2479,7 +2469,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../io/writers/console_writer.html" class="md-nav__link">
+      <a href="../../../reference/packages/io/writers/console_writer.html" class="md-nav__link">
         Console writer
       </a>
     </li>
@@ -2493,7 +2483,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../io/writers/dataframe_writer.html" class="md-nav__link">
+      <a href="../../../reference/packages/io/writers/dataframe_writer.html" class="md-nav__link">
         Dataframe writer
       </a>
     </li>
@@ -2507,7 +2497,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../io/writers/delta_merge_writer.html" class="md-nav__link">
+      <a href="../../../reference/packages/io/writers/delta_merge_writer.html" class="md-nav__link">
         Delta merge writer
       </a>
     </li>
@@ -2521,7 +2511,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../io/writers/file_writer.html" class="md-nav__link">
+      <a href="../../../reference/packages/io/writers/file_writer.html" class="md-nav__link">
         File writer
       </a>
     </li>
@@ -2535,7 +2525,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../io/writers/jdbc_writer.html" class="md-nav__link">
+      <a href="../../../reference/packages/io/writers/jdbc_writer.html" class="md-nav__link">
         Jdbc writer
       </a>
     </li>
@@ -2549,7 +2539,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../io/writers/kafka_writer.html" class="md-nav__link">
+      <a href="../../../reference/packages/io/writers/kafka_writer.html" class="md-nav__link">
         Kafka writer
       </a>
     </li>
@@ -2563,7 +2553,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../io/writers/rest_api_writer.html" class="md-nav__link">
+      <a href="../../../reference/packages/io/writers/rest_api_writer.html" class="md-nav__link">
         Rest api writer
       </a>
     </li>
@@ -2577,7 +2567,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../io/writers/sharepoint_writer.html" class="md-nav__link">
+      <a href="../../../reference/packages/io/writers/sharepoint_writer.html" class="md-nav__link">
         Sharepoint writer
       </a>
     </li>
@@ -2591,7 +2581,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../io/writers/table_writer.html" class="md-nav__link">
+      <a href="../../../reference/packages/io/writers/table_writer.html" class="md-nav__link">
         Table writer
       </a>
     </li>
@@ -2651,7 +2641,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../../terminators/index.html">Terminators</a>
+          <a href="../../../reference/packages/terminators/index.html">Terminators</a>
           
             <label for="__nav_3_1_7">
               <span class="md-nav__icon md-icon"></span>
@@ -2672,7 +2662,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../terminators/cdf_processor.html" class="md-nav__link">
+      <a href="../../../reference/packages/terminators/cdf_processor.html" class="md-nav__link">
         Cdf processor
       </a>
     </li>
@@ -2686,7 +2676,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../terminators/dataset_optimizer.html" class="md-nav__link">
+      <a href="../../../reference/packages/terminators/dataset_optimizer.html" class="md-nav__link">
         Dataset optimizer
       </a>
     </li>
@@ -2700,7 +2690,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../terminators/notifier.html" class="md-nav__link">
+      <a href="../../../reference/packages/terminators/notifier.html" class="md-nav__link">
         Notifier
       </a>
     </li>
@@ -2714,7 +2704,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../terminators/notifier_factory.html" class="md-nav__link">
+      <a href="../../../reference/packages/terminators/notifier_factory.html" class="md-nav__link">
         Notifier factory
       </a>
     </li>
@@ -2728,7 +2718,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../terminators/sensor_terminator.html" class="md-nav__link">
+      <a href="../../../reference/packages/terminators/sensor_terminator.html" class="md-nav__link">
         Sensor terminator
       </a>
     </li>
@@ -2742,7 +2732,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../terminators/spark_terminator.html" class="md-nav__link">
+      <a href="../../../reference/packages/terminators/spark_terminator.html" class="md-nav__link">
         Spark terminator
       </a>
     </li>
@@ -2756,7 +2746,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../terminators/terminator_factory.html" class="md-nav__link">
+      <a href="../../../reference/packages/terminators/terminator_factory.html" class="md-nav__link">
         Terminator factory
       </a>
     </li>
@@ -2788,7 +2778,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../../terminators/notifiers/index.html">Notifiers</a>
+          <a href="../../../reference/packages/terminators/notifiers/index.html">Notifiers</a>
           
             <label for="__nav_3_1_7_8">
               <span class="md-nav__icon md-icon"></span>
@@ -2809,7 +2799,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../terminators/notifiers/email_notifier.html" class="md-nav__link">
+      <a href="../../../reference/packages/terminators/notifiers/email_notifier.html" class="md-nav__link">
         Email notifier
       </a>
     </li>
@@ -2823,7 +2813,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../terminators/notifiers/notification_templates.html" class="md-nav__link">
+      <a href="../../../reference/packages/terminators/notifiers/notification_templates.html" class="md-nav__link">
         Notification templates
       </a>
     </li>
@@ -2899,7 +2889,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../../transformers/index.html">Transformers</a>
+          <a href="../../../reference/packages/transformers/index.html">Transformers</a>
           
             <label for="__nav_3_1_8">
               <span class="md-nav__icon md-icon"></span>
@@ -2920,7 +2910,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../transformers/aggregators.html" class="md-nav__link">
+      <a href="../../../reference/packages/transformers/aggregators.html" class="md-nav__link">
         Aggregators
       </a>
     </li>
@@ -2934,7 +2924,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../transformers/column_creators.html" class="md-nav__link">
+      <a href="../../../reference/packages/transformers/column_creators.html" class="md-nav__link">
         Column creators
       </a>
     </li>
@@ -2948,7 +2938,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../transformers/column_reshapers.html" class="md-nav__link">
+      <a href="../../../reference/packages/transformers/column_reshapers.html" class="md-nav__link">
         Column reshapers
       </a>
     </li>
@@ -2962,7 +2952,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../transformers/condensers.html" class="md-nav__link">
+      <a href="../../../reference/packages/transformers/condensers.html" class="md-nav__link">
         Condensers
       </a>
     </li>
@@ -2976,7 +2966,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../transformers/custom_transformers.html" class="md-nav__link">
+      <a href="../../../reference/packages/transformers/custom_transformers.html" class="md-nav__link">
         Custom transformers
       </a>
     </li>
@@ -2990,7 +2980,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../transformers/data_maskers.html" class="md-nav__link">
+      <a href="../../../reference/packages/transformers/data_maskers.html" class="md-nav__link">
         Data maskers
       </a>
     </li>
@@ -3004,7 +2994,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../transformers/date_transformers.html" class="md-nav__link">
+      <a href="../../../reference/packages/transformers/date_transformers.html" class="md-nav__link">
         Date transformers
       </a>
     </li>
@@ -3018,7 +3008,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../transformers/exceptions.html" class="md-nav__link">
+      <a href="../../../reference/packages/transformers/exceptions.html" class="md-nav__link">
         Exceptions
       </a>
     </li>
@@ -3032,7 +3022,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../transformers/filters.html" class="md-nav__link">
+      <a href="../../../reference/packages/transformers/filters.html" class="md-nav__link">
         Filters
       </a>
     </li>
@@ -3046,7 +3036,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../transformers/joiners.html" class="md-nav__link">
+      <a href="../../../reference/packages/transformers/joiners.html" class="md-nav__link">
         Joiners
       </a>
     </li>
@@ -3060,7 +3050,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../transformers/null_handlers.html" class="md-nav__link">
+      <a href="../../../reference/packages/transformers/null_handlers.html" class="md-nav__link">
         Null handlers
       </a>
     </li>
@@ -3074,7 +3064,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../transformers/optimizers.html" class="md-nav__link">
+      <a href="../../../reference/packages/transformers/optimizers.html" class="md-nav__link">
         Optimizers
       </a>
     </li>
@@ -3088,7 +3078,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../transformers/regex_transformers.html" class="md-nav__link">
+      <a href="../../../reference/packages/transformers/regex_transformers.html" class="md-nav__link">
         Regex transformers
       </a>
     </li>
@@ -3102,7 +3092,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../transformers/repartitioners.html" class="md-nav__link">
+      <a href="../../../reference/packages/transformers/repartitioners.html" class="md-nav__link">
         Repartitioners
       </a>
     </li>
@@ -3116,7 +3106,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../transformers/transformer_factory.html" class="md-nav__link">
+      <a href="../../../reference/packages/transformers/transformer_factory.html" class="md-nav__link">
         Transformer factory
       </a>
     </li>
@@ -3130,7 +3120,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../transformers/unions.html" class="md-nav__link">
+      <a href="../../../reference/packages/transformers/unions.html" class="md-nav__link">
         Unions
       </a>
     </li>
@@ -3144,7 +3134,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../transformers/watermarker.html" class="md-nav__link">
+      <a href="../../../reference/packages/transformers/watermarker.html" class="md-nav__link">
         Watermarker
       </a>
     </li>
@@ -3163,16 +3153,14 @@
               
   
   
-    
-  
   
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
       
       
       
-      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1_9" checked>
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1_9" >
       
       
         
@@ -3217,7 +3205,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../index.html">Utils</a>
+          <a href="../../../reference/packages/utils/index.html">Utils</a>
           
             <label for="__nav_3_1_9">
               <span class="md-nav__icon md-icon"></span>
@@ -3225,7 +3213,7 @@
           
         </div>
       
-      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_1_9_label" aria-expanded="true">
+      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_1_9_label" aria-expanded="false">
         <label class="md-nav__title" for="__nav_3_1_9">
           <span class="md-nav__icon md-icon"></span>
           Utils
@@ -3238,7 +3226,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../acon_utils.html" class="md-nav__link">
+      <a href="../../../reference/packages/utils/acon_utils.html" class="md-nav__link">
         Acon utils
       </a>
     </li>
@@ -3252,7 +3240,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../databricks_utils.html" class="md-nav__link">
+      <a href="../../../reference/packages/utils/databricks_utils.html" class="md-nav__link">
         Databricks utils
       </a>
     </li>
@@ -3266,7 +3254,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../dq_utils.html" class="md-nav__link">
+      <a href="../../../reference/packages/utils/dq_utils.html" class="md-nav__link">
         Dq utils
       </a>
     </li>
@@ -3280,7 +3268,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../engine_usage_stats.html" class="md-nav__link">
+      <a href="../../../reference/packages/utils/engine_usage_stats.html" class="md-nav__link">
         Engine usage stats
       </a>
     </li>
@@ -3294,7 +3282,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../expectations_utils.html" class="md-nav__link">
+      <a href="../../../reference/packages/utils/expectations_utils.html" class="md-nav__link">
         Expectations utils
       </a>
     </li>
@@ -3308,7 +3296,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../file_utils.html" class="md-nav__link">
+      <a href="../../../reference/packages/utils/file_utils.html" class="md-nav__link">
         File utils
       </a>
     </li>
@@ -3322,7 +3310,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../gab_utils.html" class="md-nav__link">
+      <a href="../../../reference/packages/utils/gab_utils.html" class="md-nav__link">
         Gab utils
       </a>
     </li>
@@ -3336,7 +3324,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../logging_handler.html" class="md-nav__link">
+      <a href="../../../reference/packages/utils/logging_handler.html" class="md-nav__link">
         Logging handler
       </a>
     </li>
@@ -3350,7 +3338,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../rest_api.html" class="md-nav__link">
+      <a href="../../../reference/packages/utils/rest_api.html" class="md-nav__link">
         Rest api
       </a>
     </li>
@@ -3364,7 +3352,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../schema_utils.html" class="md-nav__link">
+      <a href="../../../reference/packages/utils/schema_utils.html" class="md-nav__link">
         Schema utils
       </a>
     </li>
@@ -3378,7 +3366,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../sharepoint_utils.html" class="md-nav__link">
+      <a href="../../../reference/packages/utils/sharepoint_utils.html" class="md-nav__link">
         Sharepoint utils
       </a>
     </li>
@@ -3392,7 +3380,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../sql_parser_utils.html" class="md-nav__link">
+      <a href="../../../reference/packages/utils/sql_parser_utils.html" class="md-nav__link">
         Sql parser utils
       </a>
     </li>
@@ -3422,7 +3410,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../configs/index.html">Configs</a>
+          <a href="../../../reference/packages/utils/configs/index.html">Configs</a>
           
             <label for="__nav_3_1_9_13">
               <span class="md-nav__icon md-icon"></span>
@@ -3443,7 +3431,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../configs/config_utils.html" class="md-nav__link">
+      <a href="../../../reference/packages/utils/configs/config_utils.html" class="md-nav__link">
         Config utils
       </a>
     </li>
@@ -3486,7 +3474,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../extraction/index.html">Extraction</a>
+          <a href="../../../reference/packages/utils/extraction/index.html">Extraction</a>
           
             <label for="__nav_3_1_9_14">
               <span class="md-nav__icon md-icon"></span>
@@ -3507,7 +3495,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../extraction/jdbc_extraction_utils.html" class="md-nav__link">
+      <a href="../../../reference/packages/utils/extraction/jdbc_extraction_utils.html" class="md-nav__link">
         Jdbc extraction utils
       </a>
     </li>
@@ -3521,7 +3509,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../extraction/sap_b4_extraction_utils.html" class="md-nav__link">
+      <a href="../../../reference/packages/utils/extraction/sap_b4_extraction_utils.html" class="md-nav__link">
         Sap b4 extraction utils
       </a>
     </li>
@@ -3535,7 +3523,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../extraction/sap_bw_extraction_utils.html" class="md-nav__link">
+      <a href="../../../reference/packages/utils/extraction/sap_bw_extraction_utils.html" class="md-nav__link">
         Sap bw extraction utils
       </a>
     </li>
@@ -3549,7 +3537,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../extraction/sftp_extraction_utils.html" class="md-nav__link">
+      <a href="../../../reference/packages/utils/extraction/sftp_extraction_utils.html" class="md-nav__link">
         Sftp extraction utils
       </a>
     </li>
@@ -3568,16 +3556,14 @@
               
   
   
-    
-  
   
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
       
       
       
-      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1_9_15" checked>
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1_9_15" >
       
       
         
@@ -3596,7 +3582,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="index.html">Storage</a>
+          <a href="../../../reference/packages/utils/storage/index.html">Storage</a>
           
             <label for="__nav_3_1_9_15">
               <span class="md-nav__icon md-icon"></span>
@@ -3604,7 +3590,7 @@
           
         </div>
       
-      <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_3_1_9_15_label" aria-expanded="true">
+      <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_3_1_9_15_label" aria-expanded="false">
         <label class="md-nav__title" for="__nav_3_1_9_15">
           <span class="md-nav__icon md-icon"></span>
           Storage
@@ -3617,7 +3603,7 @@
   
   
     <li class="md-nav__item">
-      <a href="dbfs_storage.html" class="md-nav__link">
+      <a href="../../../reference/packages/utils/storage/dbfs_storage.html" class="md-nav__link">
         Dbfs storage
       </a>
     </li>
@@ -3629,75 +3615,11 @@
               
   
   
-    
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          File storage
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="file_storage.html" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/utils/storage/file_storage.html" class="md-nav__link">
         File storage
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#packages.utils.storage.file_storage" class="md-nav__link">
-    packages.utils.storage.file_storage
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#packages.utils.storage.file_storage.FileStorage" class="md-nav__link">
-    FileStorage
-  </a>
-  
-    <nav class="md-nav" aria-label="FileStorage">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#packages.utils.storage.file_storage.FileStorage.get_file_payload" class="md-nav__link">
-    get_file_payload()
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#packages.utils.storage.file_storage.FileStorage.write_payload_to_file" class="md-nav__link">
-    write_payload_to_file()
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -3709,7 +3631,7 @@
   
   
     <li class="md-nav__item">
-      <a href="file_storage_functions.html" class="md-nav__link">
+      <a href="../../../reference/packages/utils/storage/file_storage_functions.html" class="md-nav__link">
         File storage functions
       </a>
     </li>
@@ -3723,7 +3645,7 @@
   
   
     <li class="md-nav__item">
-      <a href="local_fs_storage.html" class="md-nav__link">
+      <a href="../../../reference/packages/utils/storage/local_fs_storage.html" class="md-nav__link">
         Local fs storage
       </a>
     </li>
@@ -3737,7 +3659,7 @@
   
   
     <li class="md-nav__item">
-      <a href="s3_storage.html" class="md-nav__link">
+      <a href="../../../reference/packages/utils/storage/s3_storage.html" class="md-nav__link">
         S3 storage
       </a>
     </li>
@@ -3790,318 +3712,55 @@
   
 
 
-  <h1>File storage</h1>
-
-<div class="doc doc-object doc-module">
-
-
-<a id="packages.utils.storage.file_storage"></a>
-  <div class="doc doc-contents first">
-  
-      <p>Module for abstract representation of a storage system holding files.</p>
-
-  
-
-  <div class="doc doc-children">
-
-
-
-
-
-
-
-
-<div class="doc doc-object doc-class">
-
-
-
-<h2 id="packages.utils.storage.file_storage.FileStorage" class="doc doc-heading">
-        <code>FileStorage</code>
-
-
-<a href="#packages.utils.storage.file_storage.FileStorage" class="headerlink" title="Permanent link">&para;</a></h2>
-
-
-  <div class="doc doc-contents ">
-      <p class="doc doc-class-bases">
-        Bases: <code><span title="abc.ABC">ABC</span></code></p>
-
-  
-      <p>Abstract file storage class.</p>
-
-
-        <details class="quote">
-          <summary>Source code in <code>mkdocs/lakehouse_engine/packages/utils/storage/file_storage.py</code></summary>
-          <div class="language-python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-8"> 8</a></span>
-<span class="normal"><a href="#__codelineno-0-9"> 9</a></span>
-<span class="normal"><a href="#__codelineno-0-10">10</a></span>
-<span class="normal"><a href="#__codelineno-0-11">11</a></span>
-<span class="normal"><a href="#__codelineno-0-12">12</a></span>
-<span class="normal"><a href="#__codelineno-0-13">13</a></span>
-<span class="normal"><a href="#__codelineno-0-14">14</a></span>
-<span class="normal"><a href="#__codelineno-0-15">15</a></span>
-<span class="normal"><a href="#__codelineno-0-16">16</a></span>
-<span class="normal"><a href="#__codelineno-0-17">17</a></span>
-<span class="normal"><a href="#__codelineno-0-18">18</a></span>
-<span class="normal"><a href="#__codelineno-0-19">19</a></span>
-<span class="normal"><a href="#__codelineno-0-20">20</a></span>
-<span class="normal"><a href="#__codelineno-0-21">21</a></span>
-<span class="normal"><a href="#__codelineno-0-22">22</a></span>
-<span class="normal"><a href="#__codelineno-0-23">23</a></span>
-<span class="normal"><a href="#__codelineno-0-24">24</a></span>
-<span class="normal"><a href="#__codelineno-0-25">25</a></span>
-<span class="normal"><a href="#__codelineno-0-26">26</a></span>
-<span class="normal"><a href="#__codelineno-0-27">27</a></span>
-<span class="normal"><a href="#__codelineno-0-28">28</a></span>
-<span class="normal"><a href="#__codelineno-0-29">29</a></span>
-<span class="normal"><a href="#__codelineno-0-30">30</a></span>
-<span class="normal"><a href="#__codelineno-0-31">31</a></span>
-<span class="normal"><a href="#__codelineno-0-32">32</a></span>
-<span class="normal"><a href="#__codelineno-0-33">33</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8"></a><span class="k">class</span><span class="w"> </span><span class="nc">FileStorage</span><span class="p">(</span><span class="n">ABC</span><span class="p">):</span>
-</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Abstract file storage class.&quot;&quot;&quot;</span>
-</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10"></a>
-</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11"></a>    <span class="nd">@classmethod</span>
-</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12"></a>    <span class="nd">@abstractmethod</span>
-</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">get_file_payload</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">url</span><span class="p">:</span> <span class="n">ParseResult</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
-</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Get the payload of a file.</span>
-</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15"></a>
-</span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16"></a><span class="sd">        Args:</span>
-</span><span id="__span-0-17"><a id="__codelineno-0-17" name="__codelineno-0-17"></a><span class="sd">            url: url of the file.</span>
-</span><span id="__span-0-18"><a id="__codelineno-0-18" name="__codelineno-0-18"></a>
-</span><span id="__span-0-19"><a id="__codelineno-0-19" name="__codelineno-0-19"></a><span class="sd">        Returns:</span>
-</span><span id="__span-0-20"><a id="__codelineno-0-20" name="__codelineno-0-20"></a><span class="sd">            File payload/content.</span>
-</span><span id="__span-0-21"><a id="__codelineno-0-21" name="__codelineno-0-21"></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="__span-0-22"><a id="__codelineno-0-22" name="__codelineno-0-22"></a>        <span class="k">pass</span>
-</span><span id="__span-0-23"><a id="__codelineno-0-23" name="__codelineno-0-23"></a>
-</span><span id="__span-0-24"><a id="__codelineno-0-24" name="__codelineno-0-24"></a>    <span class="nd">@classmethod</span>
-</span><span id="__span-0-25"><a id="__codelineno-0-25" name="__codelineno-0-25"></a>    <span class="nd">@abstractmethod</span>
-</span><span id="__span-0-26"><a id="__codelineno-0-26" name="__codelineno-0-26"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">write_payload_to_file</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">url</span><span class="p">:</span> <span class="n">ParseResult</span><span class="p">,</span> <span class="n">content</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-</span><span id="__span-0-27"><a id="__codelineno-0-27" name="__codelineno-0-27"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Write payload into a file.</span>
-</span><span id="__span-0-28"><a id="__codelineno-0-28" name="__codelineno-0-28"></a>
-</span><span id="__span-0-29"><a id="__codelineno-0-29" name="__codelineno-0-29"></a><span class="sd">        Args:</span>
-</span><span id="__span-0-30"><a id="__codelineno-0-30" name="__codelineno-0-30"></a><span class="sd">            url: url of the file.</span>
-</span><span id="__span-0-31"><a id="__codelineno-0-31" name="__codelineno-0-31"></a><span class="sd">            content: content to write into the file.</span>
-</span><span id="__span-0-32"><a id="__codelineno-0-32" name="__codelineno-0-32"></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="__span-0-33"><a id="__codelineno-0-33" name="__codelineno-0-33"></a>        <span class="k">pass</span>
-</span></code></pre></div></td></tr></table></div>
-        </details>
-
-  
-
-  <div class="doc doc-children">
-
-
-
-
-
-
-
-
-
-<div class="doc doc-object doc-function">
-
-
-
-<h3 id="packages.utils.storage.file_storage.FileStorage.get_file_payload" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">get_file_payload</span><span class="p">(</span><span class="n">url</span><span class="p">)</span></code>
-  
-  <span class="doc doc-labels">
-      <small class="doc doc-label doc-label-classmethod"><code>classmethod</code></small>
-      <small class="doc doc-label doc-label-abstractmethod"><code>abstractmethod</code></small>
-  </span>
-
-<a href="#packages.utils.storage.file_storage.FileStorage.get_file_payload" class="headerlink" title="Permanent link">&para;</a></h3>
-
-
-  <div class="doc doc-contents ">
-  
-      <p>Get the payload of a file.</p>
-
-  <p><strong>Parameters:</strong></p>
-  <table>
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Type</th>
-        <th>Description</th>
-        <th>Default</th>
-      </tr>
-    </thead>
-    <tbody>
-        <tr>
-          <td><code>url</code></td>
-          <td>
-                <code><span title="urllib.parse.ParseResult">ParseResult</span></code>
-          </td>
-          <td>
-            <div class="doc-md-description">
-              <p>url of the file.</p>
-            </div>
-          </td>
-          <td>
-              <em>required</em>
-          </td>
-        </tr>
-    </tbody>
-  </table>
-
-  <p><strong>Returns:</strong></p>
-  <table>
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-        <tr>
-          <td>
-                <code><span title="typing.Any">Any</span></code>
-          </td>
-          <td>
-            <div class="doc-md-description">
-              <p>File payload/content.</p>
-            </div>
-          </td>
-        </tr>
-    </tbody>
-  </table>
-
-      <details class="quote">
-        <summary>Source code in <code>mkdocs/lakehouse_engine/packages/utils/storage/file_storage.py</code></summary>
-        <div class="language-python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-11">11</a></span>
-<span class="normal"><a href="#__codelineno-0-12">12</a></span>
-<span class="normal"><a href="#__codelineno-0-13">13</a></span>
-<span class="normal"><a href="#__codelineno-0-14">14</a></span>
-<span class="normal"><a href="#__codelineno-0-15">15</a></span>
-<span class="normal"><a href="#__codelineno-0-16">16</a></span>
-<span class="normal"><a href="#__codelineno-0-17">17</a></span>
-<span class="normal"><a href="#__codelineno-0-18">18</a></span>
-<span class="normal"><a href="#__codelineno-0-19">19</a></span>
-<span class="normal"><a href="#__codelineno-0-20">20</a></span>
-<span class="normal"><a href="#__codelineno-0-21">21</a></span>
-<span class="normal"><a href="#__codelineno-0-22">22</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11"></a><span class="nd">@classmethod</span>
-</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12"></a><span class="nd">@abstractmethod</span>
-</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13"></a><span class="k">def</span><span class="w"> </span><span class="nf">get_file_payload</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">url</span><span class="p">:</span> <span class="n">ParseResult</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
-</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Get the payload of a file.</span>
-</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15"></a>
-</span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16"></a><span class="sd">    Args:</span>
-</span><span id="__span-0-17"><a id="__codelineno-0-17" name="__codelineno-0-17"></a><span class="sd">        url: url of the file.</span>
-</span><span id="__span-0-18"><a id="__codelineno-0-18" name="__codelineno-0-18"></a>
-</span><span id="__span-0-19"><a id="__codelineno-0-19" name="__codelineno-0-19"></a><span class="sd">    Returns:</span>
-</span><span id="__span-0-20"><a id="__codelineno-0-20" name="__codelineno-0-20"></a><span class="sd">        File payload/content.</span>
-</span><span id="__span-0-21"><a id="__codelineno-0-21" name="__codelineno-0-21"></a><span class="sd">    &quot;&quot;&quot;</span>
-</span><span id="__span-0-22"><a id="__codelineno-0-22" name="__codelineno-0-22"></a>    <span class="k">pass</span>
-</span></code></pre></div></td></tr></table></div>
-      </details>
-  </div>
-
-</div>
-
-<div class="doc doc-object doc-function">
-
-
-
-<h3 id="packages.utils.storage.file_storage.FileStorage.write_payload_to_file" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">write_payload_to_file</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">content</span><span class="p">)</span></code>
-  
-  <span class="doc doc-labels">
-      <small class="doc doc-label doc-label-classmethod"><code>classmethod</code></small>
-      <small class="doc doc-label doc-label-abstractmethod"><code>abstractmethod</code></small>
-  </span>
-
-<a href="#packages.utils.storage.file_storage.FileStorage.write_payload_to_file" class="headerlink" title="Permanent link">&para;</a></h3>
-
-
-  <div class="doc doc-contents ">
-  
-      <p>Write payload into a file.</p>
-
-  <p><strong>Parameters:</strong></p>
-  <table>
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Type</th>
-        <th>Description</th>
-        <th>Default</th>
-      </tr>
-    </thead>
-    <tbody>
-        <tr>
-          <td><code>url</code></td>
-          <td>
-                <code><span title="urllib.parse.ParseResult">ParseResult</span></code>
-          </td>
-          <td>
-            <div class="doc-md-description">
-              <p>url of the file.</p>
-            </div>
-          </td>
-          <td>
-              <em>required</em>
-          </td>
-        </tr>
-        <tr>
-          <td><code>content</code></td>
-          <td>
-                <code>str</code>
-          </td>
-          <td>
-            <div class="doc-md-description">
-              <p>content to write into the file.</p>
-            </div>
-          </td>
-          <td>
-              <em>required</em>
-          </td>
-        </tr>
-    </tbody>
-  </table>
-
-      <details class="quote">
-        <summary>Source code in <code>mkdocs/lakehouse_engine/packages/utils/storage/file_storage.py</code></summary>
-        <div class="language-python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-24">24</a></span>
-<span class="normal"><a href="#__codelineno-0-25">25</a></span>
-<span class="normal"><a href="#__codelineno-0-26">26</a></span>
-<span class="normal"><a href="#__codelineno-0-27">27</a></span>
-<span class="normal"><a href="#__codelineno-0-28">28</a></span>
-<span class="normal"><a href="#__codelineno-0-29">29</a></span>
-<span class="normal"><a href="#__codelineno-0-30">30</a></span>
-<span class="normal"><a href="#__codelineno-0-31">31</a></span>
-<span class="normal"><a href="#__codelineno-0-32">32</a></span>
-<span class="normal"><a href="#__codelineno-0-33">33</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-0-24"><a id="__codelineno-0-24" name="__codelineno-0-24"></a><span class="nd">@classmethod</span>
-</span><span id="__span-0-25"><a id="__codelineno-0-25" name="__codelineno-0-25"></a><span class="nd">@abstractmethod</span>
-</span><span id="__span-0-26"><a id="__codelineno-0-26" name="__codelineno-0-26"></a><span class="k">def</span><span class="w"> </span><span class="nf">write_payload_to_file</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">url</span><span class="p">:</span> <span class="n">ParseResult</span><span class="p">,</span> <span class="n">content</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-</span><span id="__span-0-27"><a id="__codelineno-0-27" name="__codelineno-0-27"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Write payload into a file.</span>
-</span><span id="__span-0-28"><a id="__codelineno-0-28" name="__codelineno-0-28"></a>
-</span><span id="__span-0-29"><a id="__codelineno-0-29" name="__codelineno-0-29"></a><span class="sd">    Args:</span>
-</span><span id="__span-0-30"><a id="__codelineno-0-30" name="__codelineno-0-30"></a><span class="sd">        url: url of the file.</span>
-</span><span id="__span-0-31"><a id="__codelineno-0-31" name="__codelineno-0-31"></a><span class="sd">        content: content to write into the file.</span>
-</span><span id="__span-0-32"><a id="__codelineno-0-32" name="__codelineno-0-32"></a><span class="sd">    &quot;&quot;&quot;</span>
-</span><span id="__span-0-33"><a id="__codelineno-0-33" name="__codelineno-0-33"></a>    <span class="k">pass</span>
-</span></code></pre></div></td></tr></table></div>
-      </details>
-  </div>
-
-</div>
-
-
-
-  </div>
-
-  </div>
-
-</div>
-
-
-
-
-  </div>
-
-  </div>
-
-</div>
+<h1 id="sql-custom-transformer">SQL Custom Transformer<a class="headerlink" href="#sql-custom-transformer" title="Permanent link">&para;</a></h1>
+<p>The SQL Custom Transformer executes a SQL transformation provided by the user.This transformer can be very useful whenever the user wants to perform SQL-based transformations that are not natively supported by the lakehouse engine transformers.</p>
+<p>The transformer receives the SQL query to be executed. This can read from any table or view from the catalog, or any dataframe registered as a temp view.</p>
+<blockquote>
+<p>To register a dataframe as a temp view you can use the "temp_view" config in the input_specs, as shown below.</p>
+</blockquote>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">lakehouse_engine.engine</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_data</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="n">acon</span> <span class="o">=</span> <span class="p">{</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>    <span class="s2">&quot;input_specs&quot;</span><span class="p">:</span> <span class="p">[</span>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>        <span class="p">{</span>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>            <span class="s2">&quot;spec_id&quot;</span><span class="p">:</span> <span class="s2">&quot;sales_source&quot;</span><span class="p">,</span>
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>            <span class="s2">&quot;read_type&quot;</span><span class="p">:</span> <span class="s2">&quot;batch&quot;</span><span class="p">,</span>
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>            <span class="s2">&quot;data_format&quot;</span><span class="p">:</span> <span class="s2">&quot;csv&quot;</span><span class="p">,</span>
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>            <span class="s2">&quot;options&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;mode&quot;</span><span class="p">:</span> <span class="s2">&quot;FAILFAST&quot;</span><span class="p">,</span> <span class="s2">&quot;header&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span> <span class="s2">&quot;delimiter&quot;</span><span class="p">:</span> <span class="s2">&quot;|&quot;</span><span class="p">},</span>
+</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>            <span class="s2">&quot;schema_path&quot;</span><span class="p">:</span> <span class="s2">&quot;file:///app/tests/lakehouse/in/feature/&quot;</span>
+</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>            <span class="s2">&quot;data_loader_custom_transformer/sql_transformation/&quot;</span>
+</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>            <span class="s2">&quot;source_schema.json&quot;</span><span class="p">,</span>
+</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>            <span class="s2">&quot;location&quot;</span><span class="p">:</span> <span class="s2">&quot;file:///app/tests/lakehouse/in/feature/&quot;</span>
+</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>            <span class="s2">&quot;data_loader_custom_transformer/sql_transformation/data&quot;</span><span class="p">,</span>
+</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>            <span class="s2">&quot;temp_view&quot;</span><span class="p">:</span> <span class="s2">&quot;sales_sql&quot;</span><span class="p">,</span>
+</span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>        <span class="p">}</span>
+</span><span id="__span-0-17"><a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>    <span class="p">],</span>
+</span><span id="__span-0-18"><a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a>    <span class="s2">&quot;transform_specs&quot;</span><span class="p">:</span> <span class="p">[</span>
+</span><span id="__span-0-19"><a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a>        <span class="p">{</span>
+</span><span id="__span-0-20"><a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a>            <span class="s2">&quot;spec_id&quot;</span><span class="p">:</span> <span class="s2">&quot;calculated_kpi&quot;</span><span class="p">,</span>
+</span><span id="__span-0-21"><a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a>            <span class="s2">&quot;input_id&quot;</span><span class="p">:</span> <span class="s2">&quot;sales_source&quot;</span><span class="p">,</span>
+</span><span id="__span-0-22"><a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a>            <span class="s2">&quot;transformers&quot;</span><span class="p">:</span> <span class="p">[</span>
+</span><span id="__span-0-23"><a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a>                <span class="p">{</span>
+</span><span id="__span-0-24"><a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a>                    <span class="s2">&quot;function&quot;</span><span class="p">:</span> <span class="s2">&quot;sql_transformation&quot;</span><span class="p">,</span>
+</span><span id="__span-0-25"><a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a>                    <span class="s2">&quot;args&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;sql&quot;</span><span class="p">:</span> <span class="n">SQL</span><span class="p">},</span>
+</span><span id="__span-0-26"><a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a>                <span class="p">}</span>
+</span><span id="__span-0-27"><a id="__codelineno-0-27" name="__codelineno-0-27" href="#__codelineno-0-27"></a>            <span class="p">],</span>
+</span><span id="__span-0-28"><a id="__codelineno-0-28" name="__codelineno-0-28" href="#__codelineno-0-28"></a>        <span class="p">}</span>
+</span><span id="__span-0-29"><a id="__codelineno-0-29" name="__codelineno-0-29" href="#__codelineno-0-29"></a>    <span class="p">],</span>
+</span><span id="__span-0-30"><a id="__codelineno-0-30" name="__codelineno-0-30" href="#__codelineno-0-30"></a>    <span class="s2">&quot;output_specs&quot;</span><span class="p">:</span> <span class="p">[</span>
+</span><span id="__span-0-31"><a id="__codelineno-0-31" name="__codelineno-0-31" href="#__codelineno-0-31"></a>        <span class="p">{</span>
+</span><span id="__span-0-32"><a id="__codelineno-0-32" name="__codelineno-0-32" href="#__codelineno-0-32"></a>            <span class="s2">&quot;spec_id&quot;</span><span class="p">:</span> <span class="s2">&quot;sales_bronze&quot;</span><span class="p">,</span>
+</span><span id="__span-0-33"><a id="__codelineno-0-33" name="__codelineno-0-33" href="#__codelineno-0-33"></a>            <span class="s2">&quot;input_id&quot;</span><span class="p">:</span> <span class="s2">&quot;calculated_kpi&quot;</span><span class="p">,</span>
+</span><span id="__span-0-34"><a id="__codelineno-0-34" name="__codelineno-0-34" href="#__codelineno-0-34"></a>            <span class="s2">&quot;write_type&quot;</span><span class="p">:</span> <span class="s2">&quot;overwrite&quot;</span><span class="p">,</span>
+</span><span id="__span-0-35"><a id="__codelineno-0-35" name="__codelineno-0-35" href="#__codelineno-0-35"></a>            <span class="s2">&quot;data_format&quot;</span><span class="p">:</span> <span class="s2">&quot;delta&quot;</span><span class="p">,</span>
+</span><span id="__span-0-36"><a id="__codelineno-0-36" name="__codelineno-0-36" href="#__codelineno-0-36"></a>            <span class="s2">&quot;location&quot;</span><span class="p">:</span> <span class="s2">&quot;file:///app/tests/lakehouse/out/feature/&quot;</span>
+</span><span id="__span-0-37"><a id="__codelineno-0-37" name="__codelineno-0-37" href="#__codelineno-0-37"></a>            <span class="s2">&quot;data_loader_custom_transformer/sql_transformation/data&quot;</span><span class="p">,</span>
+</span><span id="__span-0-38"><a id="__codelineno-0-38" name="__codelineno-0-38" href="#__codelineno-0-38"></a>        <span class="p">}</span>
+</span><span id="__span-0-39"><a id="__codelineno-0-39" name="__codelineno-0-39" href="#__codelineno-0-39"></a>    <span class="p">],</span>
+</span><span id="__span-0-40"><a id="__codelineno-0-40" name="__codelineno-0-40" href="#__codelineno-0-40"></a><span class="p">}</span>
+</span><span id="__span-0-41"><a id="__codelineno-0-41" name="__codelineno-0-41" href="#__codelineno-0-41"></a>
+</span><span id="__span-0-42"><a id="__codelineno-0-42" name="__codelineno-0-42" href="#__codelineno-0-42"></a><span class="n">load_data</span><span class="p">(</span><span class="n">acon</span><span class="o">=</span><span class="n">acon</span><span class="p">)</span>
+</span></code></pre></div>
 
 
 
@@ -4165,13 +3824,13 @@
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
-    <script id="__config" type="application/json">{"base": "../../../..", "features": ["content.code.annotate", "content.code.annotation", "content.code.copy", "content.code.select", "content.tabs.link", "content.tooltips", "navigation.indexes", "navigation.path", "navigation.tabs", "navigation.tabs.instant", "navigation.tabs.sticky", "navigation.top", "navigation.sections", "toc.follow", "toc.integrate", "search.highlight", "search.suggest"], "search": "../../../../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["content.code.annotate", "content.code.annotation", "content.code.copy", "content.code.select", "content.tabs.link", "content.tooltips", "navigation.indexes", "navigation.path", "navigation.tabs", "navigation.tabs.instant", "navigation.tabs.sticky", "navigation.top", "navigation.sections", "toc.follow", "toc.integrate", "search.highlight", "search.suggest"], "search": "../../../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="../../../../assets/javascripts/bundle.b425cdc4.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.b425cdc4.min.js"></script>
       
         
-          <script src="../../../../assets/_markdown_exec_pyodide.js"></script>
+          <script src="../../../assets/_markdown_exec_pyodide.js"></script>
         
       
     
