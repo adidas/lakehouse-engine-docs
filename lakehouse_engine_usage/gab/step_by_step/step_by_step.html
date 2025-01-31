@@ -1,0 +1,4304 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://adidas.github.io/lakehouse-engine-docs/lakehouse_engine_usage/gab/step_by_step/step_by_step.html">
+      
+      
+        <link rel="prev" href="../gab.html">
+      
+      
+        <link rel="next" href="../../../reference/index.html">
+      
+      <link rel="icon" href="../../../assets/img/lakehouse_engine_logo_symbol_large.png">
+      <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.17">
+    
+    
+      
+        <title>Step-by-Step - Lakehouse Engine Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.26e3688c.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ecc896b0.min.css">
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/_markdown_exec_pyodide.css">
+    
+      <link rel="stylesheet" href="../../../assets/_mkdocstrings.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="yellow">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#gab-step-by-step" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../../index.html" title="Lakehouse Engine Documentation" class="md-header__button md-logo" aria-label="Lakehouse Engine Documentation" data-md-component="logo">
+      
+  <img src="../../../assets/img/lakehouse_engine_logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Lakehouse Engine Documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Step-by-Step
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+          
+            
+            
+            
+            <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="yellow"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+            
+              <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3Z"/></svg>
+              </label>
+            
+          
+            
+            
+            
+            <input class="md-option" data-md-color-media="(prefers-color-scheme: dark), (prefers-color-scheme: no-preference)" data-md-color-scheme="slate" data-md-color-primary="blue" data-md-color-accent="yellow"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_2">
+            
+              <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5M7 15a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3Z"/></svg>
+              </label>
+            
+          
+        </form>
+      
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/adidas/lakehouse-engine" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M186.1 328.7c0 20.9-10.9 55.1-36.7 55.1s-36.7-34.2-36.7-55.1 10.9-55.1 36.7-55.1 36.7 34.2 36.7 55.1zM480 278.2c0 31.9-3.2 65.7-17.5 95-37.9 76.6-142.1 74.8-216.7 74.8-75.8 0-186.2 2.7-225.6-74.8-14.6-29-20.2-63.1-20.2-95 0-41.9 13.9-81.5 41.5-113.6-5.2-15.8-7.7-32.4-7.7-48.8 0-21.5 4.9-32.3 14.6-51.8 45.3 0 74.3 9 108.8 36 29-6.9 58.8-10 88.7-10 27 0 54.2 2.9 80.4 9.2 34-26.7 63-35.2 107.8-35.2 9.8 19.5 14.6 30.3 14.6 51.8 0 16.4-2.6 32.7-7.7 48.2 27.5 32.4 39 72.3 39 114.2zm-64.3 50.5c0-43.9-26.7-82.6-73.5-82.6-18.9 0-37 3.4-56 6-14.9 2.3-29.8 3.2-45.1 3.2-15.2 0-30.1-.9-45.1-3.2-18.7-2.6-37-6-56-6-46.8 0-73.5 38.7-73.5 82.6 0 87.8 80.4 101.3 150.4 101.3h48.2c70.3 0 150.6-13.4 150.6-101.3zm-82.6-55.1c-25.8 0-36.7 34.2-36.7 55.1s10.9 55.1 36.7 55.1 36.7-34.2 36.7-55.1-10.9-55.1-36.7-55.1z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    lakehouse-engine
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../../index.html" class="md-tabs__link">
+      Lakehouse Engine
+    </a>
+  </li>
+
+      
+        
+  
+  
+    
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../lakehouse_engine_usage.html" class="md-tabs__link md-tabs__link--active">
+        How to use the Lakehouse Engine?
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../../reference/index.html" class="md-tabs__link">
+      API Documentation
+    </a>
+  </li>
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../index.html" title="Lakehouse Engine Documentation" class="md-nav__button md-logo" aria-label="Lakehouse Engine Documentation" data-md-component="logo">
+      
+  <img src="../../../assets/img/lakehouse_engine_logo.png" alt="logo">
+
+    </a>
+    Lakehouse Engine Documentation
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/adidas/lakehouse-engine" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M186.1 328.7c0 20.9-10.9 55.1-36.7 55.1s-36.7-34.2-36.7-55.1 10.9-55.1 36.7-55.1 36.7 34.2 36.7 55.1zM480 278.2c0 31.9-3.2 65.7-17.5 95-37.9 76.6-142.1 74.8-216.7 74.8-75.8 0-186.2 2.7-225.6-74.8-14.6-29-20.2-63.1-20.2-95 0-41.9 13.9-81.5 41.5-113.6-5.2-15.8-7.7-32.4-7.7-48.8 0-21.5 4.9-32.3 14.6-51.8 45.3 0 74.3 9 108.8 36 29-6.9 58.8-10 88.7-10 27 0 54.2 2.9 80.4 9.2 34-26.7 63-35.2 107.8-35.2 9.8 19.5 14.6 30.3 14.6 51.8 0 16.4-2.6 32.7-7.7 48.2 27.5 32.4 39 72.3 39 114.2zm-64.3 50.5c0-43.9-26.7-82.6-73.5-82.6-18.9 0-37 3.4-56 6-14.9 2.3-29.8 3.2-45.1 3.2-15.2 0-30.1-.9-45.1-3.2-18.7-2.6-37-6-56-6-46.8 0-73.5 38.7-73.5 82.6 0 87.8 80.4 101.3 150.4 101.3h48.2c70.3 0 150.6-13.4 150.6-101.3zm-82.6-55.1c-25.8 0-36.7 34.2-36.7 55.1s10.9 55.1 36.7 55.1 36.7-34.2 36.7-55.1-10.9-55.1-36.7-55.1z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    lakehouse-engine
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../index.html" class="md-nav__link">
+        Lakehouse Engine
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+      
+      
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+          How to use the Lakehouse Engine?
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          How to use the Lakehouse Engine?
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lakehouse_engine_usage.html" class="md-nav__link">
+        Overview
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" checked>
+      
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+          Algorithms
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="true">
+        <label class="md-nav__title" for="__nav_2_2">
+          <span class="md-nav__icon md-icon"></span>
+          Algorithms
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2_1" >
+      
+      
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_2_2_1" id="__nav_2_2_1_label" tabindex="0">
+          Data Loader
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_2_1_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_2_1">
+          <span class="md-nav__icon md-icon"></span>
+          Data Loader
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data_loader/data_loader.html" class="md-nav__link">
+        Overview
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2_1_2" >
+      
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_2_2_1_2" id="__nav_2_2_1_2_label" tabindex="0">
+          Scenarios
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_2_2_1_2_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_2_1_2">
+          <span class="md-nav__icon md-icon"></span>
+          Scenarios
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data_loader/append_load_from_jdbc_with_permissive_mode/append_load_from_jdbc_with_permissive_mode.html" class="md-nav__link">
+        Append Load from JDBC with PERMISSIVE mode (default)
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data_loader/append_load_with_failfast/append_load_with_failfast.html" class="md-nav__link">
+        Append Load with FAILFAST
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data_loader/batch_delta_load_init_delta_backfill_with_merge/batch_delta_load_init_delta_backfill_with_merge.html" class="md-nav__link">
+        Batch Delta Load Init, Delta and Backfill with Merge
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data_loader/custom_transformer/custom_transformer.html" class="md-nav__link">
+        Custom Transformer
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data_loader/custom_transformer_sql/custom_transformer_sql.html" class="md-nav__link">
+        Custom Transformer (SQL)
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data_loader/extract_from_sap_b4_adso/extract_from_sap_b4_adso.html" class="md-nav__link">
+        Extract from SAP B4 ADSOs
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data_loader/extract_from_sap_bw_dso/extract_from_sap_bw_dso.html" class="md-nav__link">
+        Extract from SAP BW DSOs
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data_loader/extract_from_sftp/extract_from_sftp.html" class="md-nav__link">
+        Extract from SFTP
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data_loader/extract_using_jdbc_connection/extract_using_jdbc_connection.html" class="md-nav__link">
+        Extract using JDBC connection
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data_loader/filtered_full_load/filtered_full_load.html" class="md-nav__link">
+        Filtered Full Load
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data_loader/filtered_full_load_with_selective_replace/filtered_full_load_with_selective_replace.html" class="md-nav__link">
+        Filtered Full Load with Selective Replace
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data_loader/flatten_schema_and_explode_columns/flatten_schema_and_explode_columns.html" class="md-nav__link">
+        Flatten Schema and Explode Columns
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data_loader/full_load/full_load.html" class="md-nav__link">
+        Full Load
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data_loader/read_from_dataframe/read_from_dataframe.html" class="md-nav__link">
+        Read from Dataframe
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data_loader/streaming_append_load_with_malformed/streaming_append_load_with_malformed.html" class="md-nav__link">
+        Streaming Append Load with DROPMALFORMED
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data_loader/streaming_append_load_with_terminator/streaming_append_load_with_terminator.html" class="md-nav__link">
+        Streaming Append Load with Optimize Dataset Terminator
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data_loader/streaming_delta_load_with_group_and_rank_condensation/streaming_delta_load_with_group_and_rank_condensation.html" class="md-nav__link">
+        Streaming Delta Load with Group and Rank Condensation
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data_loader/streaming_delta_with_late_arriving_and_out_of_order_events/streaming_delta_with_late_arriving_and_out_of_order_events.html" class="md-nav__link">
+        Streaming Delta Load with Late Arriving and Out of Order Events (with and without watermarking)
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data_loader/write_and_read_dataframe/write_and_read_dataframe.html" class="md-nav__link">
+        Write and Read Dataframe
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data_loader/write_to_console/write_to_console.html" class="md-nav__link">
+        Write to Console
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data_loader/write_to_rest_api/write_to_rest_api.html" class="md-nav__link">
+        Write to REST API
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2_2" >
+      
+      
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_2_2_2" id="__nav_2_2_2_label" tabindex="0">
+          Data Quality
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_2_2_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_2_2">
+          <span class="md-nav__icon md-icon"></span>
+          Data Quality
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data_quality/data_quality.html" class="md-nav__link">
+        Overview
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2_2_2" >
+      
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_2_2_2_2" id="__nav_2_2_2_2_label" tabindex="0">
+          Scenarios
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_2_2_2_2_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_2_2_2">
+          <span class="md-nav__icon md-icon"></span>
+          Scenarios
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data_quality/custom_expectations/custom_expectations.html" class="md-nav__link">
+        Custom Expectations
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data_quality/data_quality_validator/data_quality_validator.html" class="md-nav__link">
+        Data Quality Validator
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data_quality/minimal_example/minimal_example.html" class="md-nav__link">
+        Minimal Example
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data_quality/prisma/prisma.html" class="md-nav__link">
+        Prisma
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data_quality/result_sink/result_sink.html" class="md-nav__link">
+        Result Sink
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data_quality/row_tagging/row_tagging.html" class="md-nav__link">
+        Row Tagging
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data_quality/validations_failing/validations_failing.html" class="md-nav__link">
+        Validations Failing
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2_3" >
+      
+      
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_2_2_3" id="__nav_2_2_3_label" tabindex="0">
+          Reconciliator
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_2_3_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_2_3">
+          <span class="md-nav__icon md-icon"></span>
+          Reconciliator
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reconciliator/reconciliator.html" class="md-nav__link">
+        Overview
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2_4" >
+      
+      
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_2_2_4" id="__nav_2_2_4_label" tabindex="0">
+          Sensor
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_2_4_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_2_4">
+          <span class="md-nav__icon md-icon"></span>
+          Sensor
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sensor/sensor.html" class="md-nav__link">
+        Overview
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2_4_2" >
+      
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_2_2_4_2" id="__nav_2_2_4_2_label" tabindex="0">
+          Scenarios
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_2_2_4_2_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_2_4_2">
+          <span class="md-nav__icon md-icon"></span>
+          Scenarios
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sensor/delta_table/delta_table.html" class="md-nav__link">
+        Delta Table
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sensor/delta_upstream_sensor_table/delta_upstream_sensor_table.html" class="md-nav__link">
+        Sensor from other Sensor Delta Table
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sensor/file/file.html" class="md-nav__link">
+        Sensor from Files
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sensor/jdbc_table/jdbc_table.html" class="md-nav__link">
+        Sensor from JDBC
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sensor/kafka/kafka.html" class="md-nav__link">
+        Sensor from Kafka
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sensor/sap_bw_b4/sap_bw_b4.html" class="md-nav__link">
+        Sensor from SAP
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sensor/update_sensor_status/update_sensor_status.html" class="md-nav__link">
+        Update Sensor control Delta Table after processing the data
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2_5" checked>
+      
+      
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_2_2_5" id="__nav_2_2_5_label" tabindex="0">
+          GAB
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_2_5_label" aria-expanded="true">
+        <label class="md-nav__title" for="__nav_2_2_5">
+          <span class="md-nav__icon md-icon"></span>
+          GAB
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../gab.html" class="md-nav__link">
+        Overview
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Step-by-Step
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="step_by_step.html" class="md-nav__link md-nav__link--active">
+        Step-by-Step
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-data-product-setup-based-on-templated-files" class="md-nav__link">
+    1. Data Product Setup based on templated files
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-use-case-setup" class="md-nav__link">
+    2. Use case setup
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Use case setup">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#templating-sql-query" class="md-nav__link">
+    Templating SQL Query
+  </a>
+  
+    <nav class="md-nav" aria-label="Templating SQL Query">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#available-placeholders" class="md-nav__link">
+    Available Placeholders:
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sample-combined-query-making-use-of-the-placeholders" class="md-nav__link">
+    Sample combined query making use of the placeholders:
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#use-case-configuration-using-the-query_builder_helper" class="md-nav__link">
+    Use case configuration using the query_builder_helper
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-use-case-execution" class="md-nav__link">
+    3. Use case execution
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-consuming-the-data" class="md-nav__link">
+    4. Consuming the data
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+      
+      
+        
+          
+            
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../../reference/index.html">API Documentation</a>
+          
+            <label for="__nav_3">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          API Documentation
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1" >
+      
+      
+        
+          
+        
+          
+            
+          
+        
+          
+            
+          
+        
+          
+            
+          
+        
+          
+            
+          
+        
+          
+            
+          
+        
+          
+            
+          
+        
+          
+            
+          
+        
+          
+            
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../../reference/packages/index.html">Packages</a>
+          
+            <label for="__nav_3_1">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3_1">
+          <span class="md-nav__icon md-icon"></span>
+          Packages
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/engine.html" class="md-nav__link">
+        Engine
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1_2" >
+      
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../../reference/packages/algorithms/index.html">Algorithms</a>
+          
+            <label for="__nav_3_1_2">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_1_2_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3_1_2">
+          <span class="md-nav__icon md-icon"></span>
+          Algorithms
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/algorithms/algorithm.html" class="md-nav__link">
+        Algorithm
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/algorithms/data_loader.html" class="md-nav__link">
+        Data loader
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/algorithms/dq_validator.html" class="md-nav__link">
+        Dq validator
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/algorithms/exceptions.html" class="md-nav__link">
+        Exceptions
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/algorithms/gab.html" class="md-nav__link">
+        Gab
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/algorithms/reconciliator.html" class="md-nav__link">
+        Reconciliator
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/algorithms/sensor.html" class="md-nav__link">
+        Sensor
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/configs/index.html" class="md-nav__link">
+        Configs
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1_4" >
+      
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../../reference/packages/core/index.html">Core</a>
+          
+            <label for="__nav_3_1_4">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_1_4_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3_1_4">
+          <span class="md-nav__icon md-icon"></span>
+          Core
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/core/dbfs_file_manager.html" class="md-nav__link">
+        Dbfs file manager
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/core/definitions.html" class="md-nav__link">
+        Definitions
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/core/exec_env.html" class="md-nav__link">
+        Exec env
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/core/executable.html" class="md-nav__link">
+        Executable
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/core/file_manager.html" class="md-nav__link">
+        File manager
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/core/gab_manager.html" class="md-nav__link">
+        Gab manager
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/core/gab_sql_generator.html" class="md-nav__link">
+        Gab sql generator
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/core/s3_file_manager.html" class="md-nav__link">
+        S3 file manager
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/core/sensor_manager.html" class="md-nav__link">
+        Sensor manager
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/core/table_manager.html" class="md-nav__link">
+        Table manager
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1_5" >
+      
+      
+        
+          
+        
+          
+        
+          
+        
+          
+            
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../../reference/packages/dq_processors/index.html">Dq processors</a>
+          
+            <label for="__nav_3_1_5">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_1_5_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3_1_5">
+          <span class="md-nav__icon md-icon"></span>
+          Dq processors
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/dq_processors/dq_factory.html" class="md-nav__link">
+        Dq factory
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/dq_processors/exceptions.html" class="md-nav__link">
+        Exceptions
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/dq_processors/validator.html" class="md-nav__link">
+        Validator
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1_5_4" >
+      
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../../reference/packages/dq_processors/custom_expectations/index.html">Custom expectations</a>
+          
+            <label for="__nav_3_1_5_4">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_3_1_5_4_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3_1_5_4">
+          <span class="md-nav__icon md-icon"></span>
+          Custom expectations
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/dq_processors/custom_expectations/expect_column_pair_a_to_be_not_equal_to_b.html" class="md-nav__link">
+        Expect column pair a to be not equal to b
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/dq_processors/custom_expectations/expect_column_pair_a_to_be_smaller_or_equal_than_b.html" class="md-nav__link">
+        Expect column pair a to be smaller or equal than b
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/dq_processors/custom_expectations/expect_column_pair_date_a_to_be_greater_than_or_equal_to_date_b.html" class="md-nav__link">
+        Expect column pair date a to be greater than or equal to date b
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/dq_processors/custom_expectations/expect_column_values_to_be_date_not_older_than.html" class="md-nav__link">
+        Expect column values to be date not older than
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/dq_processors/custom_expectations/expect_column_values_to_not_be_null_or_empty_string.html" class="md-nav__link">
+        Expect column values to not be null or empty string
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/dq_processors/custom_expectations/expect_multicolumn_column_a_must_equal_b_or_c.html" class="md-nav__link">
+        Expect multicolumn column a must equal b or c
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/dq_processors/custom_expectations/expect_queried_column_agg_value_to_be.html" class="md-nav__link">
+        Expect queried column agg value to be
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1_6" >
+      
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+            
+          
+        
+          
+            
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../../reference/packages/io/index.html">Io</a>
+          
+            <label for="__nav_3_1_6">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_1_6_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3_1_6">
+          <span class="md-nav__icon md-icon"></span>
+          Io
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/io/exceptions.html" class="md-nav__link">
+        Exceptions
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/io/reader.html" class="md-nav__link">
+        Reader
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/io/reader_factory.html" class="md-nav__link">
+        Reader factory
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/io/writer.html" class="md-nav__link">
+        Writer
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/io/writer_factory.html" class="md-nav__link">
+        Writer factory
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1_6_6" >
+      
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../../reference/packages/io/readers/index.html">Readers</a>
+          
+            <label for="__nav_3_1_6_6">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_3_1_6_6_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3_1_6_6">
+          <span class="md-nav__icon md-icon"></span>
+          Readers
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/io/readers/dataframe_reader.html" class="md-nav__link">
+        Dataframe reader
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/io/readers/file_reader.html" class="md-nav__link">
+        File reader
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/io/readers/jdbc_reader.html" class="md-nav__link">
+        Jdbc reader
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/io/readers/kafka_reader.html" class="md-nav__link">
+        Kafka reader
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/io/readers/query_reader.html" class="md-nav__link">
+        Query reader
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/io/readers/sap_b4_reader.html" class="md-nav__link">
+        Sap b4 reader
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/io/readers/sap_bw_reader.html" class="md-nav__link">
+        Sap bw reader
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/io/readers/sftp_reader.html" class="md-nav__link">
+        Sftp reader
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/io/readers/table_reader.html" class="md-nav__link">
+        Table reader
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1_6_7" >
+      
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../../reference/packages/io/writers/index.html">Writers</a>
+          
+            <label for="__nav_3_1_6_7">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_3_1_6_7_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3_1_6_7">
+          <span class="md-nav__icon md-icon"></span>
+          Writers
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/io/writers/console_writer.html" class="md-nav__link">
+        Console writer
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/io/writers/dataframe_writer.html" class="md-nav__link">
+        Dataframe writer
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/io/writers/delta_merge_writer.html" class="md-nav__link">
+        Delta merge writer
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/io/writers/file_writer.html" class="md-nav__link">
+        File writer
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/io/writers/jdbc_writer.html" class="md-nav__link">
+        Jdbc writer
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/io/writers/kafka_writer.html" class="md-nav__link">
+        Kafka writer
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/io/writers/rest_api_writer.html" class="md-nav__link">
+        Rest api writer
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/io/writers/sharepoint_writer.html" class="md-nav__link">
+        Sharepoint writer
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/io/writers/table_writer.html" class="md-nav__link">
+        Table writer
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1_7" >
+      
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+            
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../../reference/packages/terminators/index.html">Terminators</a>
+          
+            <label for="__nav_3_1_7">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_1_7_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3_1_7">
+          <span class="md-nav__icon md-icon"></span>
+          Terminators
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/terminators/cdf_processor.html" class="md-nav__link">
+        Cdf processor
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/terminators/dataset_optimizer.html" class="md-nav__link">
+        Dataset optimizer
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/terminators/notifier.html" class="md-nav__link">
+        Notifier
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/terminators/notifier_factory.html" class="md-nav__link">
+        Notifier factory
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/terminators/sensor_terminator.html" class="md-nav__link">
+        Sensor terminator
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/terminators/spark_terminator.html" class="md-nav__link">
+        Spark terminator
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/terminators/terminator_factory.html" class="md-nav__link">
+        Terminator factory
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1_7_8" >
+      
+      
+        
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../../reference/packages/terminators/notifiers/index.html">Notifiers</a>
+          
+            <label for="__nav_3_1_7_8">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_3_1_7_8_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3_1_7_8">
+          <span class="md-nav__icon md-icon"></span>
+          Notifiers
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/terminators/notifiers/email_notifier.html" class="md-nav__link">
+        Email notifier
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/terminators/notifiers/notification_templates.html" class="md-nav__link">
+        Notification templates
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1_8" >
+      
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../../reference/packages/transformers/index.html">Transformers</a>
+          
+            <label for="__nav_3_1_8">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_1_8_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3_1_8">
+          <span class="md-nav__icon md-icon"></span>
+          Transformers
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/transformers/aggregators.html" class="md-nav__link">
+        Aggregators
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/transformers/column_creators.html" class="md-nav__link">
+        Column creators
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/transformers/column_reshapers.html" class="md-nav__link">
+        Column reshapers
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/transformers/condensers.html" class="md-nav__link">
+        Condensers
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/transformers/custom_transformers.html" class="md-nav__link">
+        Custom transformers
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/transformers/data_maskers.html" class="md-nav__link">
+        Data maskers
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/transformers/date_transformers.html" class="md-nav__link">
+        Date transformers
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/transformers/exceptions.html" class="md-nav__link">
+        Exceptions
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/transformers/filters.html" class="md-nav__link">
+        Filters
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/transformers/joiners.html" class="md-nav__link">
+        Joiners
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/transformers/null_handlers.html" class="md-nav__link">
+        Null handlers
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/transformers/optimizers.html" class="md-nav__link">
+        Optimizers
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/transformers/regex_transformers.html" class="md-nav__link">
+        Regex transformers
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/transformers/repartitioners.html" class="md-nav__link">
+        Repartitioners
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/transformers/transformer_factory.html" class="md-nav__link">
+        Transformer factory
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/transformers/unions.html" class="md-nav__link">
+        Unions
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/transformers/watermarker.html" class="md-nav__link">
+        Watermarker
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1_9" >
+      
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+            
+          
+        
+          
+            
+          
+        
+          
+            
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../../reference/packages/utils/index.html">Utils</a>
+          
+            <label for="__nav_3_1_9">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_1_9_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3_1_9">
+          <span class="md-nav__icon md-icon"></span>
+          Utils
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/utils/acon_utils.html" class="md-nav__link">
+        Acon utils
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/utils/databricks_utils.html" class="md-nav__link">
+        Databricks utils
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/utils/dq_utils.html" class="md-nav__link">
+        Dq utils
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/utils/engine_usage_stats.html" class="md-nav__link">
+        Engine usage stats
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/utils/expectations_utils.html" class="md-nav__link">
+        Expectations utils
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/utils/file_utils.html" class="md-nav__link">
+        File utils
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/utils/gab_utils.html" class="md-nav__link">
+        Gab utils
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/utils/logging_handler.html" class="md-nav__link">
+        Logging handler
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/utils/rest_api.html" class="md-nav__link">
+        Rest api
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/utils/schema_utils.html" class="md-nav__link">
+        Schema utils
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/utils/sharepoint_utils.html" class="md-nav__link">
+        Sharepoint utils
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/utils/sql_parser_utils.html" class="md-nav__link">
+        Sql parser utils
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1_9_13" >
+      
+      
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../../reference/packages/utils/configs/index.html">Configs</a>
+          
+            <label for="__nav_3_1_9_13">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_3_1_9_13_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3_1_9_13">
+          <span class="md-nav__icon md-icon"></span>
+          Configs
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/utils/configs/config_utils.html" class="md-nav__link">
+        Config utils
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1_9_14" >
+      
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../../reference/packages/utils/extraction/index.html">Extraction</a>
+          
+            <label for="__nav_3_1_9_14">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_3_1_9_14_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3_1_9_14">
+          <span class="md-nav__icon md-icon"></span>
+          Extraction
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/utils/extraction/jdbc_extraction_utils.html" class="md-nav__link">
+        Jdbc extraction utils
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/utils/extraction/sap_b4_extraction_utils.html" class="md-nav__link">
+        Sap b4 extraction utils
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/utils/extraction/sap_bw_extraction_utils.html" class="md-nav__link">
+        Sap bw extraction utils
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/utils/extraction/sftp_extraction_utils.html" class="md-nav__link">
+        Sftp extraction utils
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1_9_15" >
+      
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../../reference/packages/utils/storage/index.html">Storage</a>
+          
+            <label for="__nav_3_1_9_15">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_3_1_9_15_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3_1_9_15">
+          <span class="md-nav__icon md-icon"></span>
+          Storage
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/utils/storage/dbfs_storage.html" class="md-nav__link">
+        Dbfs storage
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/utils/storage/file_storage.html" class="md-nav__link">
+        File storage
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/utils/storage/file_storage_functions.html" class="md-nav__link">
+        File storage functions
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/utils/storage/local_fs_storage.html" class="md-nav__link">
+        Local fs storage
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/utils/storage/s3_storage.html" class="md-nav__link">
+        S3 storage
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+  
+
+
+<h1 id="gab-step-by-step">GAB step-by-step<a class="headerlink" href="#gab-step-by-step" title="Permanent link">&para;</a></h1>
+<h2 id="1-data-product-setup-based-on-templated-files">1. Data Product Setup based on templated files<a class="headerlink" href="#1-data-product-setup-based-on-templated-files" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Lakehouse engine: 1.20.0+</li>
+<li>Copy GAB assets from templated files to your data product:</li>
+<li>GAB tables:<ul>
+<li><a href="../../../assets/gab/metadata/tables/dim_calendar.sql">Calendar table - dim_calendar</a></li>
+<li><a href="../../../assets/gab/metadata/tables/lkp_query_builder.sql">Use case configuration table - lkp_query_builder</a></li>
+<li><a href="../../../assets/gab/metadata/tables/gab_use_case_results.sql">Unified data table - gab_use_case_results</a></li>
+<li><a href="../../../assets/gab/metadata/tables/gab_log_events.sql">GAB log events table - gab_log_events</a></li>
+</ul>
+</li>
+<li>GAB notebooks:<ul>
+<li><a href="../../../assets/gab/notebooks/gab_dim_calendar.py">Feed Calendar table - gab_dim_calendar</a></li>
+<li><a href="../../../assets/gab/notebooks/query_builder_helper.py">Use case creation - query_builder_helper</a></li>
+<li><a href="../../../assets/gab/notebooks/gab.py">GAB execution - gab</a></li>
+<li><a href="../../../assets/gab/notebooks/gab_job_manager.py">GAB job manager - gab_job_manager</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="2-use-case-setup">2. Use case setup<a class="headerlink" href="#2-use-case-setup" title="Permanent link">&para;</a></h2>
+<h3 id="templating-sql-query">Templating SQL Query<a class="headerlink" href="#templating-sql-query" title="Permanent link">&para;</a></h3>
+<p><strong>The placeholder will always use <a href="#use-case-configuration-using-the-query_builder_helper">pre-configured values from the use case</a> (lkp_query_builder).</strong> </p>
+<h4 id="available-placeholders">Available Placeholders:<a class="headerlink" href="#available-placeholders" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Date Aggregation:<ul>
+<li>Reference date (the date column used to compute the cadences and the extended window)
+  <div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a> <span class="p">({{</span> <span class="n">project_date_column</span> <span class="p">}}</span> <span class="o">+</span> <span class="n">interval</span> <span class="s1">&#39;{{ offset_value }}&#39;</span> <span class="n">hour</span><span class="p">)</span>
+</span></code></pre></div>
+  <strong>Note:</strong> The <code>replace_offset_value</code> have the responsibility to use directly the date column or shift it to the specified timezone using the <code>offset_value</code> from the configured use case.</li>
+<li>Last day of the cadence and if snapshots are enabled then it contains the snapshot end day:
+  <div class="language-python highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="p">{{</span> <span class="n">to_date</span> <span class="p">}}</span>
+</span></code></pre></div></li>
+</ul>
+</li>
+<li>Filter:<ul>
+<li>It expects to have the data partitioned by date (year/month/day) and it replaces the placeholder with a filter like <code>year = **** and month = ** and day = **</code>:
+  <div class="language-python highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="p">{{</span> <span class="n">partition_filter</span> <span class="p">}}</span>
+</span></code></pre></div>
+  <strong>Note:</strong> if your table does not have the Year, Month, Day columns you should not add this template</li>
+<li>Shift the data consumed on your use case to be between the specified offset timezone:
+  <div class="language-python highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="p">{{</span> <span class="n">filter_date_column</span> <span class="p">}}</span> <span class="o">&gt;=</span> <span class="p">(</span><span class="s1">&#39;{{ start_date }}&#39;</span> <span class="o">+</span> <span class="n">interval</span> <span class="s1">&#39;{{ offset_value }}&#39;</span> <span class="n">hour</span><span class="p">)</span> <span class="n">AND</span> <span class="p">{{</span> <span class="n">filter_date_column</span> <span class="p">}}</span> <span class="o">&lt;</span> <span class="p">(</span><span class="s1">&#39;{{ end_date }}&#39;</span> <span class="o">+</span> <span class="n">interval</span> <span class="s1">&#39;{{ offset_value }}&#39;</span> <span class="n">hour</span><span class="p">)</span>
+</span></code></pre></div></li>
+</ul>
+</li>
+<li>The source database to consume the data:
+  <div class="language-python highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="p">{{</span> <span class="n">database</span> <span class="p">}}</span>
+</span></code></pre></div></li>
+<li>Calendar join:
+  <div class="language-python highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="p">{{</span> <span class="n">joins</span> <span class="p">}}</span>
+</span></code></pre></div>
+  <strong>Note:</strong> Can be added after any of the table names in the <code>from</code> statement. The framework renders this <code>joins</code> with an internal calendar join and populates the <code>to_date</code> and the <code>project_date_column</code> as per the configured cadences, which means, <strong>it will need to be added</strong> when using <strong>Cadence</strong>, <strong>Extended Window Calculation</strong>, <strong>Reconciliation</strong> and <strong>Snapshot</strong>.</li>
+</ul>
+<h4 id="sample-combined-query-making-use-of-the-placeholders">Sample combined query making use of the placeholders:<a class="headerlink" href="#sample-combined-query-making-use-of-the-placeholders" title="Permanent link">&para;</a></h4>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="n">SELECT</span>
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>     <span class="p">({{</span> <span class="n">project_date_column</span> <span class="p">}}</span> <span class="o">+</span> <span class="n">interval</span> <span class="s1">&#39;{{ offset_value }}&#39;</span> <span class="n">hour</span><span class="p">)</span>  <span class="n">AS</span> <span class="n">order_date</span><span class="p">,</span>  <span class="c1"># date aggregation: computed cadence start date</span>
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>    <span class="p">{{</span> <span class="n">to_date</span> <span class="p">}}</span> <span class="n">AS</span> <span class="n">to_date</span><span class="p">,</span>  <span class="c1"># date aggregation: last day of the cadence or of the snapshot if enabled</span>
+</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>    <span class="n">b</span><span class="o">.</span><span class="n">category_name</span><span class="p">,</span>
+</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>    <span class="n">COUNT</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">article_id</span><span class="p">)</span> <span class="n">qty_articles</span><span class="p">,</span>
+</span><span id="__span-6-6"><a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>    <span class="n">SUM</span><span class="p">(</span><span class="n">amount</span><span class="p">)</span> <span class="n">total_amount</span>
+</span><span id="__span-6-7"><a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="n">FROM</span>
+</span><span id="__span-6-8"><a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a>    <span class="p">{{</span> <span class="n">database</span> <span class="p">}}</span><span class="o">.</span><span class="n">dummy_sales_kpi</span> <span class="n">a</span>  <span class="c1"># source database</span>
+</span><span id="__span-6-9"><a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a>    <span class="p">{{</span> <span class="n">joins</span> <span class="p">}}</span>  <span class="c1"># calendar table join: used to compute the cadence start and end date</span>
+</span><span id="__span-6-10"><a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a><span class="n">LEFT</span> <span class="n">JOIN</span>
+</span><span id="__span-6-11"><a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a>    <span class="n">article_categories</span> <span class="n">b</span> <span class="n">ON</span> <span class="n">a</span><span class="o">.</span><span class="n">article_id</span> <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">article_id</span>
+</span><span id="__span-6-12"><a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a><span class="n">WHERE</span>
+</span><span id="__span-6-13"><a id="__codelineno-6-13" name="__codelineno-6-13" href="#__codelineno-6-13"></a>    <span class="p">{{</span> <span class="n">partition_filter</span> <span class="p">}}</span>  <span class="c1"># filter: partition filter</span>
+</span><span id="__span-6-14"><a id="__codelineno-6-14" name="__codelineno-6-14" href="#__codelineno-6-14"></a><span class="n">AND</span>
+</span><span id="__span-6-15"><a id="__codelineno-6-15" name="__codelineno-6-15" href="#__codelineno-6-15"></a>    <span class="n">TO_DATE</span><span class="p">({{</span> <span class="n">filter_date_column</span> <span class="p">}},</span> <span class="s1">&#39;yyyyMMdd&#39;</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="p">(</span>
+</span><span id="__span-6-16"><a id="__codelineno-6-16" name="__codelineno-6-16" href="#__codelineno-6-16"></a>        <span class="s1">&#39;{{ start_date }}&#39;</span> <span class="o">+</span> <span class="n">interval</span> <span class="s1">&#39;{{ offset_value }}&#39;</span> <span class="n">hour</span>
+</span><span id="__span-6-17"><a id="__codelineno-6-17" name="__codelineno-6-17" href="#__codelineno-6-17"></a>    <span class="p">)</span>  <span class="c1"># filter by date column configured in the use case for this file and timezone shift</span>
+</span><span id="__span-6-18"><a id="__codelineno-6-18" name="__codelineno-6-18" href="#__codelineno-6-18"></a><span class="n">AND</span>
+</span><span id="__span-6-19"><a id="__codelineno-6-19" name="__codelineno-6-19" href="#__codelineno-6-19"></a>    <span class="n">TO_DATE</span><span class="p">({{</span> <span class="n">filter_date_column</span> <span class="p">}},</span> <span class="s1">&#39;yyyyMMdd&#39;</span><span class="p">)</span> <span class="o">&lt;</span> <span class="p">(</span>
+</span><span id="__span-6-20"><a id="__codelineno-6-20" name="__codelineno-6-20" href="#__codelineno-6-20"></a>        <span class="s1">&#39;{{ end_date }}&#39;</span> <span class="o">+</span> <span class="n">interval</span> <span class="s1">&#39;{{ offset_value }}&#39;</span> <span class="n">hour</span>
+</span><span id="__span-6-21"><a id="__codelineno-6-21" name="__codelineno-6-21" href="#__codelineno-6-21"></a>    <span class="p">)</span>  <span class="c1"># filter by date column configured in the use case for this file and timezone shift</span>
+</span><span id="__span-6-22"><a id="__codelineno-6-22" name="__codelineno-6-22" href="#__codelineno-6-22"></a><span class="n">GROUP</span> <span class="n">BY</span> <span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span>
+</span></code></pre></div>
+<p><strong>Note:</strong> If there's just one sql file for the use case, the file should start with 1_. When the use case has several different intermediate stages/temp tables, please create them according to the sequence order, as shown in the screenshot, and a final combined script, example:</p>
+<p><img src="../../../assets/gab/img/gab_sample_templated_query.png" alt="image" width="auto" height="auto"></p>
+<p>We suggest using the folder <strong>metadata/gab</strong> to use as the SQL use case folder but this is a parametrised property which you can override with the property <a href="../../../assets/gab/notebooks/gab.py">gab_base_path</a>. This property is used in the <a href="../../../assets/gab/notebooks/gab_job_manager.py">job manager as well</a>.</p>
+<h3 id="use-case-configuration-using-the-query_builder_helper">Use case configuration using the <strong>query_builder_helper</strong><a class="headerlink" href="#use-case-configuration-using-the-query_builder_helper" title="Permanent link">&para;</a></h3>
+<details class="example">
+<summary>1. General configuration</summary>
+<p>GAB will pull information from <strong><code>lkp_query_builder</code></strong> in order to retrieve information/configuration to execute the process. To help us on this task a <a href="../../../assets/gab/notebooks/query_builder_helper.py">query_builder_help notebook was provided</a>. We will follow the notebook instructions to add necessary configuration.</p>
+<p><img src="../../../assets/gab/img/gab_use_case.png" alt="image" width="1000px" height="auto"></p>
+<table>
+<thead>
+<tr>
+<th>Variable</th>
+<th>Value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Complexity</strong></td>
+<td>Low</td>
+<td>Defines the complexity of your use case.<br />You should mainly consider the volume of data.<br />Possible values: <strong>Low</strong>, <strong>Medium</strong> and <strong>High</strong>.</td>
+</tr>
+<tr>
+<td><strong>Database Name</strong></td>
+<td>example_database</td>
+<td>Refers to the name of the development environment database where the <strong>lkp_query_builder</strong> table resides.<br />This parameter is used at the end of the notebook to insert data into the <strong>lkp_query_builder</strong> table.</td>
+</tr>
+<tr>
+<td><strong>How many dimensions</strong></td>
+<td>1</td>
+<td>Number of dimensions (columns) expected in the use case.<br /><strong>Note: Do not consider the reference date or metrics here, as they have their own parameters.</strong></td>
+</tr>
+<tr>
+<td><strong>How many views</strong></td>
+<td>1</td>
+<td>Defines how many views to generate in the use case, it's possible to have as many as the use case need.<br />All views will have the same structure (dimensions and metrics), the only difference possible to specify between the views is the <strong>view filter</strong>.<br /><strong>Default value is 1.</strong><br /><strong>Note</strong>: This configuration have a direct impact in the <code>3. Configure View Name and Filters</code> configuration.</td>
+</tr>
+<tr>
+<td><strong>Is Active</strong></td>
+<td>Y</td>
+<td>Flag to make the use case active or not.<br /><strong>Default value is Y</strong>.</td>
+</tr>
+<tr>
+<td><strong>Market</strong></td>
+<td>GLOBAL</td>
+<td>Used in the <strong>gab_job_manager</strong> to execute the use cases for each <strong>market</strong>.</td>
+</tr>
+<tr>
+<td><strong>SQL File Names</strong></td>
+<td>1_article_category.sql,<br />2_f_agg_dummy_sales_kpi.sql</td>
+<td>Name of the SQL files used in the use case. <br />You can combine different layers of dependencies between them as shown in the example, where the <strong>2_combined.sql</strong> file depends on <strong>1_product_category.sql</strong> file. <br />The file name should follow the pattern x_file_name (where x is an integer digit) and be separated by a comma (e.g.: 1_first_query.sql, 2_second_query.sql).</td>
+</tr>
+<tr>
+<td><strong>Snapshot End Date</strong></td>
+<td>to_date</td>
+<td>This parameter is used in the template, by default its value must be <strong><em>to_date</em></strong>.<br />You can change it if you have managed this in your SQL files.<br />The values stored in this column depend on the use case behavior:<br /><ul><li>if snapshots are enabled, it will contain the snapshot end day.</li><li>If no snapshot is enabled, it will contain the last day of the cadence.</li></ul>The snapshot behaviour is set in the reconciliation steps.</td>
+</tr>
+<tr>
+<td><strong>Timezone Offset</strong></td>
+<td>0</td>
+<td>The time zone offset that you want to apply to the reference date column.<br />It should be a number to decrement or add to the date (e.g., -8 or 8).<br /><strong>The default value is zero</strong>, which means that any time zone transformation will be applied to the date.</td>
+</tr>
+<tr>
+<td><strong>Use Case Name</strong></td>
+<td>f_agg_dummy_sales_kpi</td>
+<td>Name of the use case.<br />The suggestion is to use lowercase and underlined alphanumeric characters.</td>
+</tr>
+<tr>
+<td><strong>Use Case Reference Date</strong></td>
+<td>order_date</td>
+<td>Reference date of the use case.&lt;br /The parameter should be the column name and the selected column should have the date/datetime format.</td>
+</tr>
+<tr>
+<td><strong>Week Start</strong></td>
+<td>MONDAY</td>
+<td>The start of the business week of the use case.<br />Possible values: <strong>SUNDAY</strong> or <strong>MONDAY</strong>.</td>
+</tr>
+</tbody>
+</table>
+</details>
+<details class="example">
+<summary>2. Configure Dimension Names</summary>
+<p><img src="../../../assets/gab/img/gab_dimensions.png" alt="image" width="1000px" height="auto"></p>
+</details>
+<details class="example">
+<summary>3. Configure View Name and Filters</summary>
+<p>This will be the name of the view at the end of the process. Filters should be applied at this step if needed.</p>
+<p><img src="../../../assets/gab/img/gab_view_name_and_filters.png" alt="image" width="1000px" height="auto"></p>
+<table>
+<thead>
+<tr>
+<th>Variable</th>
+<th>Value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>View Filter</strong></td>
+<td></td>
+<td>Based on the dimensions defined in the previous step.<br /><strong>Example</strong>: if you have set the country as <code>D1</code>, the filter here could be <strong>D1 = "Germany"</strong>. The commands allowed for the filter step are the same as those supported in the where clause in SQL language.</td>
+</tr>
+<tr>
+<td><strong>View Name</strong></td>
+<td>vw_f_agg_dummy_sales_kpi</td>
+<td>Name of the view to output the computed data.</td>
+</tr>
+</tbody>
+</table>
+</details>
+<details class="example">
+<summary>4. Configure RECON</summary>
+<p>This step is where we define which will be the cadence displayed at the view.
+<img src="../../../assets/gab/img/gab_recon.png" alt="image" width="1000px" height="auto"></p>
+<table>
+<thead>
+<tr>
+<th>Variable</th>
+<th>Value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Reconciliation Cadence</strong></td>
+<td>YEAR</td>
+<td>Compute the data aggregated by the specified cadence but with the reconciliation frequency.<br /><a href="../gab.html#reconciliation">Check more about it here</a></td>
+</tr>
+</tbody>
+</table>
+</details>
+<details class="example">
+<summary>5. Configure METRICS</summary>
+<p>First question regarding metrics is how many metrics do we have on our SQL use case query.</p>
+<p>On our template we have two metrics (<code>qty_articles</code> and <code>total_amount</code>).</p>
+<p><img src="../../../assets/gab/img/gab_query_metrics.png" alt="image" width="1000px" height="auto"></p>
+<p><img src="../../../assets/gab/img/gab_metrics.png" alt="image" width="1000px" height="auto"></p>
+<p>The next paragraph will create widgets for us to be able to define if we want GAB to create secondary calculations for us based on the metric name. <strong>Note: metrics should follow the same order as defined on the SQL use case query.</strong></p>
+<p><img src="../../../assets/gab/img/gab_metrics_configuration.png" alt="image" width="1000px" height="auto"></p>
+<table>
+<thead>
+<tr>
+<th>Variable</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="../gab.html#metric"><strong>Calculated Metric</strong></a></td>
+<td>It's possible to derive (add secondary calculations) 4 new columns based on each metric.<br />Those new columns will be based on cadences like <strong><em>last_cadence</em></strong>, <strong><em>last_year_cadence</em></strong> and <strong><em>window function</em></strong>.<br />But also, you can create a derived column,<br />which is a SQL statement that you can write on your own by selecting the <strong><em>derived_metric</em></strong> option.</td>
+</tr>
+<tr>
+<td><strong>Metric Name</strong></td>
+<td>Name of the base metric. Should have the same name as on the SQL use case query.</td>
+</tr>
+</tbody>
+</table>
+<p>The next metrics configuration is where we configure secondary calculations.
+<img src="../../../assets/gab/img/gab_metrics_calculations.png" alt="image" width="1000px" height="auto"></p>
+<table>
+<thead>
+<tr>
+<th>Variable</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>derived_metric.Formula</strong></td>
+<td>Formula to calculate the metric referring any of previous configured metrics by the <strong>Metric Name</strong>.<br /><strong>Example</strong>: <code>total_amount*0.56</code></td>
+</tr>
+<tr>
+<td><strong>derived_metric.Label</strong></td>
+<td>Name of the generated metric by <strong><em>derived_metric</em></strong>.</td>
+</tr>
+<tr>
+<td><strong>last_cadence.Label</strong></td>
+<td>Name of the generated metric by <strong><em>last_cadence</em></strong>.</td>
+</tr>
+<tr>
+<td><strong>last_cadence.Window</strong></td>
+<td>Cadence lookback window, which means in this example,<br />a lookback from the previous year (as the use case is on <strong>YEARLY</strong> cadence)</td>
+</tr>
+<tr>
+<td><strong>window_function.Agg Func</strong></td>
+<td>SQL Function to calculate the metric.<br />Possible values: <strong><em>sum</em></strong>, <strong><em>avg</em></strong>, <strong><em>max</em></strong>, <strong><em>min</em></strong>, <strong><em>count</em></strong></td>
+</tr>
+<tr>
+<td><strong>window_function.Label</strong></td>
+<td>Name of the generated metric by <strong><em>window_function</em></strong>.</td>
+</tr>
+<tr>
+<td><strong>window_function.Window Interval</strong></td>
+<td>Window interval to use on the metric generation.</td>
+</tr>
+</tbody>
+</table>
+</details>
+<details class="example">
+<summary>6. Configure Stages</summary>
+<p>Stages are related to each SQL statement at the use case.</p>
+<p><img src="../../../assets/gab/img/gab_stages_configuration.png" alt="image" width="1000px" height="auto"></p>
+<table>
+<thead>
+<tr>
+<th>Variable</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Script Filter Date Column</strong></td>
+<td>It will be used to filter the data of your use case.<br />This information will be replaced in the placeholder of the GAB template.</td>
+</tr>
+<tr>
+<td><strong>Script Project Date Column</strong></td>
+<td>It will be used as reference date for the query given.<br />This information will be replaced in the placeholder of the GAB template.</td>
+</tr>
+<tr>
+<td><strong>Script Repartition Type</strong></td>
+<td>Type of repartitioning the data of the query.<br />Possible values: <strong><em>Key</em></strong> and <strong><em>Number</em></strong>.<br />When use Key, it expects column names separated by a comma.<br />When use number it expects an integer of how many partitions the user want.</td>
+</tr>
+<tr>
+<td><strong>Script Repartition Value</strong></td>
+<td>This parameter only has effect when used <strong>with Repartition Type parameter</strong>.<br />It sets the way of repartitioning the data while processing.</td>
+</tr>
+<tr>
+<td><strong>Script Storage Level</strong></td>
+<td>Defines the type of spark persistence storage levels you want to define<br />(e.g. <strong><em>Memory Only</em></strong>, <strong><em>Memory and Disk</em></strong> etc).</td>
+</tr>
+<tr>
+<td><strong>Script Table Alias</strong></td>
+<td>The alias name of the sql file that will run, this name can be used to <br />consume the output of the execution in the next stage(next sql file).</td>
+</tr>
+</tbody>
+</table>
+</details>
+<details class="example">
+<summary>7. Build and Insert SQL Instruction</summary>
+<p><img src="../../../assets/gab/img/gab_build_insert_sql_instruction.png" alt="image" width="1000px" height="auto"></p>
+<p><img src="../../../assets/gab/img/gab_insert_use_case.png" alt="image" width="1000px" height="auto"></p>
+<p>At the end of the process it should have data inserted on lkp_query_builder table:
+<img src="../../../assets/gab/img/gab_lkp_query_builder.png" alt="image" width="1000px" height="auto"></p>
+</details>
+<details class="example">
+<summary>Configured Use case</summary>
+<p>After configuring the use case, it would generate a SQL command to create it on the <code>lkp_query_builder</code>, like this:
+<div class="language-sql highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="k">DELETE</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">example_database</span><span class="p">.</span><span class="n">lkp_query_builder</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">QUERY_LABEL</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;f_agg_dummy_sales_kpi&#39;</span><span class="p">;</span>
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">example_database</span><span class="p">.</span><span class="n">lkp_query_builder</span><span class="w"> </span><span class="k">VALUES</span><span class="w"> </span><span class="p">(</span>
+</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="w">  </span><span class="mi">1</span><span class="p">,</span>
+</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="w">  </span><span class="s1">&#39;f_agg_dummy_sales_kpi&#39;</span><span class="p">,</span>
+</span><span id="__span-7-5"><a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="w">  </span><span class="s1">&#39;GLOBAL&#39;</span><span class="p">,</span>
+</span><span id="__span-7-6"><a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="w">  </span><span class="ss">&quot;&quot;&quot;{</span>
+</span><span id="__span-7-7"><a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a><span class="ss">    &#39;vw_f_agg_dummy_sales_kpi&#39;: {</span>
+</span><span id="__span-7-8"><a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a><span class="ss">      &#39;dimensions&#39;: {</span>
+</span><span id="__span-7-9"><a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a><span class="ss">        &#39;from_date&#39;: &#39;order_date&#39;,</span>
+</span><span id="__span-7-10"><a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a><span class="ss">        &#39;to_date&#39;: &#39;to_date&#39;,</span>
+</span><span id="__span-7-11"><a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a><span class="ss">        &#39;d1&#39;: &#39;category_name&#39;</span>
+</span><span id="__span-7-12"><a id="__codelineno-7-12" name="__codelineno-7-12" href="#__codelineno-7-12"></a><span class="ss">      },</span>
+</span><span id="__span-7-13"><a id="__codelineno-7-13" name="__codelineno-7-13" href="#__codelineno-7-13"></a><span class="ss">      &#39;metric&#39;: {</span>
+</span><span id="__span-7-14"><a id="__codelineno-7-14" name="__codelineno-7-14" href="#__codelineno-7-14"></a><span class="ss">        &#39;m1&#39;: {</span>
+</span><span id="__span-7-15"><a id="__codelineno-7-15" name="__codelineno-7-15" href="#__codelineno-7-15"></a><span class="ss">          &#39;metric_name&#39;: &#39;qty_articles&#39;,</span>
+</span><span id="__span-7-16"><a id="__codelineno-7-16" name="__codelineno-7-16" href="#__codelineno-7-16"></a><span class="ss">          &#39;calculated_metric&#39;: {},</span>
+</span><span id="__span-7-17"><a id="__codelineno-7-17" name="__codelineno-7-17" href="#__codelineno-7-17"></a><span class="ss">          &#39;derived_metric&#39;: {}</span>
+</span><span id="__span-7-18"><a id="__codelineno-7-18" name="__codelineno-7-18" href="#__codelineno-7-18"></a><span class="ss">        },</span>
+</span><span id="__span-7-19"><a id="__codelineno-7-19" name="__codelineno-7-19" href="#__codelineno-7-19"></a><span class="ss">        &#39;m2&#39;: {</span>
+</span><span id="__span-7-20"><a id="__codelineno-7-20" name="__codelineno-7-20" href="#__codelineno-7-20"></a><span class="ss">          &#39;metric_name&#39;: &#39;total_amount&#39;,</span>
+</span><span id="__span-7-21"><a id="__codelineno-7-21" name="__codelineno-7-21" href="#__codelineno-7-21"></a><span class="ss">            &#39;calculated_metric&#39;: {</span>
+</span><span id="__span-7-22"><a id="__codelineno-7-22" name="__codelineno-7-22" href="#__codelineno-7-22"></a><span class="ss">              &#39;last_cadence&#39;: [</span>
+</span><span id="__span-7-23"><a id="__codelineno-7-23" name="__codelineno-7-23" href="#__codelineno-7-23"></a><span class="ss">                {</span>
+</span><span id="__span-7-24"><a id="__codelineno-7-24" name="__codelineno-7-24" href="#__codelineno-7-24"></a><span class="ss">                  &#39;label&#39;: &#39;total_amount_last_year&#39;,</span>
+</span><span id="__span-7-25"><a id="__codelineno-7-25" name="__codelineno-7-25" href="#__codelineno-7-25"></a><span class="ss">                  &#39;window&#39;: &#39;1&#39;</span>
+</span><span id="__span-7-26"><a id="__codelineno-7-26" name="__codelineno-7-26" href="#__codelineno-7-26"></a><span class="ss">                }</span>
+</span><span id="__span-7-27"><a id="__codelineno-7-27" name="__codelineno-7-27" href="#__codelineno-7-27"></a><span class="ss">              ],</span>
+</span><span id="__span-7-28"><a id="__codelineno-7-28" name="__codelineno-7-28" href="#__codelineno-7-28"></a><span class="ss">              &#39;window_function&#39;: [</span>
+</span><span id="__span-7-29"><a id="__codelineno-7-29" name="__codelineno-7-29" href="#__codelineno-7-29"></a><span class="ss">                {</span>
+</span><span id="__span-7-30"><a id="__codelineno-7-30" name="__codelineno-7-30" href="#__codelineno-7-30"></a><span class="ss">                  &#39;label&#39;: &#39;avg_total_amount_last_2_years&#39;,</span>
+</span><span id="__span-7-31"><a id="__codelineno-7-31" name="__codelineno-7-31" href="#__codelineno-7-31"></a><span class="ss">                  &#39;window&#39;: [2, 1],</span>
+</span><span id="__span-7-32"><a id="__codelineno-7-32" name="__codelineno-7-32" href="#__codelineno-7-32"></a><span class="ss">                  &#39;agg_func&#39;: &#39;avg&#39;</span>
+</span><span id="__span-7-33"><a id="__codelineno-7-33" name="__codelineno-7-33" href="#__codelineno-7-33"></a><span class="ss">                }</span>
+</span><span id="__span-7-34"><a id="__codelineno-7-34" name="__codelineno-7-34" href="#__codelineno-7-34"></a><span class="ss">              ]</span>
+</span><span id="__span-7-35"><a id="__codelineno-7-35" name="__codelineno-7-35" href="#__codelineno-7-35"></a><span class="ss">            },</span>
+</span><span id="__span-7-36"><a id="__codelineno-7-36" name="__codelineno-7-36" href="#__codelineno-7-36"></a><span class="ss">            &#39;derived_metric&#39;: [</span>
+</span><span id="__span-7-37"><a id="__codelineno-7-37" name="__codelineno-7-37" href="#__codelineno-7-37"></a><span class="ss">              {</span>
+</span><span id="__span-7-38"><a id="__codelineno-7-38" name="__codelineno-7-38" href="#__codelineno-7-38"></a><span class="ss">                &#39;label&#39;: &#39;discounted_total_amount&#39;,</span>
+</span><span id="__span-7-39"><a id="__codelineno-7-39" name="__codelineno-7-39" href="#__codelineno-7-39"></a><span class="ss">                &#39;formula&#39;: &#39;total_amount*0.56&#39;</span>
+</span><span id="__span-7-40"><a id="__codelineno-7-40" name="__codelineno-7-40" href="#__codelineno-7-40"></a><span class="ss">              }</span>
+</span><span id="__span-7-41"><a id="__codelineno-7-41" name="__codelineno-7-41" href="#__codelineno-7-41"></a><span class="ss">            ]</span>
+</span><span id="__span-7-42"><a id="__codelineno-7-42" name="__codelineno-7-42" href="#__codelineno-7-42"></a><span class="ss">          }</span>
+</span><span id="__span-7-43"><a id="__codelineno-7-43" name="__codelineno-7-43" href="#__codelineno-7-43"></a><span class="ss">        },</span>
+</span><span id="__span-7-44"><a id="__codelineno-7-44" name="__codelineno-7-44" href="#__codelineno-7-44"></a><span class="ss">      &#39;filter&#39;: {}</span>
+</span><span id="__span-7-45"><a id="__codelineno-7-45" name="__codelineno-7-45" href="#__codelineno-7-45"></a><span class="ss">    }</span>
+</span><span id="__span-7-46"><a id="__codelineno-7-46" name="__codelineno-7-46" href="#__codelineno-7-46"></a><span class="ss">  }&quot;&quot;&quot;</span><span class="p">,</span>
+</span><span id="__span-7-47"><a id="__codelineno-7-47" name="__codelineno-7-47" href="#__codelineno-7-47"></a><span class="w">  </span><span class="ss">&quot;&quot;&quot;{</span>
+</span><span id="__span-7-48"><a id="__codelineno-7-48" name="__codelineno-7-48" href="#__codelineno-7-48"></a><span class="ss">    &#39;1&#39;: {</span>
+</span><span id="__span-7-49"><a id="__codelineno-7-49" name="__codelineno-7-49" href="#__codelineno-7-49"></a><span class="ss">        &#39;file_path&#39;: &#39;f_agg_dummy_sales_kpi/1_article_category.sql&#39;,</span>
+</span><span id="__span-7-50"><a id="__codelineno-7-50" name="__codelineno-7-50" href="#__codelineno-7-50"></a><span class="ss">        &#39;table_alias&#39;: &#39;article_categories&#39;,</span>
+</span><span id="__span-7-51"><a id="__codelineno-7-51" name="__codelineno-7-51" href="#__codelineno-7-51"></a><span class="ss">        &#39;storage_level&#39;: &#39;MEMORY_ONLY&#39;,</span>
+</span><span id="__span-7-52"><a id="__codelineno-7-52" name="__codelineno-7-52" href="#__codelineno-7-52"></a><span class="ss">        &#39;project_date_column&#39;: &#39;&#39;,</span>
+</span><span id="__span-7-53"><a id="__codelineno-7-53" name="__codelineno-7-53" href="#__codelineno-7-53"></a><span class="ss">        &#39;filter_date_column&#39;: &#39;&#39;,</span>
+</span><span id="__span-7-54"><a id="__codelineno-7-54" name="__codelineno-7-54" href="#__codelineno-7-54"></a><span class="ss">        &#39;repartition&#39;: {}</span>
+</span><span id="__span-7-55"><a id="__codelineno-7-55" name="__codelineno-7-55" href="#__codelineno-7-55"></a><span class="ss">    },</span>
+</span><span id="__span-7-56"><a id="__codelineno-7-56" name="__codelineno-7-56" href="#__codelineno-7-56"></a><span class="ss">    &#39;2&#39;: {</span>
+</span><span id="__span-7-57"><a id="__codelineno-7-57" name="__codelineno-7-57" href="#__codelineno-7-57"></a><span class="ss">        &#39;file_path&#39;: &#39;f_agg_dummy_sales_kpi/2_f_agg_dummy_sales_kpi.sql&#39;,</span>
+</span><span id="__span-7-58"><a id="__codelineno-7-58" name="__codelineno-7-58" href="#__codelineno-7-58"></a><span class="ss">        &#39;table_alias&#39;: &#39;dummy_sales_kpi&#39;,</span>
+</span><span id="__span-7-59"><a id="__codelineno-7-59" name="__codelineno-7-59" href="#__codelineno-7-59"></a><span class="ss">        &#39;storage_level&#39;: &#39;MEMORY_ONLY&#39;,</span>
+</span><span id="__span-7-60"><a id="__codelineno-7-60" name="__codelineno-7-60" href="#__codelineno-7-60"></a><span class="ss">        &#39;project_date_column&#39;: &#39;order_date&#39;,</span>
+</span><span id="__span-7-61"><a id="__codelineno-7-61" name="__codelineno-7-61" href="#__codelineno-7-61"></a><span class="ss">        &#39;filter_date_column&#39;: &#39;order_date&#39;,</span>
+</span><span id="__span-7-62"><a id="__codelineno-7-62" name="__codelineno-7-62" href="#__codelineno-7-62"></a><span class="ss">        &#39;repartition&#39;: {}</span>
+</span><span id="__span-7-63"><a id="__codelineno-7-63" name="__codelineno-7-63" href="#__codelineno-7-63"></a><span class="ss">    }</span>
+</span><span id="__span-7-64"><a id="__codelineno-7-64" name="__codelineno-7-64" href="#__codelineno-7-64"></a><span class="ss">  }&quot;&quot;&quot;</span><span class="p">,</span>
+</span><span id="__span-7-65"><a id="__codelineno-7-65" name="__codelineno-7-65" href="#__codelineno-7-65"></a><span class="w">  </span><span class="ss">&quot;&quot;&quot;{&#39;YEAR&#39;: {}}&quot;&quot;&quot;</span><span class="p">,</span>
+</span><span id="__span-7-66"><a id="__codelineno-7-66" name="__codelineno-7-66" href="#__codelineno-7-66"></a><span class="w">  </span><span class="s1">&#39;0&#39;</span><span class="p">,</span>
+</span><span id="__span-7-67"><a id="__codelineno-7-67" name="__codelineno-7-67" href="#__codelineno-7-67"></a><span class="w">  </span><span class="s1">&#39;MONDAY&#39;</span><span class="p">,</span>
+</span><span id="__span-7-68"><a id="__codelineno-7-68" name="__codelineno-7-68" href="#__codelineno-7-68"></a><span class="w">  </span><span class="s1">&#39;Y&#39;</span><span class="p">,</span>
+</span><span id="__span-7-69"><a id="__codelineno-7-69" name="__codelineno-7-69" href="#__codelineno-7-69"></a><span class="w">  </span><span class="s1">&#39;Low&#39;</span><span class="p">,</span>
+</span><span id="__span-7-70"><a id="__codelineno-7-70" name="__codelineno-7-70" href="#__codelineno-7-70"></a><span class="w">  </span><span class="k">current_timestamp</span><span class="p">()</span>
+</span><span id="__span-7-71"><a id="__codelineno-7-71" name="__codelineno-7-71" href="#__codelineno-7-71"></a><span class="p">);</span>
+</span></code></pre></div></p>
+</details>
+<h2 id="3-use-case-execution">3. Use case execution<a class="headerlink" href="#3-use-case-execution" title="Permanent link">&para;</a></h2>
+<p>After the initial setup and adding your use case to the <strong><em>lkp_query_builder</em></strong> you can schedule the <a href="../../../assets/gab/notebooks/gab_job_manager.py">gab_job_manager</a> to manage the use case execution in any schedule time you want.</p>
+<h2 id="4-consuming-the-data">4. Consuming the data<a class="headerlink" href="#4-consuming-the-data" title="Permanent link">&para;</a></h2>
+<p>The data is available in the view you specified as output from the use-case, so you can normally consume the view as you would consume any other data (directly on power bi or in another pipeline).</p>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var tab,labels=set.querySelector(".tabbed-labels");for(tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+            Back to top
+          </button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      &copy; 2025 <a href="https://github.com/adidas"  target="_blank" rel="noopener">adidas</a>
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://adidas.github.io/lakehouse-engine" target="_blank" rel="noopener" title="adidas.github.io" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M186.1 328.7c0 20.9-10.9 55.1-36.7 55.1s-36.7-34.2-36.7-55.1 10.9-55.1 36.7-55.1 36.7 34.2 36.7 55.1zM480 278.2c0 31.9-3.2 65.7-17.5 95-37.9 76.6-142.1 74.8-216.7 74.8-75.8 0-186.2 2.7-225.6-74.8-14.6-29-20.2-63.1-20.2-95 0-41.9 13.9-81.5 41.5-113.6-5.2-15.8-7.7-32.4-7.7-48.8 0-21.5 4.9-32.3 14.6-51.8 45.3 0 74.3 9 108.8 36 29-6.9 58.8-10 88.7-10 27 0 54.2 2.9 80.4 9.2 34-26.7 63-35.2 107.8-35.2 9.8 19.5 14.6 30.3 14.6 51.8 0 16.4-2.6 32.7-7.7 48.2 27.5 32.4 39 72.3 39 114.2zm-64.3 50.5c0-43.9-26.7-82.6-73.5-82.6-18.9 0-37 3.4-56 6-14.9 2.3-29.8 3.2-45.1 3.2-15.2 0-30.1-.9-45.1-3.2-18.7-2.6-37-6-56-6-46.8 0-73.5 38.7-73.5 82.6 0 87.8 80.4 101.3 150.4 101.3h48.2c70.3 0 150.6-13.4 150.6-101.3zm-82.6-55.1c-25.8 0-36.7 34.2-36.7 55.1s10.9 55.1 36.7 55.1 36.7-34.2 36.7-55.1-10.9-55.1-36.7-55.1z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["content.code.annotate", "content.code.annotation", "content.code.copy", "content.code.select", "content.tabs.link", "content.tooltips", "navigation.indexes", "navigation.path", "navigation.tabs", "navigation.tabs.instant", "navigation.tabs.sticky", "navigation.top", "navigation.sections", "toc.follow", "toc.integrate", "search.highlight", "search.suggest"], "search": "../../../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.b425cdc4.min.js"></script>
+      
+        
+          <script src="../../../assets/_markdown_exec_pyodide.js"></script>
+        
+      
+    
+  </body>
+</html>

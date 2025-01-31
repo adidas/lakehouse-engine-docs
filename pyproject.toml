@@ -1,0 +1,97 @@
+[build-system]
+requires = [
+    "setuptools==74.*"
+]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "lakehouse-engine"
+requires-python = ">=3.11"
+readme = "README.md"
+license = {file = "LICENSE.txt"}
+version = "1.24.0"
+authors = [{name = "Adidas Lakehouse Foundations Team", email = "software.engineering@adidas.com"}]
+description = "A configuration-driven Spark framework serving as the engine for several lakehouse algorithms and data flows."
+keywords = ["framework", "big-data", "spark", "databricks", "data-quality", "data-engineering", "great-expectations",
+    "lakehouse", "delta-lake", "configuration-driver"]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Programming Language :: Python :: 3",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Science/Research",
+    "Intended Audience :: Other Audience",
+    "Operating System :: OS Independent",
+    "Topic :: Scientific/Engineering",
+    "Topic :: Software Development",
+    "License :: OSI Approved :: Apache Software License"
+]
+dynamic = ["dependencies", "optional-dependencies"]
+
+[project.urls]
+Repository = "https://github.com/adidas/lakehouse-engine"
+Documentation = "https://adidas.github.io/lakehouse-engine-docs/index.html"
+Issues = "https://github.com/adidas/lakehouse-engine/issues"
+Releases = "https://github.com/adidas/lakehouse-engine/releases"
+
+[tool.setuptools.dynamic]
+dependencies = { file = ["cicd/requirements.lock"] }
+optional-dependencies.os = { file = ["cicd/requirements_os.lock"] }
+optional-dependencies.azure = { file = ["cicd/requirements_azure.lock"] }
+optional-dependencies.dq = { file = ["cicd/requirements_dq.lock"] }
+optional-dependencies.sftp = { file = ["cicd/requirements_sftp.lock"] }
+optional-dependencies.sharepoint = { file = ["cicd/requirements_sharepoint.lock"] }
+
+[tool.setuptools.packages.find]
+exclude = ["tests*", "lakehouse_engine_usage*"]
+namespaces = false
+
+[tool.setuptools.package-data]
+lakehouse_engine = ["configs/engine.yaml"]
+
+[tool.isort]
+profile = "black"
+
+[tool.mypy]
+warn_return_any = true
+warn_unused_configs = true
+ignore_missing_imports = false
+strict_optional = false
+disallow_untyped_defs = true
+
+[[tool.mypy.overrides]]
+module = [
+    "delta.*",
+    "pyspark.*",
+    "py4j.*",
+    "great_expectations.*",
+    "pandas.*",
+    "IPython.*",
+    "nest_asyncio.*",
+    "msgraph.*",
+    "pkg_resources.*",
+    "yaml.*",
+    "ruamel.*",
+    "msal.*"
+]
+ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+filterwarnings = [
+    # coming from GX and also on their pyproject ignores
+    "ignore: Jupyter is migrating its paths to use standard platformdirs:DeprecationWarning", #1 warning
+    # We are defining result_format at the Checkpoint level (which is the right one), but GX is wrongly
+    # triggering the warning, because it is also considering the defaults of the expectations for triggering the warning.
+    # Only place where we are not defining at Checkpoint level is for custom expectation local test, as we don't
+    # need checkpoint for the test.
+    "ignore:`result_format` configured at the Validator-level will not be persisted:UserWarning", # 12 warnings
+    "ignore:`result_format` configured at the Expectation-level will not be persisted:UserWarning", # 12 warnings
+    "ignore: In a future version, object-dtype columns with all-bool values will not be included:FutureWarning", # 60 warnings,
+    "ignore: jsonschema.RefResolver is deprecated as of v4.18.0:DeprecationWarning", #1985 warnings come from this one
+    "ignore: 'contextfilter' is renamed to 'pass_context', the old name will be removed in Jinja 3.1:DeprecationWarning", # 4 warnings
+    "ignore: The default dtype for empty Series will be 'object' instead of 'float64' in a future version.:DeprecationWarning",
+    "ignore: The default dtype for empty Series will be 'object' instead of 'float64' in a future version.:FutureWarning",
+    # Warning about host keys on local ftp tests with paramiko
+    "ignore: Unknown ssh-rsa host key for : UserWarning",
+    # expect_multicolumn_sum_to_equal from GX is generating this warning
+    "ignore: V2 API style custom rendering is deprecated as of v0.13.28 and is not fully supported anymore:DeprecationWarning"
+]
