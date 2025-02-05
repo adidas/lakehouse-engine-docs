@@ -2,802 +2,802 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://adidas.github.io/lakehouse-engine-docs/index.html</loc>
-         <lastmod>2025-01-31</lastmod>
+         <lastmod>2025-02-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://adidas.github.io/lakehouse-engine-docs/lakehouse_engine_usage/lakehouse_engine_usage.html</loc>
-         <lastmod>2025-01-31</lastmod>
+         <lastmod>2025-02-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://adidas.github.io/lakehouse-engine-docs/lakehouse_engine_usage/data_loader/data_loader.html</loc>
-         <lastmod>2025-01-31</lastmod>
+         <lastmod>2025-02-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://adidas.github.io/lakehouse-engine-docs/lakehouse_engine_usage/data_loader/append_load_from_jdbc_with_permissive_mode/append_load_from_jdbc_with_permissive_mode.html</loc>
-         <lastmod>2025-01-31</lastmod>
+         <lastmod>2025-02-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://adidas.github.io/lakehouse-engine-docs/lakehouse_engine_usage/data_loader/append_load_with_failfast/append_load_with_failfast.html</loc>
-         <lastmod>2025-01-31</lastmod>
+         <lastmod>2025-02-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://adidas.github.io/lakehouse-engine-docs/lakehouse_engine_usage/data_loader/batch_delta_load_init_delta_backfill_with_merge/batch_delta_load_init_delta_backfill_with_merge.html</loc>
-         <lastmod>2025-01-31</lastmod>
+         <lastmod>2025-02-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://adidas.github.io/lakehouse-engine-docs/lakehouse_engine_usage/data_loader/custom_transformer/custom_transformer.html</loc>
-         <lastmod>2025-01-31</lastmod>
+         <lastmod>2025-02-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://adidas.github.io/lakehouse-engine-docs/lakehouse_engine_usage/data_loader/custom_transformer/sql_custom_transformer.html</loc>
-         <lastmod>2025-01-31</lastmod>
+         <lastmod>2025-02-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://adidas.github.io/lakehouse-engine-docs/lakehouse_engine_usage/data_loader/custom_transformer_sql/custom_transformer_sql.html</loc>
-         <lastmod>2025-01-31</lastmod>
+         <lastmod>2025-02-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://adidas.github.io/lakehouse-engine-docs/lakehouse_engine_usage/data_loader/extract_from_sap_b4_adso/extract_from_sap_b4_adso.html</loc>
-         <lastmod>2025-01-31</lastmod>
+         <lastmod>2025-02-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://adidas.github.io/lakehouse-engine-docs/lakehouse_engine_usage/data_loader/extract_from_sap_bw_dso/extract_from_sap_bw_dso.html</loc>
-         <lastmod>2025-01-31</lastmod>
+         <lastmod>2025-02-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://adidas.github.io/lakehouse-engine-docs/lakehouse_engine_usage/data_loader/extract_from_sftp/extract_from_sftp.html</loc>
-         <lastmod>2025-01-31</lastmod>
+         <lastmod>2025-02-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://adidas.github.io/lakehouse-engine-docs/lakehouse_engine_usage/data_loader/extract_using_jdbc_connection/extract_using_jdbc_connection.html</loc>
-         <lastmod>2025-01-31</lastmod>
+         <lastmod>2025-02-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://adidas.github.io/lakehouse-engine-docs/lakehouse_engine_usage/data_loader/filtered_full_load/filtered_full_load.html</loc>
-         <lastmod>2025-01-31</lastmod>
+         <lastmod>2025-02-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://adidas.github.io/lakehouse-engine-docs/lakehouse_engine_usage/data_loader/filtered_full_load_with_selective_replace/filtered_full_load_with_selective_replace.html</loc>
-         <lastmod>2025-01-31</lastmod>
+         <lastmod>2025-02-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://adidas.github.io/lakehouse-engine-docs/lakehouse_engine_usage/data_loader/flatten_schema_and_explode_columns/flatten_schema_and_explode_columns.html</loc>
-         <lastmod>2025-01-31</lastmod>
+         <lastmod>2025-02-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://adidas.github.io/lakehouse-engine-docs/lakehouse_engine_usage/data_loader/full_load/full_load.html</loc>
-         <lastmod>2025-01-31</lastmod>
+         <lastmod>2025-02-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://adidas.github.io/lakehouse-engine-docs/lakehouse_engine_usage/data_loader/read_from_dataframe/read_from_dataframe.html</loc>
-         <lastmod>2025-01-31</lastmod>
+         <lastmod>2025-02-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://adidas.github.io/lakehouse-engine-docs/lakehouse_engine_usage/data_loader/streaming_append_load_with_malformed/streaming_append_load_with_malformed.html</loc>
-         <lastmod>2025-01-31</lastmod>
+         <lastmod>2025-02-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://adidas.github.io/lakehouse-engine-docs/lakehouse_engine_usage/data_loader/streaming_append_load_with_terminator/streaming_append_load_with_terminator.html</loc>
-         <lastmod>2025-01-31</lastmod>
+         <lastmod>2025-02-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://adidas.github.io/lakehouse-engine-docs/lakehouse_engine_usage/data_loader/streaming_delta_load_with_group_and_rank_condensation/streaming_delta_load_with_group_and_rank_condensation.html</loc>
-         <lastmod>2025-01-31</lastmod>
+         <lastmod>2025-02-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://adidas.github.io/lakehouse-engine-docs/lakehouse_engine_usage/data_loader/streaming_delta_with_late_arriving_and_out_of_order_events/streaming_delta_with_late_arriving_and_out_of_order_events.html</loc>
-         <lastmod>2025-01-31</lastmod>
+         <lastmod>2025-02-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://adidas.github.io/lakehouse-engine-docs/lakehouse_engine_usage/data_loader/write_and_read_dataframe/write_and_read_dataframe.html</loc>
-         <lastmod>2025-01-31</lastmod>
+         <lastmod>2025-02-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://adidas.github.io/lakehouse-engine-docs/lakehouse_engine_usage/data_loader/write_to_console/write_to_console.html</loc>
-         <lastmod>2025-01-31</lastmod>
+         <lastmod>2025-02-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://adidas.github.io/lakehouse-engine-docs/lakehouse_engine_usage/data_loader/write_to_rest_api/write_to_rest_api.html</loc>
-         <lastmod>2025-01-31</lastmod>
+         <lastmod>2025-02-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://adidas.github.io/lakehouse-engine-docs/lakehouse_engine_usage/data_quality/data_quality.html</loc>
-         <lastmod>2025-01-31</lastmod>
+         <lastmod>2025-02-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://adidas.github.io/lakehouse-engine-docs/lakehouse_engine_usage/data_quality/custom_expectations/custom_expectations.html</loc>
-         <lastmod>2025-01-31</lastmod>
+         <lastmod>2025-02-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://adidas.github.io/lakehouse-engine-docs/lakehouse_engine_usage/data_quality/data_quality_validator/data_quality_validator.html</loc>
-         <lastmod>2025-01-31</lastmod>
+         <lastmod>2025-02-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://adidas.github.io/lakehouse-engine-docs/lakehouse_engine_usage/data_quality/minimal_example/minimal_example.html</loc>
-         <lastmod>2025-01-31</lastmod>
+         <lastmod>2025-02-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://adidas.github.io/lakehouse-engine-docs/lakehouse_engine_usage/data_quality/prisma/prisma.html</loc>
-         <lastmod>2025-01-31</lastmod>
+         <lastmod>2025-02-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://adidas.github.io/lakehouse-engine-docs/lakehouse_engine_usage/data_quality/result_sink/result_sink.html</loc>
-         <lastmod>2025-01-31</lastmod>
+         <lastmod>2025-02-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://adidas.github.io/lakehouse-engine-docs/lakehouse_engine_usage/data_quality/row_tagging/row_tagging.html</loc>
-         <lastmod>2025-01-31</lastmod>
+         <lastmod>2025-02-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://adidas.github.io/lakehouse-engine-docs/lakehouse_engine_usage/data_quality/validations_failing/validations_failing.html</loc>
-         <lastmod>2025-01-31</lastmod>
+         <lastmod>2025-02-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://adidas.github.io/lakehouse-engine-docs/lakehouse_engine_usage/gab/gab.html</loc>
-         <lastmod>2025-01-31</lastmod>
+         <lastmod>2025-02-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://adidas.github.io/lakehouse-engine-docs/lakehouse_engine_usage/gab/step_by_step/step_by_step.html</loc>
-         <lastmod>2025-01-31</lastmod>
+         <lastmod>2025-02-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://adidas.github.io/lakehouse-engine-docs/lakehouse_engine_usage/reconciliator/reconciliator.html</loc>
-         <lastmod>2025-01-31</lastmod>
+         <lastmod>2025-02-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://adidas.github.io/lakehouse-engine-docs/lakehouse_engine_usage/sensor/sensor.html</loc>
-         <lastmod>2025-01-31</lastmod>
+         <lastmod>2025-02-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://adidas.github.io/lakehouse-engine-docs/lakehouse_engine_usage/sensor/delta_table/delta_table.html</loc>
-         <lastmod>2025-01-31</lastmod>
+         <lastmod>2025-02-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://adidas.github.io/lakehouse-engine-docs/lakehouse_engine_usage/sensor/delta_upstream_sensor_table/delta_upstream_sensor_table.html</loc>
-         <lastmod>2025-01-31</lastmod>
+         <lastmod>2025-02-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://adidas.github.io/lakehouse-engine-docs/lakehouse_engine_usage/sensor/file/file.html</loc>
-         <lastmod>2025-01-31</lastmod>
+         <lastmod>2025-02-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://adidas.github.io/lakehouse-engine-docs/lakehouse_engine_usage/sensor/jdbc_table/jdbc_table.html</loc>
-         <lastmod>2025-01-31</lastmod>
+         <lastmod>2025-02-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://adidas.github.io/lakehouse-engine-docs/lakehouse_engine_usage/sensor/kafka/kafka.html</loc>
-         <lastmod>2025-01-31</lastmod>
+         <lastmod>2025-02-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://adidas.github.io/lakehouse-engine-docs/lakehouse_engine_usage/sensor/sap_bw_b4/sap_bw_b4.html</loc>
-         <lastmod>2025-01-31</lastmod>
+         <lastmod>2025-02-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://adidas.github.io/lakehouse-engine-docs/lakehouse_engine_usage/sensor/update_sensor_status/update_sensor_status.html</loc>
-         <lastmod>2025-01-31</lastmod>
+         <lastmod>2025-02-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://adidas.github.io/lakehouse-engine-docs/reference/index.html</loc>
-         <lastmod>2025-01-31</lastmod>
+         <lastmod>2025-02-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://adidas.github.io/lakehouse-engine-docs/reference/packages/index.html</loc>
-         <lastmod>2025-01-31</lastmod>
+         <lastmod>2025-02-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://adidas.github.io/lakehouse-engine-docs/reference/packages/engine.html</loc>
-         <lastmod>2025-01-31</lastmod>
+         <lastmod>2025-02-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://adidas.github.io/lakehouse-engine-docs/reference/packages/algorithms/index.html</loc>
-         <lastmod>2025-01-31</lastmod>
+         <lastmod>2025-02-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://adidas.github.io/lakehouse-engine-docs/reference/packages/algorithms/algorithm.html</loc>
-         <lastmod>2025-01-31</lastmod>
+         <lastmod>2025-02-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://adidas.github.io/lakehouse-engine-docs/reference/packages/algorithms/data_loader.html</loc>
-         <lastmod>2025-01-31</lastmod>
+         <lastmod>2025-02-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://adidas.github.io/lakehouse-engine-docs/reference/packages/algorithms/dq_validator.html</loc>
-         <lastmod>2025-01-31</lastmod>
+         <lastmod>2025-02-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://adidas.github.io/lakehouse-engine-docs/reference/packages/algorithms/exceptions.html</loc>
-         <lastmod>2025-01-31</lastmod>
+         <lastmod>2025-02-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://adidas.github.io/lakehouse-engine-docs/reference/packages/algorithms/gab.html</loc>
-         <lastmod>2025-01-31</lastmod>
+         <lastmod>2025-02-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://adidas.github.io/lakehouse-engine-docs/reference/packages/algorithms/reconciliator.html</loc>
-         <lastmod>2025-01-31</lastmod>
+         <lastmod>2025-02-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://adidas.github.io/lakehouse-engine-docs/reference/packages/algorithms/sensor.html</loc>
-         <lastmod>2025-01-31</lastmod>
+         <lastmod>2025-02-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://adidas.github.io/lakehouse-engine-docs/reference/packages/configs/index.html</loc>
-         <lastmod>2025-01-31</lastmod>
+         <lastmod>2025-02-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://adidas.github.io/lakehouse-engine-docs/reference/packages/core/index.html</loc>
-         <lastmod>2025-01-31</lastmod>
+         <lastmod>2025-02-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://adidas.github.io/lakehouse-engine-docs/reference/packages/core/dbfs_file_manager.html</loc>
-         <lastmod>2025-01-31</lastmod>
+         <lastmod>2025-02-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://adidas.github.io/lakehouse-engine-docs/reference/packages/core/definitions.html</loc>
-         <lastmod>2025-01-31</lastmod>
+         <lastmod>2025-02-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://adidas.github.io/lakehouse-engine-docs/reference/packages/core/exec_env.html</loc>
-         <lastmod>2025-01-31</lastmod>
+         <lastmod>2025-02-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://adidas.github.io/lakehouse-engine-docs/reference/packages/core/executable.html</loc>
-         <lastmod>2025-01-31</lastmod>
+         <lastmod>2025-02-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://adidas.github.io/lakehouse-engine-docs/reference/packages/core/file_manager.html</loc>
-         <lastmod>2025-01-31</lastmod>
+         <lastmod>2025-02-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://adidas.github.io/lakehouse-engine-docs/reference/packages/core/gab_manager.html</loc>
-         <lastmod>2025-01-31</lastmod>
+         <lastmod>2025-02-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://adidas.github.io/lakehouse-engine-docs/reference/packages/core/gab_sql_generator.html</loc>
-         <lastmod>2025-01-31</lastmod>
+         <lastmod>2025-02-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://adidas.github.io/lakehouse-engine-docs/reference/packages/core/s3_file_manager.html</loc>
-         <lastmod>2025-01-31</lastmod>
+         <lastmod>2025-02-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://adidas.github.io/lakehouse-engine-docs/reference/packages/core/sensor_manager.html</loc>
-         <lastmod>2025-01-31</lastmod>
+         <lastmod>2025-02-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://adidas.github.io/lakehouse-engine-docs/reference/packages/core/table_manager.html</loc>
-         <lastmod>2025-01-31</lastmod>
+         <lastmod>2025-02-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://adidas.github.io/lakehouse-engine-docs/reference/packages/dq_processors/index.html</loc>
-         <lastmod>2025-01-31</lastmod>
+         <lastmod>2025-02-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://adidas.github.io/lakehouse-engine-docs/reference/packages/dq_processors/dq_factory.html</loc>
-         <lastmod>2025-01-31</lastmod>
+         <lastmod>2025-02-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://adidas.github.io/lakehouse-engine-docs/reference/packages/dq_processors/exceptions.html</loc>
-         <lastmod>2025-01-31</lastmod>
+         <lastmod>2025-02-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://adidas.github.io/lakehouse-engine-docs/reference/packages/dq_processors/validator.html</loc>
-         <lastmod>2025-01-31</lastmod>
+         <lastmod>2025-02-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://adidas.github.io/lakehouse-engine-docs/reference/packages/dq_processors/custom_expectations/index.html</loc>
-         <lastmod>2025-01-31</lastmod>
+         <lastmod>2025-02-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://adidas.github.io/lakehouse-engine-docs/reference/packages/dq_processors/custom_expectations/expect_column_pair_a_to_be_not_equal_to_b.html</loc>
-         <lastmod>2025-01-31</lastmod>
+         <lastmod>2025-02-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://adidas.github.io/lakehouse-engine-docs/reference/packages/dq_processors/custom_expectations/expect_column_pair_a_to_be_smaller_or_equal_than_b.html</loc>
-         <lastmod>2025-01-31</lastmod>
+         <lastmod>2025-02-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://adidas.github.io/lakehouse-engine-docs/reference/packages/dq_processors/custom_expectations/expect_column_pair_date_a_to_be_greater_than_or_equal_to_date_b.html</loc>
-         <lastmod>2025-01-31</lastmod>
+         <lastmod>2025-02-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://adidas.github.io/lakehouse-engine-docs/reference/packages/dq_processors/custom_expectations/expect_column_values_to_be_date_not_older_than.html</loc>
-         <lastmod>2025-01-31</lastmod>
+         <lastmod>2025-02-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://adidas.github.io/lakehouse-engine-docs/reference/packages/dq_processors/custom_expectations/expect_column_values_to_not_be_null_or_empty_string.html</loc>
-         <lastmod>2025-01-31</lastmod>
+         <lastmod>2025-02-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://adidas.github.io/lakehouse-engine-docs/reference/packages/dq_processors/custom_expectations/expect_multicolumn_column_a_must_equal_b_or_c.html</loc>
-         <lastmod>2025-01-31</lastmod>
+         <lastmod>2025-02-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://adidas.github.io/lakehouse-engine-docs/reference/packages/dq_processors/custom_expectations/expect_queried_column_agg_value_to_be.html</loc>
-         <lastmod>2025-01-31</lastmod>
+         <lastmod>2025-02-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://adidas.github.io/lakehouse-engine-docs/reference/packages/io/index.html</loc>
-         <lastmod>2025-01-31</lastmod>
+         <lastmod>2025-02-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://adidas.github.io/lakehouse-engine-docs/reference/packages/io/exceptions.html</loc>
-         <lastmod>2025-01-31</lastmod>
+         <lastmod>2025-02-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://adidas.github.io/lakehouse-engine-docs/reference/packages/io/reader.html</loc>
-         <lastmod>2025-01-31</lastmod>
+         <lastmod>2025-02-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://adidas.github.io/lakehouse-engine-docs/reference/packages/io/reader_factory.html</loc>
-         <lastmod>2025-01-31</lastmod>
+         <lastmod>2025-02-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://adidas.github.io/lakehouse-engine-docs/reference/packages/io/writer.html</loc>
-         <lastmod>2025-01-31</lastmod>
+         <lastmod>2025-02-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://adidas.github.io/lakehouse-engine-docs/reference/packages/io/writer_factory.html</loc>
-         <lastmod>2025-01-31</lastmod>
+         <lastmod>2025-02-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://adidas.github.io/lakehouse-engine-docs/reference/packages/io/readers/index.html</loc>
-         <lastmod>2025-01-31</lastmod>
+         <lastmod>2025-02-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://adidas.github.io/lakehouse-engine-docs/reference/packages/io/readers/dataframe_reader.html</loc>
-         <lastmod>2025-01-31</lastmod>
+         <lastmod>2025-02-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://adidas.github.io/lakehouse-engine-docs/reference/packages/io/readers/file_reader.html</loc>
-         <lastmod>2025-01-31</lastmod>
+         <lastmod>2025-02-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://adidas.github.io/lakehouse-engine-docs/reference/packages/io/readers/jdbc_reader.html</loc>
-         <lastmod>2025-01-31</lastmod>
+         <lastmod>2025-02-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://adidas.github.io/lakehouse-engine-docs/reference/packages/io/readers/kafka_reader.html</loc>
-         <lastmod>2025-01-31</lastmod>
+         <lastmod>2025-02-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://adidas.github.io/lakehouse-engine-docs/reference/packages/io/readers/query_reader.html</loc>
-         <lastmod>2025-01-31</lastmod>
+         <lastmod>2025-02-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://adidas.github.io/lakehouse-engine-docs/reference/packages/io/readers/sap_b4_reader.html</loc>
-         <lastmod>2025-01-31</lastmod>
+         <lastmod>2025-02-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://adidas.github.io/lakehouse-engine-docs/reference/packages/io/readers/sap_bw_reader.html</loc>
-         <lastmod>2025-01-31</lastmod>
+         <lastmod>2025-02-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://adidas.github.io/lakehouse-engine-docs/reference/packages/io/readers/sftp_reader.html</loc>
-         <lastmod>2025-01-31</lastmod>
+         <lastmod>2025-02-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://adidas.github.io/lakehouse-engine-docs/reference/packages/io/readers/table_reader.html</loc>
-         <lastmod>2025-01-31</lastmod>
+         <lastmod>2025-02-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://adidas.github.io/lakehouse-engine-docs/reference/packages/io/writers/index.html</loc>
-         <lastmod>2025-01-31</lastmod>
+         <lastmod>2025-02-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://adidas.github.io/lakehouse-engine-docs/reference/packages/io/writers/console_writer.html</loc>
-         <lastmod>2025-01-31</lastmod>
+         <lastmod>2025-02-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://adidas.github.io/lakehouse-engine-docs/reference/packages/io/writers/dataframe_writer.html</loc>
-         <lastmod>2025-01-31</lastmod>
+         <lastmod>2025-02-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://adidas.github.io/lakehouse-engine-docs/reference/packages/io/writers/delta_merge_writer.html</loc>
-         <lastmod>2025-01-31</lastmod>
+         <lastmod>2025-02-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://adidas.github.io/lakehouse-engine-docs/reference/packages/io/writers/file_writer.html</loc>
-         <lastmod>2025-01-31</lastmod>
+         <lastmod>2025-02-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://adidas.github.io/lakehouse-engine-docs/reference/packages/io/writers/jdbc_writer.html</loc>
-         <lastmod>2025-01-31</lastmod>
+         <lastmod>2025-02-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://adidas.github.io/lakehouse-engine-docs/reference/packages/io/writers/kafka_writer.html</loc>
-         <lastmod>2025-01-31</lastmod>
+         <lastmod>2025-02-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://adidas.github.io/lakehouse-engine-docs/reference/packages/io/writers/rest_api_writer.html</loc>
-         <lastmod>2025-01-31</lastmod>
+         <lastmod>2025-02-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://adidas.github.io/lakehouse-engine-docs/reference/packages/io/writers/sharepoint_writer.html</loc>
-         <lastmod>2025-01-31</lastmod>
+         <lastmod>2025-02-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://adidas.github.io/lakehouse-engine-docs/reference/packages/io/writers/table_writer.html</loc>
-         <lastmod>2025-01-31</lastmod>
+         <lastmod>2025-02-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://adidas.github.io/lakehouse-engine-docs/reference/packages/terminators/index.html</loc>
-         <lastmod>2025-01-31</lastmod>
+         <lastmod>2025-02-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://adidas.github.io/lakehouse-engine-docs/reference/packages/terminators/cdf_processor.html</loc>
-         <lastmod>2025-01-31</lastmod>
+         <lastmod>2025-02-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://adidas.github.io/lakehouse-engine-docs/reference/packages/terminators/dataset_optimizer.html</loc>
-         <lastmod>2025-01-31</lastmod>
+         <lastmod>2025-02-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://adidas.github.io/lakehouse-engine-docs/reference/packages/terminators/notifier.html</loc>
-         <lastmod>2025-01-31</lastmod>
+         <lastmod>2025-02-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://adidas.github.io/lakehouse-engine-docs/reference/packages/terminators/notifier_factory.html</loc>
-         <lastmod>2025-01-31</lastmod>
+         <lastmod>2025-02-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://adidas.github.io/lakehouse-engine-docs/reference/packages/terminators/sensor_terminator.html</loc>
-         <lastmod>2025-01-31</lastmod>
+         <lastmod>2025-02-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://adidas.github.io/lakehouse-engine-docs/reference/packages/terminators/spark_terminator.html</loc>
-         <lastmod>2025-01-31</lastmod>
+         <lastmod>2025-02-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://adidas.github.io/lakehouse-engine-docs/reference/packages/terminators/terminator_factory.html</loc>
-         <lastmod>2025-01-31</lastmod>
+         <lastmod>2025-02-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://adidas.github.io/lakehouse-engine-docs/reference/packages/terminators/notifiers/index.html</loc>
-         <lastmod>2025-01-31</lastmod>
+         <lastmod>2025-02-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://adidas.github.io/lakehouse-engine-docs/reference/packages/terminators/notifiers/email_notifier.html</loc>
-         <lastmod>2025-01-31</lastmod>
+         <lastmod>2025-02-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://adidas.github.io/lakehouse-engine-docs/reference/packages/terminators/notifiers/notification_templates.html</loc>
-         <lastmod>2025-01-31</lastmod>
+         <lastmod>2025-02-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://adidas.github.io/lakehouse-engine-docs/reference/packages/transformers/index.html</loc>
-         <lastmod>2025-01-31</lastmod>
+         <lastmod>2025-02-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://adidas.github.io/lakehouse-engine-docs/reference/packages/transformers/aggregators.html</loc>
-         <lastmod>2025-01-31</lastmod>
+         <lastmod>2025-02-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://adidas.github.io/lakehouse-engine-docs/reference/packages/transformers/column_creators.html</loc>
-         <lastmod>2025-01-31</lastmod>
+         <lastmod>2025-02-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://adidas.github.io/lakehouse-engine-docs/reference/packages/transformers/column_reshapers.html</loc>
-         <lastmod>2025-01-31</lastmod>
+         <lastmod>2025-02-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://adidas.github.io/lakehouse-engine-docs/reference/packages/transformers/condensers.html</loc>
-         <lastmod>2025-01-31</lastmod>
+         <lastmod>2025-02-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://adidas.github.io/lakehouse-engine-docs/reference/packages/transformers/custom_transformers.html</loc>
-         <lastmod>2025-01-31</lastmod>
+         <lastmod>2025-02-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://adidas.github.io/lakehouse-engine-docs/reference/packages/transformers/data_maskers.html</loc>
-         <lastmod>2025-01-31</lastmod>
+         <lastmod>2025-02-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://adidas.github.io/lakehouse-engine-docs/reference/packages/transformers/date_transformers.html</loc>
-         <lastmod>2025-01-31</lastmod>
+         <lastmod>2025-02-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://adidas.github.io/lakehouse-engine-docs/reference/packages/transformers/exceptions.html</loc>
-         <lastmod>2025-01-31</lastmod>
+         <lastmod>2025-02-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://adidas.github.io/lakehouse-engine-docs/reference/packages/transformers/filters.html</loc>
-         <lastmod>2025-01-31</lastmod>
+         <lastmod>2025-02-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://adidas.github.io/lakehouse-engine-docs/reference/packages/transformers/joiners.html</loc>
-         <lastmod>2025-01-31</lastmod>
+         <lastmod>2025-02-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://adidas.github.io/lakehouse-engine-docs/reference/packages/transformers/null_handlers.html</loc>
-         <lastmod>2025-01-31</lastmod>
+         <lastmod>2025-02-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://adidas.github.io/lakehouse-engine-docs/reference/packages/transformers/optimizers.html</loc>
-         <lastmod>2025-01-31</lastmod>
+         <lastmod>2025-02-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://adidas.github.io/lakehouse-engine-docs/reference/packages/transformers/regex_transformers.html</loc>
-         <lastmod>2025-01-31</lastmod>
+         <lastmod>2025-02-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://adidas.github.io/lakehouse-engine-docs/reference/packages/transformers/repartitioners.html</loc>
-         <lastmod>2025-01-31</lastmod>
+         <lastmod>2025-02-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://adidas.github.io/lakehouse-engine-docs/reference/packages/transformers/transformer_factory.html</loc>
-         <lastmod>2025-01-31</lastmod>
+         <lastmod>2025-02-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://adidas.github.io/lakehouse-engine-docs/reference/packages/transformers/unions.html</loc>
-         <lastmod>2025-01-31</lastmod>
+         <lastmod>2025-02-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://adidas.github.io/lakehouse-engine-docs/reference/packages/transformers/watermarker.html</loc>
-         <lastmod>2025-01-31</lastmod>
+         <lastmod>2025-02-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://adidas.github.io/lakehouse-engine-docs/reference/packages/utils/index.html</loc>
-         <lastmod>2025-01-31</lastmod>
+         <lastmod>2025-02-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://adidas.github.io/lakehouse-engine-docs/reference/packages/utils/acon_utils.html</loc>
-         <lastmod>2025-01-31</lastmod>
+         <lastmod>2025-02-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://adidas.github.io/lakehouse-engine-docs/reference/packages/utils/databricks_utils.html</loc>
-         <lastmod>2025-01-31</lastmod>
+         <lastmod>2025-02-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://adidas.github.io/lakehouse-engine-docs/reference/packages/utils/dq_utils.html</loc>
-         <lastmod>2025-01-31</lastmod>
+         <lastmod>2025-02-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://adidas.github.io/lakehouse-engine-docs/reference/packages/utils/engine_usage_stats.html</loc>
-         <lastmod>2025-01-31</lastmod>
+         <lastmod>2025-02-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://adidas.github.io/lakehouse-engine-docs/reference/packages/utils/expectations_utils.html</loc>
-         <lastmod>2025-01-31</lastmod>
+         <lastmod>2025-02-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://adidas.github.io/lakehouse-engine-docs/reference/packages/utils/file_utils.html</loc>
-         <lastmod>2025-01-31</lastmod>
+         <lastmod>2025-02-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://adidas.github.io/lakehouse-engine-docs/reference/packages/utils/gab_utils.html</loc>
-         <lastmod>2025-01-31</lastmod>
+         <lastmod>2025-02-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://adidas.github.io/lakehouse-engine-docs/reference/packages/utils/logging_handler.html</loc>
-         <lastmod>2025-01-31</lastmod>
+         <lastmod>2025-02-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://adidas.github.io/lakehouse-engine-docs/reference/packages/utils/rest_api.html</loc>
-         <lastmod>2025-01-31</lastmod>
+         <lastmod>2025-02-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://adidas.github.io/lakehouse-engine-docs/reference/packages/utils/schema_utils.html</loc>
-         <lastmod>2025-01-31</lastmod>
+         <lastmod>2025-02-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://adidas.github.io/lakehouse-engine-docs/reference/packages/utils/sharepoint_utils.html</loc>
-         <lastmod>2025-01-31</lastmod>
+         <lastmod>2025-02-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://adidas.github.io/lakehouse-engine-docs/reference/packages/utils/sql_parser_utils.html</loc>
-         <lastmod>2025-01-31</lastmod>
+         <lastmod>2025-02-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://adidas.github.io/lakehouse-engine-docs/reference/packages/utils/configs/index.html</loc>
-         <lastmod>2025-01-31</lastmod>
+         <lastmod>2025-02-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://adidas.github.io/lakehouse-engine-docs/reference/packages/utils/configs/config_utils.html</loc>
-         <lastmod>2025-01-31</lastmod>
+         <lastmod>2025-02-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://adidas.github.io/lakehouse-engine-docs/reference/packages/utils/extraction/index.html</loc>
-         <lastmod>2025-01-31</lastmod>
+         <lastmod>2025-02-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://adidas.github.io/lakehouse-engine-docs/reference/packages/utils/extraction/jdbc_extraction_utils.html</loc>
-         <lastmod>2025-01-31</lastmod>
+         <lastmod>2025-02-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://adidas.github.io/lakehouse-engine-docs/reference/packages/utils/extraction/sap_b4_extraction_utils.html</loc>
-         <lastmod>2025-01-31</lastmod>
+         <lastmod>2025-02-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://adidas.github.io/lakehouse-engine-docs/reference/packages/utils/extraction/sap_bw_extraction_utils.html</loc>
-         <lastmod>2025-01-31</lastmod>
+         <lastmod>2025-02-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://adidas.github.io/lakehouse-engine-docs/reference/packages/utils/extraction/sftp_extraction_utils.html</loc>
-         <lastmod>2025-01-31</lastmod>
+         <lastmod>2025-02-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://adidas.github.io/lakehouse-engine-docs/reference/packages/utils/storage/index.html</loc>
-         <lastmod>2025-01-31</lastmod>
+         <lastmod>2025-02-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://adidas.github.io/lakehouse-engine-docs/reference/packages/utils/storage/dbfs_storage.html</loc>
-         <lastmod>2025-01-31</lastmod>
+         <lastmod>2025-02-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://adidas.github.io/lakehouse-engine-docs/reference/packages/utils/storage/file_storage.html</loc>
-         <lastmod>2025-01-31</lastmod>
+         <lastmod>2025-02-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://adidas.github.io/lakehouse-engine-docs/reference/packages/utils/storage/file_storage_functions.html</loc>
-         <lastmod>2025-01-31</lastmod>
+         <lastmod>2025-02-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://adidas.github.io/lakehouse-engine-docs/reference/packages/utils/storage/local_fs_storage.html</loc>
-         <lastmod>2025-01-31</lastmod>
+         <lastmod>2025-02-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://adidas.github.io/lakehouse-engine-docs/reference/packages/utils/storage/s3_storage.html</loc>
-         <lastmod>2025-01-31</lastmod>
+         <lastmod>2025-02-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
 </urlset>
