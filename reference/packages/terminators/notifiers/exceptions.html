@@ -8,20 +8,20 @@
       
       
       
-        <link rel="canonical" href="https://adidas.github.io/lakehouse-engine-docs/reference/packages/terminators/notifiers/notification_templates.html">
+        <link rel="canonical" href="https://adidas.github.io/lakehouse-engine-docs/reference/packages/terminators/notifiers/exceptions.html">
       
       
-        <link rel="prev" href="exceptions.html">
+        <link rel="prev" href="email_notifier.html">
       
       
-        <link rel="next" href="../../transformers/index.html">
+        <link rel="next" href="notification_templates.html">
       
       <link rel="icon" href="../../../../assets/img/lakehouse_engine_logo_symbol_large.png">
       <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.17">
     
     
       
-        <title>Notification templates - Lakehouse Engine Documentation</title>
+        <title>Exceptions - Lakehouse Engine Documentation</title>
       
     
     
@@ -77,7 +77,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#packages.terminators.notifiers.notification_templates" class="md-skip">
+        <a href="#packages.terminators.notifiers.exceptions" class="md-skip">
           Skip to content
         </a>
       
@@ -111,7 +111,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Notification templates
+              Exceptions
             
           </span>
         </div>
@@ -2843,20 +2843,6 @@
               
   
   
-  
-    <li class="md-nav__item">
-      <a href="exceptions.html" class="md-nav__link">
-        Exceptions
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
     
   
   
@@ -2867,12 +2853,12 @@
       
       
         <label class="md-nav__link md-nav__link--active" for="__toc">
-          Notification templates
+          Exceptions
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <a href="notification_templates.html" class="md-nav__link md-nav__link--active">
-        Notification templates
+      <a href="exceptions.html" class="md-nav__link md-nav__link--active">
+        Exceptions
       </a>
       
         
@@ -2889,15 +2875,36 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#packages.terminators.notifiers.notification_templates" class="md-nav__link">
-    packages.terminators.notifiers.notification_templates
+  <a href="#packages.terminators.notifiers.exceptions" class="md-nav__link">
+    packages.terminators.notifiers.exceptions
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#packages.terminators.notifiers.notification_templates.NotificationsTemplates" class="md-nav__link">
-    NotificationsTemplates
+  <a href="#packages.terminators.notifiers.exceptions.NotifierConfigException" class="md-nav__link">
+    NotifierConfigException
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#packages.terminators.notifiers.exceptions.NotifierNotFoundException" class="md-nav__link">
+    NotifierNotFoundException
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#packages.terminators.notifiers.exceptions.NotifierTemplateConfigException" class="md-nav__link">
+    NotifierTemplateConfigException
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#packages.terminators.notifiers.exceptions.NotifierTemplateNotFoundException" class="md-nav__link">
+    NotifierTemplateNotFoundException
   </a>
   
 </li>
@@ -2906,6 +2913,20 @@
   
 </nav>
       
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="notification_templates.html" class="md-nav__link">
+        Notification templates
+      </a>
     </li>
   
 
@@ -3802,15 +3823,15 @@
   
 
 
-  <h1>Notification templates</h1>
+  <h1>Exceptions</h1>
 
 <div class="doc doc-object doc-module">
 
 
-<a id="packages.terminators.notifiers.notification_templates"></a>
+<a id="packages.terminators.notifiers.exceptions"></a>
   <div class="doc doc-contents first">
   
-      <p>Email notification templates.</p>
+      <p>Package defining all the Notifier custom exceptions.</p>
 
   
 
@@ -3827,66 +3848,137 @@
 
 
 
-<h2 id="packages.terminators.notifiers.notification_templates.NotificationsTemplates" class="doc doc-heading">
-        <code>NotificationsTemplates</code>
+<h2 id="packages.terminators.notifiers.exceptions.NotifierConfigException" class="doc doc-heading">
+        <code>NotifierConfigException</code>
 
 
-<a href="#packages.terminators.notifiers.notification_templates.NotificationsTemplates" class="headerlink" title="Permanent link">&para;</a></h2>
+<a href="#packages.terminators.notifiers.exceptions.NotifierConfigException" class="headerlink" title="Permanent link">&para;</a></h2>
 
 
   <div class="doc doc-contents ">
       <p class="doc doc-class-bases">
-        Bases: <code>object</code></p>
+        Bases: <code>Exception</code></p>
 
   
-      <p>Templates for notifications.</p>
+      <p>Exception for when the notifier configuration is invalid.</p>
 
 
         <details class="quote">
-          <summary>Source code in <code>mkdocs/lakehouse_engine/packages/terminators/notifiers/notification_templates.py</code></summary>
-          <div class="language-python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-4"> 4</a></span>
-<span class="normal"><a href="#__codelineno-0-5"> 5</a></span>
-<span class="normal"><a href="#__codelineno-0-6"> 6</a></span>
-<span class="normal"><a href="#__codelineno-0-7"> 7</a></span>
-<span class="normal"><a href="#__codelineno-0-8"> 8</a></span>
-<span class="normal"><a href="#__codelineno-0-9"> 9</a></span>
-<span class="normal"><a href="#__codelineno-0-10">10</a></span>
+          <summary>Source code in <code>mkdocs/lakehouse_engine/packages/terminators/notifiers/exceptions.py</code></summary>
+          <div class="language-python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-10">10</a></span>
 <span class="normal"><a href="#__codelineno-0-11">11</a></span>
 <span class="normal"><a href="#__codelineno-0-12">12</a></span>
-<span class="normal"><a href="#__codelineno-0-13">13</a></span>
-<span class="normal"><a href="#__codelineno-0-14">14</a></span>
-<span class="normal"><a href="#__codelineno-0-15">15</a></span>
-<span class="normal"><a href="#__codelineno-0-16">16</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4"></a><span class="k">class</span><span class="w"> </span><span class="nc">NotificationsTemplates</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Templates for notifications.&quot;&quot;&quot;</span>
-</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6"></a>
-</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7"></a>    <span class="n">EMAIL_NOTIFICATIONS_TEMPLATES</span> <span class="o">=</span> <span class="p">{</span>
-</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8"></a>        <span class="s2">&quot;failure_notification_email&quot;</span><span class="p">:</span> <span class="p">{</span>
-</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9"></a>            <span class="s2">&quot;subject&quot;</span><span class="p">:</span> <span class="s2">&quot;Service Failure&quot;</span><span class="p">,</span>
-</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10"></a>            <span class="s2">&quot;mimetype&quot;</span><span class="p">:</span> <span class="s2">&quot;text/text&quot;</span><span class="p">,</span>
-</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11"></a>            <span class="s2">&quot;message&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;&quot;</span>
-</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12"></a><span class="s2">            Job {{ databricks_job_name }} in workspace {{ databricks_workspace_id }} has</span>
-</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13"></a><span class="s2">            failed with the exception: {{ exception }}&quot;&quot;&quot;</span><span class="p">,</span>
-</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14"></a>            <span class="s2">&quot;on_failure&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
-</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15"></a>        <span class="p">},</span>
-</span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16"></a>    <span class="p">}</span>
+<span class="normal"><a href="#__codelineno-0-13">13</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10"></a><span class="k">class</span><span class="w"> </span><span class="nc">NotifierConfigException</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Exception for when the notifier configuration is invalid.&quot;&quot;&quot;</span>
+</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12"></a>
+</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13"></a>    <span class="k">pass</span>
 </span></code></pre></div></td></tr></table></div>
         </details>
 
+  </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h2 id="packages.terminators.notifiers.exceptions.NotifierNotFoundException" class="doc doc-heading">
+        <code>NotifierNotFoundException</code>
+
+
+<a href="#packages.terminators.notifiers.exceptions.NotifierNotFoundException" class="headerlink" title="Permanent link">&para;</a></h2>
+
+
+  <div class="doc doc-contents ">
+      <p class="doc doc-class-bases">
+        Bases: <code>Exception</code></p>
+
   
-
-  <div class="doc doc-children">
-
+      <p>Exception for when the notifier is not found.</p>
 
 
-
-
-
-
-
-
-
+        <details class="quote">
+          <summary>Source code in <code>mkdocs/lakehouse_engine/packages/terminators/notifiers/exceptions.py</code></summary>
+          <div class="language-python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-4">4</a></span>
+<span class="normal"><a href="#__codelineno-0-5">5</a></span>
+<span class="normal"><a href="#__codelineno-0-6">6</a></span>
+<span class="normal"><a href="#__codelineno-0-7">7</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4"></a><span class="k">class</span><span class="w"> </span><span class="nc">NotifierNotFoundException</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Exception for when the notifier is not found.&quot;&quot;&quot;</span>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6"></a>
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7"></a>    <span class="k">pass</span>
+</span></code></pre></div></td></tr></table></div>
+        </details>
 
   </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h2 id="packages.terminators.notifiers.exceptions.NotifierTemplateConfigException" class="doc doc-heading">
+        <code>NotifierTemplateConfigException</code>
+
+
+<a href="#packages.terminators.notifiers.exceptions.NotifierTemplateConfigException" class="headerlink" title="Permanent link">&para;</a></h2>
+
+
+  <div class="doc doc-contents ">
+      <p class="doc doc-class-bases">
+        Bases: <code>Exception</code></p>
+
+  
+      <p>Exception for when the notifier config is incorrect.</p>
+
+
+        <details class="quote">
+          <summary>Source code in <code>mkdocs/lakehouse_engine/packages/terminators/notifiers/exceptions.py</code></summary>
+          <div class="language-python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-22">22</a></span>
+<span class="normal"><a href="#__codelineno-0-23">23</a></span>
+<span class="normal"><a href="#__codelineno-0-24">24</a></span>
+<span class="normal"><a href="#__codelineno-0-25">25</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-0-22"><a id="__codelineno-0-22" name="__codelineno-0-22"></a><span class="k">class</span><span class="w"> </span><span class="nc">NotifierTemplateConfigException</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+</span><span id="__span-0-23"><a id="__codelineno-0-23" name="__codelineno-0-23"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Exception for when the notifier config is incorrect.&quot;&quot;&quot;</span>
+</span><span id="__span-0-24"><a id="__codelineno-0-24" name="__codelineno-0-24"></a>
+</span><span id="__span-0-25"><a id="__codelineno-0-25" name="__codelineno-0-25"></a>    <span class="k">pass</span>
+</span></code></pre></div></td></tr></table></div>
+        </details>
+
+  </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h2 id="packages.terminators.notifiers.exceptions.NotifierTemplateNotFoundException" class="doc doc-heading">
+        <code>NotifierTemplateNotFoundException</code>
+
+
+<a href="#packages.terminators.notifiers.exceptions.NotifierTemplateNotFoundException" class="headerlink" title="Permanent link">&para;</a></h2>
+
+
+  <div class="doc doc-contents ">
+      <p class="doc doc-class-bases">
+        Bases: <code>Exception</code></p>
+
+  
+      <p>Exception for when the notifier is not found.</p>
+
+
+        <details class="quote">
+          <summary>Source code in <code>mkdocs/lakehouse_engine/packages/terminators/notifiers/exceptions.py</code></summary>
+          <div class="language-python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-16">16</a></span>
+<span class="normal"><a href="#__codelineno-0-17">17</a></span>
+<span class="normal"><a href="#__codelineno-0-18">18</a></span>
+<span class="normal"><a href="#__codelineno-0-19">19</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16"></a><span class="k">class</span><span class="w"> </span><span class="nc">NotifierTemplateNotFoundException</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+</span><span id="__span-0-17"><a id="__codelineno-0-17" name="__codelineno-0-17"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Exception for when the notifier is not found.&quot;&quot;&quot;</span>
+</span><span id="__span-0-18"><a id="__codelineno-0-18" name="__codelineno-0-18"></a>
+</span><span id="__span-0-19"><a id="__codelineno-0-19" name="__codelineno-0-19"></a>    <span class="k">pass</span>
+</span></code></pre></div></td></tr></table></div>
+        </details>
 
   </div>
 

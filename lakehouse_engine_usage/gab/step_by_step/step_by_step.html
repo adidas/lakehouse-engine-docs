@@ -508,6 +508,8 @@
         
           
         
+          
+        
       
       
         <label class="md-nav__link" for="__nav_2_2_1_2" id="__nav_2_2_1_2_label" tabindex="0">
@@ -810,6 +812,20 @@
     <li class="md-nav__item">
       <a href="../../data_loader/write_to_rest_api/write_to_rest_api.html" class="md-nav__link">
         Write to REST API
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data_loader/write_to_sharepoint/write_to_sharepoint.html" class="md-nav__link">
+        Write to Sharepoint
       </a>
     </li>
   
@@ -1375,38 +1391,60 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#1-data-product-setup-based-on-templated-files" class="md-nav__link">
-    1. Data Product Setup based on templated files
+  <a href="#1-setup-data-product-based-on-templated-files" class="md-nav__link">
+    1. Setup Data Product based on Templated Files
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#2-use-case-setup" class="md-nav__link">
-    2. Use case setup
+  <a href="#2-set-up-the-use-case" class="md-nav__link">
+    2. Set up the Use Case
   </a>
   
-    <nav class="md-nav" aria-label="2. Use case setup">
+    <nav class="md-nav" aria-label="2. Set up the Use Case">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#templating-sql-query" class="md-nav__link">
-    Templating SQL Query
+  <a href="#21-create-the-sql-template-files" class="md-nav__link">
+    2.1. Create the SQL Template Files
   </a>
   
-    <nav class="md-nav" aria-label="Templating SQL Query">
+    <nav class="md-nav" aria-label="2.1. Create the SQL Template Files">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#available-placeholders" class="md-nav__link">
-    Available Placeholders:
+  <a href="#available-sql-template-placeholders" class="md-nav__link">
+    Available SQL Template Placeholders
+  </a>
+  
+    <nav class="md-nav" aria-label="Available SQL Template Placeholders">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#reference-dates" class="md-nav__link">
+    Reference Dates
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#sample-combined-query-making-use-of-the-placeholders" class="md-nav__link">
-    Sample combined query making use of the placeholders:
+  <a href="#filter-placeholders" class="md-nav__link">
+    Filter Placeholders
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#source-database" class="md-nav__link">
+    Source Database
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dim-calendar-join" class="md-nav__link">
+    Dim Calendar join
   </a>
   
 </li>
@@ -1417,9 +1455,96 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#use-case-configuration-using-the-query_builder_helper" class="md-nav__link">
-    Use case configuration using the query_builder_helper
+  <a href="#combining-multiple-sql-template-files-for-a-use-case" class="md-nav__link">
+    Combining Multiple SQL Template Files for a Use Case
   </a>
+  
+    <nav class="md-nav" aria-label="Combining Multiple SQL Template Files for a Use Case">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#if-theres-just-one-sql-file-for-the-use-case" class="md-nav__link">
+    If there's just one SQL file for the use case
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#when-the-use-case-has-several-sql-files" class="md-nav__link">
+    When the use case has several SQL files
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-configure-the-use-case-using-the-query-builder-helper-notebook" class="md-nav__link">
+    2.2. Configure the Use Case using the Query Builder Helper Notebook
+  </a>
+  
+    <nav class="md-nav" aria-label="2.2. Configure the Use Case using the Query Builder Helper Notebook">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#221-general-configuration" class="md-nav__link">
+    2.2.1. General Configuration
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#222-configure-dimension-names" class="md-nav__link">
+    2.2.2. Configure Dimension Names
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#223-configure-view-name-and-filters" class="md-nav__link">
+    2.2.3. Configure View Name and Filters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#224-configure-the-cadence-reconciliation-and-snapshot" class="md-nav__link">
+    2.2.4. Configure the Cadence, Reconciliation and Snapshot
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#225-configure-metrics" class="md-nav__link">
+    2.2.5. Configure METRICS
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#226-configure-stages" class="md-nav__link">
+    2.2.6. Configure Stages
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#227-build-and-execute-the-sql-commands-to-populate-the-lkp_query_builder-table" class="md-nav__link">
+    2.2.7. Build and Execute the SQL Commands to populate the lkp_query_builder Table
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -2887,6 +3012,8 @@
         
           
         
+          
+        
       
       
         
@@ -2915,6 +3042,20 @@
     <li class="md-nav__item">
       <a href="../../../reference/packages/terminators/notifiers/email_notifier.html" class="md-nav__link">
         Email notifier
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/terminators/notifiers/exceptions.html" class="md-nav__link">
+        Exceptions
       </a>
     </li>
   
@@ -3826,19 +3967,22 @@
   
 
 
-<h1 id="gab-step-by-step">GAB step-by-step<a class="headerlink" href="#gab-step-by-step" title="Permanent link">&para;</a></h1>
-<h2 id="1-data-product-setup-based-on-templated-files">1. Data Product Setup based on templated files<a class="headerlink" href="#1-data-product-setup-based-on-templated-files" title="Permanent link">&para;</a></h2>
+<h1 id="gab-step-by-step">GAB Step-by-Step<a class="headerlink" href="#gab-step-by-step" title="Permanent link">&para;</a></h1>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Requirements: Lakehouse engine: 1.20.0+</p>
+</div>
+<h2 id="1-setup-data-product-based-on-templated-files">1. Setup Data Product based on Templated Files<a class="headerlink" href="#1-setup-data-product-based-on-templated-files" title="Permanent link">&para;</a></h2>
 <ul>
-<li>Lakehouse engine: 1.20.0+</li>
-<li>Copy GAB assets from templated files to your data product:</li>
-<li>GAB tables:<ul>
+<li>Copy GAB assets from the templated files to your data product:</li>
+<li>GAB Tables:<ul>
 <li><a href="../../../assets/gab/metadata/tables/dim_calendar.sql">Calendar table - dim_calendar</a></li>
 <li><a href="../../../assets/gab/metadata/tables/lkp_query_builder.sql">Use case configuration table - lkp_query_builder</a></li>
 <li><a href="../../../assets/gab/metadata/tables/gab_use_case_results.sql">Unified data table - gab_use_case_results</a></li>
 <li><a href="../../../assets/gab/metadata/tables/gab_log_events.sql">GAB log events table - gab_log_events</a></li>
 </ul>
 </li>
-<li>GAB notebooks:<ul>
+<li>GAB Notebooks:<ul>
 <li><a href="../../../assets/gab/notebooks/gab_dim_calendar.py">Feed Calendar table - gab_dim_calendar</a></li>
 <li><a href="../../../assets/gab/notebooks/query_builder_helper.py">Use case creation - query_builder_helper</a></li>
 <li><a href="../../../assets/gab/notebooks/gab.py">GAB execution - gab</a></li>
@@ -3846,76 +3990,122 @@
 </ul>
 </li>
 </ul>
-<h2 id="2-use-case-setup">2. Use case setup<a class="headerlink" href="#2-use-case-setup" title="Permanent link">&para;</a></h2>
-<h3 id="templating-sql-query">Templating SQL Query<a class="headerlink" href="#templating-sql-query" title="Permanent link">&para;</a></h3>
-<p><strong>The placeholder will always use <a href="#use-case-configuration-using-the-query_builder_helper">pre-configured values from the use case</a> (lkp_query_builder).</strong> </p>
-<h4 id="available-placeholders">Available Placeholders:<a class="headerlink" href="#available-placeholders" title="Permanent link">&para;</a></h4>
+<h2 id="2-set-up-the-use-case">2. Set up the Use Case<a class="headerlink" href="#2-set-up-the-use-case" title="Permanent link">&para;</a></h2>
+<h3 id="21-create-the-sql-template-files">2.1. Create the SQL Template Files<a class="headerlink" href="#21-create-the-sql-template-files" title="Permanent link">&para;</a></h3>
+<p>Start by writing the SQL code for your use case. Here's an example where you will find several available placeholders (more on that below):</p>
+<div class="language-sql highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">SELECT</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">     </span><span class="p">(</span><span class="err">{{</span><span class="w"> </span><span class="n">project_date_column</span><span class="w"> </span><span class="err">}}</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nb">interval</span><span class="w"> </span><span class="s1">&#39;{{ offset_value }}&#39;</span><span class="w"> </span><span class="n">hour</span><span class="p">)</span><span class="w">  </span><span class="k">AS</span><span class="w"> </span><span class="n">order_date</span><span class="p">,</span><span class="w">  </span><span class="o">#</span><span class="w"> </span><span class="nb">date</span><span class="w"> </span><span class="n">aggregation</span><span class="p">:</span><span class="w"> </span><span class="n">computed</span><span class="w"> </span><span class="n">cadence</span><span class="w"> </span><span class="k">start</span><span class="w"> </span><span class="nb">date</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span><span class="err">{{</span><span class="w"> </span><span class="n">to_date</span><span class="w"> </span><span class="err">}}</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">to_date</span><span class="p">,</span><span class="w">  </span><span class="o">#</span><span class="w"> </span><span class="nb">date</span><span class="w"> </span><span class="n">aggregation</span><span class="p">:</span><span class="w"> </span><span class="k">last</span><span class="w"> </span><span class="k">day</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">cadence</span><span class="w"> </span><span class="k">or</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">snapshot</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">enabled</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">    </span><span class="n">b</span><span class="p">.</span><span class="n">category_name</span><span class="p">,</span>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">    </span><span class="k">COUNT</span><span class="p">(</span><span class="n">a</span><span class="p">.</span><span class="n">article_id</span><span class="p">)</span><span class="w"> </span><span class="n">qty_articles</span><span class="p">,</span>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">    </span><span class="k">SUM</span><span class="p">(</span><span class="n">amount</span><span class="p">)</span><span class="w"> </span><span class="n">total_amount</span>
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="k">FROM</span>
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="w">    </span><span class="err">{{</span><span class="w"> </span><span class="k">database</span><span class="w"> </span><span class="err">}}</span><span class="p">.</span><span class="n">dummy_sales_kpi</span><span class="w"> </span><span class="n">a</span><span class="w">  </span><span class="o">#</span><span class="w"> </span><span class="k">source</span><span class="w"> </span><span class="k">database</span>
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="w">    </span><span class="err">{{</span><span class="w"> </span><span class="n">joins</span><span class="w"> </span><span class="err">}}</span><span class="w">  </span><span class="o">#</span><span class="w"> </span><span class="n">calendar</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="k">join</span><span class="p">:</span><span class="w"> </span><span class="n">used</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="n">compute</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">cadence</span><span class="w"> </span><span class="k">start</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="k">end</span><span class="w"> </span><span class="nb">date</span>
+</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="k">LEFT</span><span class="w"> </span><span class="k">JOIN</span>
+</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="w">    </span><span class="n">article_categories</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">article_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">b</span><span class="p">.</span><span class="n">article_id</span>
+</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="k">WHERE</span>
+</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="w">    </span><span class="err">{{</span><span class="w"> </span><span class="n">partition_filter</span><span class="w"> </span><span class="err">}}</span><span class="w">  </span><span class="o">#</span><span class="w"> </span><span class="n">filter</span><span class="p">:</span><span class="w"> </span><span class="n">partition</span><span class="w"> </span><span class="n">filter</span>
+</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="k">AND</span>
+</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a><span class="w">    </span><span class="n">TO_DATE</span><span class="p">(</span><span class="err">{{</span><span class="w"> </span><span class="n">filter_date_column</span><span class="w"> </span><span class="err">}}</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;yyyyMMdd&#39;</span><span class="p">)</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="p">(</span>
+</span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a><span class="w">        </span><span class="s1">&#39;{{ start_date }}&#39;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nb">interval</span><span class="w"> </span><span class="s1">&#39;{{ offset_value }}&#39;</span><span class="w"> </span><span class="n">hour</span>
+</span><span id="__span-0-17"><a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a><span class="w">    </span><span class="p">)</span><span class="w">  </span><span class="o">#</span><span class="w"> </span><span class="n">filter</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="nb">date</span><span class="w"> </span><span class="k">column</span><span class="w"> </span><span class="n">configured</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">use</span><span class="w"> </span><span class="k">case</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">this</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="n">timezone</span><span class="w"> </span><span class="n">shift</span>
+</span><span id="__span-0-18"><a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a><span class="k">AND</span>
+</span><span id="__span-0-19"><a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a><span class="w">    </span><span class="n">TO_DATE</span><span class="p">(</span><span class="err">{{</span><span class="w"> </span><span class="n">filter_date_column</span><span class="w"> </span><span class="err">}}</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;yyyyMMdd&#39;</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="p">(</span>
+</span><span id="__span-0-20"><a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a><span class="w">        </span><span class="s1">&#39;{{ end_date }}&#39;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nb">interval</span><span class="w"> </span><span class="s1">&#39;{{ offset_value }}&#39;</span><span class="w"> </span><span class="n">hour</span>
+</span><span id="__span-0-21"><a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a><span class="w">    </span><span class="p">)</span><span class="w">  </span><span class="o">#</span><span class="w"> </span><span class="n">filter</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="nb">date</span><span class="w"> </span><span class="k">column</span><span class="w"> </span><span class="n">configured</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">use</span><span class="w"> </span><span class="k">case</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">this</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="n">timezone</span><span class="w"> </span><span class="n">shift</span>
+</span><span id="__span-0-22"><a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a><span class="k">GROUP</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span>
+</span></code></pre></div>
+<h4 id="available-sql-template-placeholders">Available SQL Template Placeholders<a class="headerlink" href="#available-sql-template-placeholders" title="Permanent link">&para;</a></h4>
+<p>You can use placeholders in your SQL queries to have them replaced at runtime by the GAB engine. There are several available placeholders that will be listed in this section.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The placeholder value will always be <a href="#use-case-configuration-using-the-query_builder_helper">injected as per the configurations of the use cases</a> in the <a href="../../../assets/gab/metadata/tables/lkp_query_builder.sql">lkp_query_builder table</a>.</p>
+</div>
+<h5 id="reference-dates">Reference Dates<a class="headerlink" href="#reference-dates" title="Permanent link">&para;</a></h5>
 <ul>
-<li>Date Aggregation:<ul>
-<li>Reference date (the date column used to compute the cadences and the extended window)
-  <div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a> <span class="p">({{</span> <span class="n">project_date_column</span> <span class="p">}}</span> <span class="o">+</span> <span class="n">interval</span> <span class="s1">&#39;{{ offset_value }}&#39;</span> <span class="n">hour</span><span class="p">)</span>
-</span></code></pre></div>
-  <strong>Note:</strong> The <code>replace_offset_value</code> have the responsibility to use directly the date column or shift it to the specified timezone using the <code>offset_value</code> from the configured use case.</li>
-<li>Last day of the cadence and if snapshots are enabled then it contains the snapshot end day:
-  <div class="language-python highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="p">{{</span> <span class="n">to_date</span> <span class="p">}}</span>
-</span></code></pre></div></li>
+<li>
+<p><em>Start and End Dates</em>:</p>
+<ul>
+<li>
+<p><code>{{ start_date }}</code> and <code>{{ end_date }}</code> are the dates that control the time window of the current GAB execution. These can be used to execute GAB on a certain schedule and have it incrementally compute the aggregated metrics. These dates are fundamental to control GAB executions and will be provided as arguments in the GAB notebook.</p>
+</li>
+<li>
+<div class="admonition warning">
+<p class="admonition-title">Warning<p>Currently only past and present dates are supported. Future dates are not supported.</p>
+</p>
+</div>
+</li>
 </ul>
 </li>
-<li>Filter:<ul>
-<li>It expects to have the data partitioned by date (year/month/day) and it replaces the placeholder with a filter like <code>year = **** and month = ** and day = **</code>:
-  <div class="language-python highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="p">{{</span> <span class="n">partition_filter</span> <span class="p">}}</span>
+<li>
+<p><em>Project Date</em>:</p>
+<ul>
+<li>
+<p><code>{{ project_date_column }}</code> is the reference date used to compute the cadences and the extended window (together with <code>{{ start_date }}</code> and <code>{{ end_date }}</code>).</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a> <span class="p">({{</span> <span class="n">project_date_column</span> <span class="p">}}</span> <span class="o">+</span> <span class="n">interval</span> <span class="s1">&#39;{{ offset_value }}&#39;</span> <span class="n">hour</span><span class="p">)</span>
 </span></code></pre></div>
-  <strong>Note:</strong> if your table does not have the Year, Month, Day columns you should not add this template</li>
-<li>Shift the data consumed on your use case to be between the specified offset timezone:
-  <div class="language-python highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="p">{{</span> <span class="n">filter_date_column</span> <span class="p">}}</span> <span class="o">&gt;=</span> <span class="p">(</span><span class="s1">&#39;{{ start_date }}&#39;</span> <span class="o">+</span> <span class="n">interval</span> <span class="s1">&#39;{{ offset_value }}&#39;</span> <span class="n">hour</span><span class="p">)</span> <span class="n">AND</span> <span class="p">{{</span> <span class="n">filter_date_column</span> <span class="p">}}</span> <span class="o">&lt;</span> <span class="p">(</span><span class="s1">&#39;{{ end_date }}&#39;</span> <span class="o">+</span> <span class="n">interval</span> <span class="s1">&#39;{{ offset_value }}&#39;</span> <span class="n">hour</span><span class="p">)</span>
-</span></code></pre></div></li>
+<ul>
+<li>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+  The <code>replace_offset_value</code> is a flag that has the responsibility to instruct GAB to either directly use the <code>{{ project_date_column }}</code> or shift it to the specified timezone according to the provided <code>offset_value</code> from the configured use case.</div>
+</li>
 </ul>
 </li>
-<li>The source database to consume the data:
-  <div class="language-python highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="p">{{</span> <span class="n">database</span> <span class="p">}}</span>
-</span></code></pre></div></li>
-<li>Calendar join:
-  <div class="language-python highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="p">{{</span> <span class="n">joins</span> <span class="p">}}</span>
-</span></code></pre></div>
-  <strong>Note:</strong> Can be added after any of the table names in the <code>from</code> statement. The framework renders this <code>joins</code> with an internal calendar join and populates the <code>to_date</code> and the <code>project_date_column</code> as per the configured cadences, which means, <strong>it will need to be added</strong> when using <strong>Cadence</strong>, <strong>Extended Window Calculation</strong>, <strong>Reconciliation</strong> and <strong>Snapshot</strong>.</li>
 </ul>
-<h4 id="sample-combined-query-making-use-of-the-placeholders">Sample combined query making use of the placeholders:<a class="headerlink" href="#sample-combined-query-making-use-of-the-placeholders" title="Permanent link">&para;</a></h4>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="n">SELECT</span>
-</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>     <span class="p">({{</span> <span class="n">project_date_column</span> <span class="p">}}</span> <span class="o">+</span> <span class="n">interval</span> <span class="s1">&#39;{{ offset_value }}&#39;</span> <span class="n">hour</span><span class="p">)</span>  <span class="n">AS</span> <span class="n">order_date</span><span class="p">,</span>  <span class="c1"># date aggregation: computed cadence start date</span>
-</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>    <span class="p">{{</span> <span class="n">to_date</span> <span class="p">}}</span> <span class="n">AS</span> <span class="n">to_date</span><span class="p">,</span>  <span class="c1"># date aggregation: last day of the cadence or of the snapshot if enabled</span>
-</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>    <span class="n">b</span><span class="o">.</span><span class="n">category_name</span><span class="p">,</span>
-</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>    <span class="n">COUNT</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">article_id</span><span class="p">)</span> <span class="n">qty_articles</span><span class="p">,</span>
-</span><span id="__span-6-6"><a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>    <span class="n">SUM</span><span class="p">(</span><span class="n">amount</span><span class="p">)</span> <span class="n">total_amount</span>
-</span><span id="__span-6-7"><a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="n">FROM</span>
-</span><span id="__span-6-8"><a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a>    <span class="p">{{</span> <span class="n">database</span> <span class="p">}}</span><span class="o">.</span><span class="n">dummy_sales_kpi</span> <span class="n">a</span>  <span class="c1"># source database</span>
-</span><span id="__span-6-9"><a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a>    <span class="p">{{</span> <span class="n">joins</span> <span class="p">}}</span>  <span class="c1"># calendar table join: used to compute the cadence start and end date</span>
-</span><span id="__span-6-10"><a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a><span class="n">LEFT</span> <span class="n">JOIN</span>
-</span><span id="__span-6-11"><a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a>    <span class="n">article_categories</span> <span class="n">b</span> <span class="n">ON</span> <span class="n">a</span><span class="o">.</span><span class="n">article_id</span> <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">article_id</span>
-</span><span id="__span-6-12"><a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a><span class="n">WHERE</span>
-</span><span id="__span-6-13"><a id="__codelineno-6-13" name="__codelineno-6-13" href="#__codelineno-6-13"></a>    <span class="p">{{</span> <span class="n">partition_filter</span> <span class="p">}}</span>  <span class="c1"># filter: partition filter</span>
-</span><span id="__span-6-14"><a id="__codelineno-6-14" name="__codelineno-6-14" href="#__codelineno-6-14"></a><span class="n">AND</span>
-</span><span id="__span-6-15"><a id="__codelineno-6-15" name="__codelineno-6-15" href="#__codelineno-6-15"></a>    <span class="n">TO_DATE</span><span class="p">({{</span> <span class="n">filter_date_column</span> <span class="p">}},</span> <span class="s1">&#39;yyyyMMdd&#39;</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="p">(</span>
-</span><span id="__span-6-16"><a id="__codelineno-6-16" name="__codelineno-6-16" href="#__codelineno-6-16"></a>        <span class="s1">&#39;{{ start_date }}&#39;</span> <span class="o">+</span> <span class="n">interval</span> <span class="s1">&#39;{{ offset_value }}&#39;</span> <span class="n">hour</span>
-</span><span id="__span-6-17"><a id="__codelineno-6-17" name="__codelineno-6-17" href="#__codelineno-6-17"></a>    <span class="p">)</span>  <span class="c1"># filter by date column configured in the use case for this file and timezone shift</span>
-</span><span id="__span-6-18"><a id="__codelineno-6-18" name="__codelineno-6-18" href="#__codelineno-6-18"></a><span class="n">AND</span>
-</span><span id="__span-6-19"><a id="__codelineno-6-19" name="__codelineno-6-19" href="#__codelineno-6-19"></a>    <span class="n">TO_DATE</span><span class="p">({{</span> <span class="n">filter_date_column</span> <span class="p">}},</span> <span class="s1">&#39;yyyyMMdd&#39;</span><span class="p">)</span> <span class="o">&lt;</span> <span class="p">(</span>
-</span><span id="__span-6-20"><a id="__codelineno-6-20" name="__codelineno-6-20" href="#__codelineno-6-20"></a>        <span class="s1">&#39;{{ end_date }}&#39;</span> <span class="o">+</span> <span class="n">interval</span> <span class="s1">&#39;{{ offset_value }}&#39;</span> <span class="n">hour</span>
-</span><span id="__span-6-21"><a id="__codelineno-6-21" name="__codelineno-6-21" href="#__codelineno-6-21"></a>    <span class="p">)</span>  <span class="c1"># filter by date column configured in the use case for this file and timezone shift</span>
-</span><span id="__span-6-22"><a id="__codelineno-6-22" name="__codelineno-6-22" href="#__codelineno-6-22"></a><span class="n">GROUP</span> <span class="n">BY</span> <span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span>
+</li>
+<li>
+<p><em>To Date</em>:</p>
+<ul>
+<li><code>{{ to_date }}</code> is the last date of the cadence, if snapshots are disabled, or, if snapshots are enabled, then this date is the snapshot end date.</li>
+</ul>
+</li>
+</ul>
+<h5 id="filter-placeholders">Filter Placeholders<a class="headerlink" href="#filter-placeholders" title="Permanent link">&para;</a></h5>
+<ul>
+<li><code>{{ partition_filter }}</code> the expression to filter the data according to a date partitioning scheme (year/month/day) and it replaces the placeholder with a filter like <code>year = **** and month = ** and day = **</code>:<ul>
+<li>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+  if your table does not have the Year, Month, Day columns you should not add this template</div>
+</li>
+</ul>
+</li>
+<li>
+<p><code>{{ filter_date_column }}</code> and <code>{{ offset_value }}</code> can be used to filter the data to be processed on your use case to be between the specified time range:</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="p">{{</span> <span class="n">filter_date_column</span> <span class="p">}}</span> <span class="o">&gt;=</span> <span class="p">(</span><span class="s1">&#39;{{ start_date }}&#39;</span> <span class="o">+</span> <span class="n">interval</span> <span class="s1">&#39;{{ offset_value }}&#39;</span> <span class="n">hour</span><span class="p">)</span> <span class="n">AND</span> <span class="p">{{</span> <span class="n">filter_date_column</span> <span class="p">}}</span> <span class="o">&lt;</span> <span class="p">(</span><span class="s1">&#39;{{ end_date }}&#39;</span> <span class="o">+</span> <span class="n">interval</span> <span class="s1">&#39;{{ offset_value }}&#39;</span> <span class="n">hour</span><span class="p">)</span>
 </span></code></pre></div>
-<p><strong>Note:</strong> If there's just one sql file for the use case, the file should start with 1_. When the use case has several different intermediate stages/temp tables, please create them according to the sequence order, as shown in the screenshot, and a final combined script, example:</p>
+</li>
+</ul>
+<h5 id="source-database">Source Database<a class="headerlink" href="#source-database" title="Permanent link">&para;</a></h5>
+<p>From where the data comes from: <code>{{ database }}</code>.</p>
+<h5 id="dim-calendar-join">Dim Calendar join<a class="headerlink" href="#dim-calendar-join" title="Permanent link">&para;</a></h5>
+<p>Represented by the <code>{{ joins }}</code> placeholder.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>It is mandatory! Can be added after any of the table names in the <code>from</code> statement. The framework renders these <code>joins</code> with an internal calendar join and populates the <code>to_date</code> and the <code>project_date_column</code> as per the configured cadences.</p>
+</div>
+<h4 id="combining-multiple-sql-template-files-for-a-use-case">Combining Multiple SQL Template Files for a Use Case<a class="headerlink" href="#combining-multiple-sql-template-files-for-a-use-case" title="Permanent link">&para;</a></h4>
+<p>For each use case, you can have just one SQL file or have multiple SQL files that depend on each other and need to be executed in a specific order.</p>
+<h5 id="if-theres-just-one-sql-file-for-the-use-case">If there's just one SQL file for the use case<a class="headerlink" href="#if-theres-just-one-sql-file-for-the-use-case" title="Permanent link">&para;</a></h5>
+<p>The file should start with 1_. Example: 1_xxxx.sql.</p>
+<h5 id="when-the-use-case-has-several-sql-files">When the use case has several SQL files<a class="headerlink" href="#when-the-use-case-has-several-sql-files" title="Permanent link">&para;</a></h5>
+<p>The different files will represent different intermediate stages/temp tables in GAB execution of the use case. Create the SQL files according to the sequence order (as shown in the image below) and a final combined script, example:</p>
 <p><img src="../../../assets/gab/img/gab_sample_templated_query.png" alt="image" width="auto" height="auto"></p>
-<p>We suggest using the folder <strong>metadata/gab</strong> to use as the SQL use case folder but this is a parametrised property which you can override with the property <a href="../../../assets/gab/notebooks/gab.py">gab_base_path</a>. This property is used in the <a href="../../../assets/gab/notebooks/gab_job_manager.py">job manager as well</a>.</p>
-<h3 id="use-case-configuration-using-the-query_builder_helper">Use case configuration using the <strong>query_builder_helper</strong><a class="headerlink" href="#use-case-configuration-using-the-query_builder_helper" title="Permanent link">&para;</a></h3>
-<details class="example">
-<summary>1. General configuration</summary>
-<p>GAB will pull information from <strong><code>lkp_query_builder</code></strong> in order to retrieve information/configuration to execute the process. To help us on this task a <a href="../../../assets/gab/notebooks/query_builder_helper.py">query_builder_help notebook was provided</a>. We will follow the notebook instructions to add necessary configuration.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>We suggest using the folder <strong>metadata/gab</strong> to use as the SQL use case folder but this is a parametrized property that you can override with the property <a href="../../../assets/gab/notebooks/gab.py">gab_base_path in the GAB notebook</a>. This property is used in the <a href="../../../assets/gab/notebooks/gab_job_manager.py">GAB Job Manager</a> as well.</p>
+</div>
+<h3 id="22-configure-the-use-case-using-the-query-builder-helper-notebook">2.2. Configure the Use Case using the Query Builder Helper Notebook<a class="headerlink" href="#22-configure-the-use-case-using-the-query-builder-helper-notebook" title="Permanent link">&para;</a></h3>
+<p>GAB will pull information from <strong><code>lkp_query_builder</code></strong> in order to retrieve information/configuration to execute the process. To help you on this task you can use the <a href="../../../assets/gab/notebooks/query_builder_helper.py">query_builder_help notebook</a>. In this section, we will go step-by-step in the notebook instructions to configure a use case.</p>
+<h4 id="221-general-configuration">2.2.1. General Configuration<a class="headerlink" href="#221-general-configuration" title="Permanent link">&para;</a></h4>
 <p><img src="../../../assets/gab/img/gab_use_case.png" alt="image" width="1000px" height="auto"></p>
 <table>
 <thead>
 <tr>
 <th>Variable</th>
-<th>Value</th>
+<th>Default Value</th>
 <th>Description</th>
 </tr>
 </thead>
@@ -3923,7 +4113,7 @@
 <tr>
 <td><strong>Complexity</strong></td>
 <td>Low</td>
-<td>Defines the complexity of your use case.<br />You should mainly consider the volume of data.<br />Possible values: <strong>Low</strong>, <strong>Medium</strong> and <strong>High</strong>.</td>
+<td>Defines the complexity of your use case.<br />You should mainly consider the volume of the data or the complexity of the SQL potentially generating a high load.<br />Possible values: <strong>Low</strong>, <strong>Medium</strong> and <strong>High</strong>. These values are used GAB's orchestration, i.e., <a href="../../../assets/gab/notebooks/gab_job_manager.py">GAB job manager - gab_job_manager</a>, which uses it to define the job cluster size/type based on the complexity of the query.</td>
 </tr>
 <tr>
 <td><strong>Database Name</strong></td>
@@ -3933,12 +4123,12 @@
 <tr>
 <td><strong>How many dimensions</strong></td>
 <td>1</td>
-<td>Number of dimensions (columns) expected in the use case.<br /><strong>Note: Do not consider the reference date or metrics here, as they have their own parameters.</strong></td>
+<td>Number of dimension columns expected in the use case.<br /><strong>Note: Do not consider the <code>project_date_column</code> or metrics</strong>, as they have their own parameters.</td>
 </tr>
 <tr>
 <td><strong>How many views</strong></td>
 <td>1</td>
-<td>Defines how many views to generate in the use case, it's possible to have as many as the use case need.<br />All views will have the same structure (dimensions and metrics), the only difference possible to specify between the views is the <strong>view filter</strong>.<br /><strong>Default value is 1.</strong><br /><strong>Note</strong>: This configuration have a direct impact in the <code>3. Configure View Name and Filters</code> configuration.</td>
+<td>Defines how many output views to generate for the use case. It's possible to have as many as the use case needs.<br />All views will have the same structure (dimensions and metrics), the only difference possible to specify between the views is the <code>view filter</code>.<br /><strong>Default value is 1.</strong><br /><strong>Note</strong>: This configuration has a direct impact in the <code>3. Configure View Name and Filters</code> configuration.</td>
 </tr>
 <tr>
 <td><strong>Is Active</strong></td>
@@ -3948,22 +4138,22 @@
 <tr>
 <td><strong>Market</strong></td>
 <td>GLOBAL</td>
-<td>Used in the <strong>gab_job_manager</strong> to execute the use cases for each <strong>market</strong>.</td>
+<td>Used in the <strong>gab_job_manager</strong> to execute the use cases for each <strong>market</strong>. If your business does not have the concept of Market, you can leave the <code>GLOBAL</code> default.</td>
 </tr>
 <tr>
 <td><strong>SQL File Names</strong></td>
 <td>1_article_category.sql,<br />2_f_agg_dummy_sales_kpi.sql</td>
-<td>Name of the SQL files used in the use case. <br />You can combine different layers of dependencies between them as shown in the example, where the <strong>2_combined.sql</strong> file depends on <strong>1_product_category.sql</strong> file. <br />The file name should follow the pattern x_file_name (where x is an integer digit) and be separated by a comma (e.g.: 1_first_query.sql, 2_second_query.sql).</td>
+<td>Name of the SQL files used in the use case, according to what you have configured in <strong><em>step 2.1</em></strong>. <br />You can combine different layers of dependencies between them as shown in the example above, where the <strong>2_combined.sql</strong> file depends on <strong>1_product_category.sql</strong> file. <br />The file name should follow the pattern x_file_name (where x is an integer digit) and should be separated by a comma (e.g.: 1_first_query.sql, 2_second_query.sql).</td>
 </tr>
 <tr>
 <td><strong>Snapshot End Date</strong></td>
 <td>to_date</td>
-<td>This parameter is used in the template, by default its value must be <strong><em>to_date</em></strong>.<br />You can change it if you have managed this in your SQL files.<br />The values stored in this column depend on the use case behavior:<br /><ul><li>if snapshots are enabled, it will contain the snapshot end day.</li><li>If no snapshot is enabled, it will contain the last day of the cadence.</li></ul>The snapshot behaviour is set in the reconciliation steps.</td>
+<td>This parameter is used in the template, by default its value must be <strong><em>to_date</em></strong>.<br />You can change it if you have managed this in your SQL files.<br />The values stored in this column depend on the use case behavior:<br /><ul><li>if snapshots are enabled, it will contain the snapshot end date.</li><li>If no snapshot is enabled, it will contain the last date of the cadence.</li></ul>The snapshot behavior is set in the reconciliation steps (more on that later).</td>
 </tr>
 <tr>
 <td><strong>Timezone Offset</strong></td>
 <td>0</td>
-<td>The time zone offset that you want to apply to the reference date column.<br />It should be a number to decrement or add to the date (e.g., -8 or 8).<br /><strong>The default value is zero</strong>, which means that any time zone transformation will be applied to the date.</td>
+<td>The timezone offset that you want to apply to the the date columns (<code>project_date_column</code> or <code>filter_date_column</code>).<br />It should be a number to decrement or add to the date (e.g., -8 or 8).<br /><strong>The default value is 0</strong>, which means that, by default, no timezone transformation will be applied to the date.</td>
 </tr>
 <tr>
 <td><strong>Use Case Name</strong></td>
@@ -3973,7 +4163,7 @@
 <tr>
 <td><strong>Use Case Reference Date</strong></td>
 <td>order_date</td>
-<td>Reference date of the use case.&lt;br /The parameter should be the column name and the selected column should have the date/datetime format.</td>
+<td>Reference date of the use case, i.e., <code>project_date_column</code>.<br />The parameter should be the column name and the selected column should have the date/datetime format.</td>
 </tr>
 <tr>
 <td><strong>Week Start</strong></td>
@@ -3982,20 +4172,16 @@
 </tr>
 </tbody>
 </table>
-</details>
-<details class="example">
-<summary>2. Configure Dimension Names</summary>
+<h4 id="222-configure-dimension-names">2.2.2. Configure Dimension Names<a class="headerlink" href="#222-configure-dimension-names" title="Permanent link">&para;</a></h4>
 <p><img src="../../../assets/gab/img/gab_dimensions.png" alt="image" width="1000px" height="auto"></p>
-</details>
-<details class="example">
-<summary>3. Configure View Name and Filters</summary>
-<p>This will be the name of the view at the end of the process. Filters should be applied at this step if needed.</p>
+<h4 id="223-configure-view-name-and-filters">2.2.3. Configure View Name and Filters<a class="headerlink" href="#223-configure-view-name-and-filters" title="Permanent link">&para;</a></h4>
+<p>This will be the name of the output view at the end of the process. Filters can be applied at this step, if needed.</p>
 <p><img src="../../../assets/gab/img/gab_view_name_and_filters.png" alt="image" width="1000px" height="auto"></p>
 <table>
 <thead>
 <tr>
 <th>Variable</th>
-<th>Value</th>
+<th>Default Value</th>
 <th>Description</th>
 </tr>
 </thead>
@@ -4003,25 +4189,23 @@
 <tr>
 <td><strong>View Filter</strong></td>
 <td></td>
-<td>Based on the dimensions defined in the previous step.<br /><strong>Example</strong>: if you have set the country as <code>D1</code>, the filter here could be <strong>D1 = "Germany"</strong>. The commands allowed for the filter step are the same as those supported in the where clause in SQL language.</td>
+<td>A SQL <em>WHERE</em> clause expression based on the dimensions defined in the previous step.<br /><strong>Example</strong>: if you have set the country as <code>D1</code>, the filter here could be <strong>D1 = "Germany"</strong>. The syntax allowed here is the same as the syntax of the <em>WHERE</em> clause in SQL.</td>
 </tr>
 <tr>
 <td><strong>View Name</strong></td>
 <td>vw_f_agg_dummy_sales_kpi</td>
-<td>Name of the view to output the computed data.</td>
+<td>Name of the view to query the resulting aggregated data. This will contain the results produced by GAB for the configured use case.</td>
 </tr>
 </tbody>
 </table>
-</details>
-<details class="example">
-<summary>4. Configure RECON</summary>
-<p>This step is where we define which will be the cadence displayed at the view.
-<img src="../../../assets/gab/img/gab_recon.png" alt="image" width="1000px" height="auto"></p>
+<h4 id="224-configure-the-cadence-reconciliation-and-snapshot">2.2.4. Configure the Cadence, Reconciliation and Snapshot<a class="headerlink" href="#224-configure-the-cadence-reconciliation-and-snapshot" title="Permanent link">&para;</a></h4>
+<p>This step is where we define which will be the cadence displayed at the view.</p>
+<p><img src="../../../assets/gab/img/gab_recon.png" alt="image" width="1000px" height="auto"></p>
 <table>
 <thead>
 <tr>
 <th>Variable</th>
-<th>Value</th>
+<th>Default Value</th>
 <th>Description</th>
 </tr>
 </thead>
@@ -4029,18 +4213,19 @@
 <tr>
 <td><strong>Reconciliation Cadence</strong></td>
 <td>YEAR</td>
-<td>Compute the data aggregated by the specified cadence but with the reconciliation frequency.<br /><a href="../gab.html#reconciliation">Check more about it here</a></td>
+<td>Compute the data aggregated by the specified cadence, optionally defined with reconciliation and snapshotting.<br /><a href="../gab.html#reconciliation">Check more about it here</a>.</td>
 </tr>
 </tbody>
 </table>
-</details>
-<details class="example">
-<summary>5. Configure METRICS</summary>
-<p>First question regarding metrics is how many metrics do we have on our SQL use case query.</p>
-<p>On our template we have two metrics (<code>qty_articles</code> and <code>total_amount</code>).</p>
+<h4 id="225-configure-metrics">2.2.5. Configure METRICS<a class="headerlink" href="#225-configure-metrics" title="Permanent link">&para;</a></h4>
+<p>First question to ask regarding metrics is how many metrics do you have on our SQL use case query. On our template we have two metrics (<code>qty_articles</code> and <code>total_amount</code>).</p>
 <p><img src="../../../assets/gab/img/gab_query_metrics.png" alt="image" width="1000px" height="auto"></p>
 <p><img src="../../../assets/gab/img/gab_metrics.png" alt="image" width="1000px" height="auto"></p>
-<p>The next paragraph will create widgets for us to be able to define if we want GAB to create secondary calculations for us based on the metric name. <strong>Note: metrics should follow the same order as defined on the SQL use case query.</strong></p>
+<p>Next, we will define if we want GAB to create secondary calculations for us based on the metric name.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Metrics should follow the same order as defined on the SQL use case query.</p>
+</div>
 <p><img src="../../../assets/gab/img/gab_metrics_configuration.png" alt="image" width="1000px" height="auto"></p>
 <table>
 <thead>
@@ -4051,17 +4236,17 @@
 </thead>
 <tbody>
 <tr>
-<td><a href="../gab.html#metric"><strong>Calculated Metric</strong></a></td>
-<td>It's possible to derive (add secondary calculations) 4 new columns based on each metric.<br />Those new columns will be based on cadences like <strong><em>last_cadence</em></strong>, <strong><em>last_year_cadence</em></strong> and <strong><em>window function</em></strong>.<br />But also, you can create a derived column,<br />which is a SQL statement that you can write on your own by selecting the <strong><em>derived_metric</em></strong> option.</td>
+<td><a href="../gab.html#Metrics"><strong>Calculated Metric</strong></a></td>
+<td>It's possible to derive (add secondary calculations) 4 new columns based on each metric.<br />Those new columns will be based on cadences like <strong><em>last_cadence</em></strong>, <strong><em>last_year_cadence</em></strong> and <strong><em>window function</em></strong>.<br />Moreover, you can create a derived column, which is a custom SQL statement that you can write by selecting the <strong><em>derived_metric</em></strong> option.</td>
 </tr>
 <tr>
 <td><strong>Metric Name</strong></td>
-<td>Name of the base metric. Should have the same name as on the SQL use case query.</td>
+<td>Name of the base metric. Should have the same name as on the SQL use case query in the SQL template files defined previously.</td>
 </tr>
 </tbody>
 </table>
-<p>The next metrics configuration is where we configure secondary calculations.
-<img src="../../../assets/gab/img/gab_metrics_calculations.png" alt="image" width="1000px" height="auto"></p>
+<p>After that, it's where you configure secondary calculations.</p>
+<p><img src="../../../assets/gab/img/gab_metrics_calculations.png" alt="image" width="1000px" height="auto"></p>
 <table>
 <thead>
 <tr>
@@ -4084,7 +4269,7 @@
 </tr>
 <tr>
 <td><strong>last_cadence.Window</strong></td>
-<td>Cadence lookback window, which means in this example,<br />a lookback from the previous year (as the use case is on <strong>YEARLY</strong> cadence)</td>
+<td>Cadence lookback window, which means in this example, a lookback from the previous year (as the use case is on <strong>YEARLY</strong> cadence)</td>
 </tr>
 <tr>
 <td><strong>window_function.Agg Func</strong></td>
@@ -4100,10 +4285,8 @@
 </tr>
 </tbody>
 </table>
-</details>
-<details class="example">
-<summary>6. Configure Stages</summary>
-<p>Stages are related to each SQL statement at the use case.</p>
+<h4 id="226-configure-stages">2.2.6. Configure Stages<a class="headerlink" href="#226-configure-stages" title="Permanent link">&para;</a></h4>
+<p>Stages are related to each SQL file in the use case.</p>
 <p><img src="../../../assets/gab/img/gab_stages_configuration.png" alt="image" width="1000px" height="auto"></p>
 <table>
 <thead>
@@ -4114,119 +4297,112 @@
 </thead>
 <tbody>
 <tr>
-<td><strong>Script Filter Date Column</strong></td>
-<td>It will be used to filter the data of your use case.<br />This information will be replaced in the placeholder of the GAB template.</td>
+<td><strong>Filter Date Column</strong></td>
+<td>It will be used to filter the data of your use case.<br />This information will be replaced in the placeholder of the GAB template <code>{{ filter_date_column }}</code>.</td>
 </tr>
 <tr>
-<td><strong>Script Project Date Column</strong></td>
-<td>It will be used as reference date for the query given.<br />This information will be replaced in the placeholder of the GAB template.</td>
+<td><strong>Project Date Column</strong></td>
+<td>It will be used as reference date for the given query.<br />This information will be replaced in the placeholder of the GAB template <code>{{ project_date_column }}</code>.</td>
 </tr>
 <tr>
-<td><strong>Script Repartition Type</strong></td>
-<td>Type of repartitioning the data of the query.<br />Possible values: <strong><em>Key</em></strong> and <strong><em>Number</em></strong>.<br />When use Key, it expects column names separated by a comma.<br />When use number it expects an integer of how many partitions the user want.</td>
+<td><strong>Repartition Type</strong></td>
+<td>Type of repartitioning of the data of the query.<br />Possible values: <strong><em>Key</em></strong> and <strong><em>Number</em></strong>.<br />When you use Key, it expects column names separated by a comma.<br />When you use Number, it expects an integer of how many partitions the user wants.</td>
 </tr>
 <tr>
-<td><strong>Script Repartition Value</strong></td>
-<td>This parameter only has effect when used <strong>with Repartition Type parameter</strong>.<br />It sets the way of repartitioning the data while processing.</td>
+<td><strong>Repartition Value</strong></td>
+<td>This parameter only has effect when used with <strong>Repartition Type parameter</strong>.<br />It sets the value for the repartitioning type set by the parameter above selected.</td>
 </tr>
 <tr>
-<td><strong>Script Storage Level</strong></td>
-<td>Defines the type of spark persistence storage levels you want to define<br />(e.g. <strong><em>Memory Only</em></strong>, <strong><em>Memory and Disk</em></strong> etc).</td>
+<td><strong>Storage Level</strong></td>
+<td>Defines the Spark persistence storage level you want (e.g. <strong><em>Memory Only</em></strong>, <strong><em>Memory and Disk</em></strong> etc).</td>
 </tr>
 <tr>
-<td><strong>Script Table Alias</strong></td>
-<td>The alias name of the sql file that will run, this name can be used to <br />consume the output of the execution in the next stage(next sql file).</td>
+<td><strong>Table Alias</strong></td>
+<td>The alias of the SQL file that will be executed. This name can be used to consume the output of a SQL stage (corresponding to a SQL file) in the next stage (the next SQL file).</td>
 </tr>
 </tbody>
 </table>
-</details>
-<details class="example">
-<summary>7. Build and Insert SQL Instruction</summary>
+<h4 id="227-build-and-execute-the-sql-commands-to-populate-the-lkp_query_builder-table">2.2.7. Build and Execute the SQL Commands to populate the lkp_query_builder Table<a class="headerlink" href="#227-build-and-execute-the-sql-commands-to-populate-the-lkp_query_builder-table" title="Permanent link">&para;</a></h4>
 <p><img src="../../../assets/gab/img/gab_build_insert_sql_instruction.png" alt="image" width="1000px" height="auto"></p>
 <p><img src="../../../assets/gab/img/gab_insert_use_case.png" alt="image" width="1000px" height="auto"></p>
-<p>At the end of the process it should have data inserted on lkp_query_builder table:
-<img src="../../../assets/gab/img/gab_lkp_query_builder.png" alt="image" width="1000px" height="auto"></p>
-</details>
-<details class="example">
-<summary>Configured Use case</summary>
-<p>After configuring the use case, it would generate a SQL command to create it on the <code>lkp_query_builder</code>, like this:
-<div class="language-sql highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="k">DELETE</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">example_database</span><span class="p">.</span><span class="n">lkp_query_builder</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">QUERY_LABEL</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;f_agg_dummy_sales_kpi&#39;</span><span class="p">;</span>
-</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">example_database</span><span class="p">.</span><span class="n">lkp_query_builder</span><span class="w"> </span><span class="k">VALUES</span><span class="w"> </span><span class="p">(</span>
-</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="w">  </span><span class="mi">1</span><span class="p">,</span>
-</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="w">  </span><span class="s1">&#39;f_agg_dummy_sales_kpi&#39;</span><span class="p">,</span>
-</span><span id="__span-7-5"><a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="w">  </span><span class="s1">&#39;GLOBAL&#39;</span><span class="p">,</span>
-</span><span id="__span-7-6"><a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="w">  </span><span class="ss">&quot;&quot;&quot;{</span>
-</span><span id="__span-7-7"><a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a><span class="ss">    &#39;vw_f_agg_dummy_sales_kpi&#39;: {</span>
-</span><span id="__span-7-8"><a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a><span class="ss">      &#39;dimensions&#39;: {</span>
-</span><span id="__span-7-9"><a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a><span class="ss">        &#39;from_date&#39;: &#39;order_date&#39;,</span>
-</span><span id="__span-7-10"><a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a><span class="ss">        &#39;to_date&#39;: &#39;to_date&#39;,</span>
-</span><span id="__span-7-11"><a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a><span class="ss">        &#39;d1&#39;: &#39;category_name&#39;</span>
-</span><span id="__span-7-12"><a id="__codelineno-7-12" name="__codelineno-7-12" href="#__codelineno-7-12"></a><span class="ss">      },</span>
-</span><span id="__span-7-13"><a id="__codelineno-7-13" name="__codelineno-7-13" href="#__codelineno-7-13"></a><span class="ss">      &#39;metric&#39;: {</span>
-</span><span id="__span-7-14"><a id="__codelineno-7-14" name="__codelineno-7-14" href="#__codelineno-7-14"></a><span class="ss">        &#39;m1&#39;: {</span>
-</span><span id="__span-7-15"><a id="__codelineno-7-15" name="__codelineno-7-15" href="#__codelineno-7-15"></a><span class="ss">          &#39;metric_name&#39;: &#39;qty_articles&#39;,</span>
-</span><span id="__span-7-16"><a id="__codelineno-7-16" name="__codelineno-7-16" href="#__codelineno-7-16"></a><span class="ss">          &#39;calculated_metric&#39;: {},</span>
-</span><span id="__span-7-17"><a id="__codelineno-7-17" name="__codelineno-7-17" href="#__codelineno-7-17"></a><span class="ss">          &#39;derived_metric&#39;: {}</span>
-</span><span id="__span-7-18"><a id="__codelineno-7-18" name="__codelineno-7-18" href="#__codelineno-7-18"></a><span class="ss">        },</span>
-</span><span id="__span-7-19"><a id="__codelineno-7-19" name="__codelineno-7-19" href="#__codelineno-7-19"></a><span class="ss">        &#39;m2&#39;: {</span>
-</span><span id="__span-7-20"><a id="__codelineno-7-20" name="__codelineno-7-20" href="#__codelineno-7-20"></a><span class="ss">          &#39;metric_name&#39;: &#39;total_amount&#39;,</span>
-</span><span id="__span-7-21"><a id="__codelineno-7-21" name="__codelineno-7-21" href="#__codelineno-7-21"></a><span class="ss">            &#39;calculated_metric&#39;: {</span>
-</span><span id="__span-7-22"><a id="__codelineno-7-22" name="__codelineno-7-22" href="#__codelineno-7-22"></a><span class="ss">              &#39;last_cadence&#39;: [</span>
-</span><span id="__span-7-23"><a id="__codelineno-7-23" name="__codelineno-7-23" href="#__codelineno-7-23"></a><span class="ss">                {</span>
-</span><span id="__span-7-24"><a id="__codelineno-7-24" name="__codelineno-7-24" href="#__codelineno-7-24"></a><span class="ss">                  &#39;label&#39;: &#39;total_amount_last_year&#39;,</span>
-</span><span id="__span-7-25"><a id="__codelineno-7-25" name="__codelineno-7-25" href="#__codelineno-7-25"></a><span class="ss">                  &#39;window&#39;: &#39;1&#39;</span>
-</span><span id="__span-7-26"><a id="__codelineno-7-26" name="__codelineno-7-26" href="#__codelineno-7-26"></a><span class="ss">                }</span>
-</span><span id="__span-7-27"><a id="__codelineno-7-27" name="__codelineno-7-27" href="#__codelineno-7-27"></a><span class="ss">              ],</span>
-</span><span id="__span-7-28"><a id="__codelineno-7-28" name="__codelineno-7-28" href="#__codelineno-7-28"></a><span class="ss">              &#39;window_function&#39;: [</span>
-</span><span id="__span-7-29"><a id="__codelineno-7-29" name="__codelineno-7-29" href="#__codelineno-7-29"></a><span class="ss">                {</span>
-</span><span id="__span-7-30"><a id="__codelineno-7-30" name="__codelineno-7-30" href="#__codelineno-7-30"></a><span class="ss">                  &#39;label&#39;: &#39;avg_total_amount_last_2_years&#39;,</span>
-</span><span id="__span-7-31"><a id="__codelineno-7-31" name="__codelineno-7-31" href="#__codelineno-7-31"></a><span class="ss">                  &#39;window&#39;: [2, 1],</span>
-</span><span id="__span-7-32"><a id="__codelineno-7-32" name="__codelineno-7-32" href="#__codelineno-7-32"></a><span class="ss">                  &#39;agg_func&#39;: &#39;avg&#39;</span>
-</span><span id="__span-7-33"><a id="__codelineno-7-33" name="__codelineno-7-33" href="#__codelineno-7-33"></a><span class="ss">                }</span>
-</span><span id="__span-7-34"><a id="__codelineno-7-34" name="__codelineno-7-34" href="#__codelineno-7-34"></a><span class="ss">              ]</span>
-</span><span id="__span-7-35"><a id="__codelineno-7-35" name="__codelineno-7-35" href="#__codelineno-7-35"></a><span class="ss">            },</span>
-</span><span id="__span-7-36"><a id="__codelineno-7-36" name="__codelineno-7-36" href="#__codelineno-7-36"></a><span class="ss">            &#39;derived_metric&#39;: [</span>
-</span><span id="__span-7-37"><a id="__codelineno-7-37" name="__codelineno-7-37" href="#__codelineno-7-37"></a><span class="ss">              {</span>
-</span><span id="__span-7-38"><a id="__codelineno-7-38" name="__codelineno-7-38" href="#__codelineno-7-38"></a><span class="ss">                &#39;label&#39;: &#39;discounted_total_amount&#39;,</span>
-</span><span id="__span-7-39"><a id="__codelineno-7-39" name="__codelineno-7-39" href="#__codelineno-7-39"></a><span class="ss">                &#39;formula&#39;: &#39;total_amount*0.56&#39;</span>
-</span><span id="__span-7-40"><a id="__codelineno-7-40" name="__codelineno-7-40" href="#__codelineno-7-40"></a><span class="ss">              }</span>
-</span><span id="__span-7-41"><a id="__codelineno-7-41" name="__codelineno-7-41" href="#__codelineno-7-41"></a><span class="ss">            ]</span>
-</span><span id="__span-7-42"><a id="__codelineno-7-42" name="__codelineno-7-42" href="#__codelineno-7-42"></a><span class="ss">          }</span>
-</span><span id="__span-7-43"><a id="__codelineno-7-43" name="__codelineno-7-43" href="#__codelineno-7-43"></a><span class="ss">        },</span>
-</span><span id="__span-7-44"><a id="__codelineno-7-44" name="__codelineno-7-44" href="#__codelineno-7-44"></a><span class="ss">      &#39;filter&#39;: {}</span>
-</span><span id="__span-7-45"><a id="__codelineno-7-45" name="__codelineno-7-45" href="#__codelineno-7-45"></a><span class="ss">    }</span>
-</span><span id="__span-7-46"><a id="__codelineno-7-46" name="__codelineno-7-46" href="#__codelineno-7-46"></a><span class="ss">  }&quot;&quot;&quot;</span><span class="p">,</span>
-</span><span id="__span-7-47"><a id="__codelineno-7-47" name="__codelineno-7-47" href="#__codelineno-7-47"></a><span class="w">  </span><span class="ss">&quot;&quot;&quot;{</span>
-</span><span id="__span-7-48"><a id="__codelineno-7-48" name="__codelineno-7-48" href="#__codelineno-7-48"></a><span class="ss">    &#39;1&#39;: {</span>
-</span><span id="__span-7-49"><a id="__codelineno-7-49" name="__codelineno-7-49" href="#__codelineno-7-49"></a><span class="ss">        &#39;file_path&#39;: &#39;f_agg_dummy_sales_kpi/1_article_category.sql&#39;,</span>
-</span><span id="__span-7-50"><a id="__codelineno-7-50" name="__codelineno-7-50" href="#__codelineno-7-50"></a><span class="ss">        &#39;table_alias&#39;: &#39;article_categories&#39;,</span>
-</span><span id="__span-7-51"><a id="__codelineno-7-51" name="__codelineno-7-51" href="#__codelineno-7-51"></a><span class="ss">        &#39;storage_level&#39;: &#39;MEMORY_ONLY&#39;,</span>
-</span><span id="__span-7-52"><a id="__codelineno-7-52" name="__codelineno-7-52" href="#__codelineno-7-52"></a><span class="ss">        &#39;project_date_column&#39;: &#39;&#39;,</span>
-</span><span id="__span-7-53"><a id="__codelineno-7-53" name="__codelineno-7-53" href="#__codelineno-7-53"></a><span class="ss">        &#39;filter_date_column&#39;: &#39;&#39;,</span>
-</span><span id="__span-7-54"><a id="__codelineno-7-54" name="__codelineno-7-54" href="#__codelineno-7-54"></a><span class="ss">        &#39;repartition&#39;: {}</span>
-</span><span id="__span-7-55"><a id="__codelineno-7-55" name="__codelineno-7-55" href="#__codelineno-7-55"></a><span class="ss">    },</span>
-</span><span id="__span-7-56"><a id="__codelineno-7-56" name="__codelineno-7-56" href="#__codelineno-7-56"></a><span class="ss">    &#39;2&#39;: {</span>
-</span><span id="__span-7-57"><a id="__codelineno-7-57" name="__codelineno-7-57" href="#__codelineno-7-57"></a><span class="ss">        &#39;file_path&#39;: &#39;f_agg_dummy_sales_kpi/2_f_agg_dummy_sales_kpi.sql&#39;,</span>
-</span><span id="__span-7-58"><a id="__codelineno-7-58" name="__codelineno-7-58" href="#__codelineno-7-58"></a><span class="ss">        &#39;table_alias&#39;: &#39;dummy_sales_kpi&#39;,</span>
-</span><span id="__span-7-59"><a id="__codelineno-7-59" name="__codelineno-7-59" href="#__codelineno-7-59"></a><span class="ss">        &#39;storage_level&#39;: &#39;MEMORY_ONLY&#39;,</span>
-</span><span id="__span-7-60"><a id="__codelineno-7-60" name="__codelineno-7-60" href="#__codelineno-7-60"></a><span class="ss">        &#39;project_date_column&#39;: &#39;order_date&#39;,</span>
-</span><span id="__span-7-61"><a id="__codelineno-7-61" name="__codelineno-7-61" href="#__codelineno-7-61"></a><span class="ss">        &#39;filter_date_column&#39;: &#39;order_date&#39;,</span>
-</span><span id="__span-7-62"><a id="__codelineno-7-62" name="__codelineno-7-62" href="#__codelineno-7-62"></a><span class="ss">        &#39;repartition&#39;: {}</span>
-</span><span id="__span-7-63"><a id="__codelineno-7-63" name="__codelineno-7-63" href="#__codelineno-7-63"></a><span class="ss">    }</span>
-</span><span id="__span-7-64"><a id="__codelineno-7-64" name="__codelineno-7-64" href="#__codelineno-7-64"></a><span class="ss">  }&quot;&quot;&quot;</span><span class="p">,</span>
-</span><span id="__span-7-65"><a id="__codelineno-7-65" name="__codelineno-7-65" href="#__codelineno-7-65"></a><span class="w">  </span><span class="ss">&quot;&quot;&quot;{&#39;YEAR&#39;: {}}&quot;&quot;&quot;</span><span class="p">,</span>
-</span><span id="__span-7-66"><a id="__codelineno-7-66" name="__codelineno-7-66" href="#__codelineno-7-66"></a><span class="w">  </span><span class="s1">&#39;0&#39;</span><span class="p">,</span>
-</span><span id="__span-7-67"><a id="__codelineno-7-67" name="__codelineno-7-67" href="#__codelineno-7-67"></a><span class="w">  </span><span class="s1">&#39;MONDAY&#39;</span><span class="p">,</span>
-</span><span id="__span-7-68"><a id="__codelineno-7-68" name="__codelineno-7-68" href="#__codelineno-7-68"></a><span class="w">  </span><span class="s1">&#39;Y&#39;</span><span class="p">,</span>
-</span><span id="__span-7-69"><a id="__codelineno-7-69" name="__codelineno-7-69" href="#__codelineno-7-69"></a><span class="w">  </span><span class="s1">&#39;Low&#39;</span><span class="p">,</span>
-</span><span id="__span-7-70"><a id="__codelineno-7-70" name="__codelineno-7-70" href="#__codelineno-7-70"></a><span class="w">  </span><span class="k">current_timestamp</span><span class="p">()</span>
-</span><span id="__span-7-71"><a id="__codelineno-7-71" name="__codelineno-7-71" href="#__codelineno-7-71"></a><span class="p">);</span>
-</span></code></pre></div></p>
-</details>
+<p>After configuring the use case, it would generate a SQL command to create it on the <code>lkp_query_builder</code>:</p>
+<div class="language-sql highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">DELETE</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">example_database</span><span class="p">.</span><span class="n">lkp_query_builder</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">QUERY_LABEL</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;f_agg_dummy_sales_kpi&#39;</span><span class="p">;</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">example_database</span><span class="p">.</span><span class="n">lkp_query_builder</span><span class="w"> </span><span class="k">VALUES</span><span class="w"> </span><span class="p">(</span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">  </span><span class="mi">1</span><span class="p">,</span>
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">  </span><span class="s1">&#39;f_agg_dummy_sales_kpi&#39;</span><span class="p">,</span>
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">  </span><span class="s1">&#39;GLOBAL&#39;</span><span class="p">,</span>
+</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="w">  </span><span class="ss">&quot;&quot;&quot;{</span>
+</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="ss">    &#39;vw_f_agg_dummy_sales_kpi&#39;: {</span>
+</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="ss">      &#39;dimensions&#39;: {</span>
+</span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="ss">        &#39;from_date&#39;: &#39;order_date&#39;,</span>
+</span><span id="__span-3-10"><a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="ss">        &#39;to_date&#39;: &#39;to_date&#39;,</span>
+</span><span id="__span-3-11"><a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="ss">        &#39;d1&#39;: &#39;category_name&#39;</span>
+</span><span id="__span-3-12"><a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a><span class="ss">      },</span>
+</span><span id="__span-3-13"><a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a><span class="ss">      &#39;metric&#39;: {</span>
+</span><span id="__span-3-14"><a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a><span class="ss">        &#39;m1&#39;: {</span>
+</span><span id="__span-3-15"><a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a><span class="ss">          &#39;metric_name&#39;: &#39;qty_articles&#39;,</span>
+</span><span id="__span-3-16"><a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a><span class="ss">          &#39;calculated_metric&#39;: {},</span>
+</span><span id="__span-3-17"><a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a><span class="ss">          &#39;derived_metric&#39;: {}</span>
+</span><span id="__span-3-18"><a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a><span class="ss">        },</span>
+</span><span id="__span-3-19"><a id="__codelineno-3-19" name="__codelineno-3-19" href="#__codelineno-3-19"></a><span class="ss">        &#39;m2&#39;: {</span>
+</span><span id="__span-3-20"><a id="__codelineno-3-20" name="__codelineno-3-20" href="#__codelineno-3-20"></a><span class="ss">          &#39;metric_name&#39;: &#39;total_amount&#39;,</span>
+</span><span id="__span-3-21"><a id="__codelineno-3-21" name="__codelineno-3-21" href="#__codelineno-3-21"></a><span class="ss">            &#39;calculated_metric&#39;: {</span>
+</span><span id="__span-3-22"><a id="__codelineno-3-22" name="__codelineno-3-22" href="#__codelineno-3-22"></a><span class="ss">              &#39;last_cadence&#39;: [</span>
+</span><span id="__span-3-23"><a id="__codelineno-3-23" name="__codelineno-3-23" href="#__codelineno-3-23"></a><span class="ss">                {</span>
+</span><span id="__span-3-24"><a id="__codelineno-3-24" name="__codelineno-3-24" href="#__codelineno-3-24"></a><span class="ss">                  &#39;label&#39;: &#39;total_amount_last_year&#39;,</span>
+</span><span id="__span-3-25"><a id="__codelineno-3-25" name="__codelineno-3-25" href="#__codelineno-3-25"></a><span class="ss">                  &#39;window&#39;: &#39;1&#39;</span>
+</span><span id="__span-3-26"><a id="__codelineno-3-26" name="__codelineno-3-26" href="#__codelineno-3-26"></a><span class="ss">                }</span>
+</span><span id="__span-3-27"><a id="__codelineno-3-27" name="__codelineno-3-27" href="#__codelineno-3-27"></a><span class="ss">              ],</span>
+</span><span id="__span-3-28"><a id="__codelineno-3-28" name="__codelineno-3-28" href="#__codelineno-3-28"></a><span class="ss">              &#39;window_function&#39;: [</span>
+</span><span id="__span-3-29"><a id="__codelineno-3-29" name="__codelineno-3-29" href="#__codelineno-3-29"></a><span class="ss">                {</span>
+</span><span id="__span-3-30"><a id="__codelineno-3-30" name="__codelineno-3-30" href="#__codelineno-3-30"></a><span class="ss">                  &#39;label&#39;: &#39;avg_total_amount_last_2_years&#39;,</span>
+</span><span id="__span-3-31"><a id="__codelineno-3-31" name="__codelineno-3-31" href="#__codelineno-3-31"></a><span class="ss">                  &#39;window&#39;: [2, 1],</span>
+</span><span id="__span-3-32"><a id="__codelineno-3-32" name="__codelineno-3-32" href="#__codelineno-3-32"></a><span class="ss">                  &#39;agg_func&#39;: &#39;avg&#39;</span>
+</span><span id="__span-3-33"><a id="__codelineno-3-33" name="__codelineno-3-33" href="#__codelineno-3-33"></a><span class="ss">                }</span>
+</span><span id="__span-3-34"><a id="__codelineno-3-34" name="__codelineno-3-34" href="#__codelineno-3-34"></a><span class="ss">              ]</span>
+</span><span id="__span-3-35"><a id="__codelineno-3-35" name="__codelineno-3-35" href="#__codelineno-3-35"></a><span class="ss">            },</span>
+</span><span id="__span-3-36"><a id="__codelineno-3-36" name="__codelineno-3-36" href="#__codelineno-3-36"></a><span class="ss">            &#39;derived_metric&#39;: [</span>
+</span><span id="__span-3-37"><a id="__codelineno-3-37" name="__codelineno-3-37" href="#__codelineno-3-37"></a><span class="ss">              {</span>
+</span><span id="__span-3-38"><a id="__codelineno-3-38" name="__codelineno-3-38" href="#__codelineno-3-38"></a><span class="ss">                &#39;label&#39;: &#39;discounted_total_amount&#39;,</span>
+</span><span id="__span-3-39"><a id="__codelineno-3-39" name="__codelineno-3-39" href="#__codelineno-3-39"></a><span class="ss">                &#39;formula&#39;: &#39;total_amount*0.56&#39;</span>
+</span><span id="__span-3-40"><a id="__codelineno-3-40" name="__codelineno-3-40" href="#__codelineno-3-40"></a><span class="ss">              }</span>
+</span><span id="__span-3-41"><a id="__codelineno-3-41" name="__codelineno-3-41" href="#__codelineno-3-41"></a><span class="ss">            ]</span>
+</span><span id="__span-3-42"><a id="__codelineno-3-42" name="__codelineno-3-42" href="#__codelineno-3-42"></a><span class="ss">          }</span>
+</span><span id="__span-3-43"><a id="__codelineno-3-43" name="__codelineno-3-43" href="#__codelineno-3-43"></a><span class="ss">        },</span>
+</span><span id="__span-3-44"><a id="__codelineno-3-44" name="__codelineno-3-44" href="#__codelineno-3-44"></a><span class="ss">      &#39;filter&#39;: {}</span>
+</span><span id="__span-3-45"><a id="__codelineno-3-45" name="__codelineno-3-45" href="#__codelineno-3-45"></a><span class="ss">    }</span>
+</span><span id="__span-3-46"><a id="__codelineno-3-46" name="__codelineno-3-46" href="#__codelineno-3-46"></a><span class="ss">  }&quot;&quot;&quot;</span><span class="p">,</span>
+</span><span id="__span-3-47"><a id="__codelineno-3-47" name="__codelineno-3-47" href="#__codelineno-3-47"></a><span class="w">  </span><span class="ss">&quot;&quot;&quot;{</span>
+</span><span id="__span-3-48"><a id="__codelineno-3-48" name="__codelineno-3-48" href="#__codelineno-3-48"></a><span class="ss">    &#39;1&#39;: {</span>
+</span><span id="__span-3-49"><a id="__codelineno-3-49" name="__codelineno-3-49" href="#__codelineno-3-49"></a><span class="ss">        &#39;file_path&#39;: &#39;f_agg_dummy_sales_kpi/1_article_category.sql&#39;,</span>
+</span><span id="__span-3-50"><a id="__codelineno-3-50" name="__codelineno-3-50" href="#__codelineno-3-50"></a><span class="ss">        &#39;table_alias&#39;: &#39;article_categories&#39;,</span>
+</span><span id="__span-3-51"><a id="__codelineno-3-51" name="__codelineno-3-51" href="#__codelineno-3-51"></a><span class="ss">        &#39;storage_level&#39;: &#39;MEMORY_ONLY&#39;,</span>
+</span><span id="__span-3-52"><a id="__codelineno-3-52" name="__codelineno-3-52" href="#__codelineno-3-52"></a><span class="ss">        &#39;project_date_column&#39;: &#39;&#39;,</span>
+</span><span id="__span-3-53"><a id="__codelineno-3-53" name="__codelineno-3-53" href="#__codelineno-3-53"></a><span class="ss">        &#39;filter_date_column&#39;: &#39;&#39;,</span>
+</span><span id="__span-3-54"><a id="__codelineno-3-54" name="__codelineno-3-54" href="#__codelineno-3-54"></a><span class="ss">        &#39;repartition&#39;: {}</span>
+</span><span id="__span-3-55"><a id="__codelineno-3-55" name="__codelineno-3-55" href="#__codelineno-3-55"></a><span class="ss">    },</span>
+</span><span id="__span-3-56"><a id="__codelineno-3-56" name="__codelineno-3-56" href="#__codelineno-3-56"></a><span class="ss">    &#39;2&#39;: {</span>
+</span><span id="__span-3-57"><a id="__codelineno-3-57" name="__codelineno-3-57" href="#__codelineno-3-57"></a><span class="ss">        &#39;file_path&#39;: &#39;f_agg_dummy_sales_kpi/2_f_agg_dummy_sales_kpi.sql&#39;,</span>
+</span><span id="__span-3-58"><a id="__codelineno-3-58" name="__codelineno-3-58" href="#__codelineno-3-58"></a><span class="ss">        &#39;table_alias&#39;: &#39;dummy_sales_kpi&#39;,</span>
+</span><span id="__span-3-59"><a id="__codelineno-3-59" name="__codelineno-3-59" href="#__codelineno-3-59"></a><span class="ss">        &#39;storage_level&#39;: &#39;MEMORY_ONLY&#39;,</span>
+</span><span id="__span-3-60"><a id="__codelineno-3-60" name="__codelineno-3-60" href="#__codelineno-3-60"></a><span class="ss">        &#39;project_date_column&#39;: &#39;order_date&#39;,</span>
+</span><span id="__span-3-61"><a id="__codelineno-3-61" name="__codelineno-3-61" href="#__codelineno-3-61"></a><span class="ss">        &#39;filter_date_column&#39;: &#39;order_date&#39;,</span>
+</span><span id="__span-3-62"><a id="__codelineno-3-62" name="__codelineno-3-62" href="#__codelineno-3-62"></a><span class="ss">        &#39;repartition&#39;: {}</span>
+</span><span id="__span-3-63"><a id="__codelineno-3-63" name="__codelineno-3-63" href="#__codelineno-3-63"></a><span class="ss">    }</span>
+</span><span id="__span-3-64"><a id="__codelineno-3-64" name="__codelineno-3-64" href="#__codelineno-3-64"></a><span class="ss">  }&quot;&quot;&quot;</span><span class="p">,</span>
+</span><span id="__span-3-65"><a id="__codelineno-3-65" name="__codelineno-3-65" href="#__codelineno-3-65"></a><span class="w">  </span><span class="ss">&quot;&quot;&quot;{&#39;YEAR&#39;: {}}&quot;&quot;&quot;</span><span class="p">,</span>
+</span><span id="__span-3-66"><a id="__codelineno-3-66" name="__codelineno-3-66" href="#__codelineno-3-66"></a><span class="w">  </span><span class="s1">&#39;0&#39;</span><span class="p">,</span>
+</span><span id="__span-3-67"><a id="__codelineno-3-67" name="__codelineno-3-67" href="#__codelineno-3-67"></a><span class="w">  </span><span class="s1">&#39;MONDAY&#39;</span><span class="p">,</span>
+</span><span id="__span-3-68"><a id="__codelineno-3-68" name="__codelineno-3-68" href="#__codelineno-3-68"></a><span class="w">  </span><span class="s1">&#39;Y&#39;</span><span class="p">,</span>
+</span><span id="__span-3-69"><a id="__codelineno-3-69" name="__codelineno-3-69" href="#__codelineno-3-69"></a><span class="w">  </span><span class="s1">&#39;Low&#39;</span><span class="p">,</span>
+</span><span id="__span-3-70"><a id="__codelineno-3-70" name="__codelineno-3-70" href="#__codelineno-3-70"></a><span class="w">  </span><span class="k">current_timestamp</span><span class="p">()</span>
+</span><span id="__span-3-71"><a id="__codelineno-3-71" name="__codelineno-3-71" href="#__codelineno-3-71"></a><span class="p">)</span>
+</span></code></pre></div>
 <h2 id="3-use-case-execution">3. Use case execution<a class="headerlink" href="#3-use-case-execution" title="Permanent link">&para;</a></h2>
-<p>After the initial setup and adding your use case to the <strong><em>lkp_query_builder</em></strong> you can schedule the <a href="../../../assets/gab/notebooks/gab_job_manager.py">gab_job_manager</a> to manage the use case execution in any schedule time you want.</p>
+<p>After the initial setup and adding your use case to the <strong><em>lkp_query_builder</em></strong> you can schedule the <a href="../../../assets/gab/notebooks/gab_job_manager.py">gab_job_manager</a> to manage the use case execution in any schedule you want.</p>
+<p>You can repeat these steps for each use case you have.</p>
 <h2 id="4-consuming-the-data">4. Consuming the data<a class="headerlink" href="#4-consuming-the-data" title="Permanent link">&para;</a></h2>
-<p>The data is available in the view you specified as output from the use-case, so you can normally consume the view as you would consume any other data (directly on power bi or in another pipeline).</p>
+<p>The data is available in the view you specified as output from the use case in <strong><em>step 2</em></strong>, so you can normally consume the view as you would consume any other data asset (e.g., Report, Dashboard, ML model, Data Pipeline).</p>
 
 
 

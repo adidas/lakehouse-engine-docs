@@ -8,20 +8,20 @@
       
       
       
-        <link rel="canonical" href="https://adidas.github.io/lakehouse-engine-docs/lakehouse_engine_usage/data_loader/streaming_delta_with_late_arriving_and_out_of_order_events/streaming_delta_with_late_arriving_and_out_of_order_events.html">
+        <link rel="canonical" href="https://adidas.github.io/lakehouse-engine-docs/lakehouse_engine_usage/data_loader/write_to_sharepoint/write_to_sharepoint.html">
       
       
-        <link rel="prev" href="../streaming_delta_load_with_group_and_rank_condensation/streaming_delta_load_with_group_and_rank_condensation.html">
+        <link rel="prev" href="../write_to_rest_api/write_to_rest_api.html">
       
       
-        <link rel="next" href="../write_and_read_dataframe/write_and_read_dataframe.html">
+        <link rel="next" href="../../data_quality/data_quality.html">
       
       <link rel="icon" href="../../../assets/img/lakehouse_engine_logo_symbol_large.png">
       <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.17">
     
     
       
-        <title>Streaming Delta Load with Late Arriving and Out of Order Events (with and without watermarking) - Lakehouse Engine Documentation</title>
+        <title>Write to Sharepoint - Lakehouse Engine Documentation</title>
       
     
     
@@ -77,7 +77,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#streaming-delta-load-with-late-arriving-and-out-of-order-events-with-and-without-watermarking" class="md-skip">
+        <a href="#write-to-sharepoint" class="md-skip">
           Skip to content
         </a>
       
@@ -111,7 +111,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Streaming Delta Load with Late Arriving and Out of Order Events (with and without watermarking)
+              Write to Sharepoint
             
           </span>
         </div>
@@ -770,119 +770,11 @@
               
   
   
-    
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          Streaming Delta Load with Late Arriving and Out of Order Events (with and without watermarking)
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="streaming_delta_with_late_arriving_and_out_of_order_events.html" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../streaming_delta_with_late_arriving_and_out_of_order_events/streaming_delta_with_late_arriving_and_out_of_order_events.html" class="md-nav__link">
         Streaming Delta Load with Late Arriving and Out of Order Events (with and without watermarking)
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#how-to-deal-with-late-arriving-data-without-using-watermark" class="md-nav__link">
-    How to Deal with Late Arriving Data without using Watermark
-  </a>
-  
-    <nav class="md-nav" aria-label="How to Deal with Late Arriving Data without using Watermark">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#relevant-notes" class="md-nav__link">
-    Relevant notes:
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#how-to-deal-with-late-arriving-data-using-watermark" class="md-nav__link">
-    How to Deal with Late Arriving Data using Watermark
-  </a>
-  
-    <nav class="md-nav" aria-label="How to Deal with Late Arriving Data using Watermark">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#approach-1-use-a-pre-defined-fixed-window-bad" class="md-nav__link">
-    Approach 1 - Use a pre-defined fixed window (Bad)
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#approach-2-watermark" class="md-nav__link">
-    Approach 2 - Watermark
-  </a>
-  
-    <nav class="md-nav" aria-label="Approach 2 - Watermark">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#watermarking-and-different-output-modes" class="md-nav__link">
-    Watermarking and Different Output Modes
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#joins-with-watermark" class="md-nav__link">
-    Joins With Watermark
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#state-store-performance-considerations" class="md-nav__link">
-    State Store Performance Considerations
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -934,11 +826,154 @@
               
   
   
+    
   
-    <li class="md-nav__item">
-      <a href="../write_to_sharepoint/write_to_sharepoint.html" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Write to Sharepoint
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="write_to_sharepoint.html" class="md-nav__link md-nav__link--active">
         Write to Sharepoint
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#usage-scenarios" class="md-nav__link">
+    Usage Scenarios
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-configuration-parameters" class="md-nav__link">
+    1. Configuration parameters
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Configuration parameters">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-mandatory-configuration-parameters-are" class="md-nav__link">
+    The mandatory configuration parameters are:
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-optional-parameters-are" class="md-nav__link">
+    The optional parameters are:
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-simple-write-one-dataframe-to-sharepoint" class="md-nav__link">
+    2. Simple: Write one Dataframe to Sharepoint
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Simple: Write one Dataframe to Sharepoint">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#i-minimal-configuration" class="md-nav__link">
+    i. Minimal Configuration
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ii-with-optional-configurations" class="md-nav__link">
+    ii. With Optional Configurations
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-complex-write-multiple-dataframes-to-sharepoint" class="md-nav__link">
+    3. Complex: Write multiple Dataframes to Sharepoint
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Complex: Write multiple Dataframes to Sharepoint">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#i-example-partitioning-function" class="md-nav__link">
+    i. Example: Partitioning function
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ii-detect-unsupported-columns-types" class="md-nav__link">
+    ii. Detect unsupported columns types
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#iii-without-parallelism-sequential-processing" class="md-nav__link">
+    iii. Without parallelism (sequential processing)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#iv-complex-with-parallelism-optimized-for-efficiency" class="md-nav__link">
+    iv. Complex - With parallelism (optimized for efficiency)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#relevant-notes" class="md-nav__link">
+    Relevant Notes
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -3866,133 +3901,423 @@
   
 
 
-<h1 id="streaming-delta-load-with-late-arriving-and-out-of-order-events-with-and-without-watermarking">Streaming Delta Load with Late Arriving and Out of Order Events (with and without watermarking)<a class="headerlink" href="#streaming-delta-load-with-late-arriving-and-out-of-order-events-with-and-without-watermarking" title="Permanent link">&para;</a></h1>
-<h2 id="how-to-deal-with-late-arriving-data-without-using-watermark">How to Deal with Late Arriving Data without using Watermark<a class="headerlink" href="#how-to-deal-with-late-arriving-data-without-using-watermark" title="Permanent link">&para;</a></h2>
-<p>This scenario covers a delta load in streaming mode that is able to deal with late arriving and out of order events.
-As for other cases, the acon configuration should be executed with <code>load_data</code> using:
-<div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">lakehouse_engine.engine</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_data</span>
-</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="n">acon</span> <span class="o">=</span> <span class="p">{</span><span class="o">...</span><span class="p">}</span>
-</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="n">load_data</span><span class="p">(</span><span class="n">acon</span><span class="o">=</span><span class="n">acon</span><span class="p">)</span>
-</span></code></pre></div>
-Example of ACON configuration:
-<div class="language-json highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="p">{</span>
-</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">  </span><span class="nt">&quot;input_specs&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
-</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">    </span><span class="p">{</span>
-</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">      </span><span class="nt">&quot;spec_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;sales_source&quot;</span><span class="p">,</span>
-</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">      </span><span class="nt">&quot;read_type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;streaming&quot;</span><span class="p">,</span>
-</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="w">      </span><span class="nt">&quot;data_format&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;csv&quot;</span><span class="p">,</span>
-</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="w">      </span><span class="nt">&quot;options&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="w">        </span><span class="nt">&quot;header&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
-</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="w">        </span><span class="nt">&quot;delimiter&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;|&quot;</span>
-</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="w">      </span><span class="p">},</span>
-</span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="w">      </span><span class="nt">&quot;location&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;file:///app/tests/lakehouse/in/feature/delta_load/record_mode_cdc/late_arriving_changes/streaming/data&quot;</span>
-</span><span id="__span-1-12"><a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="w">    </span><span class="p">}</span>
-</span><span id="__span-1-13"><a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="w">  </span><span class="p">],</span>
-</span><span id="__span-1-14"><a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a><span class="w">  </span><span class="nt">&quot;transform_specs&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
-</span><span id="__span-1-15"><a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a><span class="w">    </span><span class="p">{</span>
-</span><span id="__span-1-16"><a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a><span class="w">      </span><span class="nt">&quot;spec_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;transformed_sales_source&quot;</span><span class="p">,</span>
-</span><span id="__span-1-17"><a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a><span class="w">      </span><span class="nt">&quot;input_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;sales_source&quot;</span><span class="p">,</span>
-</span><span id="__span-1-18"><a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a><span class="w">      </span><span class="nt">&quot;transformers&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
-</span><span id="__span-1-19"><a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a><span class="w">        </span><span class="p">{</span>
-</span><span id="__span-1-20"><a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a><span class="w">          </span><span class="nt">&quot;function&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;condense_record_mode_cdc&quot;</span><span class="p">,</span>
-</span><span id="__span-1-21"><a id="__codelineno-1-21" name="__codelineno-1-21" href="#__codelineno-1-21"></a><span class="w">          </span><span class="nt">&quot;args&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-1-22"><a id="__codelineno-1-22" name="__codelineno-1-22" href="#__codelineno-1-22"></a><span class="w">            </span><span class="nt">&quot;business_key&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
-</span><span id="__span-1-23"><a id="__codelineno-1-23" name="__codelineno-1-23" href="#__codelineno-1-23"></a><span class="w">              </span><span class="s2">&quot;salesorder&quot;</span><span class="p">,</span>
-</span><span id="__span-1-24"><a id="__codelineno-1-24" name="__codelineno-1-24" href="#__codelineno-1-24"></a><span class="w">              </span><span class="s2">&quot;item&quot;</span>
-</span><span id="__span-1-25"><a id="__codelineno-1-25" name="__codelineno-1-25" href="#__codelineno-1-25"></a><span class="w">            </span><span class="p">],</span>
-</span><span id="__span-1-26"><a id="__codelineno-1-26" name="__codelineno-1-26" href="#__codelineno-1-26"></a><span class="w">            </span><span class="nt">&quot;ranking_key_desc&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
-</span><span id="__span-1-27"><a id="__codelineno-1-27" name="__codelineno-1-27" href="#__codelineno-1-27"></a><span class="w">              </span><span class="s2">&quot;extraction_timestamp&quot;</span><span class="p">,</span>
-</span><span id="__span-1-28"><a id="__codelineno-1-28" name="__codelineno-1-28" href="#__codelineno-1-28"></a><span class="w">              </span><span class="s2">&quot;actrequest_timestamp&quot;</span><span class="p">,</span>
-</span><span id="__span-1-29"><a id="__codelineno-1-29" name="__codelineno-1-29" href="#__codelineno-1-29"></a><span class="w">              </span><span class="s2">&quot;datapakid&quot;</span><span class="p">,</span>
-</span><span id="__span-1-30"><a id="__codelineno-1-30" name="__codelineno-1-30" href="#__codelineno-1-30"></a><span class="w">              </span><span class="s2">&quot;partno&quot;</span><span class="p">,</span>
-</span><span id="__span-1-31"><a id="__codelineno-1-31" name="__codelineno-1-31" href="#__codelineno-1-31"></a><span class="w">              </span><span class="s2">&quot;record&quot;</span>
-</span><span id="__span-1-32"><a id="__codelineno-1-32" name="__codelineno-1-32" href="#__codelineno-1-32"></a><span class="w">            </span><span class="p">],</span>
-</span><span id="__span-1-33"><a id="__codelineno-1-33" name="__codelineno-1-33" href="#__codelineno-1-33"></a><span class="w">            </span><span class="nt">&quot;record_mode_col&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;recordmode&quot;</span><span class="p">,</span>
-</span><span id="__span-1-34"><a id="__codelineno-1-34" name="__codelineno-1-34" href="#__codelineno-1-34"></a><span class="w">            </span><span class="nt">&quot;valid_record_modes&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
-</span><span id="__span-1-35"><a id="__codelineno-1-35" name="__codelineno-1-35" href="#__codelineno-1-35"></a><span class="w">              </span><span class="s2">&quot;&quot;</span><span class="p">,</span>
-</span><span id="__span-1-36"><a id="__codelineno-1-36" name="__codelineno-1-36" href="#__codelineno-1-36"></a><span class="w">              </span><span class="s2">&quot;N&quot;</span><span class="p">,</span>
-</span><span id="__span-1-37"><a id="__codelineno-1-37" name="__codelineno-1-37" href="#__codelineno-1-37"></a><span class="w">              </span><span class="s2">&quot;R&quot;</span><span class="p">,</span>
-</span><span id="__span-1-38"><a id="__codelineno-1-38" name="__codelineno-1-38" href="#__codelineno-1-38"></a><span class="w">              </span><span class="s2">&quot;D&quot;</span><span class="p">,</span>
-</span><span id="__span-1-39"><a id="__codelineno-1-39" name="__codelineno-1-39" href="#__codelineno-1-39"></a><span class="w">              </span><span class="s2">&quot;X&quot;</span>
-</span><span id="__span-1-40"><a id="__codelineno-1-40" name="__codelineno-1-40" href="#__codelineno-1-40"></a><span class="w">            </span><span class="p">]</span>
-</span><span id="__span-1-41"><a id="__codelineno-1-41" name="__codelineno-1-41" href="#__codelineno-1-41"></a><span class="w">          </span><span class="p">}</span>
-</span><span id="__span-1-42"><a id="__codelineno-1-42" name="__codelineno-1-42" href="#__codelineno-1-42"></a><span class="w">        </span><span class="p">}</span>
-</span><span id="__span-1-43"><a id="__codelineno-1-43" name="__codelineno-1-43" href="#__codelineno-1-43"></a><span class="w">      </span><span class="p">]</span>
-</span><span id="__span-1-44"><a id="__codelineno-1-44" name="__codelineno-1-44" href="#__codelineno-1-44"></a><span class="w">    </span><span class="p">}</span>
-</span><span id="__span-1-45"><a id="__codelineno-1-45" name="__codelineno-1-45" href="#__codelineno-1-45"></a><span class="w">  </span><span class="p">],</span>
-</span><span id="__span-1-46"><a id="__codelineno-1-46" name="__codelineno-1-46" href="#__codelineno-1-46"></a><span class="w">  </span><span class="nt">&quot;output_specs&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
-</span><span id="__span-1-47"><a id="__codelineno-1-47" name="__codelineno-1-47" href="#__codelineno-1-47"></a><span class="w">    </span><span class="p">{</span>
-</span><span id="__span-1-48"><a id="__codelineno-1-48" name="__codelineno-1-48" href="#__codelineno-1-48"></a><span class="w">      </span><span class="nt">&quot;spec_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;sales_bronze&quot;</span><span class="p">,</span>
-</span><span id="__span-1-49"><a id="__codelineno-1-49" name="__codelineno-1-49" href="#__codelineno-1-49"></a><span class="w">      </span><span class="nt">&quot;input_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;transformed_sales_source&quot;</span><span class="p">,</span>
-</span><span id="__span-1-50"><a id="__codelineno-1-50" name="__codelineno-1-50" href="#__codelineno-1-50"></a><span class="w">      </span><span class="nt">&quot;write_type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;merge&quot;</span><span class="p">,</span>
-</span><span id="__span-1-51"><a id="__codelineno-1-51" name="__codelineno-1-51" href="#__codelineno-1-51"></a><span class="w">      </span><span class="nt">&quot;data_format&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;delta&quot;</span><span class="p">,</span>
-</span><span id="__span-1-52"><a id="__codelineno-1-52" name="__codelineno-1-52" href="#__codelineno-1-52"></a><span class="w">      </span><span class="nt">&quot;location&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;file:///app/tests/lakehouse/out/feature/delta_load/record_mode_cdc/late_arriving_changes/streaming/data&quot;</span><span class="p">,</span>
-</span><span id="__span-1-53"><a id="__codelineno-1-53" name="__codelineno-1-53" href="#__codelineno-1-53"></a><span class="w">      </span><span class="nt">&quot;options&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-1-54"><a id="__codelineno-1-54" name="__codelineno-1-54" href="#__codelineno-1-54"></a><span class="w">        </span><span class="nt">&quot;checkpointLocation&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;file:///app/tests/lakehouse/out/feature/delta_load/record_mode_cdc/late_arriving_changes/streaming/checkpoint&quot;</span>
-</span><span id="__span-1-55"><a id="__codelineno-1-55" name="__codelineno-1-55" href="#__codelineno-1-55"></a><span class="w">      </span><span class="p">},</span>
-</span><span id="__span-1-56"><a id="__codelineno-1-56" name="__codelineno-1-56" href="#__codelineno-1-56"></a><span class="w">      </span><span class="nt">&quot;merge_opts&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-1-57"><a id="__codelineno-1-57" name="__codelineno-1-57" href="#__codelineno-1-57"></a><span class="w">        </span><span class="nt">&quot;merge_predicate&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;current.salesorder = new.salesorder and current.item = new.item and current.date &lt;=&gt; new.date&quot;</span><span class="p">,</span>
-</span><span id="__span-1-58"><a id="__codelineno-1-58" name="__codelineno-1-58" href="#__codelineno-1-58"></a><span class="w">        </span><span class="nt">&quot;update_predicate&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;new.extraction_timestamp &gt; current.extraction_timestamp or new.actrequest_timestamp &gt; current.actrequest_timestamp or ( new.actrequest_timestamp = current.actrequest_timestamp and new.datapakid &gt; current.datapakid) or ( new.actrequest_timestamp = current.actrequest_timestamp and new.datapakid = current.datapakid and new.partno &gt; current.partno) or ( new.actrequest_timestamp = current.actrequest_timestamp and new.datapakid = current.datapakid and new.partno = current.partno and new.record &gt;= current.record)&quot;</span><span class="p">,</span>
-</span><span id="__span-1-59"><a id="__codelineno-1-59" name="__codelineno-1-59" href="#__codelineno-1-59"></a><span class="w">        </span><span class="nt">&quot;delete_predicate&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;new.recordmode in (&#39;R&#39;,&#39;D&#39;,&#39;X&#39;)&quot;</span><span class="p">,</span>
-</span><span id="__span-1-60"><a id="__codelineno-1-60" name="__codelineno-1-60" href="#__codelineno-1-60"></a><span class="w">        </span><span class="nt">&quot;insert_predicate&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;new.recordmode is null or new.recordmode not in (&#39;R&#39;,&#39;D&#39;,&#39;X&#39;)&quot;</span>
-</span><span id="__span-1-61"><a id="__codelineno-1-61" name="__codelineno-1-61" href="#__codelineno-1-61"></a><span class="w">      </span><span class="p">}</span>
-</span><span id="__span-1-62"><a id="__codelineno-1-62" name="__codelineno-1-62" href="#__codelineno-1-62"></a><span class="w">    </span><span class="p">}</span>
-</span><span id="__span-1-63"><a id="__codelineno-1-63" name="__codelineno-1-63" href="#__codelineno-1-63"></a><span class="w">  </span><span class="p">],</span>
-</span><span id="__span-1-64"><a id="__codelineno-1-64" name="__codelineno-1-64" href="#__codelineno-1-64"></a><span class="w">  </span><span class="nt">&quot;exec_env&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-1-65"><a id="__codelineno-1-65" name="__codelineno-1-65" href="#__codelineno-1-65"></a><span class="w">    </span><span class="nt">&quot;spark.sql.streaming.schemaInference&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span>
-</span><span id="__span-1-66"><a id="__codelineno-1-66" name="__codelineno-1-66" href="#__codelineno-1-66"></a><span class="w">  </span><span class="p">}</span>
-</span></code></pre></div></p>
-<h5 id="relevant-notes">Relevant notes:<a class="headerlink" href="#relevant-notes" title="Permanent link">&para;</a></h5>
+<h1 id="write-to-sharepoint">Write to Sharepoint<a class="headerlink" href="#write-to-sharepoint" title="Permanent link">&para;</a></h1>
+<p>There may be scenarios where data products must deliver curated datasets to external platforms like SharePoint, 
+often to serve business users or reporting tools outside the lakehouse environment.</p>
+<p>The SharePointWriter is a specialized writer module designed to export a single file from the lakehouse to a SharePoint document library.
+It handles the complexities of the export by:</p>
 <ul>
-<li>First question we can impose is: Do we need such complicated update predicate to handle late arriving and out of order events? Simple answer is no. Because we expect that the latest event (e.g., latest status of a record in the source) will eventually arrive, and therefore the target delta lake table will eventually be consistent. However, when will that happen? Do we want to have our target table inconsistent until the next update comes along? This of course is only true when your source cannot ensure the order of the changes and cannot avoid late arriving changes (e.g., some changes that should have come in this changelog extraction, will only arrive in the next changelog extraction). From previous experiences, this is not the case with SAP BW, for example (as SAP BW is ACID compliant, and it will extract data from an SAP source and only have the updated changelog available when the extraction goes through, so theoretically we should not be able to extract data from the SAP BW changelog while SAP BW is still extracting data). </li>
-<li>However, when the source cannot fully ensure ordering (e.g., Kafka) and we want to make sure we don't load temporarily inconsistent data into the target table, we can pay extra special attention, as we do here, to our update and insert predicates, that will enable us to only insert or update data if the new event meets the respective predicates:<ul>
-<li>In this scenario, we will only update if the <code>update_predicate</code> is true, and that long predicate we have here ensures that the change that we are receiving is likely the latest one;</li>
-<li>In this scenario, we will only insert the record if the record is not marked for deletion (this can happen if the new event is a record that is marked for deletion, but the record was not in the target table (late arriving changes where the delete came before the insert), and therefore, without the <code>insert_predicate</code>, the algorithm would still try to insert the row, even if the <code>record_mode</code> indicates that that row is for deletion. By using the <code>insert_predicate</code> above we avoid that to happen. However, even in such scenario, to prevent the algorithm to insert the data that comes later (which is old, as we said, the delete came before the insert and was actually the latest status), we would even need a more complex predicate based on your data's nature. Therefore, please read the disclaimer below.
-!!! note "<strong>Disclaimer</strong>!" The scenario illustrated in this page is purely fictional, designed for the Lakehouse Engine local tests specifically. Your data source changelogs may be different and the scenario and predicates discussed here may not make sense to you. Consequently, the data product team should reason about the adequate merge predicate and insert, update and delete predicates, that better reflect how they want to handle the delta loads for their data.</li>
-</ul>
-</li>
-<li>We use spark.sql.streaming.schemaInference in our local tests only. We don't encourage you to use it in your data product.</li>
+<li>Writing the dataset to a temporary local file. </li>
+<li>Uploading that file to the configured SharePoint location using authenticated APIs. </li>
+<li>Since it is scoped to handle only a single file per execution, any logic for splitting or generating multiple files must be implemented within your notebook prior to invoking the writer.</li>
 </ul>
 <div class="admonition note">
-<p class="admonition-title"><strong>Documentation</strong></p>
-<p><a href="https://www.databricks.com/blog/feature-deep-dive-watermarking-apache-spark-structured-streaming">Feature Deep Dive: Watermarking in Apache Spark Structured Streaming - The Databricks Blog</a></p>
-<p><a href="https://spark.apache.org/docs/latest/structured-streaming-programming-guide.html">Structured Streaming Programming Guide - Spark 3.4.0 Documentation</a></p>
+<p class="admonition-title">Note</p>
+<p>📘 Tip: This writer integrates seamlessly into the lakehouse engine's output step and can be triggered as part of the ACON-based pipeline, just like any other writer module.</p>
 </div>
-<h2 id="how-to-deal-with-late-arriving-data-using-watermark">How to Deal with Late Arriving Data using Watermark<a class="headerlink" href="#how-to-deal-with-late-arriving-data-using-watermark" title="Permanent link">&para;</a></h2>
-<p>When building real-time pipelines, one of the realities that teams have to work with is that distributed data ingestion is inherently unordered. Additionally, in the context of stateful streaming operations, teams need to be able to properly track event time progress in the stream of data they are ingesting for the proper calculation of time-window aggregations and other stateful operations. While working with real-time streaming data there will be delays between event time and processing time due to how data is ingested and whether the overall application experiences issues like downtime. Due to these potential variable delays, the engine that you use to process this data needs to have some mechanism to decide when to close the aggregate windows and produce the aggregate result.</p>
-<p>Imagine a scenario where we will need to perform stateful aggregations on the streaming data to understand and identify problems in the machines. <strong>This is where we need to leverage Structured Streaming and Watermarking to produce the necessary stateful aggregations.</strong></p>
-<h5 id="approach-1-use-a-pre-defined-fixed-window-bad">Approach 1 - Use a pre-defined fixed window (Bad)<a class="headerlink" href="#approach-1-use-a-pre-defined-fixed-window-bad" title="Permanent link">&para;</a></h5>
-<p><img src="../../../assets/img/fixed_window.png?raw=true" style="max-width: 800px; height: auto; "/></p>
-<p>Credits: <a href="https://www.databricks.com/blog/feature-deep-dive-watermarking-apache-spark-structured-streaming">Image source</a></p>
-<p>To explain this visually let’s take a scenario where we are receiving data at various times from around 10:50 AM → 11:20 AM. We are creating 10-minute tumbling windows that calculate the average of the temperature and pressure readings that came in during the windowed period.</p>
-<p>In this first picture, we have the tumbling windows trigger at 11:00 AM, 11:10 AM and 11:20 AM leading to the result tables shown at the respective times. When the second batch of data comes around 11:10 AM with data that has an event time of 10:53 AM this gets incorporated into the temperature and pressure averages calculated for the 11:00 AM → 11:10 AM window that closes at 11:10 AM, which does not give the correct result.</p>
-<h5 id="approach-2-watermark">Approach 2 - Watermark<a class="headerlink" href="#approach-2-watermark" title="Permanent link">&para;</a></h5>
-<p>We can define a <strong>watermark</strong> that will allow Spark to understand when to close the aggregate window and produce the correct aggregate result. In Structured Streaming applications, we can ensure that all relevant data for the aggregations we want to calculate is collected by using a feature called <strong>watermarking</strong>. In the most basic sense, by defining a <strong>watermark</strong> Spark Structured Streaming then knows when it has ingested all data up to some time, <strong>T</strong>, (based on a set lateness expectation) so that it can close and produce windowed aggregates up to timestamp <strong>T</strong>.</p>
-<p><img src="../../../assets/img/watermarking.png?raw=true" style="max-width: 800px; height: auto; "/></p>
-<p>Credits: <a href="https://www.databricks.com/blog/feature-deep-dive-watermarking-apache-spark-structured-streaming">Image source</a></p>
-<p>Unlike the first scenario where Spark will emit the windowed aggregation for the previous ten minutes every ten minutes (i.e. emit the 11:00 AM →11:10 AM window at 11:10 AM), Spark now waits to close and output the windowed aggregation once <strong>the max event time seen minus the specified watermark is greater than the upper bound of the window</strong>.</p>
-<p>In other words, Spark needed to wait until it saw data points where the latest event time seen minus 10 minutes was greater than 11:00 AM to emit the 10:50 AM → 11:00 AM aggregate window. At 11:00 AM, it does not see this, so it only initialises the aggregate calculation in Spark’s internal state store. At 11:10 AM, this condition is still not met, but we have a new data point for 10:53 AM so the internal state gets updated, just <strong>not emitted</strong>. Then finally by 11:20 AM Spark has seen a data point with an event time of 11:15 AM and since 11:15 AM minus 10 minutes is 11:05 AM which is later than 11:00 AM the 10:50 AM → 11:00 AM window can be emitted to the result table.</p>
-<p>This produces the correct result by properly incorporating the data based on the expected lateness defined by the watermark. Once the results are emitted the corresponding state is removed from the state store.</p>
-<h6 id="watermarking-and-different-output-modes">Watermarking and Different Output Modes<a class="headerlink" href="#watermarking-and-different-output-modes" title="Permanent link">&para;</a></h6>
-<p>It is important to understand how state, late-arriving records, and the different output modes could lead to different behaviours of your application running on Spark. The main takeaway here is that in both append and update modes, once the watermark indicates that all data is received for an aggregate time window, the engine can trim the window state. In append mode the aggregate is produced only at the closing of the time window plus the watermark delay while in update mode it is produced on every update to the window.</p>
-<p>Lastly, by increasing your watermark delay window you will cause the pipeline to wait longer for data and potentially drop less data – higher precision, but also higher latency to produce the aggregates. On the flip side, smaller watermark delay leads to lower precision but also lower latency to produce the aggregates.</p>
-<p>Watermarks can only be used when you are running your streaming application in <strong>append</strong> or <strong>update</strong> output modes. There is a third output mode, complete mode, in which the entire result table is written to storage. This mode cannot be used because it requires all aggregate data to be preserved, and hence cannot use watermarking to drop intermediate state.</p>
-<h6 id="joins-with-watermark">Joins With Watermark<a class="headerlink" href="#joins-with-watermark" title="Permanent link">&para;</a></h6>
-<p>There are three types of stream-stream joins that can be implemented in Structured Streaming: <strong>inner, outer, and semi joins</strong>. The main problem with doing joins in streaming applications is that you may have an incomplete picture of one side of the join. Giving Spark an understanding of when there are no future matches to expect is similar to the earlier problem with aggregations where Spark needed to understand when there were no new rows to incorporate into the calculation for the aggregation before emitting it.</p>
-<p>To allow Spark to handle this, we can leverage a combination of watermarks and event-time constraints within the join condition of the stream-stream join. This combination allows Spark to filter out late records and trim the state for the join operation through a time range condition on the join.</p>
-<p>Spark has a policy for handling multiple watermark definitions. Spark maintains <strong>one global watermark</strong> that is based on the slowest stream to ensure the highest amount of safety when it comes to not missing data.</p>
-<p>We can change this behaviour by changing <em>spark.sql.streaming.multipleWatermarkPolicy</em> to max; however, this means that data from the slower stream will be dropped.</p>
-<h6 id="state-store-performance-considerations">State Store Performance Considerations<a class="headerlink" href="#state-store-performance-considerations" title="Permanent link">&para;</a></h6>
-<p>As of Spark 3.2, Spark offers RocksDB state store provider.</p>
-<p>If you have stateful operations in your streaming query (for example, streaming aggregation, streaming dropDuplicates, stream-stream joins, mapGroupsWithState, or flatMapGroupsWithState) and you want to maintain millions of keys in the state, then you may face issues related to large JVM garbage collection (GC) pauses causing high variations in the micro-batch processing times. This occurs because, by the implementation of HDFSBackedStateStore, the state data is maintained in the JVM memory of the executors and large number of state objects puts memory pressure on the JVM causing high GC pauses.</p>
-<p>In such cases, you can choose to use a more optimized state management solution based on RocksDB. Rather than keeping the state in the JVM memory, this solution uses RocksDB to efficiently manage the state in the native memory and the local disk. Furthermore, any changes to this state are automatically saved by Structured Streaming to the checkpoint location you have provided, thus providing full fault-tolerance guarantees (the same as default state management).</p>
-<p>To enable the new build-in state store implementation, <em>set <code>spark.sql.streaming.stateStore.providerClass</code> to <code>org.apache.spark.sql.execution.streaming.state.RocksDBStateStoreProvider</code></em>.</p>
-<p>For more details please visit Spark documentation: https://spark.apache.org/docs/latest/structured-streaming-programming-guide.html#rocksdb-state-store-implementation</p>
-<p>You can enable this in your acons, by specifying it as part of the exec_env properties like below:</p>
-<div class="language-json highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nt">&quot;exec_env&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">    </span><span class="nt">&quot;spark.sql.streaming.stateStore.providerClass&quot;</span><span class="p">:</span><span class="s2">&quot;org.apache.spark.sql.execution.streaming.state.RocksDBStateStoreProvider&quot;</span>
-</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="p">}</span>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p><strong>CSV files do not support complex data types such as array, map, or struct.</strong>
+If these fields exist in the dataset, they must be converted to string (e.g., via to_json(), cast, or similar) before using the SharePoint Writer, as <strong>these types will cause the export to fail.</strong></p>
+</div>
+<h3 id="usage-scenarios">Usage Scenarios<a class="headerlink" href="#usage-scenarios" title="Permanent link">&para;</a></h3>
+<p>The examples below show how to write data to SharePoint, ranging from simple single-DataFrame writes to more complex multi-DataFrame workflows.</p>
+<ol>
+<li><a href="#1-configuration-parameters">Configuration parameters</a></li>
+<li><a href="#2-simple-write-one-dataframe-to-sharepoint"><strong>Simple:</strong> Write one Dataframe to Sharepoint</a><ol>
+<li><a href="#i-minimal-configuration">Minimal configuration</a></li>
+<li><a href="#ii-with-optional-configurations">With optional configurations</a></li>
+</ol>
+</li>
+<li><a href="#3-complex-write-multiple-dataframes-to-sharepoint"><strong>Complex:</strong> Write multiple Dataframes to Sharepoint</a><ol>
+<li><a href="#i-example-partitioning-function">Example: Partitioning function</a></li>
+<li><a href="#ii-detect-unsupported-columns-types">Example: Detect Unsupported Column Types</a></li>
+<li><a href="#iii-without-parallelism-sequential-processing">Without parallelism (sequential processing)</a></li>
+<li><a href="#iv-complex---with-parallelism-optimized-for-efficiency">With parallelism (optimized for efficiency)</a></li>
+</ol>
+</li>
+</ol>
+<h2 id="1-configuration-parameters">1. Configuration parameters<a class="headerlink" href="#1-configuration-parameters" title="Permanent link">&para;</a></h2>
+<h3 id="the-mandatory-configuration-parameters-are">The mandatory configuration parameters are:<a class="headerlink" href="#the-mandatory-configuration-parameters-are" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>client_id</strong> (str): azure client ID application, available at the
+     Azure Portal -&gt; Azure Active Directory.</li>
+<li><strong>tenant_id</strong> (str): tenant ID associated with the SharePoint site, available at the
+     Azure Portal -&gt; Azure Active Directory.</li>
+<li><strong>site_name</strong> (str): name of the SharePoint site where the document library resides.
+     Sharepoint URL naming convention is: <strong>https://your_company_name.sharepoint.com/sites/site_name</strong></li>
+<li><strong>drive_name</strong> (str): name of the document library where the file will be uploaded.
+     Sharepoint URL naming convention is: <strong>https://your_company_name.sharepoint.com/sites/site_name/drive_name</strong></li>
+<li><strong>file_name</strong> (str): name of the file to be uploaded to local path and to SharePoint.</li>
+<li><strong>secret</strong> (str): client secret for authentication, available at the
+     Azure Portal -&gt; Azure Active Directory.</li>
+<li><strong>local_path</strong> (str): Temporary local storage path for the file before uploading.<ul>
+<li>Ensure the <strong>path ends with "/"</strong>.</li>
+<li>Note: The <strong>specified sub-folder is deleted during the process</strong>; it does not perform a recursive
+ delete on parent directories.</li>
+<li><strong>Avoid using a critical sub-folder.</strong></li>
+</ul>
+</li>
+<li><strong>api_version</strong> (str): version of the Graph SharePoint API to be used for operations.
+     This defaults to "v1.0".</li>
+</ul>
+<h3 id="the-optional-parameters-are">The optional parameters are:<a class="headerlink" href="#the-optional-parameters-are" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>folder_relative_path</strong> (Optional[str]): relative folder path within the document
+       library to upload the file.</li>
+<li><strong>chunk_size</strong> (Optional[int]): Optional; size (in Bytes) of the file chunks for
+       uploading to SharePoint. <strong>Default is 100 Mb.</strong></li>
+<li><strong>local_options</strong> (Optional[dict]): Optional; additional options for customizing
+       write to csv action to local path. You can check the available options
+       below.</li>
+<li><strong>conflict_behaviour</strong> (Optional[str]): Optional; behavior to adopt in case
+       of a conflict (e.g., 'replace', 'fail').</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>For more details about the SharePoint framework, refer to Microsoft's official documentation:</p>
+<blockquote>
+<p>📖<a href="https://learn.microsoft.com/en-us/graph/api/resources/sharepoint?view=graph-rest-1.0"> Microsoft Graph API - SharePoint</a></p>
+<p>🛠️ <a href="https://developer.microsoft.com/en-us/graph/graph-explorer">Graph Explorer Tool</a> -  this tool helps you explore available SharePoint Graph API functionalities.</p>
+<p>📑 <a href="https://spark.apache.org/docs/3.5.3/sql-data-sources-csv.html">Spark CSV options</a></p>
+</blockquote>
+</div>
+<h2 id="2-simple-write-one-dataframe-to-sharepoint">2. Simple: Write one Dataframe to Sharepoint<a class="headerlink" href="#2-simple-write-one-dataframe-to-sharepoint" title="Permanent link">&para;</a></h2>
+<p>This section demonstrates both minimal configuration and extended configurations
+when using the SharePoint Writer.</p>
+<h3 id="i-minimal-configuration">i. Minimal Configuration<a class="headerlink" href="#i-minimal-configuration" title="Permanent link">&para;</a></h3>
+<p>This approach uses only the mandatory parameters, making it the quickest way to write a DataFrame to SharePoint.</p>
+<p><strong>Note:</strong> With minimal configurations, not even the header is written on the table. Furthermore, the file is
+written on the Sharepoint Drive root folder.</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">lakehouse_engine.engine</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_data</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="n">acon</span> <span class="o">=</span> <span class="p">{</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>    <span class="s2">&quot;input_specs&quot;</span><span class="p">:</span> <span class="p">[</span>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>        <span class="p">{</span>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>            <span class="s2">&quot;spec_id&quot;</span><span class="p">:</span> <span class="s2">&quot;dummy_input&quot;</span><span class="p">,</span>
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>            <span class="s2">&quot;read_type&quot;</span><span class="p">:</span> <span class="s2">&quot;batch&quot;</span><span class="p">,</span>
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>            <span class="s2">&quot;data_format&quot;</span><span class="p">:</span> <span class="s2">&quot;delta&quot;</span><span class="p">,</span>
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>            <span class="s2">&quot;db_table&quot;</span><span class="p">:</span> <span class="s2">&quot;dummy_sales&quot;</span><span class="p">,</span>
+</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>        <span class="p">},</span>
+</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>    <span class="p">],</span>
+</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>    <span class="s2">&quot;output_specs&quot;</span><span class="p">:</span> <span class="p">[</span>
+</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>        <span class="p">{</span>
+</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>            <span class="s2">&quot;spec_id&quot;</span><span class="p">:</span> <span class="s2">&quot;dummy_output&quot;</span><span class="p">,</span>
+</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>            <span class="s2">&quot;input_id&quot;</span><span class="p">:</span> <span class="s2">&quot;dummy_input&quot;</span><span class="p">,</span>
+</span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>            <span class="s2">&quot;data_format&quot;</span><span class="p">:</span> <span class="s2">&quot;sharepoint&quot;</span><span class="p">,</span>
+</span><span id="__span-0-17"><a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>            <span class="s2">&quot;sharepoint_opts&quot;</span><span class="p">:</span> <span class="p">{</span>
+</span><span id="__span-0-18"><a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a>                <span class="s2">&quot;client_id&quot;</span><span class="p">:</span> <span class="s2">&quot;dummy_client_id&quot;</span><span class="p">,</span>
+</span><span id="__span-0-19"><a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a>                <span class="s2">&quot;tenant_id&quot;</span><span class="p">:</span> <span class="s2">&quot;dummy_tenant_id&quot;</span><span class="p">,</span>
+</span><span id="__span-0-20"><a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a>                <span class="s2">&quot;secret&quot;</span><span class="p">:</span> <span class="s2">&quot;dummy_secret&quot;</span><span class="p">,</span>
+</span><span id="__span-0-21"><a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a>                <span class="s2">&quot;site_name&quot;</span><span class="p">:</span> <span class="s2">&quot;dummy_site_name&quot;</span><span class="p">,</span>
+</span><span id="__span-0-22"><a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a>                <span class="s2">&quot;drive_name&quot;</span><span class="p">:</span> <span class="s2">&quot;dummy_drive_name&quot;</span><span class="p">,</span>
+</span><span id="__span-0-23"><a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a>                <span class="s2">&quot;local_path&quot;</span><span class="p">:</span> <span class="s2">&quot;s3://my_data_product_bucket/silver/dummy_sales/&quot;</span><span class="p">,</span>  <span class="c1"># this path must end with an &quot;/&quot;</span>
+</span><span id="__span-0-24"><a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a>                <span class="s2">&quot;file_name&quot;</span><span class="p">:</span> <span class="s2">&quot;dummy_sales&quot;</span><span class="p">,</span>
+</span><span id="__span-0-25"><a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a>            <span class="p">},</span>
+</span><span id="__span-0-26"><a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a>        <span class="p">},</span>
+</span><span id="__span-0-27"><a id="__codelineno-0-27" name="__codelineno-0-27" href="#__codelineno-0-27"></a>    <span class="p">],</span>
+</span><span id="__span-0-28"><a id="__codelineno-0-28" name="__codelineno-0-28" href="#__codelineno-0-28"></a><span class="p">}</span>
+</span><span id="__span-0-29"><a id="__codelineno-0-29" name="__codelineno-0-29" href="#__codelineno-0-29"></a>
+</span><span id="__span-0-30"><a id="__codelineno-0-30" name="__codelineno-0-30" href="#__codelineno-0-30"></a><span class="n">load_data</span><span class="p">(</span><span class="n">acon</span><span class="o">=</span><span class="n">acon</span><span class="p">)</span>
 </span></code></pre></div>
+<h3 id="ii-with-optional-configurations">ii. With Optional Configurations<a class="headerlink" href="#ii-with-optional-configurations" title="Permanent link">&para;</a></h3>
+<p>For more control over the upload process, additional parameters can be specified:</p>
+<blockquote>
+<p><strong>folder_relative_path (Optional):</strong> Defines the subfolder inside the SharePoint drive
+where the file should be stored.</p>
+<p>‼️ <strong>Important:</strong> The drive within the site acts as the root.</p>
+<p><strong>Example:</strong></p>
+<ul>
+<li>Site Name: "dummy_sharepoint"</li>
+<li>Drive Name: "dummy_drive"</li>
+<li>Folder Path: "dummy/test/"</li>
+<li>File Name: "test.csv"</li>
+<li>Final Destination: "dummy_sharepoint/dummy_drive/dummy/test/test.csv"</li>
+</ul>
+<p><strong>chunk_size (Optional):</strong> Defines the file chunk size (in bytes) for uploading.</p>
+<ul>
+<li>Default: 100 MB (Recommended unless handling large files).</li>
+<li>Larger chunk sizes can improve performance but may increase memory usage.</li>
+</ul>
+<p><strong>local_options (Optional):</strong> Additional options for writing the DataFrame to a CSV file before upload.</p>
+<ul>
+<li>For available options, refer to: <a href="https://spark.apache.org/docs/3.5.4/sql-data-sources-csv.html">Apache Spark CSV Options</a>.</li>
+</ul>
+<p><strong>conflict_behaviour (Optional):</strong> Determines the action taken if a file with the same name already exists.</p>
+<ul>
+<li>Possible values: "replace", "fail", "rename", etc.</li>
+<li>Refer to Microsoft’s documentation: <a href="https://learn.microsoft.com/en-us/dynamics365/business-central/application/system-application/enum/system.integration.graph.graph-conflictbehavior">Drive Item Conflict Behavior</a>.</li>
+</ul>
+</blockquote>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">lakehouse_engine.engine</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_data</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="c1"># Set the optional parameters</span>
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="n">LOCAL_OPTIONS</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;mode&quot;</span><span class="p">:</span> <span class="s2">&quot;overwrite&quot;</span><span class="p">,</span> <span class="s2">&quot;header&quot;</span><span class="p">:</span> <span class="s2">&quot;true&quot;</span><span class="p">}</span>
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="n">acon</span> <span class="o">=</span> <span class="p">{</span>
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>    <span class="s2">&quot;input_specs&quot;</span><span class="p">:</span> <span class="p">[</span>
+</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>        <span class="p">{</span>
+</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>            <span class="s2">&quot;spec_id&quot;</span><span class="p">:</span> <span class="s2">&quot;dummy_input&quot;</span><span class="p">,</span>
+</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>            <span class="s2">&quot;read_type&quot;</span><span class="p">:</span> <span class="s2">&quot;batch&quot;</span><span class="p">,</span>
+</span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>            <span class="s2">&quot;data_format&quot;</span><span class="p">:</span> <span class="s2">&quot;delta&quot;</span><span class="p">,</span>
+</span><span id="__span-1-12"><a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>            <span class="s2">&quot;db_table&quot;</span><span class="p">:</span> <span class="s2">&quot;dummy_sales&quot;</span><span class="p">,</span>
+</span><span id="__span-1-13"><a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>        <span class="p">},</span>
+</span><span id="__span-1-14"><a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a>    <span class="p">],</span>
+</span><span id="__span-1-15"><a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a>    <span class="s2">&quot;transform_specs&quot;</span><span class="p">:</span> <span class="p">[</span>
+</span><span id="__span-1-16"><a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a>        <span class="p">{</span>
+</span><span id="__span-1-17"><a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a>            <span class="s2">&quot;spec_id&quot;</span><span class="p">:</span> <span class="s2">&quot;dummy_transform&quot;</span><span class="p">,</span>
+</span><span id="__span-1-18"><a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a>            <span class="s2">&quot;input_id&quot;</span><span class="p">:</span> <span class="s2">&quot;dummy_input&quot;</span><span class="p">,</span>
+</span><span id="__span-1-19"><a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a>            <span class="s2">&quot;transformers&quot;</span><span class="p">:</span> <span class="p">[</span>
+</span><span id="__span-1-20"><a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a>                <span class="p">{</span>
+</span><span id="__span-1-21"><a id="__codelineno-1-21" name="__codelineno-1-21" href="#__codelineno-1-21"></a>                    <span class="s2">&quot;function&quot;</span><span class="p">:</span> <span class="s2">&quot;add_current_date&quot;</span><span class="p">,</span>
+</span><span id="__span-1-22"><a id="__codelineno-1-22" name="__codelineno-1-22" href="#__codelineno-1-22"></a>                    <span class="s2">&quot;args&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;output_col&quot;</span><span class="p">:</span> <span class="s2">&quot;extraction_timestamp&quot;</span><span class="p">},</span>
+</span><span id="__span-1-23"><a id="__codelineno-1-23" name="__codelineno-1-23" href="#__codelineno-1-23"></a>                <span class="p">},</span>  <span class="c1"># Add a new column with the current date if needed</span>
+</span><span id="__span-1-24"><a id="__codelineno-1-24" name="__codelineno-1-24" href="#__codelineno-1-24"></a>                <span class="p">{</span>
+</span><span id="__span-1-25"><a id="__codelineno-1-25" name="__codelineno-1-25" href="#__codelineno-1-25"></a>                    <span class="s2">&quot;function&quot;</span><span class="p">:</span> <span class="s2">&quot;expression_filter&quot;</span><span class="p">,</span>
+</span><span id="__span-1-26"><a id="__codelineno-1-26" name="__codelineno-1-26" href="#__codelineno-1-26"></a>                    <span class="s2">&quot;args&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;exp&quot;</span><span class="p">:</span> <span class="s2">&quot;customer = &#39;customer 1&#39;&quot;</span><span class="p">},</span>
+</span><span id="__span-1-27"><a id="__codelineno-1-27" name="__codelineno-1-27" href="#__codelineno-1-27"></a>                <span class="p">},</span>  <span class="c1"># Filter the data if needed</span>
+</span><span id="__span-1-28"><a id="__codelineno-1-28" name="__codelineno-1-28" href="#__codelineno-1-28"></a>            <span class="p">],</span>
+</span><span id="__span-1-29"><a id="__codelineno-1-29" name="__codelineno-1-29" href="#__codelineno-1-29"></a>        <span class="p">},</span>
+</span><span id="__span-1-30"><a id="__codelineno-1-30" name="__codelineno-1-30" href="#__codelineno-1-30"></a>    <span class="p">],</span>
+</span><span id="__span-1-31"><a id="__codelineno-1-31" name="__codelineno-1-31" href="#__codelineno-1-31"></a>    <span class="s2">&quot;output_specs&quot;</span><span class="p">:</span> <span class="p">[</span>
+</span><span id="__span-1-32"><a id="__codelineno-1-32" name="__codelineno-1-32" href="#__codelineno-1-32"></a>        <span class="p">{</span>
+</span><span id="__span-1-33"><a id="__codelineno-1-33" name="__codelineno-1-33" href="#__codelineno-1-33"></a>            <span class="s2">&quot;spec_id&quot;</span><span class="p">:</span> <span class="s2">&quot;dummy_output&quot;</span><span class="p">,</span>
+</span><span id="__span-1-34"><a id="__codelineno-1-34" name="__codelineno-1-34" href="#__codelineno-1-34"></a>            <span class="s2">&quot;input_id&quot;</span><span class="p">:</span> <span class="s2">&quot;dummy_transform&quot;</span><span class="p">,</span>
+</span><span id="__span-1-35"><a id="__codelineno-1-35" name="__codelineno-1-35" href="#__codelineno-1-35"></a>            <span class="s2">&quot;data_format&quot;</span><span class="p">:</span> <span class="s2">&quot;sharepoint&quot;</span><span class="p">,</span>
+</span><span id="__span-1-36"><a id="__codelineno-1-36" name="__codelineno-1-36" href="#__codelineno-1-36"></a>            <span class="s2">&quot;sharepoint_opts&quot;</span><span class="p">:</span> <span class="p">{</span>
+</span><span id="__span-1-37"><a id="__codelineno-1-37" name="__codelineno-1-37" href="#__codelineno-1-37"></a>                <span class="s2">&quot;client_id&quot;</span><span class="p">:</span> <span class="s2">&quot;dummy_client_id&quot;</span><span class="p">,</span>
+</span><span id="__span-1-38"><a id="__codelineno-1-38" name="__codelineno-1-38" href="#__codelineno-1-38"></a>                <span class="s2">&quot;tenant_id&quot;</span><span class="p">:</span> <span class="s2">&quot;dummy_tenant_id&quot;</span><span class="p">,</span>
+</span><span id="__span-1-39"><a id="__codelineno-1-39" name="__codelineno-1-39" href="#__codelineno-1-39"></a>                <span class="s2">&quot;secret&quot;</span><span class="p">:</span> <span class="s2">&quot;dummy_secret&quot;</span><span class="p">,</span>
+</span><span id="__span-1-40"><a id="__codelineno-1-40" name="__codelineno-1-40" href="#__codelineno-1-40"></a>                <span class="s2">&quot;site_name&quot;</span><span class="p">:</span> <span class="s2">&quot;dummy_site_name&quot;</span><span class="p">,</span>
+</span><span id="__span-1-41"><a id="__codelineno-1-41" name="__codelineno-1-41" href="#__codelineno-1-41"></a>                <span class="s2">&quot;drive_name&quot;</span><span class="p">:</span> <span class="s2">&quot;dummy_drive_name&quot;</span><span class="p">,</span>
+</span><span id="__span-1-42"><a id="__codelineno-1-42" name="__codelineno-1-42" href="#__codelineno-1-42"></a>                <span class="s2">&quot;local_path&quot;</span><span class="p">:</span> <span class="s2">&quot;s3://my_data_product_bucket/silver/dummy_sales/&quot;</span><span class="p">,</span>  <span class="c1"># this path must end with an &quot;/&quot;</span>
+</span><span id="__span-1-43"><a id="__codelineno-1-43" name="__codelineno-1-43" href="#__codelineno-1-43"></a>                <span class="s2">&quot;file_name&quot;</span><span class="p">:</span> <span class="s2">&quot;dummy_sales&quot;</span><span class="p">,</span>
+</span><span id="__span-1-44"><a id="__codelineno-1-44" name="__codelineno-1-44" href="#__codelineno-1-44"></a>                <span class="s2">&quot;folder_relative_path&quot;</span><span class="p">:</span> <span class="s2">&quot;dummy_simple&quot;</span><span class="p">,</span>  <span class="c1"># writes file in the folder ./dummy_simple</span>
+</span><span id="__span-1-45"><a id="__codelineno-1-45" name="__codelineno-1-45" href="#__codelineno-1-45"></a>                <span class="s2">&quot;local_options&quot;</span><span class="p">:</span> <span class="n">LOCAL_OPTIONS</span><span class="p">,</span>
+</span><span id="__span-1-46"><a id="__codelineno-1-46" name="__codelineno-1-46" href="#__codelineno-1-46"></a>                <span class="s2">&quot;chunk_size&quot;</span><span class="p">:</span> <span class="mi">300</span> <span class="o">*</span> <span class="mi">1024</span> <span class="o">*</span> <span class="mi">1024</span><span class="p">,</span>  <span class="c1"># 300 MB</span>
+</span><span id="__span-1-47"><a id="__codelineno-1-47" name="__codelineno-1-47" href="#__codelineno-1-47"></a>            <span class="p">},</span>
+</span><span id="__span-1-48"><a id="__codelineno-1-48" name="__codelineno-1-48" href="#__codelineno-1-48"></a>        <span class="p">},</span>
+</span><span id="__span-1-49"><a id="__codelineno-1-49" name="__codelineno-1-49" href="#__codelineno-1-49"></a>    <span class="p">],</span>
+</span><span id="__span-1-50"><a id="__codelineno-1-50" name="__codelineno-1-50" href="#__codelineno-1-50"></a><span class="p">}</span>
+</span><span id="__span-1-51"><a id="__codelineno-1-51" name="__codelineno-1-51" href="#__codelineno-1-51"></a>
+</span><span id="__span-1-52"><a id="__codelineno-1-52" name="__codelineno-1-52" href="#__codelineno-1-52"></a><span class="n">load_data</span><span class="p">(</span><span class="n">acon</span><span class="o">=</span><span class="n">acon</span><span class="p">)</span>
+</span></code></pre></div>
+<h2 id="3-complex-write-multiple-dataframes-to-sharepoint">3. Complex: Write multiple Dataframes to Sharepoint<a class="headerlink" href="#3-complex-write-multiple-dataframes-to-sharepoint" title="Permanent link">&para;</a></h2>
+<p>This scenario illustrates how to write multiple files to Sharepoint within a loop.
+Some use cases may require uploading files categorized by season, customer type, product category, etc.,
+depending on the business needs.</p>
+<p>Partitioning the data ensures better organization and optimized file management in SharePoint.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>‼️ <strong>Caution: Excessive Parallelism!</strong></p>
+<ul>
+<li>Too many simultaneous uploads can trigger Graph API throttling, leading to 503 (Service Unavailable) errors.</li>
+<li>Use a controlled level of parallelism (limit concurrent uploads) <strong>if necessary</strong>.<ul>
+<li><a href="https://spark.apache.org/docs/3.5.3/sql-performance-tuning.html#coalesce-hints-for-sql-queries">Coalesce</a> allows you to control Spark's parallelism.</li>
+</ul>
+</li>
+<li><strong>As the size of the files increases so does this concern,</strong> so it’s important to test and monitor upload
+processes to avoid service disruptions and ensure smooth performance.</li>
+</ul>
+</div>
+<p><strong>Neverthless, a stress test with over 50 partition files with &gt; 4GB each</strong> was performed and parallelism
+issues were not detected.
+The Lakehouse Engine Framework uses a <strong>exponential backoff retry logic to avoid throttling</strong> issues.</p>
+<h3 id="i-example-partitioning-function">i. Example: Partitioning function<a class="headerlink" href="#i-example-partitioning-function" title="Permanent link">&para;</a></h3>
+<p>This function is a mere example on how to fetch the distinct of a column from a given table.\
+It is not part of the lakehouse_engine framework.</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">get_partitions</span><span class="p">(</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="n">partition</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">bucket</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">table</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">filter_expression</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]:</span>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="sd">&quot;&quot;&quot;Fetch distinct values from a given partition column in a table or bucket.</span>
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="sd">    Parameters</span>
+</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="sd">    ----------</span>
+</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="sd">    partition : str</span>
+</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="sd">        The name of the partition column.</span>
+</span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="sd">    bucket : Optional[str], default=None</span>
+</span><span id="__span-2-11"><a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="sd">        The path to the S3 bucket (if applicable).</span>
+</span><span id="__span-2-12"><a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a><span class="sd">    table : Optional[str], default=None</span>
+</span><span id="__span-2-13"><a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a><span class="sd">        The name of the table (if applicable).</span>
+</span><span id="__span-2-14"><a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a><span class="sd">    filter_expression : Optional[str], default=None</span>
+</span><span id="__span-2-15"><a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a><span class="sd">        A filter condition to apply.</span>
+</span><span id="__span-2-16"><a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a>
+</span><span id="__span-2-17"><a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a><span class="sd">    Returns</span>
+</span><span id="__span-2-18"><a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a><span class="sd">    -------</span>
+</span><span id="__span-2-19"><a id="__codelineno-2-19" name="__codelineno-2-19" href="#__codelineno-2-19"></a><span class="sd">    List[Dict[str, str]]</span>
+</span><span id="__span-2-20"><a id="__codelineno-2-20" name="__codelineno-2-20" href="#__codelineno-2-20"></a><span class="sd">        A list of dictionaries with unique partition values.</span>
+</span><span id="__span-2-21"><a id="__codelineno-2-21" name="__codelineno-2-21" href="#__codelineno-2-21"></a><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="__span-2-22"><a id="__codelineno-2-22" name="__codelineno-2-22" href="#__codelineno-2-22"></a>    <span class="k">if</span> <span class="ow">not</span> <span class="n">bucket</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">table</span><span class="p">:</span>
+</span><span id="__span-2-23"><a id="__codelineno-2-23" name="__codelineno-2-23" href="#__codelineno-2-23"></a>        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Either &#39;bucket&#39; or &#39;table&#39; must be provided&quot;</span><span class="p">)</span>
+</span><span id="__span-2-24"><a id="__codelineno-2-24" name="__codelineno-2-24" href="#__codelineno-2-24"></a>
+</span><span id="__span-2-25"><a id="__codelineno-2-25" name="__codelineno-2-25" href="#__codelineno-2-25"></a>    <span class="n">df</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">read</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s2">&quot;delta&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">bucket</span><span class="p">)</span> <span class="k">if</span> <span class="n">bucket</span> <span class="k">else</span> <span class="n">spark</span><span class="o">.</span><span class="n">table</span><span class="p">(</span><span class="n">table</span><span class="p">)</span>
+</span><span id="__span-2-26"><a id="__codelineno-2-26" name="__codelineno-2-26" href="#__codelineno-2-26"></a>
+</span><span id="__span-2-27"><a id="__codelineno-2-27" name="__codelineno-2-27" href="#__codelineno-2-27"></a>    <span class="n">partitions</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">partition</span><span class="p">)</span><span class="o">.</span><span class="n">distinct</span><span class="p">()</span>
+</span><span id="__span-2-28"><a id="__codelineno-2-28" name="__codelineno-2-28" href="#__codelineno-2-28"></a>
+</span><span id="__span-2-29"><a id="__codelineno-2-29" name="__codelineno-2-29" href="#__codelineno-2-29"></a>    <span class="k">if</span> <span class="n">filter_expression</span><span class="p">:</span>
+</span><span id="__span-2-30"><a id="__codelineno-2-30" name="__codelineno-2-30" href="#__codelineno-2-30"></a>        <span class="n">partitions</span> <span class="o">=</span> <span class="n">partitions</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">filter_expression</span><span class="p">)</span>
+</span><span id="__span-2-31"><a id="__codelineno-2-31" name="__codelineno-2-31" href="#__codelineno-2-31"></a>
+</span><span id="__span-2-32"><a id="__codelineno-2-32" name="__codelineno-2-32" href="#__codelineno-2-32"></a>    <span class="k">return</span> <span class="p">[{</span><span class="n">partition</span><span class="p">:</span> <span class="n">row</span><span class="p">[</span><span class="n">partition</span><span class="p">]}</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">partitions</span><span class="o">.</span><span class="n">collect</span><span class="p">()]</span>
+</span></code></pre></div>
+<h3 id="ii-detect-unsupported-columns-types">ii. Detect unsupported columns types<a class="headerlink" href="#ii-detect-unsupported-columns-types" title="Permanent link">&para;</a></h3>
+<p>This function exemplifies how to detect unsupported .csv column types.
+It is not part of the lakehouse_engine framework.</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">detect_array_or_struct_fields</span><span class="p">(</span><span class="n">df</span><span class="p">:</span> <span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="sd">Detect fields in a DataFrame that are arrays, structs, or maps.</span>
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="sd">    Args:</span>
+</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="sd">        df (DataFrame): The input DataFrame.</span>
+</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>
+</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="sd">    Returns:</span>
+</span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="sd">        Dict[str, str]: A dictionary with field names as keys and their types (&#39;array&#39;, &#39;struct&#39;, or &#39;map&#39;) as values.</span>
+</span><span id="__span-3-10"><a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="__span-3-11"><a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a>    <span class="n">field_types</span> <span class="o">=</span> <span class="p">{}</span>
+</span><span id="__span-3-12"><a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a>    <span class="n">type_mapping</span> <span class="o">=</span> <span class="p">{</span><span class="n">ArrayType</span><span class="p">:</span> <span class="s2">&quot;StringType&quot;</span><span class="p">,</span> <span class="n">StructType</span><span class="p">:</span> <span class="s2">&quot;StringType&quot;</span><span class="p">,</span> <span class="n">MapType</span><span class="p">:</span> <span class="s2">&quot;StringType&quot;</span><span class="p">}</span>
+</span><span id="__span-3-13"><a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a>
+</span><span id="__span-3-14"><a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a>    <span class="k">for</span> <span class="n">field</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">schema</span><span class="o">.</span><span class="n">fields</span><span class="p">:</span>
+</span><span id="__span-3-15"><a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a>        <span class="k">for</span> <span class="n">data_type</span><span class="p">,</span> <span class="n">type_name</span> <span class="ow">in</span> <span class="n">type_mapping</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+</span><span id="__span-3-16"><a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a>            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">field</span><span class="o">.</span><span class="n">dataType</span><span class="p">,</span> <span class="n">data_type</span><span class="p">):</span>
+</span><span id="__span-3-17"><a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a>                <span class="n">field_types</span><span class="p">[</span><span class="n">field</span><span class="o">.</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">type_name</span>
+</span><span id="__span-3-18"><a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a>                <span class="k">break</span>
+</span><span id="__span-3-19"><a id="__codelineno-3-19" name="__codelineno-3-19" href="#__codelineno-3-19"></a>    <span class="k">return</span> <span class="n">field_types</span>
+</span></code></pre></div>
+<h3 id="iii-without-parallelism-sequential-processing">iii. Without parallelism (sequential processing)<a class="headerlink" href="#iii-without-parallelism-sequential-processing" title="Permanent link">&para;</a></h3>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">lakehouse_engine.engine</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_data</span>
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="c1"># Set the optional parameters</span>
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="n">LOCAL_OPTIONS</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;mode&quot;</span><span class="p">:</span> <span class="s2">&quot;overwrite&quot;</span><span class="p">,</span> <span class="s2">&quot;header&quot;</span><span class="p">:</span> <span class="s2">&quot;true&quot;</span><span class="p">}</span>
+</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>
+</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="c1"># Set the partition column</span>
+</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="n">PARTITION</span> <span class="o">=</span> <span class="s2">&quot;customer&quot;</span>
+</span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>
+</span><span id="__span-4-9"><a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="c1"># Fetch distinct values from the partition column</span>
+</span><span id="__span-4-10"><a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="n">partitions</span> <span class="o">=</span> <span class="n">get_partitions</span><span class="p">(</span><span class="n">partition</span><span class="o">=</span><span class="n">PARTITION</span><span class="p">,</span> <span class="n">table</span><span class="o">=</span><span class="s2">&quot;dummy_sales&quot;</span><span class="p">)</span>
+</span><span id="__span-4-11"><a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a>
+</span><span id="__span-4-12"><a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a><span class="c1"># Sort the distinct values to ensure the correct order of the files</span>
+</span><span id="__span-4-13"><a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a><span class="c1"># Note:</span>
+</span><span id="__span-4-14"><a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a><span class="c1">#   - If an error occurs during the process, by sorting beforehand, you guarantee the correct order of the files.</span>
+</span><span id="__span-4-15"><a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a><span class="c1">#   - It may come in handy if you want to restart the process (starting on a given file).</span>
+</span><span id="__span-4-16"><a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a><span class="n">partitions</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="s2">&quot;customer&quot;</span><span class="p">])</span>
+</span><span id="__span-4-17"><a id="__codelineno-4-17" name="__codelineno-4-17" href="#__codelineno-4-17"></a>
+</span><span id="__span-4-18"><a id="__codelineno-4-18" name="__codelineno-4-18" href="#__codelineno-4-18"></a><span class="k">for</span> <span class="n">partition</span> <span class="ow">in</span> <span class="n">partitions</span><span class="p">:</span>
+</span><span id="__span-4-19"><a id="__codelineno-4-19" name="__codelineno-4-19" href="#__codelineno-4-19"></a>    <span class="n">acon</span> <span class="o">=</span> <span class="p">{</span>
+</span><span id="__span-4-20"><a id="__codelineno-4-20" name="__codelineno-4-20" href="#__codelineno-4-20"></a>        <span class="s2">&quot;input_specs&quot;</span><span class="p">:</span> <span class="p">[</span>
+</span><span id="__span-4-21"><a id="__codelineno-4-21" name="__codelineno-4-21" href="#__codelineno-4-21"></a>            <span class="p">{</span>
+</span><span id="__span-4-22"><a id="__codelineno-4-22" name="__codelineno-4-22" href="#__codelineno-4-22"></a>                <span class="s2">&quot;spec_id&quot;</span><span class="p">:</span> <span class="s2">&quot;dummy_input&quot;</span><span class="p">,</span>
+</span><span id="__span-4-23"><a id="__codelineno-4-23" name="__codelineno-4-23" href="#__codelineno-4-23"></a>                <span class="s2">&quot;read_type&quot;</span><span class="p">:</span> <span class="s2">&quot;batch&quot;</span><span class="p">,</span>
+</span><span id="__span-4-24"><a id="__codelineno-4-24" name="__codelineno-4-24" href="#__codelineno-4-24"></a>                <span class="s2">&quot;data_format&quot;</span><span class="p">:</span> <span class="s2">&quot;delta&quot;</span><span class="p">,</span>
+</span><span id="__span-4-25"><a id="__codelineno-4-25" name="__codelineno-4-25" href="#__codelineno-4-25"></a>                <span class="s2">&quot;db_table&quot;</span><span class="p">:</span> <span class="s2">&quot;dummy_sales&quot;</span><span class="p">,</span>
+</span><span id="__span-4-26"><a id="__codelineno-4-26" name="__codelineno-4-26" href="#__codelineno-4-26"></a>            <span class="p">},</span>
+</span><span id="__span-4-27"><a id="__codelineno-4-27" name="__codelineno-4-27" href="#__codelineno-4-27"></a>        <span class="p">],</span>
+</span><span id="__span-4-28"><a id="__codelineno-4-28" name="__codelineno-4-28" href="#__codelineno-4-28"></a>        <span class="s2">&quot;transform_specs&quot;</span><span class="p">:</span> <span class="p">[</span>
+</span><span id="__span-4-29"><a id="__codelineno-4-29" name="__codelineno-4-29" href="#__codelineno-4-29"></a>            <span class="p">{</span>
+</span><span id="__span-4-30"><a id="__codelineno-4-30" name="__codelineno-4-30" href="#__codelineno-4-30"></a>                <span class="s2">&quot;spec_id&quot;</span><span class="p">:</span> <span class="s2">&quot;dummy_transform&quot;</span><span class="p">,</span>
+</span><span id="__span-4-31"><a id="__codelineno-4-31" name="__codelineno-4-31" href="#__codelineno-4-31"></a>                <span class="s2">&quot;input_id&quot;</span><span class="p">:</span> <span class="s2">&quot;dummy_input&quot;</span><span class="p">,</span>
+</span><span id="__span-4-32"><a id="__codelineno-4-32" name="__codelineno-4-32" href="#__codelineno-4-32"></a>                <span class="s2">&quot;transformers&quot;</span><span class="p">:</span> <span class="p">[</span>
+</span><span id="__span-4-33"><a id="__codelineno-4-33" name="__codelineno-4-33" href="#__codelineno-4-33"></a>                    <span class="p">{</span><span class="s2">&quot;function&quot;</span><span class="p">:</span> <span class="s2">&quot;add_current_date&quot;</span><span class="p">,</span> <span class="s2">&quot;args&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;output_col&quot;</span><span class="p">:</span> <span class="s2">&quot;extraction_timestamp&quot;</span><span class="p">}},</span>
+</span><span id="__span-4-34"><a id="__codelineno-4-34" name="__codelineno-4-34" href="#__codelineno-4-34"></a>                    <span class="p">{</span><span class="s2">&quot;function&quot;</span><span class="p">:</span> <span class="s2">&quot;expression_filter&quot;</span><span class="p">,</span> <span class="s2">&quot;args&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;exp&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;customer = &#39;</span><span class="si">{</span><span class="n">partition</span><span class="p">[</span><span class="s1">&#39;customer&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;&quot;</span><span class="p">}},</span>
+</span><span id="__span-4-35"><a id="__codelineno-4-35" name="__codelineno-4-35" href="#__codelineno-4-35"></a>                    <span class="p">{</span>
+</span><span id="__span-4-36"><a id="__codelineno-4-36" name="__codelineno-4-36" href="#__codelineno-4-36"></a>                        <span class="s2">&quot;function&quot;</span><span class="p">:</span> <span class="s2">&quot;coalesce&quot;</span><span class="p">,</span>
+</span><span id="__span-4-37"><a id="__codelineno-4-37" name="__codelineno-4-37" href="#__codelineno-4-37"></a>                        <span class="s2">&quot;args&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;num_partitions&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">},</span>
+</span><span id="__span-4-38"><a id="__codelineno-4-38" name="__codelineno-4-38" href="#__codelineno-4-38"></a>                    <span class="p">},</span>  <span class="c1"># Enforce that only 1 file is written - eliminating the parallelism</span>
+</span><span id="__span-4-39"><a id="__codelineno-4-39" name="__codelineno-4-39" href="#__codelineno-4-39"></a>                <span class="p">],</span>
+</span><span id="__span-4-40"><a id="__codelineno-4-40" name="__codelineno-4-40" href="#__codelineno-4-40"></a>            <span class="p">},</span>
+</span><span id="__span-4-41"><a id="__codelineno-4-41" name="__codelineno-4-41" href="#__codelineno-4-41"></a>        <span class="p">],</span>
+</span><span id="__span-4-42"><a id="__codelineno-4-42" name="__codelineno-4-42" href="#__codelineno-4-42"></a>        <span class="s2">&quot;output_specs&quot;</span><span class="p">:</span> <span class="p">[</span>
+</span><span id="__span-4-43"><a id="__codelineno-4-43" name="__codelineno-4-43" href="#__codelineno-4-43"></a>            <span class="p">{</span>
+</span><span id="__span-4-44"><a id="__codelineno-4-44" name="__codelineno-4-44" href="#__codelineno-4-44"></a>                <span class="s2">&quot;spec_id&quot;</span><span class="p">:</span> <span class="s2">&quot;dummy_output&quot;</span><span class="p">,</span>
+</span><span id="__span-4-45"><a id="__codelineno-4-45" name="__codelineno-4-45" href="#__codelineno-4-45"></a>                <span class="s2">&quot;input_id&quot;</span><span class="p">:</span> <span class="s2">&quot;dummy_transform&quot;</span><span class="p">,</span>
+</span><span id="__span-4-46"><a id="__codelineno-4-46" name="__codelineno-4-46" href="#__codelineno-4-46"></a>                <span class="s2">&quot;data_format&quot;</span><span class="p">:</span> <span class="s2">&quot;sharepoint&quot;</span><span class="p">,</span>
+</span><span id="__span-4-47"><a id="__codelineno-4-47" name="__codelineno-4-47" href="#__codelineno-4-47"></a>                <span class="s2">&quot;sharepoint_opts&quot;</span><span class="p">:</span> <span class="p">{</span>
+</span><span id="__span-4-48"><a id="__codelineno-4-48" name="__codelineno-4-48" href="#__codelineno-4-48"></a>                    <span class="s2">&quot;client_id&quot;</span><span class="p">:</span> <span class="s2">&quot;dummy_client_id&quot;</span><span class="p">,</span>
+</span><span id="__span-4-49"><a id="__codelineno-4-49" name="__codelineno-4-49" href="#__codelineno-4-49"></a>                    <span class="s2">&quot;tenant_id&quot;</span><span class="p">:</span> <span class="s2">&quot;dummy_tenant_id&quot;</span><span class="p">,</span>
+</span><span id="__span-4-50"><a id="__codelineno-4-50" name="__codelineno-4-50" href="#__codelineno-4-50"></a>                    <span class="s2">&quot;secret&quot;</span><span class="p">:</span> <span class="s2">&quot;dummy_secret&quot;</span><span class="p">,</span>
+</span><span id="__span-4-51"><a id="__codelineno-4-51" name="__codelineno-4-51" href="#__codelineno-4-51"></a>                    <span class="s2">&quot;site_name&quot;</span><span class="p">:</span> <span class="s2">&quot;dummy_site_name&quot;</span><span class="p">,</span>
+</span><span id="__span-4-52"><a id="__codelineno-4-52" name="__codelineno-4-52" href="#__codelineno-4-52"></a>                    <span class="s2">&quot;drive_name&quot;</span><span class="p">:</span> <span class="s2">&quot;dummy_drive_name&quot;</span><span class="p">,</span>
+</span><span id="__span-4-53"><a id="__codelineno-4-53" name="__codelineno-4-53" href="#__codelineno-4-53"></a>                    <span class="s2">&quot;local_path&quot;</span><span class="p">:</span> <span class="s2">&quot;s3://my_data_product_bucket/silver/dummy_sales/&quot;</span><span class="p">,</span>  <span class="c1"># this path must end with an &quot;/&quot;</span>
+</span><span id="__span-4-54"><a id="__codelineno-4-54" name="__codelineno-4-54" href="#__codelineno-4-54"></a>                    <span class="s2">&quot;folder_relative_path&quot;</span><span class="p">:</span> <span class="s2">&quot;dummy_complex/wo_parallelism&quot;</span><span class="p">,</span>
+</span><span id="__span-4-55"><a id="__codelineno-4-55" name="__codelineno-4-55" href="#__codelineno-4-55"></a>                    <span class="s2">&quot;file_name&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;dummy_sales_</span><span class="si">{</span><span class="n">partition</span><span class="p">[</span><span class="s1">&#39;customer&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+</span><span id="__span-4-56"><a id="__codelineno-4-56" name="__codelineno-4-56" href="#__codelineno-4-56"></a>                    <span class="s2">&quot;local_options&quot;</span><span class="p">:</span> <span class="n">LOCAL_OPTIONS</span><span class="p">,</span>
+</span><span id="__span-4-57"><a id="__codelineno-4-57" name="__codelineno-4-57" href="#__codelineno-4-57"></a>                    <span class="s2">&quot;chunk_size&quot;</span><span class="p">:</span> <span class="mi">200</span> <span class="o">*</span> <span class="mi">1024</span> <span class="o">*</span> <span class="mi">1024</span><span class="p">,</span>  <span class="c1"># 200 MB</span>
+</span><span id="__span-4-58"><a id="__codelineno-4-58" name="__codelineno-4-58" href="#__codelineno-4-58"></a>                <span class="p">},</span>
+</span><span id="__span-4-59"><a id="__codelineno-4-59" name="__codelineno-4-59" href="#__codelineno-4-59"></a>            <span class="p">},</span>
+</span><span id="__span-4-60"><a id="__codelineno-4-60" name="__codelineno-4-60" href="#__codelineno-4-60"></a>        <span class="p">],</span>
+</span><span id="__span-4-61"><a id="__codelineno-4-61" name="__codelineno-4-61" href="#__codelineno-4-61"></a>    <span class="p">}</span>
+</span><span id="__span-4-62"><a id="__codelineno-4-62" name="__codelineno-4-62" href="#__codelineno-4-62"></a>
+</span><span id="__span-4-63"><a id="__codelineno-4-63" name="__codelineno-4-63" href="#__codelineno-4-63"></a><span class="n">load_data</span><span class="p">(</span><span class="n">acon</span><span class="o">=</span><span class="n">acon</span><span class="p">)</span>
+</span></code></pre></div>
+<h3 id="iv-complex-with-parallelism-optimized-for-efficiency">iv. Complex - With parallelism (optimized for efficiency)<a class="headerlink" href="#iv-complex-with-parallelism-optimized-for-efficiency" title="Permanent link">&para;</a></h3>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">lakehouse_engine.engine</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_data</span>
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="c1"># Set the optional parameters</span>
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="n">LOCAL_OPTIONS</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;mode&quot;</span><span class="p">:</span> <span class="s2">&quot;overwrite&quot;</span><span class="p">,</span> <span class="s2">&quot;header&quot;</span><span class="p">:</span> <span class="s2">&quot;true&quot;</span><span class="p">}</span>
+</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>
+</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="c1"># Set the partition column</span>
+</span><span id="__span-5-7"><a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="n">PARTITION</span> <span class="o">=</span> <span class="s2">&quot;customer&quot;</span>
+</span><span id="__span-5-8"><a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>
+</span><span id="__span-5-9"><a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a><span class="c1"># Fetch distinct values from the partition column</span>
+</span><span id="__span-5-10"><a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a><span class="n">partitions</span> <span class="o">=</span> <span class="n">get_partitions</span><span class="p">(</span><span class="n">partition</span><span class="o">=</span><span class="n">PARTITION</span><span class="p">,</span> <span class="n">table</span><span class="o">=</span><span class="s2">&quot;dummy_sales&quot;</span><span class="p">)</span>
+</span><span id="__span-5-11"><a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a>
+</span><span id="__span-5-12"><a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a><span class="c1"># Detect array, struct or map fields which cannot be written to .csv files</span>
+</span><span id="__span-5-13"><a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a><span class="n">columns_to_cast</span> <span class="o">=</span> <span class="n">detect_array_or_struct_fields</span><span class="p">(</span><span class="n">spark</span><span class="o">.</span><span class="n">sql</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;SELECT * FROM </span><span class="si">{</span><span class="n">dummy_sales</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">))</span>
+</span><span id="__span-5-14"><a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a>
+</span><span id="__span-5-15"><a id="__codelineno-5-15" name="__codelineno-5-15" href="#__codelineno-5-15"></a><span class="c1"># Sort the distinct values to ensure the correct order of the files</span>
+</span><span id="__span-5-16"><a id="__codelineno-5-16" name="__codelineno-5-16" href="#__codelineno-5-16"></a><span class="c1"># Note:</span>
+</span><span id="__span-5-17"><a id="__codelineno-5-17" name="__codelineno-5-17" href="#__codelineno-5-17"></a><span class="c1">#   - If an error occurs during the process, by sorting beforehand, you guarantee the correct order of the files.</span>
+</span><span id="__span-5-18"><a id="__codelineno-5-18" name="__codelineno-5-18" href="#__codelineno-5-18"></a><span class="c1">#   - It may come in handy if you want to restart the process (starting on a given file).</span>
+</span><span id="__span-5-19"><a id="__codelineno-5-19" name="__codelineno-5-19" href="#__codelineno-5-19"></a><span class="n">partitions</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="s2">&quot;customer&quot;</span><span class="p">])</span>
+</span><span id="__span-5-20"><a id="__codelineno-5-20" name="__codelineno-5-20" href="#__codelineno-5-20"></a>
+</span><span id="__span-5-21"><a id="__codelineno-5-21" name="__codelineno-5-21" href="#__codelineno-5-21"></a><span class="k">for</span> <span class="n">partition</span> <span class="ow">in</span> <span class="n">partitions</span><span class="p">:</span>
+</span><span id="__span-5-22"><a id="__codelineno-5-22" name="__codelineno-5-22" href="#__codelineno-5-22"></a>    <span class="n">acon</span> <span class="o">=</span> <span class="p">{</span>
+</span><span id="__span-5-23"><a id="__codelineno-5-23" name="__codelineno-5-23" href="#__codelineno-5-23"></a>        <span class="s2">&quot;input_specs&quot;</span><span class="p">:</span> <span class="p">[</span>
+</span><span id="__span-5-24"><a id="__codelineno-5-24" name="__codelineno-5-24" href="#__codelineno-5-24"></a>            <span class="p">{</span>
+</span><span id="__span-5-25"><a id="__codelineno-5-25" name="__codelineno-5-25" href="#__codelineno-5-25"></a>                <span class="s2">&quot;spec_id&quot;</span><span class="p">:</span> <span class="s2">&quot;dummy_input&quot;</span><span class="p">,</span>
+</span><span id="__span-5-26"><a id="__codelineno-5-26" name="__codelineno-5-26" href="#__codelineno-5-26"></a>                <span class="s2">&quot;read_type&quot;</span><span class="p">:</span> <span class="s2">&quot;batch&quot;</span><span class="p">,</span>
+</span><span id="__span-5-27"><a id="__codelineno-5-27" name="__codelineno-5-27" href="#__codelineno-5-27"></a>                <span class="s2">&quot;data_format&quot;</span><span class="p">:</span> <span class="s2">&quot;delta&quot;</span><span class="p">,</span>
+</span><span id="__span-5-28"><a id="__codelineno-5-28" name="__codelineno-5-28" href="#__codelineno-5-28"></a>                <span class="s2">&quot;db_table&quot;</span><span class="p">:</span> <span class="s2">&quot;dummy_sales&quot;</span><span class="p">,</span>
+</span><span id="__span-5-29"><a id="__codelineno-5-29" name="__codelineno-5-29" href="#__codelineno-5-29"></a>            <span class="p">},</span>
+</span><span id="__span-5-30"><a id="__codelineno-5-30" name="__codelineno-5-30" href="#__codelineno-5-30"></a>        <span class="p">],</span>
+</span><span id="__span-5-31"><a id="__codelineno-5-31" name="__codelineno-5-31" href="#__codelineno-5-31"></a>        <span class="s2">&quot;transform_specs&quot;</span><span class="p">:</span> <span class="p">[</span>
+</span><span id="__span-5-32"><a id="__codelineno-5-32" name="__codelineno-5-32" href="#__codelineno-5-32"></a>            <span class="p">{</span>
+</span><span id="__span-5-33"><a id="__codelineno-5-33" name="__codelineno-5-33" href="#__codelineno-5-33"></a>                <span class="s2">&quot;spec_id&quot;</span><span class="p">:</span> <span class="s2">&quot;dummy_transform&quot;</span><span class="p">,</span>
+</span><span id="__span-5-34"><a id="__codelineno-5-34" name="__codelineno-5-34" href="#__codelineno-5-34"></a>                <span class="s2">&quot;input_id&quot;</span><span class="p">:</span> <span class="s2">&quot;dummy_input&quot;</span><span class="p">,</span>
+</span><span id="__span-5-35"><a id="__codelineno-5-35" name="__codelineno-5-35" href="#__codelineno-5-35"></a>                <span class="s2">&quot;transformers&quot;</span><span class="p">:</span> <span class="p">[</span>
+</span><span id="__span-5-36"><a id="__codelineno-5-36" name="__codelineno-5-36" href="#__codelineno-5-36"></a>                    <span class="p">{</span><span class="s2">&quot;function&quot;</span><span class="p">:</span> <span class="s2">&quot;add_current_date&quot;</span><span class="p">,</span> <span class="s2">&quot;args&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;output_col&quot;</span><span class="p">:</span> <span class="s2">&quot;extraction_timestamp&quot;</span><span class="p">}},</span>
+</span><span id="__span-5-37"><a id="__codelineno-5-37" name="__codelineno-5-37" href="#__codelineno-5-37"></a>                    <span class="p">{</span><span class="s2">&quot;function&quot;</span><span class="p">:</span> <span class="s2">&quot;expression_filter&quot;</span><span class="p">,</span> <span class="s2">&quot;args&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;exp&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;customer = &#39;</span><span class="si">{</span><span class="n">partition</span><span class="p">[</span><span class="s1">&#39;customer&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;&quot;</span><span class="p">}},</span>
+</span><span id="__span-5-38"><a id="__codelineno-5-38" name="__codelineno-5-38" href="#__codelineno-5-38"></a>                    <span class="c1"># Coalesce removed guaranteeing maximum parallelism</span>
+</span><span id="__span-5-39"><a id="__codelineno-5-39" name="__codelineno-5-39" href="#__codelineno-5-39"></a>                    <span class="p">{</span><span class="s2">&quot;function&quot;</span><span class="p">:</span> <span class="s2">&quot;cast&quot;</span><span class="p">,</span> <span class="s2">&quot;args&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;cols&quot;</span><span class="p">:</span> <span class="n">columns_to_cast</span><span class="p">}},</span> <span class="c1"># Cast unsupported column types</span>
+</span><span id="__span-5-40"><a id="__codelineno-5-40" name="__codelineno-5-40" href="#__codelineno-5-40"></a>                <span class="p">],</span>
+</span><span id="__span-5-41"><a id="__codelineno-5-41" name="__codelineno-5-41" href="#__codelineno-5-41"></a>            <span class="p">},</span>
+</span><span id="__span-5-42"><a id="__codelineno-5-42" name="__codelineno-5-42" href="#__codelineno-5-42"></a>        <span class="p">],</span>
+</span><span id="__span-5-43"><a id="__codelineno-5-43" name="__codelineno-5-43" href="#__codelineno-5-43"></a>        <span class="s2">&quot;output_specs&quot;</span><span class="p">:</span> <span class="p">[</span>
+</span><span id="__span-5-44"><a id="__codelineno-5-44" name="__codelineno-5-44" href="#__codelineno-5-44"></a>            <span class="p">{</span>
+</span><span id="__span-5-45"><a id="__codelineno-5-45" name="__codelineno-5-45" href="#__codelineno-5-45"></a>                <span class="s2">&quot;spec_id&quot;</span><span class="p">:</span> <span class="s2">&quot;dummy_output&quot;</span><span class="p">,</span>
+</span><span id="__span-5-46"><a id="__codelineno-5-46" name="__codelineno-5-46" href="#__codelineno-5-46"></a>                <span class="s2">&quot;input_id&quot;</span><span class="p">:</span> <span class="s2">&quot;dummy_transform&quot;</span><span class="p">,</span>
+</span><span id="__span-5-47"><a id="__codelineno-5-47" name="__codelineno-5-47" href="#__codelineno-5-47"></a>                <span class="s2">&quot;data_format&quot;</span><span class="p">:</span> <span class="s2">&quot;sharepoint&quot;</span><span class="p">,</span>
+</span><span id="__span-5-48"><a id="__codelineno-5-48" name="__codelineno-5-48" href="#__codelineno-5-48"></a>                <span class="s2">&quot;sharepoint_opts&quot;</span><span class="p">:</span> <span class="p">{</span>
+</span><span id="__span-5-49"><a id="__codelineno-5-49" name="__codelineno-5-49" href="#__codelineno-5-49"></a>                    <span class="s2">&quot;client_id&quot;</span><span class="p">:</span> <span class="s2">&quot;dummy_client_id&quot;</span><span class="p">,</span>
+</span><span id="__span-5-50"><a id="__codelineno-5-50" name="__codelineno-5-50" href="#__codelineno-5-50"></a>                    <span class="s2">&quot;tenant_id&quot;</span><span class="p">:</span> <span class="s2">&quot;dummy_tenant_id&quot;</span><span class="p">,</span>
+</span><span id="__span-5-51"><a id="__codelineno-5-51" name="__codelineno-5-51" href="#__codelineno-5-51"></a>                    <span class="s2">&quot;secret&quot;</span><span class="p">:</span> <span class="s2">&quot;dummy_secret&quot;</span><span class="p">,</span>
+</span><span id="__span-5-52"><a id="__codelineno-5-52" name="__codelineno-5-52" href="#__codelineno-5-52"></a>                    <span class="s2">&quot;site_name&quot;</span><span class="p">:</span> <span class="s2">&quot;dummy_site_name&quot;</span><span class="p">,</span>
+</span><span id="__span-5-53"><a id="__codelineno-5-53" name="__codelineno-5-53" href="#__codelineno-5-53"></a>                    <span class="s2">&quot;drive_name&quot;</span><span class="p">:</span> <span class="s2">&quot;dummy_drive_name&quot;</span><span class="p">,</span>
+</span><span id="__span-5-54"><a id="__codelineno-5-54" name="__codelineno-5-54" href="#__codelineno-5-54"></a>                    <span class="s2">&quot;local_path&quot;</span><span class="p">:</span> <span class="s2">&quot;s3://my_data_product_bucket/silver/dummy_sales/&quot;</span><span class="p">,</span>  <span class="c1"># this path must end with an &quot;/&quot;</span>
+</span><span id="__span-5-55"><a id="__codelineno-5-55" name="__codelineno-5-55" href="#__codelineno-5-55"></a>                    <span class="s2">&quot;folder_relative_path&quot;</span><span class="p">:</span> <span class="s2">&quot;dummy_complex/with_parallelism&quot;</span><span class="p">,</span>
+</span><span id="__span-5-56"><a id="__codelineno-5-56" name="__codelineno-5-56" href="#__codelineno-5-56"></a>                    <span class="s2">&quot;file_name&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;dummy_sales_</span><span class="si">{</span><span class="n">partition</span><span class="p">[</span><span class="s1">&#39;customer&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+</span><span id="__span-5-57"><a id="__codelineno-5-57" name="__codelineno-5-57" href="#__codelineno-5-57"></a>                    <span class="s2">&quot;local_options&quot;</span><span class="p">:</span> <span class="n">LOCAL_OPTIONS</span><span class="p">,</span>
+</span><span id="__span-5-58"><a id="__codelineno-5-58" name="__codelineno-5-58" href="#__codelineno-5-58"></a>                    <span class="s2">&quot;chunk_size&quot;</span><span class="p">:</span> <span class="mi">200</span> <span class="o">*</span> <span class="mi">1024</span> <span class="o">*</span> <span class="mi">1024</span><span class="p">,</span>  <span class="c1"># 200 MB</span>
+</span><span id="__span-5-59"><a id="__codelineno-5-59" name="__codelineno-5-59" href="#__codelineno-5-59"></a>                <span class="p">},</span>
+</span><span id="__span-5-60"><a id="__codelineno-5-60" name="__codelineno-5-60" href="#__codelineno-5-60"></a>            <span class="p">},</span>
+</span><span id="__span-5-61"><a id="__codelineno-5-61" name="__codelineno-5-61" href="#__codelineno-5-61"></a>        <span class="p">],</span>
+</span><span id="__span-5-62"><a id="__codelineno-5-62" name="__codelineno-5-62" href="#__codelineno-5-62"></a>    <span class="p">}</span>
+</span><span id="__span-5-63"><a id="__codelineno-5-63" name="__codelineno-5-63" href="#__codelineno-5-63"></a>
+</span><span id="__span-5-64"><a id="__codelineno-5-64" name="__codelineno-5-64" href="#__codelineno-5-64"></a><span class="n">load_data</span><span class="p">(</span><span class="n">acon</span><span class="o">=</span><span class="n">acon</span><span class="p">)</span>
+</span></code></pre></div>
+<h3 id="relevant-notes">Relevant Notes<a class="headerlink" href="#relevant-notes" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Multi-file export is not supported. For such use cases, loop through files manually and invoke SharePointWriter per file. </li>
+<li>Authentication details should be handled securely via lakehouse configuration or secret management tools.</li>
+</ul>
 
 
 

@@ -508,6 +508,8 @@
         
           
         
+          
+        
       
       
         <label class="md-nav__link" for="__nav_2_2_1_2" id="__nav_2_2_1_2_label" tabindex="0">
@@ -810,6 +812,20 @@
     <li class="md-nav__item">
       <a href="../data_loader/write_to_rest_api/write_to_rest_api.html" class="md-nav__link">
         Write to REST API
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../data_loader/write_to_sharepoint/write_to_sharepoint.html" class="md-nav__link">
+        Write to Sharepoint
       </a>
     </li>
   
@@ -1336,9 +1352,210 @@
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Overview
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="gab.html" class="md-nav__link md-nav__link--active">
         Overview
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#main-advantages-over-self-orchestrated-sql" class="md-nav__link">
+    Main Advantages over Self-Orchestrated SQL
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#when-to-use-gab" class="md-nav__link">
+    When to use GAB?
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#when-not-to-use-gab" class="md-nav__link">
+    When not to use GAB?
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#gab-concepts-and-features" class="md-nav__link">
+    GAB Concepts and Features
+  </a>
+  
+    <nav class="md-nav" aria-label="GAB Concepts and Features">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cadence" class="md-nav__link">
+    Cadence
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dimensions-metrics" class="md-nav__link">
+    Dimensions &amp; Metrics
+  </a>
+  
+    <nav class="md-nav" aria-label="Dimensions & Metrics">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#dimensions" class="md-nav__link">
+    Dimensions
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#metrics" class="md-nav__link">
+    Metrics
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#extended-window-calculator-reconciliation-snapshotting" class="md-nav__link">
+    Extended Window Calculator, Reconciliation &amp; Snapshotting
+  </a>
+  
+    <nav class="md-nav" aria-label="Extended Window Calculator, Reconciliation & Snapshotting">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#extended-window-calculator" class="md-nav__link">
+    Extended Window Calculator
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reconciliation" class="md-nav__link">
+    Reconciliation
+  </a>
+  
+    <nav class="md-nav" aria-label="Reconciliation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cadence-to-date-calculations" class="md-nav__link">
+    "Cadence to Date" Calculations
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reconcile-the-data-to-account-for-late-events" class="md-nav__link">
+    Reconcile the Data to Account for Late Events
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#snapshot" class="md-nav__link">
+    Snapshot
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#next-steps" class="md-nav__link">
+    Next Steps
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#faq" class="md-nav__link">
+    FAQ
+  </a>
+  
+    <nav class="md-nav" aria-label="FAQ">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#can-we-ensure-past-snapshots-are-not-changed" class="md-nav__link">
+    Can we ensure past snapshots are not changed?
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-exactly-lookback_window-works" class="md-nav__link">
+    How exactly lookback_window works?
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#can-i-use-gab-with-cadence-dates-in-the-future" class="md-nav__link">
+    Can I use GAB with cadence dates in the future?
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-is-the-purpose-of-the-rerun-flag" class="md-nav__link">
+    What is the purpose of the rerun flag?
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#does-my-data-product-needs-to-be-using-a-star-schema-fact-table-and-dimension-tables-to-use-gab" class="md-nav__link">
+    Does my data product needs to be using a star schema (fact table and dimension tables) to use GAB?
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -2795,6 +3012,8 @@
         
           
         
+          
+        
       
       
         
@@ -2823,6 +3042,20 @@
     <li class="md-nav__item">
       <a href="../../reference/packages/terminators/notifiers/email_notifier.html" class="md-nav__link">
         Email notifier
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/packages/terminators/notifiers/exceptions.html" class="md-nav__link">
+        Exceptions
       </a>
     </li>
   
@@ -3735,91 +3968,161 @@
 
 
 <h1 id="gab-gold-asset-builder">GAB - Gold Asset Builder<a class="headerlink" href="#gab-gold-asset-builder" title="Permanent link">&para;</a></h1>
-<p>GAB stands for Gold Asset Builder and, technically, it is a SQL-first transformation workflow that allows teams to, quickly and collaboratively, deploy aggregate tables on top of base fact tables, which can then be used for empowering analytics over different perspectives on dashboards or exploratory queries.</p>
-<p><strong>Main benefits:</strong></p>
+<p>GAB stands for Gold Asset Builder and, technically, it is a SQL-first transformation workflow that allows teams to quickly and collaboratively deploy aggregate tables on top of base fact tables, which can then be used for empowering analytics over different perspectives on dashboards or exploratory queries.</p>
+<p>GAB provides the following benefits:</p>
 <ul>
-<li><strong><em>Efficiency and speed</em></strong>: It reduces the efforts and time to production for new aggregate tables (gold layer assets).</li>
-<li><strong><em>Simple pipeline</em></strong>: It simplifies the cluster decision by having just 3 cluster types (small, medium, large), there's no need to create a separated pipeline for each case.</li>
-<li><strong><em>Low-code and mainly SQL language.</em></strong></li>
+<li><strong>Efficiency and speed</strong>: It reduces the efforts and time to production for new aggregate tables (gold layer assets).</li>
+<li><strong>Simple operation</strong>: It simplifies the cluster decision by having just 3 cluster types (small, medium, large), there's no need to create a separated pipeline for each case. These cluster types are tied to the concept of workload priority in GAB (more on that later).</li>
+<li><strong>Low-code first:</strong> Focus on low-code aggregation configuration with capabilities to also orchestrate complex SQL.</li>
 </ul>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
-<p>Before deciding whether your use case will fit into GAB or not, please read the instructions in the sections below carefully. If there is any doubt about certain metrics which might deviate from our framework support please reach us before starting your development. GAB may not be a one size fit for all your requirements so please make use of the framework only if it satisfies your criteria.</p>
+<p>Before deciding whether your use case can be supported by GAB or not, read the instructions in the sections below carefully. If there is any doubt about certain metrics which might deviate from the realm of GAB, reach out to us before starting your development and we will support you. GAB may not be a one size fit for all your requirements, so use GAB only if it satisfies your requirements.</p>
 </div>
 <p><img src="../../assets/gab/img/gab_overview.png" alt="image" width="1000px" height="auto"></p>
-<h1 id="advantages">Advantages<a class="headerlink" href="#advantages" title="Permanent link">&para;</a></h1>
+<h2 id="main-advantages-over-self-orchestrated-sql">Main Advantages over Self-Orchestrated SQL<a class="headerlink" href="#main-advantages-over-self-orchestrated-sql" title="Permanent link">&para;</a></h2>
 <ul>
 <li>More flexibility to define any type of complex sql queries.</li>
-<li>Only need to touch the sql file for the execution</li>
-<li>Quick production rollout and adaptability</li>
-<li>Innersourcing model really works, a data analyst can work on sql and hand it over to the engineering team. Engineering team can then adapt the templating and make the production ready code quickly after the data validation.</li>
-<li>As shown in the image below, it's possible to generate different perspectives of the same metric for a specific use case:<ol>
-<li>rollup (aggregated by dimension1(d1), dimension2(d2)) - Compute the same metrics at a upper level from the most granular level</li>
-<li>grouping set (aggregated by dimension1(d1), dimension2(d2), dimension3(d3)) - Compute the same metrics at the most granular level</li>
-<li>cube (aggregated by dimension1(d1)) - Compute the same metrics in the higher aggregation level</li>
+<li>Only need to touch SQL, GAB takes care of all its orchestration.</li>
+<li>Quick production rollout, adaptability and maintainability, without the need to define any complex aggregation orchestration, rerun logic, monitoring, etc.</li>
+<li>Inner-sourcing model really works, as a data analyst can work on a SQL template and hand it over to the data engineering team, which can then adapt that SQL template and take it to production quickly after the data validation.</li>
+<li>
+<p>As shown in the image below, it's possible to generate different perspectives (dimensions - D1, D2, D3...) of different metrics (M1, M2, M3) for a specific use case:</p>
+<ol>
+<li><strong>Grouping Set (dimensions D1, D2)</strong> - Compute the same metrics at a higher grain from the finest grain.</li>
+<li><strong>Grouping Set (dimensions D1, D2, D3)</strong> - Compute the same metrics at the finest grain.</li>
+<li><strong>Grouping Set (dimensions D1)</strong> - Compute the same metrics at a higher grain.</li>
 </ol>
+<table>
+<thead>
+<tr>
+<th align="left">D1</th>
+<th align="center">D2</th>
+<th align="center">D3</th>
+<th align="center">M1</th>
+<th align="center">M2</th>
+<th align="center">M3</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">value 1</td>
+<td align="center">value 2</td>
+<td align="center">NULL</td>
+<td align="center">22</td>
+<td align="center">45</td>
+<td align="center">54</td>
+</tr>
+<tr>
+<td align="left">value 1</td>
+<td align="center">value 2</td>
+<td align="center">value 3</td>
+<td align="center">89</td>
+<td align="center">12</td>
+<td align="center">47</td>
+</tr>
+<tr>
+<td align="left">value 1</td>
+<td align="center">NULL</td>
+<td align="center">NULL</td>
+<td align="center">45</td>
+<td align="center">57</td>
+<td align="center">12</td>
+</tr>
+</tbody>
+</table>
 </li>
 </ul>
-<p><img src="../../assets/gab/img/gab_advantages.png" alt="image" width="1000px" height="auto"></p>
-<h1 id="use-gab">Use GAB<a class="headerlink" href="#use-gab" title="Permanent link">&para;</a></h1>
+<h2 id="when-to-use-gab">When to use GAB?<a class="headerlink" href="#when-to-use-gab" title="Permanent link">&para;</a></h2>
 <ul>
-<li>When an aggregate table is to be created for any analytical perspectives on dashboards or exploratory queries with some specific dimensions and metrics and can be done using normal SQL query.</li>
-<li>When metrics and dimensions are bound to the configured cadences and you are not calculating the whole universe data in your SQL query.</li>
+<li>When an aggregate result, constructed using SQL, is to be created for different levels of detail (AKA different grains) supporting analytics on dashboards or exploratory queries with some specific dimensions and metrics.</li>
+<li>When metrics and dimensions are bound to configured <em>DAY, WEEK, MONTH, QUARTER, YEAR</em> cadences and you are not calculating the whole universe of data in your SQL query (e.g., you're looking back or forward on a specific time interval).</li>
 </ul>
-<h1 id="dont-use-gab">Don't Use GAB<a class="headerlink" href="#dont-use-gab" title="Permanent link">&para;</a></h1>
+<h2 id="when-not-to-use-gab">When not to use GAB?<a class="headerlink" href="#when-not-to-use-gab" title="Permanent link">&para;</a></h2>
 <ul>
-<li>When metrics and dimensions are not bound to cadences.</li>
-<li>When your table is not an aggregated i.e. table is at an acid granularity</li>
-<li>When your metrics are not calculated incrementally.</li>
+<li>When metrics and dimensions are not bound to <em>DAY, WEEK, MONTH, QUARTER, YEAR</em> cadences.</li>
+<li>When your result is not an aggregated result, i.e., the resulting table is at the transaction grain.</li>
+<li>If your start and end dates for the time interval include dates into the future.</li>
+<li>
+<div class="admonition warning">
+<p class="admonition-title">Warning
+This is for now a current limitation in the GAB engine codebase (<code>if new_end_date &gt;= current_date: new_end_date = current_date</code>) that would require further testing to ensure it can be relaxed.</p>
+</div>
+</li>
+<li>If your metrics are not calculated incrementally, you should consider the tradeoff of using GAB vs just writing a very simple "full load" SQL code that computes the all universe of data all the time. </li>
+<li>
+<div class="admonition note">
+<p class="admonition-title">Note
+However, if the computation is not very intensive, the orchestration/automation that comes with GAB out of the box can actually provide you value. Moreover, even if the metrics are not computed incrementally, you can collect all the automation benefits from GAB and use a time filter in your SQL statements in GAB. You can take that into consideration for your use case.</p>
+</div>
+</li>
 </ul>
-<h1 id="gab-capabilities">GAB Capabilities<a class="headerlink" href="#gab-capabilities" title="Permanent link">&para;</a></h1>
+<h2 id="gab-concepts-and-features">GAB Concepts and Features<a class="headerlink" href="#gab-concepts-and-features" title="Permanent link">&para;</a></h2>
 <h3 id="cadence">Cadence<a class="headerlink" href="#cadence" title="Permanent link">&para;</a></h3>
-<p>In which cadence (timeslice) you want the data (DAILY, WEEKLY, MONTHLY, QUARTERLY, YEARLY).</p>
-<h3 id="dimensionsmetrics">Dimensions/Metrics<a class="headerlink" href="#dimensionsmetrics" title="Permanent link">&para;</a></h3>
-<h4 id="dimension">Dimension<a class="headerlink" href="#dimension" title="Permanent link">&para;</a></h4>
-<p>Usually directly mapped from the table without any transformation, it will be used to aggregate the metric, example: <code>product_category</code>.</p>
-<h4 id="metric">Metric<a class="headerlink" href="#metric" title="Permanent link">&para;</a></h4>
-<p>Aggregated value at the dimension level with the cadence as one of the dimension.
-There's some options to compute a metric:</p>
+<p>In which time grain you want the data to be aggregated: DAILY, WEEKLY, MONTHLY, QUARTERLY, YEARLY. The internal dynamics with the CADENCE concept in GAB heavily rely on an automatically generated dimension calendar for GAB's internal usage.</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="p">{</span><span class="s1">&#39;DAY&#39;</span><span class="p">:{},</span><span class="s1">&#39;WEEK&#39;</span><span class="p">:{},</span><span class="s1">&#39;MONTH&#39;</span><span class="p">:{},</span><span class="s1">&#39;YEAR&#39;</span><span class="p">:{}}</span>
+</span></code></pre></div>
+<h3 id="dimensions-metrics">Dimensions &amp; Metrics<a class="headerlink" href="#dimensions-metrics" title="Permanent link">&para;</a></h3>
+<h4 id="dimensions">Dimensions<a class="headerlink" href="#dimensions" title="Permanent link">&para;</a></h4>
+<p>It's just a regular dimension according to the OLAP concept. It will be used to aggregate the metrics, example: <code>product_category</code>. Usually it is directly mapped from the source tables without any transformation.</p>
+<h4 id="metrics">Metrics<a class="headerlink" href="#metrics" title="Permanent link">&para;</a></h4>
+<p>Aggregated value at the dimension level. As part of the dimensions, GAB has an automatically generated calendar dimension at different grains (more on that below).</p>
+<p>There are some options to compute a metric:</p>
 <ul>
-<li>Directly from a table column, example: <code>sum(product_amount)</code></li>
-<li>Compute it in the same cadence but in an exactly 1 previous time window, example: In a <code>MONTHLY</code> cadence it will compute for the <strong>previous month</strong>.</li>
-<li>Compute it in the same cadence but from the last year, example: In a <code>QUARTERLY</code> cadence it will compute it in the <strong>same quarter but from the previous year</strong>.</li>
-<li>Compute it in the same cadence but with a custom window function, example: In a <code>QUARTER</code> cadence computing the last <strong>2 quarters</strong>.</li>
-<li>Compute it in any SQL way possible: using any of the available columns, deriving a metric from another, using SQL functions, etc. Example: compute a metric for the <strong>last 6 months of data</strong>.</li>
+<li><strong>Using SQL to directly</strong> query and aggregate a source table column. Example: <code>sum(product_amount)</code></li>
+<li>Compute it in the same cadence, but in <strong>CADENCE - 1 time window</strong>. Example: In a <code>MONTHLY</code> cadence it will compute for the previous month.</li>
+<li>Compute it in the same cadence, but using <strong>last year's reference value</strong>.  Example: In a <code>QUARTERLY</code> cadence it will compute it in the same quarter but from the previous year.</li>
+<li>Compute it in the same cadence, but with a <strong>custom window function</strong>. Example: In a <code>QUARTER</code> cadence computing the last 2 quarters.</li>
+<li>Compute it in <strong>using any SQL function</strong>, using any of the available columns, deriving a metric from another, etc. Example: compute a metric by multiplying it by 0.56 for the last 6 months of data.</li>
 </ul>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p><a href="step_by_step/step_by_step.html#use-case-configuration-using-the-query_builder_helper">each computation derives a new column on the output view.</a></p>
+<p>Each computation derives a <a href="step_by_step/step_by_step.html#use-case-configuration-using-the-query_builder_helper">new column on the output view</a>.</p>
 </div>
-<h3 id="extended-window-calculator-reconciliation">Extended Window Calculator &amp; Reconciliation<a class="headerlink" href="#extended-window-calculator-reconciliation" title="Permanent link">&para;</a></h3>
-<h4 id="extended-window-calculator">Extended window Calculator<a class="headerlink" href="#extended-window-calculator" title="Permanent link">&para;</a></h4>
+<h3 id="extended-window-calculator-reconciliation-snapshotting">Extended Window Calculator, Reconciliation &amp; Snapshotting<a class="headerlink" href="#extended-window-calculator-reconciliation-snapshotting" title="Permanent link">&para;</a></h3>
+<h4 id="extended-window-calculator">Extended Window Calculator<a class="headerlink" href="#extended-window-calculator" title="Permanent link">&para;</a></h4>
 <p>This feature aims to calculate the extended window of any cadence despite the user providing custom dates which are not the exact start and end dates of a cadence.</p>
-<ul>
-<li>For example, if the user wants to calculate the <code>MONTH</code> cadence but gives a date range of <code>2023-01-10</code> to <code>2023-01-29</code>, the computation window will be a window from <code>2023-01-01</code> to <code>2023-01-31</code>, which calculates the full data for the month and inserts it. This function handles any user error to efficiently integrate the data.
-<div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="p">{</span><span class="s1">&#39;DAY&#39;</span><span class="p">:{},</span><span class="s1">&#39;WEEK&#39;</span><span class="p">:{},</span><span class="s1">&#39;MONTH&#39;</span><span class="p">:{},</span><span class="s1">&#39;YEAR&#39;</span><span class="p">:{}}</span>
-</span></code></pre></div>
-<strong>You can find an image below sampling how a recon_window config looks like.</strong> If we consider WEEK cadence, then it has a recon_window of MONTH and QUARTER. What this means is, at the start of a new Month or a Quarter, all the weeks in that cadence are recalculated to consider the late events. For example, <code>2023-01-01</code> is the start of a Month, Quarter and a Year. Here since Month and Quarter are given and Quarter is the greater cadence among the 2, all the weeks in Q4 2022 (with the extended cadence window using the above function) are recalculated i.e. instead of <code>2022-10-01</code> to <code>2022-12-31</code>, extended window is <code>2022-09-26</code> to <code>2023-01-01</code>.</li>
-</ul>
-<p><img src="../../assets/gab/img/gab_extended_window_calculator.png" alt="image" width="1000px" height="auto"></p>
+<p>For example, if the user wants to calculate the <code>MONTH</code> cadence but gives a date range of <code>2023-01-10</code> to <code>2023-01-29</code>, which is not exactly the start and/or end of the month, the computation window will be extended/adjusted to <code>2023-01-01</code>-<code>2023-01-31</code>, i.e., including the complete month. This ensures that GAB automatically handles any user error to efficiently integrate the complete data of the selected cadence.</p>
 <h4 id="reconciliation">Reconciliation<a class="headerlink" href="#reconciliation" title="Permanent link">&para;</a></h4>
-<p>Reconciliation enables the user to compute the data aggregated by the specified cadence but in a different frequency, this brings flexibility in the data computation as the use case can compute the data in a smaller or bigger frequency, example:</p>
-<ul>
-<li>There's a use case where the cadence is <code>WEEKLY</code> but we want the aggregated data with a <code>DAILY</code> frequency, so configuring the reconciliation window to be <code>DAILY</code> it will compute the data in <code>WEEK TO DATE</code> basis (In a case where the first day of week is monday, on monday it will have the data just for monday, on tuesday will be the computation of monday + tuesday, on wednesday will be the computation of monday + tuesday + wednesday, and so on until the end of week), configuration example:
-<div class="language-python highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="p">{</span><span class="s1">&#39;WEEK&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;recon_window&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;DAY&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;snapshot&#39;</span><span class="p">:</span> <span class="s1">&#39;N&#39;</span><span class="p">}}}}</span>
-</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a> <span class="err">```</span>
-</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>
-</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="o">-</span> <span class="n">You</span> <span class="n">can</span> <span class="n">also</span> <span class="n">have</span> <span class="n">the</span> <span class="n">same</span> <span class="n">frequency</span> <span class="n">calculation</span> <span class="n">but</span> <span class="k">with</span> <span class="ow">in</span> <span class="n">a</span> <span class="n">bigger</span> <span class="n">frequency</span><span class="p">,</span> <span class="n">like</span> <span class="err">`</span><span class="n">WEEKLY</span><span class="err">`</span> <span class="n">cadence</span> <span class="n">but</span> <span class="n">compute</span> <span class="n">it</span> <span class="n">just</span> <span class="k">with</span> <span class="n">a</span> <span class="err">`</span><span class="n">MONTHLY</span><span class="err">`</span> <span class="n">frequency</span><span class="p">,</span> <span class="n">configuration</span> <span class="n">example</span><span class="p">:</span>
-</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="err">```</span><span class="n">python</span>
-</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="p">{</span><span class="s1">&#39;WEEK&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;recon_window&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;MONTH&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;snapshot&#39;</span><span class="p">:</span> <span class="s1">&#39;N&#39;</span><span class="p">}}}}</span>
-</span></code></pre></div></li>
-</ul>
+<p>The concept of Extended Window Calculator is intertwined with the concept of Reconciliation. These enable the user to compute the data aggregated by the specified cadence, but leveraging 1) <em>"cadence to date"</em> calculations; or 2) Reconcile the data taking into account late events.</p>
+<h5 id="cadence-to-date-calculations">"<em>Cadence to Date</em>" Calculations<a class="headerlink" href="#cadence-to-date-calculations" title="Permanent link">&para;</a></h5>
+<p>For example, there can be a use case where the cadence is <code>WEEKLY</code>, but we want the aggregated data with a <code>DAILY</code> frequency, so configuring the reconciliation window to be <code>DAILY</code> it will compute the data in <code>WEEK TO DATE</code> basis. In a case where the first day of week is Monday, on Monday it will have the data just for Monday; on Tuesday will be the computation of Monday + Tuesday; on Wednesday will have the results for Monday + Tuesday + Wednesday; and so on, until the end of week. That example would be configured as follows:</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="p">{</span><span class="s1">&#39;WEEK&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;recon_window&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;DAY&#39;</span><span class="p">}}}</span>
+</span></code></pre></div>
+<h5 id="reconcile-the-data-to-account-for-late-events">Reconcile the Data to Account for Late Events<a class="headerlink" href="#reconcile-the-data-to-account-for-late-events" title="Permanent link">&para;</a></h5>
+<p>Another example can be if we consider WEEK cadence with reconciliation MONTH and QUARTER enabled (<code>{WEEK':{'recon_window':['MONTH','QUARTER']}</code>). What this means is, at the start of a new month or a quarter, all the weeks that still belong to that month or that quarter are recalculated to consider the late events. For example, <code>2023-01-01</code> is the start of a month, quarter and a year. In this example, since month and quarter are given, and quarter is the higher grain among the two, all the weeks in Q4/22 (using the extended window explained above) are recalculated, i.e. instead of <code>2022-10-01</code> to <code>2022-12-31</code>, extended window to consider in the current GAB execution is <code>2022-09-26</code> to <code>2023-01-01</code>. This is true because the first day of Q1/23 was on a Sunday of the last week of Q4/22, and once we execute GAB on 01/01/2023, we are reconciling all the weeks of Q4/22, hence weekly cadence with quarterly reconciliation.</p>
+<p>You can find in the image below other illustrative examples of how the extended window and the reconciliation concept work together. In the first example, GAB will always extend the processing window and reconcile the results for all the weeks (yellow color) involved in that month (green color color). In the second example, GAB will always extend the processing window and reconcile the results for all the months (yellow color) involved in the year (note that green color is quarter, not year, but since year is an higher grain than quarter GAB extends the window and reconciles the results for all the months involved in the year, not only the quarter).</p>
+<p><img src="../../assets/gab/img/gab_extended_window_calculator.png" alt="image" width="1000px" height="auto"></p>
 <h3 id="snapshot">Snapshot<a class="headerlink" href="#snapshot" title="Permanent link">&para;</a></h3>
-<p>It creates a snapshot of the computed data on the specified reconciliation cadence, example: in a case where we have <code>MONTHLY</code> cadence and snapshot enabled at <code>DAILY</code> basis, we are going to compute the use case for each day in the month. Use case configuration: 
+<p>It creates a snapshot of the data on a specified cadence. For example: in a case where we have <code>MONTHLY</code> cadence and snapshot enabled at <code>DAILY</code> basis, we are going to compute the aggregates for each day in the month:</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="p">{</span><span class="s1">&#39;MONTH&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;recon_window&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;DAY&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;snapshot&#39;</span><span class="p">:</span> <span class="s1">&#39;Y&#39;</span><span class="p">}}}}</span>
-</span></code></pre></div></p>
-<h1 id="next-steps">Next Steps<a class="headerlink" href="#next-steps" title="Permanent link">&para;</a></h1>
-<p>If you are interested in using GAB you can check our <a href="step_by_step/step_by_step.html">step-by-step documentation</a> that aims to help in the use case configuration and make easier to use this awesome feature :)</p>
+</span></code></pre></div>
+<p>This is possible with the template column <code>{{ to_date }}</code>, which will tell us the end date of the snapshot.</p>
+<p>In the version without snapshot, there will be one record for the <em>MONTH</em> cadence, but when we enable the above configuration the number of entries for the <em>MONTH</em> cadence will be the same as the number of days in the month.</p>
+<p>This means there will be a separate entry for each day of the month, which enables to compare the data to the previous year on the same day from the start of the month.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The snapshot feature will always write the snapshot entry for the given period (start date and end date), meaning if you have runs that overlap each other but for a different period (e.g., same start date but different end date) it will not rewrite past snapshot entries.</p>
+</div>
+<p>The above configuration is just an example, and the snapshot can be enabled on any combination of cadences:</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="p">{</span><span class="s1">&#39;QUARTER&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;recon_window&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;WEEK&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;snapshot&#39;</span><span class="p">:</span> <span class="s1">&#39;Y&#39;</span><span class="p">}}}}</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="p">{</span><span class="s1">&#39;YEAR&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;recon_window&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;MONTH&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;snapshot&#39;</span><span class="p">:</span> <span class="s1">&#39;Y&#39;</span><span class="p">}}}}</span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="p">{</span><span class="s1">&#39;MONTH&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;recon_window&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;WEEK&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;snapshot&#39;</span><span class="p">:</span> <span class="s1">&#39;Y&#39;</span><span class="p">}}}}</span>
+</span></code></pre></div>
+<h2 id="next-steps">Next Steps<a class="headerlink" href="#next-steps" title="Permanent link">&para;</a></h2>
+<p>If you are interested in using GAB you can check our <a href="step_by_step/step_by_step.html">step-by-step documentation</a> that aims to help in the use case configuration and make easier to use GAB.</p>
+<h2 id="faq">FAQ<a class="headerlink" href="#faq" title="Permanent link">&para;</a></h2>
+<h3 id="can-we-ensure-past-snapshots-are-not-changed">Can we ensure past snapshots are not changed?<a class="headerlink" href="#can-we-ensure-past-snapshots-are-not-changed" title="Permanent link">&para;</a></h3>
+<p>When we use the snapshots feature, taking monthly cadence with daily reconciliation as example, the number of entries for the <em>MONTH</em> cadence will be the same as the number of days in the month, because every day, GAB will generate a snapshot of that month, providing a cumulative picture of the month throughout the several days. In this way, snapshots are immutable.</p>
+<p>There may be cases, where the date that you want to control the snapshots is different than the cadence date in GAB, and in this case you will have to inject custom snapshot gathering logic in your GAB SQL templates and potentially play around with GAB's filter date to achieve what you want, because as of now, GAB relies on the cadence date to control the snapshot logic.</p>
+<h3 id="how-exactly-lookback_window-works">How exactly <code>lookback_window</code> works?<a class="headerlink" href="#how-exactly-lookback_window-works" title="Permanent link">&para;</a></h3>
+<p>Sometimes, <code>lookback_days</code> in <a href="../../assets/gab/notebooks/gab.py">GAB execution notebook</a> and <code>lookback_window</code> get confused. <code>lookback_window</code> is only used for when you define derived metrics that use window functions (check <a href="step_by_step/step_by_step.html">step-by-step documentation</a>), and it is used to configure the window. On the other hand, <code>lookback_days</code> are only part of <a href="../../assets/gab/notebooks/gab.py">GAB execution notebook</a> to modify the provided <code>start_date</code> so that it considers <code>lookback_days</code> before that.</p>
+<h3 id="can-i-use-gab-with-cadence-dates-in-the-future">Can I use GAB with cadence dates in the future?<a class="headerlink" href="#can-i-use-gab-with-cadence-dates-in-the-future" title="Permanent link">&para;</a></h3>
+<p>As mentioned in the <a href="#when-not-to-use-gab">"When not to use GAB?"</a> section, this is currently not supported.</p>
+<h3 id="what-is-the-purpose-of-the-rerun-flag">What is the purpose of the <code>rerun</code> flag?<a class="headerlink" href="#what-is-the-purpose-of-the-rerun-flag" title="Permanent link">&para;</a></h3>
+<p>If you run GAB for same start date and end date as it was run before, without the <em>rerun</em> flag, GAB will ignore the execution based on the <code>gab_events_log</code> table. The <em>rerun</em> flag ensures we can force such re-execution.</p>
+<h3 id="does-my-data-product-needs-to-be-using-a-star-schema-fact-table-and-dimension-tables-to-use-gab">Does my data product needs to be using a star schema (fact table and dimension tables) to use GAB?<a class="headerlink" href="#does-my-data-product-needs-to-be-using-a-star-schema-fact-table-and-dimension-tables-to-use-gab" title="Permanent link">&para;</a></h3>
+<p>No, GAB can be used regardless of the underlying data model, as you should prepare your data with templated SQL (that can be as simple or as complex as your use case) before feeding it to the GAB execution engine.</p>
 
 
 

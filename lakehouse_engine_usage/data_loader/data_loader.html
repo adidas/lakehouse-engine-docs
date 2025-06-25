@@ -652,6 +652,8 @@
         
           
         
+          
+        
       
       
         <label class="md-nav__link" for="__nav_2_2_1_2" id="__nav_2_2_1_2_label" tabindex="0">
@@ -954,6 +956,20 @@
     <li class="md-nav__item">
       <a href="write_to_rest_api/write_to_rest_api.html" class="md-nav__link">
         Write to REST API
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="write_to_sharepoint/write_to_sharepoint.html" class="md-nav__link">
+        Write to Sharepoint
       </a>
     </li>
   
@@ -2927,6 +2943,8 @@
         
           
         
+          
+        
       
       
         
@@ -2955,6 +2973,20 @@
     <li class="md-nav__item">
       <a href="../../reference/packages/terminators/notifiers/email_notifier.html" class="md-nav__link">
         Email notifier
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/packages/terminators/notifiers/exceptions.html" class="md-nav__link">
+        Exceptions
       </a>
     </li>
   
@@ -3888,7 +3920,7 @@ specifications are:</p>
 <li><strong>Execution environment (exec_env)</strong>: custom Spark session configurations to be provided for your algorithm (configurations can also be provided from your job/cluster configuration, which we highly advise you to do instead of passing performance related configs here for example).</li>
 </ul>
 <p>Below is an example of a complete ACON file that reads from a s3 folder with CSVs and incrementally loads that data (using a merge) into a delta lake table.</p>
-<div class="admonition info">
+<div class="admonition note">
 <p class="admonition-title">What is the <strong>spec_id</strong>?</p>
 <p><strong>spec_id</strong> is one of the main concepts to ensure you can chain the steps of the algorithm, so, for example, you can specify the transformations (in transform_specs) of a DataFrame that was read in the input_specs. Check ACON below to see how the spec_id of the input_specs is used as input_id in one transform specification.</p>
 </div>
