@@ -1,0 +1,4925 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://adidas.github.io/lakehouse-engine-docs/lakehouse_engine_usage/sensors/heartbeat/heartbeat.html">
+      
+      
+        <link rel="prev" href="../sensor/update_sensor_status/update_sensor_status.html">
+      
+      
+        <link rel="next" href="delta_table/delta_table.html">
+      
+      <link rel="icon" href="../../../assets/img/lakehouse_engine_logo_symbol_large.png">
+      <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.17">
+    
+    
+      
+        <title>Overview - Lakehouse Engine Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.26e3688c.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ecc896b0.min.css">
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/_markdown_exec_pyodide.css">
+    
+      <link rel="stylesheet" href="../../../assets/_mkdocstrings.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="yellow">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#heartbeat-sensor" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../../index.html" title="Lakehouse Engine Documentation" class="md-header__button md-logo" aria-label="Lakehouse Engine Documentation" data-md-component="logo">
+      
+  <img src="../../../assets/img/lakehouse_engine_logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Lakehouse Engine Documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Overview
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+          
+            
+            
+            
+            <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="yellow"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+            
+              <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3Z"/></svg>
+              </label>
+            
+          
+            
+            
+            
+            <input class="md-option" data-md-color-media="(prefers-color-scheme: dark), (prefers-color-scheme: no-preference)" data-md-color-scheme="slate" data-md-color-primary="blue" data-md-color-accent="yellow"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_2">
+            
+              <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5M7 15a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3Z"/></svg>
+              </label>
+            
+          
+        </form>
+      
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/adidas/lakehouse-engine" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M186.1 328.7c0 20.9-10.9 55.1-36.7 55.1s-36.7-34.2-36.7-55.1 10.9-55.1 36.7-55.1 36.7 34.2 36.7 55.1zM480 278.2c0 31.9-3.2 65.7-17.5 95-37.9 76.6-142.1 74.8-216.7 74.8-75.8 0-186.2 2.7-225.6-74.8-14.6-29-20.2-63.1-20.2-95 0-41.9 13.9-81.5 41.5-113.6-5.2-15.8-7.7-32.4-7.7-48.8 0-21.5 4.9-32.3 14.6-51.8 45.3 0 74.3 9 108.8 36 29-6.9 58.8-10 88.7-10 27 0 54.2 2.9 80.4 9.2 34-26.7 63-35.2 107.8-35.2 9.8 19.5 14.6 30.3 14.6 51.8 0 16.4-2.6 32.7-7.7 48.2 27.5 32.4 39 72.3 39 114.2zm-64.3 50.5c0-43.9-26.7-82.6-73.5-82.6-18.9 0-37 3.4-56 6-14.9 2.3-29.8 3.2-45.1 3.2-15.2 0-30.1-.9-45.1-3.2-18.7-2.6-37-6-56-6-46.8 0-73.5 38.7-73.5 82.6 0 87.8 80.4 101.3 150.4 101.3h48.2c70.3 0 150.6-13.4 150.6-101.3zm-82.6-55.1c-25.8 0-36.7 34.2-36.7 55.1s10.9 55.1 36.7 55.1 36.7-34.2 36.7-55.1-10.9-55.1-36.7-55.1z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    lakehouse-engine
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../../index.html" class="md-tabs__link">
+      Lakehouse Engine
+    </a>
+  </li>
+
+      
+        
+  
+  
+    
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../lakehouse_engine_usage.html" class="md-tabs__link md-tabs__link--active">
+        How to use the Lakehouse Engine?
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../../reference/index.html" class="md-tabs__link">
+      API Documentation
+    </a>
+  </li>
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../index.html" title="Lakehouse Engine Documentation" class="md-nav__button md-logo" aria-label="Lakehouse Engine Documentation" data-md-component="logo">
+      
+  <img src="../../../assets/img/lakehouse_engine_logo.png" alt="logo">
+
+    </a>
+    Lakehouse Engine Documentation
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/adidas/lakehouse-engine" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M186.1 328.7c0 20.9-10.9 55.1-36.7 55.1s-36.7-34.2-36.7-55.1 10.9-55.1 36.7-55.1 36.7 34.2 36.7 55.1zM480 278.2c0 31.9-3.2 65.7-17.5 95-37.9 76.6-142.1 74.8-216.7 74.8-75.8 0-186.2 2.7-225.6-74.8-14.6-29-20.2-63.1-20.2-95 0-41.9 13.9-81.5 41.5-113.6-5.2-15.8-7.7-32.4-7.7-48.8 0-21.5 4.9-32.3 14.6-51.8 45.3 0 74.3 9 108.8 36 29-6.9 58.8-10 88.7-10 27 0 54.2 2.9 80.4 9.2 34-26.7 63-35.2 107.8-35.2 9.8 19.5 14.6 30.3 14.6 51.8 0 16.4-2.6 32.7-7.7 48.2 27.5 32.4 39 72.3 39 114.2zm-64.3 50.5c0-43.9-26.7-82.6-73.5-82.6-18.9 0-37 3.4-56 6-14.9 2.3-29.8 3.2-45.1 3.2-15.2 0-30.1-.9-45.1-3.2-18.7-2.6-37-6-56-6-46.8 0-73.5 38.7-73.5 82.6 0 87.8 80.4 101.3 150.4 101.3h48.2c70.3 0 150.6-13.4 150.6-101.3zm-82.6-55.1c-25.8 0-36.7 34.2-36.7 55.1s10.9 55.1 36.7 55.1 36.7-34.2 36.7-55.1-10.9-55.1-36.7-55.1z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    lakehouse-engine
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../index.html" class="md-nav__link">
+        Lakehouse Engine
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+      
+      
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+          How to use the Lakehouse Engine?
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          How to use the Lakehouse Engine?
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lakehouse_engine_usage.html" class="md-nav__link">
+        Overview
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" checked>
+      
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+          Algorithms
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="true">
+        <label class="md-nav__title" for="__nav_2_2">
+          <span class="md-nav__icon md-icon"></span>
+          Algorithms
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2_1" >
+      
+      
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_2_2_1" id="__nav_2_2_1_label" tabindex="0">
+          Data Loader
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_2_1_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_2_1">
+          <span class="md-nav__icon md-icon"></span>
+          Data Loader
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data_loader/data_loader.html" class="md-nav__link">
+        Overview
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2_1_2" >
+      
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_2_2_1_2" id="__nav_2_2_1_2_label" tabindex="0">
+          Scenarios
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_2_2_1_2_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_2_1_2">
+          <span class="md-nav__icon md-icon"></span>
+          Scenarios
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data_loader/append_load_from_jdbc_with_permissive_mode/append_load_from_jdbc_with_permissive_mode.html" class="md-nav__link">
+        Append Load from JDBC with PERMISSIVE mode (default)
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data_loader/append_load_with_failfast/append_load_with_failfast.html" class="md-nav__link">
+        Append Load with FAILFAST
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data_loader/batch_delta_load_init_delta_backfill_with_merge/batch_delta_load_init_delta_backfill_with_merge.html" class="md-nav__link">
+        Batch Delta Load Init, Delta and Backfill with Merge
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data_loader/custom_transformer/custom_transformer.html" class="md-nav__link">
+        Custom Transformer
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data_loader/custom_transformer_sql/custom_transformer_sql.html" class="md-nav__link">
+        Custom Transformer (SQL)
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data_loader/extract_from_sap_b4_adso/extract_from_sap_b4_adso.html" class="md-nav__link">
+        Extract from SAP B4 ADSOs
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data_loader/extract_from_sap_bw_dso/extract_from_sap_bw_dso.html" class="md-nav__link">
+        Extract from SAP BW DSOs
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data_loader/extract_from_sftp/extract_from_sftp.html" class="md-nav__link">
+        Extract from SFTP
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data_loader/extract_using_jdbc_connection/extract_using_jdbc_connection.html" class="md-nav__link">
+        Extract using JDBC connection
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data_loader/filtered_full_load/filtered_full_load.html" class="md-nav__link">
+        Filtered Full Load
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data_loader/filtered_full_load_with_selective_replace/filtered_full_load_with_selective_replace.html" class="md-nav__link">
+        Filtered Full Load with Selective Replace
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data_loader/flatten_schema_and_explode_columns/flatten_schema_and_explode_columns.html" class="md-nav__link">
+        Flatten Schema and Explode Columns
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data_loader/full_load/full_load.html" class="md-nav__link">
+        Full Load
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data_loader/read_from_dataframe/read_from_dataframe.html" class="md-nav__link">
+        Read from Dataframe
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data_loader/streaming_append_load_with_malformed/streaming_append_load_with_malformed.html" class="md-nav__link">
+        Streaming Append Load with DROPMALFORMED
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data_loader/streaming_append_load_with_terminator/streaming_append_load_with_terminator.html" class="md-nav__link">
+        Streaming Append Load with Optimize Dataset Terminator
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data_loader/streaming_delta_load_with_group_and_rank_condensation/streaming_delta_load_with_group_and_rank_condensation.html" class="md-nav__link">
+        Streaming Delta Load with Group and Rank Condensation
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data_loader/streaming_delta_with_late_arriving_and_out_of_order_events/streaming_delta_with_late_arriving_and_out_of_order_events.html" class="md-nav__link">
+        Streaming Delta Load with Late Arriving and Out of Order Events (with and without watermarking)
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data_loader/write_and_read_dataframe/write_and_read_dataframe.html" class="md-nav__link">
+        Write and Read Dataframe
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data_loader/write_to_console/write_to_console.html" class="md-nav__link">
+        Write to Console
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data_loader/write_to_rest_api/write_to_rest_api.html" class="md-nav__link">
+        Write to REST API
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data_loader/write_to_sharepoint/write_to_sharepoint.html" class="md-nav__link">
+        Write to Sharepoint
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2_2" >
+      
+      
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_2_2_2" id="__nav_2_2_2_label" tabindex="0">
+          Data Quality
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_2_2_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_2_2">
+          <span class="md-nav__icon md-icon"></span>
+          Data Quality
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data_quality/data_quality.html" class="md-nav__link">
+        Overview
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2_2_2" >
+      
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_2_2_2_2" id="__nav_2_2_2_2_label" tabindex="0">
+          Scenarios
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_2_2_2_2_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_2_2_2">
+          <span class="md-nav__icon md-icon"></span>
+          Scenarios
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data_quality/custom_expectations/custom_expectations.html" class="md-nav__link">
+        Custom Expectations
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data_quality/data_quality_validator/data_quality_validator.html" class="md-nav__link">
+        Data Quality Validator
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data_quality/minimal_example/minimal_example.html" class="md-nav__link">
+        Minimal Example
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data_quality/prisma/prisma.html" class="md-nav__link">
+        Prisma
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data_quality/result_sink/result_sink.html" class="md-nav__link">
+        Result Sink
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data_quality/row_tagging/row_tagging.html" class="md-nav__link">
+        Row Tagging
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data_quality/validations_failing/validations_failing.html" class="md-nav__link">
+        Validations Failing
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2_3" >
+      
+      
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_2_2_3" id="__nav_2_2_3_label" tabindex="0">
+          Reconciliator
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_2_3_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_2_3">
+          <span class="md-nav__icon md-icon"></span>
+          Reconciliator
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reconciliator/reconciliator.html" class="md-nav__link">
+        Overview
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2_4" checked>
+      
+      
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_2_2_4" id="__nav_2_2_4_label" tabindex="0">
+          Sensors
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_2_4_label" aria-expanded="true">
+        <label class="md-nav__title" for="__nav_2_2_4">
+          <span class="md-nav__icon md-icon"></span>
+          Sensors
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sensors.html" class="md-nav__link">
+        Overview
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2_4_2" >
+      
+      
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_2_2_4_2" id="__nav_2_2_4_2_label" tabindex="0">
+          Sensor
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_2_2_4_2_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_2_4_2">
+          <span class="md-nav__icon md-icon"></span>
+          Sensor
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sensor/sensor.html" class="md-nav__link">
+        Overview
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2_4_2_2" >
+      
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_2_2_4_2_2" id="__nav_2_2_4_2_2_label" tabindex="0">
+          Supported Sources
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="5" aria-labelledby="__nav_2_2_4_2_2_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_2_4_2_2">
+          <span class="md-nav__icon md-icon"></span>
+          Supported Sources
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sensor/delta_table/delta_table.html" class="md-nav__link">
+        Delta Table
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sensor/delta_upstream_sensor_table/delta_upstream_sensor_table.html" class="md-nav__link">
+        Sensor from other Sensor Delta Table
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sensor/file/file.html" class="md-nav__link">
+        Sensor from Files
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sensor/jdbc_table/jdbc_table.html" class="md-nav__link">
+        Sensor from JDBC
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sensor/kafka/kafka.html" class="md-nav__link">
+        Sensor from Kafka
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sensor/sap_bw_b4/sap_bw_b4.html" class="md-nav__link">
+        Sensor from SAP
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sensor/update_sensor_status/update_sensor_status.html" class="md-nav__link">
+        Update Sensor control Delta Table after processing the data
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2_4_3" checked>
+      
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_2_2_4_3" id="__nav_2_2_4_3_label" tabindex="0">
+          Heartbeat Sensor
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_2_2_4_3_label" aria-expanded="true">
+        <label class="md-nav__title" for="__nav_2_2_4_3">
+          <span class="md-nav__icon md-icon"></span>
+          Heartbeat Sensor
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Overview
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="heartbeat.html" class="md-nav__link md-nav__link--active">
+        Overview
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#what-is-it" class="md-nav__link">
+    What is it?
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-does-the-heartbeat-sensor-work" class="md-nav__link">
+    How Does the Heartbeat Sensor Work?
+  </a>
+  
+    <nav class="md-nav" aria-label="How Does the Heartbeat Sensor Work?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#core-architecture-components" class="md-nav__link">
+    Core Architecture Components
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#operational-flow" class="md-nav__link">
+    Operational Flow
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#control-table-schema" class="md-nav__link">
+    Control Table Schema
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#control-table-reference-records" class="md-nav__link">
+    Control Table Reference Records
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-to-implement-the-heartbeat-sensor" class="md-nav__link">
+    How to Implement the Heartbeat Sensor
+  </a>
+  
+    <nav class="md-nav" aria-label="How to Implement the Heartbeat Sensor">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#phase-1-initial-setup-and-configuration" class="md-nav__link">
+    Phase 1: Initial Setup and Configuration
+  </a>
+  
+    <nav class="md-nav" aria-label="Phase 1: Initial Setup and Configuration">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#step-1-define-your-data-source-configurations" class="md-nav__link">
+    Step 1: Define Your Data Source Configurations
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-2-populate-the-heartbeat-control-table" class="md-nav__link">
+    Step 2: Populate the Heartbeat Control Table
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phase-2-heartbeat-sensor-operation-workflow" class="md-nav__link">
+    Phase 2: Heartbeat Sensor Operation Workflow
+  </a>
+  
+    <nav class="md-nav" aria-label="Phase 2: Heartbeat Sensor Operation Workflow">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#step-3-continuous-monitoring-and-event-detection" class="md-nav__link">
+    Step 3: Continuous Monitoring and Event Detection
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-4-event-processing-and-status-updates" class="md-nav__link">
+    Step 4: Event Processing and Status Updates
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-5-dependency-validation-and-job-triggering" class="md-nav__link">
+    Step 5: Dependency Validation and Job Triggering
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phase-3-job-execution-and-completion" class="md-nav__link">
+    Phase 3: Job Execution and Completion
+  </a>
+  
+    <nav class="md-nav" aria-label="Phase 3: Job Execution and Completion">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#step-6-databricks-job-execution" class="md-nav__link">
+    Step 6: Databricks Job Execution
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-7-job-completion-handling" class="md-nav__link">
+    Step 7: Job Completion Handling
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phase-4-error-handling-and-recovery" class="md-nav__link">
+    Phase 4: Error Handling and Recovery
+  </a>
+  
+    <nav class="md-nav" aria-label="Phase 4: Error Handling and Recovery">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#step-8-job-failure-recovery-process" class="md-nav__link">
+    Step 8: Job Failure Recovery Process
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-9-monitoring-and-maintenance" class="md-nav__link">
+    Step 9: Monitoring and Maintenance
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phase-5-advanced-configuration-and-optimization" class="md-nav__link">
+    Phase 5: Advanced Configuration and Optimization
+  </a>
+  
+    <nav class="md-nav" aria-label="Phase 5: Advanced Configuration and Optimization">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#step-10-advanced-configuration-options" class="md-nav__link">
+    Step 10: Advanced Configuration Options
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#troubleshooting-common-issues" class="md-nav__link">
+    Troubleshooting Common Issues
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2_4_3_2" >
+      
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_2_2_4_3_2" id="__nav_2_2_4_3_2_label" tabindex="0">
+          Supported Sources
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="5" aria-labelledby="__nav_2_2_4_3_2_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_2_4_3_2">
+          <span class="md-nav__icon md-icon"></span>
+          Supported Sources
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="delta_table/delta_table.html" class="md-nav__link">
+        Delta Table
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="kafka/kafka.html" class="md-nav__link">
+        Kafka
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="manual_table/manual_table.html" class="md-nav__link">
+        Manual Table
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="sap_bw_b4/sap_bw_b4.html" class="md-nav__link">
+        SAP BW/4HANA
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="trigger_file/trigger_file.html" class="md-nav__link">
+        Trigger File
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="heartbeat_sensor_data_feed/heartbeat_sensor_data_feed.html" class="md-nav__link">
+        Feed Heartbeat Sensor Control Delta Table
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="update_heartbeat_sensor_status/update_heartbeat_sensor_status.html" class="md-nav__link">
+        Update Heartbeat Sensor control Delta Table after processing the data
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2_5" >
+      
+      
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_2_2_5" id="__nav_2_2_5_label" tabindex="0">
+          GAB
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_2_5_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_2_5">
+          <span class="md-nav__icon md-icon"></span>
+          GAB
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gab/gab.html" class="md-nav__link">
+        Overview
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gab/step_by_step/step_by_step.html" class="md-nav__link">
+        Step-by-Step
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+      
+      
+        
+          
+            
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../../reference/index.html">API Documentation</a>
+          
+            <label for="__nav_3">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          API Documentation
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1" >
+      
+      
+        
+          
+        
+          
+            
+          
+        
+          
+            
+          
+        
+          
+            
+          
+        
+          
+            
+          
+        
+          
+            
+          
+        
+          
+            
+          
+        
+          
+            
+          
+        
+          
+            
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../../reference/packages/index.html">Packages</a>
+          
+            <label for="__nav_3_1">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3_1">
+          <span class="md-nav__icon md-icon"></span>
+          Packages
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/engine.html" class="md-nav__link">
+        Engine
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1_2" >
+      
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+            
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../../reference/packages/algorithms/index.html">Algorithms</a>
+          
+            <label for="__nav_3_1_2">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_1_2_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3_1_2">
+          <span class="md-nav__icon md-icon"></span>
+          Algorithms
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/algorithms/algorithm.html" class="md-nav__link">
+        Algorithm
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/algorithms/data_loader.html" class="md-nav__link">
+        Data loader
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/algorithms/dq_validator.html" class="md-nav__link">
+        Dq validator
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/algorithms/exceptions.html" class="md-nav__link">
+        Exceptions
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/algorithms/gab.html" class="md-nav__link">
+        Gab
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/algorithms/reconciliator.html" class="md-nav__link">
+        Reconciliator
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/algorithms/sensor.html" class="md-nav__link">
+        Sensor
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1_2_8" >
+      
+      
+        
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../../reference/packages/algorithms/sensors/index.html">Sensors</a>
+          
+            <label for="__nav_3_1_2_8">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_3_1_2_8_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3_1_2_8">
+          <span class="md-nav__icon md-icon"></span>
+          Sensors
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/algorithms/sensors/heartbeat.html" class="md-nav__link">
+        Heartbeat
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/algorithms/sensors/sensor.html" class="md-nav__link">
+        Sensor
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/configs/index.html" class="md-nav__link">
+        Configs
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1_4" >
+      
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../../reference/packages/core/index.html">Core</a>
+          
+            <label for="__nav_3_1_4">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_1_4_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3_1_4">
+          <span class="md-nav__icon md-icon"></span>
+          Core
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/core/dbfs_file_manager.html" class="md-nav__link">
+        Dbfs file manager
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/core/definitions.html" class="md-nav__link">
+        Definitions
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/core/exec_env.html" class="md-nav__link">
+        Exec env
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/core/executable.html" class="md-nav__link">
+        Executable
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/core/file_manager.html" class="md-nav__link">
+        File manager
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/core/gab_manager.html" class="md-nav__link">
+        Gab manager
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/core/gab_sql_generator.html" class="md-nav__link">
+        Gab sql generator
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/core/s3_file_manager.html" class="md-nav__link">
+        S3 file manager
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/core/sensor_manager.html" class="md-nav__link">
+        Sensor manager
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/core/table_manager.html" class="md-nav__link">
+        Table manager
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1_5" >
+      
+      
+        
+          
+        
+          
+        
+          
+        
+          
+            
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../../reference/packages/dq_processors/index.html">Dq processors</a>
+          
+            <label for="__nav_3_1_5">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_1_5_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3_1_5">
+          <span class="md-nav__icon md-icon"></span>
+          Dq processors
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/dq_processors/dq_factory.html" class="md-nav__link">
+        Dq factory
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/dq_processors/exceptions.html" class="md-nav__link">
+        Exceptions
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/dq_processors/validator.html" class="md-nav__link">
+        Validator
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1_5_4" >
+      
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../../reference/packages/dq_processors/custom_expectations/index.html">Custom expectations</a>
+          
+            <label for="__nav_3_1_5_4">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_3_1_5_4_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3_1_5_4">
+          <span class="md-nav__icon md-icon"></span>
+          Custom expectations
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/dq_processors/custom_expectations/expect_column_pair_a_to_be_not_equal_to_b.html" class="md-nav__link">
+        Expect column pair a to be not equal to b
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/dq_processors/custom_expectations/expect_column_pair_a_to_be_smaller_or_equal_than_b.html" class="md-nav__link">
+        Expect column pair a to be smaller or equal than b
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/dq_processors/custom_expectations/expect_column_pair_date_a_to_be_greater_than_or_equal_to_date_b.html" class="md-nav__link">
+        Expect column pair date a to be greater than or equal to date b
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/dq_processors/custom_expectations/expect_column_values_to_be_date_not_older_than.html" class="md-nav__link">
+        Expect column values to be date not older than
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/dq_processors/custom_expectations/expect_column_values_to_not_be_null_or_empty_string.html" class="md-nav__link">
+        Expect column values to not be null or empty string
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/dq_processors/custom_expectations/expect_multicolumn_column_a_must_equal_b_or_c.html" class="md-nav__link">
+        Expect multicolumn column a must equal b or c
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/dq_processors/custom_expectations/expect_queried_column_agg_value_to_be.html" class="md-nav__link">
+        Expect queried column agg value to be
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1_6" >
+      
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+            
+          
+        
+          
+            
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../../reference/packages/io/index.html">Io</a>
+          
+            <label for="__nav_3_1_6">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_1_6_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3_1_6">
+          <span class="md-nav__icon md-icon"></span>
+          Io
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/io/exceptions.html" class="md-nav__link">
+        Exceptions
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/io/reader.html" class="md-nav__link">
+        Reader
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/io/reader_factory.html" class="md-nav__link">
+        Reader factory
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/io/writer.html" class="md-nav__link">
+        Writer
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/io/writer_factory.html" class="md-nav__link">
+        Writer factory
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1_6_6" >
+      
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../../reference/packages/io/readers/index.html">Readers</a>
+          
+            <label for="__nav_3_1_6_6">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_3_1_6_6_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3_1_6_6">
+          <span class="md-nav__icon md-icon"></span>
+          Readers
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/io/readers/dataframe_reader.html" class="md-nav__link">
+        Dataframe reader
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/io/readers/file_reader.html" class="md-nav__link">
+        File reader
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/io/readers/jdbc_reader.html" class="md-nav__link">
+        Jdbc reader
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/io/readers/kafka_reader.html" class="md-nav__link">
+        Kafka reader
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/io/readers/query_reader.html" class="md-nav__link">
+        Query reader
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/io/readers/sap_b4_reader.html" class="md-nav__link">
+        Sap b4 reader
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/io/readers/sap_bw_reader.html" class="md-nav__link">
+        Sap bw reader
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/io/readers/sftp_reader.html" class="md-nav__link">
+        Sftp reader
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/io/readers/table_reader.html" class="md-nav__link">
+        Table reader
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1_6_7" >
+      
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../../reference/packages/io/writers/index.html">Writers</a>
+          
+            <label for="__nav_3_1_6_7">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_3_1_6_7_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3_1_6_7">
+          <span class="md-nav__icon md-icon"></span>
+          Writers
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/io/writers/console_writer.html" class="md-nav__link">
+        Console writer
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/io/writers/dataframe_writer.html" class="md-nav__link">
+        Dataframe writer
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/io/writers/delta_merge_writer.html" class="md-nav__link">
+        Delta merge writer
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/io/writers/file_writer.html" class="md-nav__link">
+        File writer
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/io/writers/jdbc_writer.html" class="md-nav__link">
+        Jdbc writer
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/io/writers/kafka_writer.html" class="md-nav__link">
+        Kafka writer
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/io/writers/rest_api_writer.html" class="md-nav__link">
+        Rest api writer
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/io/writers/sharepoint_writer.html" class="md-nav__link">
+        Sharepoint writer
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/io/writers/table_writer.html" class="md-nav__link">
+        Table writer
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1_7" >
+      
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+            
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../../reference/packages/terminators/index.html">Terminators</a>
+          
+            <label for="__nav_3_1_7">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_1_7_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3_1_7">
+          <span class="md-nav__icon md-icon"></span>
+          Terminators
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/terminators/cdf_processor.html" class="md-nav__link">
+        Cdf processor
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/terminators/dataset_optimizer.html" class="md-nav__link">
+        Dataset optimizer
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/terminators/notifier.html" class="md-nav__link">
+        Notifier
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/terminators/notifier_factory.html" class="md-nav__link">
+        Notifier factory
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/terminators/sensor_terminator.html" class="md-nav__link">
+        Sensor terminator
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/terminators/spark_terminator.html" class="md-nav__link">
+        Spark terminator
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/terminators/terminator_factory.html" class="md-nav__link">
+        Terminator factory
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1_7_8" >
+      
+      
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../../reference/packages/terminators/notifiers/index.html">Notifiers</a>
+          
+            <label for="__nav_3_1_7_8">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_3_1_7_8_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3_1_7_8">
+          <span class="md-nav__icon md-icon"></span>
+          Notifiers
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/terminators/notifiers/email_notifier.html" class="md-nav__link">
+        Email notifier
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/terminators/notifiers/exceptions.html" class="md-nav__link">
+        Exceptions
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/terminators/notifiers/notification_templates.html" class="md-nav__link">
+        Notification templates
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1_8" >
+      
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../../reference/packages/transformers/index.html">Transformers</a>
+          
+            <label for="__nav_3_1_8">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_1_8_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3_1_8">
+          <span class="md-nav__icon md-icon"></span>
+          Transformers
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/transformers/aggregators.html" class="md-nav__link">
+        Aggregators
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/transformers/column_creators.html" class="md-nav__link">
+        Column creators
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/transformers/column_reshapers.html" class="md-nav__link">
+        Column reshapers
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/transformers/condensers.html" class="md-nav__link">
+        Condensers
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/transformers/custom_transformers.html" class="md-nav__link">
+        Custom transformers
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/transformers/data_maskers.html" class="md-nav__link">
+        Data maskers
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/transformers/date_transformers.html" class="md-nav__link">
+        Date transformers
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/transformers/exceptions.html" class="md-nav__link">
+        Exceptions
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/transformers/filters.html" class="md-nav__link">
+        Filters
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/transformers/joiners.html" class="md-nav__link">
+        Joiners
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/transformers/null_handlers.html" class="md-nav__link">
+        Null handlers
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/transformers/optimizers.html" class="md-nav__link">
+        Optimizers
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/transformers/regex_transformers.html" class="md-nav__link">
+        Regex transformers
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/transformers/repartitioners.html" class="md-nav__link">
+        Repartitioners
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/transformers/transformer_factory.html" class="md-nav__link">
+        Transformer factory
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/transformers/unions.html" class="md-nav__link">
+        Unions
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/transformers/watermarker.html" class="md-nav__link">
+        Watermarker
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1_9" >
+      
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+            
+          
+        
+          
+            
+          
+        
+          
+            
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../../reference/packages/utils/index.html">Utils</a>
+          
+            <label for="__nav_3_1_9">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_1_9_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3_1_9">
+          <span class="md-nav__icon md-icon"></span>
+          Utils
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/utils/acon_utils.html" class="md-nav__link">
+        Acon utils
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/utils/databricks_utils.html" class="md-nav__link">
+        Databricks utils
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/utils/dq_utils.html" class="md-nav__link">
+        Dq utils
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/utils/engine_usage_stats.html" class="md-nav__link">
+        Engine usage stats
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/utils/expectations_utils.html" class="md-nav__link">
+        Expectations utils
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/utils/file_utils.html" class="md-nav__link">
+        File utils
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/utils/gab_utils.html" class="md-nav__link">
+        Gab utils
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/utils/logging_handler.html" class="md-nav__link">
+        Logging handler
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/utils/rest_api.html" class="md-nav__link">
+        Rest api
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/utils/schema_utils.html" class="md-nav__link">
+        Schema utils
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/utils/sharepoint_utils.html" class="md-nav__link">
+        Sharepoint utils
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/utils/sql_parser_utils.html" class="md-nav__link">
+        Sql parser utils
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1_9_13" >
+      
+      
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../../reference/packages/utils/configs/index.html">Configs</a>
+          
+            <label for="__nav_3_1_9_13">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_3_1_9_13_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3_1_9_13">
+          <span class="md-nav__icon md-icon"></span>
+          Configs
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/utils/configs/config_utils.html" class="md-nav__link">
+        Config utils
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1_9_14" >
+      
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../../reference/packages/utils/extraction/index.html">Extraction</a>
+          
+            <label for="__nav_3_1_9_14">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_3_1_9_14_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3_1_9_14">
+          <span class="md-nav__icon md-icon"></span>
+          Extraction
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/utils/extraction/jdbc_extraction_utils.html" class="md-nav__link">
+        Jdbc extraction utils
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/utils/extraction/sap_b4_extraction_utils.html" class="md-nav__link">
+        Sap b4 extraction utils
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/utils/extraction/sap_bw_extraction_utils.html" class="md-nav__link">
+        Sap bw extraction utils
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/utils/extraction/sftp_extraction_utils.html" class="md-nav__link">
+        Sftp extraction utils
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1_9_15" >
+      
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../../reference/packages/utils/storage/index.html">Storage</a>
+          
+            <label for="__nav_3_1_9_15">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_3_1_9_15_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3_1_9_15">
+          <span class="md-nav__icon md-icon"></span>
+          Storage
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/utils/storage/dbfs_storage.html" class="md-nav__link">
+        Dbfs storage
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/utils/storage/file_storage.html" class="md-nav__link">
+        File storage
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/utils/storage/file_storage_functions.html" class="md-nav__link">
+        File storage functions
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/utils/storage/local_fs_storage.html" class="md-nav__link">
+        Local fs storage
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/packages/utils/storage/s3_storage.html" class="md-nav__link">
+        S3 storage
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+  
+
+
+<h1 id="heartbeat-sensor">Heartbeat Sensor<a class="headerlink" href="#heartbeat-sensor" title="Permanent link">&para;</a></h1>
+<h2 id="what-is-it">What is it?<a class="headerlink" href="#what-is-it" title="Permanent link">&para;</a></h2>
+<p>The Heartbeat Sensor is a robust, configurable system designed to continuously monitor 
+upstream systems for new data. It enhances the existing sensor infrastructure by addressing 
+key limitations and providing significant improvements:</p>
+<p><strong>Previous Sensor Architecture Limitations:</strong></p>
+<ul>
+<li>Required individual sensor configurations for each data source.</li>
+<li>Limited scalability when monitoring multiple upstream systems.</li>
+<li>Manual job triggering and dependency management.</li>
+<li>No centralized control or monitoring of sensor status.</li>
+<li>Difficult to manage complex multi-source dependencies.</li>
+</ul>
+<p><strong>Heartbeat Sensor Enhancements:</strong></p>
+<ul>
+<li><strong>Centralized Management</strong>: Single control table to manage all sensor sources and their dependencies.</li>
+<li><strong>Automated Job Orchestration</strong>: Automatically triggers downstream Databricks jobs when new data is detected.</li>
+<li><strong>Multi-Source Support</strong>: Handles diverse source types (SAP, Kafka, Delta Tables, Manual Uploads, Trigger Files) in one unified system.</li>
+<li><strong>Dependency Management</strong>: Built-in hard/soft dependency validation before triggering jobs.</li>
+<li><strong>Scalable Architecture</strong>: Efficiently processes multiple sensors in parallel.</li>
+<li><strong>Status Tracking</strong>: Comprehensive lifecycle tracking from detection to job completion.</li>
+</ul>
+<p>This provides a centralized, efficient, and automated mechanism to detect and trigger 
+downstream workflows with minimal user intervention.</p>
+<h2 id="how-does-the-heartbeat-sensor-work">How Does the Heartbeat Sensor Work?<a class="headerlink" href="#how-does-the-heartbeat-sensor-work" title="Permanent link">&para;</a></h2>
+<p><img src="../../../assets/img/heartbeat_sensor_os.png" alt="image" width="1000px" height="auto"></p>
+<p>The Heartbeat Sensor operates on a pull-based approach using a single-node cluster that continuously monitors upstream systems. Here's how the system works:</p>
+<h3 id="core-architecture-components">Core Architecture Components<a class="headerlink" href="#core-architecture-components" title="Permanent link">&para;</a></h3>
+<p><strong>1. <a href="#control-table-schema">Centralized Control Table</a></strong></p>
+<ul>
+<li>Tracks and manages all data sources and their configurations.</li>
+<li>Dynamically populated by the <a href="heartbeat_sensor_data_feed/heartbeat_sensor_data_feed.html">Heartbeat Data Feeder Job</a>.</li>
+<li>Provides structured monitoring across various upstream systems.</li>
+</ul>
+<p><strong>2. Persistent Heartbeat Job</strong></p>
+<ul>
+<li>Runs continuously or on a user-defined schedule.</li>
+<li>Supports both real-time and batch-style data monitoring.</li>
+<li>Efficiently processes multiple sensors in parallel.</li>
+</ul>
+<p><strong>3. Sensor Integration Framework</strong></p>
+<ul>
+<li>Leverages existing sensor mechanisms for event detection.</li>
+<li>Creates appropriate Sensor ACONs based on source types.</li>
+<li>Returns <code>NEW_EVENT_AVAILABLE</code> status when new data is detected.</li>
+</ul>
+<p><strong>4. Automated Job Orchestration</strong></p>
+<ul>
+<li>Triggers Databricks jobs via Job Run API when conditions are met.</li>
+<li>Validates dependencies before job execution.</li>
+<li>Maintains comprehensive audit trail of all operations.</li>
+</ul>
+<h3 id="operational-flow">Operational Flow<a class="headerlink" href="#operational-flow" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>Continuous Monitoring</strong>: The heartbeat cluster continuously polls configured sensor sources.</li>
+<li><strong>Event Detection</strong>: Checks each source for <code>NEW_EVENT_AVAILABLE</code> status.</li>
+<li><strong>Dependency Validation</strong>: Evaluates hard/soft dependencies before triggering jobs.</li>
+<li><strong>Automatic Triggering</strong>: Launches Databricks jobs when all conditions are satisfied.</li>
+<li><strong>Status Management</strong>: Updates control table throughout the entire lifecycle.</li>
+</ol>
+<div class="admonition warning">
+<p class="admonition-title">Pull-Based Architecture</p>
+<p>The system is designed for a "pull" approach, same as the Sensor solution.
+Downstream data product sensor clusters actively check for new events from the
+upstream. Upstream sensor clusters do not require write permissions to the downstream
+data product system. Just read access is required for upstream from downstream system.</p>
+</div>
+<h3 id="control-table-schema">Control Table Schema<a class="headerlink" href="#control-table-schema" title="Permanent link">&para;</a></h3>
+<p>The Heartbeat Sensor Control Table is the central component that manages all sensor sources and their configurations. Below is the complete schema with detailed descriptions:</p>
+<table>
+<thead>
+<tr>
+<th>Column name</th>
+<th>Data Type</th>
+<th>Description</th>
+<th>Produced/Maintained by</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>sensor_source</strong></td>
+<td>STRING</td>
+<td>Upstream source system<ul><li><code>sap_b4</code> - SAP 4HANA</li><li><code>sap_bw</code> SAP BW</li><li><code>delta_table</code></li><li><code>lmu_delta_table</code> - Lakehouse Manual Upload</li><li><code>kafka</code></li><li><code>trigger_file</code></li></ul></td>
+<td>User/Developer</td>
+</tr>
+<tr>
+<td><strong>sensor_id</strong></td>
+<td>STRING</td>
+<td>Unique Upstream id or upstream reference.<ul><li><strong>sap_bw</strong> or <strong>sap_b4</strong> source:<br />SAP Chain Id, example: <code>SAP_CHAIN_ID_SAP_TABLE</code></li><li><strong>delta_table</strong> source: Delta table name along with database name, examples: <code>my_database_1.my_table</code>; <code>my_database_2.my_table_2</code></li><li><strong>lmu_delta_table</strong> source: Lakehouse Manual Upload Delta table name along with database name, examples: <code>my_database.my_lmu_table</code></li><li><strong>kafka</strong> source: Kafka Topic name starting with <data_product_name:> prefix and then the topic name, example: <code>data_product_name: my_product.my.topic</code>.</li><li><strong>trigger_file</strong> source: Asset name/folder name under which trigger file will be kept, example: <code>my_trigger</code></li></ul></td>
+<td>User/Developer</td>
+</tr>
+<tr>
+<td><strong>sensor_read_type</strong></td>
+<td>STRING</td>
+<td>Sensor read type to fetch new event - can be batch or streaming.</td>
+<td>User/Developer</td>
+</tr>
+<tr>
+<td><strong>asset_description</strong></td>
+<td>STRING</td>
+<td>Description of Upstream source (It can be upstream name).</td>
+<td>User/Developer</td>
+</tr>
+<tr>
+<td><strong>upstream_key</strong></td>
+<td>STRING</td>
+<td>upstream key (an attribute name from the upstream so that new data can be detected automatically), example: <code>load_date</code>.<br />This is useful for sensors that do not rely on Spark streaming checkpoints, like the JDBC sensor, as it stores the name of a field in the JDBC upstream that contains the values that will allow us to identify new data (e.g., a timestamp in the upstream that tells us when the record was loaded into the database).<br /><strong>Note</strong>: This attribute will be used in the <code>preprocess_query</code>, example: <code>SELECT * FROM sensor_new_data WHERE ?upstream_key &gt;= current_date() - 7</code> will be rendered to <code>SELECT * FROM sensor_new_data WHERE load_date &gt;= current_date() - 7</code></td>
+<td>User/Developer</td>
+</tr>
+<tr>
+<td><strong>preprocess_query</strong></td>
+<td>STRING</td>
+<td>Query to filter data returned by the upstream. <strong>Note</strong>: This parameter is only needed when the upstream data have to be filtered, in this case a custom query should be created with the source table as <code>sensor_new_data</code>.<br />Example: <code>SELECT * FROM sensor_new_data WHERE load_date &gt;= current_date() - 7</code></td>
+<td>User/Developer</td>
+</tr>
+<tr>
+<td><strong>latest_event_fetched_timestamp</strong></td>
+<td>TIMESTAMP</td>
+<td>Latest event fetched timestamp for upstream source. It will be updated each time as soon as NEW EVENT is available.</td>
+<td>lakehouse-engine</td>
+</tr>
+<tr>
+<td><strong>trigger_job_id</strong></td>
+<td>STRING</td>
+<td>Databricks Job Id of downstream application. Based on this, Job will get triggered by Heartbeat once new event is available.</td>
+<td>User/Developer</td>
+</tr>
+<tr>
+<td><strong>trigger_job_name</strong></td>
+<td>STRING</td>
+<td>Databricks Job Name.</td>
+<td>User/Developer</td>
+</tr>
+<tr>
+<td><strong>status</strong></td>
+<td>STRING</td>
+<td>Status of the orchestration.<br/><ul><li><code>NEW_EVENT_AVAILABLE</code> once new event is found.</li><li><code>IN PROGRESS</code> - When job gets triggered</li><li><code>COMPLETED</code> - once Job completed successfully</li></ul></td>
+<td>lakehouse-engine</td>
+</tr>
+<tr>
+<td><strong>status_change_timestamp</strong></td>
+<td>STRING</td>
+<td>string containing the datetime when the status has changed.</td>
+<td>lakehouse-engine</td>
+</tr>
+<tr>
+<td><strong>job_start_timestamp</strong></td>
+<td>TIMESTAMP</td>
+<td>Start timestamp of downstream Job. It will get updated as soon as Job went into <code>IN_PROGRESS</code> job_status.</td>
+<td>lakehouse-engine</td>
+</tr>
+<tr>
+<td><strong>job_end_timestamp</strong></td>
+<td>TIMESTAMP</td>
+<td>End timestamp of downstream Job. It will get updated as soon as Job went into <code>COMPLETED</code> job_status.</td>
+<td>lakehouse-engine</td>
+</tr>
+<tr>
+<td><strong>job_state</strong></td>
+<td>STRING</td>
+<td>Current status of Job in Control table. <code>PAUSED</code> or <code>UNPAUSED</code>. If <code>PAUSED</code>, Sensor will <strong>not look</strong> for NEW EVENTS or Trigger the dependent job.</td>
+<td>User/Developer</td>
+</tr>
+<tr>
+<td><strong>dependency_flag</strong></td>
+<td>STRING</td>
+<td><ul><li>TRUE - For Hard dependency</li><li>FALSE - For SOFT dependency</li></ul>All dependent Job needs to complete successfully for HARD dependency. For SOFT → FALSE marked job will be ignored. Default - must be TRUE in case of no dependency.</td>
+<td>User/Developer</td>
+</tr>
+</tbody>
+</table>
+<h3 id="control-table-reference-records">Control Table Reference Records<a class="headerlink" href="#control-table-reference-records" title="Permanent link">&para;</a></h3>
+<p>The following table shows <strong>example records</strong> that demonstrate how different types of sensor sources are configured in the Heartbeat Sensor Control Table. These are <strong>sample entries</strong> that illustrate the structure and typical values for each column across various sensor source types (Kafka, Lakehouse Manual Upload Delta Table, SAP B4, Delta Table, and Trigger File).</p>
+<p><strong>Purpose of these examples:</strong></p>
+<ul>
+<li>Show real-world configuration patterns for different sensor sources.</li>
+<li>Demonstrate how different statuses (<code>NEW_EVENT_AVAILABLE</code>, <code>IN_PROGRESS</code>, <code>null</code>) appear in the table.</li>
+<li>Illustrate the relationship between sensor sources and their corresponding Databricks jobs.</li>
+<li>Provide reference values for fields like <code>sensor_id</code>, <code>trigger_job_id</code>, and status timestamps.</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>These are illustrative examples - your actual table will contain records specific to your data sources and job configurations.</p>
+</div>
+<table>
+<thead>
+<tr>
+<th>sensor_source</th>
+<th>sensor_id</th>
+<th>sensor_read_type</th>
+<th>asset_description</th>
+<th>upstream_key</th>
+<th>preprocess_query</th>
+<th>latest_event_fetched_timestamp</th>
+<th>trigger_job_id</th>
+<th>trigger_job_name</th>
+<th>status</th>
+<th>status_change_timestamp</th>
+<th>job_start_timestamp</th>
+<th>job_end_timestamp</th>
+<th>job_state</th>
+<th>dependancy_flag</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>kafka</td>
+<td>my_product: my.topic</td>
+<td>streaming</td>
+<td>My product Kafka Topic</td>
+<td>null</td>
+<td>null</td>
+<td>2025-04-23T21:40:23.768Z</td>
+<td>111111111</td>
+<td>my-product-kafka_consumer_job</td>
+<td>IN_PROGRESS</td>
+<td>2025-04-23T21:40:36.88Z</td>
+<td>2025-04-23T21:40:36.88Z</td>
+<td>null</td>
+<td>UNPAUSED</td>
+<td>TRUE</td>
+</tr>
+<tr>
+<td>lmu_delta_table</td>
+<td>my_database.my_lmu_table</td>
+<td>batch</td>
+<td>My Lakehouse Manual Upload Delta Table</td>
+<td>date</td>
+<td>null</td>
+<td>2025-04-23T21:46:07.495Z</td>
+<td>222222222</td>
+<td>my-product-lmu_table_consumer_job</td>
+<td>IN_PROGRESS</td>
+<td>2025-04-23T21:46:19.4Z</td>
+<td>2025-04-23T21:46:19.4Z</td>
+<td>null</td>
+<td>UNPAUSED</td>
+<td>TRUE</td>
+</tr>
+<tr>
+<td>sap_b4</td>
+<td>SAP_BW_CHAIN_ID_SAP_TABLE</td>
+<td>batch</td>
+<td>My SAP BW Chain Process</td>
+<td>LOAD_DATE</td>
+<td>null</td>
+<td>2025-04-23T21:35:10.643Z</td>
+<td>333333333</td>
+<td>my-product-sap_bw_consumer_job</td>
+<td>IN_PROGRESS</td>
+<td>2025-04-23T21:35:29.248Z</td>
+<td>2025-04-23T21:35:29.248Z</td>
+<td>null</td>
+<td>UNPAUSED</td>
+<td>TRUE</td>
+</tr>
+<tr>
+<td>delta_table</td>
+<td>my_database_1.my_table</td>
+<td>streaming</td>
+<td>My Delta Table from My Database 1</td>
+<td>null</td>
+<td>null</td>
+<td>2025-04-23T22:11:56.384Z</td>
+<td>444444444</td>
+<td>my-product-delta_and_sap_b4_consumer_job</td>
+<td>NEW_EVENT_AVAILABLE</td>
+<td>2025-04-23T22:11:56.384Z</td>
+<td>null</td>
+<td>null</td>
+<td>UNPAUSED</td>
+<td>TRUE</td>
+</tr>
+<tr>
+<td>sap_b4</td>
+<td>SAP_4HANA_CHAIN_ID_SAP_TABLE</td>
+<td>batch</td>
+<td>My SAP 4HANA Chain Process</td>
+<td>LOAD_DATE</td>
+<td>null</td>
+<td>null</td>
+<td>444444444</td>
+<td>my-product-delta_and_sap_b4_consumer_job</td>
+<td>null</td>
+<td>null</td>
+<td>null</td>
+<td>null</td>
+<td>UNPAUSED</td>
+<td>TRUE</td>
+</tr>
+<tr>
+<td>trigger_file</td>
+<td>my_trigger</td>
+<td>streaming</td>
+<td>My Trigger File</td>
+<td>null</td>
+<td>null</td>
+<td>2025-04-23T22:07:28.668Z</td>
+<td>555555555</td>
+<td>my-product-trigger_file_consumer_job</td>
+<td>IN_PROGRESS</td>
+<td>2025-04-23T22:07:39.865Z</td>
+<td>2025-04-23T22:07:39.865Z</td>
+<td>null</td>
+<td>UNPAUSED</td>
+<td>TRUE</td>
+</tr>
+</tbody>
+</table>
+<h2 id="how-to-implement-the-heartbeat-sensor">How to Implement the Heartbeat Sensor<a class="headerlink" href="#how-to-implement-the-heartbeat-sensor" title="Permanent link">&para;</a></h2>
+<p>This step-by-step guide aims to help you through setting up, configuring, and operating the Heartbeat Sensor system from initial setup to ongoing monitoring and troubleshooting.</p>
+<h3 id="phase-1-initial-setup-and-configuration">Phase 1: Initial Setup and Configuration<a class="headerlink" href="#phase-1-initial-setup-and-configuration" title="Permanent link">&para;</a></h3>
+<h4 id="step-1-define-your-data-source-configurations">Step 1: Define Your Data Source Configurations<a class="headerlink" href="#step-1-define-your-data-source-configurations" title="Permanent link">&para;</a></h4>
+<p>Create a CSV file containing your data source configurations with the following required columns:</p>
+<ul>
+<li><code>sensor_source</code>: Type of <a href="#control-table-schema">sensor source</a>.</li>
+<li><code>sensor_id</code>: Unique upstream identifier or reference.</li>
+<li><code>sensor_read_type</code>: How to read the sensor (batch or streaming).</li>
+<li><code>asset_description</code>: Description of the upstream source.</li>
+<li><code>upstream_key</code>: Attribute name for detecting new data automatically.</li>
+<li><code>preprocess_query</code>: Optional query to filter upstream data.</li>
+<li><code>trigger_job_id</code>: Databricks Job ID to trigger when new data is available.</li>
+<li><code>trigger_job_name</code>: Databricks Job Name.</li>
+<li><code>job_state</code>: Job control state (<code>UNPAUSED</code> or <code>PAUSED</code>).</li>
+<li><code>dependency_flag</code>: Dependency type (<code>TRUE</code> for hard, <code>FALSE</code> for soft).</li>
+</ul>
+<p><strong>Example CSV Configuration:</strong>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>sensor_source,sensor_id,sensor_read_type,asset_description,upstream_key,preprocess_query,trigger_job_id,trigger_job_name,job_state,dependency_flag
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>kafka,&quot;my_product: my.topic&quot;,streaming,&quot;My product Kafka Topic&quot;,,,&quot;111111111&quot;,&quot;my-product-kafka_consumer_job&quot;,UNPAUSED,TRUE
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>delta_table,&quot;my_database_1.my_table&quot;,streaming,&quot;My Delta Table from My Database 1&quot;,,,&quot;444444444&quot;,&quot;my-product-delta_and_sap_b4_consumer_job&quot;,UNPAUSED,TRUE
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>sap_b4,&quot;SAP_4HANA_CHAIN_ID_SAP_TABLE&quot;,batch,&quot;My SAP 4HANA Chain Process&quot;,LOAD_DATE,,&quot;444444444&quot;,&quot;my-product-delta_and_sap_b4_consumer_job&quot;,UNPAUSED,TRUE
+</span></code></pre></div></p>
+<h4 id="step-2-populate-the-heartbeat-control-table">Step 2: Populate the Heartbeat Control Table<a class="headerlink" href="#step-2-populate-the-heartbeat-control-table" title="Permanent link">&para;</a></h4>
+<p>Use the <a href="heartbeat_sensor_data_feed/heartbeat_sensor_data_feed.html">Heartbeat Sensor Control Table Data Feeder</a> to:</p>
+<ul>
+<li>Read your CSV configuration file.</li>
+<li>Validate the configuration entries.</li>
+<li>Ingest the data into the Heartbeat Control Table.</li>
+<li>Establish the foundation for monitoring and orchestration.</li>
+</ul>
+<h3 id="phase-2-heartbeat-sensor-operation-workflow">Phase 2: Heartbeat Sensor Operation Workflow<a class="headerlink" href="#phase-2-heartbeat-sensor-operation-workflow" title="Permanent link">&para;</a></h3>
+<h4 id="step-3-continuous-monitoring-and-event-detection">Step 3: Continuous Monitoring and Event Detection<a class="headerlink" href="#step-3-continuous-monitoring-and-event-detection" title="Permanent link">&para;</a></h4>
+<p>The Heartbeat sensor cluster (running on a single node) performs the following operations:</p>
+<p><strong>3.1 Control Table Scanning</strong></p>
+<ul>
+<li>Scans the Heartbeat Control Table for eligible records.</li>
+<li>Filters records based on:<ul>
+<li>Supported sensor sources: <code>Delta Table</code>, <code>Kafka</code>, <code>SAP BW/4HANA</code>, <code>Lakehouse Manual Upload</code>, <code>Trigger file</code>.</li>
+<li>Job state: <code>job_state = 'UNPAUSED'</code>.</li>
+<li>Status conditions: <code>status IS NULL</code> or <code>status = 'COMPLETED'</code>.</li>
+</ul>
+</li>
+</ul>
+<div class="admonition important">
+<p class="admonition-title">Orchestration job recommendation</p>
+<p>We recommend running multiple tasks for each sensor source type in the same Heartbeat
+Sensor Orchestrator and just create specific source related jobs when it's really needed,
+example: real time processing jobs or some complex jobs that need to be triggered as
+soon as the trigger condition is satisfied (all hard dependencies has <code>NEW_EVENT_AVAILABLE</code>).</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">First-Time Execution</p>
+<p>For new sensor sources and IDs, the initial <code>status</code> will be <code>NULL</code>. This ensures that failed or paused jobs are not automatically triggered.</p>
+</div>
+<p><strong>3.2 Source-Specific Event Detection</strong></p>
+<p>For each eligible record, the Heartbeat system:</p>
+<ul>
+<li>Creates the appropriate Sensor ACON (configuration) based on the <code>sensor_source</code> type.</li>
+<li>Passes the configuration to the respective Sensor Algorithm.</li>
+<li>The sensor algorithm checks for <code>NEW_EVENT_AVAILABLE</code> status for the specific <code>sensor_id</code>.</li>
+</ul>
+<p><strong>Supported Source Types and Their Configuration:</strong></p>
+<ul>
+<li><strong><a href="delta_table/delta_table.html">Delta Table Sources</a></strong>: Monitor delta tables for new data.</li>
+<li><strong><a href="kafka/kafka.html">Kafka Sources</a></strong>: Monitor Kafka topics for new messages.</li>
+<li><strong><a href="manual_table/manual_table.html">Manual Table Sources</a></strong>: Monitor manually uploaded delta tables.</li>
+<li><strong><a href="sap_bw_b4/sap_bw_b4.html">SAP BW/B4 Sources</a></strong>: Monitor SAP systems for new process chains.</li>
+<li><strong><a href="trigger_file/trigger_file.html">Trigger File Sources</a></strong>: Monitor file systems for trigger files.</li>
+</ul>
+<h4 id="step-4-event-processing-and-status-updates">Step 4: Event Processing and Status Updates<a class="headerlink" href="#step-4-event-processing-and-status-updates" title="Permanent link">&para;</a></h4>
+<p><strong>4.1 New Event Detection</strong></p>
+<p>When a sensor detects new data:</p>
+<ul>
+<li>Updates the traditional sensor table (<code>lakehouse_engine_sensor</code>) with detection details.</li>
+<li>Returns <code>NEW_EVENT_AVAILABLE</code> status to the Heartbeat module.</li>
+</ul>
+<p><strong>4.2 Heartbeat Control Table Updates</strong></p>
+<p>The Heartbeat system updates the control table with:</p>
+<ul>
+<li><code>status</code> → <code>NEW_EVENT_AVAILABLE</code>.</li>
+<li><code>status_change_timestamp</code> → current timestamp.</li>
+<li><code>latest_event_fetched_timestamp</code> → timestamp when event detection started.</li>
+</ul>
+<h4 id="step-5-dependency-validation-and-job-triggering">Step 5: Dependency Validation and Job Triggering<a class="headerlink" href="#step-5-dependency-validation-and-job-triggering" title="Permanent link">&para;</a></h4>
+<p><strong>5.1 Dependency Evaluation Process</strong></p>
+<p>Before triggering any jobs, the system evaluates dependencies:</p>
+<ol>
+<li><strong>Filter Eligible Records</strong>: Select records with <code>status = 'NEW_EVENT_AVAILABLE'</code>.</li>
+<li><strong>Group by Job ID</strong>: Group records by <code>trigger_job_id</code> to identify job dependencies.</li>
+<li><strong>Evaluate Dependency Flags</strong>:<ul>
+<li><strong>TRUE (Hard Dependency)</strong>: Job must have <code>NEW_EVENT_AVAILABLE</code> status.</li>
+<li><strong>FALSE (Soft Dependency)</strong>: Job status is optional and doesn't block triggering.</li>
+</ul>
+</li>
+<li><strong>Aggregate and Validate</strong>: Ensure all hard dependencies are satisfied before triggering.</li>
+</ol>
+<p><strong>5.2 Triggering Logic Examples</strong></p>
+<p>Consider Job 3 that depends on Job 1 and Job 2:</p>
+<ul>
+<li><strong>Scenario A</strong>: Job 1 (HARD) + Job 2 (HARD) → Both must have <code>NEW_EVENT_AVAILABLE</code>.</li>
+<li><strong>Scenario B</strong>: Job 1 (HARD) + Job 2 (SOFT) → Only Job 1 needs <code>NEW_EVENT_AVAILABLE</code>.</li>
+</ul>
+<p><img src="../../../assets/img/heartbeat_dependency_flag.png" alt="image" width="1000px" height="auto"></p>
+<p><strong>5.3 Job Triggering via Databricks API</strong></p>
+<p>For jobs that pass dependency validation:</p>
+<ul>
+<li>Trigger the corresponding <code>trigger_job_id</code> via Databricks Job Run API.</li>
+<li>Immediately update the control table:<ul>
+<li><code>status</code> → <code>IN_PROGRESS</code>.</li>
+<li><code>job_start_timestamp</code> → current timestamp.</li>
+<li><code>status_change_timestamp</code> → current timestamp.</li>
+</ul>
+</li>
+</ul>
+<h3 id="phase-3-job-execution-and-completion">Phase 3: Job Execution and Completion<a class="headerlink" href="#phase-3-job-execution-and-completion" title="Permanent link">&para;</a></h3>
+<h4 id="step-6-databricks-job-execution">Step 6: Databricks Job Execution<a class="headerlink" href="#step-6-databricks-job-execution" title="Permanent link">&para;</a></h4>
+<p>Each triggered Databricks job must include:</p>
+<ul>
+<li>Your primary ETL/processing tasks.</li>
+<li><strong>Final Task</strong>: <a href="update_heartbeat_sensor_status/update_heartbeat_sensor_status.html">Update Heartbeat Sensor Status</a> task.</li>
+</ul>
+<h4 id="step-7-job-completion-handling">Step 7: Job Completion Handling<a class="headerlink" href="#step-7-job-completion-handling" title="Permanent link">&para;</a></h4>
+<p>Upon successful job completion, the update status task:</p>
+<ul>
+<li>Sets <code>status</code> → <code>COMPLETED</code>.</li>
+<li>Updates <code>status_change_timestamp</code> → current timestamp.</li>
+<li>Sets <code>job_end_timestamp</code> → job completion timestamp.</li>
+</ul>
+<h3 id="phase-4-error-handling-and-recovery">Phase 4: Error Handling and Recovery<a class="headerlink" href="#phase-4-error-handling-and-recovery" title="Permanent link">&para;</a></h3>
+<h4 id="step-8-job-failure-recovery-process">Step 8: Job Failure Recovery Process<a class="headerlink" href="#step-8-job-failure-recovery-process" title="Permanent link">&para;</a></h4>
+<p>If a Databricks job fails, follow this recovery process:</p>
+<ol>
+<li><strong>Identify the Issue</strong>: Analyze job logs and error messages.</li>
+<li><strong>Fix the Problem</strong>: Address the underlying cause of the failure.</li>
+<li><strong>Manual Recovery</strong>: Execute at least one successful manual run of the job.</li>
+<li><strong>Automatic Resumption</strong>: Heartbeat will resume monitoring and triggering after successful completion.</li>
+</ol>
+<div class="admonition warning">
+<p class="admonition-title">Important Recovery Note</p>
+<p>The Heartbeat sensor will <strong>not</strong> resume checking failed jobs for new events until at least one successful completion occurs. This prevents repeated triggering of failing jobs.</p>
+</div>
+<h4 id="step-9-monitoring-and-maintenance">Step 9: Monitoring and Maintenance<a class="headerlink" href="#step-9-monitoring-and-maintenance" title="Permanent link">&para;</a></h4>
+<p><strong>9.1 Regular Monitoring Tasks</strong></p>
+<ul>
+<li>Monitor the Heartbeat Control Table for job statuses.</li>
+<li>Check for jobs stuck in <code>IN_PROGRESS</code> status.</li>
+<li>Verify dependency relationships are working correctly.</li>
+<li>Review <code>latest_event_fetched_timestamp</code> for regular updates.</li>
+</ul>
+<p><strong>9.2 Control and Management</strong></p>
+<ul>
+<li><strong>Pause Jobs</strong>: Set <code>job_state</code> to <code>PAUSED</code> to temporarily stop monitoring.</li>
+<li><strong>Resume Jobs</strong>: Set <code>job_state</code> to <code>UNPAUSED</code> to resume monitoring.</li>
+<li><strong>Modify Dependencies</strong>: Update <code>dependency_flag</code> to change dependency relationships.</li>
+</ul>
+<h3 id="phase-5-advanced-configuration-and-optimization">Phase 5: Advanced Configuration and Optimization<a class="headerlink" href="#phase-5-advanced-configuration-and-optimization" title="Permanent link">&para;</a></h3>
+<h4 id="step-10-advanced-configuration-options">Step 10: Advanced Configuration Options<a class="headerlink" href="#step-10-advanced-configuration-options" title="Permanent link">&para;</a></h4>
+<p><strong>10.1 Preprocess Queries</strong></p>
+<p>Use <code>preprocess_query</code> to filter upstream data:
+<div class="language-sql highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1">-- Example: Filter only recent records</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">sensor_new_data</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">load_date</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="k">current_date</span><span class="p">()</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">7</span>
+</span></code></pre></div></p>
+<p><strong>10.2 Parallel Processing</strong></p>
+<p>The Heartbeat sensor automatically handles parallel processing of multiple sources, improving efficiency and scalability.</p>
+<p><strong>10.3 Pull-Based Architecture Benefits</strong></p>
+<ul>
+<li>Upstream systems only need read access to downstream systems.</li>
+<li>No write permissions required from upstream to downstream.</li>
+<li>Improved security and access control.</li>
+</ul>
+<h3 id="troubleshooting-common-issues">Troubleshooting Common Issues<a class="headerlink" href="#troubleshooting-common-issues" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Issue</th>
+<th>Symptoms</th>
+<th>Solution</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Jobs not triggering</td>
+<td>Status remains <code>NEW_EVENT_AVAILABLE</code></td>
+<td>Check dependency flags and ensure all hard dependencies are met.</td>
+</tr>
+<tr>
+<td>Jobs stuck in <code>IN_PROGRESS</code></td>
+<td>No completion status updates</td>
+<td>Verify that jobs include the update status task as the final step.</td>
+</tr>
+<tr>
+<td>Failed job recovery</td>
+<td>Jobs not resuming after fixes</td>
+<td>Manually run the job successfully at least once.</td>
+</tr>
+<tr>
+<td>Missing events</td>
+<td><code>latest_event_fetched_timestamp</code> not updating</td>
+<td>Check sensor source connectivity and configuration.</td>
+</tr>
+</tbody>
+</table>
+<p>This workflow ensures reliable, automated data pipeline orchestration with robust error handling and dependency management.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Also have a look at the <a href="../sensors.html">Sensor documentation</a> to have a better understanding of the underlying sensor mechanisms that power the Heartbeat Sensor system.</p>
+</div>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var tab,labels=set.querySelector(".tabbed-labels");for(tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+            Back to top
+          </button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      &copy; 2025 <a href="https://github.com/adidas"  target="_blank" rel="noopener">adidas</a>
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://adidas.github.io/lakehouse-engine" target="_blank" rel="noopener" title="adidas.github.io" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M186.1 328.7c0 20.9-10.9 55.1-36.7 55.1s-36.7-34.2-36.7-55.1 10.9-55.1 36.7-55.1 36.7 34.2 36.7 55.1zM480 278.2c0 31.9-3.2 65.7-17.5 95-37.9 76.6-142.1 74.8-216.7 74.8-75.8 0-186.2 2.7-225.6-74.8-14.6-29-20.2-63.1-20.2-95 0-41.9 13.9-81.5 41.5-113.6-5.2-15.8-7.7-32.4-7.7-48.8 0-21.5 4.9-32.3 14.6-51.8 45.3 0 74.3 9 108.8 36 29-6.9 58.8-10 88.7-10 27 0 54.2 2.9 80.4 9.2 34-26.7 63-35.2 107.8-35.2 9.8 19.5 14.6 30.3 14.6 51.8 0 16.4-2.6 32.7-7.7 48.2 27.5 32.4 39 72.3 39 114.2zm-64.3 50.5c0-43.9-26.7-82.6-73.5-82.6-18.9 0-37 3.4-56 6-14.9 2.3-29.8 3.2-45.1 3.2-15.2 0-30.1-.9-45.1-3.2-18.7-2.6-37-6-56-6-46.8 0-73.5 38.7-73.5 82.6 0 87.8 80.4 101.3 150.4 101.3h48.2c70.3 0 150.6-13.4 150.6-101.3zm-82.6-55.1c-25.8 0-36.7 34.2-36.7 55.1s10.9 55.1 36.7 55.1 36.7-34.2 36.7-55.1-10.9-55.1-36.7-55.1z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["content.code.annotate", "content.code.annotation", "content.code.copy", "content.code.select", "content.tabs.link", "content.tooltips", "navigation.indexes", "navigation.path", "navigation.tabs", "navigation.tabs.instant", "navigation.tabs.sticky", "navigation.top", "navigation.sections", "toc.follow", "toc.integrate", "search.highlight", "search.suggest"], "search": "../../../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.b425cdc4.min.js"></script>
+      
+        
+          <script src="../../../assets/_markdown_exec_pyodide.js"></script>
+        
+      
+    
+  </body>
+</html>
