@@ -3096,8 +3096,6 @@
       
         
       
-        
-      
     
     
     
@@ -3322,34 +3320,6 @@
                 
   
   
-  
-  
-    <li class="md-nav__item">
-      <a href="../sensor.html" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Sensor
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
     
   
   
@@ -3374,7 +3344,7 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_1_2_8" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_1_2_7" checked>
         
           
           <div class="md-nav__link md-nav__container">
@@ -3396,14 +3366,14 @@
             </a>
             
               
-              <label class="md-nav__link " for="__nav_4_1_2_8" id="__nav_4_1_2_8_label" tabindex="0">
+              <label class="md-nav__link " for="__nav_4_1_2_7" id="__nav_4_1_2_7_label" tabindex="0">
                 <span class="md-nav__icon md-icon"></span>
               </label>
             
           </div>
         
-        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_4_1_2_8_label" aria-expanded="true">
-          <label class="md-nav__title" for="__nav_4_1_2_8">
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_4_1_2_7_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4_1_2_7">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -8425,11 +8395,7 @@
 <span class="normal"><a href="#__codelineno-0-825">825</a></span>
 <span class="normal"><a href="#__codelineno-0-826">826</a></span>
 <span class="normal"><a href="#__codelineno-0-827">827</a></span>
-<span class="normal"><a href="#__codelineno-0-828">828</a></span>
-<span class="normal"><a href="#__codelineno-0-829">829</a></span>
-<span class="normal"><a href="#__codelineno-0-830">830</a></span>
-<span class="normal"><a href="#__codelineno-0-831">831</a></span>
-<span class="normal"><a href="#__codelineno-0-832">832</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-0-42"><a id="__codelineno-0-42" name="__codelineno-0-42"></a><span class="k">class</span><span class="w"> </span><span class="nc">Heartbeat</span><span class="p">(</span><span class="n">Algorithm</span><span class="p">):</span>
+<span class="normal"><a href="#__codelineno-0-828">828</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-0-42"><a id="__codelineno-0-42" name="__codelineno-0-42"></a><span class="k">class</span><span class="w"> </span><span class="nc">Heartbeat</span><span class="p">(</span><span class="n">Algorithm</span><span class="p">):</span>
 </span><span id="__span-0-43"><a id="__codelineno-0-43" name="__codelineno-0-43"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Class representing a Heartbeat to check if the upstream has new data.&quot;&quot;&quot;</span>
 </span><span id="__span-0-44"><a id="__codelineno-0-44" name="__codelineno-0-44"></a>
 </span><span id="__span-0-45"><a id="__codelineno-0-45" name="__codelineno-0-45"></a>    <span class="n">_LOGGER</span> <span class="o">=</span> <span class="n">LoggingHandler</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span><span class="o">.</span><span class="n">get_logger</span><span class="p">()</span>
@@ -9071,155 +9037,151 @@
 </span><span id="__span-0-681"><a id="__codelineno-0-681" name="__codelineno-0-681"></a>
 </span><span id="__span-0-682"><a id="__codelineno-0-682" name="__codelineno-0-682"></a>        <span class="n">delta_table</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">&quot;trgt&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span>
 </span><span id="__span-0-683"><a id="__codelineno-0-683" name="__codelineno-0-683"></a>            <span class="n">heartbeat_sensor_data_feed_csv_df</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">&quot;source&quot;</span><span class="p">),</span>
-</span><span id="__span-0-684"><a id="__codelineno-0-684" name="__codelineno-0-684"></a>            <span class="p">(</span>
-</span><span id="__span-0-685"><a id="__codelineno-0-685" name="__codelineno-0-685"></a><span class="w">                </span><span class="sd">&quot;&quot;&quot;source.sensor_id = trgt.sensor_id and</span>
-</span><span id="__span-0-686"><a id="__codelineno-0-686" name="__codelineno-0-686"></a><span class="sd">                trgt.trigger_job_id = source.trigger_job_id&quot;&quot;&quot;</span>
-</span><span id="__span-0-687"><a id="__codelineno-0-687" name="__codelineno-0-687"></a>            <span class="p">),</span>
-</span><span id="__span-0-688"><a id="__codelineno-0-688" name="__codelineno-0-688"></a>        <span class="p">)</span><span class="o">.</span><span class="n">whenNotMatchedInsert</span><span class="p">(</span>
-</span><span id="__span-0-689"><a id="__codelineno-0-689" name="__codelineno-0-689"></a>            <span class="n">values</span><span class="o">=</span><span class="p">{</span>
-</span><span id="__span-0-690"><a id="__codelineno-0-690" name="__codelineno-0-690"></a>                <span class="s2">&quot;sensor_source&quot;</span><span class="p">:</span> <span class="s2">&quot;source.sensor_source&quot;</span><span class="p">,</span>
-</span><span id="__span-0-691"><a id="__codelineno-0-691" name="__codelineno-0-691"></a>                <span class="s2">&quot;sensor_id&quot;</span><span class="p">:</span> <span class="s2">&quot;source.sensor_id&quot;</span><span class="p">,</span>
-</span><span id="__span-0-692"><a id="__codelineno-0-692" name="__codelineno-0-692"></a>                <span class="s2">&quot;sensor_read_type&quot;</span><span class="p">:</span> <span class="s2">&quot;source.sensor_read_type&quot;</span><span class="p">,</span>
-</span><span id="__span-0-693"><a id="__codelineno-0-693" name="__codelineno-0-693"></a>                <span class="s2">&quot;asset_description&quot;</span><span class="p">:</span> <span class="s2">&quot;source.asset_description&quot;</span><span class="p">,</span>
-</span><span id="__span-0-694"><a id="__codelineno-0-694" name="__codelineno-0-694"></a>                <span class="s2">&quot;upstream_key&quot;</span><span class="p">:</span> <span class="s2">&quot;source.upstream_key&quot;</span><span class="p">,</span>
-</span><span id="__span-0-695"><a id="__codelineno-0-695" name="__codelineno-0-695"></a>                <span class="s2">&quot;preprocess_query&quot;</span><span class="p">:</span> <span class="s2">&quot;source.preprocess_query&quot;</span><span class="p">,</span>
-</span><span id="__span-0-696"><a id="__codelineno-0-696" name="__codelineno-0-696"></a>                <span class="s2">&quot;latest_event_fetched_timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;null&quot;</span><span class="p">,</span>
-</span><span id="__span-0-697"><a id="__codelineno-0-697" name="__codelineno-0-697"></a>                <span class="s2">&quot;trigger_job_id&quot;</span><span class="p">:</span> <span class="s2">&quot;source.trigger_job_id&quot;</span><span class="p">,</span>
-</span><span id="__span-0-698"><a id="__codelineno-0-698" name="__codelineno-0-698"></a>                <span class="s2">&quot;trigger_job_name&quot;</span><span class="p">:</span> <span class="s2">&quot;source.trigger_job_name&quot;</span><span class="p">,</span>
-</span><span id="__span-0-699"><a id="__codelineno-0-699" name="__codelineno-0-699"></a>                <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;null&quot;</span><span class="p">,</span>
-</span><span id="__span-0-700"><a id="__codelineno-0-700" name="__codelineno-0-700"></a>                <span class="s2">&quot;status_change_timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;null&quot;</span><span class="p">,</span>
-</span><span id="__span-0-701"><a id="__codelineno-0-701" name="__codelineno-0-701"></a>                <span class="s2">&quot;job_start_timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;null&quot;</span><span class="p">,</span>
-</span><span id="__span-0-702"><a id="__codelineno-0-702" name="__codelineno-0-702"></a>                <span class="s2">&quot;job_end_timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;null&quot;</span><span class="p">,</span>
-</span><span id="__span-0-703"><a id="__codelineno-0-703" name="__codelineno-0-703"></a>                <span class="s2">&quot;job_state&quot;</span><span class="p">:</span> <span class="s2">&quot;source.job_state&quot;</span><span class="p">,</span>
-</span><span id="__span-0-704"><a id="__codelineno-0-704" name="__codelineno-0-704"></a>                <span class="s2">&quot;dependency_flag&quot;</span><span class="p">:</span> <span class="s2">&quot;source.dependency_flag&quot;</span><span class="p">,</span>
-</span><span id="__span-0-705"><a id="__codelineno-0-705" name="__codelineno-0-705"></a>            <span class="p">}</span>
-</span><span id="__span-0-706"><a id="__codelineno-0-706" name="__codelineno-0-706"></a>        <span class="p">)</span><span class="o">.</span><span class="n">whenMatchedUpdate</span><span class="p">(</span>
-</span><span id="__span-0-707"><a id="__codelineno-0-707" name="__codelineno-0-707"></a>            <span class="nb">set</span><span class="o">=</span><span class="p">{</span>
-</span><span id="__span-0-708"><a id="__codelineno-0-708" name="__codelineno-0-708"></a>                <span class="s2">&quot;sensor_source&quot;</span><span class="p">:</span> <span class="s2">&quot;source.sensor_source&quot;</span><span class="p">,</span>
-</span><span id="__span-0-709"><a id="__codelineno-0-709" name="__codelineno-0-709"></a>                <span class="s2">&quot;sensor_id&quot;</span><span class="p">:</span> <span class="s2">&quot;source.sensor_id&quot;</span><span class="p">,</span>
-</span><span id="__span-0-710"><a id="__codelineno-0-710" name="__codelineno-0-710"></a>                <span class="s2">&quot;sensor_read_type&quot;</span><span class="p">:</span> <span class="s2">&quot;source.sensor_read_type&quot;</span><span class="p">,</span>
-</span><span id="__span-0-711"><a id="__codelineno-0-711" name="__codelineno-0-711"></a>                <span class="s2">&quot;asset_description&quot;</span><span class="p">:</span> <span class="s2">&quot;source.asset_description&quot;</span><span class="p">,</span>
-</span><span id="__span-0-712"><a id="__codelineno-0-712" name="__codelineno-0-712"></a>                <span class="s2">&quot;upstream_key&quot;</span><span class="p">:</span> <span class="s2">&quot;source.upstream_key&quot;</span><span class="p">,</span>
-</span><span id="__span-0-713"><a id="__codelineno-0-713" name="__codelineno-0-713"></a>                <span class="s2">&quot;preprocess_query&quot;</span><span class="p">:</span> <span class="s2">&quot;source.preprocess_query&quot;</span><span class="p">,</span>
-</span><span id="__span-0-714"><a id="__codelineno-0-714" name="__codelineno-0-714"></a>                <span class="s2">&quot;latest_event_fetched_timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;trgt.latest_event_fetched_timestamp&quot;</span><span class="p">,</span>
-</span><span id="__span-0-715"><a id="__codelineno-0-715" name="__codelineno-0-715"></a>                <span class="s2">&quot;trigger_job_id&quot;</span><span class="p">:</span> <span class="s2">&quot;source.trigger_job_id&quot;</span><span class="p">,</span>
-</span><span id="__span-0-716"><a id="__codelineno-0-716" name="__codelineno-0-716"></a>                <span class="s2">&quot;trigger_job_name&quot;</span><span class="p">:</span> <span class="s2">&quot;source.trigger_job_name&quot;</span><span class="p">,</span>
-</span><span id="__span-0-717"><a id="__codelineno-0-717" name="__codelineno-0-717"></a>                <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;trgt.status&quot;</span><span class="p">,</span>
-</span><span id="__span-0-718"><a id="__codelineno-0-718" name="__codelineno-0-718"></a>                <span class="s2">&quot;status_change_timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;trgt.status_change_timestamp&quot;</span><span class="p">,</span>
-</span><span id="__span-0-719"><a id="__codelineno-0-719" name="__codelineno-0-719"></a>                <span class="s2">&quot;job_start_timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;trgt.job_start_timestamp&quot;</span><span class="p">,</span>
-</span><span id="__span-0-720"><a id="__codelineno-0-720" name="__codelineno-0-720"></a>                <span class="s2">&quot;job_end_timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;trgt.job_end_timestamp&quot;</span><span class="p">,</span>
-</span><span id="__span-0-721"><a id="__codelineno-0-721" name="__codelineno-0-721"></a>                <span class="s2">&quot;job_state&quot;</span><span class="p">:</span> <span class="s2">&quot;source.job_state&quot;</span><span class="p">,</span>
-</span><span id="__span-0-722"><a id="__codelineno-0-722" name="__codelineno-0-722"></a>                <span class="s2">&quot;dependency_flag&quot;</span><span class="p">:</span> <span class="s2">&quot;source.dependency_flag&quot;</span><span class="p">,</span>
-</span><span id="__span-0-723"><a id="__codelineno-0-723" name="__codelineno-0-723"></a>            <span class="p">}</span>
-</span><span id="__span-0-724"><a id="__codelineno-0-724" name="__codelineno-0-724"></a>        <span class="p">)</span><span class="o">.</span><span class="n">whenNotMatchedBySourceDelete</span><span class="p">()</span><span class="o">.</span><span class="n">execute</span><span class="p">()</span>
-</span><span id="__span-0-725"><a id="__codelineno-0-725" name="__codelineno-0-725"></a>
-</span><span id="__span-0-726"><a id="__codelineno-0-726" name="__codelineno-0-726"></a>    <span class="nd">@classmethod</span>
-</span><span id="__span-0-727"><a id="__codelineno-0-727" name="__codelineno-0-727"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">heartbeat_sensor_control_table_data_feed</span><span class="p">(</span>
-</span><span id="__span-0-728"><a id="__codelineno-0-728" name="__codelineno-0-728"></a>        <span class="bp">cls</span><span class="p">,</span>
-</span><span id="__span-0-729"><a id="__codelineno-0-729" name="__codelineno-0-729"></a>        <span class="n">heartbeat_sensor_data_feed_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-</span><span id="__span-0-730"><a id="__codelineno-0-730" name="__codelineno-0-730"></a>        <span class="n">heartbeat_sensor_control_table</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-</span><span id="__span-0-731"><a id="__codelineno-0-731" name="__codelineno-0-731"></a>    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-</span><span id="__span-0-732"><a id="__codelineno-0-732" name="__codelineno-0-732"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Control table Data feeder.</span>
-</span><span id="__span-0-733"><a id="__codelineno-0-733" name="__codelineno-0-733"></a>
-</span><span id="__span-0-734"><a id="__codelineno-0-734" name="__codelineno-0-734"></a><span class="sd">        It reads the CSV file stored at `heartbeat_sensor_data_feed_path` and</span>
-</span><span id="__span-0-735"><a id="__codelineno-0-735" name="__codelineno-0-735"></a><span class="sd">        perform UPSERT and DELETE in control table.</span>
-</span><span id="__span-0-736"><a id="__codelineno-0-736" name="__codelineno-0-736"></a><span class="sd">        - **heartbeat_sensor_data_feed_path**: path where CSV file is stored.</span>
-</span><span id="__span-0-737"><a id="__codelineno-0-737" name="__codelineno-0-737"></a><span class="sd">        - **heartbeat_sensor_control_table**: CONTROL table of Heartbeat sensor.</span>
-</span><span id="__span-0-738"><a id="__codelineno-0-738" name="__codelineno-0-738"></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="__span-0-739"><a id="__codelineno-0-739" name="__codelineno-0-739"></a>        <span class="n">heartbeat_sensor_data_feed_csv_df</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_read_heartbeat_sensor_data_feed_csv</span><span class="p">(</span>
-</span><span id="__span-0-740"><a id="__codelineno-0-740" name="__codelineno-0-740"></a>            <span class="n">heartbeat_sensor_data_feed_path</span>
-</span><span id="__span-0-741"><a id="__codelineno-0-741" name="__codelineno-0-741"></a>        <span class="p">)</span>
-</span><span id="__span-0-742"><a id="__codelineno-0-742" name="__codelineno-0-742"></a>
-</span><span id="__span-0-743"><a id="__codelineno-0-743" name="__codelineno-0-743"></a>        <span class="bp">cls</span><span class="o">.</span><span class="n">merge_control_table_data_feed_records</span><span class="p">(</span>
-</span><span id="__span-0-744"><a id="__codelineno-0-744" name="__codelineno-0-744"></a>            <span class="n">heartbeat_sensor_control_table</span><span class="p">,</span> <span class="n">heartbeat_sensor_data_feed_csv_df</span>
-</span><span id="__span-0-745"><a id="__codelineno-0-745" name="__codelineno-0-745"></a>        <span class="p">)</span>
-</span><span id="__span-0-746"><a id="__codelineno-0-746" name="__codelineno-0-746"></a>
-</span><span id="__span-0-747"><a id="__codelineno-0-747" name="__codelineno-0-747"></a>    <span class="nd">@classmethod</span>
-</span><span id="__span-0-748"><a id="__codelineno-0-748" name="__codelineno-0-748"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">update_sensor_processed_status</span><span class="p">(</span>
-</span><span id="__span-0-749"><a id="__codelineno-0-749" name="__codelineno-0-749"></a>        <span class="bp">cls</span><span class="p">,</span>
-</span><span id="__span-0-750"><a id="__codelineno-0-750" name="__codelineno-0-750"></a>        <span class="n">sensor_table</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-</span><span id="__span-0-751"><a id="__codelineno-0-751" name="__codelineno-0-751"></a>        <span class="n">job_id_filter_control_table_df</span><span class="p">:</span> <span class="n">DataFrame</span><span class="p">,</span>
-</span><span id="__span-0-752"><a id="__codelineno-0-752" name="__codelineno-0-752"></a>    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-</span><span id="__span-0-753"><a id="__codelineno-0-753" name="__codelineno-0-753"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;UPDATE sensor PROCESSED_NEW_DATA status.</span>
-</span><span id="__span-0-754"><a id="__codelineno-0-754" name="__codelineno-0-754"></a>
-</span><span id="__span-0-755"><a id="__codelineno-0-755" name="__codelineno-0-755"></a><span class="sd">        Update sensor control table with PROCESSED_NEW_DATA status and</span>
-</span><span id="__span-0-756"><a id="__codelineno-0-756" name="__codelineno-0-756"></a><span class="sd">        status_change_timestamp for the triggered job.</span>
-</span><span id="__span-0-757"><a id="__codelineno-0-757" name="__codelineno-0-757"></a>
-</span><span id="__span-0-758"><a id="__codelineno-0-758" name="__codelineno-0-758"></a><span class="sd">        Args:</span>
-</span><span id="__span-0-759"><a id="__codelineno-0-759" name="__codelineno-0-759"></a><span class="sd">            sensor_table: lakehouse engine sensor table name.</span>
-</span><span id="__span-0-760"><a id="__codelineno-0-760" name="__codelineno-0-760"></a><span class="sd">            job_id_filter_control_table_df: Job Id filtered Heartbeat sensor</span>
-</span><span id="__span-0-761"><a id="__codelineno-0-761" name="__codelineno-0-761"></a><span class="sd">            control table dataframe.</span>
-</span><span id="__span-0-762"><a id="__codelineno-0-762" name="__codelineno-0-762"></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="__span-0-763"><a id="__codelineno-0-763" name="__codelineno-0-763"></a>        <span class="n">sensor_id_df</span> <span class="o">=</span> <span class="n">job_id_filter_control_table_df</span><span class="o">.</span><span class="n">withColumn</span><span class="p">(</span>
-</span><span id="__span-0-764"><a id="__codelineno-0-764" name="__codelineno-0-764"></a>            <span class="s2">&quot;sensor_table_sensor_id&quot;</span><span class="p">,</span>
-</span><span id="__span-0-765"><a id="__codelineno-0-765" name="__codelineno-0-765"></a>            <span class="n">concat_ws</span><span class="p">(</span>
-</span><span id="__span-0-766"><a id="__codelineno-0-766" name="__codelineno-0-766"></a>                <span class="s2">&quot;_&quot;</span><span class="p">,</span>
-</span><span id="__span-0-767"><a id="__codelineno-0-767" name="__codelineno-0-767"></a>                <span class="n">regexp_replace</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s2">&quot;sensor_id&quot;</span><span class="p">),</span> <span class="sa">r</span><span class="s2">&quot;[ :\.]&quot;</span><span class="p">,</span> <span class="s2">&quot;_&quot;</span><span class="p">),</span>
-</span><span id="__span-0-768"><a id="__codelineno-0-768" name="__codelineno-0-768"></a>                <span class="n">col</span><span class="p">(</span><span class="s2">&quot;trigger_job_id&quot;</span><span class="p">),</span>
-</span><span id="__span-0-769"><a id="__codelineno-0-769" name="__codelineno-0-769"></a>            <span class="p">),</span>
-</span><span id="__span-0-770"><a id="__codelineno-0-770" name="__codelineno-0-770"></a>        <span class="p">)</span>
-</span><span id="__span-0-771"><a id="__codelineno-0-771" name="__codelineno-0-771"></a>
-</span><span id="__span-0-772"><a id="__codelineno-0-772" name="__codelineno-0-772"></a>        <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">sensor_id_df</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s2">&quot;sensor_table_sensor_id&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">collect</span><span class="p">():</span>
-</span><span id="__span-0-773"><a id="__codelineno-0-773" name="__codelineno-0-773"></a>            <span class="n">SensorTerminator</span><span class="o">.</span><span class="n">update_sensor_status</span><span class="p">(</span>
-</span><span id="__span-0-774"><a id="__codelineno-0-774" name="__codelineno-0-774"></a>                <span class="n">sensor_id</span><span class="o">=</span><span class="n">row</span><span class="p">[</span><span class="s2">&quot;sensor_table_sensor_id&quot;</span><span class="p">],</span>
-</span><span id="__span-0-775"><a id="__codelineno-0-775" name="__codelineno-0-775"></a>                <span class="n">control_db_table_name</span><span class="o">=</span><span class="n">sensor_table</span><span class="p">,</span>
-</span><span id="__span-0-776"><a id="__codelineno-0-776" name="__codelineno-0-776"></a>                <span class="n">status</span><span class="o">=</span><span class="n">SensorStatus</span><span class="o">.</span><span class="n">PROCESSED_NEW_DATA</span><span class="o">.</span><span class="n">value</span><span class="p">,</span>
-</span><span id="__span-0-777"><a id="__codelineno-0-777" name="__codelineno-0-777"></a>                <span class="n">assets</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-</span><span id="__span-0-778"><a id="__codelineno-0-778" name="__codelineno-0-778"></a>            <span class="p">)</span>
-</span><span id="__span-0-779"><a id="__codelineno-0-779" name="__codelineno-0-779"></a>
-</span><span id="__span-0-780"><a id="__codelineno-0-780" name="__codelineno-0-780"></a>    <span class="nd">@classmethod</span>
-</span><span id="__span-0-781"><a id="__codelineno-0-781" name="__codelineno-0-781"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">update_heartbeat_sensor_completion_status</span><span class="p">(</span>
-</span><span id="__span-0-782"><a id="__codelineno-0-782" name="__codelineno-0-782"></a>        <span class="bp">cls</span><span class="p">,</span>
-</span><span id="__span-0-783"><a id="__codelineno-0-783" name="__codelineno-0-783"></a>        <span class="n">heartbeat_sensor_control_table</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-</span><span id="__span-0-784"><a id="__codelineno-0-784" name="__codelineno-0-784"></a>        <span class="n">sensor_table</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-</span><span id="__span-0-785"><a id="__codelineno-0-785" name="__codelineno-0-785"></a>        <span class="n">job_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-</span><span id="__span-0-786"><a id="__codelineno-0-786" name="__codelineno-0-786"></a>    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-</span><span id="__span-0-787"><a id="__codelineno-0-787" name="__codelineno-0-787"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;UPDATE heartbeat sensor status.</span>
-</span><span id="__span-0-788"><a id="__codelineno-0-788" name="__codelineno-0-788"></a>
-</span><span id="__span-0-789"><a id="__codelineno-0-789" name="__codelineno-0-789"></a><span class="sd">        Update heartbeat sensor control table with COMPLETE status and</span>
-</span><span id="__span-0-790"><a id="__codelineno-0-790" name="__codelineno-0-790"></a><span class="sd">        job_end_timestamp for the triggered job.</span>
-</span><span id="__span-0-791"><a id="__codelineno-0-791" name="__codelineno-0-791"></a><span class="sd">        Update sensor control table with PROCESSED_NEW_DATA status and</span>
-</span><span id="__span-0-792"><a id="__codelineno-0-792" name="__codelineno-0-792"></a><span class="sd">        status_change_timestamp for the triggered job.</span>
-</span><span id="__span-0-793"><a id="__codelineno-0-793" name="__codelineno-0-793"></a>
-</span><span id="__span-0-794"><a id="__codelineno-0-794" name="__codelineno-0-794"></a><span class="sd">        Args:</span>
-</span><span id="__span-0-795"><a id="__codelineno-0-795" name="__codelineno-0-795"></a><span class="sd">            job_id: job_id of the running job. It will refer to</span>
-</span><span id="__span-0-796"><a id="__codelineno-0-796" name="__codelineno-0-796"></a><span class="sd">            trigger_job_id in Control table.</span>
-</span><span id="__span-0-797"><a id="__codelineno-0-797" name="__codelineno-0-797"></a><span class="sd">            sensor_table: lakehouse engine sensor table name.</span>
-</span><span id="__span-0-798"><a id="__codelineno-0-798" name="__codelineno-0-798"></a><span class="sd">            heartbeat_sensor_control_table: Heartbeat sensor control table.</span>
-</span><span id="__span-0-799"><a id="__codelineno-0-799" name="__codelineno-0-799"></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="__span-0-800"><a id="__codelineno-0-800" name="__codelineno-0-800"></a>        <span class="n">job_id_filter_control_table_df</span> <span class="o">=</span> <span class="p">(</span>
-</span><span id="__span-0-801"><a id="__codelineno-0-801" name="__codelineno-0-801"></a>            <span class="n">ExecEnv</span><span class="o">.</span><span class="n">SESSION</span><span class="o">.</span><span class="n">table</span><span class="p">(</span><span class="n">heartbeat_sensor_control_table</span><span class="p">)</span>
-</span><span id="__span-0-802"><a id="__codelineno-0-802" name="__codelineno-0-802"></a>            <span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s2">&quot;trigger_job_id&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="n">job_id</span><span class="p">)</span>
-</span><span id="__span-0-803"><a id="__codelineno-0-803" name="__codelineno-0-803"></a>            <span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="s2">&quot;status&quot;</span><span class="p">,</span> <span class="n">lit</span><span class="p">(</span><span class="n">HeartbeatStatus</span><span class="o">.</span><span class="n">COMPLETED</span><span class="o">.</span><span class="n">value</span><span class="p">))</span>
-</span><span id="__span-0-804"><a id="__codelineno-0-804" name="__codelineno-0-804"></a>            <span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="s2">&quot;status_change_timestamp&quot;</span><span class="p">,</span> <span class="n">current_timestamp</span><span class="p">())</span>
-</span><span id="__span-0-805"><a id="__codelineno-0-805" name="__codelineno-0-805"></a>            <span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="s2">&quot;job_end_timestamp&quot;</span><span class="p">,</span> <span class="n">current_timestamp</span><span class="p">())</span>
-</span><span id="__span-0-806"><a id="__codelineno-0-806" name="__codelineno-0-806"></a>        <span class="p">)</span>
+</span><span id="__span-0-684"><a id="__codelineno-0-684" name="__codelineno-0-684"></a>            <span class="p">(</span><span class="s2">&quot;&quot;&quot;source.sensor_id = trgt.sensor_id and</span>
+</span><span id="__span-0-685"><a id="__codelineno-0-685" name="__codelineno-0-685"></a><span class="s2">                trgt.trigger_job_id = source.trigger_job_id&quot;&quot;&quot;</span><span class="p">),</span>
+</span><span id="__span-0-686"><a id="__codelineno-0-686" name="__codelineno-0-686"></a>        <span class="p">)</span><span class="o">.</span><span class="n">whenNotMatchedInsert</span><span class="p">(</span>
+</span><span id="__span-0-687"><a id="__codelineno-0-687" name="__codelineno-0-687"></a>            <span class="n">values</span><span class="o">=</span><span class="p">{</span>
+</span><span id="__span-0-688"><a id="__codelineno-0-688" name="__codelineno-0-688"></a>                <span class="s2">&quot;sensor_source&quot;</span><span class="p">:</span> <span class="s2">&quot;source.sensor_source&quot;</span><span class="p">,</span>
+</span><span id="__span-0-689"><a id="__codelineno-0-689" name="__codelineno-0-689"></a>                <span class="s2">&quot;sensor_id&quot;</span><span class="p">:</span> <span class="s2">&quot;source.sensor_id&quot;</span><span class="p">,</span>
+</span><span id="__span-0-690"><a id="__codelineno-0-690" name="__codelineno-0-690"></a>                <span class="s2">&quot;sensor_read_type&quot;</span><span class="p">:</span> <span class="s2">&quot;source.sensor_read_type&quot;</span><span class="p">,</span>
+</span><span id="__span-0-691"><a id="__codelineno-0-691" name="__codelineno-0-691"></a>                <span class="s2">&quot;asset_description&quot;</span><span class="p">:</span> <span class="s2">&quot;source.asset_description&quot;</span><span class="p">,</span>
+</span><span id="__span-0-692"><a id="__codelineno-0-692" name="__codelineno-0-692"></a>                <span class="s2">&quot;upstream_key&quot;</span><span class="p">:</span> <span class="s2">&quot;source.upstream_key&quot;</span><span class="p">,</span>
+</span><span id="__span-0-693"><a id="__codelineno-0-693" name="__codelineno-0-693"></a>                <span class="s2">&quot;preprocess_query&quot;</span><span class="p">:</span> <span class="s2">&quot;source.preprocess_query&quot;</span><span class="p">,</span>
+</span><span id="__span-0-694"><a id="__codelineno-0-694" name="__codelineno-0-694"></a>                <span class="s2">&quot;latest_event_fetched_timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;null&quot;</span><span class="p">,</span>
+</span><span id="__span-0-695"><a id="__codelineno-0-695" name="__codelineno-0-695"></a>                <span class="s2">&quot;trigger_job_id&quot;</span><span class="p">:</span> <span class="s2">&quot;source.trigger_job_id&quot;</span><span class="p">,</span>
+</span><span id="__span-0-696"><a id="__codelineno-0-696" name="__codelineno-0-696"></a>                <span class="s2">&quot;trigger_job_name&quot;</span><span class="p">:</span> <span class="s2">&quot;source.trigger_job_name&quot;</span><span class="p">,</span>
+</span><span id="__span-0-697"><a id="__codelineno-0-697" name="__codelineno-0-697"></a>                <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;null&quot;</span><span class="p">,</span>
+</span><span id="__span-0-698"><a id="__codelineno-0-698" name="__codelineno-0-698"></a>                <span class="s2">&quot;status_change_timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;null&quot;</span><span class="p">,</span>
+</span><span id="__span-0-699"><a id="__codelineno-0-699" name="__codelineno-0-699"></a>                <span class="s2">&quot;job_start_timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;null&quot;</span><span class="p">,</span>
+</span><span id="__span-0-700"><a id="__codelineno-0-700" name="__codelineno-0-700"></a>                <span class="s2">&quot;job_end_timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;null&quot;</span><span class="p">,</span>
+</span><span id="__span-0-701"><a id="__codelineno-0-701" name="__codelineno-0-701"></a>                <span class="s2">&quot;job_state&quot;</span><span class="p">:</span> <span class="s2">&quot;source.job_state&quot;</span><span class="p">,</span>
+</span><span id="__span-0-702"><a id="__codelineno-0-702" name="__codelineno-0-702"></a>                <span class="s2">&quot;dependency_flag&quot;</span><span class="p">:</span> <span class="s2">&quot;source.dependency_flag&quot;</span><span class="p">,</span>
+</span><span id="__span-0-703"><a id="__codelineno-0-703" name="__codelineno-0-703"></a>            <span class="p">}</span>
+</span><span id="__span-0-704"><a id="__codelineno-0-704" name="__codelineno-0-704"></a>        <span class="p">)</span><span class="o">.</span><span class="n">whenMatchedUpdate</span><span class="p">(</span>
+</span><span id="__span-0-705"><a id="__codelineno-0-705" name="__codelineno-0-705"></a>            <span class="nb">set</span><span class="o">=</span><span class="p">{</span>
+</span><span id="__span-0-706"><a id="__codelineno-0-706" name="__codelineno-0-706"></a>                <span class="s2">&quot;sensor_source&quot;</span><span class="p">:</span> <span class="s2">&quot;source.sensor_source&quot;</span><span class="p">,</span>
+</span><span id="__span-0-707"><a id="__codelineno-0-707" name="__codelineno-0-707"></a>                <span class="s2">&quot;sensor_id&quot;</span><span class="p">:</span> <span class="s2">&quot;source.sensor_id&quot;</span><span class="p">,</span>
+</span><span id="__span-0-708"><a id="__codelineno-0-708" name="__codelineno-0-708"></a>                <span class="s2">&quot;sensor_read_type&quot;</span><span class="p">:</span> <span class="s2">&quot;source.sensor_read_type&quot;</span><span class="p">,</span>
+</span><span id="__span-0-709"><a id="__codelineno-0-709" name="__codelineno-0-709"></a>                <span class="s2">&quot;asset_description&quot;</span><span class="p">:</span> <span class="s2">&quot;source.asset_description&quot;</span><span class="p">,</span>
+</span><span id="__span-0-710"><a id="__codelineno-0-710" name="__codelineno-0-710"></a>                <span class="s2">&quot;upstream_key&quot;</span><span class="p">:</span> <span class="s2">&quot;source.upstream_key&quot;</span><span class="p">,</span>
+</span><span id="__span-0-711"><a id="__codelineno-0-711" name="__codelineno-0-711"></a>                <span class="s2">&quot;preprocess_query&quot;</span><span class="p">:</span> <span class="s2">&quot;source.preprocess_query&quot;</span><span class="p">,</span>
+</span><span id="__span-0-712"><a id="__codelineno-0-712" name="__codelineno-0-712"></a>                <span class="s2">&quot;latest_event_fetched_timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;trgt.latest_event_fetched_timestamp&quot;</span><span class="p">,</span>
+</span><span id="__span-0-713"><a id="__codelineno-0-713" name="__codelineno-0-713"></a>                <span class="s2">&quot;trigger_job_id&quot;</span><span class="p">:</span> <span class="s2">&quot;source.trigger_job_id&quot;</span><span class="p">,</span>
+</span><span id="__span-0-714"><a id="__codelineno-0-714" name="__codelineno-0-714"></a>                <span class="s2">&quot;trigger_job_name&quot;</span><span class="p">:</span> <span class="s2">&quot;source.trigger_job_name&quot;</span><span class="p">,</span>
+</span><span id="__span-0-715"><a id="__codelineno-0-715" name="__codelineno-0-715"></a>                <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;trgt.status&quot;</span><span class="p">,</span>
+</span><span id="__span-0-716"><a id="__codelineno-0-716" name="__codelineno-0-716"></a>                <span class="s2">&quot;status_change_timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;trgt.status_change_timestamp&quot;</span><span class="p">,</span>
+</span><span id="__span-0-717"><a id="__codelineno-0-717" name="__codelineno-0-717"></a>                <span class="s2">&quot;job_start_timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;trgt.job_start_timestamp&quot;</span><span class="p">,</span>
+</span><span id="__span-0-718"><a id="__codelineno-0-718" name="__codelineno-0-718"></a>                <span class="s2">&quot;job_end_timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;trgt.job_end_timestamp&quot;</span><span class="p">,</span>
+</span><span id="__span-0-719"><a id="__codelineno-0-719" name="__codelineno-0-719"></a>                <span class="s2">&quot;job_state&quot;</span><span class="p">:</span> <span class="s2">&quot;source.job_state&quot;</span><span class="p">,</span>
+</span><span id="__span-0-720"><a id="__codelineno-0-720" name="__codelineno-0-720"></a>                <span class="s2">&quot;dependency_flag&quot;</span><span class="p">:</span> <span class="s2">&quot;source.dependency_flag&quot;</span><span class="p">,</span>
+</span><span id="__span-0-721"><a id="__codelineno-0-721" name="__codelineno-0-721"></a>            <span class="p">}</span>
+</span><span id="__span-0-722"><a id="__codelineno-0-722" name="__codelineno-0-722"></a>        <span class="p">)</span><span class="o">.</span><span class="n">whenNotMatchedBySourceDelete</span><span class="p">()</span><span class="o">.</span><span class="n">execute</span><span class="p">()</span>
+</span><span id="__span-0-723"><a id="__codelineno-0-723" name="__codelineno-0-723"></a>
+</span><span id="__span-0-724"><a id="__codelineno-0-724" name="__codelineno-0-724"></a>    <span class="nd">@classmethod</span>
+</span><span id="__span-0-725"><a id="__codelineno-0-725" name="__codelineno-0-725"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">heartbeat_sensor_control_table_data_feed</span><span class="p">(</span>
+</span><span id="__span-0-726"><a id="__codelineno-0-726" name="__codelineno-0-726"></a>        <span class="bp">cls</span><span class="p">,</span>
+</span><span id="__span-0-727"><a id="__codelineno-0-727" name="__codelineno-0-727"></a>        <span class="n">heartbeat_sensor_data_feed_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+</span><span id="__span-0-728"><a id="__codelineno-0-728" name="__codelineno-0-728"></a>        <span class="n">heartbeat_sensor_control_table</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+</span><span id="__span-0-729"><a id="__codelineno-0-729" name="__codelineno-0-729"></a>    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="__span-0-730"><a id="__codelineno-0-730" name="__codelineno-0-730"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Control table Data feeder.</span>
+</span><span id="__span-0-731"><a id="__codelineno-0-731" name="__codelineno-0-731"></a>
+</span><span id="__span-0-732"><a id="__codelineno-0-732" name="__codelineno-0-732"></a><span class="sd">        It reads the CSV file stored at `heartbeat_sensor_data_feed_path` and</span>
+</span><span id="__span-0-733"><a id="__codelineno-0-733" name="__codelineno-0-733"></a><span class="sd">        perform UPSERT and DELETE in control table.</span>
+</span><span id="__span-0-734"><a id="__codelineno-0-734" name="__codelineno-0-734"></a><span class="sd">        - **heartbeat_sensor_data_feed_path**: path where CSV file is stored.</span>
+</span><span id="__span-0-735"><a id="__codelineno-0-735" name="__codelineno-0-735"></a><span class="sd">        - **heartbeat_sensor_control_table**: CONTROL table of Heartbeat sensor.</span>
+</span><span id="__span-0-736"><a id="__codelineno-0-736" name="__codelineno-0-736"></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="__span-0-737"><a id="__codelineno-0-737" name="__codelineno-0-737"></a>        <span class="n">heartbeat_sensor_data_feed_csv_df</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_read_heartbeat_sensor_data_feed_csv</span><span class="p">(</span>
+</span><span id="__span-0-738"><a id="__codelineno-0-738" name="__codelineno-0-738"></a>            <span class="n">heartbeat_sensor_data_feed_path</span>
+</span><span id="__span-0-739"><a id="__codelineno-0-739" name="__codelineno-0-739"></a>        <span class="p">)</span>
+</span><span id="__span-0-740"><a id="__codelineno-0-740" name="__codelineno-0-740"></a>
+</span><span id="__span-0-741"><a id="__codelineno-0-741" name="__codelineno-0-741"></a>        <span class="bp">cls</span><span class="o">.</span><span class="n">merge_control_table_data_feed_records</span><span class="p">(</span>
+</span><span id="__span-0-742"><a id="__codelineno-0-742" name="__codelineno-0-742"></a>            <span class="n">heartbeat_sensor_control_table</span><span class="p">,</span> <span class="n">heartbeat_sensor_data_feed_csv_df</span>
+</span><span id="__span-0-743"><a id="__codelineno-0-743" name="__codelineno-0-743"></a>        <span class="p">)</span>
+</span><span id="__span-0-744"><a id="__codelineno-0-744" name="__codelineno-0-744"></a>
+</span><span id="__span-0-745"><a id="__codelineno-0-745" name="__codelineno-0-745"></a>    <span class="nd">@classmethod</span>
+</span><span id="__span-0-746"><a id="__codelineno-0-746" name="__codelineno-0-746"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">update_sensor_processed_status</span><span class="p">(</span>
+</span><span id="__span-0-747"><a id="__codelineno-0-747" name="__codelineno-0-747"></a>        <span class="bp">cls</span><span class="p">,</span>
+</span><span id="__span-0-748"><a id="__codelineno-0-748" name="__codelineno-0-748"></a>        <span class="n">sensor_table</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+</span><span id="__span-0-749"><a id="__codelineno-0-749" name="__codelineno-0-749"></a>        <span class="n">job_id_filter_control_table_df</span><span class="p">:</span> <span class="n">DataFrame</span><span class="p">,</span>
+</span><span id="__span-0-750"><a id="__codelineno-0-750" name="__codelineno-0-750"></a>    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="__span-0-751"><a id="__codelineno-0-751" name="__codelineno-0-751"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;UPDATE sensor PROCESSED_NEW_DATA status.</span>
+</span><span id="__span-0-752"><a id="__codelineno-0-752" name="__codelineno-0-752"></a>
+</span><span id="__span-0-753"><a id="__codelineno-0-753" name="__codelineno-0-753"></a><span class="sd">        Update sensor control table with PROCESSED_NEW_DATA status and</span>
+</span><span id="__span-0-754"><a id="__codelineno-0-754" name="__codelineno-0-754"></a><span class="sd">        status_change_timestamp for the triggered job.</span>
+</span><span id="__span-0-755"><a id="__codelineno-0-755" name="__codelineno-0-755"></a>
+</span><span id="__span-0-756"><a id="__codelineno-0-756" name="__codelineno-0-756"></a><span class="sd">        Args:</span>
+</span><span id="__span-0-757"><a id="__codelineno-0-757" name="__codelineno-0-757"></a><span class="sd">            sensor_table: lakehouse engine sensor table name.</span>
+</span><span id="__span-0-758"><a id="__codelineno-0-758" name="__codelineno-0-758"></a><span class="sd">            job_id_filter_control_table_df: Job Id filtered Heartbeat sensor</span>
+</span><span id="__span-0-759"><a id="__codelineno-0-759" name="__codelineno-0-759"></a><span class="sd">            control table dataframe.</span>
+</span><span id="__span-0-760"><a id="__codelineno-0-760" name="__codelineno-0-760"></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="__span-0-761"><a id="__codelineno-0-761" name="__codelineno-0-761"></a>        <span class="n">sensor_id_df</span> <span class="o">=</span> <span class="n">job_id_filter_control_table_df</span><span class="o">.</span><span class="n">withColumn</span><span class="p">(</span>
+</span><span id="__span-0-762"><a id="__codelineno-0-762" name="__codelineno-0-762"></a>            <span class="s2">&quot;sensor_table_sensor_id&quot;</span><span class="p">,</span>
+</span><span id="__span-0-763"><a id="__codelineno-0-763" name="__codelineno-0-763"></a>            <span class="n">concat_ws</span><span class="p">(</span>
+</span><span id="__span-0-764"><a id="__codelineno-0-764" name="__codelineno-0-764"></a>                <span class="s2">&quot;_&quot;</span><span class="p">,</span>
+</span><span id="__span-0-765"><a id="__codelineno-0-765" name="__codelineno-0-765"></a>                <span class="n">regexp_replace</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s2">&quot;sensor_id&quot;</span><span class="p">),</span> <span class="sa">r</span><span class="s2">&quot;[ :\.]&quot;</span><span class="p">,</span> <span class="s2">&quot;_&quot;</span><span class="p">),</span>
+</span><span id="__span-0-766"><a id="__codelineno-0-766" name="__codelineno-0-766"></a>                <span class="n">col</span><span class="p">(</span><span class="s2">&quot;trigger_job_id&quot;</span><span class="p">),</span>
+</span><span id="__span-0-767"><a id="__codelineno-0-767" name="__codelineno-0-767"></a>            <span class="p">),</span>
+</span><span id="__span-0-768"><a id="__codelineno-0-768" name="__codelineno-0-768"></a>        <span class="p">)</span>
+</span><span id="__span-0-769"><a id="__codelineno-0-769" name="__codelineno-0-769"></a>
+</span><span id="__span-0-770"><a id="__codelineno-0-770" name="__codelineno-0-770"></a>        <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">sensor_id_df</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s2">&quot;sensor_table_sensor_id&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">collect</span><span class="p">():</span>
+</span><span id="__span-0-771"><a id="__codelineno-0-771" name="__codelineno-0-771"></a>            <span class="n">SensorTerminator</span><span class="o">.</span><span class="n">update_sensor_status</span><span class="p">(</span>
+</span><span id="__span-0-772"><a id="__codelineno-0-772" name="__codelineno-0-772"></a>                <span class="n">sensor_id</span><span class="o">=</span><span class="n">row</span><span class="p">[</span><span class="s2">&quot;sensor_table_sensor_id&quot;</span><span class="p">],</span>
+</span><span id="__span-0-773"><a id="__codelineno-0-773" name="__codelineno-0-773"></a>                <span class="n">control_db_table_name</span><span class="o">=</span><span class="n">sensor_table</span><span class="p">,</span>
+</span><span id="__span-0-774"><a id="__codelineno-0-774" name="__codelineno-0-774"></a>                <span class="n">status</span><span class="o">=</span><span class="n">SensorStatus</span><span class="o">.</span><span class="n">PROCESSED_NEW_DATA</span><span class="o">.</span><span class="n">value</span><span class="p">,</span>
+</span><span id="__span-0-775"><a id="__codelineno-0-775" name="__codelineno-0-775"></a>                <span class="n">assets</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+</span><span id="__span-0-776"><a id="__codelineno-0-776" name="__codelineno-0-776"></a>            <span class="p">)</span>
+</span><span id="__span-0-777"><a id="__codelineno-0-777" name="__codelineno-0-777"></a>
+</span><span id="__span-0-778"><a id="__codelineno-0-778" name="__codelineno-0-778"></a>    <span class="nd">@classmethod</span>
+</span><span id="__span-0-779"><a id="__codelineno-0-779" name="__codelineno-0-779"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">update_heartbeat_sensor_completion_status</span><span class="p">(</span>
+</span><span id="__span-0-780"><a id="__codelineno-0-780" name="__codelineno-0-780"></a>        <span class="bp">cls</span><span class="p">,</span>
+</span><span id="__span-0-781"><a id="__codelineno-0-781" name="__codelineno-0-781"></a>        <span class="n">heartbeat_sensor_control_table</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+</span><span id="__span-0-782"><a id="__codelineno-0-782" name="__codelineno-0-782"></a>        <span class="n">sensor_table</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+</span><span id="__span-0-783"><a id="__codelineno-0-783" name="__codelineno-0-783"></a>        <span class="n">job_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+</span><span id="__span-0-784"><a id="__codelineno-0-784" name="__codelineno-0-784"></a>    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="__span-0-785"><a id="__codelineno-0-785" name="__codelineno-0-785"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;UPDATE heartbeat sensor status.</span>
+</span><span id="__span-0-786"><a id="__codelineno-0-786" name="__codelineno-0-786"></a>
+</span><span id="__span-0-787"><a id="__codelineno-0-787" name="__codelineno-0-787"></a><span class="sd">        Update heartbeat sensor control table with COMPLETE status and</span>
+</span><span id="__span-0-788"><a id="__codelineno-0-788" name="__codelineno-0-788"></a><span class="sd">        job_end_timestamp for the triggered job.</span>
+</span><span id="__span-0-789"><a id="__codelineno-0-789" name="__codelineno-0-789"></a><span class="sd">        Update sensor control table with PROCESSED_NEW_DATA status and</span>
+</span><span id="__span-0-790"><a id="__codelineno-0-790" name="__codelineno-0-790"></a><span class="sd">        status_change_timestamp for the triggered job.</span>
+</span><span id="__span-0-791"><a id="__codelineno-0-791" name="__codelineno-0-791"></a>
+</span><span id="__span-0-792"><a id="__codelineno-0-792" name="__codelineno-0-792"></a><span class="sd">        Args:</span>
+</span><span id="__span-0-793"><a id="__codelineno-0-793" name="__codelineno-0-793"></a><span class="sd">            job_id: job_id of the running job. It will refer to</span>
+</span><span id="__span-0-794"><a id="__codelineno-0-794" name="__codelineno-0-794"></a><span class="sd">            trigger_job_id in Control table.</span>
+</span><span id="__span-0-795"><a id="__codelineno-0-795" name="__codelineno-0-795"></a><span class="sd">            sensor_table: lakehouse engine sensor table name.</span>
+</span><span id="__span-0-796"><a id="__codelineno-0-796" name="__codelineno-0-796"></a><span class="sd">            heartbeat_sensor_control_table: Heartbeat sensor control table.</span>
+</span><span id="__span-0-797"><a id="__codelineno-0-797" name="__codelineno-0-797"></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="__span-0-798"><a id="__codelineno-0-798" name="__codelineno-0-798"></a>        <span class="n">job_id_filter_control_table_df</span> <span class="o">=</span> <span class="p">(</span>
+</span><span id="__span-0-799"><a id="__codelineno-0-799" name="__codelineno-0-799"></a>            <span class="n">ExecEnv</span><span class="o">.</span><span class="n">SESSION</span><span class="o">.</span><span class="n">table</span><span class="p">(</span><span class="n">heartbeat_sensor_control_table</span><span class="p">)</span>
+</span><span id="__span-0-800"><a id="__codelineno-0-800" name="__codelineno-0-800"></a>            <span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s2">&quot;trigger_job_id&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="n">job_id</span><span class="p">)</span>
+</span><span id="__span-0-801"><a id="__codelineno-0-801" name="__codelineno-0-801"></a>            <span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="s2">&quot;status&quot;</span><span class="p">,</span> <span class="n">lit</span><span class="p">(</span><span class="n">HeartbeatStatus</span><span class="o">.</span><span class="n">COMPLETED</span><span class="o">.</span><span class="n">value</span><span class="p">))</span>
+</span><span id="__span-0-802"><a id="__codelineno-0-802" name="__codelineno-0-802"></a>            <span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="s2">&quot;status_change_timestamp&quot;</span><span class="p">,</span> <span class="n">current_timestamp</span><span class="p">())</span>
+</span><span id="__span-0-803"><a id="__codelineno-0-803" name="__codelineno-0-803"></a>            <span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="s2">&quot;job_end_timestamp&quot;</span><span class="p">,</span> <span class="n">current_timestamp</span><span class="p">())</span>
+</span><span id="__span-0-804"><a id="__codelineno-0-804" name="__codelineno-0-804"></a>        <span class="p">)</span>
+</span><span id="__span-0-805"><a id="__codelineno-0-805" name="__codelineno-0-805"></a>
+</span><span id="__span-0-806"><a id="__codelineno-0-806" name="__codelineno-0-806"></a>        <span class="bp">cls</span><span class="o">.</span><span class="n">update_sensor_processed_status</span><span class="p">(</span><span class="n">sensor_table</span><span class="p">,</span> <span class="n">job_id_filter_control_table_df</span><span class="p">)</span>
 </span><span id="__span-0-807"><a id="__codelineno-0-807" name="__codelineno-0-807"></a>
-</span><span id="__span-0-808"><a id="__codelineno-0-808" name="__codelineno-0-808"></a>        <span class="bp">cls</span><span class="o">.</span><span class="n">update_sensor_processed_status</span><span class="p">(</span><span class="n">sensor_table</span><span class="p">,</span> <span class="n">job_id_filter_control_table_df</span><span class="p">)</span>
-</span><span id="__span-0-809"><a id="__codelineno-0-809" name="__codelineno-0-809"></a>
-</span><span id="__span-0-810"><a id="__codelineno-0-810" name="__codelineno-0-810"></a>        <span class="n">delta_table</span> <span class="o">=</span> <span class="n">DeltaTable</span><span class="o">.</span><span class="n">forName</span><span class="p">(</span>
-</span><span id="__span-0-811"><a id="__codelineno-0-811" name="__codelineno-0-811"></a>            <span class="n">ExecEnv</span><span class="o">.</span><span class="n">SESSION</span><span class="p">,</span> <span class="n">heartbeat_sensor_control_table</span>
-</span><span id="__span-0-812"><a id="__codelineno-0-812" name="__codelineno-0-812"></a>        <span class="p">)</span>
-</span><span id="__span-0-813"><a id="__codelineno-0-813" name="__codelineno-0-813"></a>
-</span><span id="__span-0-814"><a id="__codelineno-0-814" name="__codelineno-0-814"></a>        <span class="p">(</span>
-</span><span id="__span-0-815"><a id="__codelineno-0-815" name="__codelineno-0-815"></a>            <span class="n">delta_table</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">&quot;target&quot;</span><span class="p">)</span>
-</span><span id="__span-0-816"><a id="__codelineno-0-816" name="__codelineno-0-816"></a>            <span class="o">.</span><span class="n">merge</span><span class="p">(</span>
-</span><span id="__span-0-817"><a id="__codelineno-0-817" name="__codelineno-0-817"></a>                <span class="n">job_id_filter_control_table_df</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">&quot;source&quot;</span><span class="p">),</span>
-</span><span id="__span-0-818"><a id="__codelineno-0-818" name="__codelineno-0-818"></a>                <span class="p">(</span>
-</span><span id="__span-0-819"><a id="__codelineno-0-819" name="__codelineno-0-819"></a>                    <span class="sa">f</span><span class="s2">&quot;&quot;&quot;target.sensor_source = source.sensor_source and</span>
-</span><span id="__span-0-820"><a id="__codelineno-0-820" name="__codelineno-0-820"></a><span class="s2">                target.sensor_id = source.sensor_id and</span>
-</span><span id="__span-0-821"><a id="__codelineno-0-821" name="__codelineno-0-821"></a><span class="s2">                target.trigger_job_id = &#39;</span><span class="si">{</span><span class="n">job_id</span><span class="si">}</span><span class="s2">&#39;&quot;&quot;&quot;</span>
-</span><span id="__span-0-822"><a id="__codelineno-0-822" name="__codelineno-0-822"></a>                <span class="p">),</span>
-</span><span id="__span-0-823"><a id="__codelineno-0-823" name="__codelineno-0-823"></a>            <span class="p">)</span>
-</span><span id="__span-0-824"><a id="__codelineno-0-824" name="__codelineno-0-824"></a>            <span class="o">.</span><span class="n">whenMatchedUpdate</span><span class="p">(</span>
-</span><span id="__span-0-825"><a id="__codelineno-0-825" name="__codelineno-0-825"></a>                <span class="nb">set</span><span class="o">=</span><span class="p">{</span>
-</span><span id="__span-0-826"><a id="__codelineno-0-826" name="__codelineno-0-826"></a>                    <span class="s2">&quot;target.status&quot;</span><span class="p">:</span> <span class="s2">&quot;source.status&quot;</span><span class="p">,</span>
-</span><span id="__span-0-827"><a id="__codelineno-0-827" name="__codelineno-0-827"></a>                    <span class="s2">&quot;target.status_change_timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;source.status_change_timestamp&quot;</span><span class="p">,</span>
-</span><span id="__span-0-828"><a id="__codelineno-0-828" name="__codelineno-0-828"></a>                    <span class="s2">&quot;target.job_end_timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;source.job_end_timestamp&quot;</span><span class="p">,</span>
-</span><span id="__span-0-829"><a id="__codelineno-0-829" name="__codelineno-0-829"></a>                <span class="p">}</span>
-</span><span id="__span-0-830"><a id="__codelineno-0-830" name="__codelineno-0-830"></a>            <span class="p">)</span>
-</span><span id="__span-0-831"><a id="__codelineno-0-831" name="__codelineno-0-831"></a>            <span class="o">.</span><span class="n">execute</span><span class="p">()</span>
-</span><span id="__span-0-832"><a id="__codelineno-0-832" name="__codelineno-0-832"></a>        <span class="p">)</span>
+</span><span id="__span-0-808"><a id="__codelineno-0-808" name="__codelineno-0-808"></a>        <span class="n">delta_table</span> <span class="o">=</span> <span class="n">DeltaTable</span><span class="o">.</span><span class="n">forName</span><span class="p">(</span>
+</span><span id="__span-0-809"><a id="__codelineno-0-809" name="__codelineno-0-809"></a>            <span class="n">ExecEnv</span><span class="o">.</span><span class="n">SESSION</span><span class="p">,</span> <span class="n">heartbeat_sensor_control_table</span>
+</span><span id="__span-0-810"><a id="__codelineno-0-810" name="__codelineno-0-810"></a>        <span class="p">)</span>
+</span><span id="__span-0-811"><a id="__codelineno-0-811" name="__codelineno-0-811"></a>
+</span><span id="__span-0-812"><a id="__codelineno-0-812" name="__codelineno-0-812"></a>        <span class="p">(</span>
+</span><span id="__span-0-813"><a id="__codelineno-0-813" name="__codelineno-0-813"></a>            <span class="n">delta_table</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">&quot;target&quot;</span><span class="p">)</span>
+</span><span id="__span-0-814"><a id="__codelineno-0-814" name="__codelineno-0-814"></a>            <span class="o">.</span><span class="n">merge</span><span class="p">(</span>
+</span><span id="__span-0-815"><a id="__codelineno-0-815" name="__codelineno-0-815"></a>                <span class="n">job_id_filter_control_table_df</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">&quot;source&quot;</span><span class="p">),</span>
+</span><span id="__span-0-816"><a id="__codelineno-0-816" name="__codelineno-0-816"></a>                <span class="p">(</span><span class="sa">f</span><span class="s2">&quot;&quot;&quot;target.sensor_source = source.sensor_source and</span>
+</span><span id="__span-0-817"><a id="__codelineno-0-817" name="__codelineno-0-817"></a><span class="s2">                target.sensor_id = source.sensor_id and</span>
+</span><span id="__span-0-818"><a id="__codelineno-0-818" name="__codelineno-0-818"></a><span class="s2">                target.trigger_job_id = &#39;</span><span class="si">{</span><span class="n">job_id</span><span class="si">}</span><span class="s2">&#39;&quot;&quot;&quot;</span><span class="p">),</span>
+</span><span id="__span-0-819"><a id="__codelineno-0-819" name="__codelineno-0-819"></a>            <span class="p">)</span>
+</span><span id="__span-0-820"><a id="__codelineno-0-820" name="__codelineno-0-820"></a>            <span class="o">.</span><span class="n">whenMatchedUpdate</span><span class="p">(</span>
+</span><span id="__span-0-821"><a id="__codelineno-0-821" name="__codelineno-0-821"></a>                <span class="nb">set</span><span class="o">=</span><span class="p">{</span>
+</span><span id="__span-0-822"><a id="__codelineno-0-822" name="__codelineno-0-822"></a>                    <span class="s2">&quot;target.status&quot;</span><span class="p">:</span> <span class="s2">&quot;source.status&quot;</span><span class="p">,</span>
+</span><span id="__span-0-823"><a id="__codelineno-0-823" name="__codelineno-0-823"></a>                    <span class="s2">&quot;target.status_change_timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;source.status_change_timestamp&quot;</span><span class="p">,</span>
+</span><span id="__span-0-824"><a id="__codelineno-0-824" name="__codelineno-0-824"></a>                    <span class="s2">&quot;target.job_end_timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;source.job_end_timestamp&quot;</span><span class="p">,</span>
+</span><span id="__span-0-825"><a id="__codelineno-0-825" name="__codelineno-0-825"></a>                <span class="p">}</span>
+</span><span id="__span-0-826"><a id="__codelineno-0-826" name="__codelineno-0-826"></a>            <span class="p">)</span>
+</span><span id="__span-0-827"><a id="__codelineno-0-827" name="__codelineno-0-827"></a>            <span class="o">.</span><span class="n">execute</span><span class="p">()</span>
+</span><span id="__span-0-828"><a id="__codelineno-0-828" name="__codelineno-0-828"></a>        <span class="p">)</span>
 </span></code></pre></div></td></tr></table></div>
               </details>
 
@@ -9878,7 +9840,9 @@ perform UPSERT and DELETE in control table.
 
             <details class="mkdocstrings-source">
               <summary>Source code in <code>mkdocs/lakehouse_engine/packages/algorithms/sensors/heartbeat.py</code></summary>
-              <div class="language-python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-726">726</a></span>
+              <div class="language-python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-724">724</a></span>
+<span class="normal"><a href="#__codelineno-0-725">725</a></span>
+<span class="normal"><a href="#__codelineno-0-726">726</a></span>
 <span class="normal"><a href="#__codelineno-0-727">727</a></span>
 <span class="normal"><a href="#__codelineno-0-728">728</a></span>
 <span class="normal"><a href="#__codelineno-0-729">729</a></span>
@@ -9895,28 +9859,26 @@ perform UPSERT and DELETE in control table.
 <span class="normal"><a href="#__codelineno-0-740">740</a></span>
 <span class="normal"><a href="#__codelineno-0-741">741</a></span>
 <span class="normal"><a href="#__codelineno-0-742">742</a></span>
-<span class="normal"><a href="#__codelineno-0-743">743</a></span>
-<span class="normal"><a href="#__codelineno-0-744">744</a></span>
-<span class="normal"><a href="#__codelineno-0-745">745</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-0-726"><a id="__codelineno-0-726" name="__codelineno-0-726"></a><span class="nd">@classmethod</span>
-</span><span id="__span-0-727"><a id="__codelineno-0-727" name="__codelineno-0-727"></a><span class="k">def</span><span class="w"> </span><span class="nf">heartbeat_sensor_control_table_data_feed</span><span class="p">(</span>
-</span><span id="__span-0-728"><a id="__codelineno-0-728" name="__codelineno-0-728"></a>    <span class="bp">cls</span><span class="p">,</span>
-</span><span id="__span-0-729"><a id="__codelineno-0-729" name="__codelineno-0-729"></a>    <span class="n">heartbeat_sensor_data_feed_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-</span><span id="__span-0-730"><a id="__codelineno-0-730" name="__codelineno-0-730"></a>    <span class="n">heartbeat_sensor_control_table</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-</span><span id="__span-0-731"><a id="__codelineno-0-731" name="__codelineno-0-731"></a><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-</span><span id="__span-0-732"><a id="__codelineno-0-732" name="__codelineno-0-732"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Control table Data feeder.</span>
-</span><span id="__span-0-733"><a id="__codelineno-0-733" name="__codelineno-0-733"></a>
-</span><span id="__span-0-734"><a id="__codelineno-0-734" name="__codelineno-0-734"></a><span class="sd">    It reads the CSV file stored at `heartbeat_sensor_data_feed_path` and</span>
-</span><span id="__span-0-735"><a id="__codelineno-0-735" name="__codelineno-0-735"></a><span class="sd">    perform UPSERT and DELETE in control table.</span>
-</span><span id="__span-0-736"><a id="__codelineno-0-736" name="__codelineno-0-736"></a><span class="sd">    - **heartbeat_sensor_data_feed_path**: path where CSV file is stored.</span>
-</span><span id="__span-0-737"><a id="__codelineno-0-737" name="__codelineno-0-737"></a><span class="sd">    - **heartbeat_sensor_control_table**: CONTROL table of Heartbeat sensor.</span>
-</span><span id="__span-0-738"><a id="__codelineno-0-738" name="__codelineno-0-738"></a><span class="sd">    &quot;&quot;&quot;</span>
-</span><span id="__span-0-739"><a id="__codelineno-0-739" name="__codelineno-0-739"></a>    <span class="n">heartbeat_sensor_data_feed_csv_df</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_read_heartbeat_sensor_data_feed_csv</span><span class="p">(</span>
-</span><span id="__span-0-740"><a id="__codelineno-0-740" name="__codelineno-0-740"></a>        <span class="n">heartbeat_sensor_data_feed_path</span>
-</span><span id="__span-0-741"><a id="__codelineno-0-741" name="__codelineno-0-741"></a>    <span class="p">)</span>
-</span><span id="__span-0-742"><a id="__codelineno-0-742" name="__codelineno-0-742"></a>
-</span><span id="__span-0-743"><a id="__codelineno-0-743" name="__codelineno-0-743"></a>    <span class="bp">cls</span><span class="o">.</span><span class="n">merge_control_table_data_feed_records</span><span class="p">(</span>
-</span><span id="__span-0-744"><a id="__codelineno-0-744" name="__codelineno-0-744"></a>        <span class="n">heartbeat_sensor_control_table</span><span class="p">,</span> <span class="n">heartbeat_sensor_data_feed_csv_df</span>
-</span><span id="__span-0-745"><a id="__codelineno-0-745" name="__codelineno-0-745"></a>    <span class="p">)</span>
+<span class="normal"><a href="#__codelineno-0-743">743</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-0-724"><a id="__codelineno-0-724" name="__codelineno-0-724"></a><span class="nd">@classmethod</span>
+</span><span id="__span-0-725"><a id="__codelineno-0-725" name="__codelineno-0-725"></a><span class="k">def</span><span class="w"> </span><span class="nf">heartbeat_sensor_control_table_data_feed</span><span class="p">(</span>
+</span><span id="__span-0-726"><a id="__codelineno-0-726" name="__codelineno-0-726"></a>    <span class="bp">cls</span><span class="p">,</span>
+</span><span id="__span-0-727"><a id="__codelineno-0-727" name="__codelineno-0-727"></a>    <span class="n">heartbeat_sensor_data_feed_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+</span><span id="__span-0-728"><a id="__codelineno-0-728" name="__codelineno-0-728"></a>    <span class="n">heartbeat_sensor_control_table</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+</span><span id="__span-0-729"><a id="__codelineno-0-729" name="__codelineno-0-729"></a><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="__span-0-730"><a id="__codelineno-0-730" name="__codelineno-0-730"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Control table Data feeder.</span>
+</span><span id="__span-0-731"><a id="__codelineno-0-731" name="__codelineno-0-731"></a>
+</span><span id="__span-0-732"><a id="__codelineno-0-732" name="__codelineno-0-732"></a><span class="sd">    It reads the CSV file stored at `heartbeat_sensor_data_feed_path` and</span>
+</span><span id="__span-0-733"><a id="__codelineno-0-733" name="__codelineno-0-733"></a><span class="sd">    perform UPSERT and DELETE in control table.</span>
+</span><span id="__span-0-734"><a id="__codelineno-0-734" name="__codelineno-0-734"></a><span class="sd">    - **heartbeat_sensor_data_feed_path**: path where CSV file is stored.</span>
+</span><span id="__span-0-735"><a id="__codelineno-0-735" name="__codelineno-0-735"></a><span class="sd">    - **heartbeat_sensor_control_table**: CONTROL table of Heartbeat sensor.</span>
+</span><span id="__span-0-736"><a id="__codelineno-0-736" name="__codelineno-0-736"></a><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="__span-0-737"><a id="__codelineno-0-737" name="__codelineno-0-737"></a>    <span class="n">heartbeat_sensor_data_feed_csv_df</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_read_heartbeat_sensor_data_feed_csv</span><span class="p">(</span>
+</span><span id="__span-0-738"><a id="__codelineno-0-738" name="__codelineno-0-738"></a>        <span class="n">heartbeat_sensor_data_feed_path</span>
+</span><span id="__span-0-739"><a id="__codelineno-0-739" name="__codelineno-0-739"></a>    <span class="p">)</span>
+</span><span id="__span-0-740"><a id="__codelineno-0-740" name="__codelineno-0-740"></a>
+</span><span id="__span-0-741"><a id="__codelineno-0-741" name="__codelineno-0-741"></a>    <span class="bp">cls</span><span class="o">.</span><span class="n">merge_control_table_data_feed_records</span><span class="p">(</span>
+</span><span id="__span-0-742"><a id="__codelineno-0-742" name="__codelineno-0-742"></a>        <span class="n">heartbeat_sensor_control_table</span><span class="p">,</span> <span class="n">heartbeat_sensor_data_feed_csv_df</span>
+</span><span id="__span-0-743"><a id="__codelineno-0-743" name="__codelineno-0-743"></a>    <span class="p">)</span>
 </span></code></pre></div></td></tr></table></div>
             </details>
     </div>
@@ -10140,9 +10102,7 @@ and perform UPSERT and DELETE in control table.
 <span class="normal"><a href="#__codelineno-0-719">719</a></span>
 <span class="normal"><a href="#__codelineno-0-720">720</a></span>
 <span class="normal"><a href="#__codelineno-0-721">721</a></span>
-<span class="normal"><a href="#__codelineno-0-722">722</a></span>
-<span class="normal"><a href="#__codelineno-0-723">723</a></span>
-<span class="normal"><a href="#__codelineno-0-724">724</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-0-665"><a id="__codelineno-0-665" name="__codelineno-0-665"></a><span class="nd">@classmethod</span>
+<span class="normal"><a href="#__codelineno-0-722">722</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-0-665"><a id="__codelineno-0-665" name="__codelineno-0-665"></a><span class="nd">@classmethod</span>
 </span><span id="__span-0-666"><a id="__codelineno-0-666" name="__codelineno-0-666"></a><span class="k">def</span><span class="w"> </span><span class="nf">merge_control_table_data_feed_records</span><span class="p">(</span>
 </span><span id="__span-0-667"><a id="__codelineno-0-667" name="__codelineno-0-667"></a>    <span class="bp">cls</span><span class="p">,</span>
 </span><span id="__span-0-668"><a id="__codelineno-0-668" name="__codelineno-0-668"></a>    <span class="n">heartbeat_sensor_control_table</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
@@ -10161,47 +10121,45 @@ and perform UPSERT and DELETE in control table.
 </span><span id="__span-0-681"><a id="__codelineno-0-681" name="__codelineno-0-681"></a>
 </span><span id="__span-0-682"><a id="__codelineno-0-682" name="__codelineno-0-682"></a>    <span class="n">delta_table</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">&quot;trgt&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span>
 </span><span id="__span-0-683"><a id="__codelineno-0-683" name="__codelineno-0-683"></a>        <span class="n">heartbeat_sensor_data_feed_csv_df</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">&quot;source&quot;</span><span class="p">),</span>
-</span><span id="__span-0-684"><a id="__codelineno-0-684" name="__codelineno-0-684"></a>        <span class="p">(</span>
-</span><span id="__span-0-685"><a id="__codelineno-0-685" name="__codelineno-0-685"></a><span class="w">            </span><span class="sd">&quot;&quot;&quot;source.sensor_id = trgt.sensor_id and</span>
-</span><span id="__span-0-686"><a id="__codelineno-0-686" name="__codelineno-0-686"></a><span class="sd">            trgt.trigger_job_id = source.trigger_job_id&quot;&quot;&quot;</span>
-</span><span id="__span-0-687"><a id="__codelineno-0-687" name="__codelineno-0-687"></a>        <span class="p">),</span>
-</span><span id="__span-0-688"><a id="__codelineno-0-688" name="__codelineno-0-688"></a>    <span class="p">)</span><span class="o">.</span><span class="n">whenNotMatchedInsert</span><span class="p">(</span>
-</span><span id="__span-0-689"><a id="__codelineno-0-689" name="__codelineno-0-689"></a>        <span class="n">values</span><span class="o">=</span><span class="p">{</span>
-</span><span id="__span-0-690"><a id="__codelineno-0-690" name="__codelineno-0-690"></a>            <span class="s2">&quot;sensor_source&quot;</span><span class="p">:</span> <span class="s2">&quot;source.sensor_source&quot;</span><span class="p">,</span>
-</span><span id="__span-0-691"><a id="__codelineno-0-691" name="__codelineno-0-691"></a>            <span class="s2">&quot;sensor_id&quot;</span><span class="p">:</span> <span class="s2">&quot;source.sensor_id&quot;</span><span class="p">,</span>
-</span><span id="__span-0-692"><a id="__codelineno-0-692" name="__codelineno-0-692"></a>            <span class="s2">&quot;sensor_read_type&quot;</span><span class="p">:</span> <span class="s2">&quot;source.sensor_read_type&quot;</span><span class="p">,</span>
-</span><span id="__span-0-693"><a id="__codelineno-0-693" name="__codelineno-0-693"></a>            <span class="s2">&quot;asset_description&quot;</span><span class="p">:</span> <span class="s2">&quot;source.asset_description&quot;</span><span class="p">,</span>
-</span><span id="__span-0-694"><a id="__codelineno-0-694" name="__codelineno-0-694"></a>            <span class="s2">&quot;upstream_key&quot;</span><span class="p">:</span> <span class="s2">&quot;source.upstream_key&quot;</span><span class="p">,</span>
-</span><span id="__span-0-695"><a id="__codelineno-0-695" name="__codelineno-0-695"></a>            <span class="s2">&quot;preprocess_query&quot;</span><span class="p">:</span> <span class="s2">&quot;source.preprocess_query&quot;</span><span class="p">,</span>
-</span><span id="__span-0-696"><a id="__codelineno-0-696" name="__codelineno-0-696"></a>            <span class="s2">&quot;latest_event_fetched_timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;null&quot;</span><span class="p">,</span>
-</span><span id="__span-0-697"><a id="__codelineno-0-697" name="__codelineno-0-697"></a>            <span class="s2">&quot;trigger_job_id&quot;</span><span class="p">:</span> <span class="s2">&quot;source.trigger_job_id&quot;</span><span class="p">,</span>
-</span><span id="__span-0-698"><a id="__codelineno-0-698" name="__codelineno-0-698"></a>            <span class="s2">&quot;trigger_job_name&quot;</span><span class="p">:</span> <span class="s2">&quot;source.trigger_job_name&quot;</span><span class="p">,</span>
-</span><span id="__span-0-699"><a id="__codelineno-0-699" name="__codelineno-0-699"></a>            <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;null&quot;</span><span class="p">,</span>
-</span><span id="__span-0-700"><a id="__codelineno-0-700" name="__codelineno-0-700"></a>            <span class="s2">&quot;status_change_timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;null&quot;</span><span class="p">,</span>
-</span><span id="__span-0-701"><a id="__codelineno-0-701" name="__codelineno-0-701"></a>            <span class="s2">&quot;job_start_timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;null&quot;</span><span class="p">,</span>
-</span><span id="__span-0-702"><a id="__codelineno-0-702" name="__codelineno-0-702"></a>            <span class="s2">&quot;job_end_timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;null&quot;</span><span class="p">,</span>
-</span><span id="__span-0-703"><a id="__codelineno-0-703" name="__codelineno-0-703"></a>            <span class="s2">&quot;job_state&quot;</span><span class="p">:</span> <span class="s2">&quot;source.job_state&quot;</span><span class="p">,</span>
-</span><span id="__span-0-704"><a id="__codelineno-0-704" name="__codelineno-0-704"></a>            <span class="s2">&quot;dependency_flag&quot;</span><span class="p">:</span> <span class="s2">&quot;source.dependency_flag&quot;</span><span class="p">,</span>
-</span><span id="__span-0-705"><a id="__codelineno-0-705" name="__codelineno-0-705"></a>        <span class="p">}</span>
-</span><span id="__span-0-706"><a id="__codelineno-0-706" name="__codelineno-0-706"></a>    <span class="p">)</span><span class="o">.</span><span class="n">whenMatchedUpdate</span><span class="p">(</span>
-</span><span id="__span-0-707"><a id="__codelineno-0-707" name="__codelineno-0-707"></a>        <span class="nb">set</span><span class="o">=</span><span class="p">{</span>
-</span><span id="__span-0-708"><a id="__codelineno-0-708" name="__codelineno-0-708"></a>            <span class="s2">&quot;sensor_source&quot;</span><span class="p">:</span> <span class="s2">&quot;source.sensor_source&quot;</span><span class="p">,</span>
-</span><span id="__span-0-709"><a id="__codelineno-0-709" name="__codelineno-0-709"></a>            <span class="s2">&quot;sensor_id&quot;</span><span class="p">:</span> <span class="s2">&quot;source.sensor_id&quot;</span><span class="p">,</span>
-</span><span id="__span-0-710"><a id="__codelineno-0-710" name="__codelineno-0-710"></a>            <span class="s2">&quot;sensor_read_type&quot;</span><span class="p">:</span> <span class="s2">&quot;source.sensor_read_type&quot;</span><span class="p">,</span>
-</span><span id="__span-0-711"><a id="__codelineno-0-711" name="__codelineno-0-711"></a>            <span class="s2">&quot;asset_description&quot;</span><span class="p">:</span> <span class="s2">&quot;source.asset_description&quot;</span><span class="p">,</span>
-</span><span id="__span-0-712"><a id="__codelineno-0-712" name="__codelineno-0-712"></a>            <span class="s2">&quot;upstream_key&quot;</span><span class="p">:</span> <span class="s2">&quot;source.upstream_key&quot;</span><span class="p">,</span>
-</span><span id="__span-0-713"><a id="__codelineno-0-713" name="__codelineno-0-713"></a>            <span class="s2">&quot;preprocess_query&quot;</span><span class="p">:</span> <span class="s2">&quot;source.preprocess_query&quot;</span><span class="p">,</span>
-</span><span id="__span-0-714"><a id="__codelineno-0-714" name="__codelineno-0-714"></a>            <span class="s2">&quot;latest_event_fetched_timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;trgt.latest_event_fetched_timestamp&quot;</span><span class="p">,</span>
-</span><span id="__span-0-715"><a id="__codelineno-0-715" name="__codelineno-0-715"></a>            <span class="s2">&quot;trigger_job_id&quot;</span><span class="p">:</span> <span class="s2">&quot;source.trigger_job_id&quot;</span><span class="p">,</span>
-</span><span id="__span-0-716"><a id="__codelineno-0-716" name="__codelineno-0-716"></a>            <span class="s2">&quot;trigger_job_name&quot;</span><span class="p">:</span> <span class="s2">&quot;source.trigger_job_name&quot;</span><span class="p">,</span>
-</span><span id="__span-0-717"><a id="__codelineno-0-717" name="__codelineno-0-717"></a>            <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;trgt.status&quot;</span><span class="p">,</span>
-</span><span id="__span-0-718"><a id="__codelineno-0-718" name="__codelineno-0-718"></a>            <span class="s2">&quot;status_change_timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;trgt.status_change_timestamp&quot;</span><span class="p">,</span>
-</span><span id="__span-0-719"><a id="__codelineno-0-719" name="__codelineno-0-719"></a>            <span class="s2">&quot;job_start_timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;trgt.job_start_timestamp&quot;</span><span class="p">,</span>
-</span><span id="__span-0-720"><a id="__codelineno-0-720" name="__codelineno-0-720"></a>            <span class="s2">&quot;job_end_timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;trgt.job_end_timestamp&quot;</span><span class="p">,</span>
-</span><span id="__span-0-721"><a id="__codelineno-0-721" name="__codelineno-0-721"></a>            <span class="s2">&quot;job_state&quot;</span><span class="p">:</span> <span class="s2">&quot;source.job_state&quot;</span><span class="p">,</span>
-</span><span id="__span-0-722"><a id="__codelineno-0-722" name="__codelineno-0-722"></a>            <span class="s2">&quot;dependency_flag&quot;</span><span class="p">:</span> <span class="s2">&quot;source.dependency_flag&quot;</span><span class="p">,</span>
-</span><span id="__span-0-723"><a id="__codelineno-0-723" name="__codelineno-0-723"></a>        <span class="p">}</span>
-</span><span id="__span-0-724"><a id="__codelineno-0-724" name="__codelineno-0-724"></a>    <span class="p">)</span><span class="o">.</span><span class="n">whenNotMatchedBySourceDelete</span><span class="p">()</span><span class="o">.</span><span class="n">execute</span><span class="p">()</span>
+</span><span id="__span-0-684"><a id="__codelineno-0-684" name="__codelineno-0-684"></a>        <span class="p">(</span><span class="s2">&quot;&quot;&quot;source.sensor_id = trgt.sensor_id and</span>
+</span><span id="__span-0-685"><a id="__codelineno-0-685" name="__codelineno-0-685"></a><span class="s2">            trgt.trigger_job_id = source.trigger_job_id&quot;&quot;&quot;</span><span class="p">),</span>
+</span><span id="__span-0-686"><a id="__codelineno-0-686" name="__codelineno-0-686"></a>    <span class="p">)</span><span class="o">.</span><span class="n">whenNotMatchedInsert</span><span class="p">(</span>
+</span><span id="__span-0-687"><a id="__codelineno-0-687" name="__codelineno-0-687"></a>        <span class="n">values</span><span class="o">=</span><span class="p">{</span>
+</span><span id="__span-0-688"><a id="__codelineno-0-688" name="__codelineno-0-688"></a>            <span class="s2">&quot;sensor_source&quot;</span><span class="p">:</span> <span class="s2">&quot;source.sensor_source&quot;</span><span class="p">,</span>
+</span><span id="__span-0-689"><a id="__codelineno-0-689" name="__codelineno-0-689"></a>            <span class="s2">&quot;sensor_id&quot;</span><span class="p">:</span> <span class="s2">&quot;source.sensor_id&quot;</span><span class="p">,</span>
+</span><span id="__span-0-690"><a id="__codelineno-0-690" name="__codelineno-0-690"></a>            <span class="s2">&quot;sensor_read_type&quot;</span><span class="p">:</span> <span class="s2">&quot;source.sensor_read_type&quot;</span><span class="p">,</span>
+</span><span id="__span-0-691"><a id="__codelineno-0-691" name="__codelineno-0-691"></a>            <span class="s2">&quot;asset_description&quot;</span><span class="p">:</span> <span class="s2">&quot;source.asset_description&quot;</span><span class="p">,</span>
+</span><span id="__span-0-692"><a id="__codelineno-0-692" name="__codelineno-0-692"></a>            <span class="s2">&quot;upstream_key&quot;</span><span class="p">:</span> <span class="s2">&quot;source.upstream_key&quot;</span><span class="p">,</span>
+</span><span id="__span-0-693"><a id="__codelineno-0-693" name="__codelineno-0-693"></a>            <span class="s2">&quot;preprocess_query&quot;</span><span class="p">:</span> <span class="s2">&quot;source.preprocess_query&quot;</span><span class="p">,</span>
+</span><span id="__span-0-694"><a id="__codelineno-0-694" name="__codelineno-0-694"></a>            <span class="s2">&quot;latest_event_fetched_timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;null&quot;</span><span class="p">,</span>
+</span><span id="__span-0-695"><a id="__codelineno-0-695" name="__codelineno-0-695"></a>            <span class="s2">&quot;trigger_job_id&quot;</span><span class="p">:</span> <span class="s2">&quot;source.trigger_job_id&quot;</span><span class="p">,</span>
+</span><span id="__span-0-696"><a id="__codelineno-0-696" name="__codelineno-0-696"></a>            <span class="s2">&quot;trigger_job_name&quot;</span><span class="p">:</span> <span class="s2">&quot;source.trigger_job_name&quot;</span><span class="p">,</span>
+</span><span id="__span-0-697"><a id="__codelineno-0-697" name="__codelineno-0-697"></a>            <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;null&quot;</span><span class="p">,</span>
+</span><span id="__span-0-698"><a id="__codelineno-0-698" name="__codelineno-0-698"></a>            <span class="s2">&quot;status_change_timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;null&quot;</span><span class="p">,</span>
+</span><span id="__span-0-699"><a id="__codelineno-0-699" name="__codelineno-0-699"></a>            <span class="s2">&quot;job_start_timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;null&quot;</span><span class="p">,</span>
+</span><span id="__span-0-700"><a id="__codelineno-0-700" name="__codelineno-0-700"></a>            <span class="s2">&quot;job_end_timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;null&quot;</span><span class="p">,</span>
+</span><span id="__span-0-701"><a id="__codelineno-0-701" name="__codelineno-0-701"></a>            <span class="s2">&quot;job_state&quot;</span><span class="p">:</span> <span class="s2">&quot;source.job_state&quot;</span><span class="p">,</span>
+</span><span id="__span-0-702"><a id="__codelineno-0-702" name="__codelineno-0-702"></a>            <span class="s2">&quot;dependency_flag&quot;</span><span class="p">:</span> <span class="s2">&quot;source.dependency_flag&quot;</span><span class="p">,</span>
+</span><span id="__span-0-703"><a id="__codelineno-0-703" name="__codelineno-0-703"></a>        <span class="p">}</span>
+</span><span id="__span-0-704"><a id="__codelineno-0-704" name="__codelineno-0-704"></a>    <span class="p">)</span><span class="o">.</span><span class="n">whenMatchedUpdate</span><span class="p">(</span>
+</span><span id="__span-0-705"><a id="__codelineno-0-705" name="__codelineno-0-705"></a>        <span class="nb">set</span><span class="o">=</span><span class="p">{</span>
+</span><span id="__span-0-706"><a id="__codelineno-0-706" name="__codelineno-0-706"></a>            <span class="s2">&quot;sensor_source&quot;</span><span class="p">:</span> <span class="s2">&quot;source.sensor_source&quot;</span><span class="p">,</span>
+</span><span id="__span-0-707"><a id="__codelineno-0-707" name="__codelineno-0-707"></a>            <span class="s2">&quot;sensor_id&quot;</span><span class="p">:</span> <span class="s2">&quot;source.sensor_id&quot;</span><span class="p">,</span>
+</span><span id="__span-0-708"><a id="__codelineno-0-708" name="__codelineno-0-708"></a>            <span class="s2">&quot;sensor_read_type&quot;</span><span class="p">:</span> <span class="s2">&quot;source.sensor_read_type&quot;</span><span class="p">,</span>
+</span><span id="__span-0-709"><a id="__codelineno-0-709" name="__codelineno-0-709"></a>            <span class="s2">&quot;asset_description&quot;</span><span class="p">:</span> <span class="s2">&quot;source.asset_description&quot;</span><span class="p">,</span>
+</span><span id="__span-0-710"><a id="__codelineno-0-710" name="__codelineno-0-710"></a>            <span class="s2">&quot;upstream_key&quot;</span><span class="p">:</span> <span class="s2">&quot;source.upstream_key&quot;</span><span class="p">,</span>
+</span><span id="__span-0-711"><a id="__codelineno-0-711" name="__codelineno-0-711"></a>            <span class="s2">&quot;preprocess_query&quot;</span><span class="p">:</span> <span class="s2">&quot;source.preprocess_query&quot;</span><span class="p">,</span>
+</span><span id="__span-0-712"><a id="__codelineno-0-712" name="__codelineno-0-712"></a>            <span class="s2">&quot;latest_event_fetched_timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;trgt.latest_event_fetched_timestamp&quot;</span><span class="p">,</span>
+</span><span id="__span-0-713"><a id="__codelineno-0-713" name="__codelineno-0-713"></a>            <span class="s2">&quot;trigger_job_id&quot;</span><span class="p">:</span> <span class="s2">&quot;source.trigger_job_id&quot;</span><span class="p">,</span>
+</span><span id="__span-0-714"><a id="__codelineno-0-714" name="__codelineno-0-714"></a>            <span class="s2">&quot;trigger_job_name&quot;</span><span class="p">:</span> <span class="s2">&quot;source.trigger_job_name&quot;</span><span class="p">,</span>
+</span><span id="__span-0-715"><a id="__codelineno-0-715" name="__codelineno-0-715"></a>            <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;trgt.status&quot;</span><span class="p">,</span>
+</span><span id="__span-0-716"><a id="__codelineno-0-716" name="__codelineno-0-716"></a>            <span class="s2">&quot;status_change_timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;trgt.status_change_timestamp&quot;</span><span class="p">,</span>
+</span><span id="__span-0-717"><a id="__codelineno-0-717" name="__codelineno-0-717"></a>            <span class="s2">&quot;job_start_timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;trgt.job_start_timestamp&quot;</span><span class="p">,</span>
+</span><span id="__span-0-718"><a id="__codelineno-0-718" name="__codelineno-0-718"></a>            <span class="s2">&quot;job_end_timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;trgt.job_end_timestamp&quot;</span><span class="p">,</span>
+</span><span id="__span-0-719"><a id="__codelineno-0-719" name="__codelineno-0-719"></a>            <span class="s2">&quot;job_state&quot;</span><span class="p">:</span> <span class="s2">&quot;source.job_state&quot;</span><span class="p">,</span>
+</span><span id="__span-0-720"><a id="__codelineno-0-720" name="__codelineno-0-720"></a>            <span class="s2">&quot;dependency_flag&quot;</span><span class="p">:</span> <span class="s2">&quot;source.dependency_flag&quot;</span><span class="p">,</span>
+</span><span id="__span-0-721"><a id="__codelineno-0-721" name="__codelineno-0-721"></a>        <span class="p">}</span>
+</span><span id="__span-0-722"><a id="__codelineno-0-722" name="__codelineno-0-722"></a>    <span class="p">)</span><span class="o">.</span><span class="n">whenNotMatchedBySourceDelete</span><span class="p">()</span><span class="o">.</span><span class="n">execute</span><span class="p">()</span>
 </span></code></pre></div></td></tr></table></div>
             </details>
     </div>
@@ -10365,7 +10323,9 @@ status_change_timestamp for the triggered job.</p>
 
             <details class="mkdocstrings-source">
               <summary>Source code in <code>mkdocs/lakehouse_engine/packages/algorithms/sensors/heartbeat.py</code></summary>
-              <div class="language-python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-780">780</a></span>
+              <div class="language-python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-778">778</a></span>
+<span class="normal"><a href="#__codelineno-0-779">779</a></span>
+<span class="normal"><a href="#__codelineno-0-780">780</a></span>
 <span class="normal"><a href="#__codelineno-0-781">781</a></span>
 <span class="normal"><a href="#__codelineno-0-782">782</a></span>
 <span class="normal"><a href="#__codelineno-0-783">783</a></span>
@@ -10413,63 +10373,57 @@ status_change_timestamp for the triggered job.</p>
 <span class="normal"><a href="#__codelineno-0-825">825</a></span>
 <span class="normal"><a href="#__codelineno-0-826">826</a></span>
 <span class="normal"><a href="#__codelineno-0-827">827</a></span>
-<span class="normal"><a href="#__codelineno-0-828">828</a></span>
-<span class="normal"><a href="#__codelineno-0-829">829</a></span>
-<span class="normal"><a href="#__codelineno-0-830">830</a></span>
-<span class="normal"><a href="#__codelineno-0-831">831</a></span>
-<span class="normal"><a href="#__codelineno-0-832">832</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-0-780"><a id="__codelineno-0-780" name="__codelineno-0-780"></a><span class="nd">@classmethod</span>
-</span><span id="__span-0-781"><a id="__codelineno-0-781" name="__codelineno-0-781"></a><span class="k">def</span><span class="w"> </span><span class="nf">update_heartbeat_sensor_completion_status</span><span class="p">(</span>
-</span><span id="__span-0-782"><a id="__codelineno-0-782" name="__codelineno-0-782"></a>    <span class="bp">cls</span><span class="p">,</span>
-</span><span id="__span-0-783"><a id="__codelineno-0-783" name="__codelineno-0-783"></a>    <span class="n">heartbeat_sensor_control_table</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-</span><span id="__span-0-784"><a id="__codelineno-0-784" name="__codelineno-0-784"></a>    <span class="n">sensor_table</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-</span><span id="__span-0-785"><a id="__codelineno-0-785" name="__codelineno-0-785"></a>    <span class="n">job_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-</span><span id="__span-0-786"><a id="__codelineno-0-786" name="__codelineno-0-786"></a><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-</span><span id="__span-0-787"><a id="__codelineno-0-787" name="__codelineno-0-787"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;UPDATE heartbeat sensor status.</span>
-</span><span id="__span-0-788"><a id="__codelineno-0-788" name="__codelineno-0-788"></a>
-</span><span id="__span-0-789"><a id="__codelineno-0-789" name="__codelineno-0-789"></a><span class="sd">    Update heartbeat sensor control table with COMPLETE status and</span>
-</span><span id="__span-0-790"><a id="__codelineno-0-790" name="__codelineno-0-790"></a><span class="sd">    job_end_timestamp for the triggered job.</span>
-</span><span id="__span-0-791"><a id="__codelineno-0-791" name="__codelineno-0-791"></a><span class="sd">    Update sensor control table with PROCESSED_NEW_DATA status and</span>
-</span><span id="__span-0-792"><a id="__codelineno-0-792" name="__codelineno-0-792"></a><span class="sd">    status_change_timestamp for the triggered job.</span>
-</span><span id="__span-0-793"><a id="__codelineno-0-793" name="__codelineno-0-793"></a>
-</span><span id="__span-0-794"><a id="__codelineno-0-794" name="__codelineno-0-794"></a><span class="sd">    Args:</span>
-</span><span id="__span-0-795"><a id="__codelineno-0-795" name="__codelineno-0-795"></a><span class="sd">        job_id: job_id of the running job. It will refer to</span>
-</span><span id="__span-0-796"><a id="__codelineno-0-796" name="__codelineno-0-796"></a><span class="sd">        trigger_job_id in Control table.</span>
-</span><span id="__span-0-797"><a id="__codelineno-0-797" name="__codelineno-0-797"></a><span class="sd">        sensor_table: lakehouse engine sensor table name.</span>
-</span><span id="__span-0-798"><a id="__codelineno-0-798" name="__codelineno-0-798"></a><span class="sd">        heartbeat_sensor_control_table: Heartbeat sensor control table.</span>
-</span><span id="__span-0-799"><a id="__codelineno-0-799" name="__codelineno-0-799"></a><span class="sd">    &quot;&quot;&quot;</span>
-</span><span id="__span-0-800"><a id="__codelineno-0-800" name="__codelineno-0-800"></a>    <span class="n">job_id_filter_control_table_df</span> <span class="o">=</span> <span class="p">(</span>
-</span><span id="__span-0-801"><a id="__codelineno-0-801" name="__codelineno-0-801"></a>        <span class="n">ExecEnv</span><span class="o">.</span><span class="n">SESSION</span><span class="o">.</span><span class="n">table</span><span class="p">(</span><span class="n">heartbeat_sensor_control_table</span><span class="p">)</span>
-</span><span id="__span-0-802"><a id="__codelineno-0-802" name="__codelineno-0-802"></a>        <span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s2">&quot;trigger_job_id&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="n">job_id</span><span class="p">)</span>
-</span><span id="__span-0-803"><a id="__codelineno-0-803" name="__codelineno-0-803"></a>        <span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="s2">&quot;status&quot;</span><span class="p">,</span> <span class="n">lit</span><span class="p">(</span><span class="n">HeartbeatStatus</span><span class="o">.</span><span class="n">COMPLETED</span><span class="o">.</span><span class="n">value</span><span class="p">))</span>
-</span><span id="__span-0-804"><a id="__codelineno-0-804" name="__codelineno-0-804"></a>        <span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="s2">&quot;status_change_timestamp&quot;</span><span class="p">,</span> <span class="n">current_timestamp</span><span class="p">())</span>
-</span><span id="__span-0-805"><a id="__codelineno-0-805" name="__codelineno-0-805"></a>        <span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="s2">&quot;job_end_timestamp&quot;</span><span class="p">,</span> <span class="n">current_timestamp</span><span class="p">())</span>
-</span><span id="__span-0-806"><a id="__codelineno-0-806" name="__codelineno-0-806"></a>    <span class="p">)</span>
+<span class="normal"><a href="#__codelineno-0-828">828</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-0-778"><a id="__codelineno-0-778" name="__codelineno-0-778"></a><span class="nd">@classmethod</span>
+</span><span id="__span-0-779"><a id="__codelineno-0-779" name="__codelineno-0-779"></a><span class="k">def</span><span class="w"> </span><span class="nf">update_heartbeat_sensor_completion_status</span><span class="p">(</span>
+</span><span id="__span-0-780"><a id="__codelineno-0-780" name="__codelineno-0-780"></a>    <span class="bp">cls</span><span class="p">,</span>
+</span><span id="__span-0-781"><a id="__codelineno-0-781" name="__codelineno-0-781"></a>    <span class="n">heartbeat_sensor_control_table</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+</span><span id="__span-0-782"><a id="__codelineno-0-782" name="__codelineno-0-782"></a>    <span class="n">sensor_table</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+</span><span id="__span-0-783"><a id="__codelineno-0-783" name="__codelineno-0-783"></a>    <span class="n">job_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+</span><span id="__span-0-784"><a id="__codelineno-0-784" name="__codelineno-0-784"></a><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="__span-0-785"><a id="__codelineno-0-785" name="__codelineno-0-785"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;UPDATE heartbeat sensor status.</span>
+</span><span id="__span-0-786"><a id="__codelineno-0-786" name="__codelineno-0-786"></a>
+</span><span id="__span-0-787"><a id="__codelineno-0-787" name="__codelineno-0-787"></a><span class="sd">    Update heartbeat sensor control table with COMPLETE status and</span>
+</span><span id="__span-0-788"><a id="__codelineno-0-788" name="__codelineno-0-788"></a><span class="sd">    job_end_timestamp for the triggered job.</span>
+</span><span id="__span-0-789"><a id="__codelineno-0-789" name="__codelineno-0-789"></a><span class="sd">    Update sensor control table with PROCESSED_NEW_DATA status and</span>
+</span><span id="__span-0-790"><a id="__codelineno-0-790" name="__codelineno-0-790"></a><span class="sd">    status_change_timestamp for the triggered job.</span>
+</span><span id="__span-0-791"><a id="__codelineno-0-791" name="__codelineno-0-791"></a>
+</span><span id="__span-0-792"><a id="__codelineno-0-792" name="__codelineno-0-792"></a><span class="sd">    Args:</span>
+</span><span id="__span-0-793"><a id="__codelineno-0-793" name="__codelineno-0-793"></a><span class="sd">        job_id: job_id of the running job. It will refer to</span>
+</span><span id="__span-0-794"><a id="__codelineno-0-794" name="__codelineno-0-794"></a><span class="sd">        trigger_job_id in Control table.</span>
+</span><span id="__span-0-795"><a id="__codelineno-0-795" name="__codelineno-0-795"></a><span class="sd">        sensor_table: lakehouse engine sensor table name.</span>
+</span><span id="__span-0-796"><a id="__codelineno-0-796" name="__codelineno-0-796"></a><span class="sd">        heartbeat_sensor_control_table: Heartbeat sensor control table.</span>
+</span><span id="__span-0-797"><a id="__codelineno-0-797" name="__codelineno-0-797"></a><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="__span-0-798"><a id="__codelineno-0-798" name="__codelineno-0-798"></a>    <span class="n">job_id_filter_control_table_df</span> <span class="o">=</span> <span class="p">(</span>
+</span><span id="__span-0-799"><a id="__codelineno-0-799" name="__codelineno-0-799"></a>        <span class="n">ExecEnv</span><span class="o">.</span><span class="n">SESSION</span><span class="o">.</span><span class="n">table</span><span class="p">(</span><span class="n">heartbeat_sensor_control_table</span><span class="p">)</span>
+</span><span id="__span-0-800"><a id="__codelineno-0-800" name="__codelineno-0-800"></a>        <span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s2">&quot;trigger_job_id&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="n">job_id</span><span class="p">)</span>
+</span><span id="__span-0-801"><a id="__codelineno-0-801" name="__codelineno-0-801"></a>        <span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="s2">&quot;status&quot;</span><span class="p">,</span> <span class="n">lit</span><span class="p">(</span><span class="n">HeartbeatStatus</span><span class="o">.</span><span class="n">COMPLETED</span><span class="o">.</span><span class="n">value</span><span class="p">))</span>
+</span><span id="__span-0-802"><a id="__codelineno-0-802" name="__codelineno-0-802"></a>        <span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="s2">&quot;status_change_timestamp&quot;</span><span class="p">,</span> <span class="n">current_timestamp</span><span class="p">())</span>
+</span><span id="__span-0-803"><a id="__codelineno-0-803" name="__codelineno-0-803"></a>        <span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="s2">&quot;job_end_timestamp&quot;</span><span class="p">,</span> <span class="n">current_timestamp</span><span class="p">())</span>
+</span><span id="__span-0-804"><a id="__codelineno-0-804" name="__codelineno-0-804"></a>    <span class="p">)</span>
+</span><span id="__span-0-805"><a id="__codelineno-0-805" name="__codelineno-0-805"></a>
+</span><span id="__span-0-806"><a id="__codelineno-0-806" name="__codelineno-0-806"></a>    <span class="bp">cls</span><span class="o">.</span><span class="n">update_sensor_processed_status</span><span class="p">(</span><span class="n">sensor_table</span><span class="p">,</span> <span class="n">job_id_filter_control_table_df</span><span class="p">)</span>
 </span><span id="__span-0-807"><a id="__codelineno-0-807" name="__codelineno-0-807"></a>
-</span><span id="__span-0-808"><a id="__codelineno-0-808" name="__codelineno-0-808"></a>    <span class="bp">cls</span><span class="o">.</span><span class="n">update_sensor_processed_status</span><span class="p">(</span><span class="n">sensor_table</span><span class="p">,</span> <span class="n">job_id_filter_control_table_df</span><span class="p">)</span>
-</span><span id="__span-0-809"><a id="__codelineno-0-809" name="__codelineno-0-809"></a>
-</span><span id="__span-0-810"><a id="__codelineno-0-810" name="__codelineno-0-810"></a>    <span class="n">delta_table</span> <span class="o">=</span> <span class="n">DeltaTable</span><span class="o">.</span><span class="n">forName</span><span class="p">(</span>
-</span><span id="__span-0-811"><a id="__codelineno-0-811" name="__codelineno-0-811"></a>        <span class="n">ExecEnv</span><span class="o">.</span><span class="n">SESSION</span><span class="p">,</span> <span class="n">heartbeat_sensor_control_table</span>
-</span><span id="__span-0-812"><a id="__codelineno-0-812" name="__codelineno-0-812"></a>    <span class="p">)</span>
-</span><span id="__span-0-813"><a id="__codelineno-0-813" name="__codelineno-0-813"></a>
-</span><span id="__span-0-814"><a id="__codelineno-0-814" name="__codelineno-0-814"></a>    <span class="p">(</span>
-</span><span id="__span-0-815"><a id="__codelineno-0-815" name="__codelineno-0-815"></a>        <span class="n">delta_table</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">&quot;target&quot;</span><span class="p">)</span>
-</span><span id="__span-0-816"><a id="__codelineno-0-816" name="__codelineno-0-816"></a>        <span class="o">.</span><span class="n">merge</span><span class="p">(</span>
-</span><span id="__span-0-817"><a id="__codelineno-0-817" name="__codelineno-0-817"></a>            <span class="n">job_id_filter_control_table_df</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">&quot;source&quot;</span><span class="p">),</span>
-</span><span id="__span-0-818"><a id="__codelineno-0-818" name="__codelineno-0-818"></a>            <span class="p">(</span>
-</span><span id="__span-0-819"><a id="__codelineno-0-819" name="__codelineno-0-819"></a>                <span class="sa">f</span><span class="s2">&quot;&quot;&quot;target.sensor_source = source.sensor_source and</span>
-</span><span id="__span-0-820"><a id="__codelineno-0-820" name="__codelineno-0-820"></a><span class="s2">            target.sensor_id = source.sensor_id and</span>
-</span><span id="__span-0-821"><a id="__codelineno-0-821" name="__codelineno-0-821"></a><span class="s2">            target.trigger_job_id = &#39;</span><span class="si">{</span><span class="n">job_id</span><span class="si">}</span><span class="s2">&#39;&quot;&quot;&quot;</span>
-</span><span id="__span-0-822"><a id="__codelineno-0-822" name="__codelineno-0-822"></a>            <span class="p">),</span>
-</span><span id="__span-0-823"><a id="__codelineno-0-823" name="__codelineno-0-823"></a>        <span class="p">)</span>
-</span><span id="__span-0-824"><a id="__codelineno-0-824" name="__codelineno-0-824"></a>        <span class="o">.</span><span class="n">whenMatchedUpdate</span><span class="p">(</span>
-</span><span id="__span-0-825"><a id="__codelineno-0-825" name="__codelineno-0-825"></a>            <span class="nb">set</span><span class="o">=</span><span class="p">{</span>
-</span><span id="__span-0-826"><a id="__codelineno-0-826" name="__codelineno-0-826"></a>                <span class="s2">&quot;target.status&quot;</span><span class="p">:</span> <span class="s2">&quot;source.status&quot;</span><span class="p">,</span>
-</span><span id="__span-0-827"><a id="__codelineno-0-827" name="__codelineno-0-827"></a>                <span class="s2">&quot;target.status_change_timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;source.status_change_timestamp&quot;</span><span class="p">,</span>
-</span><span id="__span-0-828"><a id="__codelineno-0-828" name="__codelineno-0-828"></a>                <span class="s2">&quot;target.job_end_timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;source.job_end_timestamp&quot;</span><span class="p">,</span>
-</span><span id="__span-0-829"><a id="__codelineno-0-829" name="__codelineno-0-829"></a>            <span class="p">}</span>
-</span><span id="__span-0-830"><a id="__codelineno-0-830" name="__codelineno-0-830"></a>        <span class="p">)</span>
-</span><span id="__span-0-831"><a id="__codelineno-0-831" name="__codelineno-0-831"></a>        <span class="o">.</span><span class="n">execute</span><span class="p">()</span>
-</span><span id="__span-0-832"><a id="__codelineno-0-832" name="__codelineno-0-832"></a>    <span class="p">)</span>
+</span><span id="__span-0-808"><a id="__codelineno-0-808" name="__codelineno-0-808"></a>    <span class="n">delta_table</span> <span class="o">=</span> <span class="n">DeltaTable</span><span class="o">.</span><span class="n">forName</span><span class="p">(</span>
+</span><span id="__span-0-809"><a id="__codelineno-0-809" name="__codelineno-0-809"></a>        <span class="n">ExecEnv</span><span class="o">.</span><span class="n">SESSION</span><span class="p">,</span> <span class="n">heartbeat_sensor_control_table</span>
+</span><span id="__span-0-810"><a id="__codelineno-0-810" name="__codelineno-0-810"></a>    <span class="p">)</span>
+</span><span id="__span-0-811"><a id="__codelineno-0-811" name="__codelineno-0-811"></a>
+</span><span id="__span-0-812"><a id="__codelineno-0-812" name="__codelineno-0-812"></a>    <span class="p">(</span>
+</span><span id="__span-0-813"><a id="__codelineno-0-813" name="__codelineno-0-813"></a>        <span class="n">delta_table</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">&quot;target&quot;</span><span class="p">)</span>
+</span><span id="__span-0-814"><a id="__codelineno-0-814" name="__codelineno-0-814"></a>        <span class="o">.</span><span class="n">merge</span><span class="p">(</span>
+</span><span id="__span-0-815"><a id="__codelineno-0-815" name="__codelineno-0-815"></a>            <span class="n">job_id_filter_control_table_df</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">&quot;source&quot;</span><span class="p">),</span>
+</span><span id="__span-0-816"><a id="__codelineno-0-816" name="__codelineno-0-816"></a>            <span class="p">(</span><span class="sa">f</span><span class="s2">&quot;&quot;&quot;target.sensor_source = source.sensor_source and</span>
+</span><span id="__span-0-817"><a id="__codelineno-0-817" name="__codelineno-0-817"></a><span class="s2">            target.sensor_id = source.sensor_id and</span>
+</span><span id="__span-0-818"><a id="__codelineno-0-818" name="__codelineno-0-818"></a><span class="s2">            target.trigger_job_id = &#39;</span><span class="si">{</span><span class="n">job_id</span><span class="si">}</span><span class="s2">&#39;&quot;&quot;&quot;</span><span class="p">),</span>
+</span><span id="__span-0-819"><a id="__codelineno-0-819" name="__codelineno-0-819"></a>        <span class="p">)</span>
+</span><span id="__span-0-820"><a id="__codelineno-0-820" name="__codelineno-0-820"></a>        <span class="o">.</span><span class="n">whenMatchedUpdate</span><span class="p">(</span>
+</span><span id="__span-0-821"><a id="__codelineno-0-821" name="__codelineno-0-821"></a>            <span class="nb">set</span><span class="o">=</span><span class="p">{</span>
+</span><span id="__span-0-822"><a id="__codelineno-0-822" name="__codelineno-0-822"></a>                <span class="s2">&quot;target.status&quot;</span><span class="p">:</span> <span class="s2">&quot;source.status&quot;</span><span class="p">,</span>
+</span><span id="__span-0-823"><a id="__codelineno-0-823" name="__codelineno-0-823"></a>                <span class="s2">&quot;target.status_change_timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;source.status_change_timestamp&quot;</span><span class="p">,</span>
+</span><span id="__span-0-824"><a id="__codelineno-0-824" name="__codelineno-0-824"></a>                <span class="s2">&quot;target.job_end_timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;source.job_end_timestamp&quot;</span><span class="p">,</span>
+</span><span id="__span-0-825"><a id="__codelineno-0-825" name="__codelineno-0-825"></a>            <span class="p">}</span>
+</span><span id="__span-0-826"><a id="__codelineno-0-826" name="__codelineno-0-826"></a>        <span class="p">)</span>
+</span><span id="__span-0-827"><a id="__codelineno-0-827" name="__codelineno-0-827"></a>        <span class="o">.</span><span class="n">execute</span><span class="p">()</span>
+</span><span id="__span-0-828"><a id="__codelineno-0-828" name="__codelineno-0-828"></a>    <span class="p">)</span>
 </span></code></pre></div></td></tr></table></div>
             </details>
     </div>
@@ -10545,7 +10499,9 @@ status_change_timestamp for the triggered job.</p>
 
             <details class="mkdocstrings-source">
               <summary>Source code in <code>mkdocs/lakehouse_engine/packages/algorithms/sensors/heartbeat.py</code></summary>
-              <div class="language-python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-747">747</a></span>
+              <div class="language-python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-745">745</a></span>
+<span class="normal"><a href="#__codelineno-0-746">746</a></span>
+<span class="normal"><a href="#__codelineno-0-747">747</a></span>
 <span class="normal"><a href="#__codelineno-0-748">748</a></span>
 <span class="normal"><a href="#__codelineno-0-749">749</a></span>
 <span class="normal"><a href="#__codelineno-0-750">750</a></span>
@@ -10574,40 +10530,38 @@ status_change_timestamp for the triggered job.</p>
 <span class="normal"><a href="#__codelineno-0-773">773</a></span>
 <span class="normal"><a href="#__codelineno-0-774">774</a></span>
 <span class="normal"><a href="#__codelineno-0-775">775</a></span>
-<span class="normal"><a href="#__codelineno-0-776">776</a></span>
-<span class="normal"><a href="#__codelineno-0-777">777</a></span>
-<span class="normal"><a href="#__codelineno-0-778">778</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-0-747"><a id="__codelineno-0-747" name="__codelineno-0-747"></a><span class="nd">@classmethod</span>
-</span><span id="__span-0-748"><a id="__codelineno-0-748" name="__codelineno-0-748"></a><span class="k">def</span><span class="w"> </span><span class="nf">update_sensor_processed_status</span><span class="p">(</span>
-</span><span id="__span-0-749"><a id="__codelineno-0-749" name="__codelineno-0-749"></a>    <span class="bp">cls</span><span class="p">,</span>
-</span><span id="__span-0-750"><a id="__codelineno-0-750" name="__codelineno-0-750"></a>    <span class="n">sensor_table</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-</span><span id="__span-0-751"><a id="__codelineno-0-751" name="__codelineno-0-751"></a>    <span class="n">job_id_filter_control_table_df</span><span class="p">:</span> <span class="n">DataFrame</span><span class="p">,</span>
-</span><span id="__span-0-752"><a id="__codelineno-0-752" name="__codelineno-0-752"></a><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-</span><span id="__span-0-753"><a id="__codelineno-0-753" name="__codelineno-0-753"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;UPDATE sensor PROCESSED_NEW_DATA status.</span>
-</span><span id="__span-0-754"><a id="__codelineno-0-754" name="__codelineno-0-754"></a>
-</span><span id="__span-0-755"><a id="__codelineno-0-755" name="__codelineno-0-755"></a><span class="sd">    Update sensor control table with PROCESSED_NEW_DATA status and</span>
-</span><span id="__span-0-756"><a id="__codelineno-0-756" name="__codelineno-0-756"></a><span class="sd">    status_change_timestamp for the triggered job.</span>
-</span><span id="__span-0-757"><a id="__codelineno-0-757" name="__codelineno-0-757"></a>
-</span><span id="__span-0-758"><a id="__codelineno-0-758" name="__codelineno-0-758"></a><span class="sd">    Args:</span>
-</span><span id="__span-0-759"><a id="__codelineno-0-759" name="__codelineno-0-759"></a><span class="sd">        sensor_table: lakehouse engine sensor table name.</span>
-</span><span id="__span-0-760"><a id="__codelineno-0-760" name="__codelineno-0-760"></a><span class="sd">        job_id_filter_control_table_df: Job Id filtered Heartbeat sensor</span>
-</span><span id="__span-0-761"><a id="__codelineno-0-761" name="__codelineno-0-761"></a><span class="sd">        control table dataframe.</span>
-</span><span id="__span-0-762"><a id="__codelineno-0-762" name="__codelineno-0-762"></a><span class="sd">    &quot;&quot;&quot;</span>
-</span><span id="__span-0-763"><a id="__codelineno-0-763" name="__codelineno-0-763"></a>    <span class="n">sensor_id_df</span> <span class="o">=</span> <span class="n">job_id_filter_control_table_df</span><span class="o">.</span><span class="n">withColumn</span><span class="p">(</span>
-</span><span id="__span-0-764"><a id="__codelineno-0-764" name="__codelineno-0-764"></a>        <span class="s2">&quot;sensor_table_sensor_id&quot;</span><span class="p">,</span>
-</span><span id="__span-0-765"><a id="__codelineno-0-765" name="__codelineno-0-765"></a>        <span class="n">concat_ws</span><span class="p">(</span>
-</span><span id="__span-0-766"><a id="__codelineno-0-766" name="__codelineno-0-766"></a>            <span class="s2">&quot;_&quot;</span><span class="p">,</span>
-</span><span id="__span-0-767"><a id="__codelineno-0-767" name="__codelineno-0-767"></a>            <span class="n">regexp_replace</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s2">&quot;sensor_id&quot;</span><span class="p">),</span> <span class="sa">r</span><span class="s2">&quot;[ :\.]&quot;</span><span class="p">,</span> <span class="s2">&quot;_&quot;</span><span class="p">),</span>
-</span><span id="__span-0-768"><a id="__codelineno-0-768" name="__codelineno-0-768"></a>            <span class="n">col</span><span class="p">(</span><span class="s2">&quot;trigger_job_id&quot;</span><span class="p">),</span>
-</span><span id="__span-0-769"><a id="__codelineno-0-769" name="__codelineno-0-769"></a>        <span class="p">),</span>
-</span><span id="__span-0-770"><a id="__codelineno-0-770" name="__codelineno-0-770"></a>    <span class="p">)</span>
-</span><span id="__span-0-771"><a id="__codelineno-0-771" name="__codelineno-0-771"></a>
-</span><span id="__span-0-772"><a id="__codelineno-0-772" name="__codelineno-0-772"></a>    <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">sensor_id_df</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s2">&quot;sensor_table_sensor_id&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">collect</span><span class="p">():</span>
-</span><span id="__span-0-773"><a id="__codelineno-0-773" name="__codelineno-0-773"></a>        <span class="n">SensorTerminator</span><span class="o">.</span><span class="n">update_sensor_status</span><span class="p">(</span>
-</span><span id="__span-0-774"><a id="__codelineno-0-774" name="__codelineno-0-774"></a>            <span class="n">sensor_id</span><span class="o">=</span><span class="n">row</span><span class="p">[</span><span class="s2">&quot;sensor_table_sensor_id&quot;</span><span class="p">],</span>
-</span><span id="__span-0-775"><a id="__codelineno-0-775" name="__codelineno-0-775"></a>            <span class="n">control_db_table_name</span><span class="o">=</span><span class="n">sensor_table</span><span class="p">,</span>
-</span><span id="__span-0-776"><a id="__codelineno-0-776" name="__codelineno-0-776"></a>            <span class="n">status</span><span class="o">=</span><span class="n">SensorStatus</span><span class="o">.</span><span class="n">PROCESSED_NEW_DATA</span><span class="o">.</span><span class="n">value</span><span class="p">,</span>
-</span><span id="__span-0-777"><a id="__codelineno-0-777" name="__codelineno-0-777"></a>            <span class="n">assets</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-</span><span id="__span-0-778"><a id="__codelineno-0-778" name="__codelineno-0-778"></a>        <span class="p">)</span>
+<span class="normal"><a href="#__codelineno-0-776">776</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-0-745"><a id="__codelineno-0-745" name="__codelineno-0-745"></a><span class="nd">@classmethod</span>
+</span><span id="__span-0-746"><a id="__codelineno-0-746" name="__codelineno-0-746"></a><span class="k">def</span><span class="w"> </span><span class="nf">update_sensor_processed_status</span><span class="p">(</span>
+</span><span id="__span-0-747"><a id="__codelineno-0-747" name="__codelineno-0-747"></a>    <span class="bp">cls</span><span class="p">,</span>
+</span><span id="__span-0-748"><a id="__codelineno-0-748" name="__codelineno-0-748"></a>    <span class="n">sensor_table</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+</span><span id="__span-0-749"><a id="__codelineno-0-749" name="__codelineno-0-749"></a>    <span class="n">job_id_filter_control_table_df</span><span class="p">:</span> <span class="n">DataFrame</span><span class="p">,</span>
+</span><span id="__span-0-750"><a id="__codelineno-0-750" name="__codelineno-0-750"></a><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="__span-0-751"><a id="__codelineno-0-751" name="__codelineno-0-751"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;UPDATE sensor PROCESSED_NEW_DATA status.</span>
+</span><span id="__span-0-752"><a id="__codelineno-0-752" name="__codelineno-0-752"></a>
+</span><span id="__span-0-753"><a id="__codelineno-0-753" name="__codelineno-0-753"></a><span class="sd">    Update sensor control table with PROCESSED_NEW_DATA status and</span>
+</span><span id="__span-0-754"><a id="__codelineno-0-754" name="__codelineno-0-754"></a><span class="sd">    status_change_timestamp for the triggered job.</span>
+</span><span id="__span-0-755"><a id="__codelineno-0-755" name="__codelineno-0-755"></a>
+</span><span id="__span-0-756"><a id="__codelineno-0-756" name="__codelineno-0-756"></a><span class="sd">    Args:</span>
+</span><span id="__span-0-757"><a id="__codelineno-0-757" name="__codelineno-0-757"></a><span class="sd">        sensor_table: lakehouse engine sensor table name.</span>
+</span><span id="__span-0-758"><a id="__codelineno-0-758" name="__codelineno-0-758"></a><span class="sd">        job_id_filter_control_table_df: Job Id filtered Heartbeat sensor</span>
+</span><span id="__span-0-759"><a id="__codelineno-0-759" name="__codelineno-0-759"></a><span class="sd">        control table dataframe.</span>
+</span><span id="__span-0-760"><a id="__codelineno-0-760" name="__codelineno-0-760"></a><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="__span-0-761"><a id="__codelineno-0-761" name="__codelineno-0-761"></a>    <span class="n">sensor_id_df</span> <span class="o">=</span> <span class="n">job_id_filter_control_table_df</span><span class="o">.</span><span class="n">withColumn</span><span class="p">(</span>
+</span><span id="__span-0-762"><a id="__codelineno-0-762" name="__codelineno-0-762"></a>        <span class="s2">&quot;sensor_table_sensor_id&quot;</span><span class="p">,</span>
+</span><span id="__span-0-763"><a id="__codelineno-0-763" name="__codelineno-0-763"></a>        <span class="n">concat_ws</span><span class="p">(</span>
+</span><span id="__span-0-764"><a id="__codelineno-0-764" name="__codelineno-0-764"></a>            <span class="s2">&quot;_&quot;</span><span class="p">,</span>
+</span><span id="__span-0-765"><a id="__codelineno-0-765" name="__codelineno-0-765"></a>            <span class="n">regexp_replace</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s2">&quot;sensor_id&quot;</span><span class="p">),</span> <span class="sa">r</span><span class="s2">&quot;[ :\.]&quot;</span><span class="p">,</span> <span class="s2">&quot;_&quot;</span><span class="p">),</span>
+</span><span id="__span-0-766"><a id="__codelineno-0-766" name="__codelineno-0-766"></a>            <span class="n">col</span><span class="p">(</span><span class="s2">&quot;trigger_job_id&quot;</span><span class="p">),</span>
+</span><span id="__span-0-767"><a id="__codelineno-0-767" name="__codelineno-0-767"></a>        <span class="p">),</span>
+</span><span id="__span-0-768"><a id="__codelineno-0-768" name="__codelineno-0-768"></a>    <span class="p">)</span>
+</span><span id="__span-0-769"><a id="__codelineno-0-769" name="__codelineno-0-769"></a>
+</span><span id="__span-0-770"><a id="__codelineno-0-770" name="__codelineno-0-770"></a>    <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">sensor_id_df</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s2">&quot;sensor_table_sensor_id&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">collect</span><span class="p">():</span>
+</span><span id="__span-0-771"><a id="__codelineno-0-771" name="__codelineno-0-771"></a>        <span class="n">SensorTerminator</span><span class="o">.</span><span class="n">update_sensor_status</span><span class="p">(</span>
+</span><span id="__span-0-772"><a id="__codelineno-0-772" name="__codelineno-0-772"></a>            <span class="n">sensor_id</span><span class="o">=</span><span class="n">row</span><span class="p">[</span><span class="s2">&quot;sensor_table_sensor_id&quot;</span><span class="p">],</span>
+</span><span id="__span-0-773"><a id="__codelineno-0-773" name="__codelineno-0-773"></a>            <span class="n">control_db_table_name</span><span class="o">=</span><span class="n">sensor_table</span><span class="p">,</span>
+</span><span id="__span-0-774"><a id="__codelineno-0-774" name="__codelineno-0-774"></a>            <span class="n">status</span><span class="o">=</span><span class="n">SensorStatus</span><span class="o">.</span><span class="n">PROCESSED_NEW_DATA</span><span class="o">.</span><span class="n">value</span><span class="p">,</span>
+</span><span id="__span-0-775"><a id="__codelineno-0-775" name="__codelineno-0-775"></a>            <span class="n">assets</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+</span><span id="__span-0-776"><a id="__codelineno-0-776" name="__codelineno-0-776"></a>        <span class="p">)</span>
 </span></code></pre></div></td></tr></table></div>
             </details>
     </div>
