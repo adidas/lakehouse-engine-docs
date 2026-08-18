@@ -686,6 +686,8 @@
       
         
       
+        
+      
     
     
     
@@ -1475,6 +1477,34 @@
     
   
     Write and Read Dataframe
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../writing_paimon_tables/writing_paimon_tables.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Writing Paimon Tables
   
 
     
@@ -6480,6 +6510,8 @@
       
         
       
+        
+      
     
     
     
@@ -6763,6 +6795,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../../../reference/packages/utils/paimon_utils.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Paimon utils
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../../reference/packages/utils/rest_api.html" class="md-nav__link">
         
   
@@ -6920,7 +6980,7 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_1_9_14" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_1_9_15" >
         
           
           <div class="md-nav__link md-nav__container">
@@ -6942,14 +7002,14 @@
             </a>
             
               
-              <label class="md-nav__link " for="__nav_4_1_9_14" id="__nav_4_1_9_14_label" tabindex="0">
+              <label class="md-nav__link " for="__nav_4_1_9_15" id="__nav_4_1_9_15_label" tabindex="0">
                 <span class="md-nav__icon md-icon"></span>
               </label>
             
           </div>
         
-        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_4_1_9_14_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_4_1_9_14">
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_4_1_9_15_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_1_9_15">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -7025,7 +7085,7 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_1_9_15" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_1_9_16" >
         
           
           <div class="md-nav__link md-nav__container">
@@ -7047,14 +7107,14 @@
             </a>
             
               
-              <label class="md-nav__link " for="__nav_4_1_9_15" id="__nav_4_1_9_15_label" tabindex="0">
+              <label class="md-nav__link " for="__nav_4_1_9_16" id="__nav_4_1_9_16_label" tabindex="0">
                 <span class="md-nav__icon md-icon"></span>
               </label>
             
           </div>
         
-        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_4_1_9_15_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_4_1_9_15">
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_4_1_9_16_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_1_9_16">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -7216,7 +7276,7 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_1_9_16" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_1_9_17" >
         
           
           <div class="md-nav__link md-nav__container">
@@ -7238,14 +7298,14 @@
             </a>
             
               
-              <label class="md-nav__link " for="__nav_4_1_9_16" id="__nav_4_1_9_16_label" tabindex="0">
+              <label class="md-nav__link " for="__nav_4_1_9_17" id="__nav_4_1_9_17_label" tabindex="0">
                 <span class="md-nav__icon md-icon"></span>
               </label>
             
           </div>
         
-        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_4_1_9_16_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_4_1_9_16">
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_4_1_9_17_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_1_9_17">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -7647,6 +7707,12 @@ hard-coded in notebooks.</p>
 <li><strong>file_type</strong> (Optional[str]): type of the files to be read from Sharepoint
      (for example, <code>"csv"</code>). The reader uses this to decide which Spark data source
      to use when reading from <code>local_path</code>.</li>
+<li><strong>skip_rename</strong> (Optional[bool]): when <code>True</code>, skips timestamp-based rename
+     after processing.<ul>
+<li>Allowed only when <code>archive_enabled</code> is <code>False</code>.</li>
+<li>Default is <code>False</code>.</li>
+</ul>
+</li>
 </ul>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -7714,6 +7780,11 @@ Sharepoint.</p>
 <li>Successful reads go to the <em>success</em> subfolder; failures go to the <em>error</em>
   subfolder.</li>
 </ul>
+<p><strong>skip_rename (Optional):</strong> Skips timestamp-based rename after processing.</p>
+<ul>
+<li>Use only with <code>archive_enabled=False</code>.</li>
+<li>If <code>archive_enabled=True</code>, setting <code>skip_rename=True</code> is invalid.</li>
+</ul>
 <p><strong>archive_success_subfolder (Optional):</strong> Name of the subfolder used to store
 successfully processed files (default is <code>"done"</code>).
 The folder is created under the same <code>folder_relative_path</code> and <code>drive_name</code>.</p>
@@ -7761,24 +7832,25 @@ downloading files.</p>
 </span><span id="__span-1-25"><a id="__codelineno-1-25" name="__codelineno-1-25" href="#__codelineno-1-25"></a>                <span class="s2">&quot;archive_enabled&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
 </span><span id="__span-1-26"><a id="__codelineno-1-26" name="__codelineno-1-26" href="#__codelineno-1-26"></a>                <span class="s2">&quot;archive_success_subfolder&quot;</span><span class="p">:</span> <span class="s2">&quot;successful&quot;</span><span class="p">,</span>
 </span><span id="__span-1-27"><a id="__codelineno-1-27" name="__codelineno-1-27" href="#__codelineno-1-27"></a>                <span class="s2">&quot;archive_error_subfolder&quot;</span><span class="p">:</span> <span class="s2">&quot;with_error&quot;</span><span class="p">,</span>
-</span><span id="__span-1-28"><a id="__codelineno-1-28" name="__codelineno-1-28" href="#__codelineno-1-28"></a>                <span class="s2">&quot;local_options&quot;</span><span class="p">:</span> <span class="n">LOCAL_OPTIONS</span><span class="p">,</span>
-</span><span id="__span-1-29"><a id="__codelineno-1-29" name="__codelineno-1-29" href="#__codelineno-1-29"></a>                <span class="s2">&quot;chunk_size&quot;</span><span class="p">:</span> <span class="mi">5</span> <span class="o">*</span> <span class="mi">1024</span> <span class="o">*</span> <span class="mi">1024</span><span class="p">,</span>
-</span><span id="__span-1-30"><a id="__codelineno-1-30" name="__codelineno-1-30" href="#__codelineno-1-30"></a>            <span class="p">},</span>
-</span><span id="__span-1-31"><a id="__codelineno-1-31" name="__codelineno-1-31" href="#__codelineno-1-31"></a>        <span class="p">},</span>
-</span><span id="__span-1-32"><a id="__codelineno-1-32" name="__codelineno-1-32" href="#__codelineno-1-32"></a>    <span class="p">],</span>
-</span><span id="__span-1-33"><a id="__codelineno-1-33" name="__codelineno-1-33" href="#__codelineno-1-33"></a>    <span class="s2">&quot;output_specs&quot;</span><span class="p">:</span> <span class="p">[</span>
-</span><span id="__span-1-34"><a id="__codelineno-1-34" name="__codelineno-1-34" href="#__codelineno-1-34"></a>        <span class="p">{</span>
-</span><span id="__span-1-35"><a id="__codelineno-1-35" name="__codelineno-1-35" href="#__codelineno-1-35"></a>            <span class="s2">&quot;spec_id&quot;</span><span class="p">:</span> <span class="s2">&quot;dummy_output&quot;</span><span class="p">,</span>
-</span><span id="__span-1-36"><a id="__codelineno-1-36" name="__codelineno-1-36" href="#__codelineno-1-36"></a>            <span class="s2">&quot;input_id&quot;</span><span class="p">:</span> <span class="s2">&quot;csv_read&quot;</span><span class="p">,</span>
-</span><span id="__span-1-37"><a id="__codelineno-1-37" name="__codelineno-1-37" href="#__codelineno-1-37"></a>            <span class="s2">&quot;data_format&quot;</span><span class="p">:</span> <span class="s2">&quot;delta&quot;</span><span class="p">,</span>
-</span><span id="__span-1-38"><a id="__codelineno-1-38" name="__codelineno-1-38" href="#__codelineno-1-38"></a>            <span class="s2">&quot;db_table&quot;</span><span class="p">:</span> <span class="s2">&quot;dummy_sales&quot;</span><span class="p">,</span>
-</span><span id="__span-1-39"><a id="__codelineno-1-39" name="__codelineno-1-39" href="#__codelineno-1-39"></a>            <span class="s2">&quot;write_type&quot;</span><span class="p">:</span> <span class="s2">&quot;overwrite&quot;</span><span class="p">,</span>
-</span><span id="__span-1-40"><a id="__codelineno-1-40" name="__codelineno-1-40" href="#__codelineno-1-40"></a>            <span class="s2">&quot;location&quot;</span><span class="p">:</span> <span class="s2">&quot;s3://my_data_product_bucket/silver/dummy_sales/&quot;</span>
-</span><span id="__span-1-41"><a id="__codelineno-1-41" name="__codelineno-1-41" href="#__codelineno-1-41"></a>        <span class="p">},</span>
-</span><span id="__span-1-42"><a id="__codelineno-1-42" name="__codelineno-1-42" href="#__codelineno-1-42"></a>    <span class="p">],</span>
-</span><span id="__span-1-43"><a id="__codelineno-1-43" name="__codelineno-1-43" href="#__codelineno-1-43"></a><span class="p">}</span>
-</span><span id="__span-1-44"><a id="__codelineno-1-44" name="__codelineno-1-44" href="#__codelineno-1-44"></a>
-</span><span id="__span-1-45"><a id="__codelineno-1-45" name="__codelineno-1-45" href="#__codelineno-1-45"></a><span class="n">load_data</span><span class="p">(</span><span class="n">acon</span><span class="o">=</span><span class="n">acon</span><span class="p">)</span>
+</span><span id="__span-1-28"><a id="__codelineno-1-28" name="__codelineno-1-28" href="#__codelineno-1-28"></a>                <span class="s2">&quot;skip_rename&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+</span><span id="__span-1-29"><a id="__codelineno-1-29" name="__codelineno-1-29" href="#__codelineno-1-29"></a>                <span class="s2">&quot;local_options&quot;</span><span class="p">:</span> <span class="n">LOCAL_OPTIONS</span><span class="p">,</span>
+</span><span id="__span-1-30"><a id="__codelineno-1-30" name="__codelineno-1-30" href="#__codelineno-1-30"></a>                <span class="s2">&quot;chunk_size&quot;</span><span class="p">:</span> <span class="mi">5</span> <span class="o">*</span> <span class="mi">1024</span> <span class="o">*</span> <span class="mi">1024</span><span class="p">,</span>
+</span><span id="__span-1-31"><a id="__codelineno-1-31" name="__codelineno-1-31" href="#__codelineno-1-31"></a>            <span class="p">},</span>
+</span><span id="__span-1-32"><a id="__codelineno-1-32" name="__codelineno-1-32" href="#__codelineno-1-32"></a>        <span class="p">},</span>
+</span><span id="__span-1-33"><a id="__codelineno-1-33" name="__codelineno-1-33" href="#__codelineno-1-33"></a>    <span class="p">],</span>
+</span><span id="__span-1-34"><a id="__codelineno-1-34" name="__codelineno-1-34" href="#__codelineno-1-34"></a>    <span class="s2">&quot;output_specs&quot;</span><span class="p">:</span> <span class="p">[</span>
+</span><span id="__span-1-35"><a id="__codelineno-1-35" name="__codelineno-1-35" href="#__codelineno-1-35"></a>        <span class="p">{</span>
+</span><span id="__span-1-36"><a id="__codelineno-1-36" name="__codelineno-1-36" href="#__codelineno-1-36"></a>            <span class="s2">&quot;spec_id&quot;</span><span class="p">:</span> <span class="s2">&quot;dummy_output&quot;</span><span class="p">,</span>
+</span><span id="__span-1-37"><a id="__codelineno-1-37" name="__codelineno-1-37" href="#__codelineno-1-37"></a>            <span class="s2">&quot;input_id&quot;</span><span class="p">:</span> <span class="s2">&quot;csv_read&quot;</span><span class="p">,</span>
+</span><span id="__span-1-38"><a id="__codelineno-1-38" name="__codelineno-1-38" href="#__codelineno-1-38"></a>            <span class="s2">&quot;data_format&quot;</span><span class="p">:</span> <span class="s2">&quot;delta&quot;</span><span class="p">,</span>
+</span><span id="__span-1-39"><a id="__codelineno-1-39" name="__codelineno-1-39" href="#__codelineno-1-39"></a>            <span class="s2">&quot;db_table&quot;</span><span class="p">:</span> <span class="s2">&quot;dummy_sales&quot;</span><span class="p">,</span>
+</span><span id="__span-1-40"><a id="__codelineno-1-40" name="__codelineno-1-40" href="#__codelineno-1-40"></a>            <span class="s2">&quot;write_type&quot;</span><span class="p">:</span> <span class="s2">&quot;overwrite&quot;</span><span class="p">,</span>
+</span><span id="__span-1-41"><a id="__codelineno-1-41" name="__codelineno-1-41" href="#__codelineno-1-41"></a>            <span class="s2">&quot;location&quot;</span><span class="p">:</span> <span class="s2">&quot;s3://my_data_product_bucket/silver/dummy_sales/&quot;</span>
+</span><span id="__span-1-42"><a id="__codelineno-1-42" name="__codelineno-1-42" href="#__codelineno-1-42"></a>        <span class="p">},</span>
+</span><span id="__span-1-43"><a id="__codelineno-1-43" name="__codelineno-1-43" href="#__codelineno-1-43"></a>    <span class="p">],</span>
+</span><span id="__span-1-44"><a id="__codelineno-1-44" name="__codelineno-1-44" href="#__codelineno-1-44"></a><span class="p">}</span>
+</span><span id="__span-1-45"><a id="__codelineno-1-45" name="__codelineno-1-45" href="#__codelineno-1-45"></a>
+</span><span id="__span-1-46"><a id="__codelineno-1-46" name="__codelineno-1-46" href="#__codelineno-1-46"></a><span class="n">load_data</span><span class="p">(</span><span class="n">acon</span><span class="o">=</span><span class="n">acon</span><span class="p">)</span>
 </span></code></pre></div>
 <h2 id="3-complex-read-multiple-files-from-sharepoint">3. Complex: Read multiple files from Sharepoint<a class="headerlink" href="#3-complex-read-multiple-files-from-sharepoint" title="Permanent link">&para;</a></h2>
 <p>In many cases, data in Sharepoint is split across multiple files within a folder or
