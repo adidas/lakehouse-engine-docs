@@ -21,7 +21,7 @@
       
       
       <link rel="icon" href="../../../assets/img/lakehouse_engine_logo_symbol_large.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
     
     
       
@@ -29,7 +29,7 @@
       
     
     
-      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.ec1eaa64.min.css">
       
         
         <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
@@ -7685,7 +7685,8 @@
 <span class="normal"><a href="#__codelineno-0-231">231</a></span>
 <span class="normal"><a href="#__codelineno-0-232">232</a></span>
 <span class="normal"><a href="#__codelineno-0-233">233</a></span>
-<span class="normal"><a href="#__codelineno-0-234">234</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-0-207"><a id="__codelineno-0-207" name="__codelineno-0-207"></a><span class="k">def</span><span class="w"> </span><span class="nf">resolve_dq_functions</span><span class="p">(</span><span class="n">acon</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">execution_point</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="normal"><a href="#__codelineno-0-234">234</a></span>
+<span class="normal"><a href="#__codelineno-0-235">235</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-0-207"><a id="__codelineno-0-207" name="__codelineno-0-207"></a><span class="k">def</span><span class="w"> </span><span class="nf">resolve_dq_functions</span><span class="p">(</span><span class="n">acon</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">execution_point</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
 </span><span id="__span-0-208"><a id="__codelineno-0-208" name="__codelineno-0-208"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Function to resolve the dq functions in the acon.</span>
 </span><span id="__span-0-209"><a id="__codelineno-0-209" name="__codelineno-0-209"></a>
 </span><span id="__span-0-210"><a id="__codelineno-0-210" name="__codelineno-0-210"></a><span class="sd">    Args:</span>
@@ -7696,23 +7697,24 @@
 </span><span id="__span-0-215"><a id="__codelineno-0-215" name="__codelineno-0-215"></a><span class="sd">        Acon after resolving the dq functions.</span>
 </span><span id="__span-0-216"><a id="__codelineno-0-216" name="__codelineno-0-216"></a><span class="sd">    &quot;&quot;&quot;</span>
 </span><span id="__span-0-217"><a id="__codelineno-0-217" name="__codelineno-0-217"></a>    <span class="k">if</span> <span class="n">acon</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;dq_spec&quot;</span><span class="p">):</span>
-</span><span id="__span-0-218"><a id="__codelineno-0-218" name="__codelineno-0-218"></a>        <span class="k">if</span> <span class="n">acon</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;dq_spec&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;dq_type&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="n">DQType</span><span class="o">.</span><span class="n">PRISMA</span><span class="o">.</span><span class="n">value</span><span class="p">:</span>
-</span><span id="__span-0-219"><a id="__codelineno-0-219" name="__codelineno-0-219"></a>            <span class="n">acon</span><span class="p">[</span><span class="s2">&quot;dq_spec&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">PrismaUtils</span><span class="o">.</span><span class="n">build_prisma_dq_spec</span><span class="p">(</span>
-</span><span id="__span-0-220"><a id="__codelineno-0-220" name="__codelineno-0-220"></a>                <span class="n">spec</span><span class="o">=</span><span class="n">acon</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;dq_spec&quot;</span><span class="p">),</span> <span class="n">execution_point</span><span class="o">=</span><span class="n">execution_point</span>
-</span><span id="__span-0-221"><a id="__codelineno-0-221" name="__codelineno-0-221"></a>            <span class="p">)</span>
-</span><span id="__span-0-222"><a id="__codelineno-0-222" name="__codelineno-0-222"></a>    <span class="k">elif</span> <span class="n">acon</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;dq_specs&quot;</span><span class="p">):</span>
-</span><span id="__span-0-223"><a id="__codelineno-0-223" name="__codelineno-0-223"></a>        <span class="n">resolved_dq_specs</span> <span class="o">=</span> <span class="p">[]</span>
-</span><span id="__span-0-224"><a id="__codelineno-0-224" name="__codelineno-0-224"></a>        <span class="k">for</span> <span class="n">spec</span> <span class="ow">in</span> <span class="n">acon</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;dq_specs&quot;</span><span class="p">,</span> <span class="p">[]):</span>
-</span><span id="__span-0-225"><a id="__codelineno-0-225" name="__codelineno-0-225"></a>            <span class="k">if</span> <span class="n">spec</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;dq_type&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="n">DQType</span><span class="o">.</span><span class="n">PRISMA</span><span class="o">.</span><span class="n">value</span><span class="p">:</span>
-</span><span id="__span-0-226"><a id="__codelineno-0-226" name="__codelineno-0-226"></a>                <span class="n">resolved_dq_specs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
-</span><span id="__span-0-227"><a id="__codelineno-0-227" name="__codelineno-0-227"></a>                    <span class="n">PrismaUtils</span><span class="o">.</span><span class="n">build_prisma_dq_spec</span><span class="p">(</span>
-</span><span id="__span-0-228"><a id="__codelineno-0-228" name="__codelineno-0-228"></a>                        <span class="n">spec</span><span class="o">=</span><span class="n">spec</span><span class="p">,</span> <span class="n">execution_point</span><span class="o">=</span><span class="n">execution_point</span>
-</span><span id="__span-0-229"><a id="__codelineno-0-229" name="__codelineno-0-229"></a>                    <span class="p">)</span>
-</span><span id="__span-0-230"><a id="__codelineno-0-230" name="__codelineno-0-230"></a>                <span class="p">)</span>
-</span><span id="__span-0-231"><a id="__codelineno-0-231" name="__codelineno-0-231"></a>            <span class="k">else</span><span class="p">:</span>
-</span><span id="__span-0-232"><a id="__codelineno-0-232" name="__codelineno-0-232"></a>                <span class="n">resolved_dq_specs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">spec</span><span class="p">)</span>
-</span><span id="__span-0-233"><a id="__codelineno-0-233" name="__codelineno-0-233"></a>        <span class="n">acon</span><span class="p">[</span><span class="s2">&quot;dq_specs&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">resolved_dq_specs</span>
-</span><span id="__span-0-234"><a id="__codelineno-0-234" name="__codelineno-0-234"></a>    <span class="k">return</span> <span class="n">acon</span>
+</span><span id="__span-0-218"><a id="__codelineno-0-218" name="__codelineno-0-218"></a>        <span class="n">dq_spec</span> <span class="o">=</span> <span class="n">acon</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;dq_spec&quot;</span><span class="p">)</span>
+</span><span id="__span-0-219"><a id="__codelineno-0-219" name="__codelineno-0-219"></a>        <span class="k">if</span> <span class="n">dq_spec</span> <span class="ow">and</span> <span class="n">dq_spec</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;dq_type&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="n">DQType</span><span class="o">.</span><span class="n">PRISMA</span><span class="o">.</span><span class="n">value</span><span class="p">:</span>
+</span><span id="__span-0-220"><a id="__codelineno-0-220" name="__codelineno-0-220"></a>            <span class="n">acon</span><span class="p">[</span><span class="s2">&quot;dq_spec&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">PrismaUtils</span><span class="o">.</span><span class="n">build_prisma_dq_spec</span><span class="p">(</span>
+</span><span id="__span-0-221"><a id="__codelineno-0-221" name="__codelineno-0-221"></a>                <span class="n">spec</span><span class="o">=</span><span class="n">dq_spec</span><span class="p">,</span> <span class="n">execution_point</span><span class="o">=</span><span class="n">execution_point</span>
+</span><span id="__span-0-222"><a id="__codelineno-0-222" name="__codelineno-0-222"></a>            <span class="p">)</span>
+</span><span id="__span-0-223"><a id="__codelineno-0-223" name="__codelineno-0-223"></a>    <span class="k">elif</span> <span class="n">acon</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;dq_specs&quot;</span><span class="p">):</span>
+</span><span id="__span-0-224"><a id="__codelineno-0-224" name="__codelineno-0-224"></a>        <span class="n">resolved_dq_specs</span> <span class="o">=</span> <span class="p">[]</span>
+</span><span id="__span-0-225"><a id="__codelineno-0-225" name="__codelineno-0-225"></a>        <span class="k">for</span> <span class="n">spec</span> <span class="ow">in</span> <span class="n">acon</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;dq_specs&quot;</span><span class="p">,</span> <span class="p">[]):</span>
+</span><span id="__span-0-226"><a id="__codelineno-0-226" name="__codelineno-0-226"></a>            <span class="k">if</span> <span class="n">spec</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;dq_type&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="n">DQType</span><span class="o">.</span><span class="n">PRISMA</span><span class="o">.</span><span class="n">value</span><span class="p">:</span>
+</span><span id="__span-0-227"><a id="__codelineno-0-227" name="__codelineno-0-227"></a>                <span class="n">resolved_dq_specs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+</span><span id="__span-0-228"><a id="__codelineno-0-228" name="__codelineno-0-228"></a>                    <span class="n">PrismaUtils</span><span class="o">.</span><span class="n">build_prisma_dq_spec</span><span class="p">(</span>
+</span><span id="__span-0-229"><a id="__codelineno-0-229" name="__codelineno-0-229"></a>                        <span class="n">spec</span><span class="o">=</span><span class="n">spec</span><span class="p">,</span> <span class="n">execution_point</span><span class="o">=</span><span class="n">execution_point</span>
+</span><span id="__span-0-230"><a id="__codelineno-0-230" name="__codelineno-0-230"></a>                    <span class="p">)</span>
+</span><span id="__span-0-231"><a id="__codelineno-0-231" name="__codelineno-0-231"></a>                <span class="p">)</span>
+</span><span id="__span-0-232"><a id="__codelineno-0-232" name="__codelineno-0-232"></a>            <span class="k">else</span><span class="p">:</span>
+</span><span id="__span-0-233"><a id="__codelineno-0-233" name="__codelineno-0-233"></a>                <span class="n">resolved_dq_specs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">spec</span><span class="p">)</span>
+</span><span id="__span-0-234"><a id="__codelineno-0-234" name="__codelineno-0-234"></a>        <span class="n">acon</span><span class="p">[</span><span class="s2">&quot;dq_specs&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">resolved_dq_specs</span>
+</span><span id="__span-0-235"><a id="__codelineno-0-235" name="__codelineno-0-235"></a>    <span class="k">return</span> <span class="n">acon</span>
 </span></code></pre></div></td></tr></table></div>
             </details>
     </div>
@@ -7845,7 +7847,7 @@
 </span><span id="__span-0-54"><a id="__codelineno-0-54" name="__codelineno-0-54"></a>    <span class="k">if</span> <span class="n">execution_point</span><span class="p">:</span>
 </span><span id="__span-0-55"><a id="__codelineno-0-55" name="__codelineno-0-55"></a>        <span class="n">acon</span> <span class="o">=</span> <span class="n">resolve_dq_functions</span><span class="p">(</span><span class="n">acon</span><span class="p">,</span> <span class="n">execution_point</span><span class="p">)</span>
 </span><span id="__span-0-56"><a id="__codelineno-0-56" name="__codelineno-0-56"></a>
-</span><span id="__span-0-57"><a id="__codelineno-0-57" name="__codelineno-0-57"></a>    <span class="n">_LOGGER</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Read Algorithm Configuration: </span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">acon</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span id="__span-0-57"><a id="__codelineno-0-57" name="__codelineno-0-57"></a>    <span class="n">_LOGGER</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Read Algorithm Configuration: </span><span class="si">{</span><span class="n">acon</span><span class="si">!s}</span><span class="s2">&quot;</span><span class="p">)</span>
 </span><span id="__span-0-58"><a id="__codelineno-0-58" name="__codelineno-0-58"></a>
 </span><span id="__span-0-59"><a id="__codelineno-0-59" name="__codelineno-0-59"></a>    <span class="k">return</span> <span class="n">acon</span>
 </span></code></pre></div></td></tr></table></div>
@@ -7990,7 +7992,7 @@
                 <code>error_list</code>
             </td>
             <td>
-                  <code><span title="list">list</span></code>
+                  <code><span title="list">list</span> | None</code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -8060,7 +8062,7 @@
 <span class="normal"><a href="#__codelineno-0-149">149</a></span>
 <span class="normal"><a href="#__codelineno-0-150">150</a></span>
 <span class="normal"><a href="#__codelineno-0-151">151</a></span>
-<span class="normal"><a href="#__codelineno-0-152">152</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-0-99"><a id="__codelineno-0-99" name="__codelineno-0-99"></a><span class="k">def</span><span class="w"> </span><span class="nf">validate_managers</span><span class="p">(</span><span class="n">acon</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">error_list</span><span class="p">:</span> <span class="nb">list</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="normal"><a href="#__codelineno-0-152">152</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-0-99"><a id="__codelineno-0-99" name="__codelineno-0-99"></a><span class="k">def</span><span class="w"> </span><span class="nf">validate_managers</span><span class="p">(</span><span class="n">acon</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">error_list</span><span class="p">:</span> <span class="nb">list</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 </span><span id="__span-0-100"><a id="__codelineno-0-100" name="__codelineno-0-100"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Function to validate the managers in the acon.</span>
 </span><span id="__span-0-101"><a id="__codelineno-0-101" name="__codelineno-0-101"></a>
 </span><span id="__span-0-102"><a id="__codelineno-0-102" name="__codelineno-0-102"></a><span class="sd">    Args:</span>
@@ -8494,11 +8496,11 @@
 </span><span id="__span-0-68"><a id="__codelineno-0-68" name="__codelineno-0-68"></a><span class="sd">    Raises:</span>
 </span><span id="__span-0-69"><a id="__codelineno-0-69" name="__codelineno-0-69"></a><span class="sd">        RuntimeError: If the input format is not supported.</span>
 </span><span id="__span-0-70"><a id="__codelineno-0-70" name="__codelineno-0-70"></a><span class="sd">    &quot;&quot;&quot;</span>
-</span><span id="__span-0-71"><a id="__codelineno-0-71" name="__codelineno-0-71"></a>    <span class="k">if</span> <span class="s2">&quot;input_specs&quot;</span> <span class="ow">in</span> <span class="n">acon</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span> <span class="ow">or</span> <span class="s2">&quot;input_spec&quot;</span> <span class="ow">in</span> <span class="n">acon</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+</span><span id="__span-0-71"><a id="__codelineno-0-71" name="__codelineno-0-71"></a>    <span class="k">if</span> <span class="s2">&quot;input_specs&quot;</span> <span class="ow">in</span> <span class="n">acon</span> <span class="ow">or</span> <span class="s2">&quot;input_spec&quot;</span> <span class="ow">in</span> <span class="n">acon</span><span class="p">:</span>
 </span><span id="__span-0-72"><a id="__codelineno-0-72" name="__codelineno-0-72"></a>        <span class="k">for</span> <span class="n">spec</span> <span class="ow">in</span> <span class="n">acon</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;input_specs&quot;</span><span class="p">,</span> <span class="p">[])</span> <span class="ow">or</span> <span class="p">[</span><span class="n">acon</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;input_spec&quot;</span><span class="p">,</span> <span class="p">{})]:</span>
 </span><span id="__span-0-73"><a id="__codelineno-0-73" name="__codelineno-0-73"></a>            <span class="k">if</span> <span class="p">(</span>
 </span><span id="__span-0-74"><a id="__codelineno-0-74" name="__codelineno-0-74"></a>                <span class="ow">not</span> <span class="n">InputFormat</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">spec</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;data_format&quot;</span><span class="p">))</span>
-</span><span id="__span-0-75"><a id="__codelineno-0-75" name="__codelineno-0-75"></a>                <span class="ow">and</span> <span class="s2">&quot;db_table&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">spec</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
+</span><span id="__span-0-75"><a id="__codelineno-0-75" name="__codelineno-0-75"></a>                <span class="ow">and</span> <span class="s2">&quot;db_table&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">spec</span>
 </span><span id="__span-0-76"><a id="__codelineno-0-76" name="__codelineno-0-76"></a>            <span class="p">):</span>
 </span><span id="__span-0-77"><a id="__codelineno-0-77" name="__codelineno-0-77"></a>                <span class="k">raise</span> <span class="n">WrongIOFormatException</span><span class="p">(</span>
 </span><span id="__span-0-78"><a id="__codelineno-0-78" name="__codelineno-0-78"></a>                    <span class="sa">f</span><span class="s2">&quot;Input format not supported: </span><span class="si">{</span><span class="n">spec</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;data_format&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
@@ -8602,7 +8604,7 @@
 </span><span id="__span-0-88"><a id="__codelineno-0-88" name="__codelineno-0-88"></a><span class="sd">    Raises:</span>
 </span><span id="__span-0-89"><a id="__codelineno-0-89" name="__codelineno-0-89"></a><span class="sd">        RuntimeError: If the output format is not supported.</span>
 </span><span id="__span-0-90"><a id="__codelineno-0-90" name="__codelineno-0-90"></a><span class="sd">    &quot;&quot;&quot;</span>
-</span><span id="__span-0-91"><a id="__codelineno-0-91" name="__codelineno-0-91"></a>    <span class="k">if</span> <span class="s2">&quot;output_specs&quot;</span> <span class="ow">in</span> <span class="n">acon</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span> <span class="ow">or</span> <span class="s2">&quot;output_spec&quot;</span> <span class="ow">in</span> <span class="n">acon</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+</span><span id="__span-0-91"><a id="__codelineno-0-91" name="__codelineno-0-91"></a>    <span class="k">if</span> <span class="s2">&quot;output_specs&quot;</span> <span class="ow">in</span> <span class="n">acon</span> <span class="ow">or</span> <span class="s2">&quot;output_spec&quot;</span> <span class="ow">in</span> <span class="n">acon</span><span class="p">:</span>
 </span><span id="__span-0-92"><a id="__codelineno-0-92" name="__codelineno-0-92"></a>        <span class="k">for</span> <span class="n">spec</span> <span class="ow">in</span> <span class="n">acon</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;output_specs&quot;</span><span class="p">,</span> <span class="p">[])</span> <span class="ow">or</span> <span class="p">[</span><span class="n">acon</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;output_spec&quot;</span><span class="p">,</span> <span class="p">{})]:</span>
 </span><span id="__span-0-93"><a id="__codelineno-0-93" name="__codelineno-0-93"></a>            <span class="k">if</span> <span class="ow">not</span> <span class="n">OutputFormat</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">spec</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;data_format&quot;</span><span class="p">)):</span>
 </span><span id="__span-0-94"><a id="__codelineno-0-94" name="__codelineno-0-94"></a>                <span class="k">raise</span> <span class="n">WrongIOFormatException</span><span class="p">(</span>
@@ -8701,7 +8703,7 @@
       <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["content.code.annotate", "content.code.annotation", "content.code.copy", "content.code.select", "content.tabs.link", "content.tooltips", "navigation.indexes", "navigation.path", "navigation.tabs", "navigation.tabs.instant", "navigation.tabs.sticky", "navigation.top", "navigation.sections", "toc.follow", "toc.integrate", "search.highlight", "search.suggest"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.d7400e89.min.js"></script>
       
         <script src="../../../assets/_markdown_exec_pyodide.js"></script>
       
