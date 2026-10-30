@@ -7545,6 +7545,7 @@ SAP BW/B4 and trigger Databricks Workflows related to them.</p>
 <li><strong>jdbc_db_table</strong>: SAP logchain table name to query for process chain status.</li>
 <li><strong>domain</strong>: Databricks workflows domain for job triggering.</li>
 <li><strong>token</strong>: Databricks workflows token for authentication.</li>
+<li><strong>max_event_gap_hours</strong> (optional): maximum number of hours between the new events of the hard dependencies of a job for them to be considered from the same upstream cycle. If not set, the default behaviour is kept. Check <a href="../heartbeat.html#step-5-dependency-validation-and-job-triggering">Same Cycle Validation</a>.</li>
 </ul>
 <h3 id="sap-bwb4-data-feed-csv-configuration-entry">SAP BW/B4 Data Feed CSV Configuration Entry<a class="headerlink" href="#sap-bwb4-data-feed-csv-configuration-entry" title="Permanent link">&para;</a></h3>
 <p>To check how the entry for a SAP BW/B4 source should look in the Heartbeat Control Table, <a href="../heartbeat.html#heartbeat-sensor-control-table-reference-records">check it here</a>.</p>

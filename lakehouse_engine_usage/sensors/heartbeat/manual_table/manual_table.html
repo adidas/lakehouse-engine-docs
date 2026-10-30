@@ -7543,6 +7543,7 @@ Manual Table and trigger Databricks Workflows related to them.</p>
 <li><strong>lakehouse_engine_sensor_db_table</strong>: Database table name for the lakehouse engine sensors (e.g., <code>my_database.lakehouse_engine_sensors</code>).</li>
 <li><strong>domain</strong>: Databricks workflows domain for job triggering.</li>
 <li><strong>token</strong>: Databricks workflows token for authentication.</li>
+<li><strong>max_event_gap_hours</strong> (optional): maximum number of hours between the new events of the hard dependencies of a job for them to be considered from the same upstream cycle. If not set, the default behaviour is kept. Check <a href="../heartbeat.html#step-5-dependency-validation-and-job-triggering">Same Cycle Validation</a>.</li>
 </ul>
 <h3 id="manual-tables-data-feed-csv-configuration-entry">Manual Tables Data Feed CSV Configuration Entry<a class="headerlink" href="#manual-tables-data-feed-csv-configuration-entry" title="Permanent link">&para;</a></h3>
 <p>To check how the entry for a manual table source should look in the Heartbeat Control Table, <a href="../heartbeat.html#heartbeat-sensor-control-table-reference-records">check it here</a>.</p>

@@ -3999,6 +3999,17 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#packages.core.definitions.HeartbeatConfigSpec.__post_init__" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        __post_init__
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#packages.core.definitions.HeartbeatConfigSpec.create_from_acon" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -11618,6 +11629,11 @@ specific quantum related config information to sensor acon.</p>
     created (read from config).</li>
 <li>schema_dict: dict representation of schema of the trigger file (e.g. Spark struct
     type schema).</li>
+<li>max_event_gap_hours: optional maximum number of hours allowed between the oldest
+    and the most recent new event of the hard dependencies of a trigger job. If
+    the gap is bigger, the job is not triggered, because the events are considered
+    to belong to different upstream cycles. If not set, the heartbeat keeps its
+    default behavior.</li>
 </ul>
 
 
@@ -11696,7 +11712,26 @@ specific quantum related config information to sensor acon.</p>
 <span class="normal"><a href="#__codelineno-0-1837">1837</a></span>
 <span class="normal"><a href="#__codelineno-0-1838">1838</a></span>
 <span class="normal"><a href="#__codelineno-0-1839">1839</a></span>
-<span class="normal"><a href="#__codelineno-0-1840">1840</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-0-1773"><a id="__codelineno-0-1773" name="__codelineno-0-1773"></a><span class="nd">@dataclass</span>
+<span class="normal"><a href="#__codelineno-0-1840">1840</a></span>
+<span class="normal"><a href="#__codelineno-0-1841">1841</a></span>
+<span class="normal"><a href="#__codelineno-0-1842">1842</a></span>
+<span class="normal"><a href="#__codelineno-0-1843">1843</a></span>
+<span class="normal"><a href="#__codelineno-0-1844">1844</a></span>
+<span class="normal"><a href="#__codelineno-0-1845">1845</a></span>
+<span class="normal"><a href="#__codelineno-0-1846">1846</a></span>
+<span class="normal"><a href="#__codelineno-0-1847">1847</a></span>
+<span class="normal"><a href="#__codelineno-0-1848">1848</a></span>
+<span class="normal"><a href="#__codelineno-0-1849">1849</a></span>
+<span class="normal"><a href="#__codelineno-0-1850">1850</a></span>
+<span class="normal"><a href="#__codelineno-0-1851">1851</a></span>
+<span class="normal"><a href="#__codelineno-0-1852">1852</a></span>
+<span class="normal"><a href="#__codelineno-0-1853">1853</a></span>
+<span class="normal"><a href="#__codelineno-0-1854">1854</a></span>
+<span class="normal"><a href="#__codelineno-0-1855">1855</a></span>
+<span class="normal"><a href="#__codelineno-0-1856">1856</a></span>
+<span class="normal"><a href="#__codelineno-0-1857">1857</a></span>
+<span class="normal"><a href="#__codelineno-0-1858">1858</a></span>
+<span class="normal"><a href="#__codelineno-0-1859">1859</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-0-1773"><a id="__codelineno-0-1773" name="__codelineno-0-1773"></a><span class="nd">@dataclass</span>
 </span><span id="__span-0-1774"><a id="__codelineno-0-1774" name="__codelineno-0-1774"></a><span class="k">class</span><span class="w"> </span><span class="nc">HeartbeatConfigSpec</span><span class="p">:</span>
 </span><span id="__span-0-1775"><a id="__codelineno-0-1775" name="__codelineno-0-1775"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Heartbeat Configurations and control table specifications.</span>
 </span><span id="__span-0-1776"><a id="__codelineno-0-1776" name="__codelineno-0-1776"></a>
@@ -11726,44 +11761,63 @@ specific quantum related config information to sensor acon.</p>
 </span><span id="__span-0-1800"><a id="__codelineno-0-1800" name="__codelineno-0-1800"></a><span class="sd">        created (read from config).</span>
 </span><span id="__span-0-1801"><a id="__codelineno-0-1801" name="__codelineno-0-1801"></a><span class="sd">    - schema_dict: dict representation of schema of the trigger file (e.g. Spark struct</span>
 </span><span id="__span-0-1802"><a id="__codelineno-0-1802" name="__codelineno-0-1802"></a><span class="sd">        type schema).</span>
-</span><span id="__span-0-1803"><a id="__codelineno-0-1803" name="__codelineno-0-1803"></a><span class="sd">    &quot;&quot;&quot;</span>
-</span><span id="__span-0-1804"><a id="__codelineno-0-1804" name="__codelineno-0-1804"></a>
-</span><span id="__span-0-1805"><a id="__codelineno-0-1805" name="__codelineno-0-1805"></a>    <span class="n">sensor_source</span><span class="p">:</span> <span class="nb">str</span>
-</span><span id="__span-0-1806"><a id="__codelineno-0-1806" name="__codelineno-0-1806"></a>    <span class="n">data_format</span><span class="p">:</span> <span class="nb">str</span>
-</span><span id="__span-0-1807"><a id="__codelineno-0-1807" name="__codelineno-0-1807"></a>    <span class="n">heartbeat_sensor_db_table</span><span class="p">:</span> <span class="nb">str</span>
-</span><span id="__span-0-1808"><a id="__codelineno-0-1808" name="__codelineno-0-1808"></a>    <span class="n">lakehouse_engine_sensor_db_table</span><span class="p">:</span> <span class="nb">str</span>
-</span><span id="__span-0-1809"><a id="__codelineno-0-1809" name="__codelineno-0-1809"></a>    <span class="n">token</span><span class="p">:</span> <span class="nb">str</span>
-</span><span id="__span-0-1810"><a id="__codelineno-0-1810" name="__codelineno-0-1810"></a>    <span class="n">domain</span><span class="p">:</span> <span class="nb">str</span>
-</span><span id="__span-0-1811"><a id="__codelineno-0-1811" name="__codelineno-0-1811"></a>    <span class="n">options</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">|</span> <span class="kc">None</span>
-</span><span id="__span-0-1812"><a id="__codelineno-0-1812" name="__codelineno-0-1812"></a>    <span class="n">jdbc_db_table</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span>
-</span><span id="__span-0-1813"><a id="__codelineno-0-1813" name="__codelineno-0-1813"></a>    <span class="n">base_checkpoint_location</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span>
-</span><span id="__span-0-1814"><a id="__codelineno-0-1814" name="__codelineno-0-1814"></a>    <span class="n">kafka_configs</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">|</span> <span class="kc">None</span>
-</span><span id="__span-0-1815"><a id="__codelineno-0-1815" name="__codelineno-0-1815"></a>    <span class="n">kafka_secret_scope</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span>
-</span><span id="__span-0-1816"><a id="__codelineno-0-1816" name="__codelineno-0-1816"></a>    <span class="n">base_trigger_file_location</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span>
-</span><span id="__span-0-1817"><a id="__codelineno-0-1817" name="__codelineno-0-1817"></a>    <span class="n">schema_dict</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">|</span> <span class="kc">None</span>
-</span><span id="__span-0-1818"><a id="__codelineno-0-1818" name="__codelineno-0-1818"></a>
-</span><span id="__span-0-1819"><a id="__codelineno-0-1819" name="__codelineno-0-1819"></a>    <span class="nd">@classmethod</span>
-</span><span id="__span-0-1820"><a id="__codelineno-0-1820" name="__codelineno-0-1820"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">create_from_acon</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">acon</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Self</span><span class="p">:</span>
-</span><span id="__span-0-1821"><a id="__codelineno-0-1821" name="__codelineno-0-1821"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Create HeartbeatConfigSpec from acon.</span>
-</span><span id="__span-0-1822"><a id="__codelineno-0-1822" name="__codelineno-0-1822"></a>
-</span><span id="__span-0-1823"><a id="__codelineno-0-1823" name="__codelineno-0-1823"></a><span class="sd">        Args:</span>
-</span><span id="__span-0-1824"><a id="__codelineno-0-1824" name="__codelineno-0-1824"></a><span class="sd">            acon: Heartbeat ACON.</span>
-</span><span id="__span-0-1825"><a id="__codelineno-0-1825" name="__codelineno-0-1825"></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="__span-0-1826"><a id="__codelineno-0-1826" name="__codelineno-0-1826"></a>        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span>
-</span><span id="__span-0-1827"><a id="__codelineno-0-1827" name="__codelineno-0-1827"></a>            <span class="n">sensor_source</span><span class="o">=</span><span class="n">acon</span><span class="p">[</span><span class="s2">&quot;sensor_source&quot;</span><span class="p">],</span>
-</span><span id="__span-0-1828"><a id="__codelineno-0-1828" name="__codelineno-0-1828"></a>            <span class="n">data_format</span><span class="o">=</span><span class="n">acon</span><span class="p">[</span><span class="s2">&quot;data_format&quot;</span><span class="p">],</span>
-</span><span id="__span-0-1829"><a id="__codelineno-0-1829" name="__codelineno-0-1829"></a>            <span class="n">heartbeat_sensor_db_table</span><span class="o">=</span><span class="n">acon</span><span class="p">[</span><span class="s2">&quot;heartbeat_sensor_db_table&quot;</span><span class="p">],</span>
-</span><span id="__span-0-1830"><a id="__codelineno-0-1830" name="__codelineno-0-1830"></a>            <span class="n">lakehouse_engine_sensor_db_table</span><span class="o">=</span><span class="n">acon</span><span class="p">[</span><span class="s2">&quot;lakehouse_engine_sensor_db_table&quot;</span><span class="p">],</span>
-</span><span id="__span-0-1831"><a id="__codelineno-0-1831" name="__codelineno-0-1831"></a>            <span class="n">token</span><span class="o">=</span><span class="n">acon</span><span class="p">[</span><span class="s2">&quot;token&quot;</span><span class="p">],</span>
-</span><span id="__span-0-1832"><a id="__codelineno-0-1832" name="__codelineno-0-1832"></a>            <span class="n">domain</span><span class="o">=</span><span class="n">acon</span><span class="p">[</span><span class="s2">&quot;domain&quot;</span><span class="p">],</span>
-</span><span id="__span-0-1833"><a id="__codelineno-0-1833" name="__codelineno-0-1833"></a>            <span class="n">options</span><span class="o">=</span><span class="n">acon</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;options&quot;</span><span class="p">),</span>
-</span><span id="__span-0-1834"><a id="__codelineno-0-1834" name="__codelineno-0-1834"></a>            <span class="n">jdbc_db_table</span><span class="o">=</span><span class="n">acon</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;jdbc_db_table&quot;</span><span class="p">),</span>
-</span><span id="__span-0-1835"><a id="__codelineno-0-1835" name="__codelineno-0-1835"></a>            <span class="n">base_checkpoint_location</span><span class="o">=</span><span class="n">acon</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;base_checkpoint_location&quot;</span><span class="p">),</span>
-</span><span id="__span-0-1836"><a id="__codelineno-0-1836" name="__codelineno-0-1836"></a>            <span class="n">kafka_configs</span><span class="o">=</span><span class="n">acon</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;kafka_configs&quot;</span><span class="p">),</span>
-</span><span id="__span-0-1837"><a id="__codelineno-0-1837" name="__codelineno-0-1837"></a>            <span class="n">kafka_secret_scope</span><span class="o">=</span><span class="n">acon</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;kafka_secret_scope&quot;</span><span class="p">),</span>
-</span><span id="__span-0-1838"><a id="__codelineno-0-1838" name="__codelineno-0-1838"></a>            <span class="n">base_trigger_file_location</span><span class="o">=</span><span class="n">acon</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;base_trigger_file_location&quot;</span><span class="p">),</span>
-</span><span id="__span-0-1839"><a id="__codelineno-0-1839" name="__codelineno-0-1839"></a>            <span class="n">schema_dict</span><span class="o">=</span><span class="n">acon</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;schema_dict&quot;</span><span class="p">),</span>
-</span><span id="__span-0-1840"><a id="__codelineno-0-1840" name="__codelineno-0-1840"></a>        <span class="p">)</span>
+</span><span id="__span-0-1803"><a id="__codelineno-0-1803" name="__codelineno-0-1803"></a><span class="sd">    - max_event_gap_hours: optional maximum number of hours allowed between the oldest</span>
+</span><span id="__span-0-1804"><a id="__codelineno-0-1804" name="__codelineno-0-1804"></a><span class="sd">        and the most recent new event of the hard dependencies of a trigger job. If</span>
+</span><span id="__span-0-1805"><a id="__codelineno-0-1805" name="__codelineno-0-1805"></a><span class="sd">        the gap is bigger, the job is not triggered, because the events are considered</span>
+</span><span id="__span-0-1806"><a id="__codelineno-0-1806" name="__codelineno-0-1806"></a><span class="sd">        to belong to different upstream cycles. If not set, the heartbeat keeps its</span>
+</span><span id="__span-0-1807"><a id="__codelineno-0-1807" name="__codelineno-0-1807"></a><span class="sd">        default behavior.</span>
+</span><span id="__span-0-1808"><a id="__codelineno-0-1808" name="__codelineno-0-1808"></a><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="__span-0-1809"><a id="__codelineno-0-1809" name="__codelineno-0-1809"></a>
+</span><span id="__span-0-1810"><a id="__codelineno-0-1810" name="__codelineno-0-1810"></a>    <span class="n">sensor_source</span><span class="p">:</span> <span class="nb">str</span>
+</span><span id="__span-0-1811"><a id="__codelineno-0-1811" name="__codelineno-0-1811"></a>    <span class="n">data_format</span><span class="p">:</span> <span class="nb">str</span>
+</span><span id="__span-0-1812"><a id="__codelineno-0-1812" name="__codelineno-0-1812"></a>    <span class="n">heartbeat_sensor_db_table</span><span class="p">:</span> <span class="nb">str</span>
+</span><span id="__span-0-1813"><a id="__codelineno-0-1813" name="__codelineno-0-1813"></a>    <span class="n">lakehouse_engine_sensor_db_table</span><span class="p">:</span> <span class="nb">str</span>
+</span><span id="__span-0-1814"><a id="__codelineno-0-1814" name="__codelineno-0-1814"></a>    <span class="n">token</span><span class="p">:</span> <span class="nb">str</span>
+</span><span id="__span-0-1815"><a id="__codelineno-0-1815" name="__codelineno-0-1815"></a>    <span class="n">domain</span><span class="p">:</span> <span class="nb">str</span>
+</span><span id="__span-0-1816"><a id="__codelineno-0-1816" name="__codelineno-0-1816"></a>    <span class="n">options</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">|</span> <span class="kc">None</span>
+</span><span id="__span-0-1817"><a id="__codelineno-0-1817" name="__codelineno-0-1817"></a>    <span class="n">jdbc_db_table</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span>
+</span><span id="__span-0-1818"><a id="__codelineno-0-1818" name="__codelineno-0-1818"></a>    <span class="n">base_checkpoint_location</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span>
+</span><span id="__span-0-1819"><a id="__codelineno-0-1819" name="__codelineno-0-1819"></a>    <span class="n">kafka_configs</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">|</span> <span class="kc">None</span>
+</span><span id="__span-0-1820"><a id="__codelineno-0-1820" name="__codelineno-0-1820"></a>    <span class="n">kafka_secret_scope</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span>
+</span><span id="__span-0-1821"><a id="__codelineno-0-1821" name="__codelineno-0-1821"></a>    <span class="n">base_trigger_file_location</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span>
+</span><span id="__span-0-1822"><a id="__codelineno-0-1822" name="__codelineno-0-1822"></a>    <span class="n">schema_dict</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">|</span> <span class="kc">None</span>
+</span><span id="__span-0-1823"><a id="__codelineno-0-1823" name="__codelineno-0-1823"></a>    <span class="n">max_event_gap_hours</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span>
+</span><span id="__span-0-1824"><a id="__codelineno-0-1824" name="__codelineno-0-1824"></a>
+</span><span id="__span-0-1825"><a id="__codelineno-0-1825" name="__codelineno-0-1825"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">__post_init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="__span-0-1826"><a id="__codelineno-0-1826" name="__codelineno-0-1826"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Validate the heartbeat configurations.&quot;&quot;&quot;</span>
+</span><span id="__span-0-1827"><a id="__codelineno-0-1827" name="__codelineno-0-1827"></a>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_event_gap_hours</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="p">(</span>
+</span><span id="__span-0-1828"><a id="__codelineno-0-1828" name="__codelineno-0-1828"></a>            <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">max_event_gap_hours</span><span class="p">,</span> <span class="nb">bool</span><span class="p">)</span>
+</span><span id="__span-0-1829"><a id="__codelineno-0-1829" name="__codelineno-0-1829"></a>            <span class="ow">or</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">max_event_gap_hours</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span>
+</span><span id="__span-0-1830"><a id="__codelineno-0-1830" name="__codelineno-0-1830"></a>            <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_event_gap_hours</span> <span class="o">&lt;</span> <span class="mi">1</span>
+</span><span id="__span-0-1831"><a id="__codelineno-0-1831" name="__codelineno-0-1831"></a>        <span class="p">):</span>
+</span><span id="__span-0-1832"><a id="__codelineno-0-1832" name="__codelineno-0-1832"></a>            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+</span><span id="__span-0-1833"><a id="__codelineno-0-1833" name="__codelineno-0-1833"></a>                <span class="s2">&quot;max_event_gap_hours must be a positive integer, got &quot;</span>
+</span><span id="__span-0-1834"><a id="__codelineno-0-1834" name="__codelineno-0-1834"></a>                <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">max_event_gap_hours</span><span class="si">!r}</span><span class="s2">.&quot;</span>
+</span><span id="__span-0-1835"><a id="__codelineno-0-1835" name="__codelineno-0-1835"></a>            <span class="p">)</span>
+</span><span id="__span-0-1836"><a id="__codelineno-0-1836" name="__codelineno-0-1836"></a>
+</span><span id="__span-0-1837"><a id="__codelineno-0-1837" name="__codelineno-0-1837"></a>    <span class="nd">@classmethod</span>
+</span><span id="__span-0-1838"><a id="__codelineno-0-1838" name="__codelineno-0-1838"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">create_from_acon</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">acon</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Self</span><span class="p">:</span>
+</span><span id="__span-0-1839"><a id="__codelineno-0-1839" name="__codelineno-0-1839"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Create HeartbeatConfigSpec from acon.</span>
+</span><span id="__span-0-1840"><a id="__codelineno-0-1840" name="__codelineno-0-1840"></a>
+</span><span id="__span-0-1841"><a id="__codelineno-0-1841" name="__codelineno-0-1841"></a><span class="sd">        Args:</span>
+</span><span id="__span-0-1842"><a id="__codelineno-0-1842" name="__codelineno-0-1842"></a><span class="sd">            acon: Heartbeat ACON.</span>
+</span><span id="__span-0-1843"><a id="__codelineno-0-1843" name="__codelineno-0-1843"></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="__span-0-1844"><a id="__codelineno-0-1844" name="__codelineno-0-1844"></a>        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span>
+</span><span id="__span-0-1845"><a id="__codelineno-0-1845" name="__codelineno-0-1845"></a>            <span class="n">sensor_source</span><span class="o">=</span><span class="n">acon</span><span class="p">[</span><span class="s2">&quot;sensor_source&quot;</span><span class="p">],</span>
+</span><span id="__span-0-1846"><a id="__codelineno-0-1846" name="__codelineno-0-1846"></a>            <span class="n">data_format</span><span class="o">=</span><span class="n">acon</span><span class="p">[</span><span class="s2">&quot;data_format&quot;</span><span class="p">],</span>
+</span><span id="__span-0-1847"><a id="__codelineno-0-1847" name="__codelineno-0-1847"></a>            <span class="n">heartbeat_sensor_db_table</span><span class="o">=</span><span class="n">acon</span><span class="p">[</span><span class="s2">&quot;heartbeat_sensor_db_table&quot;</span><span class="p">],</span>
+</span><span id="__span-0-1848"><a id="__codelineno-0-1848" name="__codelineno-0-1848"></a>            <span class="n">lakehouse_engine_sensor_db_table</span><span class="o">=</span><span class="n">acon</span><span class="p">[</span><span class="s2">&quot;lakehouse_engine_sensor_db_table&quot;</span><span class="p">],</span>
+</span><span id="__span-0-1849"><a id="__codelineno-0-1849" name="__codelineno-0-1849"></a>            <span class="n">token</span><span class="o">=</span><span class="n">acon</span><span class="p">[</span><span class="s2">&quot;token&quot;</span><span class="p">],</span>
+</span><span id="__span-0-1850"><a id="__codelineno-0-1850" name="__codelineno-0-1850"></a>            <span class="n">domain</span><span class="o">=</span><span class="n">acon</span><span class="p">[</span><span class="s2">&quot;domain&quot;</span><span class="p">],</span>
+</span><span id="__span-0-1851"><a id="__codelineno-0-1851" name="__codelineno-0-1851"></a>            <span class="n">options</span><span class="o">=</span><span class="n">acon</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;options&quot;</span><span class="p">),</span>
+</span><span id="__span-0-1852"><a id="__codelineno-0-1852" name="__codelineno-0-1852"></a>            <span class="n">jdbc_db_table</span><span class="o">=</span><span class="n">acon</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;jdbc_db_table&quot;</span><span class="p">),</span>
+</span><span id="__span-0-1853"><a id="__codelineno-0-1853" name="__codelineno-0-1853"></a>            <span class="n">base_checkpoint_location</span><span class="o">=</span><span class="n">acon</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;base_checkpoint_location&quot;</span><span class="p">),</span>
+</span><span id="__span-0-1854"><a id="__codelineno-0-1854" name="__codelineno-0-1854"></a>            <span class="n">kafka_configs</span><span class="o">=</span><span class="n">acon</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;kafka_configs&quot;</span><span class="p">),</span>
+</span><span id="__span-0-1855"><a id="__codelineno-0-1855" name="__codelineno-0-1855"></a>            <span class="n">kafka_secret_scope</span><span class="o">=</span><span class="n">acon</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;kafka_secret_scope&quot;</span><span class="p">),</span>
+</span><span id="__span-0-1856"><a id="__codelineno-0-1856" name="__codelineno-0-1856"></a>            <span class="n">base_trigger_file_location</span><span class="o">=</span><span class="n">acon</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;base_trigger_file_location&quot;</span><span class="p">),</span>
+</span><span id="__span-0-1857"><a id="__codelineno-0-1857" name="__codelineno-0-1857"></a>            <span class="n">schema_dict</span><span class="o">=</span><span class="n">acon</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;schema_dict&quot;</span><span class="p">),</span>
+</span><span id="__span-0-1858"><a id="__codelineno-0-1858" name="__codelineno-0-1858"></a>            <span class="n">max_event_gap_hours</span><span class="o">=</span><span class="n">acon</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;max_event_gap_hours&quot;</span><span class="p">),</span>
+</span><span id="__span-0-1859"><a id="__codelineno-0-1859" name="__codelineno-0-1859"></a>        <span class="p">)</span>
 </span></code></pre></div></td></tr></table></div>
               </details>
 
@@ -11779,6 +11833,49 @@ specific quantum related config information to sensor acon.</p>
 
 
 
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="packages.core.definitions.HeartbeatConfigSpec.__post_init__" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">__post_init__</span><span class="p">()</span></code>
+
+<a href="#packages.core.definitions.HeartbeatConfigSpec.__post_init__" class="headerlink" title="Permanent link">&para;</a></h3>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Validate the heartbeat configurations.</p>
+
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>mkdocs/lakehouse_engine/packages/core/definitions.py</code></summary>
+              <div class="language-python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-1825">1825</a></span>
+<span class="normal"><a href="#__codelineno-0-1826">1826</a></span>
+<span class="normal"><a href="#__codelineno-0-1827">1827</a></span>
+<span class="normal"><a href="#__codelineno-0-1828">1828</a></span>
+<span class="normal"><a href="#__codelineno-0-1829">1829</a></span>
+<span class="normal"><a href="#__codelineno-0-1830">1830</a></span>
+<span class="normal"><a href="#__codelineno-0-1831">1831</a></span>
+<span class="normal"><a href="#__codelineno-0-1832">1832</a></span>
+<span class="normal"><a href="#__codelineno-0-1833">1833</a></span>
+<span class="normal"><a href="#__codelineno-0-1834">1834</a></span>
+<span class="normal"><a href="#__codelineno-0-1835">1835</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-0-1825"><a id="__codelineno-0-1825" name="__codelineno-0-1825"></a><span class="k">def</span><span class="w"> </span><span class="nf">__post_init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="__span-0-1826"><a id="__codelineno-0-1826" name="__codelineno-0-1826"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Validate the heartbeat configurations.&quot;&quot;&quot;</span>
+</span><span id="__span-0-1827"><a id="__codelineno-0-1827" name="__codelineno-0-1827"></a>    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_event_gap_hours</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="p">(</span>
+</span><span id="__span-0-1828"><a id="__codelineno-0-1828" name="__codelineno-0-1828"></a>        <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">max_event_gap_hours</span><span class="p">,</span> <span class="nb">bool</span><span class="p">)</span>
+</span><span id="__span-0-1829"><a id="__codelineno-0-1829" name="__codelineno-0-1829"></a>        <span class="ow">or</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">max_event_gap_hours</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span>
+</span><span id="__span-0-1830"><a id="__codelineno-0-1830" name="__codelineno-0-1830"></a>        <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_event_gap_hours</span> <span class="o">&lt;</span> <span class="mi">1</span>
+</span><span id="__span-0-1831"><a id="__codelineno-0-1831" name="__codelineno-0-1831"></a>    <span class="p">):</span>
+</span><span id="__span-0-1832"><a id="__codelineno-0-1832" name="__codelineno-0-1832"></a>        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+</span><span id="__span-0-1833"><a id="__codelineno-0-1833" name="__codelineno-0-1833"></a>            <span class="s2">&quot;max_event_gap_hours must be a positive integer, got &quot;</span>
+</span><span id="__span-0-1834"><a id="__codelineno-0-1834" name="__codelineno-0-1834"></a>            <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">max_event_gap_hours</span><span class="si">!r}</span><span class="s2">.&quot;</span>
+</span><span id="__span-0-1835"><a id="__codelineno-0-1835" name="__codelineno-0-1835"></a>        <span class="p">)</span>
+</span></code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
 
 <div class="doc doc-object doc-function">
 
@@ -11831,49 +11928,51 @@ specific quantum related config information to sensor acon.</p>
 
             <details class="mkdocstrings-source">
               <summary>Source code in <code>mkdocs/lakehouse_engine/packages/core/definitions.py</code></summary>
-              <div class="language-python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-1819">1819</a></span>
-<span class="normal"><a href="#__codelineno-0-1820">1820</a></span>
-<span class="normal"><a href="#__codelineno-0-1821">1821</a></span>
-<span class="normal"><a href="#__codelineno-0-1822">1822</a></span>
-<span class="normal"><a href="#__codelineno-0-1823">1823</a></span>
-<span class="normal"><a href="#__codelineno-0-1824">1824</a></span>
-<span class="normal"><a href="#__codelineno-0-1825">1825</a></span>
-<span class="normal"><a href="#__codelineno-0-1826">1826</a></span>
-<span class="normal"><a href="#__codelineno-0-1827">1827</a></span>
-<span class="normal"><a href="#__codelineno-0-1828">1828</a></span>
-<span class="normal"><a href="#__codelineno-0-1829">1829</a></span>
-<span class="normal"><a href="#__codelineno-0-1830">1830</a></span>
-<span class="normal"><a href="#__codelineno-0-1831">1831</a></span>
-<span class="normal"><a href="#__codelineno-0-1832">1832</a></span>
-<span class="normal"><a href="#__codelineno-0-1833">1833</a></span>
-<span class="normal"><a href="#__codelineno-0-1834">1834</a></span>
-<span class="normal"><a href="#__codelineno-0-1835">1835</a></span>
-<span class="normal"><a href="#__codelineno-0-1836">1836</a></span>
-<span class="normal"><a href="#__codelineno-0-1837">1837</a></span>
+              <div class="language-python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-1837">1837</a></span>
 <span class="normal"><a href="#__codelineno-0-1838">1838</a></span>
 <span class="normal"><a href="#__codelineno-0-1839">1839</a></span>
-<span class="normal"><a href="#__codelineno-0-1840">1840</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-0-1819"><a id="__codelineno-0-1819" name="__codelineno-0-1819"></a><span class="nd">@classmethod</span>
-</span><span id="__span-0-1820"><a id="__codelineno-0-1820" name="__codelineno-0-1820"></a><span class="k">def</span><span class="w"> </span><span class="nf">create_from_acon</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">acon</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Self</span><span class="p">:</span>
-</span><span id="__span-0-1821"><a id="__codelineno-0-1821" name="__codelineno-0-1821"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Create HeartbeatConfigSpec from acon.</span>
-</span><span id="__span-0-1822"><a id="__codelineno-0-1822" name="__codelineno-0-1822"></a>
-</span><span id="__span-0-1823"><a id="__codelineno-0-1823" name="__codelineno-0-1823"></a><span class="sd">    Args:</span>
-</span><span id="__span-0-1824"><a id="__codelineno-0-1824" name="__codelineno-0-1824"></a><span class="sd">        acon: Heartbeat ACON.</span>
-</span><span id="__span-0-1825"><a id="__codelineno-0-1825" name="__codelineno-0-1825"></a><span class="sd">    &quot;&quot;&quot;</span>
-</span><span id="__span-0-1826"><a id="__codelineno-0-1826" name="__codelineno-0-1826"></a>    <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span>
-</span><span id="__span-0-1827"><a id="__codelineno-0-1827" name="__codelineno-0-1827"></a>        <span class="n">sensor_source</span><span class="o">=</span><span class="n">acon</span><span class="p">[</span><span class="s2">&quot;sensor_source&quot;</span><span class="p">],</span>
-</span><span id="__span-0-1828"><a id="__codelineno-0-1828" name="__codelineno-0-1828"></a>        <span class="n">data_format</span><span class="o">=</span><span class="n">acon</span><span class="p">[</span><span class="s2">&quot;data_format&quot;</span><span class="p">],</span>
-</span><span id="__span-0-1829"><a id="__codelineno-0-1829" name="__codelineno-0-1829"></a>        <span class="n">heartbeat_sensor_db_table</span><span class="o">=</span><span class="n">acon</span><span class="p">[</span><span class="s2">&quot;heartbeat_sensor_db_table&quot;</span><span class="p">],</span>
-</span><span id="__span-0-1830"><a id="__codelineno-0-1830" name="__codelineno-0-1830"></a>        <span class="n">lakehouse_engine_sensor_db_table</span><span class="o">=</span><span class="n">acon</span><span class="p">[</span><span class="s2">&quot;lakehouse_engine_sensor_db_table&quot;</span><span class="p">],</span>
-</span><span id="__span-0-1831"><a id="__codelineno-0-1831" name="__codelineno-0-1831"></a>        <span class="n">token</span><span class="o">=</span><span class="n">acon</span><span class="p">[</span><span class="s2">&quot;token&quot;</span><span class="p">],</span>
-</span><span id="__span-0-1832"><a id="__codelineno-0-1832" name="__codelineno-0-1832"></a>        <span class="n">domain</span><span class="o">=</span><span class="n">acon</span><span class="p">[</span><span class="s2">&quot;domain&quot;</span><span class="p">],</span>
-</span><span id="__span-0-1833"><a id="__codelineno-0-1833" name="__codelineno-0-1833"></a>        <span class="n">options</span><span class="o">=</span><span class="n">acon</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;options&quot;</span><span class="p">),</span>
-</span><span id="__span-0-1834"><a id="__codelineno-0-1834" name="__codelineno-0-1834"></a>        <span class="n">jdbc_db_table</span><span class="o">=</span><span class="n">acon</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;jdbc_db_table&quot;</span><span class="p">),</span>
-</span><span id="__span-0-1835"><a id="__codelineno-0-1835" name="__codelineno-0-1835"></a>        <span class="n">base_checkpoint_location</span><span class="o">=</span><span class="n">acon</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;base_checkpoint_location&quot;</span><span class="p">),</span>
-</span><span id="__span-0-1836"><a id="__codelineno-0-1836" name="__codelineno-0-1836"></a>        <span class="n">kafka_configs</span><span class="o">=</span><span class="n">acon</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;kafka_configs&quot;</span><span class="p">),</span>
-</span><span id="__span-0-1837"><a id="__codelineno-0-1837" name="__codelineno-0-1837"></a>        <span class="n">kafka_secret_scope</span><span class="o">=</span><span class="n">acon</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;kafka_secret_scope&quot;</span><span class="p">),</span>
-</span><span id="__span-0-1838"><a id="__codelineno-0-1838" name="__codelineno-0-1838"></a>        <span class="n">base_trigger_file_location</span><span class="o">=</span><span class="n">acon</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;base_trigger_file_location&quot;</span><span class="p">),</span>
-</span><span id="__span-0-1839"><a id="__codelineno-0-1839" name="__codelineno-0-1839"></a>        <span class="n">schema_dict</span><span class="o">=</span><span class="n">acon</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;schema_dict&quot;</span><span class="p">),</span>
-</span><span id="__span-0-1840"><a id="__codelineno-0-1840" name="__codelineno-0-1840"></a>    <span class="p">)</span>
+<span class="normal"><a href="#__codelineno-0-1840">1840</a></span>
+<span class="normal"><a href="#__codelineno-0-1841">1841</a></span>
+<span class="normal"><a href="#__codelineno-0-1842">1842</a></span>
+<span class="normal"><a href="#__codelineno-0-1843">1843</a></span>
+<span class="normal"><a href="#__codelineno-0-1844">1844</a></span>
+<span class="normal"><a href="#__codelineno-0-1845">1845</a></span>
+<span class="normal"><a href="#__codelineno-0-1846">1846</a></span>
+<span class="normal"><a href="#__codelineno-0-1847">1847</a></span>
+<span class="normal"><a href="#__codelineno-0-1848">1848</a></span>
+<span class="normal"><a href="#__codelineno-0-1849">1849</a></span>
+<span class="normal"><a href="#__codelineno-0-1850">1850</a></span>
+<span class="normal"><a href="#__codelineno-0-1851">1851</a></span>
+<span class="normal"><a href="#__codelineno-0-1852">1852</a></span>
+<span class="normal"><a href="#__codelineno-0-1853">1853</a></span>
+<span class="normal"><a href="#__codelineno-0-1854">1854</a></span>
+<span class="normal"><a href="#__codelineno-0-1855">1855</a></span>
+<span class="normal"><a href="#__codelineno-0-1856">1856</a></span>
+<span class="normal"><a href="#__codelineno-0-1857">1857</a></span>
+<span class="normal"><a href="#__codelineno-0-1858">1858</a></span>
+<span class="normal"><a href="#__codelineno-0-1859">1859</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-0-1837"><a id="__codelineno-0-1837" name="__codelineno-0-1837"></a><span class="nd">@classmethod</span>
+</span><span id="__span-0-1838"><a id="__codelineno-0-1838" name="__codelineno-0-1838"></a><span class="k">def</span><span class="w"> </span><span class="nf">create_from_acon</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">acon</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Self</span><span class="p">:</span>
+</span><span id="__span-0-1839"><a id="__codelineno-0-1839" name="__codelineno-0-1839"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Create HeartbeatConfigSpec from acon.</span>
+</span><span id="__span-0-1840"><a id="__codelineno-0-1840" name="__codelineno-0-1840"></a>
+</span><span id="__span-0-1841"><a id="__codelineno-0-1841" name="__codelineno-0-1841"></a><span class="sd">    Args:</span>
+</span><span id="__span-0-1842"><a id="__codelineno-0-1842" name="__codelineno-0-1842"></a><span class="sd">        acon: Heartbeat ACON.</span>
+</span><span id="__span-0-1843"><a id="__codelineno-0-1843" name="__codelineno-0-1843"></a><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="__span-0-1844"><a id="__codelineno-0-1844" name="__codelineno-0-1844"></a>    <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span>
+</span><span id="__span-0-1845"><a id="__codelineno-0-1845" name="__codelineno-0-1845"></a>        <span class="n">sensor_source</span><span class="o">=</span><span class="n">acon</span><span class="p">[</span><span class="s2">&quot;sensor_source&quot;</span><span class="p">],</span>
+</span><span id="__span-0-1846"><a id="__codelineno-0-1846" name="__codelineno-0-1846"></a>        <span class="n">data_format</span><span class="o">=</span><span class="n">acon</span><span class="p">[</span><span class="s2">&quot;data_format&quot;</span><span class="p">],</span>
+</span><span id="__span-0-1847"><a id="__codelineno-0-1847" name="__codelineno-0-1847"></a>        <span class="n">heartbeat_sensor_db_table</span><span class="o">=</span><span class="n">acon</span><span class="p">[</span><span class="s2">&quot;heartbeat_sensor_db_table&quot;</span><span class="p">],</span>
+</span><span id="__span-0-1848"><a id="__codelineno-0-1848" name="__codelineno-0-1848"></a>        <span class="n">lakehouse_engine_sensor_db_table</span><span class="o">=</span><span class="n">acon</span><span class="p">[</span><span class="s2">&quot;lakehouse_engine_sensor_db_table&quot;</span><span class="p">],</span>
+</span><span id="__span-0-1849"><a id="__codelineno-0-1849" name="__codelineno-0-1849"></a>        <span class="n">token</span><span class="o">=</span><span class="n">acon</span><span class="p">[</span><span class="s2">&quot;token&quot;</span><span class="p">],</span>
+</span><span id="__span-0-1850"><a id="__codelineno-0-1850" name="__codelineno-0-1850"></a>        <span class="n">domain</span><span class="o">=</span><span class="n">acon</span><span class="p">[</span><span class="s2">&quot;domain&quot;</span><span class="p">],</span>
+</span><span id="__span-0-1851"><a id="__codelineno-0-1851" name="__codelineno-0-1851"></a>        <span class="n">options</span><span class="o">=</span><span class="n">acon</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;options&quot;</span><span class="p">),</span>
+</span><span id="__span-0-1852"><a id="__codelineno-0-1852" name="__codelineno-0-1852"></a>        <span class="n">jdbc_db_table</span><span class="o">=</span><span class="n">acon</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;jdbc_db_table&quot;</span><span class="p">),</span>
+</span><span id="__span-0-1853"><a id="__codelineno-0-1853" name="__codelineno-0-1853"></a>        <span class="n">base_checkpoint_location</span><span class="o">=</span><span class="n">acon</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;base_checkpoint_location&quot;</span><span class="p">),</span>
+</span><span id="__span-0-1854"><a id="__codelineno-0-1854" name="__codelineno-0-1854"></a>        <span class="n">kafka_configs</span><span class="o">=</span><span class="n">acon</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;kafka_configs&quot;</span><span class="p">),</span>
+</span><span id="__span-0-1855"><a id="__codelineno-0-1855" name="__codelineno-0-1855"></a>        <span class="n">kafka_secret_scope</span><span class="o">=</span><span class="n">acon</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;kafka_secret_scope&quot;</span><span class="p">),</span>
+</span><span id="__span-0-1856"><a id="__codelineno-0-1856" name="__codelineno-0-1856"></a>        <span class="n">base_trigger_file_location</span><span class="o">=</span><span class="n">acon</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;base_trigger_file_location&quot;</span><span class="p">),</span>
+</span><span id="__span-0-1857"><a id="__codelineno-0-1857" name="__codelineno-0-1857"></a>        <span class="n">schema_dict</span><span class="o">=</span><span class="n">acon</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;schema_dict&quot;</span><span class="p">),</span>
+</span><span id="__span-0-1858"><a id="__codelineno-0-1858" name="__codelineno-0-1858"></a>        <span class="n">max_event_gap_hours</span><span class="o">=</span><span class="n">acon</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;max_event_gap_hours&quot;</span><span class="p">),</span>
+</span><span id="__span-0-1859"><a id="__codelineno-0-1859" name="__codelineno-0-1859"></a>    <span class="p">)</span>
 </span></code></pre></div></td></tr></table></div>
             </details>
     </div>
@@ -11916,41 +12015,41 @@ specific quantum related config information to sensor acon.</p>
 
               <details class="mkdocstrings-source">
                 <summary>Source code in <code>mkdocs/lakehouse_engine/packages/core/definitions.py</code></summary>
-                <div class="language-python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-1843">1843</a></span>
-<span class="normal"><a href="#__codelineno-0-1844">1844</a></span>
-<span class="normal"><a href="#__codelineno-0-1845">1845</a></span>
-<span class="normal"><a href="#__codelineno-0-1846">1846</a></span>
-<span class="normal"><a href="#__codelineno-0-1847">1847</a></span>
-<span class="normal"><a href="#__codelineno-0-1848">1848</a></span>
-<span class="normal"><a href="#__codelineno-0-1849">1849</a></span>
-<span class="normal"><a href="#__codelineno-0-1850">1850</a></span>
-<span class="normal"><a href="#__codelineno-0-1851">1851</a></span>
-<span class="normal"><a href="#__codelineno-0-1852">1852</a></span>
-<span class="normal"><a href="#__codelineno-0-1853">1853</a></span>
-<span class="normal"><a href="#__codelineno-0-1854">1854</a></span>
-<span class="normal"><a href="#__codelineno-0-1855">1855</a></span>
-<span class="normal"><a href="#__codelineno-0-1856">1856</a></span>
-<span class="normal"><a href="#__codelineno-0-1857">1857</a></span>
-<span class="normal"><a href="#__codelineno-0-1858">1858</a></span>
-<span class="normal"><a href="#__codelineno-0-1859">1859</a></span>
-<span class="normal"><a href="#__codelineno-0-1860">1860</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-0-1843"><a id="__codelineno-0-1843" name="__codelineno-0-1843"></a><span class="k">class</span><span class="w"> </span><span class="nc">HeartbeatSensorSource</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
-</span><span id="__span-0-1844"><a id="__codelineno-0-1844" name="__codelineno-0-1844"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Formats of algorithm input.&quot;&quot;&quot;</span>
-</span><span id="__span-0-1845"><a id="__codelineno-0-1845" name="__codelineno-0-1845"></a>
-</span><span id="__span-0-1846"><a id="__codelineno-0-1846" name="__codelineno-0-1846"></a>    <span class="n">SAP_BW</span> <span class="o">=</span> <span class="s2">&quot;sap_bw&quot;</span>
-</span><span id="__span-0-1847"><a id="__codelineno-0-1847" name="__codelineno-0-1847"></a>    <span class="n">SAP_B4</span> <span class="o">=</span> <span class="s2">&quot;sap_b4&quot;</span>
-</span><span id="__span-0-1848"><a id="__codelineno-0-1848" name="__codelineno-0-1848"></a>    <span class="n">DELTA_TABLE</span> <span class="o">=</span> <span class="s2">&quot;delta_table&quot;</span>
-</span><span id="__span-0-1849"><a id="__codelineno-0-1849" name="__codelineno-0-1849"></a>    <span class="n">KAFKA</span> <span class="o">=</span> <span class="s2">&quot;kafka&quot;</span>
-</span><span id="__span-0-1850"><a id="__codelineno-0-1850" name="__codelineno-0-1850"></a>    <span class="n">LMU_DELTA_TABLE</span> <span class="o">=</span> <span class="s2">&quot;lmu_delta_table&quot;</span>
-</span><span id="__span-0-1851"><a id="__codelineno-0-1851" name="__codelineno-0-1851"></a>    <span class="n">TRIGGER_FILE</span> <span class="o">=</span> <span class="s2">&quot;trigger_file&quot;</span>
-</span><span id="__span-0-1852"><a id="__codelineno-0-1852" name="__codelineno-0-1852"></a>
-</span><span id="__span-0-1853"><a id="__codelineno-0-1853" name="__codelineno-0-1853"></a>    <span class="nd">@classmethod</span>
-</span><span id="__span-0-1854"><a id="__codelineno-0-1854" name="__codelineno-0-1854"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">values</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
-</span><span id="__span-0-1855"><a id="__codelineno-0-1855" name="__codelineno-0-1855"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Generates a list containing all enum values.</span>
-</span><span id="__span-0-1856"><a id="__codelineno-0-1856" name="__codelineno-0-1856"></a>
-</span><span id="__span-0-1857"><a id="__codelineno-0-1857" name="__codelineno-0-1857"></a><span class="sd">        Returns:</span>
-</span><span id="__span-0-1858"><a id="__codelineno-0-1858" name="__codelineno-0-1858"></a><span class="sd">            A list with all enum values.</span>
-</span><span id="__span-0-1859"><a id="__codelineno-0-1859" name="__codelineno-0-1859"></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="__span-0-1860"><a id="__codelineno-0-1860" name="__codelineno-0-1860"></a>        <span class="k">return</span> <span class="p">[</span><span class="n">c</span><span class="o">.</span><span class="n">value</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="bp">cls</span><span class="p">]</span>
+                <div class="language-python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-1862">1862</a></span>
+<span class="normal"><a href="#__codelineno-0-1863">1863</a></span>
+<span class="normal"><a href="#__codelineno-0-1864">1864</a></span>
+<span class="normal"><a href="#__codelineno-0-1865">1865</a></span>
+<span class="normal"><a href="#__codelineno-0-1866">1866</a></span>
+<span class="normal"><a href="#__codelineno-0-1867">1867</a></span>
+<span class="normal"><a href="#__codelineno-0-1868">1868</a></span>
+<span class="normal"><a href="#__codelineno-0-1869">1869</a></span>
+<span class="normal"><a href="#__codelineno-0-1870">1870</a></span>
+<span class="normal"><a href="#__codelineno-0-1871">1871</a></span>
+<span class="normal"><a href="#__codelineno-0-1872">1872</a></span>
+<span class="normal"><a href="#__codelineno-0-1873">1873</a></span>
+<span class="normal"><a href="#__codelineno-0-1874">1874</a></span>
+<span class="normal"><a href="#__codelineno-0-1875">1875</a></span>
+<span class="normal"><a href="#__codelineno-0-1876">1876</a></span>
+<span class="normal"><a href="#__codelineno-0-1877">1877</a></span>
+<span class="normal"><a href="#__codelineno-0-1878">1878</a></span>
+<span class="normal"><a href="#__codelineno-0-1879">1879</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-0-1862"><a id="__codelineno-0-1862" name="__codelineno-0-1862"></a><span class="k">class</span><span class="w"> </span><span class="nc">HeartbeatSensorSource</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+</span><span id="__span-0-1863"><a id="__codelineno-0-1863" name="__codelineno-0-1863"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Formats of algorithm input.&quot;&quot;&quot;</span>
+</span><span id="__span-0-1864"><a id="__codelineno-0-1864" name="__codelineno-0-1864"></a>
+</span><span id="__span-0-1865"><a id="__codelineno-0-1865" name="__codelineno-0-1865"></a>    <span class="n">SAP_BW</span> <span class="o">=</span> <span class="s2">&quot;sap_bw&quot;</span>
+</span><span id="__span-0-1866"><a id="__codelineno-0-1866" name="__codelineno-0-1866"></a>    <span class="n">SAP_B4</span> <span class="o">=</span> <span class="s2">&quot;sap_b4&quot;</span>
+</span><span id="__span-0-1867"><a id="__codelineno-0-1867" name="__codelineno-0-1867"></a>    <span class="n">DELTA_TABLE</span> <span class="o">=</span> <span class="s2">&quot;delta_table&quot;</span>
+</span><span id="__span-0-1868"><a id="__codelineno-0-1868" name="__codelineno-0-1868"></a>    <span class="n">KAFKA</span> <span class="o">=</span> <span class="s2">&quot;kafka&quot;</span>
+</span><span id="__span-0-1869"><a id="__codelineno-0-1869" name="__codelineno-0-1869"></a>    <span class="n">LMU_DELTA_TABLE</span> <span class="o">=</span> <span class="s2">&quot;lmu_delta_table&quot;</span>
+</span><span id="__span-0-1870"><a id="__codelineno-0-1870" name="__codelineno-0-1870"></a>    <span class="n">TRIGGER_FILE</span> <span class="o">=</span> <span class="s2">&quot;trigger_file&quot;</span>
+</span><span id="__span-0-1871"><a id="__codelineno-0-1871" name="__codelineno-0-1871"></a>
+</span><span id="__span-0-1872"><a id="__codelineno-0-1872" name="__codelineno-0-1872"></a>    <span class="nd">@classmethod</span>
+</span><span id="__span-0-1873"><a id="__codelineno-0-1873" name="__codelineno-0-1873"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">values</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+</span><span id="__span-0-1874"><a id="__codelineno-0-1874" name="__codelineno-0-1874"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Generates a list containing all enum values.</span>
+</span><span id="__span-0-1875"><a id="__codelineno-0-1875" name="__codelineno-0-1875"></a>
+</span><span id="__span-0-1876"><a id="__codelineno-0-1876" name="__codelineno-0-1876"></a><span class="sd">        Returns:</span>
+</span><span id="__span-0-1877"><a id="__codelineno-0-1877" name="__codelineno-0-1877"></a><span class="sd">            A list with all enum values.</span>
+</span><span id="__span-0-1878"><a id="__codelineno-0-1878" name="__codelineno-0-1878"></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="__span-0-1879"><a id="__codelineno-0-1879" name="__codelineno-0-1879"></a>        <span class="k">return</span> <span class="p">[</span><span class="n">c</span><span class="o">.</span><span class="n">value</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="bp">cls</span><span class="p">]</span>
 </span></code></pre></div></td></tr></table></div>
               </details>
 
@@ -12010,21 +12109,21 @@ specific quantum related config information to sensor acon.</p>
 
             <details class="mkdocstrings-source">
               <summary>Source code in <code>mkdocs/lakehouse_engine/packages/core/definitions.py</code></summary>
-              <div class="language-python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-1853">1853</a></span>
-<span class="normal"><a href="#__codelineno-0-1854">1854</a></span>
-<span class="normal"><a href="#__codelineno-0-1855">1855</a></span>
-<span class="normal"><a href="#__codelineno-0-1856">1856</a></span>
-<span class="normal"><a href="#__codelineno-0-1857">1857</a></span>
-<span class="normal"><a href="#__codelineno-0-1858">1858</a></span>
-<span class="normal"><a href="#__codelineno-0-1859">1859</a></span>
-<span class="normal"><a href="#__codelineno-0-1860">1860</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-0-1853"><a id="__codelineno-0-1853" name="__codelineno-0-1853"></a><span class="nd">@classmethod</span>
-</span><span id="__span-0-1854"><a id="__codelineno-0-1854" name="__codelineno-0-1854"></a><span class="k">def</span><span class="w"> </span><span class="nf">values</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
-</span><span id="__span-0-1855"><a id="__codelineno-0-1855" name="__codelineno-0-1855"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Generates a list containing all enum values.</span>
-</span><span id="__span-0-1856"><a id="__codelineno-0-1856" name="__codelineno-0-1856"></a>
-</span><span id="__span-0-1857"><a id="__codelineno-0-1857" name="__codelineno-0-1857"></a><span class="sd">    Returns:</span>
-</span><span id="__span-0-1858"><a id="__codelineno-0-1858" name="__codelineno-0-1858"></a><span class="sd">        A list with all enum values.</span>
-</span><span id="__span-0-1859"><a id="__codelineno-0-1859" name="__codelineno-0-1859"></a><span class="sd">    &quot;&quot;&quot;</span>
-</span><span id="__span-0-1860"><a id="__codelineno-0-1860" name="__codelineno-0-1860"></a>    <span class="k">return</span> <span class="p">[</span><span class="n">c</span><span class="o">.</span><span class="n">value</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="bp">cls</span><span class="p">]</span>
+              <div class="language-python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-1872">1872</a></span>
+<span class="normal"><a href="#__codelineno-0-1873">1873</a></span>
+<span class="normal"><a href="#__codelineno-0-1874">1874</a></span>
+<span class="normal"><a href="#__codelineno-0-1875">1875</a></span>
+<span class="normal"><a href="#__codelineno-0-1876">1876</a></span>
+<span class="normal"><a href="#__codelineno-0-1877">1877</a></span>
+<span class="normal"><a href="#__codelineno-0-1878">1878</a></span>
+<span class="normal"><a href="#__codelineno-0-1879">1879</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-0-1872"><a id="__codelineno-0-1872" name="__codelineno-0-1872"></a><span class="nd">@classmethod</span>
+</span><span id="__span-0-1873"><a id="__codelineno-0-1873" name="__codelineno-0-1873"></a><span class="k">def</span><span class="w"> </span><span class="nf">values</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+</span><span id="__span-0-1874"><a id="__codelineno-0-1874" name="__codelineno-0-1874"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Generates a list containing all enum values.</span>
+</span><span id="__span-0-1875"><a id="__codelineno-0-1875" name="__codelineno-0-1875"></a>
+</span><span id="__span-0-1876"><a id="__codelineno-0-1876" name="__codelineno-0-1876"></a><span class="sd">    Returns:</span>
+</span><span id="__span-0-1877"><a id="__codelineno-0-1877" name="__codelineno-0-1877"></a><span class="sd">        A list with all enum values.</span>
+</span><span id="__span-0-1878"><a id="__codelineno-0-1878" name="__codelineno-0-1878"></a><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="__span-0-1879"><a id="__codelineno-0-1879" name="__codelineno-0-1879"></a>    <span class="k">return</span> <span class="p">[</span><span class="n">c</span><span class="o">.</span><span class="n">value</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="bp">cls</span><span class="p">]</span>
 </span></code></pre></div></td></tr></table></div>
             </details>
     </div>
@@ -12067,17 +12166,17 @@ specific quantum related config information to sensor acon.</p>
 
               <details class="mkdocstrings-source">
                 <summary>Source code in <code>mkdocs/lakehouse_engine/packages/core/definitions.py</code></summary>
-                <div class="language-python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-1863">1863</a></span>
-<span class="normal"><a href="#__codelineno-0-1864">1864</a></span>
-<span class="normal"><a href="#__codelineno-0-1865">1865</a></span>
-<span class="normal"><a href="#__codelineno-0-1866">1866</a></span>
-<span class="normal"><a href="#__codelineno-0-1867">1867</a></span>
-<span class="normal"><a href="#__codelineno-0-1868">1868</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-0-1863"><a id="__codelineno-0-1863" name="__codelineno-0-1863"></a><span class="k">class</span><span class="w"> </span><span class="nc">HeartbeatStatus</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
-</span><span id="__span-0-1864"><a id="__codelineno-0-1864" name="__codelineno-0-1864"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Status for a sensor.&quot;&quot;&quot;</span>
-</span><span id="__span-0-1865"><a id="__codelineno-0-1865" name="__codelineno-0-1865"></a>
-</span><span id="__span-0-1866"><a id="__codelineno-0-1866" name="__codelineno-0-1866"></a>    <span class="n">NEW_EVENT_AVAILABLE</span> <span class="o">=</span> <span class="s2">&quot;NEW_EVENT_AVAILABLE&quot;</span>
-</span><span id="__span-0-1867"><a id="__codelineno-0-1867" name="__codelineno-0-1867"></a>    <span class="n">IN_PROGRESS</span> <span class="o">=</span> <span class="s2">&quot;IN_PROGRESS&quot;</span>
-</span><span id="__span-0-1868"><a id="__codelineno-0-1868" name="__codelineno-0-1868"></a>    <span class="n">COMPLETED</span> <span class="o">=</span> <span class="s2">&quot;COMPLETED&quot;</span>
+                <div class="language-python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-1882">1882</a></span>
+<span class="normal"><a href="#__codelineno-0-1883">1883</a></span>
+<span class="normal"><a href="#__codelineno-0-1884">1884</a></span>
+<span class="normal"><a href="#__codelineno-0-1885">1885</a></span>
+<span class="normal"><a href="#__codelineno-0-1886">1886</a></span>
+<span class="normal"><a href="#__codelineno-0-1887">1887</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-0-1882"><a id="__codelineno-0-1882" name="__codelineno-0-1882"></a><span class="k">class</span><span class="w"> </span><span class="nc">HeartbeatStatus</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+</span><span id="__span-0-1883"><a id="__codelineno-0-1883" name="__codelineno-0-1883"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Status for a sensor.&quot;&quot;&quot;</span>
+</span><span id="__span-0-1884"><a id="__codelineno-0-1884" name="__codelineno-0-1884"></a>
+</span><span id="__span-0-1885"><a id="__codelineno-0-1885" name="__codelineno-0-1885"></a>    <span class="n">NEW_EVENT_AVAILABLE</span> <span class="o">=</span> <span class="s2">&quot;NEW_EVENT_AVAILABLE&quot;</span>
+</span><span id="__span-0-1886"><a id="__codelineno-0-1886" name="__codelineno-0-1886"></a>    <span class="n">IN_PROGRESS</span> <span class="o">=</span> <span class="s2">&quot;IN_PROGRESS&quot;</span>
+</span><span id="__span-0-1887"><a id="__codelineno-0-1887" name="__codelineno-0-1887"></a>    <span class="n">COMPLETED</span> <span class="o">=</span> <span class="s2">&quot;COMPLETED&quot;</span>
 </span></code></pre></div></td></tr></table></div>
               </details>
 

@@ -7501,6 +7501,21 @@
 <p class="admonition-title">Note</p>
 <p><strong>When to use</strong>: This function must be called as the <strong>final task</strong> in every Databricks job that is orchestrated by the Heartbeat Sensor to properly update the <code>status</code> to <code>COMPLETED</code> and record the job completion timestamp.</p>
 </div>
+<div class="admonition note">
+<p class="admonition-title">Events acquired while the job is running</p>
+<p>The sensors of the job are marked as <code>PROCESSED_NEW_DATA</code>, except the ones that
+acquired new data while the job was running (after its <code>job_start_timestamp</code>).
+These keep the <code>ACQUIRED_NEW_DATA</code> status, so that the new data triggers the job
+again and no upstream event is lost. This only applies to records <code>IN_PROGRESS</code>
+(jobs triggered by the Heartbeat): for manual runs, all the sensors are marked as
+<code>PROCESSED_NEW_DATA</code>.
+This behaviour does not depend on <code>max_event_gap_hours</code>.
+The sensor statuses are updated in a single merge, so if the sensor table is
+changed by another process at the same time (e.g. the Heartbeat acquiring a new
+event), the task fails with a Delta concurrent modification error instead of
+overwriting that change. In that case, the job records stay <code>IN_PROGRESS</code>: repair
+the update status task to complete the job.</p>
+</div>
 <h2 id="configuration-required-to-update-heartbeat-sensor-status">Configuration required to update heartbeat sensor status<a class="headerlink" href="#configuration-required-to-update-heartbeat-sensor-status" title="Permanent link">&para;</a></h2>
 <ul>
 <li><strong>job_id</strong>: The unique identifier of the Databricks job that was triggered by the Heartbeat sensor (e.g., <code>"MY_JOB_ID"</code>).</li>

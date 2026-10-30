@@ -8110,7 +8110,10 @@ data product system. Just read access is required for upstream from downstream s
 <li>Filters records based on:<ul>
 <li>Supported sensor sources: <code>Delta Table</code>, <code>Kafka</code>, <code>SAP BW/4HANA</code>, <code>Lakehouse Manual Upload</code>, <code>Trigger file</code>.</li>
 <li>Job state: <code>job_state = 'UNPAUSED'</code>.</li>
-<li>Status conditions: <code>status IS NULL</code> or <code>status = 'COMPLETED'</code>.</li>
+<li>Status conditions: <code>status IS NULL</code> or <code>status = 'COMPLETED'</code>. When
+    <a href="#step-5-dependency-validation-and-job-triggering"><code>max_event_gap_hours</code></a> is set,
+    <code>status = 'NEW_EVENT_AVAILABLE'</code> records are also checked, so that an older
+    event can be replaced by a newer one before the job is triggered.</li>
 </ul>
 </li>
 </ul>
@@ -8185,6 +8188,43 @@ soon as the trigger condition is satisfied (all hard dependencies has <code>NEW_
 </ul>
 </li>
 </ul>
+<p><strong>5.4 Same Cycle Validation (optional)</strong></p>
+<p>When a job depends on several upstream sources that run at different times, the hard
+dependencies can all be <code>NEW_EVENT_AVAILABLE</code> while their events belong to different
+upstream cycles (e.g. one event from yesterday's evening run and the others from
+today's morning run). In that case the job would be triggered with incomplete data.</p>
+<p>To prevent this, set the optional <code>max_event_gap_hours</code> parameter in the Heartbeat
+ACON. Before triggering a job, the Heartbeat compares the time of the new event of each
+hard dependency and only triggers the job if the gap between the oldest and the most
+recent event is not bigger than <code>max_event_gap_hours</code>. Otherwise, the job is not
+triggered and the Heartbeat waits for the newer events.</p>
+<ul>
+<li>The event time is the <code>status_change_timestamp</code> of the sensor record in the
+<code>lakehouse_engine_sensor_db_table</code> with <code>ACQUIRED_NEW_DATA</code> status, as it only
+changes when the sensor acquires new data from the upstream.</li>
+<li>Jobs with a single hard dependency are not affected (the gap is always 0).</li>
+<li>If any hard dependency has no valid event time (no sensor record with
+<code>ACQUIRED_NEW_DATA</code> status and a valid <code>status_change_timestamp</code>), the gap cannot be
+validated, so the job is not triggered and a warning is logged.</li>
+<li>If <code>max_event_gap_hours</code> is not set, the Heartbeat keeps its default behaviour.</li>
+</ul>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">heartbeat_sensor_config_acon</span> <span class="o">=</span> <span class="p">{</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>    <span class="s2">&quot;sensor_source&quot;</span><span class="p">:</span> <span class="s2">&quot;trigger_file&quot;</span><span class="p">,</span>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>    <span class="c1"># ... other parameters ...</span>
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>    <span class="s2">&quot;max_event_gap_hours&quot;</span><span class="p">:</span> <span class="mi">6</span><span class="p">,</span>
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="p">}</span>
+</span></code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Choosing max_event_gap_hours</p>
+<p>The value is a time window and not an exact upstream cycle, so it must be chosen
+based on the schedules of each data product: bigger than the time between the
+first and the last upstream of the same cycle, and smaller than the time between
+cycles. A value that is too small blocks the job: if the upstreams of the same
+cycle usually finish further apart than <code>max_event_gap_hours</code>, the job is <strong>never</strong>
+triggered, and if it only happens occasionally (e.g. one upstream finishes a few
+hours later than usual), the job is only triggered in the next cycle. A value that
+is too big allows events from different cycles to be combined.</p>
+</div>
 <h3 id="phase-3-job-execution-and-completion">Phase 3: Job Execution and Completion<a class="headerlink" href="#phase-3-job-execution-and-completion" title="Permanent link">&para;</a></h3>
 <h4 id="step-6-databricks-job-execution">Step 6: Databricks Job Execution<a class="headerlink" href="#step-6-databricks-job-execution" title="Permanent link">&para;</a></h4>
 <p>Each triggered Databricks job must include:</p>
@@ -8198,6 +8238,10 @@ soon as the trigger condition is satisfied (all hard dependencies has <code>NEW_
 <li>Sets <code>status</code> → <code>COMPLETED</code>.</li>
 <li>Updates <code>status_change_timestamp</code> → current timestamp.</li>
 <li>Sets <code>job_end_timestamp</code> → job completion timestamp.</li>
+<li>Sets the sensor status → <code>PROCESSED_NEW_DATA</code>, except for sensors that acquired new
+    data while the job was running (after its <code>job_start_timestamp</code>). These keep the
+    <code>ACQUIRED_NEW_DATA</code> status, so that the new data triggers the job again and no event
+    is lost. This applies whether <code>max_event_gap_hours</code> is set or not.</li>
 </ul>
 <h3 id="phase-4-error-handling-and-recovery">Phase 4: Error Handling and Recovery<a class="headerlink" href="#phase-4-error-handling-and-recovery" title="Permanent link">&para;</a></h3>
 <h4 id="step-8-job-failure-recovery-process">Step 8: Job Failure Recovery Process<a class="headerlink" href="#step-8-job-failure-recovery-process" title="Permanent link">&para;</a></h4>
@@ -8230,8 +8274,8 @@ soon as the trigger condition is satisfied (all hard dependencies has <code>NEW_
 <h4 id="step-10-advanced-configuration-options">Step 10: Advanced Configuration Options<a class="headerlink" href="#step-10-advanced-configuration-options" title="Permanent link">&para;</a></h4>
 <p><strong>10.1 Preprocess Queries</strong></p>
 <p>Use <code>preprocess_query</code> to filter upstream data:
-<div class="language-sql highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1">-- Example: Filter only recent records</span>
-</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">sensor_new_data</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">load_date</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="k">current_date</span><span class="p">()</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">7</span>
+<div class="language-sql highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1">-- Example: Filter only recent records</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">sensor_new_data</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">load_date</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="k">current_date</span><span class="p">()</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">7</span>
 </span></code></pre></div></p>
 <p><strong>10.2 Parallel Processing</strong></p>
 <p>The Heartbeat sensor automatically handles parallel processing of multiple sources, improving efficiency and scalability.</p>
@@ -8270,6 +8314,21 @@ soon as the trigger condition is satisfied (all hard dependencies has <code>NEW_
 <td>Missing events</td>
 <td><code>latest_event_fetched_timestamp</code> not updating</td>
 <td>Check sensor source connectivity and configuration.</td>
+</tr>
+<tr>
+<td>Jobs not triggering: events from different cycles</td>
+<td>Log message <code>Event gap for job ... hours (max allowed: ... hours)</code></td>
+<td>The events belong to different cycles according to <code>max_event_gap_hours</code>. Wait for the newer events or review the configured value.</td>
+</tr>
+<tr>
+<td>Jobs not triggering: missing event time</td>
+<td>Warning <code>Job ... not triggered: only ... of ... hard dependencies have a valid event time</code></td>
+<td>With <code>max_event_gap_hours</code> set, every hard dependency needs a sensor record with <code>ACQUIRED_NEW_DATA</code> status and a valid <code>status_change_timestamp</code>. Check the sensor records of the job in the <code>lakehouse_engine_sensor_db_table</code>.</td>
+</tr>
+<tr>
+<td>Update status task fails with a Delta concurrent modification error</td>
+<td>Records of the job stay <code>IN_PROGRESS</code></td>
+<td>The sensor table was changed by another process (e.g. the Heartbeat) at the same time. No sensor status is overwritten: repair the update status task to complete the job.</td>
 </tr>
 </tbody>
 </table>
